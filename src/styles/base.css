@@ -1,0 +1,555 @@
+/*
+ * Zone base styles (shipped in the library bundle, after tokens.css).
+ *
+ *   1. Accent clock ........ one pulsing --zzz-accent shared by every selected/pressed element
+ *   2. Theme root .......... .zzz-theme scale inheritance, typography baseline, box-sizing
+ *   3. Text utilities ...... .zzz-text-<role>, .zzz-tone-<tone>, .zzz-italic, .zzz-sr-only
+ *   4. Materials ........... .zzz-dots, .zzz-mat-pill, .zzz-mat-panel, .zzz-mat-textured,
+ *                            .zzz-mat-drawer, .zzz-bg-hatch, .zzz-accent-fill, .zzz-accent-ring
+ *   5. Pressed recipe ...... .zzz-pressable (+ .zzz-pressable__hide)
+ *   6. Focus ............... .zzz-focusable
+ *
+ * Nothing here styles elements outside .zzz-theme except the accent clock on :root.
+ * There are deliberately NO :hover styles: no hover state by design.
+ */
+
+/* ── 1. Accent clock ───────────────────────────────────────────────────────────────────────
+ * --zzz-accent is registered in tokens.css (<color>, inherits, initial #93BA00). One clock:
+ * 750 ms per half, sine-like, alternate = 1.5 s lime -> yellow -> lime, starting 300 ms in.
+ * Components only ever read var(--zzz-accent), so everything on screen pulses in phase.
+ */
+@keyframes zzz-accent-pulse {
+  from {
+    --zzz-accent: #93BA00;
+  }
+  to {
+    --zzz-accent: #FCDC00;
+  }
+}
+
+:root,
+.zzz-theme {
+  animation: zzz-accent-pulse 750ms cubic-bezier(.45, 0, .55, 1) -300ms infinite alternate;
+}
+
+/* A .zzz-theme inside the document inherits the running root clock instead of starting its
+ * own at mount time, so remounts (tab switches, stories, stages) never reset the phase: one
+ * phase runs across screens. accentPhase="live" (data-accent-phase="live") opts a
+ * theme into its own clock, e.g. to pulse inside a pinned ancestor. */
+:root .zzz-theme:not([data-accent-phase='live']) {
+  animation: none;
+}
+
+/* Freeze at lime: component prop reducedMotion (data-reduced-motion) … */
+[data-reduced-motion] {
+  animation: none;
+  --zzz-accent: #93BA00;
+}
+
+/* … or the OS setting (the registered initial value is lime, so stopping the clock is enough). */
+@media (prefers-reduced-motion: reduce) {
+  :root,
+  .zzz-theme,
+  .zzz-theme[data-accent-phase] {
+    animation: none;
+  }
+}
+
+/* Pinned phases for visual regression / static mocks. */
+[data-accent-phase='lime'] {
+  animation: none;
+  --zzz-accent: #93BA00;
+}
+[data-accent-phase='mid'] {
+  animation: none;
+  --zzz-accent: #C7CB00;
+}
+[data-accent-phase='yellow'] {
+  animation: none;
+  --zzz-accent: #FCDC00;
+}
+
+/* ── 2. Theme root ─────────────────────────────────────────────────────────────────────────
+ * tokens.css declares every token on ":root, .zzz-theme", so a .zzz-theme re-computes all
+ * lengths from its own --zzz-px. --zzz-scale itself (default 0.7) is declared on :root only, so a
+ * top-level .zzz-theme inherits whatever density the page set. Nesting:
+ *   - a nested .zzz-theme with no inline scale keeps its parent's --zzz-scale AND --zzz-px, so
+ *     a class-only theme inside a Stage or a viewport-scaled theme does not snap back to the
+ *     page density;
+ *   - one with an inline --zzz-scale (style="--zzz-scale: 1", the pattern the tokens.css header
+ *     documents) recomputes --zzz-px = calc(1rem / 16 * var(--zzz-scale)) from it, so it stays
+ *     rem-based (follows the browser font size / zoom) like the root;
+ *   - an inline --zzz-px (ZzzTheme scale="viewport", Stage) beats both rules.
+ */
+.zzz-theme .zzz-theme {
+  --zzz-scale: inherit;
+  --zzz-px: inherit;
+}
+.zzz-theme .zzz-theme[style*='--zzz-scale'] {
+  --zzz-px: calc(1rem / 16 * var(--zzz-scale));
+}
+
+.zzz-theme {
+  font-family: var(--zzz-font-family-ui);
+  font-weight: 900;
+  font-stretch: var(--zzz-font-stretch-ui);
+  font-size-adjust: cap-height 0.84;
+  font-size: var(--zzz-font-size-body);
+  line-height: var(--zzz-line-height-list);
+  letter-spacing: 0;
+  word-spacing: var(--zzz-font-word-spacing-ui);
+  /* Plain figures: Mona Sans tnum draws a slashed 0 + footed 1 (see font.numeric.default). */
+  font-variant-numeric: var(--zzz-font-numeric-default);
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--zzz-color-text-primary);
+}
+
+.zzz-theme,
+.zzz-theme *,
+.zzz-theme *::before,
+.zzz-theme *::after {
+  box-sizing: border-box;
+}
+
+/* Form controls take the theme's type instead of the UA font. */
+.zzz-theme :where(button, input, select, textarea) {
+  font: inherit;
+  font-size-adjust: inherit;
+  letter-spacing: inherit;
+  word-spacing: inherit;
+  color: inherit;
+}
+
+/* ── 3. Text utilities (the Text component maps role/tone to these) ─────────────────────────
+ * Sizes are design units (x --zzz-px); font-size-adjust renders them at the kit's cap height in Mona Sans.
+ * Class names are kebab-case (.zzz-text-body-lg); the camelCase TextRole spelling
+ * (.zzz-text-bodyLg) is accepted as an alias.
+ */
+:where(
+    .zzz-text-nano, .zzz-text-tiny, .zzz-text-micro, .zzz-text-caption, .zzz-text-label,
+    .zzz-text-body, .zzz-text-body-lg, .zzz-text-bodyLg, .zzz-text-body-xl, .zzz-text-bodyXl,
+    .zzz-text-button, .zzz-text-title, .zzz-text-title-pill, .zzz-text-titlePill,
+    .zzz-text-event-title, .zzz-text-eventTitle, .zzz-text-display-name, .zzz-text-displayName,
+    .zzz-text-ghost-level, .zzz-text-ghostLevel, .zzz-text-badge-new, .zzz-text-badgeNew
+  ) {
+  font-family: var(--zzz-font-family-ui);
+  font-weight: 900;
+  font-stretch: var(--zzz-font-stretch-ui);
+  font-size-adjust: cap-height 0.84;
+  word-spacing: var(--zzz-font-word-spacing-ui);
+  letter-spacing: 0;
+}
+
+:where(
+    .zzz-text-condensed-sm, .zzz-text-condensedSm, .zzz-text-condensed-md, .zzz-text-condensedMd,
+    .zzz-text-condensed-interstitial, .zzz-text-condensedInterstitial,
+    .zzz-text-condensed-lg, .zzz-text-condensedLg, .zzz-text-condensed-xl-hud,
+    .zzz-text-condensedXlHud, .zzz-text-condensed-xl, .zzz-text-condensedXl
+  ) {
+  font-family: var(--zzz-font-family-condensed);
+  font-weight: 900;
+  font-stretch: var(--zzz-font-stretch-condensed);
+  font-size-adjust: cap-height 0.79;
+  word-spacing: normal;
+  letter-spacing: 0;
+  line-height: var(--zzz-line-height-single);
+  text-transform: uppercase;
+}
+
+.zzz-text-nano {
+  font-size: var(--zzz-font-size-nano);
+  line-height: var(--zzz-line-height-single);
+}
+.zzz-text-tiny {
+  font-size: var(--zzz-font-size-tiny);
+  line-height: var(--zzz-line-height-single);
+}
+.zzz-text-micro {
+  font-size: var(--zzz-font-size-micro);
+  line-height: var(--zzz-line-height-single);
+}
+.zzz-text-caption {
+  font-size: var(--zzz-font-size-caption);
+  line-height: var(--zzz-line-height-single);
+}
+.zzz-text-label {
+  font-size: var(--zzz-font-size-label);
+  line-height: var(--zzz-line-height-dialog-item);
+}
+.zzz-text-body {
+  font-size: var(--zzz-font-size-body);
+  line-height: var(--zzz-line-height-list);
+}
+.zzz-text-body-lg,
+.zzz-text-bodyLg {
+  font-size: var(--zzz-font-size-body-lg);
+  line-height: var(--zzz-line-height-single);
+}
+.zzz-text-body-xl,
+.zzz-text-bodyXl {
+  font-size: var(--zzz-font-size-body-xl);
+  line-height: var(--zzz-line-height-single);
+}
+.zzz-text-button {
+  font-size: var(--zzz-font-size-button);
+  line-height: var(--zzz-line-height-single);
+}
+.zzz-text-title {
+  font-size: var(--zzz-font-size-title);
+  line-height: var(--zzz-line-height-single);
+}
+.zzz-text-title-pill,
+.zzz-text-titlePill {
+  font-size: var(--zzz-font-size-title-pill);
+  line-height: var(--zzz-line-height-single);
+}
+.zzz-text-event-title,
+.zzz-text-eventTitle {
+  font-size: var(--zzz-font-size-event-title);
+  line-height: var(--zzz-line-height-single);
+}
+.zzz-text-display-name,
+.zzz-text-displayName {
+  font-size: var(--zzz-font-size-display-name);
+  line-height: var(--zzz-line-height-single);
+}
+.zzz-text-ghost-level,
+.zzz-text-ghostLevel {
+  font-size: var(--zzz-font-size-ghost-level);
+  line-height: var(--zzz-line-height-single);
+}
+.zzz-text-badge-new,
+.zzz-text-badgeNew {
+  font-size: var(--zzz-font-size-badge-new);
+  line-height: var(--zzz-line-height-single);
+}
+.zzz-text-condensed-sm,
+.zzz-text-condensedSm {
+  font-size: var(--zzz-font-size-condensed-sm);
+}
+.zzz-text-condensed-md,
+.zzz-text-condensedMd {
+  font-size: var(--zzz-font-size-condensed-md);
+}
+.zzz-text-condensed-interstitial,
+.zzz-text-condensedInterstitial {
+  font-size: var(--zzz-font-size-condensed-interstitial);
+}
+.zzz-text-condensed-lg,
+.zzz-text-condensedLg {
+  font-size: var(--zzz-font-size-condensed-lg);
+}
+.zzz-text-condensed-xl-hud,
+.zzz-text-condensedXlHud {
+  font-size: var(--zzz-font-size-condensed-xl-hud);
+  letter-spacing: var(--zzz-letter-spacing-condensed);
+}
+.zzz-text-condensed-xl,
+.zzz-text-condensedXl {
+  font-size: var(--zzz-font-size-condensed-xl);
+  letter-spacing: var(--zzz-letter-spacing-condensed);
+}
+
+/* Tones (TextTone) */
+.zzz-tone-primary { color: var(--zzz-color-text-primary); }
+.zzz-tone-soft { color: var(--zzz-color-text-soft); }
+.zzz-tone-secondary { color: var(--zzz-color-text-secondary); }
+.zzz-tone-title { color: var(--zzz-color-text-title); }
+.zzz-tone-tertiary { color: var(--zzz-color-text-tertiary); }
+.zzz-tone-muted { color: var(--zzz-color-text-muted); }
+.zzz-tone-subtle { color: var(--zzz-color-text-subtle); }
+.zzz-tone-disabled { color: var(--zzz-color-text-disabled); }
+.zzz-tone-faint { color: var(--zzz-color-text-faint); }
+.zzz-tone-ghost { color: var(--zzz-color-text-ghost); }
+.zzz-tone-engraved { color: var(--zzz-color-text-engraved); }
+.zzz-tone-keyword { color: var(--zzz-color-highlight-keyword); }
+.zzz-tone-value { color: var(--zzz-color-highlight-value); }
+.zzz-tone-danger { color: var(--zzz-color-danger-text); }
+.zzz-tone-on-accent,
+.zzz-tone-onAccent { color: var(--zzz-color-accent-on); }
+.zzz-tone-sage { color: var(--zzz-color-sage-base); }
+
+/* Italic = the upright glyphs sheared 10deg about the baseline. Never font-style: italic. */
+.zzz-italic {
+  display: inline-block;
+  transform: skewX(var(--zzz-skew-italic));
+  transform-origin: 0 100%;
+}
+
+.zzz-sr-only {
+  position: absolute !important;
+  /* 1px is the accessibility-hack box, not a design length */
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+}
+
+/* ── 4. Materials ──────────────────────────────────────────────────────────────────────────
+ * Dot lattice: a diamond lattice (square grid + one dot per cell centre) of soft light dots,
+ * with soft dark dots in the holes between them. Knobs, set on the element or an ancestor:
+ *   --zzz-dots-size   lattice pitch (length)          default var(--zzz-pattern-dots-sm)
+ *   --zzz-dots-alpha  white alpha of the light dots    default 0.035
+ *   --zzz-dots-shade  black alpha of the dark dots     default 0
+ * Each material sets its own alpha/shade.
+ * The image is rebuilt here (not read from --zzz-pattern-dots-css) because a custom property
+ * resolves its var() references where it is declared (:root), not where it is used.
+ */
+.zzz-dots,
+.zzz-mat-pill,
+.zzz-mat-textured,
+.zzz-mat-drawer {
+  --zzz-dots-s: var(--zzz-dots-size, var(--zzz-pattern-dots-sm));
+  --zzz-dots-light: radial-gradient(
+    circle,
+    rgb(255 255 255 / var(--zzz-dots-alpha, 0.035)) 0 calc(var(--zzz-dots-s) * 0.15),
+    transparent calc(var(--zzz-dots-s) * 0.33)
+  );
+  --zzz-dots-dark: radial-gradient(
+    circle,
+    rgb(0 0 0 / var(--zzz-dots-shade, 0)) 0 calc(var(--zzz-dots-s) * 0.15),
+    transparent calc(var(--zzz-dots-s) * 0.33)
+  );
+  background-image: var(--zzz-dots-light), var(--zzz-dots-light), var(--zzz-dots-dark), var(--zzz-dots-dark);
+  background-position:
+    0 0,
+    calc(var(--zzz-dots-s) / 2) calc(var(--zzz-dots-s) / 2),
+    calc(var(--zzz-dots-s) / 2) 0,
+    0 calc(var(--zzz-dots-s) / 2);
+  background-size: var(--zzz-dots-s) var(--zzz-dots-s);
+}
+
+/* The lit ring: the ring is flat #333
+ * except its OUTERMOST pixel row on the top and left, which is #444 (light from the upper left,
+ * fading out around the lower-left and upper-right curves).
+ * Pill: the ring is the border; an inset shadow on an ::after that covers the border box draws
+ * the lit rows and follows the radius (pills never clip their content, so nothing clips it).
+ * Knobs: --zzz-mat-ring (ring width), --zzz-mat-bevel (box-shadow; `none` to drop it).
+ * Panel: see .zzz-mat-panel (ring drawn with box-shadow spread, safe under overflow: hidden). */
+.zzz-mat-pill::after {
+  content: '';
+  position: absolute;
+  inset: calc(-1 * var(--zzz-mat-ring));
+  z-index: -1;
+  border-radius: inherit;
+  box-shadow: var(--zzz-mat-bevel);
+  pointer-events: none;
+}
+
+/* Dark pill: Button, IconButton, Select, currency pill, segmented container, carousel. */
+.zzz-mat-pill {
+  --zzz-mat-ring: var(--zzz-border-width-ring);
+  /* Top/left ring rows: #454545, #373737, then the #303030-#333333 body. */
+  --zzz-mat-bevel:
+    inset calc(1 * var(--zzz-px)) calc(1 * var(--zzz-px)) 0 var(--zzz-color-border-button-bevel-top),
+    inset calc(2 * var(--zzz-px)) calc(2 * var(--zzz-px)) 0 #373737;
+  --zzz-press-border: var(--zzz-mat-ring);
+  --zzz-dots-size: var(--zzz-pattern-dots-sm);
+  --zzz-dots-alpha: 0.025;
+  --zzz-dots-shade: 0.75;
+  position: relative;
+  isolation: isolate;
+  border: var(--zzz-mat-ring) solid var(--zzz-color-border-button);
+  border-radius: var(--zzz-radius-pill);
+  background-color: var(--zzz-color-surface-button);
+  box-shadow: var(--zzz-shadow-keyline);
+}
+
+/* Side / tool panel frame: 5 px #333 lit ring, outer radius 29, black body, 3 px keyline.
+ * The ring, its lit top/left row and the keyline are all OUTER box-shadows (spread), so they sit
+ * outside the element's box and `overflow: hidden` on the panel can never clip them (an ::after
+ * bevel would be clipped away by the overflow a panel needs to clip its header).
+ * Consequence: the element's box is the panel's INNER area; the ring (5 px, --large 4 px) and
+ * keyline are drawn around it without taking layout space. Its own border-radius is the inner
+ * radius (outer radius - ring), so overflow: hidden clips content to the inner curve.
+ * Shadow stack, top first:
+ *   1. core ring #333, spread ring - .5 px, shifted .5 px down-right: its top/left edge lands
+ *      1 px inside the outer edge, its bottom/right edge exactly on it;
+ *   2. the lit shape (#454545, spread ring): only the 1 px crescent on the top/left that (1)
+ *      leaves uncovered shows, tapering out around the upper-right / lower-left curves;
+ *   3. the black keyline (border.width.keyline) outside the ring.
+ * Knobs: --zzz-mat-ring, --zzz-mat-ring-color, --zzz-mat-lit, --zzz-mat-radius (outer). */
+.zzz-mat-panel {
+  --zzz-mat-ring: var(--zzz-border-width-panel);
+  --zzz-mat-ring-color: var(--zzz-color-border-panel);
+  --zzz-mat-lit: var(--zzz-color-border-button-bevel-top);
+  --zzz-mat-radius: var(--zzz-radius-panel);
+  /* The ring lies outside the box, so a pressed fill must start that far out too. */
+  --zzz-press-border: var(--zzz-mat-ring);
+  position: relative;
+  border-radius: calc(var(--zzz-mat-radius) - var(--zzz-mat-ring));
+  background-color: var(--zzz-color-surface-panel);
+  box-shadow:
+    calc(0.5 * var(--zzz-px)) calc(0.5 * var(--zzz-px)) 0 calc(var(--zzz-mat-ring) - 0.5 * var(--zzz-px)) var(--zzz-mat-ring-color),
+    0 0 0 var(--zzz-mat-ring) var(--zzz-mat-lit),
+    0 0 0 calc(var(--zzz-mat-ring) + var(--zzz-border-width-keyline)) var(--zzz-color-border-keyline);
+}
+/* Full-width item panel frame (4 px #2D2D2D, outer radius 33). */
+.zzz-mat-panel--large {
+  --zzz-mat-ring: var(--zzz-border-width-panel-large);
+  --zzz-mat-ring-color: var(--zzz-color-border-panel-large);
+  --zzz-mat-radius: var(--zzz-radius-panel-large);
+}
+
+/* Textured tool-panel header (#222) / lower body (--body, #191919), dots lg. */
+.zzz-mat-textured {
+  --zzz-dots-size: var(--zzz-pattern-dots-lg);
+  --zzz-dots-alpha: 0.022;
+  --zzz-dots-shade: 0.18;
+  background-color: var(--zzz-color-surface-panel-header);
+}
+.zzz-mat-textured--body {
+  background-color: var(--zzz-color-surface-panel-body-textured);
+}
+
+/* Drawer body (#1A1A1A), dots md. */
+.zzz-mat-drawer {
+  --zzz-dots-size: var(--zzz-pattern-dots-md);
+  --zzz-dots-alpha: 0.02;
+  --zzz-dots-shade: 0.2;
+  background-color: var(--zzz-color-surface-drawer-body);
+}
+
+/* Global hatch over a base colour (--zzz-hatch-base, default black): skew.hatch 39.8deg,
+ * perpendicular period pattern.hatch.period 7.68 (= 12 px across, 10 px down), white peaking at
+ * opacity.hatch 0.105. Same geometry as --zzz-pattern-hatch-css, but with a soft, flat-topped
+ * profile instead of a linear triangle. */
+.zzz-bg-hatch {
+  --zzz-hatch-p: var(--zzz-pattern-hatch-period);
+  --zzz-hatch-a: var(--zzz-opacity-hatch);
+  background-color: var(--zzz-hatch-base, var(--zzz-color-bg-base));
+  background-image: repeating-linear-gradient(
+    var(--zzz-skew-hatch),
+    rgb(255 255 255 / calc(var(--zzz-hatch-a) * 0.02)) 0,
+    rgb(255 255 255 / calc(var(--zzz-hatch-a) * 0.15)) calc(var(--zzz-hatch-p) * 0.1),
+    rgb(255 255 255 / calc(var(--zzz-hatch-a) * 0.5)) calc(var(--zzz-hatch-p) * 0.2),
+    rgb(255 255 255 / calc(var(--zzz-hatch-a) * 0.85)) calc(var(--zzz-hatch-p) * 0.3),
+    rgb(255 255 255 / calc(var(--zzz-hatch-a) * 0.98)) calc(var(--zzz-hatch-p) * 0.4),
+    rgb(255 255 255 / var(--zzz-hatch-a)) calc(var(--zzz-hatch-p) * 0.5),
+    rgb(255 255 255 / calc(var(--zzz-hatch-a) * 0.98)) calc(var(--zzz-hatch-p) * 0.6),
+    rgb(255 255 255 / calc(var(--zzz-hatch-a) * 0.85)) calc(var(--zzz-hatch-p) * 0.7),
+    rgb(255 255 255 / calc(var(--zzz-hatch-a) * 0.5)) calc(var(--zzz-hatch-p) * 0.8),
+    rgb(255 255 255 / calc(var(--zzz-hatch-a) * 0.15)) calc(var(--zzz-hatch-p) * 0.9),
+    rgb(255 255 255 / calc(var(--zzz-hatch-a) * 0.02)) var(--zzz-hatch-p)
+  );
+}
+
+/* Selected / active indicators read the live accent. */
+.zzz-accent-fill {
+  background: var(--zzz-accent);
+  color: var(--zzz-color-accent-on);
+}
+.zzz-accent-ring {
+  border-color: var(--zzz-accent);
+}
+
+/* ── 5. Pressed recipe ──────────────────────────────────────────────────────────────────────
+ * While :active (pointer or Space held) or [data-pressed] (forced, or usePressFlash for Enter):
+ * an accent fill grows --zzz-press-outset (default size.control.pressOutset = 4) beyond the
+ * border box on every side, covering ring, keyline and bevel; the label/glyph turns black and
+ * children marked .zzz-pressable__hide (icon caps, discs) disappear. Instant, no transition.
+ *   --zzz-press-outset  outset beyond the border box (0 on dialog buttons); inherits
+ *   --zzz-press-border  the host's own border width; .zzz-mat-pill sets it; never inherits
+ * .zzz-pressable owns ::before; .zzz-mat-pill owns ::after (the bevel, hidden while pressed).
+ * .zzz-mat-panel uses no pseudo-element; its shadow ring lies under the ::before fill.
+ */
+@property --zzz-press-border {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+.zzz-pressable {
+  --zzz-press-inset: calc(-1 * (var(--zzz-press-border) + var(--zzz-press-outset, var(--zzz-size-control-press-outset))));
+  position: relative;
+  isolation: isolate;
+}
+
+.zzz-pressable:active:not(:disabled, [aria-disabled='true']),
+.zzz-pressable[data-pressed] {
+  color: var(--zzz-color-accent-on);
+}
+
+.zzz-pressable:active:not(:disabled, [aria-disabled='true'])::before,
+.zzz-pressable[data-pressed]::before {
+  content: '';
+  position: absolute;
+  inset: var(--zzz-press-inset);
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--zzz-accent);
+  pointer-events: none;
+}
+
+.zzz-mat-pill.zzz-pressable:active:not(:disabled, [aria-disabled='true'])::after,
+.zzz-mat-pill.zzz-pressable[data-pressed]::after {
+  visibility: hidden;
+}
+
+.zzz-pressable:active:not(:disabled, [aria-disabled='true']) .zzz-pressable__hide,
+.zzz-pressable[data-pressed] .zzz-pressable__hide {
+  visibility: hidden;
+}
+
+/* ── 6. Focus ───────────────────────────────────────────────────────────────────────────── */
+.zzz-focusable:focus-visible {
+  box-shadow: var(--zzz-focus-ring);
+  /* Transparent in normal rendering; forced-colors mode (WHCM) drops box-shadow but paints
+     this outline in a system colour, so the focus indicator survives (WCAG 2.4.7). */
+  outline: calc(3 * var(--zzz-px)) solid transparent;
+  outline-offset: calc(3 * var(--zzz-px));
+}
+
+/* ── 7. Forced colors (WHCM) fallbacks ──────────────────────────────────────────────────────
+   Forced colors drops box-shadow and author background colours, which carry focus and
+   selection everywhere in the library. Library-wide (every element with a zzz- class, also
+   portals rendered outside .zzz-theme):
+   - focus: a Highlight outline, inset so scroll containers and clipping ancestors
+     (overflow: hidden / auto) cannot cut it off. !important beats component `outline: none`.
+   - selection / current: a thinner inset Highlight outline (focus replaces it on the focused
+     element, which is already marked).
+   - the listbox/menu "active descendant" (aria-activedescendant: focus stays on the input,
+     so the highlighted option is the only cue): a Highlight fill. */
+@media (forced-colors: active) {
+  [class*='zzz-']:focus-visible {
+    outline: calc(3 * var(--zzz-px)) solid Highlight !important;
+    outline-offset: calc(-3 * var(--zzz-px)) !important;
+  }
+  /* Exception: an ItemGrid cell's ItemCard layers are z-indexed and paint over an inset ring
+     (only the label strip showed it, and a selected cell looked the same focused or not). The
+     grid's padding reserves room for the selection-ring overhang, so this ring goes outside. */
+  .zzz-item-grid__cell:focus-visible {
+    outline-offset: calc(2 * var(--zzz-px)) !important;
+  }
+
+  [class*='zzz-']:is(
+      [aria-selected='true'],
+      [aria-current]:not([aria-current='false']),
+      [data-selected]:not([data-selected='false']),
+      [data-active]:not([data-active='false'])
+    ) {
+    outline: calc(2 * var(--zzz-px)) solid Highlight;
+    outline-offset: calc(-2 * var(--zzz-px));
+  }
+  /* Exception: the selected AgentCarousel thumb clips its absolutely positioned face, which
+     painted over the inset ring (and the track clips an outer one). The selected thumb is a
+     stacking context (z-index: 1), so sinking the face below it lets the ring show on top. */
+  .zzz-agent-carousel__thumb[aria-selected='true'] > .zzz-agent-carousel__face {
+    z-index: -1;
+  }
+  .zzz-item-grid__cell[aria-selected='true'] {
+    outline-offset: calc(2 * var(--zzz-px)); /* see the ItemGrid focus exception above */
+  }
+
+  [class*='zzz-']:is([role='option'], [role='menuitem'], [role='menuitemcheckbox'], [role='menuitemradio'])[data-active]:not([data-active='false']) {
+    forced-color-adjust: none;
+    background: Highlight;
+    color: HighlightText;
+  }
+}

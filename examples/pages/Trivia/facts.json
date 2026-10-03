@@ -1,0 +1,427 @@
+{
+  "source": "https://static.nanoka.cc",
+  "version": "3.2",
+  "fetchedAt": "2026-10-01T00:28:10.541Z",
+  "agents": {
+    "1011": {
+      "name": "Anby",
+      "faction": "Cunning Hares",
+      "fullName": "Anby Demara",
+      "birthday": "FEB 20",
+      "attackType": "Slash"
+    },
+    "1021": {
+      "name": "Nekomata",
+      "faction": "Cunning Hares",
+      "fullName": "Nekomiya Mana",
+      "birthday": "JUL 30",
+      "attackType": "Slash"
+    },
+    "1031": {
+      "name": "Nicole",
+      "faction": "Cunning Hares",
+      "fullName": "Nicole Demara",
+      "birthday": "NOV 11",
+      "attackType": "Strike"
+    },
+    "1041": {
+      "name": "Soldier 11",
+      "faction": "New Eridu Defense Force",
+      "fullName": "Soldier 11",
+      "birthday": "MAR 21",
+      "attackType": "Slash"
+    },
+    "1051": {
+      "name": "Yidhari",
+      "faction": "Spook Shack",
+      "fullName": "Yidhari Murphy",
+      "birthday": "MAR 19",
+      "attackType": "Strike"
+    },
+    "1061": {
+      "name": "Corin",
+      "faction": "Victoria Housekeeping Co.",
+      "fullName": "Corin Wickes",
+      "birthday": "JUN 2",
+      "attackType": "Slash"
+    },
+    "1071": {
+      "name": "Caesar",
+      "faction": "Sons of Calydon",
+      "fullName": "Caesar King",
+      "birthday": "MAR 16",
+      "attackType": "Slash"
+    },
+    "1081": {
+      "name": "Billy",
+      "faction": "Cunning Hares",
+      "fullName": "Billy Kid",
+      "birthday": "NOV 25",
+      "attackType": "Pierce"
+    },
+    "1091": {
+      "name": "Miyabi",
+      "faction": "Hollow Special Operations Section 6",
+      "fullName": "Hoshimi Miyabi",
+      "birthday": "JUN 19",
+      "attackType": "Slash"
+    },
+    "1101": {
+      "name": "Koleda",
+      "faction": "Belobog Heavy Industries",
+      "fullName": "Koleda Belobog",
+      "birthday": "AUG 10",
+      "attackType": "Strike"
+    },
+    "1111": {
+      "name": "Anton",
+      "faction": "Belobog Heavy Industries",
+      "fullName": "Anton Ivanov",
+      "birthday": "MAY 2",
+      "attackType": "Pierce"
+    },
+    "1121": {
+      "name": "Ben",
+      "faction": "Belobog Heavy Industries",
+      "fullName": "Ben Bigger",
+      "birthday": "DEC 23",
+      "attackType": "Strike"
+    },
+    "1131": {
+      "name": "Soukaku",
+      "faction": "Hollow Special Operations Section 6",
+      "fullName": "Soukaku",
+      "birthday": "JAN 23",
+      "attackType": "Slash"
+    },
+    "1141": {
+      "name": "Lycaon",
+      "faction": "Victoria Housekeeping Co.",
+      "fullName": "Von Lycaon",
+      "birthday": "OCT 4",
+      "attackType": "Strike"
+    },
+    "1151": {
+      "name": "Lucy",
+      "faction": "Sons of Calydon",
+      "fullName": "Luciana de Montefio",
+      "birthday": "AUG 14",
+      "attackType": "Strike"
+    },
+    "1161": {
+      "name": "Lighter",
+      "faction": "Sons of Calydon",
+      "fullName": "Lighter",
+      "birthday": "DEC 27",
+      "attackType": "Strike"
+    },
+    "1171": {
+      "name": "Burnice",
+      "faction": "Sons of Calydon",
+      "fullName": "Burnice White",
+      "birthday": "MAY 23",
+      "attackType": "Pierce"
+    },
+    "1181": {
+      "name": "Grace",
+      "faction": "Belobog Heavy Industries",
+      "fullName": "Grace Howard",
+      "birthday": "APR 14",
+      "attackType": "Pierce"
+    },
+    "1191": {
+      "name": "Ellen",
+      "faction": "Victoria Housekeeping Co.",
+      "fullName": "Ellen Joe",
+      "birthday": "JAN 4",
+      "attackType": "Slash"
+    },
+    "1201": {
+      "name": "Harumasa",
+      "faction": "Hollow Special Operations Section 6",
+      "fullName": "Asaba Harumasa",
+      "birthday": "JUL 19",
+      "attackType": "Slash"
+    },
+    "1211": {
+      "name": "Rina",
+      "faction": "Victoria Housekeeping Co.",
+      "fullName": "Alexandrina Sebastiane",
+      "birthday": "SEP 23",
+      "attackType": "Strike"
+    },
+    "1221": {
+      "name": "Yanagi",
+      "faction": "Hollow Special Operations Section 6",
+      "fullName": "Tsukishiro Yanagi",
+      "birthday": "SEP 21",
+      "attackType": "Slash"
+    },
+    "1241": {
+      "name": "Zhu Yuan",
+      "faction": "New Eridu Public Security",
+      "fullName": "Zhu Yuan",
+      "birthday": "SEP 1",
+      "attackType": "Pierce"
+    },
+    "1251": {
+      "name": "Qingyi",
+      "faction": "New Eridu Public Security",
+      "fullName": "Qingyi",
+      "birthday": "JAN 1",
+      "attackType": "Strike"
+    },
+    "1261": {
+      "name": "Jane",
+      "faction": "New Eridu Public Security",
+      "fullName": "Jane Doe",
+      "birthday": "FEB 16",
+      "attackType": "Slash"
+    },
+    "1271": {
+      "name": "Seth",
+      "faction": "New Eridu Public Security",
+      "fullName": "Seth Lowell",
+      "birthday": "APR 8",
+      "attackType": "Slash"
+    },
+    "1281": {
+      "name": "Piper",
+      "faction": "Sons of Calydon",
+      "fullName": "Piper",
+      "birthday": "OCT 21",
+      "attackType": "Slash"
+    },
+    "1291": {
+      "name": "Hugo",
+      "faction": "Mockingbird",
+      "fullName": "Hugo Vlad",
+      "birthday": "AUG 20",
+      "attackType": "Slash"
+    },
+    "1301": {
+      "name": "Orphie & Magus",
+      "faction": "New Eridu Defense Force",
+      "fullName": "Orphie Magnusson & Magus",
+      "birthday": "NOV 3",
+      "attackType": "Slash"
+    },
+    "1311": {
+      "name": "Astra Yao",
+      "faction": "Stars of Lyra",
+      "fullName": "Astra Yao",
+      "birthday": "JAN 31",
+      "attackType": "Strike"
+    },
+    "1321": {
+      "name": "Evelyn",
+      "faction": "Stars of Lyra",
+      "fullName": "Evelyn Chevalier",
+      "birthday": "OCT 7",
+      "attackType": "Slash"
+    },
+    "1331": {
+      "name": "Vivian",
+      "faction": "Mockingbird",
+      "fullName": "Vivian Banshee",
+      "birthday": "APR 10",
+      "attackType": "Slash"
+    },
+    "1341": {
+      "name": "Zhao",
+      "faction": "Krampus Compliance Authority",
+      "fullName": "Zhao",
+      "birthday": "OCT 14",
+      "attackType": "Slash"
+    },
+    "1351": {
+      "name": "Pulchra",
+      "faction": "Sons of Calydon",
+      "fullName": "Pulchra Fellini",
+      "birthday": "JUN 19",
+      "attackType": "Slash"
+    },
+    "1361": {
+      "name": "Trigger",
+      "faction": "New Eridu Defense Force",
+      "fullName": "Trigger",
+      "birthday": "APR 21",
+      "attackType": "Pierce"
+    },
+    "1371": {
+      "name": "Yixuan",
+      "faction": "Yunkui Summit",
+      "fullName": "Yixuan",
+      "birthday": "DEC 3",
+      "attackType": "Strike"
+    },
+    "1381": {
+      "name": "Soldier 0 - Anby",
+      "faction": "New Eridu Defense Force",
+      "fullName": null,
+      "birthday": null,
+      "attackType": "Slash"
+    },
+    "1391": {
+      "name": "Ju Fufu",
+      "faction": "Yunkui Summit",
+      "fullName": "Ju Fufu",
+      "birthday": "JAN 6",
+      "attackType": "Strike"
+    },
+    "1401": {
+      "name": "Alice",
+      "faction": "Spook Shack",
+      "fullName": "Alice Thymefield",
+      "birthday": "AUG 30",
+      "attackType": "Slash"
+    },
+    "1411": {
+      "name": "Yuzuha",
+      "faction": "Spook Shack",
+      "fullName": "Ukinami Yuzuha",
+      "birthday": "NOV 2",
+      "attackType": "Strike"
+    },
+    "1421": {
+      "name": "Pan Yinhu",
+      "faction": "Yunkui Summit",
+      "fullName": "Pan Yinhu",
+      "birthday": "MAY 10",
+      "attackType": "Strike"
+    },
+    "1431": {
+      "name": "Ye Shunguang",
+      "faction": "Yunkui Summit",
+      "fullName": "Ye Shunguang",
+      "birthday": "JAN 20",
+      "attackType": "Slash"
+    },
+    "1441": {
+      "name": "Manato",
+      "faction": "Spook Shack",
+      "fullName": "Komano Manato",
+      "birthday": "JAN 5",
+      "attackType": "Slash"
+    },
+    "1451": {
+      "name": "Lucia",
+      "faction": "Spook Shack",
+      "fullName": "Lucia Elowen",
+      "birthday": "MAR 17",
+      "attackType": "Strike"
+    },
+    "1461": {
+      "name": "Seed",
+      "faction": "New Eridu Defense Force",
+      "fullName": "Seed",
+      "birthday": "NOV 22",
+      "attackType": "Slash"
+    },
+    "1471": {
+      "name": "Banyue",
+      "faction": "Krampus Compliance Authority",
+      "fullName": "Banyue",
+      "birthday": "JUL 24",
+      "attackType": "Strike"
+    },
+    "1481": {
+      "name": "Dialyn",
+      "faction": "Krampus Compliance Authority",
+      "fullName": "Dialyn",
+      "birthday": "MAY 28",
+      "attackType": "Slash"
+    },
+    "1491": {
+      "name": "Sunna",
+      "faction": "Angels of Delusion",
+      "fullName": "Sunna",
+      "birthday": "JUL 18",
+      "attackType": "Strike"
+    },
+    "1501": {
+      "name": "Aria",
+      "faction": "Angels of Delusion",
+      "fullName": "Aria",
+      "birthday": "JUN 7",
+      "attackType": "Strike"
+    },
+    "1511": {
+      "name": "Nangong Yu",
+      "faction": "Angels of Delusion",
+      "fullName": "Nangong Yu",
+      "birthday": "SEP 29",
+      "attackType": "Strike"
+    },
+    "1521": {
+      "name": "Cissia",
+      "faction": "New Eridu Public Security",
+      "fullName": "Cissia",
+      "birthday": "JAN 10",
+      "attackType": "Slash"
+    },
+    "1531": {
+      "name": "Starlight - Billy",
+      "faction": "Cunning Hares",
+      "fullName": null,
+      "birthday": null,
+      "attackType": "Slash"
+    },
+    "1541": {
+      "name": "Promeia",
+      "faction": "Krampus Compliance Authority",
+      "fullName": "Promeia",
+      "birthday": "DEC 23",
+      "attackType": "Slash"
+    },
+    "1551": {
+      "name": "Pyrois",
+      "faction": "Phaethon",
+      "fullName": null,
+      "birthday": null,
+      "attackType": "Slash"
+    },
+    "1561": {
+      "name": "Velina",
+      "faction": "Roscaelifer",
+      "fullName": "Velina Airgid",
+      "birthday": "SEP 22",
+      "attackType": "Slash"
+    },
+    "1571": {
+      "name": "Norma",
+      "faction": "Roscaelifer",
+      "fullName": "Norma Hollowell",
+      "birthday": "JUL 26",
+      "attackType": "Strike"
+    },
+    "1581": {
+      "name": "Remielle",
+      "faction": "Covenant of Dayat",
+      "fullName": "Remielle Dan",
+      "birthday": "MAR 14",
+      "attackType": "Slash"
+    },
+    "1591": {
+      "name": "Sigrid",
+      "faction": "Roscaelifer",
+      "fullName": "Sigrid de L'Azur",
+      "birthday": "APR 23",
+      "attackType": "Pierce"
+    },
+    "1611": {
+      "name": "Claret",
+      "faction": "Roscaelifer",
+      "fullName": "Claret Flint",
+      "birthday": "JUL 23",
+      "attackType": "Slash"
+    },
+    "1621": {
+      "name": "Roxy",
+      "faction": "Roscaelifer",
+      "fullName": "Roxy Ifrita Pryce",
+      "birthday": "DEC 29",
+      "attackType": "Strike"
+    }
+  }
+}

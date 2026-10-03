@@ -1,0 +1,227 @@
+/*
+ * SegmentedTabs.
+ *
+ * Root = .zzz-mat-pill (ring + bevel ::after); it owns no pseudo-element here. Two absolute layers
+ * cover the ring box (inset -ring), so thirds are taken on the OUTER width:
+ *   __track  the accent fill (__indicator = [cap][body][cap]), under the labels
+ *   __row    the tab buttons (equal columns)
+ * The fill is 62 tall on the 59 container (1.5 px overhang top and bottom, over the ring); its
+ * geometric width (to the sharp slant vertex) is outer/N + 33, which paints as outer/N + 24 once the
+ * r14 / r28 slant corners are rounded (258 of 703). The end fills sit flush with the outer ends, the middle ones centred on their slot.
+ * --zzz-seg-pop outsets the fill on every side: +8 while another tab is held (inflate), and the
+ * 370 ms pop (0 -> +10 at 170 ms -> 0) after each switch. No slide: the fill snaps.
+ *
+ * Sizes (data-size sm / md / lg): every length below is written in --zzz-seg-u, the design unit
+ * (--zzz-px) times the control-size ratio --zzz-seg-k (sm 46/57, md 1, lg 69/57 from
+ * size.control.{sm,md,lg}). md is the base geometry; the label takes
+ * fontSize.control.{size}. Ring, bevel rows, keyline and the pop / swell follow the size; the focus ring stays a fixed hairline.
+ */
+@property --zzz-seg-pop {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 0px;
+}
+
+.zzz-segmented-tabs {
+  --zzz-seg-k: 1;
+  --zzz-seg-u: calc(var(--zzz-px) * var(--zzz-seg-k));
+  --zzz-seg-font: var(--zzz-font-size-control-md);
+  --zzz-seg-fill-h: calc(62 * var(--zzz-seg-u));
+  --zzz-seg-fill-w: calc(var(--zzz-seg-width) / var(--zzz-seg-count) + 33 * var(--zzz-seg-u));
+  --zzz-seg-end-shift: calc(12 * var(--zzz-seg-u));
+  --zzz-seg-pop-max: calc(var(--zzz-size-control-segmented-pop-n) * var(--zzz-seg-u));
+  --zzz-seg-inflate: calc(var(--zzz-size-control-segmented-inflate-n) * var(--zzz-seg-u));
+  position: relative;
+  display: block;
+  flex: none;
+  width: var(--zzz-seg-width);
+  height: calc(var(--zzz-size-control-segmented-height-n) * var(--zzz-seg-u));
+  overflow: visible;
+  line-height: var(--zzz-line-height-single);
+}
+.zzz-segmented-tabs[data-size='sm'] {
+  --zzz-seg-k: calc(var(--zzz-size-control-sm-n) / var(--zzz-size-control-md-n));
+  --zzz-seg-font: var(--zzz-font-size-control-sm);
+}
+.zzz-segmented-tabs[data-size='lg'] {
+  --zzz-seg-k: calc(var(--zzz-size-control-lg-n) / var(--zzz-size-control-md-n));
+  --zzz-seg-font: var(--zzz-font-size-control-lg);
+}
+/* Material knobs in the size unit (0,2,0 so .zzz-mat-pill's own declarations never win by order). */
+.zzz-segmented-tabs.zzz-mat-pill {
+  --zzz-mat-ring: calc(var(--zzz-border-width-ring-n) * var(--zzz-seg-u));
+  --zzz-dots-size: calc(var(--zzz-pattern-dots-sm-n) * var(--zzz-seg-u));
+}
+/* sm / lg: the lit bevel rows and the keyline follow the size too (as Button / IconButton); the
+ * keyline goes through --zzz-shadow-keyline so :focus-visible still replaces it. md keeps the tokens. */
+.zzz-segmented-tabs.zzz-mat-pill:is([data-size='sm'], [data-size='lg']) {
+  --zzz-mat-bevel:
+    inset calc(1 * var(--zzz-seg-u)) calc(1 * var(--zzz-seg-u)) 0 var(--zzz-color-border-button-bevel-top),
+    inset calc(2 * var(--zzz-seg-u)) calc(2 * var(--zzz-seg-u)) 0 #373737;
+  --zzz-shadow-keyline: 0 0 0 calc(var(--zzz-border-width-keyline-n) * var(--zzz-seg-u)) var(--zzz-color-border-keyline);
+}
+
+/* black surface: a pure-black track, no mesh. */
+.zzz-segmented-tabs[data-surface='black'] {
+  background-color: #000000;
+  background-image: none;
+}
+
+.zzz-segmented-tabs__track,
+.zzz-segmented-tabs__row {
+  position: absolute;
+  inset: calc(-1 * var(--zzz-mat-ring));
+}
+
+.zzz-segmented-tabs__track {
+  pointer-events: none;
+}
+
+.zzz-segmented-tabs__indicator {
+  --zzz-seg-left: calc(
+    (var(--zzz-seg-index) + 0.5) * 100% / var(--zzz-seg-count) - var(--zzz-seg-fill-w) / 2
+  );
+  position: absolute;
+  top: calc((100% - var(--zzz-seg-fill-h)) / 2 - var(--zzz-seg-pop));
+  left: calc(var(--zzz-seg-left) - var(--zzz-seg-pop));
+  display: flex;
+  width: calc(var(--zzz-seg-fill-w) + 2 * var(--zzz-seg-pop));
+  height: calc(var(--zzz-seg-fill-h) + 2 * var(--zzz-seg-pop));
+  color: var(--zzz-accent);
+}
+.zzz-segmented-tabs__indicator[data-shape='start'] {
+  --zzz-seg-left: 0%;
+}
+.zzz-segmented-tabs__indicator[data-shape='end'] {
+  --zzz-seg-left: calc(100% - var(--zzz-seg-fill-w));
+}
+.zzz-segmented-tabs__indicator[data-shape='only'] {
+  --zzz-seg-left: 0%;
+  --zzz-seg-fill-w: 100%;
+}
+
+.zzz-segmented-tabs__body {
+  flex: 1 1 auto;
+  min-width: 0;
+  background: currentColor;
+}
+.zzz-segmented-tabs__indicator[data-shape='start'] > .zzz-segmented-tabs__body,
+.zzz-segmented-tabs__indicator[data-shape='only'] > .zzz-segmented-tabs__body {
+  border-start-start-radius: var(--zzz-radius-pill);
+  border-end-start-radius: var(--zzz-radius-pill);
+}
+.zzz-segmented-tabs__indicator[data-shape='end'] > .zzz-segmented-tabs__body,
+.zzz-segmented-tabs__indicator[data-shape='only'] > .zzz-segmented-tabs__body {
+  border-start-end-radius: var(--zzz-radius-pill);
+  border-end-end-radius: var(--zzz-radius-pill);
+}
+
+/* Slanted end: fixed geometry per unit height, so it scales with the pop outset. */
+.zzz-segmented-tabs__cap {
+  display: block;
+  flex: none;
+  height: 100%;
+  width: auto;
+  /* aspect-ratio is set inline from geometry.ts */
+  overflow: visible;
+  fill: currentColor;
+}
+.zzz-segmented-tabs__cap--start {
+  transform: rotate(180deg);
+}
+
+/* Held on an inactive tab: the CURRENT fill swells to +8 over 270 ms and holds. */
+.zzz-segmented-tabs[data-inflating] .zzz-segmented-tabs__indicator {
+  --zzz-seg-pop: var(--zzz-seg-inflate);
+  transition: --zzz-seg-pop var(--zzz-motion-duration-segmented-inflate) cubic-bezier(0.3, 0, 0.4, 1);
+}
+
+/* After a switch: snap, then pop (motion.keyframes.segmentedPop). */
+.zzz-segmented-tabs__indicator[data-pop] {
+  animation: zzz-segmented-pop var(--zzz-motion-duration-segmented-pop) linear both;
+}
+.zzz-segmented-tabs[data-inflating] .zzz-segmented-tabs__indicator[data-pop] {
+  animation: none;
+}
+
+@keyframes zzz-segmented-pop {
+  0%,
+  20% {
+    --zzz-seg-pop: 0px;
+  }
+  45% {
+    --zzz-seg-pop: var(--zzz-seg-pop-max);
+  }
+  60% {
+    --zzz-seg-pop: calc(0.7 * var(--zzz-seg-pop-max));
+  }
+  72% {
+    --zzz-seg-pop: calc(0.5 * var(--zzz-seg-pop-max));
+  }
+  82% {
+    --zzz-seg-pop: calc(0.2 * var(--zzz-seg-pop-max));
+  }
+  100% {
+    --zzz-seg-pop: 0px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zzz-segmented-tabs__indicator[data-pop] {
+    animation: none;
+  }
+  .zzz-segmented-tabs[data-inflating] .zzz-segmented-tabs__indicator {
+    transition: none;
+  }
+}
+
+/* ── Tabs ─────────────────────────────────────────────────────────────────────────────────── */
+.zzz-segmented-tabs__row {
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
+}
+
+.zzz-segmented-tabs__tab {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--zzz-radius-pill);
+  background: none;
+  color: var(--zzz-color-text-primary);
+  font-size: var(--zzz-seg-font);
+  line-height: var(--zzz-line-height-single);
+  white-space: nowrap;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+/* End labels sit ~10–14 px toward the centre of the bar (start +14 / end −9). */
+.zzz-segmented-tabs__tab[data-position='start'] {
+  padding-left: calc(2 * var(--zzz-seg-end-shift));
+}
+.zzz-segmented-tabs__tab[data-position='end'] {
+  padding-right: calc(2 * var(--zzz-seg-end-shift));
+}
+
+.zzz-segmented-tabs__label {
+  line-height: var(--zzz-line-height-single);
+}
+
+.zzz-segmented-tabs__tab[aria-selected='true'] {
+  color: var(--zzz-color-accent-on);
+  cursor: default;
+}
+/* Pointer held on an inactive tab (#7C7C7C–#828282). Instant, no transition. */
+.zzz-segmented-tabs__tab[data-pressed] {
+  color: var(--zzz-color-text-pressed);
+}
+.zzz-segmented-tabs__tab[aria-disabled='true'] {
+  color: var(--zzz-color-text-disabled);
+  cursor: default;
+}

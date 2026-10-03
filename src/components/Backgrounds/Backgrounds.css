@@ -1,0 +1,222 @@
+/*
+ * Background layers. Every layer is decorative: aria-hidden, no pointer events, absolutely
+ * positioned over its nearest positioned ancestor, on zIndex.background.
+ */
+.zzz-bg {
+  position: absolute;
+  inset: 0;
+  z-index: var(--zzz-z-index-background);
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── HatchBackground ────────────────────────────────────────────────────────────────────────
+ * tone black = .zzz-bg-hatch from base.css (white alpha over black). Tinted tones cannot come from a
+ * white-alpha stripe (0.105 white over #658775 gives ≈#759483, not #89AC9A), so the stripe runs from
+ * --zzz-hatch-dark to --zzz-hatch-light with the same soft, flat-topped profile, angle and period. */
+.zzz-hatch-bg--tinted {
+  --zzz-hatch-p: var(--zzz-pattern-hatch-period);
+  background-color: var(--zzz-hatch-dark);
+  background-image: repeating-linear-gradient(
+    var(--zzz-skew-hatch),
+    color-mix(in srgb, var(--zzz-hatch-light) 2%, transparent) 0,
+    color-mix(in srgb, var(--zzz-hatch-light) 15%, transparent) calc(var(--zzz-hatch-p) * 0.1),
+    color-mix(in srgb, var(--zzz-hatch-light) 50%, transparent) calc(var(--zzz-hatch-p) * 0.2),
+    color-mix(in srgb, var(--zzz-hatch-light) 85%, transparent) calc(var(--zzz-hatch-p) * 0.3),
+    color-mix(in srgb, var(--zzz-hatch-light) 98%, transparent) calc(var(--zzz-hatch-p) * 0.4),
+    var(--zzz-hatch-light) calc(var(--zzz-hatch-p) * 0.5),
+    color-mix(in srgb, var(--zzz-hatch-light) 98%, transparent) calc(var(--zzz-hatch-p) * 0.6),
+    color-mix(in srgb, var(--zzz-hatch-light) 85%, transparent) calc(var(--zzz-hatch-p) * 0.7),
+    color-mix(in srgb, var(--zzz-hatch-light) 50%, transparent) calc(var(--zzz-hatch-p) * 0.8),
+    color-mix(in srgb, var(--zzz-hatch-light) 15%, transparent) calc(var(--zzz-hatch-p) * 0.9),
+    color-mix(in srgb, var(--zzz-hatch-light) 2%, transparent) var(--zzz-hatch-p)
+  );
+}
+/* Light (sage) chevron panel: mean #779988, light #89AC9A, dark #658775. */
+.zzz-hatch-bg--sage {
+  --zzz-hatch-light: var(--zzz-color-interstitial-sage-light);
+  --zzz-hatch-dark: var(--zzz-color-interstitial-sage-dark);
+}
+/* Middle panel: #384C4A, stripes #3F5452 / #304543. */
+.zzz-hatch-bg--teal {
+  --zzz-hatch-light: var(--zzz-color-interstitial-teal-light);
+  --zzz-hatch-dark: var(--zzz-color-interstitial-teal-dark);
+}
+/* Third panel #202A27, hatch barely visible: ±2 levels around the base. */
+.zzz-hatch-bg--deep {
+  --zzz-hatch-light: color-mix(in srgb, var(--zzz-color-interstitial-deep), #FFFFFF 2%);
+  --zzz-hatch-dark: color-mix(in srgb, var(--zzz-color-interstitial-deep), #000000 7%);
+}
+
+/* ── GraffitiLayer ──────────────────────────────────────────────────────────────────────────
+ * The SVG is a fixed 21:9 canvas in design units (CANVAS_W × CANVAS_H in GraffitiLayer.tsx; sized
+ * with --zzz-px, like the film strips), centred in the layer and cropped by the layer's overflow: hidden.
+ * Its viewBox uses the same numbers, so one user unit = one design unit at any --zzz-scale and in any
+ * container shape: letters stay 300–600 units and
+ * the drift stays at pattern.watermark.drift units/s. SVG-internal lengths (font sizes, the drift
+ * translate) are user units. */
+.zzz-graffiti__svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: calc(2520 * var(--zzz-px)); /* = CANVAS_W */
+  height: calc(1080 * var(--zzz-px));
+  overflow: visible; /* tiles past the canvas still cover larger containers; .zzz-bg crops */
+  transform: translate(-50%, -50%);
+}
+.zzz-graffiti__display,
+.zzz-graffiti__plate {
+  font-family: var(--zzz-font-family-ui);
+  font-weight: 900;
+  font-stretch: 125%;
+  font-size-adjust: none;
+  letter-spacing: -0.02em;
+}
+.zzz-graffiti__plate {
+  font-stretch: 100%;
+  letter-spacing: 0;
+}
+.zzz-graffiti__micro {
+  font-family: var(--zzz-font-family-condensed);
+  font-weight: 900;
+  font-stretch: 75%;
+  font-size-adjust: none;
+  letter-spacing: 0.04em;
+}
+
+/* Dialog-band paint: large shapes #181818, small print #1E1E1E — a step lighter than the
+ * color.watermark.dialogLarge / dialogDetail tokens (#0E0E0E / #181818) so the lettering stays
+ * legible inside the black band. */
+.zzz-graffiti--dialog {
+  --zzz-graffiti-dialog-large: #181818;
+  --zzz-graffiti-dialog-detail: #1E1E1E;
+}
+
+/* Dialog-band drift: one 1800-unit tile along the rotated baseline per loop (−23.3, +6.4 px/s). */
+@keyframes zzz-graffiti-drift {
+  to {
+    transform: translateX(-1800px); /* SVG user units (design units), not CSS px */
+  }
+}
+.zzz-graffiti[data-drift] .zzz-graffiti__track {
+  animation: zzz-graffiti-drift var(--zzz-graffiti-loop, 74.49s) linear infinite;
+}
+[data-reduced-motion] .zzz-graffiti[data-drift] .zzz-graffiti__track {
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .zzz-graffiti[data-drift] .zzz-graffiti__track {
+    animation: none;
+  }
+}
+
+/* ── FilmStripBackground ────────────────────────────────────────────────────────────────────
+ * Strip: film base #020200 with 30 px sprocket edges (16 × 22 holes, radius 4, pitch 35, #1E2020),
+ * body between them. Rotated about the layer's vertical centre. */
+.zzz-filmstrip__strip {
+  --zzz-film-base: #020200;
+  --zzz-film-hole: #1E2020;
+  --zzz-film-edge: calc(30 * var(--zzz-px));
+  position: absolute;
+  top: -50%;
+  left: calc(var(--zzz-strip-left) * var(--zzz-px));
+  width: calc(var(--zzz-strip-width) * var(--zzz-px));
+  height: 200%;
+  padding: 0 var(--zzz-film-edge);
+  background-color: var(--zzz-film-base);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 35'%3E%3Crect x='7' y='6.5' width='16' height='22' rx='4' fill='%231E2020'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 35'%3E%3Crect x='7' y='6.5' width='16' height='22' rx='4' fill='%231E2020'/%3E%3C/svg%3E");
+  background-repeat: repeat-y, repeat-y;
+  background-position: left top, right top;
+  background-size: var(--zzz-film-edge) calc(35 * var(--zzz-px));
+  transform: rotate(var(--zzz-skew-watermark-rotate));
+}
+.zzz-filmstrip__frames {
+  display: flex;
+  flex-direction: column;
+  gap: calc(16 * var(--zzz-px));
+  height: 100%;
+  padding: calc(8 * var(--zzz-px)) calc(10 * var(--zzz-px));
+  overflow: hidden;
+}
+/* Dark strips: #1E2020 body with black rounded windows. */
+.zzz-filmstrip__strip--dark .zzz-filmstrip__frames {
+  background-color: var(--zzz-film-hole);
+}
+/* The poster strip's body is a grey teal (#3D4A4A; no token). */
+.zzz-filmstrip__strip--teal .zzz-filmstrip__frames {
+  background-color: #3D4A4A;
+}
+/* Its posters are the tall ones (≈ 420 units along the strip). */
+.zzz-filmstrip__strip--teal .zzz-filmstrip__frame--poster {
+  height: calc(420 * var(--zzz-px));
+}
+.zzz-filmstrip__frame {
+  flex: none;
+  overflow: hidden;
+}
+.zzz-filmstrip__frame--window {
+  height: calc(140 * var(--zzz-px));
+  border-radius: calc(14 * var(--zzz-px));
+  background-color: var(--zzz-film-base);
+}
+.zzz-filmstrip__frame--poster {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(330 * var(--zzz-px));
+  padding: calc(14 * var(--zzz-px));
+  border-radius: calc(18 * var(--zzz-px));
+  background-color: var(--zzz-color-content-film-orange);
+  color: #000000;
+}
+.zzz-filmstrip__stencil {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.zzz-filmstrip__glyph {
+  font-family: var(--zzz-font-family-condensed);
+  font-weight: 900;
+  font-stretch: 75%;
+  font-size-adjust: none;
+  fill: #000000;
+}
+
+/* ── StorageMuralBackground ─────────────────────────────────────────────────────────────────
+ * An 82 % black veil caps every pixel at color.bg.artMax #2E2E2E (255 × 0.18 = 46).
+ * The layer is a flat color.bg.artMax surface: with no src (or while/if the image fails to load)
+ * the band reads 46 × 0.18 ≈ #080808, the tone of a typical mural behind the veil. */
+.zzz-mural {
+  background-color: var(--zzz-color-bg-art-max);
+}
+.zzz-mural__art {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Hidden until fully loaded (no partial paint), then a fade over the flat band. */
+  opacity: 0;
+  transition: opacity var(--zzz-motion-duration-screen-in) ease-out;
+}
+.zzz-mural__art[data-loaded] {
+  opacity: 1;
+}
+.zzz-mural__art[data-instant] {
+  transition: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .zzz-mural__art {
+    transition: none;
+  }
+}
+.zzz-mural__veil {
+  position: absolute;
+  inset: 0;
+  background-color: rgb(0 0 0 / 0.82);
+}

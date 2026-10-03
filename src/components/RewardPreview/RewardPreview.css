@@ -1,0 +1,90 @@
+/*
+ * RewardPreview: right-aligned label, then tiles (ItemCard preview, size.card.preview = 95 outer) at a
+ * ~107 pitch; ">" chevron 18 × 30 (white, 11 px horizontal arm run), its centre ~8 px above the tile
+ * centre; notice below.
+ */
+.zzz-reward-preview {
+  --zzz-reward-preview-pitch: 107;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 0;
+}
+.zzz-reward-preview__label {
+  display: block;
+  margin: 0 calc(25 * var(--zzz-px)) 0 0;
+  padding-block: calc(3 * var(--zzz-px)) calc(4 * var(--zzz-px));
+  text-align: end;
+  white-space: nowrap;
+  /* fontSize.button (26, cap ≈ 22): a step above bodyXl. */
+  font-size: var(--zzz-font-size-button);
+}
+/* Sticker treatment as EventTitle (stroke + silhouette drop, see EventTitle.css), a lighter rim (~2 px) here. */
+.zzz-reward-preview__label.zzz-text--outline-event {
+  -webkit-text-stroke: calc(4.5 * var(--zzz-px)) var(--zzz-color-bg-base);
+  text-shadow: none;
+  filter: drop-shadow(0 calc(2 * var(--zzz-px)) 0 var(--zzz-color-bg-base));
+}
+.zzz-reward-preview__row {
+  display: flex;
+  align-items: center;
+  /* the 6th tile's ring ends ~1 px before the ">" ink; the 20-px hit box already pads it */
+  gap: 0;
+  /* tile ring tops 21 px under the label box (list padding included) */
+  margin-top: calc(12 * var(--zzz-px));
+}
+.zzz-reward-preview__list {
+  display: flex;
+  gap: calc((var(--zzz-reward-preview-pitch) - var(--zzz-size-card-preview-n)) * var(--zzz-px));
+  /* visible tiles × pitch minus one trailing gap (pitch − tile) */
+  width: calc(
+    (var(--zzz-reward-preview-visible, 6) * var(--zzz-reward-preview-pitch) -
+      (var(--zzz-reward-preview-pitch) - var(--zzz-size-card-preview-n))) * var(--zzz-px)
+  );
+  margin: 0;
+  /* room for the card rings / selection ring without clipping */
+  padding: calc(4 * var(--zzz-px)) 0;
+  list-style: none;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+}
+.zzz-reward-preview__list::-webkit-scrollbar {
+  display: none;
+}
+.zzz-reward-preview__item {
+  flex: none;
+  scroll-snap-align: start;
+}
+.zzz-reward-preview__more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: calc(20 * var(--zzz-px));
+  height: calc(34 * var(--zzz-px));
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--zzz-color-text-primary);
+  cursor: pointer;
+  appearance: none;
+  filter: drop-shadow(0 0 calc(1.5 * var(--zzz-px)) rgb(0 0 0 / 0.6));
+  /* the row centres it on the tiles; lift the ">" ~9.5 px above that */
+  margin-bottom: calc(19 * var(--zzz-px));
+}
+.zzz-reward-preview__more > svg {
+  flex: none;
+  /* viewBox = the ink: 18 × 30 */
+  width: calc(18 * var(--zzz-px));
+  height: calc(30 * var(--zzz-px));
+  fill: currentColor;
+}
+/* Pressed: the shared pressed recipe (.zzz-pressable): accent fill outset by size.control.pressOutset around the
+ * 20 × 34 hit box, chevron turns color.accent.on. The bare chevron has no ring/cap to hide. */
+.zzz-reward-preview__notice {
+  /* notice top 105 px below the tile tops (95 tile + 4 list padding + 6) */
+  margin-top: calc(6 * var(--zzz-px));
+  margin-right: calc(25 * var(--zzz-px));
+}

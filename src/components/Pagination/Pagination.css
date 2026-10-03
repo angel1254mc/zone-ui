@@ -1,0 +1,199 @@
+/*
+ * Pagination. Lengths in design units: track 52 tall, full pill,
+ * #222122; page slots min-width 64, margin 0 6, white numbers; current page = black number on a
+ * white parallelogram (45×32, 40° from vertical); prev/next = 64×40 white end chips
+ * (round outer end, slanted inner edge) with a black arrow, 24 px further from the numbers.
+ * Hover (web only): the chip appears + scale(1.12), 300 ms (never on the current page).
+ * Web colours are not theme tokens: they live here as local custom properties.
+ *
+ * Sizes (data-size sm / md / lg): every length is written in --zzz-pagination-u = --zzz-px times the
+ * control-size ratio (sm 46/57, md 1, lg 69/57 from size.control.{sm,md,lg}); md is the original
+ * geometry. Skew angles do not change; the game skin's ring, bevel rows and keyline follow the size.
+ */
+.zzz-pagination {
+  --zzz-pagination-k: 1;
+  --zzz-pagination-u: calc(var(--zzz-px) * var(--zzz-pagination-k));
+  --zzz-pagination-track: #222122;
+  --zzz-pagination-chip: #FFFFFF;
+  --zzz-pagination-on-chip: #000000;
+  --zzz-pagination-text: #FFFFFF;
+  --zzz-pagination-skew: -40deg;
+  --zzz-pagination-chip-w: calc(45 * var(--zzz-pagination-u));
+  --zzz-pagination-chip-h: calc(32 * var(--zzz-pagination-u));
+  --zzz-pagination-chip-radius: calc(6 * var(--zzz-pagination-u));
+  display: inline-block;
+}
+.zzz-pagination[data-size='sm'] {
+  --zzz-pagination-k: calc(var(--zzz-size-control-sm-n) / var(--zzz-size-control-md-n));
+}
+.zzz-pagination[data-size='lg'] {
+  --zzz-pagination-k: calc(var(--zzz-size-control-lg-n) / var(--zzz-size-control-md-n));
+}
+/* Game-skin material knobs in the size unit (0,2,0 so .zzz-mat-pill never wins by order). */
+.zzz-pagination .zzz-mat-pill {
+  --zzz-mat-ring: calc(var(--zzz-border-width-ring-n) * var(--zzz-pagination-u));
+  --zzz-dots-size: calc(var(--zzz-pattern-dots-sm-n) * var(--zzz-pagination-u));
+}
+/* sm / lg: the lit bevel rows and the keyline follow the size too (as Button / IconButton); the
+ * keyline goes through --zzz-shadow-keyline so :focus-visible still replaces it. md keeps the tokens. */
+.zzz-pagination:is([data-size='sm'], [data-size='lg']) .zzz-mat-pill {
+  --zzz-mat-bevel:
+    inset calc(1 * var(--zzz-pagination-u)) calc(1 * var(--zzz-pagination-u)) 0 var(--zzz-color-border-button-bevel-top),
+    inset calc(2 * var(--zzz-pagination-u)) calc(2 * var(--zzz-pagination-u)) 0 #373737;
+  --zzz-shadow-keyline: 0 0 0 calc(var(--zzz-border-width-keyline-n) * var(--zzz-pagination-u)) var(--zzz-color-border-keyline);
+}
+
+.zzz-pagination[data-skin='game'] {
+  --zzz-pagination-track: var(--zzz-color-surface-button);
+  --zzz-pagination-chip: var(--zzz-accent);
+  --zzz-pagination-on-chip: var(--zzz-color-accent-on);
+  --zzz-pagination-skew: var(--zzz-skew-tab-edge);
+  --zzz-pagination-chip-w: calc(50 * var(--zzz-pagination-u));
+  --zzz-pagination-chip-radius: calc(var(--zzz-radius-tab-corner-n) * var(--zzz-pagination-u));
+}
+
+.zzz-pagination__track {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: calc(52 * var(--zzz-pagination-u));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-radius: var(--zzz-radius-pill);
+  /* background-color only: the game skin keeps .zzz-mat-pill's dot mesh image. */
+  background-color: var(--zzz-pagination-track);
+}
+
+.zzz-pagination__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: calc(64 * var(--zzz-pagination-u));
+  margin: 0 calc(6 * var(--zzz-pagination-u));
+  color: var(--zzz-pagination-text);
+  /* Floored at the label role: sm stays legible (12.25 CSS px at 0.7, not 11.3). */
+  font-size: max(calc(var(--zzz-font-size-body-n) * var(--zzz-pagination-u)), var(--zzz-font-size-label));
+  line-height: var(--zzz-line-height-single);
+}
+.zzz-pagination__item--prev {
+  margin-right: calc(24 * var(--zzz-pagination-u));
+}
+.zzz-pagination__item--next {
+  margin-left: calc(24 * var(--zzz-pagination-u));
+}
+
+.zzz-pagination__ellipsis {
+  user-select: none;
+}
+
+.zzz-pagination__page,
+.zzz-pagination__step {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.zzz-pagination__page {
+  min-width: calc(64 * var(--zzz-pagination-u));
+  height: calc(40 * var(--zzz-pagination-u));
+  border-radius: var(--zzz-radius-pill);
+}
+
+.zzz-pagination__num {
+  line-height: var(--zzz-line-height-single);
+}
+
+.zzz-pagination__chip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: -1;
+  width: var(--zzz-pagination-chip-w);
+  height: var(--zzz-pagination-chip-h);
+  border-radius: var(--zzz-pagination-chip-radius);
+  background: var(--zzz-pagination-chip);
+  transform: translate(-50%, -50%) skewX(var(--zzz-pagination-skew));
+  opacity: 0;
+  pointer-events: none;
+}
+
+.zzz-pagination__page[aria-current='page'] {
+  color: var(--zzz-pagination-on-chip);
+  cursor: default;
+}
+.zzz-pagination__page[aria-current='page'] .zzz-pagination__chip {
+  opacity: 1;
+}
+
+/* Prev / next end chips. */
+.zzz-pagination__step {
+  width: calc(64 * var(--zzz-pagination-u));
+  height: calc(40 * var(--zzz-pagination-u));
+  color: var(--zzz-pagination-on-chip);
+  border-radius: var(--zzz-radius-pill);
+}
+.zzz-pagination__step-chip {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  fill: var(--zzz-pagination-chip);
+  stroke: var(--zzz-pagination-chip);
+}
+.zzz-pagination__step--next .zzz-pagination__step-chip {
+  transform: rotate(180deg);
+}
+.zzz-pagination__arrow {
+  position: relative;
+  width: calc(28 * var(--zzz-pagination-u));
+  height: calc(28 * var(--zzz-pagination-u));
+  margin-right: calc(8 * var(--zzz-pagination-u));
+}
+.zzz-pagination__step--next .zzz-pagination__arrow {
+  margin: 0 0 0 calc(8 * var(--zzz-pagination-u));
+  transform: rotate(180deg);
+}
+
+/* Disabled (ends, or the whole bar): label / glyph only, shape unchanged, no opacity. */
+.zzz-pagination__page[aria-disabled='true'],
+.zzz-pagination__step[aria-disabled='true'] {
+  cursor: default;
+}
+.zzz-pagination__page[aria-disabled='true']:not([aria-current='page']),
+.zzz-pagination__step[aria-disabled='true'] {
+  color: var(--zzz-color-text-disabled);
+}
+
+/* Web skin hover: the number sits on the chip (colour swap kept under reduced motion). */
+.zzz-pagination[data-skin='web'] .zzz-pagination__page:hover:not([aria-disabled='true']) {
+  color: var(--zzz-pagination-on-chip);
+}
+.zzz-pagination[data-skin='web'] .zzz-pagination__page:hover:not([aria-disabled='true']) .zzz-pagination__chip {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .zzz-pagination[data-skin='web'] :is(.zzz-pagination__page, .zzz-pagination__step) {
+    transition: transform 300ms, color 300ms;
+  }
+  .zzz-pagination[data-skin='web'] .zzz-pagination__chip {
+    transition: opacity 300ms;
+  }
+  .zzz-pagination[data-skin='web'] :is(.zzz-pagination__page:not([aria-current='page']), .zzz-pagination__step):hover:not([aria-disabled='true']) {
+    transform: scale(1.12);
+  }
+}

@@ -1,0 +1,202 @@
+/*
+ * Slider.
+ * Rhythm: − stepper | min number | thumb travel (the track runs thumb-centre to thumb-centre, 12 tall)
+ * | max number | + stepper. Each number is centred in the gap between its stepper and the thumb's
+ * travel: slots of 47 + 69 + 346 + 72 (centre 3 px left) + 47 = 581.
+ * Numbers: white, upright; fontSize.button 26 (cap ~21.5).
+ * Stepper: 47 circle, ring 4 color.border.stepper, fill ~#0C0C0C (color.surface.button #090909),
+ * glyph white (minus 25 × 6-7, plus 26 × 26), color.text.disabled at its bound (#666).
+ * Thumb: 34 px metallic sphere: bright crescent top-left (#D0–#DF), flat #585858 face (~22 px),
+ * dark lower-right rim (#18–#30), a dark dash on the left of the face.
+ *
+ * Sizes: every length except the default width is a multiple of the local unit
+ * --zzz-slider-u (1 design unit on md; x 46/57 on sm, x 69/57 on lg, from --zzz-size-control-*-n),
+ * so steppers, thumb, track, number slots, rings and the press outset keep their proportions.
+ * Numbers: --zzz-font-size-control-{sm,md,lg} (21 / 26 / 30; md = fontSize.button).
+ */
+.zzz-slider {
+  --zzz-slider-u: var(--zzz-px);
+  --zzz-slider-font: var(--zzz-font-size-control-md);
+  --zzz-slider-width: calc(581 * var(--zzz-px));
+  --zzz-slider-thumb: calc(var(--zzz-size-control-slider-thumb-n) * var(--zzz-slider-u));
+  display: flex;
+  align-items: center;
+  width: var(--zzz-slider-width);
+  height: calc(var(--zzz-size-control-stepper-n) * var(--zzz-slider-u));
+  touch-action: none;
+  user-select: none;
+}
+
+.zzz-slider--sm {
+  --zzz-slider-u: calc(var(--zzz-px) * var(--zzz-size-control-sm-n) / var(--zzz-size-control-md-n));
+  --zzz-slider-font: var(--zzz-font-size-control-sm);
+}
+.zzz-slider--lg {
+  --zzz-slider-u: calc(var(--zzz-px) * var(--zzz-size-control-lg-n) / var(--zzz-size-control-md-n));
+  --zzz-slider-font: var(--zzz-font-size-control-lg);
+}
+
+/* ── Steppers ──────────────────────────────────────────────────────────────────────────── */
+.zzz-slider__stepper {
+  --zzz-press-border: calc(var(--zzz-border-width-ring-stepper-n) * var(--zzz-slider-u));
+  --zzz-press-outset: calc(var(--zzz-size-control-press-outset-n) * var(--zzz-slider-u));
+  /* Same dotted fill as the pill material (.zzz-dots knobs from .zzz-mat-pill). */
+  --zzz-dots-size: var(--zzz-pattern-dots-sm);
+  --zzz-dots-alpha: 0.025;
+  --zzz-dots-shade: 0.75;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--zzz-size-control-stepper-n) * var(--zzz-slider-u));
+  height: calc(var(--zzz-size-control-stepper-n) * var(--zzz-slider-u));
+  margin: 0;
+  padding: 0;
+  border: calc(var(--zzz-border-width-ring-stepper-n) * var(--zzz-slider-u)) solid var(--zzz-color-border-stepper);
+  border-radius: var(--zzz-radius-pill);
+  background-color: var(--zzz-color-surface-button);
+  box-shadow: var(--zzz-shadow-keyline);
+  color: var(--zzz-color-text-primary);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.zzz-slider__stepper:disabled,
+.zzz-slider__stepper[aria-disabled='true'] {
+  color: var(--zzz-color-text-disabled);
+  cursor: default;
+}
+
+.zzz-slider__stepper--dec .zzz-slider__glyph {
+  width: calc(25 * var(--zzz-slider-u));
+  height: calc(25 * var(--zzz-slider-u));
+}
+
+.zzz-slider__stepper--inc .zzz-slider__glyph {
+  width: calc(26 * var(--zzz-slider-u));
+  height: calc(26 * var(--zzz-slider-u));
+}
+
+/* ── Min / max numbers ─────────────────────────────────────────────────────────────────── */
+.zzz-slider__bound {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: calc(69 * var(--zzz-slider-u));
+  color: var(--zzz-color-text-primary);
+  line-height: var(--zzz-line-height-single);
+  white-space: nowrap;
+}
+
+/* Two classes: beats the .zzz-text-button role class on the number. */
+.zzz-slider .zzz-slider__bound > * {
+  font-size: var(--zzz-slider-font);
+}
+
+.zzz-slider__bound--max {
+  width: calc(72 * var(--zzz-slider-u));
+  padding-right: calc(3 * var(--zzz-slider-u));
+}
+
+.zzz-slider--no-steppers .zzz-slider__bound--min {
+  justify-content: flex-start;
+}
+.zzz-slider--no-steppers .zzz-slider__bound--max {
+  justify-content: flex-end;
+}
+
+/* ── Rail, track, thumb ────────────────────────────────────────────────────────────────── */
+.zzz-slider__rail {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: calc(2 * var(--zzz-slider-thumb));
+  height: var(--zzz-slider-thumb);
+  cursor: pointer;
+}
+
+.zzz-slider[data-disabled] .zzz-slider__rail {
+  cursor: default;
+}
+
+.zzz-slider__track {
+  position: absolute;
+  top: 50%;
+  left: calc(var(--zzz-slider-thumb) / 2);
+  right: calc(var(--zzz-slider-thumb) / 2);
+  height: calc(var(--zzz-size-control-slider-track-n) * var(--zzz-slider-u));
+  border-radius: var(--zzz-radius-pill);
+  background: var(--zzz-color-surface-track);
+  transform: translateY(-50%);
+}
+
+.zzz-slider__thumb {
+  position: absolute;
+  top: 0;
+  left: calc(var(--zzz-slider-fraction, 0) * (100% - var(--zzz-slider-thumb)));
+  width: var(--zzz-slider-thumb);
+  height: var(--zzz-slider-thumb);
+  border-radius: 50%;
+  background:
+    /* flat face */
+    radial-gradient(circle at 52% 52%, #585858 0 calc(10.5 * var(--zzz-slider-u)), transparent calc(11.5 * var(--zzz-slider-u))),
+    /* sphere: bright crescent top-left, dark rim lower-right */
+    radial-gradient(circle at 32% 24%, #DCDCDC 0, #A4A4A4 calc(7 * var(--zzz-slider-u)), #585858 calc(17 * var(--zzz-slider-u)), #2A2A2A calc(25 * var(--zzz-slider-u)), #181818 calc(32 * var(--zzz-slider-u)));
+  box-shadow: 0 0 0 calc(1 * var(--zzz-slider-u)) #000;
+  cursor: grab;
+}
+
+/* The dark dash on the left of the face. */
+.zzz-slider__thumb::after {
+  content: '';
+  position: absolute;
+  top: calc(15 * var(--zzz-slider-u));
+  left: calc(7 * var(--zzz-slider-u));
+  width: calc(6 * var(--zzz-slider-u));
+  height: calc(3 * var(--zzz-slider-u));
+  border-radius: calc(1 * var(--zzz-slider-u));
+  background: #3C3C3C;
+}
+
+.zzz-slider__thumb:active {
+  cursor: grabbing;
+}
+
+.zzz-slider[data-disabled] .zzz-slider__thumb {
+  cursor: default;
+}
+
+/*
+ * Forced colours (Windows High Contrast). The track and the metallic thumb
+ * are drawn only with backgrounds, gradients and box-shadows, which WHCM drops, so only the
+ * steppers and bounds were left. Here the track gets a CanvasText border, the thumb opts out of
+ * colour forcing and is painted as a ButtonText disc with a Canvas border (GrayText when the
+ * slider is disabled). forced-color-adjust: none also stops the base.css transparent focus
+ * outline from being repainted, so the thumb's focus outline is set to Highlight explicitly.
+ */
+@media (forced-colors: active) {
+  .zzz-slider__track {
+    box-sizing: border-box;
+    border: calc(1 * var(--zzz-slider-u)) solid CanvasText;
+    background: Canvas;
+  }
+  .zzz-slider__thumb {
+    forced-color-adjust: none;
+    box-sizing: border-box;
+    border: calc(2 * var(--zzz-slider-u)) solid Canvas;
+    background: ButtonText;
+    box-shadow: none;
+  }
+  .zzz-slider__thumb::after {
+    display: none;
+  }
+  .zzz-slider__thumb:focus-visible {
+    outline-color: Highlight;
+  }
+  .zzz-slider[data-disabled] .zzz-slider__track {
+    border-color: GrayText;
+  }
+  .zzz-slider[data-disabled] .zzz-slider__thumb {
+    background: GrayText;
+  }
+}

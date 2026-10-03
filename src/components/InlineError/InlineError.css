@@ -1,0 +1,47 @@
+/* InlineError: cap 16 ≈ body 20, #BF3C2A. */
+.zzz-inline-error {
+  margin: 0;
+  color: var(--zzz-color-danger-text);
+  font-size: var(--zzz-font-size-body);
+  font-weight: 900;
+  font-style: normal;
+  line-height: var(--zzz-line-height-list);
+  text-align: center;
+}
+
+/* Notice: 424 × 39 black-50 % pill, no blur. */
+.zzz-notice {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(12 * var(--zzz-px));
+  box-sizing: border-box;
+  width: calc(424 * var(--zzz-px));
+  max-width: 100%;
+  height: var(--zzz-size-control-notice);
+  padding: 0 calc(8 * var(--zzz-px)) 0 calc(12 * var(--zzz-px));
+  border-radius: var(--zzz-radius-pill);
+  background: var(--zzz-color-surface-notice);
+  color: var(--zzz-color-text-primary);
+  font-size: var(--zzz-font-size-label);
+  font-weight: 900;
+  line-height: var(--zzz-line-height-single);
+  white-space: nowrap;
+}
+.zzz-notice__text {
+  padding-block: 0.3em; /* keeps descenders inside the overflow clip */
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.zzz-notice__icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: calc(22 * var(--zzz-px));
+  height: calc(22 * var(--zzz-px));
+}
+.zzz-notice__icon > :is(svg, img) {
+  width: 100%;
+  height: 100%;
+}

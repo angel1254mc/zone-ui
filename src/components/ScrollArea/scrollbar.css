@@ -1,0 +1,95 @@
+/* .zzz-scrollbar: NATIVE scrollbars styled as close to the ScrollArea bar as the platform allows.
+ *
+ * Apply it to any overflow container, or to the page:
+ *     <html class="zzz-theme zzz-scrollbar">    (tokens live on :root / .zzz-theme, so <html> resolves them)
+ *
+ * The bar: a 20 px capsule, #030303 fill with a 2 px #2A2A2A outline; a 4 px square-ended
+ * #808080 thumb running 23 px in from the capsule ends; 9 x 8 #808080 bullet-shaped arrow caps (tip + vertical-sided base) 8 px from the ends.
+ *
+ * - Chromium / Safari / Edge (::-webkit-scrollbar*): full look, including the arrow caps (styled scroll
+ *   buttons, Chromium only; Safari ignores the buttons). The capsule is the scrollbar box itself so it spans
+ *   the buttons; the thumb is a 4 px strip clipped out of a transparent border.
+ * - Firefox (standard scrollbar-width / scrollbar-color): only colours can be set, so it gets a grey thumb on
+ *   the #030303 track; no capsule, outline or arrow caps.
+ * The two are gated with @supports because Chromium 121+ ignores every ::-webkit-scrollbar rule on an element
+ * that also sets the standard properties.
+ */
+@supports not selector(::-webkit-scrollbar) {
+  .zzz-scrollbar {
+    scrollbar-width: auto;
+    scrollbar-color: var(--zzz-scrollbar-thumb, #808080) var(--zzz-color-surface-scroll-track);
+  }
+}
+
+@supports selector(::-webkit-scrollbar) {
+  .zzz-scrollbar {
+    --zzz-scrollbar-thumb: #808080;
+    /* the thumb box spans the full 20 px track (outline included): (20 - 4) / 2 */
+    --zzz-scrollbar-thumb-side: calc(8 * var(--zzz-px));
+  }
+  .zzz-scrollbar::-webkit-scrollbar {
+    width: var(--zzz-size-scrollbar-track);
+    height: var(--zzz-size-scrollbar-track);
+    box-sizing: border-box;
+    border: var(--zzz-border-width-scrollbar) solid var(--zzz-color-border-scrollbar);
+    border-radius: var(--zzz-radius-pill);
+    background: var(--zzz-color-surface-scroll-track);
+  }
+  .zzz-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .zzz-scrollbar::-webkit-scrollbar-thumb {
+    border: 0 solid transparent;
+    border-radius: 0;
+    background: var(--zzz-scrollbar-thumb);
+    background-clip: padding-box;
+  }
+  .zzz-scrollbar::-webkit-scrollbar-thumb:vertical {
+    border-left-width: var(--zzz-scrollbar-thumb-side);
+    border-right-width: var(--zzz-scrollbar-thumb-side);
+    min-height: calc(20 * var(--zzz-px));
+  }
+  .zzz-scrollbar::-webkit-scrollbar-thumb:horizontal {
+    border-top-width: var(--zzz-scrollbar-thumb-side);
+    border-bottom-width: var(--zzz-scrollbar-thumb-side);
+    min-width: calc(20 * var(--zzz-px));
+  }
+  .zzz-scrollbar::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  /* Arrow caps: one button at each end, 23 px deep (the run inset; buttons start at the outer edge); the 9 x 8
+   * bullet cap (4.7-row tip, 2.8-row vertical-sided base; same outline as ScrollArea's SCROLL_CAP_*_PATH) sits 8 px from the capsule's outer end. */
+  .zzz-scrollbar::-webkit-scrollbar-button {
+    display: none;
+  }
+  .zzz-scrollbar::-webkit-scrollbar-button:single-button {
+    display: block;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: calc(9 * var(--zzz-px)) calc(8 * var(--zzz-px));
+  }
+  .zzz-scrollbar::-webkit-scrollbar-button:single-button:vertical {
+    height: calc(23 * var(--zzz-px));
+  }
+  .zzz-scrollbar::-webkit-scrollbar-button:single-button:horizontal {
+    width: calc(23 * var(--zzz-px));
+    background-size: calc(8 * var(--zzz-px)) calc(9 * var(--zzz-px));
+  }
+  .zzz-scrollbar::-webkit-scrollbar-button:single-button:vertical:decrement {
+    background-position: center calc(8 * var(--zzz-px));
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 8' preserveAspectRatio='none'%3E%3Cpath fill='%23808080' d='M4.5 0.3L8.1 5V7.8H0.9V5Z'/%3E%3C/svg%3E");
+  }
+  .zzz-scrollbar::-webkit-scrollbar-button:single-button:vertical:increment {
+    background-position: center calc(100% - 8 * var(--zzz-px));
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 8' preserveAspectRatio='none'%3E%3Cpath fill='%23808080' d='M0.9 0.2H8.1V3L4.5 7.7L0.9 3Z'/%3E%3C/svg%3E");
+  }
+  .zzz-scrollbar::-webkit-scrollbar-button:single-button:horizontal:decrement {
+    background-position: calc(8 * var(--zzz-px)) center;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 9' preserveAspectRatio='none'%3E%3Cpath fill='%23808080' d='M0.3 4.5L5 0.9H7.8V8.1H5Z'/%3E%3C/svg%3E");
+  }
+  .zzz-scrollbar::-webkit-scrollbar-button:single-button:horizontal:increment {
+    background-position: calc(100% - 8 * var(--zzz-px)) center;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 9' preserveAspectRatio='none'%3E%3Cpath fill='%23808080' d='M7.7 4.5L3 8.1H0.2V0.9H3Z'/%3E%3C/svg%3E");
+  }
+}

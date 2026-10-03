@@ -1,0 +1,14 @@
+/* EventDescription: bodyXl + textOutlineMd from Text; 30 px line pitch. */
+.zzz-event-description {
+  display: block;
+  margin: 0;
+  line-height: var(--zzz-line-height-description);
+  white-space: pre-line;
+  /* The advance includes the sticker outline, so outlined letters keep visible gaps; the 5 px
+     paint-order stroke otherwise closes them and lines run 7-10 % short. Scoped to this component
+     (not .zzz-text--outline-md). */
+  letter-spacing: var(--zzz-event-description-tracking, 0.05em);
+}
+.zzz-event-description--start { text-align: start; }
+.zzz-event-description--center { text-align: center; margin-inline: auto; }
+.zzz-event-description--end { text-align: end; margin-inline-start: auto; }

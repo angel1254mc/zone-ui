@@ -1,0 +1,141 @@
+/*
+ * WebTabs. Lengths in design units: track 820×64, radius 32, padding 0 20,
+ * #222122; items 195 wide, white labels (font.size.body); active chip ~108×44 white parallelogram (~38° from
+ * vertical, ~7 px corners after the skew), active text #333. Hover (web only): chip fades in, scale(1.12), 300 ms.
+ * Web colours are not theme tokens: they live here as local custom properties.
+ *
+ * Sizes (data-size sm / md / lg): every length is written in --zzz-web-tabs-u = --zzz-px times the
+ * control-size ratio (sm 46/57, md 1, lg 69/57 from size.control.{sm,md,lg}); md is the original
+ * geometry. Skew angles do not change; the game skin's ring, bevel rows and keyline follow the size.
+ */
+.zzz-web-tabs {
+  --zzz-web-tabs-k: 1;
+  --zzz-web-tabs-u: calc(var(--zzz-px) * var(--zzz-web-tabs-k));
+  --zzz-web-tabs-track: #222122;
+  --zzz-web-tabs-chip: #FFFFFF;
+  --zzz-web-tabs-on-chip: #333333;
+  --zzz-web-tabs-text: #FFFFFF;
+  --zzz-web-tabs-chip-w: calc(108 * var(--zzz-web-tabs-u));
+  --zzz-web-tabs-chip-h: calc(44 * var(--zzz-web-tabs-u));
+  --zzz-web-tabs-chip-skew: -38deg;
+  --zzz-web-tabs-chip-radius: calc(7 * var(--zzz-web-tabs-u));
+  display: inline-flex;
+  align-items: stretch;
+  box-sizing: border-box;
+  width: var(--zzz-web-tabs-width);
+  max-width: 100%;
+  height: calc(64 * var(--zzz-web-tabs-u));
+  padding: 0 calc(20 * var(--zzz-web-tabs-u));
+  border-radius: var(--zzz-radius-pill);
+  /* background-color only: the game skin keeps .zzz-mat-pill's dot mesh image. */
+  background-color: var(--zzz-web-tabs-track);
+}
+.zzz-web-tabs[data-size='sm'] {
+  --zzz-web-tabs-k: calc(var(--zzz-size-control-sm-n) / var(--zzz-size-control-md-n));
+}
+.zzz-web-tabs[data-size='lg'] {
+  --zzz-web-tabs-k: calc(var(--zzz-size-control-lg-n) / var(--zzz-size-control-md-n));
+}
+
+.zzz-web-tabs[data-skin='game'] {
+  --zzz-web-tabs-track: var(--zzz-color-surface-button);
+  --zzz-web-tabs-chip: var(--zzz-accent);
+  --zzz-web-tabs-on-chip: var(--zzz-color-accent-on);
+  --zzz-web-tabs-chip-w: calc(134 * var(--zzz-web-tabs-u));
+  --zzz-web-tabs-chip-skew: var(--zzz-skew-tab-edge);
+  --zzz-web-tabs-chip-radius: calc(var(--zzz-radius-tab-corner-n) * var(--zzz-web-tabs-u));
+  height: calc(var(--zzz-size-control-pill-top-n) * var(--zzz-web-tabs-u));
+  padding: 0 calc(15 * var(--zzz-web-tabs-u));
+}
+/* Game-skin material knobs in the size unit (0,2,0 so .zzz-mat-pill never wins by order). */
+.zzz-web-tabs.zzz-mat-pill {
+  --zzz-mat-ring: calc(var(--zzz-border-width-ring-n) * var(--zzz-web-tabs-u));
+  --zzz-dots-size: calc(var(--zzz-pattern-dots-sm-n) * var(--zzz-web-tabs-u));
+}
+/* sm / lg: the lit bevel rows and the keyline follow the size too (as Button / IconButton); the
+ * keyline goes through --zzz-shadow-keyline so :focus-visible still replaces it. md keeps the tokens. */
+.zzz-web-tabs.zzz-mat-pill:is([data-size='sm'], [data-size='lg']) {
+  --zzz-mat-bevel:
+    inset calc(1 * var(--zzz-web-tabs-u)) calc(1 * var(--zzz-web-tabs-u)) 0 var(--zzz-color-border-button-bevel-top),
+    inset calc(2 * var(--zzz-web-tabs-u)) calc(2 * var(--zzz-web-tabs-u)) 0 #373737;
+  --zzz-shadow-keyline: 0 0 0 calc(var(--zzz-border-width-keyline-n) * var(--zzz-web-tabs-u)) var(--zzz-color-border-keyline);
+}
+
+.zzz-web-tabs__tab {
+  position: relative;
+  isolation: isolate;
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--zzz-radius-pill);
+  background: none;
+  color: var(--zzz-web-tabs-text);
+  /* Floored at the label role: sm stays legible (12.25 CSS px at 0.7, not 11.3). */
+  font-size: max(calc(var(--zzz-font-size-body-n) * var(--zzz-web-tabs-u)), var(--zzz-font-size-label));
+  line-height: var(--zzz-line-height-single);
+  white-space: nowrap;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.zzz-web-tabs__chip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: -1;
+  width: var(--zzz-web-tabs-chip-w);
+  height: var(--zzz-web-tabs-chip-h);
+  border-radius: var(--zzz-web-tabs-chip-radius);
+  background: var(--zzz-web-tabs-chip);
+  transform: translate(-50%, -50%) skewX(var(--zzz-web-tabs-chip-skew));
+  opacity: 0;
+  pointer-events: none;
+}
+
+.zzz-web-tabs__label {
+  line-height: var(--zzz-line-height-single);
+}
+
+.zzz-web-tabs__tab[aria-selected='true'] {
+  color: var(--zzz-web-tabs-on-chip);
+}
+.zzz-web-tabs__tab[aria-selected='true'] .zzz-web-tabs__chip {
+  opacity: 1;
+}
+
+/* Disabled: label only, shape unchanged, no opacity. */
+.zzz-web-tabs__tab[aria-disabled='true'] {
+  color: var(--zzz-color-text-disabled);
+  cursor: default;
+}
+
+/* Game skin, pressed inactive tab: grey label (as SegmentedTabs). */
+.zzz-web-tabs[data-skin='game'] .zzz-web-tabs__tab[data-pressed] {
+  color: var(--zzz-color-text-pressed);
+}
+
+/* Web skin hover (web component): the chip fades in behind the label.
+ * The colour swap stays under reduced motion; the scale and the transitions do not. */
+.zzz-web-tabs[data-skin='web'] .zzz-web-tabs__tab:hover:not([aria-disabled='true']) {
+  color: var(--zzz-web-tabs-on-chip);
+}
+.zzz-web-tabs[data-skin='web'] .zzz-web-tabs__tab:hover:not([aria-disabled='true']) .zzz-web-tabs__chip {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .zzz-web-tabs[data-skin='web'] .zzz-web-tabs__tab {
+    transition: transform 300ms, color 300ms;
+  }
+  .zzz-web-tabs[data-skin='web'] .zzz-web-tabs__chip {
+    transition: opacity 300ms;
+  }
+  .zzz-web-tabs[data-skin='web'] .zzz-web-tabs__tab:hover:not([aria-disabled='true'], [aria-selected='true']) {
+    transform: scale(1.12);
+  }
+}

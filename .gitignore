@@ -1,0 +1,9 @@
+node_modules/
+dist/
+demo-dist/
+storybook-static/
+.vitest/
+*.log
+*.tgz
+.vercel/
+.env*

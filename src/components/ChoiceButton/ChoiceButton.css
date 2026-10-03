@@ -1,0 +1,433 @@
+/*
+ * ChoiceButton + ChoiceGroup.
+ * Shell: .zzz-mat-pill (5 px #333 ring with the lit top/left rows, #090909 + dot mesh, 3 px black
+ * keyline) + .zzz-pressable (accent fill + 4 px outset while pressed) from base.css. The pill
+ * radius is clamped to a plate radius so a 2–3 line choice reads as a rounded plate while a one-line
+ * choice (min-height 78) is a full stadium pill.
+ * Lengths are design units (× --zzz-px) through the local unit --zzz-choice-u.
+ *
+ * Sizes (web scale): --zzz-choice-u is 1 design unit on md, x 46/57 on sm and x 69/57 on lg
+ * (from --zzz-size-control-*-n), so min-height (63 / 78 / 94), badge cap (45 / 56 / 68), ring,
+ * radius, padding, media, glyphs and the press outset keep their proportions. Label:
+ * --zzz-font-size-control-{sm,md,lg} (21 / 26 / 30); description label / body / bodyLg.
+ *
+ * States (data-state): idle · selected · correct · incorrect · revealed; [data-pressed] / :active;
+ * :disabled / [aria-disabled]; [data-dimmed] (locked group, not picked, no result).
+ */
+
+.zzz-choice {
+  --zzz-choice-u: var(--zzz-px);
+  --zzz-choice-font: var(--zzz-font-size-control-md);
+  --zzz-choice-desc: var(--zzz-font-size-body);
+  --zzz-choice-radius: calc(39 * var(--zzz-choice-u));
+  --zzz-choice-cap: calc(56 * var(--zzz-choice-u));
+  --zzz-choice-pad-y: calc(10 * var(--zzz-choice-u));
+  --zzz-choice-pad-x: calc(26 * var(--zzz-choice-u));
+  /* result colours (tokens: color.icon.confirm / color.icon.cancel / color.danger.base) */
+  --zzz-choice-green: var(--zzz-color-icon-confirm);
+  --zzz-choice-red: var(--zzz-color-icon-cancel);
+  --zzz-choice-red-ring: var(--zzz-color-danger-base);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
+  min-height: calc(78 * var(--zzz-choice-u));
+  margin: 0;
+  padding: var(--zzz-choice-pad-y) var(--zzz-choice-pad-x) var(--zzz-choice-pad-y) calc(var(--zzz-choice-pad-y) + 2 * var(--zzz-choice-u));
+  border-radius: var(--zzz-choice-radius);
+  color: var(--zzz-color-text-primary);
+  text-align: left;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  appearance: none;
+}
+.zzz-choice--sm {
+  --zzz-choice-u: calc(var(--zzz-px) * var(--zzz-size-control-sm-n) / var(--zzz-size-control-md-n));
+  --zzz-choice-font: var(--zzz-font-size-control-sm);
+  --zzz-choice-desc: var(--zzz-font-size-label);
+}
+.zzz-choice--lg {
+  --zzz-choice-u: calc(var(--zzz-px) * var(--zzz-size-control-lg-n) / var(--zzz-size-control-md-n));
+  --zzz-choice-font: var(--zzz-font-size-control-lg);
+  --zzz-choice-desc: var(--zzz-font-size-body-lg);
+}
+/* Ring + press outset in the size's unit. Two classes: beats .zzz-mat-pill's own --zzz-mat-ring
+ * (which also feeds --zzz-press-border) whatever the stylesheet order. */
+.zzz-choice.zzz-mat-pill {
+  --zzz-mat-ring: calc(var(--zzz-border-width-ring-n) * var(--zzz-choice-u));
+  --zzz-press-outset: calc(var(--zzz-size-control-press-outset-n) * var(--zzz-choice-u));
+}
+/* Only the idle hover lighten eases; selected / result rings read the live accent every frame and
+ * must stay in phase with every other accent on screen (a transition would lag them). */
+.zzz-choice[data-state='idle'] {
+  transition: border-color 120ms linear;
+}
+.zzz-choice:not(.zzz-choice--capped) {
+  padding-left: var(--zzz-choice-pad-x);
+}
+
+.zzz-choice__row {
+  display: flex;
+  align-items: center;
+  gap: calc(18 * var(--zzz-choice-u));
+  min-width: 0;
+  flex: 1 1 auto;
+  pointer-events: none;
+}
+
+/* ── Badge cap: the icon-cap build (5 px #333 ring, black mesh-free disc, white glyph) ─────── */
+.zzz-choice__cap,
+.zzz-choice__mark {
+  position: relative;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: var(--zzz-choice-cap);
+  height: var(--zzz-choice-cap);
+}
+.zzz-choice__cap > *,
+.zzz-choice__mark > * {
+  grid-area: 1 / 1;
+}
+.zzz-choice__disc {
+  width: 100%;
+  height: 100%;
+  border: var(--zzz-mat-ring) solid var(--zzz-color-border-button);
+  border-radius: 50%;
+  background: var(--zzz-color-surface-button-cap);
+  box-shadow:
+    inset calc(1 * var(--zzz-choice-u)) calc(1 * var(--zzz-choice-u)) 0 var(--zzz-color-border-button-bevel-top),
+    var(--zzz-shadow-keyline);
+}
+.zzz-choice__badge {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  font-size: var(--zzz-choice-font);
+  line-height: var(--zzz-line-height-single);
+  color: currentColor;
+}
+/* text badges are sheared like the label; icons stay upright */
+.zzz-choice__badge:not(:has(> svg, > .zzz-choice__glyph, > img)) {
+  transform: skewX(var(--zzz-skew-italic));
+  translate: calc(-1 * var(--zzz-choice-u)) calc(1 * var(--zzz-choice-u));
+}
+.zzz-choice__badge > svg {
+  width: calc(28 * var(--zzz-choice-u));
+  height: calc(28 * var(--zzz-choice-u));
+}
+.zzz-choice__glyph {
+  position: relative;
+  display: grid;
+  place-items: center;
+  line-height: 0;
+  font-size: calc(26 * var(--zzz-choice-u));
+}
+.zzz-choice__mark {
+  --zzz-choice-cap: calc(44 * var(--zzz-choice-u));
+  margin-right: calc(-12 * var(--zzz-choice-u));
+}
+
+/* ── Media ─────────────────────────────────────────────────────────────────────────────── */
+.zzz-choice__media {
+  position: relative;
+  flex: none;
+  display: block;
+  overflow: hidden;
+  background: var(--zzz-color-surface-button-cap);
+  box-shadow: 0 0 0 calc(2 * var(--zzz-choice-u)) var(--zzz-color-border-button);
+}
+.zzz-choice__media > :is(img, picture, svg, video) {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.zzz-choice__media > picture > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.zzz-choice--media-inline .zzz-choice__media {
+  width: calc(64 * var(--zzz-choice-u));
+  height: calc(64 * var(--zzz-choice-u));
+  border-radius: var(--zzz-radius-card-inner);
+}
+.zzz-choice--media-cover {
+  --zzz-choice-radius: calc(30 * var(--zzz-choice-u));
+  justify-content: flex-start;
+  padding-top: calc(10 * var(--zzz-choice-u));
+  padding-right: calc(10 * var(--zzz-choice-u) + var(--zzz-choice-pad-y));
+  gap: calc(10 * var(--zzz-choice-u));
+}
+.zzz-choice--media-cover .zzz-choice__media {
+  width: 100%;
+  aspect-ratio: var(--zzz-choice-media-ratio, 16 / 10);
+  border-radius: calc(var(--zzz-choice-radius) - 12 * var(--zzz-choice-u));
+  pointer-events: none;
+}
+
+/* ── Label + description ─────────────────────────────────────────────────────────────── */
+.zzz-choice__body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: calc(5 * var(--zzz-choice-u));
+  min-width: 0;
+  padding-block: calc(6 * var(--zzz-choice-u));
+}
+.zzz-choice__label {
+  display: block;
+  min-width: 0;
+}
+.zzz-choice__text {
+  /* .zzz-italic: inline-block + 10° shear about the baseline. A block-ish inline-block wraps. */
+  max-width: 100%;
+  padding-right: calc(6 * var(--zzz-choice-u));
+  font-size: var(--zzz-choice-font);
+  line-height: calc(31 * var(--zzz-choice-u));
+  overflow-wrap: break-word;
+  text-wrap: pretty;
+  /* shear about the block's vertical centre: a wrapped label leans evenly (top lines right, bottom
+   * lines left) instead of every line drifting right of the first column */
+  transform-origin: 0 50%;
+}
+/* word-by-word shear: the label box itself is upright */
+.zzz-choice__text--words {
+  display: block;
+  transform: none;
+}
+.zzz-choice__text--words > .zzz-italic {
+  /* inline-blocks can't break inside: very long words wrap whole (break-word still applies within) */
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+.zzz-choice__desc {
+  display: block;
+  color: var(--zzz-color-text-tertiary);
+  font-size: var(--zzz-choice-desc);
+  /* 25 over body 20, kept proportional to the description size */
+  line-height: calc(var(--zzz-choice-desc) * 1.25);
+  text-wrap: pretty;
+}
+
+/* ── Hover (web addition; pointer devices only) ─────────────────────────────────────────── */
+@media (hover: hover) {
+  .zzz-choice:hover:not(:disabled, [aria-disabled='true'], [data-pressed], :active)[data-state='idle'] {
+    border-color: var(--zzz-color-border-button-bevel-top);
+  }
+  .zzz-choice:hover:not(:disabled, [aria-disabled='true'], [data-pressed], :active)[data-state='idle'] .zzz-choice__disc {
+    border-color: var(--zzz-color-border-button-bevel-top);
+  }
+}
+
+/* ── Selected: accent ring + accent cap with a black letter; pulses with the accent clock ── */
+.zzz-choice[data-state='selected'] {
+  --zzz-mat-bevel: none;
+  border-color: var(--zzz-accent);
+}
+.zzz-choice[data-state='selected'] .zzz-choice__disc {
+  border-color: var(--zzz-accent);
+  background: var(--zzz-accent);
+  box-shadow: var(--zzz-shadow-keyline);
+}
+.zzz-choice[data-state='selected'] .zzz-choice__badge {
+  color: var(--zzz-color-accent-on);
+}
+
+/* ── Results ───────────────────────────────────────────────────────────────────────────
+ * The cap keeps the icon-cap build (5 px #333 ring, black interior) with a coloured disc
+ * (size.control.iconDisc) and a black glyph inside, like Button's Confirm / Cancel caps. The plate
+ * ring takes the result colour so the outcome reads at a glance, and the plate gets a faint tint. */
+.zzz-choice:is([data-state='correct'], [data-state='incorrect'], [data-state='revealed']) {
+  --zzz-mat-bevel: none;
+}
+.zzz-choice__dot {
+  position: relative;
+  width: calc(var(--zzz-size-control-icon-disc-n) * var(--zzz-choice-u));
+  height: calc(var(--zzz-size-control-icon-disc-n) * var(--zzz-choice-u));
+  border-radius: 50%;
+  background: var(--zzz-choice-dot, transparent);
+}
+.zzz-choice__mark .zzz-choice__dot {
+  width: calc(30 * var(--zzz-choice-u));
+  height: calc(30 * var(--zzz-choice-u));
+}
+.zzz-choice:is([data-state='correct'], [data-state='incorrect']) .zzz-choice__glyph {
+  color: var(--zzz-color-accent-on);
+}
+
+/* correct (green): green ring, a green-tinted plate, green disc with a black check */
+.zzz-choice[data-state='correct'] {
+  --zzz-choice-dot: var(--zzz-choice-green);
+  border-color: var(--zzz-choice-green);
+  background-color: color-mix(in srgb, var(--zzz-choice-green) 14%, var(--zzz-color-surface-button));
+}
+/* correct (accent): the whole plate takes the live accent fill with a black label; the cap stays
+ * black with an accent check (the pressed-pill palette, held) */
+.zzz-choice[data-state='correct'][data-tone='accent'] {
+  --zzz-choice-dot: transparent;
+  border-color: var(--zzz-accent);
+  background-color: var(--zzz-accent);
+  background-image: none;
+  color: var(--zzz-color-accent-on);
+}
+.zzz-choice[data-state='correct'][data-tone='accent'] .zzz-choice__desc {
+  color: var(--zzz-color-accent-on);
+}
+.zzz-choice[data-state='correct'][data-tone='accent'] .zzz-choice__disc {
+  border-color: var(--zzz-color-accent-on);
+}
+.zzz-choice[data-state='correct'][data-tone='accent'] .zzz-choice__glyph {
+  color: var(--zzz-accent);
+}
+
+/* incorrect: red ring, red-tinted plate, red disc with a black x */
+.zzz-choice[data-state='incorrect'] {
+  --zzz-choice-dot: var(--zzz-choice-red);
+  border-color: var(--zzz-choice-red-ring);
+  background-color: color-mix(in srgb, var(--zzz-choice-red) 14%, var(--zzz-color-surface-button));
+}
+.zzz-choice:is([data-state='correct'], [data-state='incorrect']):not([data-tone='accent']) .zzz-choice__glyph {
+  /* black glyph on a disc: ~18–19 px, as on the Confirm / Cancel caps */
+  font-size: calc(20 * var(--zzz-choice-u));
+}
+.zzz-choice__mark .zzz-choice__glyph {
+  font-size: calc(17 * var(--zzz-choice-u));
+}
+
+/* revealed: the right answer the user did not pick. Green ring on the normal dark plate and a
+ * green check on the black cap (no disc): reads "this was it" without claiming the point. */
+.zzz-choice[data-state='revealed'] {
+  border-color: var(--zzz-choice-green);
+}
+.zzz-choice[data-state='revealed'] .zzz-choice__disc {
+  border-color: var(--zzz-choice-green);
+}
+.zzz-choice[data-state='revealed'] .zzz-choice__glyph {
+  color: var(--zzz-choice-green);
+}
+
+/* A short pop when a result lands (incorrect shakes). Off with reduced motion. */
+@keyframes zzz-choice-result-pop {
+  0% { scale: 1; }
+  40% { scale: 1.025; }
+  100% { scale: 1; }
+}
+@keyframes zzz-choice-result-shake {
+  0%, 100% { translate: 0 0; }
+  20% { translate: calc(-8 * var(--zzz-choice-u)) 0; }
+  40% { translate: calc(7 * var(--zzz-choice-u)) 0; }
+  60% { translate: calc(-5 * var(--zzz-choice-u)) 0; }
+  80% { translate: calc(3 * var(--zzz-choice-u)) 0; }
+}
+.zzz-choice:is([data-state='correct'], [data-state='revealed']) {
+  animation: zzz-choice-result-pop 260ms cubic-bezier(.3, 0, .3, 1) both;
+}
+.zzz-choice[data-state='incorrect'] {
+  animation: zzz-choice-result-shake 320ms linear both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .zzz-choice {
+    animation: none !important;
+    transition: none;
+  }
+}
+[data-reduced-motion] .zzz-choice {
+  animation: none;
+  transition: none;
+}
+
+/* ── Pressed (shared recipe): accent fill + outset, black label, cap ring/disc hidden, glyph stays ── */
+.zzz-choice:active:not(:disabled, [aria-disabled='true']),
+.zzz-choice[data-pressed] {
+  transition: none;
+}
+.zzz-choice:active:not(:disabled, [aria-disabled='true']) .zzz-choice__desc,
+.zzz-choice[data-pressed] .zzz-choice__desc {
+  color: var(--zzz-color-accent-on);
+}
+.zzz-choice:active:not(:disabled, [aria-disabled='true']) .zzz-choice__glyph,
+.zzz-choice[data-pressed] .zzz-choice__glyph,
+.zzz-choice:active:not(:disabled, [aria-disabled='true']) .zzz-choice__badge,
+.zzz-choice[data-pressed] .zzz-choice__badge {
+  color: var(--zzz-color-accent-on);
+}
+
+/* ── Disabled: grey label/badge/description, shape unchanged, no opacity ────────────────── */
+.zzz-choice:disabled,
+.zzz-choice[data-dimmed] {
+  color: var(--zzz-color-text-disabled);
+  cursor: default;
+}
+.zzz-choice[aria-disabled='true'] {
+  cursor: default;
+}
+.zzz-choice:is(:disabled, [data-dimmed]) .zzz-choice__desc {
+  color: var(--zzz-color-text-disabled);
+}
+.zzz-choice:is(:disabled, [data-dimmed]) .zzz-choice__media {
+  filter: grayscale(1) brightness(0.55);
+}
+
+/* ── ChoiceGroup ───────────────────────────────────────────────────────────────────────── */
+.zzz-choice-group {
+  --zzz-choice-group-u: var(--zzz-px);
+  --zzz-choice-group-label: var(--zzz-font-size-body-lg);
+  container: zzz-choice-group / inline-size;
+  /* inline-size containment zeroes the intrinsic width: always fill the available width */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: calc(14 * var(--zzz-choice-group-u));
+  min-width: 0;
+}
+.zzz-choice-group--sm {
+  --zzz-choice-group-u: calc(var(--zzz-px) * var(--zzz-size-control-sm-n) / var(--zzz-size-control-md-n));
+  --zzz-choice-group-label: var(--zzz-font-size-body);
+}
+.zzz-choice-group--lg {
+  --zzz-choice-group-u: calc(var(--zzz-px) * var(--zzz-size-control-lg-n) / var(--zzz-size-control-md-n));
+  --zzz-choice-group-label: var(--zzz-font-size-button);
+}
+.zzz-choice-group__label {
+  color: var(--zzz-color-text-muted);
+  font-size: var(--zzz-choice-group-label);
+  /* line-height.card (25) over bodyLg (22), kept proportional */
+  line-height: calc(var(--zzz-choice-group-label) * 25 / 22);
+}
+.zzz-choice-group__items {
+  --zzz-choice-cols: 1;
+  display: grid;
+  grid-template-columns: repeat(var(--zzz-choice-cols), minmax(0, 1fr));
+  /* rows the same height inside a grid row, a ring + keyline + press outset of air between them */
+  gap: calc(20 * var(--zzz-choice-group-u)) calc(22 * var(--zzz-choice-group-u));
+  padding: calc(8 * var(--zzz-choice-group-u));
+  margin: calc(-8 * var(--zzz-choice-group-u));
+}
+.zzz-choice-group--grid .zzz-choice-group__items[data-cols='2'] { --zzz-choice-cols: 2; }
+.zzz-choice-group--grid .zzz-choice-group__items[data-cols='3'] { --zzz-choice-cols: 3; }
+.zzz-choice-group--grid .zzz-choice-group__items[data-cols='4'] { --zzz-choice-cols: 4; }
+.zzz-choice-group--list .zzz-choice-group__items {
+  gap: calc(16 * var(--zzz-choice-group-u));
+}
+
+/* Container breakpoints in CSS px (container queries cannot read --zzz-px): 3–4 columns need
+ * ≥ 960 px, 2 columns ≥ 520 px; narrower containers (phones) stack to one column. */
+@container zzz-choice-group (max-width: 960px) {
+  .zzz-choice-group--grid .zzz-choice-group__items:is([data-cols='3'], [data-cols='4']) {
+    --zzz-choice-cols: 2;
+  }
+}
+@container zzz-choice-group (max-width: 520px) {
+  /* same specificity as the [data-cols] rules above, later in the file: wins */
+  .zzz-choice-group--grid .zzz-choice-group__items[data-cols] {
+    --zzz-choice-cols: 1;
+  }
+}

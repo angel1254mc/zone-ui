@@ -1,0 +1,42 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Using this Storybook" />
+
+# Using this Storybook
+
+Zone is a general-purpose, Zenless Zone Zero–inspired React UI kit for game-flavoured web apps and sites, and this Storybook is styled with it, like a ZZZ menu. The sidebar, search field, toolbar, tabs, addon panel and scrollbars all use the library's own materials, at a compact density (`--zzz-scale: 0.5`, 1 design unit = 0.5 CSS px at a 16 px root). The **Scale** control on the left of the toolbar is a real zone-ui `SegmentedTabs`, rendered inside Storybook's UI.
+
+## Toolbar tools
+
+### Scale: 0.5× · 0.7× · 1× · 1.333×
+
+This sets the `zzzScale` global, which sets `--zzz-scale` on the `.zzz-theme` frame around every story. Sizes are rem-based (`--zzz-px = calc(1rem / 16 * var(--zzz-scale))`), so they also follow your browser font size and zoom.
+
+- **0.7×** (the default) is the library's web default: md controls ~40 px tall and body text ~14 px at a 16 px browser font size, like other web design systems.
+- **0.5×** is a compact density.
+- **1×** is game density: 1 design unit = 1 CSS px.
+- **1.333×** is a large density.
+
+Full-screen, game-style scenes may render inside `<Stage>`, an optional artboard that fits its own canvas (default 1920 × 1080) to the story; everything else follows the Scale tool. See **Foundations / Sizing**.
+
+The Scale tool is a radio group (one choice, no panels). Click an option, or use the keyboard: the toolbar is one Tab stop and ← / → move through all of its tools, including each Scale option; Enter or Space chooses the focused option (moving focus alone never changes a setting). Home / End jump to the first or last option. The chosen option takes the pulsing accent fill. You can also set the global in the URL, for example `&globals=zzzScale:1`.
+
+The other circle buttons are Storybook's built-in tools: reload, measure, outline, viewport, vision filter, isolation mode, zoom, full screen and open in editor. A circle that is on or open turns accent-filled.
+
+## Images in stories
+
+The library ships no images: every image slot of a component is a prop (`src`, or a ReactNode slot such as `art`, `media`, `avatar` or `icon`) that takes any URL, path, `<img>`, `<picture>` or SVG.
+
+The stories and examples fill those slots with real Zenless Zone Zero art, **loaded by URL at runtime** from two community sources: [static.nanoka.cc](https://static.nanoka.cc) (agents, W-Engines, Drive Disc sets, items, element and specialty icons) and [Enka.Network](https://enka.network) (namecards used as banners). Zenless Zone Zero and its art are © HoYoverse. `examples/art` resolves names to URLs through a small committed manifest, `examples/art/art-manifest.json`, which lists only names, metadata and the remote image locations (a base URL per source plus file names); `npm run art-manifest` regenerates it from the sources' indexes. No image file from those sources is in the repository, in `storybook-static/` or in `demo-dist/`. See [Foundations / Game Art](?path=/docs/foundations-game-art--docs).
+
+While an image loads, its slot shows a neutral skeleton at the image's final size, then the image fades in. If a source cannot be reached, the slot stays an empty frame and the console logs one `[zone examples] No game art …` hint. To try that, or a self-hosted mirror, add `&artBase=<url>` to the preview (`iframe.html`) URL; in code, `configureArt({ nanokaBase, enkaBase })` from `examples/art` sets each base URL.
+
+## Finding things
+
+- **Search**: the pill at the top of the sidebar. Press <kbd>Ctrl</kbd> + <kbd>K</kbd> to focus it from anywhere. Use ↑ / ↓ to move through the results (the highlighted one is accent-filled) and Enter to open it.
+- **Tree**: the groups follow the library's layers: Foundations, Primitives, Forms, Data Display, Inventory, Overlays, Shell, Game and Examples. Inside the tree, ↑ / ↓ move between items (the keyboard row gets the accent focus ring), → / ← expand and collapse, and Enter opens the item. The selected story is the accent-filled row.
+- **Addon panel**: <kbd>Alt</kbd> + <kbd>A</kbd> shows or hides it, and <kbd>Alt</kbd> + <kbd>D</kbd> moves it to the side. **Controls** edits a story's props. **Accessibility** runs axe on the current story.
+
+## Inspired by, not a copy
+
+Zone is inspired by the game, not a copy of it. Its chrome has no hover state by design. Text inputs and focus rings are web additions: `:focus-visible` draws a black keyline plus the accent ring. If your OS asks for reduced motion, the accent stops pulsing and stays lime.

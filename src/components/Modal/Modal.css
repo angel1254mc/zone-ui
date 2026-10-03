@@ -1,0 +1,137 @@
+/*
+ * Modal: a centred panel for web pages; full-width band dialogs use DialogBand.
+ * Panel: 450 wide, radius 20 0 20 20 (top-right square), 3 px black border + 3 px
+ * rgba(66,66,66,.66) outline (box-shadow, so it follows the radius) + 0 0 10 #000 glow;
+ * fill linear-gradient(170deg, #222, #000 80%) under the rhombus grid (65deg / 115deg lines,
+ * rgba(0,0,0,.2), cell 8 × 14). Header: min 60, linear-gradient(#1C1C1C, #080808), padding
+ * 26 30 15, title color.text.title. Body: fontSize.body in color.text.secondary.
+ * Backdrop: rgba(0,0,0,.1) + skew.hatch 39.8deg stripes (5 / 5, white .07) + 4 px blur.
+ * Enter: a 140 ms fade/scale (centred modal).
+ */
+/* The shared overlay layer root (DialogBand/overlay.tsx OverlayPortal): carries the stacking order,
+   since position: fixed makes it a stacking context of its own. */
+.zzz-modal-layer {
+  z-index: 1300;
+}
+
+.zzz-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1300;
+  display: grid;
+  place-items: center;
+  padding: var(--zzz-space-8);
+  overflow: auto;
+  background:
+    repeating-linear-gradient(
+      var(--zzz-skew-hatch),
+      transparent 0 calc(5 * var(--zzz-px)),
+      rgba(255, 255, 255, 0.07) calc(5 * var(--zzz-px)) calc(10 * var(--zzz-px))
+    ),
+    rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(calc(4 * var(--zzz-px)));
+  animation: zzz-modal-fade 140ms linear;
+}
+
+.zzz-modal {
+  --zzz-modal-width: calc(450 * var(--zzz-px));
+  --zzz-modal-radius: var(--zzz-radius-info-panel);
+  --zzz-modal-grid: rgba(0, 0, 0, 0.2);
+  position: relative;
+  width: min(var(--zzz-modal-width), 100%);
+  max-height: calc(100vh - 2 * var(--zzz-space-8));
+  display: flex;
+  flex-direction: column;
+  border: var(--zzz-border-width-keyline) solid var(--zzz-color-border-keyline);
+  border-radius: var(--zzz-modal-radius) 0 var(--zzz-modal-radius) var(--zzz-modal-radius);
+  background:
+    repeating-linear-gradient(65deg, var(--zzz-modal-grid) 0 var(--zzz-border-width-hairline), transparent var(--zzz-border-width-hairline) calc(8 * var(--zzz-px))),
+    repeating-linear-gradient(115deg, var(--zzz-modal-grid) 0 var(--zzz-border-width-hairline), transparent var(--zzz-border-width-hairline) calc(8 * var(--zzz-px))),
+    linear-gradient(170deg, var(--zzz-color-surface-panel-header), var(--zzz-color-bg-base) 80%);
+  box-shadow:
+    0 0 0 calc(3 * var(--zzz-px)) rgba(66, 66, 66, 0.66),
+    0 0 calc(10 * var(--zzz-px)) var(--zzz-color-bg-base);
+  color: var(--zzz-color-text-secondary);
+  outline: none;
+  animation: zzz-modal-in 140ms ease-out;
+}
+
+.zzz-modal__header {
+  flex: none;
+  min-height: calc(60 * var(--zzz-px));
+  padding: calc(26 * var(--zzz-px)) calc(30 * var(--zzz-px)) calc(15 * var(--zzz-px));
+  /* The title must not run under the close button in the square corner. */
+  padding-right: calc(30 * var(--zzz-px) + var(--zzz-size-control-stepper));
+  border-radius: calc(var(--zzz-modal-radius) - var(--zzz-border-width-keyline)) 0 0 0;
+  background: linear-gradient(var(--zzz-color-surface-profile-chip), #080808);
+}
+
+.zzz-modal__title {
+  margin: 0;
+  color: var(--zzz-color-text-title);
+  font-size: var(--zzz-font-size-body-lg);
+  line-height: var(--zzz-line-height-card);
+  font-weight: 900;
+}
+
+.zzz-modal__description {
+  margin: var(--zzz-space-4) 0 0;
+  color: var(--zzz-color-text-muted);
+  font-size: var(--zzz-font-size-label);
+  line-height: var(--zzz-line-height-list);
+}
+
+.zzz-modal__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  padding: var(--zzz-space-9) calc(30 * var(--zzz-px)) calc(26 * var(--zzz-px));
+  font-size: var(--zzz-font-size-body);
+  line-height: var(--zzz-line-height-paragraph);
+}
+.zzz-modal__body > :first-child {
+  margin-top: 0;
+}
+
+.zzz-modal__footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--zzz-space-8);
+  margin-top: var(--zzz-space-10);
+  /* Room for the pills' 4 px pressed outset + 3 px keyline so they are never clipped. */
+  padding: var(--zzz-space-3) var(--zzz-space-1);
+}
+/* Pill buttons are wide: two rarely fit side by side in 450, so actions share the row and, once
+ * they wrap, each takes the full width (a stacked action list) instead of a ragged right edge. */
+.zzz-modal__footer > * {
+  flex: 1 1 auto;
+}
+
+.zzz-modal__close {
+  position: absolute;
+  top: var(--zzz-space-5);
+  right: var(--zzz-space-5);
+}
+
+@keyframes zzz-modal-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes zzz-modal-in {
+  from {
+    opacity: 0;
+    scale: 0.96;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zzz-modal-overlay,
+  .zzz-modal {
+    animation: none;
+  }
+}
+[data-reduced-motion] :is(.zzz-modal-overlay, .zzz-modal) {
+  animation: none;
+}

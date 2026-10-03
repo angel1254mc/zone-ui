@@ -1,0 +1,93 @@
+/* StarsPill. The 3 px black keyline is part of the box (border), so the outer sizes are
+ * panel 200 × 44, large 297 × 57. */
+.zzz-stars-pill {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border: var(--zzz-border-width-keyline) solid var(--zzz-color-border-keyline);
+  border-radius: var(--zzz-radius-pill);
+  line-height: var(--zzz-line-height-single);
+  vertical-align: middle;
+}
+
+.zzz-stars-pill--panel {
+  width: calc(200 * var(--zzz-px));
+  height: var(--zzz-size-row-level-pill-panel);
+  background: var(--zzz-color-surface-stat-row);
+}
+
+.zzz-stars-pill--large {
+  width: calc(297 * var(--zzz-px));
+  height: calc(57 * var(--zzz-px));
+  background: var(--zzz-color-surface-level-pill);
+  box-shadow: inset 0 calc(1 * var(--zzz-px)) 0 var(--zzz-color-border-level-pill-highlight);
+}
+
+/* With a right-end action the stars start 34 px from the outer left edge. */
+.zzz-stars-pill--has-action {
+  justify-content: flex-start;
+  padding-left: calc(31 * var(--zzz-px));
+}
+
+.zzz-stars-pill__stars {
+  display: inline-flex;
+  align-items: center;
+}
+
+.zzz-stars-pill__empty {
+  color: var(--zzz-color-text-faint);
+  font-family: var(--zzz-font-family-condensed);
+  font-weight: 900;
+  font-stretch: var(--zzz-font-stretch-condensed);
+  font-size-adjust: cap-height 0.79;
+  font-size: calc(21 * var(--zzz-px));
+  line-height: var(--zzz-line-height-single);
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+/* Right-end slot: flush with the outer edge, full outer height (covers the keyline). */
+.zzz-stars-pill__action {
+  position: absolute;
+  top: calc(-1 * var(--zzz-border-width-keyline));
+  right: calc(-1 * var(--zzz-border-width-keyline));
+  bottom: calc(-1 * var(--zzz-border-width-keyline));
+  display: flex;
+  align-items: stretch;
+}
+
+/* Enhance ">>" sub-pill: 81 × 57, 4 px #323232 ring, #080808 mesh, white chevrons 37 × 25.
+ * Pressed: live accent fill, black chevrons, 88 × 61 (≈ +3 px outset). */
+.zzz-stars-pill__enhance.zzz-mat-pill {
+  --zzz-mat-ring: calc(4 * var(--zzz-px));
+  --zzz-press-outset: calc(3 * var(--zzz-px));
+  display: inline-grid;
+  place-items: center;
+  box-sizing: border-box;
+  width: calc(81 * var(--zzz-px));
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border-color: var(--zzz-color-border-level-pill-highlight);
+  background-color: #080808;
+  color: var(--zzz-color-text-primary);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.zzz-stars-pill__enhance.zzz-pressable:active:not(:disabled, [aria-disabled='true']),
+.zzz-stars-pill__enhance.zzz-pressable[data-pressed] {
+  color: var(--zzz-color-accent-on);
+}
+.zzz-stars-pill__enhance:disabled,
+.zzz-stars-pill__enhance[aria-disabled='true'] {
+  color: var(--zzz-color-text-disabled);
+  cursor: default;
+}
+.zzz-stars-pill__chevrons {
+  display: block;
+  width: calc(37 * var(--zzz-px));
+  height: calc(37 * var(--zzz-px));
+}

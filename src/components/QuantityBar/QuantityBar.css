@@ -1,0 +1,49 @@
+/*
+ * QuantityBar.
+ * 581 × 38 flat pill in color.surface.track #373737, radius pill, no ring. Its top 2 rows are lit
+ * -> an inset border.button.bevelTop line.
+ * Text upright fontSize.body (cap 17 rows), white. The text is NOT centred on its ink: the value
+ * sits in a slot wider than one digit (--zzz-quantity-bar-value-chars, default 2.2 ch), so
+ * "Craft Quantity × 1" sits 9 px left of the bar centre and does not shift as the count grows.
+ *
+ * Sizes: height, padding and bevel are multiples of the local unit
+ * --zzz-quantity-bar-u (1 design unit on md; x 46/57 on sm, x 69/57 on lg, from
+ * --zzz-size-control-*-n); text label / body / bodyLg. The default width (581) stays in design units.
+ */
+.zzz-quantity-bar {
+  --zzz-quantity-bar-u: var(--zzz-px);
+  --zzz-quantity-bar-font: var(--zzz-font-size-body);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(581 * var(--zzz-px));
+  max-width: 100%;
+  height: calc(var(--zzz-size-control-quantity-bar-n) * var(--zzz-quantity-bar-u));
+  padding: 0 calc(19 * var(--zzz-quantity-bar-u));
+  border-radius: var(--zzz-radius-pill);
+  background: var(--zzz-color-surface-track);
+  box-shadow: inset 0 calc(2 * var(--zzz-quantity-bar-u)) 0 var(--zzz-color-border-button-bevel-top);
+  color: var(--zzz-color-text-primary);
+}
+
+.zzz-quantity-bar--sm {
+  --zzz-quantity-bar-u: calc(var(--zzz-px) * var(--zzz-size-control-sm-n) / var(--zzz-size-control-md-n));
+  --zzz-quantity-bar-font: var(--zzz-font-size-label);
+}
+.zzz-quantity-bar--lg {
+  --zzz-quantity-bar-u: calc(var(--zzz-px) * var(--zzz-size-control-lg-n) / var(--zzz-size-control-md-n));
+  --zzz-quantity-bar-font: var(--zzz-font-size-body-lg);
+}
+
+/* Two classes: beats the .zzz-text-body role class on the same element. */
+.zzz-quantity-bar .zzz-quantity-bar__text {
+  font-size: var(--zzz-quantity-bar-font);
+  line-height: var(--zzz-line-height-single);
+  white-space: nowrap;
+}
+
+.zzz-quantity-bar__value {
+  display: inline-block;
+  min-width: calc(var(--zzz-quantity-bar-value-chars, 2.2) * 1ch);
+  text-align: left;
+}

@@ -1,0 +1,6 @@
+/* Portal root of the floating overlays: carries the theme (class zzz-theme, --zzz-px), never takes space. */
+.zzz-portal {
+  /* The portal root only carries the theme; it never takes space or intercepts input. */
+  position: static;
+  display: contents;
+}

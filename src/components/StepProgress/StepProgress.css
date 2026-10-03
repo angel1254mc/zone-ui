@@ -1,0 +1,248 @@
+/*
+ * StepProgress, built from the kit's vocabulary:
+ *   pips      slanted bars leaning '/' like the carousel thumbs (skew.carousel -24°), 44 × 12;
+ *   capsules  filter-chip pills (size.control.chip 41, 3 px #333 ring, surface.chip) with a
+ *             31 px disc carrying the number or a glyph; current = accent fill, black label;
+ *   text      italic button-size line, the step number in the accent.
+ * Status colours (tokens only): current var(--zzz-accent) + a pulsing outer ring; complete
+ * text.secondary; success highlight.value (#2CA306); error danger.base; skipped = hollow;
+ * pending surface.track (#373737). Reduced motion stops the ring pulse.
+ *
+ * Sizes: md lengths are multiples of the local unit --zzz-step-u (1 design unit;
+ * x 69/57 on lg, from --zzz-size-control-*-n), so lg keeps every proportion. sm keeps its own
+ * compact values (pips 28 x 8, capsule 32, disc 24); its disc digits and labels sit at the
+ * fontSize.label floor (17.5 units, about 12 CSS px at 0.7), the same text floor as the other sm controls. Text variant:
+ * --zzz-font-size-control-{sm,md,lg} (21 / 26 / 30).
+ */
+.zzz-step-progress {
+  --zzz-step-u: var(--zzz-px);
+  --zzz-step-color: var(--zzz-color-surface-track);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.zzz-step-progress--lg {
+  --zzz-step-u: calc(var(--zzz-px) * var(--zzz-size-control-lg-n) / var(--zzz-size-control-md-n));
+}
+.zzz-step-progress__step[data-status='current'] {
+  --zzz-step-color: var(--zzz-accent);
+}
+.zzz-step-progress__step[data-status='complete'] {
+  --zzz-step-color: var(--zzz-color-text-secondary);
+}
+.zzz-step-progress__step[data-status='success'] {
+  --zzz-step-color: var(--zzz-color-highlight-value);
+}
+.zzz-step-progress__step[data-status='error'] {
+  --zzz-step-color: var(--zzz-color-danger-base);
+}
+
+/* ── pips ─────────────────────────────────────────────────────────────────── */
+.zzz-step-progress--pips {
+  --zzz-step-w: calc(44 * var(--zzz-step-u));
+  --zzz-step-h: calc(12 * var(--zzz-step-u));
+  display: flex;
+  align-items: center;
+  gap: calc(8 * var(--zzz-step-u));
+  /* room for the slant and the current ring */
+  padding: calc(6 * var(--zzz-step-u)) calc(8 * var(--zzz-step-u));
+}
+.zzz-step-progress--pips.zzz-step-progress--sm {
+  --zzz-step-w: calc(28 * var(--zzz-step-u));
+  --zzz-step-h: calc(8 * var(--zzz-step-u));
+  gap: calc(6 * var(--zzz-step-u));
+}
+.zzz-step-progress--pips .zzz-step-progress__step {
+  display: flex;
+  flex: 0 1 var(--zzz-step-w);
+  min-width: calc(8 * var(--zzz-step-u));
+}
+.zzz-step-progress__pip {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: var(--zzz-step-h);
+  border-radius: calc(2 * var(--zzz-step-u));
+  background: var(--zzz-step-color);
+  transform: skewX(var(--zzz-skew-carousel));
+}
+[data-status='skipped'] > .zzz-step-progress__pip {
+  background: transparent;
+  box-shadow: inset 0 0 0 calc(2 * var(--zzz-step-u)) var(--zzz-color-surface-track);
+}
+[data-status='current'] > .zzz-step-progress__pip {
+  box-shadow: 0 0 0 calc(2 * var(--zzz-step-u)) #000;
+}
+/* Pulsing outer ring on the current step (pips and capsule discs). */
+[data-status='current'] > .zzz-step-progress__pip::after,
+[data-status='current'] .zzz-step-progress__capsule::after {
+  content: '';
+  position: absolute;
+  inset: calc(-4 * var(--zzz-step-u));
+  border-radius: inherit;
+  box-shadow: 0 0 0 calc(2 * var(--zzz-step-u)) var(--zzz-accent);
+  animation: zzz-step-beat 1500ms cubic-bezier(.45, 0, .55, 1) infinite;
+  pointer-events: none;
+}
+@keyframes zzz-step-beat {
+  0%,
+  100% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 0.15;
+  }
+}
+
+/* ── capsules ─────────────────────────────────────────────────────────────── */
+.zzz-step-progress--capsules {
+  display: flex;
+  gap: calc(12 * var(--zzz-step-u));
+  padding: calc(6 * var(--zzz-step-u));
+}
+.zzz-step-progress--capsules .zzz-step-progress__step {
+  display: flex;
+  flex: 1 1 0;
+  min-width: 0;
+  /* Each capsule queries its own width: too narrow for a label → disc only (see below). */
+  container-type: inline-size;
+}
+/* The current step claims extra room so its label survives on phones. */
+.zzz-step-progress--capsules .zzz-step-progress__step[data-status='current'] {
+  flex-grow: 2.4;
+}
+.zzz-step-progress__capsule {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: calc(10 * var(--zzz-step-u));
+  width: 100%;
+  min-width: 0;
+  height: calc(var(--zzz-size-control-chip-n) * var(--zzz-step-u));
+  padding: 0 calc(16 * var(--zzz-step-u)) 0 calc(2 * var(--zzz-step-u));
+  border: calc(var(--zzz-border-width-ring-chip-n) * var(--zzz-step-u)) solid var(--zzz-color-border-button);
+  border-radius: var(--zzz-radius-pill);
+  background: var(--zzz-color-surface-chip);
+  box-shadow: var(--zzz-shadow-keyline);
+  color: var(--zzz-color-text-muted);
+}
+.zzz-step-progress--capsules.zzz-step-progress--sm .zzz-step-progress__capsule {
+  height: calc(32 * var(--zzz-step-u));
+  gap: calc(6 * var(--zzz-step-u));
+  padding-right: calc(12 * var(--zzz-step-u));
+}
+.zzz-step-progress__disc {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: calc(31 * var(--zzz-step-u));
+  height: calc(31 * var(--zzz-step-u));
+  border-radius: 50%;
+  background: var(--zzz-step-color);
+  color: var(--zzz-color-text-primary);
+  font-size: calc(var(--zzz-font-size-label-n) * var(--zzz-step-u));
+  line-height: var(--zzz-line-height-single);
+}
+.zzz-step-progress--sm .zzz-step-progress__disc {
+  width: calc(24 * var(--zzz-step-u));
+  height: calc(24 * var(--zzz-step-u));
+  /* Text floor: fontSize.label (17.5 units ≈ 12 px at the default 0.7), never micro (≈ 9 px). */
+  font-size: var(--zzz-font-size-label);
+}
+.zzz-step-progress__disc > svg {
+  width: 70%;
+  height: 70%;
+}
+.zzz-step-progress__label {
+  min-width: 0;
+  overflow: hidden;
+  /* room for descenders inside the ellipsis clip (line-height 1) */
+  padding-block: 0.15em;
+  font-size: calc(var(--zzz-font-size-label-n) * var(--zzz-step-u));
+  line-height: var(--zzz-line-height-single);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.zzz-step-progress--sm .zzz-step-progress__label {
+  /* Same floor as the sm disc: web sm text stays >= 12 px (Chakra / Radix / Mantine). */
+  font-size: var(--zzz-font-size-label);
+}
+[data-status='complete'] .zzz-step-progress__disc {
+  color: var(--zzz-color-accent-on);
+}
+[data-status='complete'] .zzz-step-progress__capsule,
+[data-status='success'] .zzz-step-progress__capsule,
+[data-status='error'] .zzz-step-progress__capsule {
+  color: var(--zzz-color-text-primary);
+}
+[data-status='error'] .zzz-step-progress__capsule {
+  border-color: var(--zzz-color-danger-gap);
+}
+[data-status='skipped'] .zzz-step-progress__capsule {
+  color: var(--zzz-color-text-disabled);
+}
+[data-status='skipped'] .zzz-step-progress__disc {
+  background: transparent;
+  box-shadow: inset 0 0 0 calc(2 * var(--zzz-step-u)) var(--zzz-color-surface-track);
+  color: var(--zzz-color-text-disabled);
+}
+[data-status='pending'] .zzz-step-progress__disc {
+  color: var(--zzz-color-text-muted);
+}
+/* Current capsule: the pressed/selected recipe — accent fill over the ring, black label, a black
+ * disc carrying the accent number. */
+[data-status='current'] .zzz-step-progress__capsule {
+  border-color: var(--zzz-accent);
+  background: var(--zzz-accent);
+  color: var(--zzz-color-accent-on);
+}
+[data-status='current'] .zzz-step-progress__disc {
+  background: var(--zzz-color-accent-on);
+  color: var(--zzz-accent);
+}
+[data-status='current'] .zzz-step-progress__capsule::after {
+  inset: calc(-1 * calc(var(--zzz-border-width-ring-chip-n) * var(--zzz-step-u)) - 5 * var(--zzz-step-u));
+}
+
+/* Narrow capsule (em = the step's own font size, so the breakpoint scales with --zzz-px):
+ * hide the label (still in the sr-only text) and centre the disc. */
+@container (max-width: 5.5em) {
+  .zzz-step-progress__label {
+    display: none;
+  }
+  .zzz-step-progress__capsule {
+    justify-content: center;
+    padding: 0;
+  }
+}
+
+/* ── text ─────────────────────────────────────────────────────────────────── */
+.zzz-step-progress--text {
+  color: var(--zzz-color-text-secondary);
+  font-size: var(--zzz-font-size-control-md);
+  line-height: var(--zzz-line-height-single);
+  white-space: nowrap;
+}
+.zzz-step-progress--text.zzz-step-progress--sm {
+  font-size: var(--zzz-font-size-control-sm);
+}
+.zzz-step-progress--text.zzz-step-progress--lg {
+  font-size: var(--zzz-font-size-control-lg);
+}
+.zzz-step-progress__num {
+  color: var(--zzz-accent);
+  font-size: 1.3em;
+}
+.zzz-step-progress__of {
+  color: var(--zzz-color-text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zzz-step-progress [data-status='current'] *::after {
+    animation: none;
+  }
+}
+[data-reduced-motion] .zzz-step-progress [data-status='current'] *::after,
+.zzz-step-progress[data-reduced-motion] [data-status='current'] *::after {
+  animation: none;
+}

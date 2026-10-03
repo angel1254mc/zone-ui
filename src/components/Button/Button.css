@@ -1,0 +1,271 @@
+/*
+ * Button. The shell is .zzz-mat-pill (ring 5 #333 with the lit top/left rows, #090909 +
+ * dots sm, 3 px black keyline) + .zzz-pressable (accent fill + outset while pressed) from base.css.
+ * This file adds sizes, the leading icon cap, the label box and the mission / sub variants.
+ * No :hover rules (no hover state by design).
+ *
+ * Sizes (web control scale): sm 46 · md 57 · lg 69 design units
+ * (≈ 32 / 40 / 48 CSS px at --zzz-scale 0.7). Height, label, cap, disc, glyph and auto padding read
+ * the size.control.* / fontSize.control.* tokens; everything sized on the md pill — ring,
+ * bevel, keyline, pressed outset, preset widths, glyph tweaks, nudges — is multiplied by
+ * --zzz-control-ratio (size / 57), so sm and lg are the md pill re-proportioned, not re-designed.
+ * md is the base pill (ratio 1).
+ */
+
+.zzz-button {
+  --zzz-control-ratio: 1;
+  --zzz-button-h: var(--zzz-size-control-md);
+  --zzz-button-cap: var(--zzz-size-control-cap-md);
+  --zzz-button-disc-size: var(--zzz-size-control-disc-md);
+  --zzz-button-icon: var(--zzz-size-control-icon-md);
+  --zzz-button-pad: var(--zzz-size-control-padding-x-md);
+  /* The label is Text role="button" (.zzz-text-button reads --zzz-font-size-button). Re-pointing the
+   * token here sizes it without a higher-specificity selector, so consumer rules such as
+   * `.zzz-x .zzz-button__text { font-size }` keep winning. md: control-md = fontSize.button (26). */
+  --zzz-font-size-button: var(--zzz-font-size-control-md);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  height: var(--zzz-button-h);
+  margin: 0;
+  padding: 0 var(--zzz-button-pad);
+  vertical-align: middle;
+  color: var(--zzz-color-text-primary);
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  appearance: none;
+}
+
+/* sm / lg. Two classes so the material knobs beat .zzz-mat-pill whatever the stylesheet order.
+ * The keyline is re-declared through --zzz-shadow-keyline (read by .zzz-mat-pill's box-shadow) so
+ * the :focus-visible ring still replaces it. An inline --zzz-press-outset (pressOutset prop) wins. */
+.zzz-button.zzz-button--sm {
+  --zzz-control-ratio: calc(var(--zzz-size-control-sm-n) / var(--zzz-size-control-md-n));
+  --zzz-button-h: var(--zzz-size-control-sm);
+  --zzz-button-cap: var(--zzz-size-control-cap-sm);
+  --zzz-button-disc-size: var(--zzz-size-control-disc-sm);
+  --zzz-button-icon: var(--zzz-size-control-icon-sm);
+  --zzz-button-pad: var(--zzz-size-control-padding-x-sm);
+  --zzz-font-size-button: var(--zzz-font-size-control-sm);
+}
+.zzz-button.zzz-button--lg {
+  --zzz-control-ratio: calc(var(--zzz-size-control-lg-n) / var(--zzz-size-control-md-n));
+  --zzz-button-h: var(--zzz-size-control-lg);
+  --zzz-button-cap: var(--zzz-size-control-cap-lg);
+  --zzz-button-disc-size: var(--zzz-size-control-disc-lg);
+  --zzz-button-icon: var(--zzz-size-control-icon-lg);
+  --zzz-button-pad: var(--zzz-size-control-padding-x-lg);
+  --zzz-font-size-button: var(--zzz-font-size-control-lg);
+}
+.zzz-button.zzz-button--sm,
+.zzz-button.zzz-button--lg {
+  --zzz-mat-ring: calc(var(--zzz-border-width-ring) * var(--zzz-control-ratio));
+  --zzz-mat-bevel:
+    inset calc(1 * var(--zzz-control-ratio) * var(--zzz-px)) calc(1 * var(--zzz-control-ratio) * var(--zzz-px)) 0 var(--zzz-color-border-button-bevel-top),
+    inset calc(2 * var(--zzz-control-ratio) * var(--zzz-px)) calc(2 * var(--zzz-control-ratio) * var(--zzz-px)) 0 #373737;
+  --zzz-shadow-keyline: 0 0 0 calc(var(--zzz-border-width-keyline) * var(--zzz-control-ratio)) var(--zzz-color-border-keyline);
+  --zzz-press-outset: calc(var(--zzz-size-control-press-outset) * var(--zzz-control-ratio));
+}
+
+/* Widths are the outer ring box (box-sizing: border-box). Preset widths keep the md pill's
+ * proportions on sm / lg (× ratio); a numeric width is absolute. Fixed widths drop the side padding
+ * so the label box spans the whole inner area (the label is centred in it). */
+.zzz-button--w-compact { width: calc(var(--zzz-size-control-pill-width-compact) * var(--zzz-control-ratio)); }
+.zzz-button--w-default { width: calc(var(--zzz-size-control-pill-width) * var(--zzz-control-ratio)); }
+.zzz-button--w-dialog { width: calc(var(--zzz-size-control-pill-width-dialog) * var(--zzz-control-ratio)); }
+.zzz-button--w-wide { width: calc(var(--zzz-size-control-pill-width-wide) * var(--zzz-control-ratio)); }
+.zzz-button:not(.zzz-button--w-auto) {
+  padding-inline: calc(12 * var(--zzz-control-ratio) * var(--zzz-px));
+}
+
+/* ── Label ─────────────────────────────────────────────────────────────────────────────────── */
+.zzz-button__label {
+  display: block;
+  min-width: 0;
+  text-align: center;
+  pointer-events: none;
+}
+.zzz-button:not(.zzz-button--w-auto) .zzz-button__label {
+  flex: 1 1 0;
+}
+.zzz-button__text {
+  display: block;
+  text-align: center;
+  white-space: nowrap;
+  /* font-size: fontSize.control.{sm,md,lg} via the re-pointed --zzz-font-size-button (see .zzz-button). */
+  /* The 10° shear leans the ink right of its layout box; a hair of room keeps the auto-fit honest. */
+  padding-inline: calc(2 * var(--zzz-control-ratio) * var(--zzz-px));
+  /* Mona Sans sits ~1 px high in the box; nudge it down. */
+  translate: 0 calc(1 * var(--zzz-control-ratio) * var(--zzz-px));
+}
+
+/* Two-line label ("Stat / Bonuses", "Combat / Readiness"): cap 19.5 on a 26 px line pitch, so
+ * font 23 and line-height 26 — lineHeight.buttonTwoLine (22) sets the lines 4 px too tight against
+ * the frame. × ratio on sm / lg. */
+.zzz-button--two-line .zzz-button__text {
+  font-size: calc(23 * var(--zzz-control-ratio) * var(--zzz-px));
+  line-height: calc(26 * var(--zzz-control-ratio) * var(--zzz-px));
+  white-space: pre-line;
+}
+
+/* ── Leading icon cap ───────────────────────────────────────────────────────────────────────
+ * A circle as tall as the pill (size.control.cap.*), sharing its left edge (it covers the pill ring
+ * there) with its own ring (the pill's ring width) and a black, mesh-free interior. The label is
+ * centred in the area right of the cap, nudged 4 left for italic balance. */
+.zzz-button.zzz-button--capped {
+  padding-left: calc(var(--zzz-button-cap) - var(--zzz-mat-ring));
+}
+.zzz-button--capped:not(.zzz-button--w-auto) {
+  padding-right: calc(12 * var(--zzz-control-ratio) * var(--zzz-px));
+}
+.zzz-button--capped .zzz-button__label {
+  translate: calc(-4 * var(--zzz-control-ratio) * var(--zzz-px)) 0;
+}
+/* Auto width has no slack to centre in, so the nudge above would push the label into the cap.
+ * Instead: an equal gap on both sides of the label, so it sits centred beside the cap. */
+.zzz-button.zzz-button--capped.zzz-button--w-auto {
+  --zzz-button-cap-gap: calc(var(--zzz-button-pad) * 0.6);
+  padding-left: calc(var(--zzz-button-cap) - var(--zzz-mat-ring) + var(--zzz-button-cap-gap));
+  padding-right: var(--zzz-button-cap-gap);
+}
+.zzz-button--capped.zzz-button--w-auto .zzz-button__label {
+  translate: none;
+}
+
+.zzz-button__cap {
+  position: absolute;
+  top: calc(-1 * var(--zzz-mat-ring));
+  left: calc(-1 * var(--zzz-mat-ring));
+  width: var(--zzz-button-cap);
+  height: var(--zzz-button-cap);
+  display: grid;
+  place-items: center;
+  border: var(--zzz-mat-ring) solid var(--zzz-color-border-button);
+  border-radius: 50%;
+  background: var(--zzz-color-surface-button-cap);
+  /* Lit top edge only: the pill's diagonal bevel would draw a crescent on the cap's left side and
+   * make its dark interior (and so the glyph) look off-centre horizontally. */
+  box-shadow:
+    inset 0 calc(1 * var(--zzz-control-ratio) * var(--zzz-px)) 0 var(--zzz-color-border-button-bevel-top),
+    inset 0 calc(2 * var(--zzz-control-ratio) * var(--zzz-px)) 0 #373737;
+  pointer-events: none;
+}
+.zzz-button__cap > * {
+  grid-area: 1 / 1;
+  /* Centre in the visible interior, which the 2-unit top bevel moves down by 1 unit. */
+  translate: 0 calc(1 * var(--zzz-control-ratio) * var(--zzz-px));
+}
+
+.zzz-button__disc {
+  width: var(--zzz-button-disc-size);
+  height: var(--zzz-button-disc-size);
+  border-radius: 50%;
+  background: var(--zzz-button-disc, transparent);
+}
+.zzz-button[data-icon-tone='confirm'] { --zzz-button-disc: var(--zzz-color-icon-confirm); }
+.zzz-button[data-icon-tone='cancel'] { --zzz-button-disc: var(--zzz-color-icon-cancel); }
+.zzz-button[data-icon-tone='recycle'] { --zzz-button-disc: var(--zzz-color-icon-recycle); }
+.zzz-button[data-icon-tone='reset'] { --zzz-button-disc: var(--zzz-color-icon-reset); }
+.zzz-button[data-icon-tone='compare'] { --zzz-button-disc: var(--zzz-color-icon-compare); }
+.zzz-button[data-icon-tone='recommend'] { --zzz-button-disc: var(--zzz-color-icon-recommend); }
+.zzz-button[data-icon-tone='combat'] { --zzz-button-disc: var(--zzz-color-icon-combat-readiness); }
+
+.zzz-button__glyph {
+  position: relative;
+  display: grid;
+  place-items: center;
+  line-height: 0;
+  /* Icons default to 1em: plain glyphs (house 28×26, funnel 21×24) use size.control.icon.* (md 28) … */
+  font-size: var(--zzz-button-icon);
+  color: currentColor;
+}
+/* Per-glyph sizes in the md caps: funnel 22×22 (Filter), (i) 32×33 (Stat Bonuses). */
+.zzz-button__cap .zzz-icon--filter { font-size: calc(22 * var(--zzz-control-ratio) * var(--zzz-px)); }
+.zzz-button__cap .zzz-icon--infoAlert { font-size: calc(33 * var(--zzz-control-ratio) * var(--zzz-px)); }
+/* … glyphs on a coloured disc are black, ~18 px. */
+.zzz-button:not([data-icon-tone='plain']) .zzz-button__cap .zzz-button__glyph {
+  font-size: calc(18 * var(--zzz-control-ratio) * var(--zzz-px));
+  color: var(--zzz-color-accent-on);
+}
+
+.zzz-button__avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.zzz-button__avatar > img,
+.zzz-button__avatar > picture,
+.zzz-button__avatar > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── States ────────────────────────────────────────────────────────────────────────────────── */
+/* Pressed: base.css fills with the accent and turns the label black; the cap loses its ring and
+ * interior (the disc is .zzz-pressable__hide) but the glyph stays, black. */
+.zzz-button:active:not(:disabled, [aria-disabled='true']) .zzz-button__cap,
+.zzz-button[data-pressed] .zzz-button__cap {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+.zzz-button:active:not(:disabled, [aria-disabled='true']) .zzz-button__avatar,
+.zzz-button[data-pressed] .zzz-button__avatar {
+  visibility: hidden;
+}
+
+/* Disabled: label and glyph #666; ring, fill, cap and disc unchanged; no opacity. The glyph on a
+ * disc greys too. */
+.zzz-button:disabled,
+.zzz-button[aria-disabled='true'] {
+  color: var(--zzz-color-text-disabled);
+  cursor: default;
+}
+.zzz-button:is(:disabled, [aria-disabled='true']) .zzz-button__cap .zzz-button__glyph {
+  color: var(--zzz-color-text-disabled);
+}
+
+/* ── Sub-pill (">>" chip): 81×57 on md, ring #323232, glyph 37×25; × ratio on sm / lg ── */
+.zzz-button--sub.zzz-button--w-auto {
+  width: calc(81 * var(--zzz-control-ratio) * var(--zzz-px));
+  padding: 0;
+}
+.zzz-button--sub .zzz-button__glyph {
+  font-size: calc(37 * var(--zzz-control-ratio) * var(--zzz-px));
+}
+
+/* ── Mission: 174×48 ring box, 4 px #333034 ring, #0A0A0A fill, then 2 px black + 4 px teal
+ * halo (border.width.missionButton). Not the dotted pill material. A fixed preset: `size`
+ * does not change its geometry (these rules come after the size rules and win). ─────────────── */
+.zzz-button--mission {
+  --zzz-press-border: var(--zzz-border-width-mission-button);
+  height: var(--zzz-size-control-mission-button);
+  border: var(--zzz-border-width-mission-button) solid #333034; /* no token */
+  border-radius: var(--zzz-radius-pill);
+  background: #0A0A0A; /* no token */
+  box-shadow:
+    0 0 0 calc(2 * var(--zzz-px)) var(--zzz-color-border-keyline),
+    0 0 0 calc(2 * var(--zzz-px) + var(--zzz-border-width-mission-button)) var(--zzz-button-halo, var(--zzz-color-content-event-teal));
+}
+.zzz-button--mission.zzz-button--w-auto {
+  width: var(--zzz-size-control-mission-button-width);
+  padding-inline: calc(12 * var(--zzz-px));
+}
+.zzz-button--mission .zzz-button__text {
+  font-size: var(--zzz-font-size-body-lg);
+}
+.zzz-button--mission.zzz-button--claimed {
+  background: #333034;
+  color: var(--zzz-color-text-claimed);
+}
+.zzz-button--mission.zzz-button--locked {
+  background: #0B050C;
+  color: var(--zzz-color-text-claimed);
+}

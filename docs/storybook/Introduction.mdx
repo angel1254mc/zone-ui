@@ -1,0 +1,98 @@
+import { Meta, Unstyled } from '@storybook/addon-docs/blocks'
+import { IntroShowcase } from '../../src/foundations/IntroShowcase.story-helpers'
+
+<Meta title="Introduction" />
+
+# Zone
+
+**Zone** (`@angel1254mc/zone-ui`) is a general-purpose, *Zenless Zone Zero*–inspired React UI kit for game-flavoured web apps and sites. It is built with React 19 + TypeScript and borrows the game's visual language: the dark pill material with its ring and bevel, the one pulsing lime↔yellow accent, 10° sheared heavy italics, hatch backgrounds, the full-width dialog band, sweep transitions and rarity colours. It turns that language into ordinary, accessible components for the web, sized like any other web design system, for quizzes and polls, settings screens, dashboards, landing pages, news sites and small web games. It is not a copy of the game and has no game-system features.
+
+It is an unofficial fan project; Zenless Zone Zero and its art are © HoYoverse. The library ships **no images**: every icon is an original SVG, and every image slot is a prop that you fill with your own art (see **Images** below).
+
+## At a glance
+
+A few of the components working together. Everything below is live: switch tabs, toggle chips, pick an answer and confirm it, or let the timer run out.
+
+<Unstyled>
+  <IntroShowcase />
+</Unstyled>
+
+## Install and use
+
+```bash
+npm install @angel1254mc/zone-ui
+```
+
+```tsx
+import '@angel1254mc/zone-ui/fonts.css'   // optional: Mona Sans from Google Fonts
+import '@angel1254mc/zone-ui/styles.css'  // tokens + base styles + component styles
+import { ZzzTheme, Button } from '@angel1254mc/zone-ui'
+
+export function App() {
+  return (
+    <ZzzTheme>
+      <Button>View</Button>
+    </ZzzTheme>
+  )
+}
+```
+
+Everything is styled with CSS custom properties named after the design tokens (`--zzz-color-accent-lime`, `--zzz-size-control-pill`, …) and BEM classes with a `zzz-` prefix. Components pass through `className`, `style`, `ref` and native props; state is exposed as ARIA / `data-*` attributes.
+
+## Images
+
+The library ships no images and contains no game art. Every image slot is a prop: either `src` (rendered as an `<img>`) or a ReactNode slot such as `art`, `media`, `avatar` or `icon`. A `src` takes any URL or path; a slot takes an `<img>`, a `<picture>` or an SVG, sized and cropped by the component's CSS.
+
+The stories and examples in this Storybook fill those slots with real Zenless Zone Zero art, **loaded by URL at runtime** from two community sources, credited here: [static.nanoka.cc](https://static.nanoka.cc) (community datamine: agents, W-Engines, Drive Disc sets, items, element and specialty icons) and [Enka.Network](https://enka.network) (namecards, used as banners). Zenless Zone Zero and its art are © HoYoverse.
+
+- `examples/art` (stories, examples and the demo only; `src/` never imports it) turns names and ids into image URLs through a small committed manifest, `examples/art/art-manifest.json`: names, metadata and remote image locations (a base URL per source plus file names), no image files.
+- `npm run art-manifest` regenerates that manifest from the sources' indexes. It downloads no images: it only reads the first bytes of each to confirm it exists and record its size.
+- `configureArt({ nanokaBase, enkaBase })` from `examples/art` points each source at another base URL, for example a self-hosted mirror with the same file names (`null` restores the default).
+- No image from those sources is in the repository, the built package (`dist/`), `storybook-static/` or `demo-dist/`.
+- While an image loads, its slot shows a neutral skeleton at the final size; an unreachable source leaves an empty frame and one console hint. See [Foundations / Game Art](?path=/docs/foundations-game-art--docs).
+
+## Sizing
+
+Zone is sized the way other web design systems (Chakra, Radix Themes, Mantine, MUI) are: in **rem**. Every size follows the reader's browser font size and zoom, so the experience is the same on any screen, independent of its resolution. See **[Foundations / Sizing](?path=/docs/foundations-sizing--docs)**.
+
+- Lengths are written in **design units**; one unit renders as `var(--zzz-px)`, so a length is `calc(N * var(--zzz-px))`, and each length token also exists raw as `--zzz-…-n`.
+- `--zzz-px` is a registered `<length>`: `calc(1rem / 16 * var(--zzz-scale))`. The default `--zzz-scale` is **0.7**, so at the browser's default 16 px font size an md control is ~40 px tall, body text ~14 px and a button label ~18 px. Rings, bevels, slants and shears scale with it, so the look keeps its proportions.
+- Controls come in **sm / md / lg**, ≈ 32 / 40 / 48 px at the default (tokens `--zzz-size-control-sm | md | lg` plus matching label, icon-cap, glyph and padding tokens). md is the default.
+- Change the density for the whole page with `:root { --zzz-scale: … }`, or for a subtree with `<ZzzTheme scale={…}>`. `<ZzzTheme>` without `scale` inherits the page density. `0.5` is compact; `1` is **game density** (1 design unit = 1 CSS px), kept as an option.
+- The components are responsive from a 360 px phone up to desktop.
+- Optional, for full-screen game-style scenes only: `<Stage>` is a fixed artboard (default 1920 × 1080) that scales as one picture to its container (see **Foundations / Stage**), and `<ZzzTheme scale="viewport">` scales with the window height (`calc(100vh / 1080)`). Neither is how ordinary pages are sized.
+- The Storybook toolbar **Scale** tool changes `--zzz-scale` for every story (default 0.7).
+
+## Fonts and licensing
+
+The kit's intended typeface is **Inpin Hongmeng** (印品鸿蒙体, weight 900), a **commercial** font that is not included. The default stand-in is **Mona Sans** (SIL OFL), a variable font loaded by `fonts.css`:
+
+- UI text: Mona Sans 900, `font-stretch: 110%`, `font-size-adjust: cap-height 0.84` (the Inpin cap height), so sizes match Inpin Hongmeng.
+- Condensed numerals and headings: Impact when the OS has it, otherwise Mona Sans at `font-stretch: 75%`.
+- Italic is never `font-style: italic`: upright glyphs are sheared by 10°, which `.zzz-italic` does with `skewX`.
+
+If you hold a web licence for Inpin Hongmeng, declare an `@font-face` with `font-family: "Inpin Hongmeng"` and `font-weight: 900`. It is first in the font stack and takes over automatically (see the comment in `fonts.css`).
+
+## State model
+
+The core controls have **no hover state** by design, like a game menu driven by a pad or a mouse. The web components add hover where it helps; pressed always keeps the accent recipe.
+
+- **Selected / active** elements use the shared accent, `var(--zzz-accent)`, which pulses lime `#93BA00` ↔ yellow `#FCDC00` every 1.5 s on one global clock. See **Foundations / Accent Clock**.
+- **Pressed** (`:active`, `[data-pressed]`, Enter flashes it for 100 ms, Space holds it): the control fills with the accent, grows 4 design units on every side, its ring and icon caps disappear and the label turns black.
+- **Disabled**: the label and glyph turn grey; the shape stays the same, with no opacity change.
+- **Focus** (a web addition): `:focus-visible` draws a black keyline plus an accent ring.
+- `prefers-reduced-motion` freezes the accent at lime and removes decorative motion.
+
+## Groups
+
+- **Foundations**: [Tokens](?path=/docs/foundations-tokens--docs), [Materials](?path=/docs/foundations-materials--docs), [Accent Clock](?path=/docs/foundations-accent-clock--docs), [Sizing](?path=/docs/foundations-sizing--docs), [Stage](?path=/docs/foundations-stage--docs), typography, backgrounds, [Icons](?path=/docs/foundations-icons--docs), [Game Art](?path=/docs/foundations-game-art--docs) (the art used by the stories).
+- **Primitives**: text, buttons, icon buttons, copy and sound toggles, key hints, badges, spinners, scroll areas.
+- **Forms**: choice groups, tabs, sliders, chips, selects, switches, checkboxes, radios, text fields, pagination.
+- **Data Display**: stat rows and tiles, charts, step and countdown progress, status grids, content cards, tables, pills.
+- **Inventory**: rarity-coloured item cards, reward tiles and grids, for any collection or gallery.
+- **Overlays**: dialog bands, modals, drawers, toasts, tooltips, menus, screen and sweep transitions.
+- **Shell**: screen frame, top bar, bottom bar, page titles, web nav bar and footer, heroes.
+- **Game**: event-style compositions (titles, ribbons, info pills, check-in calendar, mission cards).
+- **Examples**: [ZZZ Daily Trivia](?path=/docs/examples-zzz-trivia--docs) and the Inter-Knot Dispatch news site, assembled only from the library.
+
+The components are general: name and use them for whatever you are building. The trivia page is just one example of composing them (see the README's "Example: building a daily trivia app").

@@ -1,0 +1,42 @@
+/*
+ * Countdown on the InfoPill look (36 px
+ * black full pill, 27 px clock glyph, bodyXl upright white text — the "66d" event timer).
+ * Digits sit in 1ch cells (stable width while ticking) instead of font-variant-numeric:
+ * tabular-nums, because Mona Sans's tnum set draws a slashed 0 (font.numeric.tabular caution).
+ * The prefix/suffix read in text.secondary so the time carries the emphasis.
+ */
+.zzz-countdown__digit {
+  display: inline-block;
+  width: 1ch;
+  text-align: center;
+}
+.zzz-countdown__sep {
+  display: inline-block;
+  padding: 0 0.04em;
+  /* the colon sits optically low in a centred line: lift it a hair */
+  translate: 0 -0.06em;
+}
+.zzz-countdown__time {
+  white-space: nowrap;
+}
+.zzz-countdown__prefix,
+.zzz-countdown__suffix {
+  color: var(--zzz-color-text-secondary);
+  white-space: pre;
+}
+.zzz-countdown--pill[data-reached] .zzz-countdown__time {
+  color: var(--zzz-accent);
+}
+.zzz-countdown--plain {
+  white-space: nowrap;
+}
+/* The timer text is bodyLg, one step smaller than InfoPill's default bodyXl label. */
+.zzz-countdown--pill .zzz-info-pill__text {
+  font-size: var(--zzz-font-size-body-lg);
+}
+/* Without a glyph InfoPill's 4 px left inset (meant for the clock) would put the first digit deep
+ * inside the 18 px end radius: give the text an even 12 px on both ends instead. */
+.zzz-countdown--pill.zzz-countdown--no-icon {
+  padding-left: calc(12 * var(--zzz-px));
+  padding-right: calc(12 * var(--zzz-px));
+}

@@ -1,0 +1,140 @@
+/*
+ * Progress.
+ */
+
+/* ── OverclockBar: 544 × 56. Flat #9FD300 to x 346, linear
+ * ramp to #D3DC00 at x 450. Star centres 52 + 32·i (left) and 370 + 32·i
+ * (right). The black around it (4 px) is the panel showing through: drawn as a shadow ring. */
+.zzz-overclock-bar {
+  position: relative;
+  display: inline-block;
+  flex: none;
+  box-sizing: border-box;
+  width: calc(544 * var(--zzz-px));
+  height: var(--zzz-size-progress-overclock-height);
+  border-radius: var(--zzz-radius-pill);
+  background: linear-gradient(
+    90deg,
+    var(--zzz-color-progress-overclock) calc(346 * var(--zzz-px)),
+    var(--zzz-color-progress-overclock-end) calc(450 * var(--zzz-px))
+  );
+  box-shadow: 0 0 0 calc(4 * var(--zzz-px)) #000;
+  overflow: hidden;
+  vertical-align: middle;
+}
+.zzz-overclock-bar__group {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  display: flex;
+  align-items: center;
+  line-height: 0;
+}
+.zzz-overclock-bar__group--current {
+  left: calc(39.5 * var(--zzz-px));
+}
+.zzz-overclock-bar__group--next {
+  left: calc(357.5 * var(--zzz-px));
+}
+.zzz-overclock-bar__chevrons {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: #000;
+  /* 6 px wide horizontally across an arm leaning ~28° */
+  stroke-width: 5.3;
+  stroke-linejoin: miter;
+  stroke-miterlimit: 8;
+}
+
+/* ── XpBar: 174 × 13 ──────────────────────────────────────────────────────────────────────── */
+.zzz-xp-bar {
+  position: relative;
+  display: inline-block;
+  flex: none;
+  box-sizing: border-box;
+  width: var(--zzz-size-progress-xp-width);
+  height: var(--zzz-size-progress-xp-height);
+  border-radius: var(--zzz-radius-pill);
+  background: var(--zzz-color-progress-xp-track);
+  overflow: hidden;
+  vertical-align: middle;
+}
+.zzz-xp-bar__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--zzz-xp-pct, 100%);
+  border-radius: var(--zzz-radius-pill);
+  background: var(--zzz-color-progress-xp);
+  background-size: var(--zzz-size-progress-xp-width) 100%;
+  background-repeat: no-repeat;
+}
+.zzz-xp-bar__label {
+  position: absolute;
+  left: calc(5 * var(--zzz-px));
+  top: 50%;
+  translate: 0 -50%;
+  color: var(--zzz-color-text-primary);
+  font-size: var(--zzz-font-size-micro);
+  font-weight: 900;
+  line-height: var(--zzz-line-height-single);
+  white-space: nowrap;
+}
+/* .zzz-italic sets a transform; the centring uses `translate`, which composes with it. */
+
+/* ── ProgressPill: 416 × 56 ──────────────────────────────────────────────────────────────── */
+.zzz-progress-pill {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  box-sizing: border-box;
+  width: calc(416 * var(--zzz-px));
+  height: calc(56 * var(--zzz-px));
+  /* the 62 px icon disc starts ~1 px inside the pill and the label glyphs ~76 px in. */
+  padding: 0 calc(25 * var(--zzz-px)) 0 calc(1 * var(--zzz-px));
+  gap: calc(13 * var(--zzz-px));
+  border-radius: var(--zzz-radius-pill);
+  background: linear-gradient(180deg, var(--zzz-color-surface-polychrome-top), var(--zzz-color-surface-polychrome-bottom));
+  box-shadow:
+    inset 0 calc(1 * var(--zzz-px)) 0 #393939,
+    0 0 0 var(--zzz-border-width-keyline) var(--zzz-color-border-keyline);
+  color: var(--zzz-color-text-primary);
+  font-weight: 900;
+  vertical-align: middle;
+}
+.zzz-progress-pill__well {
+  display: grid;
+  place-items: center;
+  flex: none;
+  /* ~62 px disc, taller than the 56 px pill: align-items:center lets it overhang 3 px top and
+     bottom (ring visible below the pill edge). ~5 px grey ring. */
+  width: calc(62 * var(--zzz-px));
+  height: calc(62 * var(--zzz-px));
+  margin-block: calc(-3 * var(--zzz-px));
+  border-radius: 50%;
+  background: #0E0E0E;
+  box-shadow: inset 0 0 0 calc(5 * var(--zzz-px)) #333333;
+  overflow: hidden;
+}
+.zzz-progress-pill__well > :is(svg, img) {
+  width: 74%;
+  height: 74%;
+  object-fit: contain;
+}
+.zzz-progress-pill__label {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: var(--zzz-color-text-soft);
+  font-size: var(--zzz-font-size-body-lg);
+  line-height: calc(24 * var(--zzz-px));
+  white-space: pre-line;
+}
+.zzz-progress-pill__value {
+  flex: none;
+  font-size: calc(21.5 * var(--zzz-px));
+  line-height: var(--zzz-line-height-single);
+  font-variant-numeric: tabular-nums;
+}

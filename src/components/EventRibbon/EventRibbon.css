@@ -1,0 +1,48 @@
+/*
+ * EventRibbon: top outline 4, white body 36, bottom black 8 (4 outline + 4 hard drop).
+ * size.ribbon.height (41) spans the top outline to the start of the bottom outline, so the border-box
+ * is 41 + 3 = 44 (4 + 36 + 4), 4 px black outline, body color.event.ribbonFill #E4E4E4 with a slightly
+ * darker lower third (#D5D7D7 from y 21), text cap 20 (bodyXl), halftone zone 50 (size.ribbon.halftoneZone) at each end.
+ */
+.zzz-event-ribbon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: calc((var(--zzz-size-ribbon-height-n) + 3) * var(--zzz-px));
+  margin: 0;
+  padding: 0 calc(56 * var(--zzz-px));
+  border: calc(4 * var(--zzz-px)) solid var(--zzz-color-bg-base);
+  border-radius: calc(22 * var(--zzz-px));
+  background: linear-gradient(
+    180deg,
+    var(--zzz-color-event-ribbon-fill) 0%,
+    var(--zzz-color-event-ribbon-fill) 55%,
+    color-mix(in srgb, var(--zzz-color-event-ribbon-fill) 93%, #000) 100%
+  );
+  color: var(--zzz-color-bg-base);
+  white-space: nowrap;
+  overflow: hidden;
+  /* The black under the body is 8 px vs the 4 px top outline (4 px hard drop, like the title). */
+  filter: drop-shadow(0 calc(4 * var(--zzz-px)) 0 var(--zzz-color-bg-base));
+}
+.zzz-event-ribbon__text {
+  position: relative;
+  color: var(--zzz-color-bg-base);
+  translate: 0 calc(0.5 * var(--zzz-px));
+}
+.zzz-event-ribbon__halftone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--zzz-size-ribbon-halftone-zone);
+  height: 100%;
+  fill: #3a3a3a; /* dot ink: a softened black that reads right at the 2–5 px dot size */
+}
+.zzz-event-ribbon__halftone--start {
+  left: 0;
+}
+.zzz-event-ribbon__halftone--end {
+  right: 0;
+  transform: scaleX(-1);
+}

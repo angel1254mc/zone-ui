@@ -1,0 +1,122 @@
+/*
+ * DropdownMenu.
+ * Panel #111, 3 px #323232 ring (color.border.stepper) + a 3 px black
+ * keyline, radius 24, padding 4. Items: 40-tall full pills, padding 0 30, 4 apart, fontSize.body
+ * in color.text.secondary. Active (keyboard / pointer) item = live accent fill + black label.
+ * Disabled item: #222 fill, color.text.disabled label.
+ * Top bar: 7.5 px across the top in var(--zzz-accent).
+ * Entrance: scaleY 0 → 1 over 130 ms + opacity 70 ms, from the trigger side.
+ */
+.zzz-dropdown {
+  --zzz-dropdown-width: calc(260 * var(--zzz-px));
+  z-index: 1150;
+  display: flex;
+  flex-direction: column;
+  gap: var(--zzz-space-2);
+  min-width: var(--zzz-dropdown-width);
+  max-width: calc(100vw - 2 * var(--zzz-space-8));
+  padding: var(--zzz-space-2);
+  border: var(--zzz-border-width-ring-chip) solid var(--zzz-color-border-stepper);
+  border-radius: calc(24 * var(--zzz-px));
+  background: #111111;
+  box-shadow: var(--zzz-shadow-keyline);
+  overflow: hidden;
+  outline: none;
+  transform-origin: top;
+  animation:
+    zzz-dropdown-scale 130ms ease-in-out,
+    zzz-dropdown-fade 70ms linear;
+}
+.zzz-dropdown[data-side='top'] {
+  transform-origin: bottom;
+}
+.zzz-dropdown[data-top-bar] {
+  padding-top: calc(7.5 * var(--zzz-px) + var(--zzz-space-2));
+}
+
+.zzz-dropdown__bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(7.5 * var(--zzz-px));
+  background: var(--zzz-accent);
+  pointer-events: none;
+}
+
+.zzz-dropdown__item {
+  display: flex;
+  align-items: center;
+  gap: var(--zzz-space-5);
+  min-height: calc(40 * var(--zzz-px));
+  padding: 0 calc(30 * var(--zzz-px));
+  border-radius: var(--zzz-radius-pill);
+  color: var(--zzz-color-text-secondary);
+  font-size: var(--zzz-font-size-body);
+  line-height: var(--zzz-line-height-list);
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.zzz-dropdown__item[data-active],
+.zzz-dropdown__item:active:not([aria-disabled='true']) {
+  background: var(--zzz-accent);
+  color: var(--zzz-color-accent-on);
+}
+.zzz-dropdown__item[aria-disabled='true'] {
+  background: var(--zzz-color-surface-panel-header);
+  color: var(--zzz-color-text-disabled);
+  cursor: default;
+}
+/* Keyboard focus is shown by the accent fill; a visible ring is added for forced-colors users. */
+@media (forced-colors: active) {
+  .zzz-dropdown__item:focus-visible {
+    outline: var(--zzz-border-width-scrollbar) solid Highlight;
+  }
+}
+
+.zzz-dropdown__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: var(--zzz-size-icon-sm);
+  height: var(--zzz-size-icon-sm);
+  font-size: var(--zzz-size-icon-sm);
+  line-height: 0;
+}
+.zzz-dropdown__label {
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: calc(4 * var(--zzz-px)) 0;
+  margin: calc(-4 * var(--zzz-px)) 0;
+}
+
+@keyframes zzz-dropdown-scale {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+@keyframes zzz-dropdown-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zzz-dropdown {
+    animation: none;
+  }
+}
+[data-reduced-motion] .zzz-dropdown {
+  animation: none;
+}

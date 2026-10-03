@@ -1,0 +1,79 @@
+/*
+ * BottomBar + UidFooter.
+ */
+
+/* Solid black, 100 tall; controls row 22 from the top, 20 bottom pad. */
+.zzz-bottom-bar {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--zzz-space-control-gap);
+  box-sizing: border-box;
+  width: 100%;
+  height: var(--zzz-layout-bottom-bar-height);
+  padding: calc(22 * var(--zzz-px)) calc(66 * var(--zzz-px)) 0;
+  background: var(--zzz-color-bg-base);
+}
+
+/* Optional faint separator: 5 tall, 6 below the band top. */
+.zzz-bottom-bar[data-separator]::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(6 * var(--zzz-px));
+  height: calc(5 * var(--zzz-px));
+  background: var(--zzz-color-border-rule);
+  pointer-events: none;
+}
+
+.zzz-bottom-bar__left,
+.zzz-bottom-bar__right {
+  display: flex;
+  align-items: center;
+  gap: var(--zzz-space-control-gap);
+  min-height: var(--zzz-size-control-pill);
+}
+.zzz-bottom-bar__right {
+  margin-left: auto;
+}
+
+/* Key hints: the text centre sits 11.5 below the controls-row centre; the row ends a little past
+ * the button margin. */
+.zzz-bottom-bar__hints {
+  translate: 0 calc(11.5 * var(--zzz-px));
+  margin-right: calc(-6 * var(--zzz-px));
+}
+
+/* ── UidFooter ───────────────────────────────────────────────────────────────────────────── */
+.zzz-uid-footer {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: calc(7 * var(--zzz-px));
+  line-height: var(--zzz-line-height-single);
+}
+.zzz-uid-footer__text {
+  color: var(--zzz-color-text-uid);
+  font-family: var(--zzz-font-family-ui);
+  font-weight: 900;
+  font-stretch: var(--zzz-font-stretch-ui);
+  font-size-adjust: cap-height 0.84;
+  font-size: var(--zzz-font-size-tiny);
+  line-height: var(--zzz-line-height-single);
+  word-spacing: var(--zzz-font-word-spacing-ui);
+  white-space: nowrap;
+}
+
+.zzz-signal-bars {
+  display: block;
+  flex: none;
+  width: calc(17 * var(--zzz-px));
+  height: calc(15 * var(--zzz-px));
+  overflow: hidden;
+}
+.zzz-signal-bars__bar {
+  fill: var(--zzz-color-border-button);
+}
+.zzz-signal-bars__bar[data-on] {
+  fill: var(--zzz-color-icon-signal);
+}

@@ -1,0 +1,29 @@
+/*
+ * Zone fonts (optional): import '@angel1254mc/zone-ui/fonts.css' before '@angel1254mc/zone-ui/styles.css'.
+ *
+ * Default face: Mona Sans (GitHub, SIL OFL 1.1) from Google Fonts, variable, upright only,
+ * wdth 75..125 and wght 400..900. One file covers both font roles:
+ *   ui         -> font-weight 900, font-stretch 110%  (stands in for Inpin Hongmeng)
+ *   condensed  -> font-weight 900, font-stretch 75%   (stands in for Impact when it is missing)
+ * Italics are NOT loaded: the kit shears upright glyphs by 10deg, which base.css does with
+ * transform: skewX(var(--zzz-skew-italic)) (.zzz-italic). Never use font-style: italic.
+ *
+ * ── Optional display face (Inpin Hongmeng) ─────────────────────────────────────────────────
+ * Inpin Hongmeng-ti (印品鸿蒙体, weight 900) is a COMMERCIAL font from inpin.cn. It is not
+ * shipped. If you hold a web licence, self-host it under the family name
+ * "Inpin Hongmeng" and it takes over automatically, because the ui stack
+ * (--zzz-font-family-ui) lists it first:
+ *
+ *   @font-face {
+ *     font-family: "Inpin Hongmeng";
+ *     src: url("/fonts/inpin-hongmeng.woff2") format("woff2");
+ *     font-weight: 900;
+ *     font-style: normal;
+ *     font-display: swap;
+ *   }
+ *
+ * Declare it with font-weight 900 (every Zone text is weight 900). font-size-adjust:
+ * cap-height 0.84 is already the Inpin cap/em ratio, so sizes do not change. Impact is used
+ * for the condensed role whenever the OS provides it (Windows, macOS).
+ */
+@import url('https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,400..900&display=swap');

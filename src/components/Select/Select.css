@@ -1,0 +1,169 @@
+/*
+ * Select.
+ * Trigger: .zzz-mat-pill 460 wide (ring 5 #333, lit top/left row, #090909 dotted fill, 3 px keyline).
+ * Height: size.control.{sm,md,lg} = 46 / 57 / 69 units (≈ 32 / 40 / 48 CSS px at the default 0.7
+ * scale), the same as TextField and Button, so fields and selects line up in a form row. The compact
+ * drawer select (53 units, size.control.select) is the opt-in size="drawer" (md ratio).
+ * Value: italic fontSize.bodyLg white, ink starting 31 px from the outer left edge.
+ * Caret: solid white triangle 15 × 14, 15 px from the outer right edge.
+ * Open list: dotted dark popover under the trigger, same ring,
+ * radius 24, 48 px items with a 24 px inset; selected item = live accent + black label;
+ * 130 ms scaleY + opacity entrance.
+ *
+ * Sizes (data-size sm / md / lg): every length is written in --zzz-select-u = --zzz-px times the
+ * control-size ratio (sm 46/57, md and drawer 1, lg 69/57 from size.control.{sm,md,lg}); md is the
+ * game select geometry on the 57-unit control height. Ring, bevel rows, keyline and pressed outset follow the size; the focus ring stays a fixed hairline.
+ */
+.zzz-select {
+  --zzz-select-k: 1;
+  --zzz-select-u: calc(var(--zzz-px) * var(--zzz-select-k));
+  --zzz-select-width: calc(var(--zzz-size-control-select-width-n) * var(--zzz-select-u));
+  /* Trigger height in md units: size.control.md (57) x the size ratio = 46 / 57 / 69. */
+  --zzz-select-h-n: var(--zzz-size-control-md-n);
+  position: relative;
+  display: inline-block;
+  width: var(--zzz-select-width);
+  vertical-align: middle;
+}
+.zzz-select[data-size='sm'] {
+  --zzz-select-k: calc(var(--zzz-size-control-sm-n) / var(--zzz-size-control-md-n));
+}
+.zzz-select[data-size='lg'] {
+  --zzz-select-k: calc(var(--zzz-size-control-lg-n) / var(--zzz-size-control-md-n));
+}
+/* Opt-in drawer geometry: 460 x 53 (size.control.select), md ratio for everything else. */
+.zzz-select[data-size='drawer'] {
+  --zzz-select-h-n: var(--zzz-size-control-select-n);
+}
+/* Material knobs in the size unit (0,2,0 so .zzz-mat-pill's own declarations never win by order). */
+.zzz-select .zzz-mat-pill {
+  --zzz-mat-ring: calc(var(--zzz-border-width-ring-n) * var(--zzz-select-u));
+  --zzz-dots-size: calc(var(--zzz-pattern-dots-sm-n) * var(--zzz-select-u));
+}
+/* sm / lg: the lit bevel rows and the keyline follow the size too (as Button / IconButton); the
+ * keyline goes through --zzz-shadow-keyline so :focus-visible still replaces it. md keeps the tokens. */
+.zzz-select:is([data-size='sm'], [data-size='lg']) .zzz-mat-pill {
+  --zzz-mat-bevel:
+    inset calc(1 * var(--zzz-select-u)) calc(1 * var(--zzz-select-u)) 0 var(--zzz-color-border-button-bevel-top),
+    inset calc(2 * var(--zzz-select-u)) calc(2 * var(--zzz-select-u)) 0 #373737;
+  --zzz-shadow-keyline: 0 0 0 calc(var(--zzz-border-width-keyline-n) * var(--zzz-select-u)) var(--zzz-color-border-keyline);
+}
+/* md keeps the inherited / default size.control.pressOutset. */
+.zzz-select:is([data-size='sm'], [data-size='lg']) .zzz-select__trigger {
+  --zzz-press-outset: calc(var(--zzz-size-control-press-outset-n) * var(--zzz-select-u));
+}
+/* Value and option text: fontSize.bodyLg in the size unit (beats Text's .zzz-text-body-lg). */
+.zzz-select .zzz-select__value > *,
+.zzz-select .zzz-select__option > * {
+  font-size: calc(var(--zzz-font-size-body-lg-n) * var(--zzz-select-u));
+}
+
+.zzz-select__trigger {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: calc(var(--zzz-select-h-n) * var(--zzz-select-u));
+  /* Ink of the first letter lands 30 px inside the outer ring edge. */
+  padding: 0 calc(10 * var(--zzz-select-u)) 0 calc(23 * var(--zzz-select-u));
+  color: var(--zzz-color-text-primary);
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.zzz-select__value {
+  flex: 1 1 auto;
+  min-width: 0;
+  /* Gap before the caret. */
+  padding-right: calc(12 * var(--zzz-select-u));
+}
+
+/* Long values end in an ellipsis before the caret (Text italic = outer span + inner .zzz-italic).
+ * The clipping box gets symmetric vertical padding so descenders survive line-height 1. */
+.zzz-select__value > * {
+  display: block;
+}
+.zzz-select__value .zzz-italic {
+  display: block;
+  max-width: 100%;
+  margin: calc(-4 * var(--zzz-select-u)) 0;
+  padding: calc(4 * var(--zzz-select-u)) 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.zzz-select__caret {
+  flex: none;
+  width: calc(15 * var(--zzz-select-u));
+  height: calc(14 * var(--zzz-select-u));
+}
+
+.zzz-select[data-disabled] .zzz-select__trigger {
+  color: var(--zzz-color-text-disabled);
+  cursor: default;
+}
+
+/* ── Open list ───────────────────────────────────────────────────────────────────────────── */
+.zzz-select .zzz-select__list {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 12 * var(--zzz-select-u));
+  left: 0;
+  right: 0;
+  max-height: calc(8 * 48 * var(--zzz-select-u) + 16 * var(--zzz-select-u));
+  margin: 0;
+  padding: calc(8 * var(--zzz-select-u)) 0;
+  overflow-y: auto;
+  list-style: none;
+  border-radius: calc(24 * var(--zzz-select-u));
+  transform-origin: 50% 0;
+  animation: zzz-select-open 130ms var(--zzz-motion-easing-out-expo, cubic-bezier(.16, 1, .3, 1));
+  scrollbar-width: none;
+}
+
+@keyframes zzz-select-open {
+  from {
+    opacity: 0;
+    transform: scaleY(0.6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zzz-select .zzz-select__list {
+    animation: none;
+  }
+}
+
+.zzz-select__option {
+  display: flex;
+  align-items: center;
+  height: calc(48 * var(--zzz-select-u));
+  margin: 0 calc(8 * var(--zzz-select-u));
+  padding: 0 calc(16 * var(--zzz-select-u));
+  border-radius: var(--zzz-radius-pill);
+  color: var(--zzz-color-text-primary);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* Keyboard / pointer highlight (web addition). */
+.zzz-select__option[data-active] {
+  background: var(--zzz-color-surface-chip);
+  box-shadow: inset 0 0 0 calc(3 * var(--zzz-select-u)) var(--zzz-color-border-chip);
+}
+
+.zzz-select__option[aria-selected='true'] {
+  background: var(--zzz-accent);
+  box-shadow: none;
+  color: var(--zzz-color-accent-on);
+}
+
+.zzz-select__option[aria-selected='true'][data-active] {
+  box-shadow: inset 0 0 0 calc(3 * var(--zzz-select-u)) var(--zzz-color-accent-on);
+}
+
+.zzz-select__option[aria-disabled='true'] {
+  color: var(--zzz-color-text-disabled);
+  cursor: default;
+}

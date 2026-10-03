@@ -1,0 +1,29 @@
+/* StarRating. Star box and gap come from the size table as unitless design units. */
+.zzz-star-rating {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: calc(var(--zzz-star-gap) * var(--zzz-px));
+  line-height: 0;
+  vertical-align: middle;
+}
+
+.zzz-star-rating__star {
+  display: block;
+  flex: none;
+  width: calc(var(--zzz-star-w) * var(--zzz-px));
+  height: calc(var(--zzz-star-h) * var(--zzz-px));
+  overflow: visible;
+}
+
+.zzz-star-rating__fill {
+  fill: var(--zzz-color-star-empty);
+}
+.zzz-star-rating__star[data-filled] .zzz-star-rating__fill {
+  fill: var(--zzz-color-star-filled);
+}
+
+.zzz-star-rating__outline {
+  fill: var(--zzz-color-star-outline);
+  stroke: var(--zzz-color-star-outline);
+}

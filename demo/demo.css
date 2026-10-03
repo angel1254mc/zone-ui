@@ -1,0 +1,183 @@
+/* Demo app shell (launcher, page frames, corner controls). Lengths are design units x --zzz-px (0.7 px each at the web default). */
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+  background: var(--zzz-color-bg-base);
+}
+
+.zzz-demo-root {
+  min-height: 100vh;
+}
+
+/* ── Launcher ─────────────────────────────────────────────────────────────── */
+
+.zzz-demo-launcher {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  padding: calc(72 * var(--zzz-px)) calc(96 * var(--zzz-px)) calc(160 * var(--zzz-px));
+}
+
+.zzz-demo-launcher__bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+}
+
+.zzz-demo-launcher__head {
+  display: grid;
+  gap: calc(12 * var(--zzz-px));
+  margin-bottom: calc(40 * var(--zzz-px));
+}
+
+.zzz-demo-launcher__kicker {
+  margin: 0;
+  color: var(--zzz-accent);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.zzz-demo-launcher__title {
+  margin: 0;
+  line-height: 1.1;
+}
+
+.zzz-demo-launcher__lede {
+  margin: 0;
+  max-width: calc(1200 * var(--zzz-px));
+  line-height: 1.4;
+}
+
+.zzz-demo-launcher__group {
+  display: grid;
+  gap: calc(20 * var(--zzz-px));
+  /* minmax(0, 1fr): the track must not grow to the cards' 396 px min-content width. */
+  grid-template-columns: minmax(0, 1fr);
+  margin-top: calc(48 * var(--zzz-px));
+}
+
+.zzz-demo-launcher__note {
+  margin: 0;
+  max-width: calc(1200 * var(--zzz-px));
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.zzz-demo-launcher__note code {
+  font-family: ui-monospace, Consolas, monospace;
+  color: var(--zzz-color-text-primary, #fff);
+}
+
+.zzz-demo-launcher__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(40 * var(--zzz-px)) calc(36 * var(--zzz-px));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Web-readable tile tags: CategoryTag text is 11 units (7.7 css px at the 0.7 web default) and has
+ * no size prop; 16 units = 11.2 css px still sits inside its 26-unit pill. */
+.zzz-demo-launcher__grid .zzz-news-card__tag {
+  font-size: calc(16 * var(--zzz-px));
+}
+
+.zzz-demo-launcher__grid > li {
+  display: block;
+  /* Let the NewsCard's own max-width: 100% shrink it below 396 design units on narrow viewports. */
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Phone widths: the 96-unit side padding alone eats half the viewport; use the usual 16 px gutter
+ * (23 units at the 0.7 web default). */
+@media (max-width: 600px) {
+  .zzz-demo-launcher {
+    padding-inline: calc(23 * var(--zzz-px));
+  }
+}
+
+/* ── Page frames ──────────────────────────────────────────────────────────── */
+
+/* Every page owns the viewport; Stage pages letterbox their artboard (1920 x 1080 by default) on black. */
+.zzz-demo-page {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--zzz-color-bg-base);
+}
+
+.zzz-demo-page[data-frame='web'] {
+  overflow: auto;
+}
+
+/* ── Corner controls ──────────────────────────────────────────────────────── */
+
+.zzz-demo-chrome {
+  position: fixed;
+  /* Pages use every corner (back button, currencies, actions...). Launcher and web pages dock at the
+   * bottom centre; full-screen pages dock at the top centre ([data-dock='top']). */
+  left: 50%;
+  bottom: calc(16 * var(--zzz-px));
+  translate: -50% 0;
+  z-index: 1000;
+  display: grid;
+  justify-items: center;
+  gap: calc(16 * var(--zzz-px));
+  pointer-events: none;
+}
+
+/* Full-screen pages: top centre (inside the letterbox when there is one, else over the top bar's free
+ * centre, between its left and right groups). */
+.zzz-demo-chrome[data-dock='top'] {
+  top: calc(16 * var(--zzz-px));
+  bottom: auto;
+}
+
+/* ...and the options panel opens downwards, below the bar. */
+.zzz-demo-chrome[data-dock='top'] .zzz-demo-chrome__panel {
+  order: 1;
+}
+
+.zzz-demo-chrome > * {
+  pointer-events: auto;
+}
+
+.zzz-demo-chrome__bar {
+  display: flex;
+  align-items: center;
+  gap: calc(16 * var(--zzz-px));
+}
+
+.zzz-demo-chrome__panel {
+  display: grid;
+  gap: calc(20 * var(--zzz-px));
+  padding: calc(28 * var(--zzz-px)) calc(32 * var(--zzz-px));
+  border-radius: calc(16 * var(--zzz-px));
+  background: var(--zzz-color-surface-panel);
+}
+
+.zzz-demo-chrome__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(32 * var(--zzz-px));
+}
+
+.zzz-demo-chrome__note {
+  margin: 0;
+  max-width: calc(620 * var(--zzz-px));
+  line-height: 1.4;
+}
+
+/* Route changes move focus to the page frame (tabIndex -1); it is a programmatic target, not a control. */
+.zzz-demo-page:focus {
+  outline: none;
+}

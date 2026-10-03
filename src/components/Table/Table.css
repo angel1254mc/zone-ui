@@ -1,0 +1,114 @@
+/*
+ * Table.
+ * Radius 10 (radius.tabCorner), header row #1C1C1C (surface.profileChip) with fontSize.label in
+ * color.text.muted; body rows #000 with 2 px #232323 row dividers (column dividers when
+ * --bordered); cells padding 10, centred, tabular numbers; body text fontSize.body in
+ * color.text.secondary (#C8C8C8).
+ * Hover (web component): the body row lifts to #0F0F0F.
+ */
+.zzz-table {
+  --zzz-table-divider: calc(2 * var(--zzz-px)) solid #232323;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: var(--zzz-radius-tab-corner);
+  overflow: hidden;
+  background: var(--zzz-color-bg-base);
+  color: var(--zzz-color-text-secondary);
+  font-size: var(--zzz-font-size-body);
+  line-height: var(--zzz-line-height-list);
+  font-variant-numeric: tabular-nums;
+}
+
+.zzz-table__caption {
+  caption-side: top;
+  padding: 0 0 var(--zzz-space-5);
+  color: var(--zzz-color-text-primary);
+  font-size: var(--zzz-font-size-body-lg);
+  line-height: var(--zzz-line-height-single);
+  text-align: left;
+}
+
+.zzz-table__th,
+.zzz-table__td,
+.zzz-table__empty > td {
+  padding: var(--zzz-space-5);
+  text-align: center;
+  vertical-align: middle;
+  font-weight: 900;
+}
+.zzz-table [data-align='start'] {
+  text-align: start;
+}
+.zzz-table [data-align='end'] {
+  text-align: end;
+}
+
+.zzz-table thead .zzz-table__th {
+  background: var(--zzz-color-surface-profile-chip);
+  color: var(--zzz-color-text-muted);
+  font-size: var(--zzz-font-size-label);
+  line-height: var(--zzz-line-height-dialog-item);
+}
+
+.zzz-table tbody > tr > * {
+  border-top: var(--zzz-table-divider);
+  background: var(--zzz-color-bg-base);
+}
+.zzz-table tbody th.zzz-table__td {
+  color: var(--zzz-color-text-primary);
+}
+.zzz-table__row:hover > * {
+  background: var(--zzz-color-bg-content);
+}
+
+.zzz-table--bordered :is(thead, tbody) > tr > * + * {
+  border-left: var(--zzz-table-divider);
+}
+
+.zzz-table__empty > td {
+  color: var(--zzz-color-text-disabled);
+}
+
+/* Sortable header: a bare button (label + stacked triangles); the active direction is white. */
+.zzz-table__sort {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--zzz-space-3);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--zzz-radius-thumb);
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.zzz-table__sort:hover {
+  color: var(--zzz-color-text-primary);
+}
+.zzz-table__sort[data-direction] {
+  color: var(--zzz-color-text-primary);
+}
+/* Pressed (the shared pressed recipe, .zzz-pressable): accent fill, black label and glyph. */
+.zzz-table__sort:active {
+  color: var(--zzz-color-accent-on);
+}
+.zzz-table__sort:active .zzz-table__sort-glyph path {
+  fill: currentColor;
+}
+
+.zzz-table__sort-glyph {
+  flex: none;
+  width: calc(10 * var(--zzz-px));
+  height: calc(14 * var(--zzz-px));
+}
+.zzz-table__sort-glyph path {
+  /* Inactive arrows: color.text.caption #787878 = 3.86:1 on the #1C1C1C header (WCAG 1.4.11 >= 3:1);
+     text.disabled #666 was 2.97:1. Still dimmer than the muted header label. */
+  fill: var(--zzz-color-text-caption);
+}
+.zzz-table__sort[data-direction='ascending'] .zzz-table__sort-up,
+.zzz-table__sort[data-direction='descending'] .zzz-table__sort-down {
+  fill: var(--zzz-accent);
+}

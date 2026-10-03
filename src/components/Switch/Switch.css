@@ -1,0 +1,180 @@
+/*
+ * Switch.
+ * Bezel 76 × 45 color.surface.toggleBezel with a 2 px black keyline; a thin black gap; track
+ * 62 × 33, vertical gradient toggleTrackTop #6D6D6D -> toggleTrackBottom #434343; knob
+ * with a lit upper rim crescent (#4C -> #2A under it) around a face that is dark at the top and
+ * light at the bottom (#2B -> #3B), a black keyline outside the rim, and a light
+ * "LED" dash on its left side. The knob is ~31 incl. rim and the dash 6 × 3 peaking #818181.
+ * ON: the knob slides to the right end (31 px = track 62 - knob 31), 120 ms out-expo, and the
+ * LED dash turns var(--zzz-accent).
+ *
+ * Sizes: every length is a multiple of the local unit --zzz-switch-u (1 design
+ * unit on md; x 46/57 on sm, x 69/57 on lg, from --zzz-size-control-*-n), so bezel, track, knob,
+ * LED and travel keep their proportions.
+ */
+.zzz-switch {
+  --zzz-switch-u: var(--zzz-px);
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--zzz-size-control-toggle-width-n) * var(--zzz-switch-u));
+  height: calc(var(--zzz-size-control-toggle-height-n) * var(--zzz-switch-u));
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--zzz-radius-pill);
+  background: var(--zzz-color-surface-toggle-bezel);
+  box-shadow: 0 0 0 calc(2 * var(--zzz-switch-u)) var(--zzz-color-border-keyline);
+  cursor: pointer;
+  vertical-align: middle;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.zzz-switch--sm {
+  --zzz-switch-u: calc(var(--zzz-px) * var(--zzz-size-control-sm-n) / var(--zzz-size-control-md-n));
+}
+.zzz-switch--lg {
+  --zzz-switch-u: calc(var(--zzz-px) * var(--zzz-size-control-lg-n) / var(--zzz-size-control-md-n));
+}
+
+.zzz-switch__track {
+  position: relative;
+  display: block;
+  width: calc(62 * var(--zzz-switch-u));
+  height: calc(33 * var(--zzz-switch-u));
+  border-radius: var(--zzz-radius-pill);
+  background: linear-gradient(
+    180deg,
+    var(--zzz-color-surface-toggle-track-top),
+    var(--zzz-color-surface-toggle-track-bottom)
+  );
+  /* The black line between the bezel and the track. */
+  box-shadow: 0 0 0 calc(1.5 * var(--zzz-switch-u)) var(--zzz-color-border-keyline);
+}
+
+.zzz-switch__knob {
+  position: absolute;
+  top: calc(1 * var(--zzz-switch-u));
+  /* Hugs the track's left end (the rim starts right after the dim gap; no black between). */
+  left: 0;
+  width: calc(31 * var(--zzz-switch-u));
+  height: calc(31 * var(--zzz-switch-u));
+  border-radius: 50%;
+  /* Rim: a lit crescent over the upper arc (#4A..#4C) that runs down both sides and darkens to ~#2A under the knob. */
+  background: linear-gradient(180deg, #4C4C4C 0, #4A4A4A 30%, #424242 55%, #353535 75%, #2A2A2A 100%);
+  /* Black keyline OUTSIDE the rim only - nothing dark between the rim and the face. The inset
+   * shade softens the rim's outer pixel. */
+  box-shadow:
+    0 0 0 calc(1 * var(--zzz-switch-u)) var(--zzz-color-border-keyline),
+    inset 0 0 0 calc(1 * var(--zzz-switch-u)) rgb(0 0 0 / 0.4);
+  transition: transform 120ms var(--zzz-motion-easing-out-expo);
+}
+
+/* Face: inset inside the rim (thicker at the top), dark at the top and light at the
+ * bottom (#2B -> #3B). */
+.zzz-switch__knob::before {
+  content: '';
+  position: absolute;
+  top: calc(5 * var(--zzz-switch-u));
+  right: calc(3 * var(--zzz-switch-u));
+  bottom: calc(2 * var(--zzz-switch-u));
+  left: calc(3 * var(--zzz-switch-u));
+  border-radius: 50%;
+  background: linear-gradient(180deg, #2B2B2B 0, #2E2E2E 25%, #383838 60%, #3B3B3B 85%);
+}
+
+/* LED dash. */
+.zzz-switch__knob::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: calc(4 * var(--zzz-switch-u));
+  width: calc(6 * var(--zzz-switch-u));
+  height: calc(3 * var(--zzz-switch-u));
+  margin-top: calc(-0.5 * var(--zzz-switch-u));
+  border-radius: calc(1 * var(--zzz-switch-u));
+  background: #818181;
+}
+
+/* On state. */
+.zzz-switch[aria-checked='true'] .zzz-switch__knob {
+  transform: translateX(calc(31 * var(--zzz-switch-u)));
+}
+.zzz-switch[aria-checked='true'] .zzz-switch__knob::after {
+  background: var(--zzz-accent);
+}
+
+.zzz-switch:disabled {
+  cursor: default;
+}
+.zzz-switch:disabled .zzz-switch__knob::after {
+  background: var(--zzz-color-text-disabled);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zzz-switch__knob {
+    transition: none;
+  }
+}
+
+/*
+ * Forced colours (Windows High Contrast). The normal look is drawn only with
+ * backgrounds, gradients and box-shadows, which WHCM drops, so the control vanished. Here the
+ * bezel gets a ButtonText border, the knob opts out of colour forcing and is painted with system
+ * colours, and ON fills the track with Highlight (knob HighlightText) so the state is visible
+ * without relying on the LED alone. Disabled uses GrayText. Focus keeps the base.css outline.
+ */
+@media (forced-colors: active) {
+  .zzz-switch {
+    box-sizing: border-box;
+    border: calc(2 * var(--zzz-switch-u)) solid ButtonText;
+    background: ButtonFace;
+  }
+  .zzz-switch__track {
+    forced-color-adjust: none;
+    box-sizing: border-box;
+    border: calc(1 * var(--zzz-switch-u)) solid ButtonText;
+    background: Canvas;
+    box-shadow: none;
+  }
+  /* Track padding box is 60 x 31 inside its 1 px border: the knob fills its height. */
+  .zzz-switch__knob {
+    top: 0;
+    width: calc(31 * var(--zzz-switch-u));
+    height: calc(31 * var(--zzz-switch-u));
+    background: ButtonText;
+    box-shadow: none;
+  }
+  .zzz-switch__knob::before {
+    display: none;
+  }
+  .zzz-switch__knob::after {
+    background: Canvas;
+  }
+  .zzz-switch[aria-checked='true'] .zzz-switch__track {
+    background: Highlight;
+    border-color: Highlight;
+  }
+  .zzz-switch[aria-checked='true'] .zzz-switch__knob {
+    transform: translateX(calc(29 * var(--zzz-switch-u)));
+    background: HighlightText;
+  }
+  .zzz-switch[aria-checked='true'] .zzz-switch__knob::after {
+    background: Highlight;
+  }
+  .zzz-switch:disabled {
+    border-color: GrayText;
+  }
+  .zzz-switch:disabled .zzz-switch__track {
+    border-color: GrayText;
+    background: Canvas;
+  }
+  .zzz-switch:disabled .zzz-switch__knob {
+    background: GrayText;
+  }
+  .zzz-switch:disabled .zzz-switch__knob::after {
+    background: Canvas;
+  }
+}

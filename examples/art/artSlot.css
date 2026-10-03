@@ -1,0 +1,87 @@
+/*
+ * ArtSlot (examples/art/ArtSlot.tsx). Kit tokens only.
+ * Base rules use :where() (zero specificity) so a library art window's own
+ * `> picture` / `> *` rules (size, object-fit) win over these defaults.
+ */
+:where(.zart) {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  object-fit: cover;
+  object-position: center;
+  background-color: var(--zzz-color-surface-art-stage);
+  transition: background-color 240ms ease-out;
+}
+
+:where(.zart[data-layout='ratio']) {
+  height: auto;
+}
+
+/* Per-component default fit (ArtSlot `defaultFit`), still zero specificity: a library slot rule
+   such as `.zzz-item-card__art > :is(img, picture)` overrides it. An explicit `fit` prop is inline. */
+:where(.zart[data-fit='cover']) {
+  object-fit: cover;
+}
+
+:where(.zart[data-fit='contain']) {
+  object-fit: contain;
+}
+
+.zart > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: inherit;
+  object-position: inherit;
+  opacity: 0;
+  transition: opacity 240ms ease-out;
+}
+
+/* Skeleton: art-stage surface + a faint 120° sheen. No shapes, glyphs or text. */
+.zart[data-state='loading'] {
+  background-image: linear-gradient(120deg, transparent 38%, rgb(255 255 255 / 6%) 50%, transparent 62%);
+  background-size: 300% 100%;
+  background-repeat: no-repeat;
+  animation: zart-sheen 1.6s linear infinite;
+}
+
+@keyframes zart-sheen {
+  from { background-position: 100% 0; }
+  to { background-position: 0% 0; }
+}
+
+/* Loaded: the art itself (transparent art keeps the parent's surface behind it). */
+.zart[data-state='loaded'] {
+  background-color: transparent;
+}
+
+.zart[data-state='loaded'] > img {
+  opacity: 1;
+}
+
+.zart[data-instant] {
+  transition: none;
+}
+
+.zart[data-instant] > img {
+  transition: none;
+}
+
+/* Missing: a quiet empty frame with an inset hairline. */
+.zart[data-state='missing'] {
+  background-color: var(--zzz-color-text-engraved);
+  box-shadow: inset 0 0 0 max(1px, calc(1.4 * var(--zzz-px))) rgb(255 255 255 / 6%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zart,
+  .zart > img {
+    transition: none;
+  }
+
+  .zart[data-state='loading'] {
+    animation: none;
+  }
+}

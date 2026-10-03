@@ -1,0 +1,40 @@
+{
+  "rasterDirs": [],
+  "entries": [
+    {
+      "glob": "{src/components/**/*.css,dist/*.css,storybook-static/**/*.css,demo-dist/assets/*.css}",
+      "pattern": "\\b(img|picture|svg|vide[o]|canvas)(,\\s*(img|picture|svg|vide[o]|canvas))+",
+      "why": "Media-slot selectors list the HTML media elements."
+    },
+    {
+      "glob": "{src,examples}/**",
+      "pattern": "[Vv]ide[o] channel|#vide[o]\\b|example\\.com/vide[o]\\b|socialGlyphs\\.vide[o]\\b|^\\s*vide[o]: glyph",
+      "why": "Social-link label and icon key of a web footer."
+    },
+    {
+      "glob": "{storybook-static,demo-dist}/assets/*.js",
+      "pattern": "[Vv]ide[o] channel`|`#vide[o]`|\\{vide[o]:|icon:\\w+\\.vide[o]\\b",
+      "why": "The same footer label, link and icon key in the built Storybook and demo."
+    },
+    {
+      "glob": "examples/art/art-manifest.json",
+      "pattern": "\"name\":\"[^\"]+\"",
+      "why": "Item names from the public art CDN."
+    },
+    {
+      "glob": "{storybook-static,demo-dist}/assets/*.js",
+      "pattern": "\\{id:`\\d+`,name:`[^`]+`",
+      "why": "The same item names, bundled from the art manifest."
+    },
+    {
+      "glob": "{examples/art/art-manifest.json,examples/pages/Trivia/fixture.ts,storybook-static/assets/*.js,demo-dist/assets/*.js}",
+      "pattern": "\"?fullSize\"?:\\s*\\[\\d+,\\s*\\d+\\]",
+      "why": "Pixel size of a CDN image (quoted in source, unquoted in the bundles)."
+    },
+    {
+      "glob": "**",
+      "pattern": "sb-zzz-frame|@babel/code-frame|code-frame-[\\d.]+\\.tgz|<reference types=|capture phase",
+      "why": "Class names, package names and TypeScript directives."
+    }
+  ]
+}
