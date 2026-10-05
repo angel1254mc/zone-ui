@@ -15,16 +15,7 @@ import {
 } from './gameArt'
 import { STORY_ITEMS } from './storyItems'
 
-/**
- * Real Zenless Zone Zero art for stories and example pages, loaded **by URL** at runtime from the
- * committed manifest (`examples/art/art-manifest.json`, `npm run art-manifest`). Sources:
- * static.nanoka.cc (agents, W-Engines, drive discs, items, icons) and Enka.Network (namecards).
- * Zenless Zone Zero © HoYoverse; no image file is part of this repository or the package.
- *
- * Every slot is an `ArtSlot`: a neutral skeleton while the bytes load, a fade-in when decoded,
- * an empty frame if the URL is unreachable — never imitation art. `configureArt({ nanokaBase,
- * enkaBase })` points the URLs at a self-hosted mirror.
- */
+
 const meta = {
   title: 'Foundations/Game Art',
   parameters: { layout: 'padded' },

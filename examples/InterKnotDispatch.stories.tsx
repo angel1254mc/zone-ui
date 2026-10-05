@@ -49,23 +49,7 @@ const meta = {
       story: { inline: false, iframeHeight: 720 },
       description: {
         component: [
-          'An original ZZZ-style fan news site. Built only from `zone-ui` ' +
-            '(+ real game art by URL from `examples/art`). It is a responsive web page, **not inside a Stage**: it keeps the web default density ' +
-            '(0.7, rem-based) at every width — container queries on its own scroller change only the layout — and follows the toolbar "Scale".',
-          '',
-          '- `NavBar` (original knot wordmark, anchor nav, accent **Download** CTA; folds into the menu button on phones).',
-          '- Hero: a full-width band in the `DialogBand` look (black, 4 px edge lines, drifting `GraffitiLayer variant="dialog"`), ' +
-            '`EventTitle` h1, `Button`s (Download = live-accent pill, Trailer = dark pill with a play cap) and full-body `AgentImage` art (eager).',
-          '- News: `WebTabs` (All / News / Notices / Events) filtering a `NewsCard` grid (Inter-Knot event namecards via `NamecardImage` + agent busts, ' +
-            '`CategoryTag`, `NewBadge`) with `Pagination` (6 per page, back to page 1 on a tab change). Web hover: card lift + banner zoom 1.15.',
-          '- Agents: a roster of `AgentImage` tile buttons in a horizontal `ScrollArea` (wraps to a 3-column grid on phones), ' +
-            'with real agent names (manifest, with an offline fallback) driving a featured portrait card.',
-          '- Newsletter: `Panel variant="tool"` with `TextField` (email), `Checkbox` (consent) and `Button` → success `Toast`; invalid input ' +
-            'shows inline errors and focuses the field (`noValidate`, the page validates).',
-          '- `Accordion` FAQ, `SiteFooter` (generic social glyphs), `HatchBackground` and the `.zzz-scrollbar` scroller.',
-          '',
-          'Art is real game art loaded by URL (static.nanoka.cc + Enka.Network, Zenless Zone Zero © HoYoverse): a neutral skeleton while ' +
-            'it loads, an empty frame when it is unreachable — see the **Loading** and **No art** stories.',
+          'An original ZZZ-style fan news site. Built only from `zone-ui` ' 
         ].join('\n'),
       },
     },

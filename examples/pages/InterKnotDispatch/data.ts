@@ -1,10 +1,4 @@
-/**
- * Content for the "Inter-Knot Dispatch" fan news site. All copy is ORIGINAL filler
- * written for this demo. Art is referenced by real id from the committed art manifest
- * (examples/art/art-manifest.json): agent ids (nanoka busts / full-body art) and Enka.Network
- * Inter-Knot event namecards (ImgCardEvent##). Names here are used as-is when the manifest is
- * unavailable, and image slots then render empty frames.
- */
+
 
 export type NewsCategory = 'news' | 'notices' | 'events'
 

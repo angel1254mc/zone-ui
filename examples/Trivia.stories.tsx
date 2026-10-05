@@ -89,27 +89,7 @@ const meta = {
       story: { inline: false, height: '720px' },
       description: {
         component:
-          'An example daily-quiz web app (in the style of Chiikawa Daily Trivia) composed only from general zone-ui ' +
-          'components and examples/art — the starting point for a real "ZZZ Daily Trivia" site. Flow: **Hero** start ' +
-          'screen (Puzzle #N counted from 2026-09-01; 5 questions · 30 s each · one try per day) → per question a ' +
-          '**SweepTransition** "QUESTION n", a **ContentCard** with **StepProgress**, a 30 s **CountdownBar** (warning at ' +
-          '10 s; a timeout counts as wrong) and a **ChoiceGroup** (A–D badges; 1–4 / A–D hotkeys; a pick reveals and ' +
-          'locks) → "Next question" / "See my score" → results ("You got X out of 5", **StatusGrid**, time taken, ' +
-          '**CopyButton** share text, **Countdown** to the next puzzle) and stats (**StatTiles** played / streak / best, a ' +
-          '**BarChart** score distribution from the `distribution` prop — MOCK data here, feed it from your backend — ' +
-          'and "You did better than N%"). Today\'s host (AgentImage `full`) reacts in a speech bubble; **SoundToggle** ' +
-          'is wired to state only (no audio bundled). One attempt per day is kept in localStorage (every access is ' +
-          'try/catch-guarded); a reload shows the results, and reloading mid-question counts that question as timed ' +
-          'out. Responsive web page (not a Stage): the web default density (0.7) at every width, with container queries ' +
-          'changing only the layout; the toolbar Scale tool previews other densities. ' +
-          'App logic (question generator, date seeding, scoring, share text) lives in examples/pages/Trivia. ' +
-          'Art is real game art by URL (static.nanoka.cc, Zenless Zone Zero © HoYoverse) referenced by real id; the day\'s ' +
-          'question set is generated once when the art state settles and then locked (art arriving never restarts a run). ' +
-          'While the art state is loading the start screen waits with Play disabled (**Loading** story); with no art it ' +
-          'plays the hand-checked, text-answerable fallback set with empty image frames (**No art** stories). If the ' +
-          'manifest is ready but an image URL fails (unreachable or hotlink-blocked CDN), a picture-only question ' +
-          '("Who is this agent?", "Which W-Engine is this?") shows its text clue over the empty frame instead; the clue ' +
-          'is generated with the set and fits only the correct option.',
+          'An example daily-quiz web app composed only from general zone-ui '
       },
     },
   },

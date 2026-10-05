@@ -1,48 +1,73 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import { useState } from 'react'
-import type { CSSProperties, ReactNode } from 'react'
-import { Button } from '../Button'
-import { CountdownBar } from './CountdownBar'
-import { useCountdown } from './useCountdown'
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { useState } from "react";
+import type { CSSProperties, ReactNode } from "react";
+import { Button } from "../Button";
+import { CountdownBar } from "./CountdownBar";
+import { useCountdown } from "./useCountdown";
 
-const gpx = (n: number) => `calc(${n} * var(--zzz-px))`
+const gpx = (n: number) => `calc(${n} * var(--zzz-px))`;
 const caption: CSSProperties = {
-  fontSize: 'var(--zzz-font-size-micro)',
-  lineHeight: 'var(--zzz-line-height-single)',
-  color: 'var(--zzz-color-text-muted)',
-}
-const col: CSSProperties = { display: 'flex', flexDirection: 'column', gap: gpx(28), width: gpx(720), maxWidth: '100%' }
-const surface: CSSProperties = { padding: gpx(28), background: 'var(--zzz-color-surface-raised)' }
+  fontSize: "var(--zzz-font-size-micro)",
+  lineHeight: "var(--zzz-line-height-single)",
+  color: "var(--zzz-color-text-muted)",
+};
+const col: CSSProperties = {
+  display: "flex",
+  flexDirection: "column",
+  gap: gpx(28),
+  width: gpx(720),
+  maxWidth: "100%",
+};
+const surface: CSSProperties = {
+  padding: gpx(28),
+  background: "var(--zzz-color-surface-raised)",
+};
 
 function Labeled({ label, children }: { label: string; children: ReactNode }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: gpx(10) }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: gpx(10) }}>
       <span style={caption}>{label}</span>
       {children}
     </div>
-  )
+  );
 }
 
 /** A 360 px-wide phone column at --zzz-scale 0.6 (the nested theme recomputes --zzz-px). */
-function Phone({ children, width = 360 }: { children: ReactNode; width?: number }) {
+function Phone({
+  children,
+  width = 360,
+}: {
+  children: ReactNode;
+  width?: number;
+}) {
   return (
-    <div className="zzz-theme" style={{ '--zzz-scale': 0.6, width, padding: 16, background: '#000' } as CSSProperties}>
+    <div
+      className="zzz-theme"
+      style={
+        {
+          "--zzz-scale": 0.6,
+          width,
+          padding: 16,
+          background: "#000",
+        } as CSSProperties
+      }
+    >
       {children}
     </div>
-  )
+  );
 }
 
 /** Stories that draw their own frame (story decorators cannot remove the meta one). */
-const BARE = ['Phone Width']
+const BARE = ["Phone Width"];
 
 const meta = {
-  title: 'Data Display/CountdownBar',
+  title: "Data Display/CountdownBar",
   component: CountdownBar,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   args: { durationMs: 30_000 },
   argTypes: {
-    size: { control: 'inline-radio', options: ['sm', 'md', 'lg'] },
-    expiredLabel: { control: 'text' },
+    size: { control: "inline-radio", options: ["sm", "md", "lg"] },
+    expiredLabel: { control: "text" },
   },
   decorators: [
     (Story, ctx) =>
@@ -50,7 +75,7 @@ const meta = {
         <Story />
       ) : (
         <div style={surface}>
-          <div style={{ width: gpx(720), maxWidth: '100%' }}>
+          <div style={{ width: gpx(720), maxWidth: "100%" }}>
             <Story />
           </div>
         </div>
@@ -60,25 +85,17 @@ const meta = {
     docs: {
       description: {
         component:
-          'Built from the kit materials (ringed pill, hatch track, accent fill with a slanted ' +
-          'leading edge, optional overclock-bar ">" cuts). A time-remaining bar for quizzes, cooldowns, sessions and auctions. ' +
-          '**Self-driven**: `durationMs` or `deadline` + `running` + `onExpire` (deadline-based, so throttled background tabs stay ' +
-          'exact). **Controlled**: `fraction` / `secondsLeft` — e.g. from your own `useCountdown()` when you need `reset/pause/resume`. ' +
-          'At `warnAt` (10 s) the fill turns orange (`color.highlight.keyword`) and pulses, at `criticalAt` (3 s) red ' +
-          '(`color.danger.base`); expired shows `expiredLabel` ("Time\'s up"). `role="progressbar"` with seconds `aria-valuetext`; ' +
-          'a polite live region speaks only at `announceAt` (default `[warnAt]`) and at expiry. Reduced motion stops the pulse and ' +
-          'the fill easing. **Sizes** `size="sm" | "md" | "lg"` (default `md`): channel 16 / 28 / 40 design units, readout ' +
-          '`fontSize.control.{sm,md,lg}` (21 / 26 / 30) — the label sizes of sm / md / lg controls.',
+          "A simple countdown bar compoonent that counts down from durationMs. Controllable via `secondsLeft`",
       },
     },
   },
-} satisfies Meta<typeof CountdownBar>
+} satisfies Meta<typeof CountdownBar>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 /** Self-driven 30 s countdown (runs live; remount the story to restart). */
-export const Playground: Story = {}
+export const Playground: Story = {};
 
 /** Static snapshots of every state (controlled props). */
 export const States: Story = {
@@ -95,17 +112,23 @@ export const States: Story = {
         <CountdownBar durationMs={30_000} secondsLeft={2} />
       </Labeled>
       <Labeled label="expired · custom label">
-        <CountdownBar durationMs={30_000} secondsLeft={0} expiredLabel="Time's up" />
+        <CountdownBar
+          durationMs={30_000}
+          secondsLeft={0}
+          expiredLabel="Time's up"
+        />
       </Labeled>
       <Labeled label="paused (running=false) · self-driven">
         <CountdownBar durationMs={45_000} running={false} />
       </Labeled>
     </div>
   ),
-}
+};
 
-export const Warning: Story = { args: { durationMs: 30_000, secondsLeft: 7 } }
-export const Expired: Story = { args: { durationMs: 30_000, secondsLeft: 0, expiredLabel: 'Too slow!' } }
+export const Warning: Story = { args: { durationMs: 30_000, secondsLeft: 7 } };
+export const Expired: Story = {
+  args: { durationMs: 30_000, secondsLeft: 0, expiredLabel: "Too slow!" },
+};
 
 /** Overclock-bar ">" cuts across the fill. */
 export const Chevrons: Story = {
@@ -116,7 +139,7 @@ export const Chevrons: Story = {
       <CountdownBar durationMs={30_000} secondsLeft={18} chevrons size="lg" />
     </div>
   ),
-}
+};
 
 export const Sizes: Story = {
   render: () => (
@@ -138,41 +161,54 @@ export const Sizes: Story = {
       </Labeled>
     </div>
   ),
-}
+};
 
 function QuizTimer() {
-  const [round, setRound] = useState(1)
-  const [log, setLog] = useState('')
-  const cd = useCountdown({ durationMs: 15_000, onExpire: () => setLog(`Round ${round}: time ran out`) })
+  const [round, setRound] = useState(1);
+  const [log, setLog] = useState("");
+  const cd = useCountdown({
+    durationMs: 15_000,
+    onExpire: () => setLog(`Round ${round}: time ran out`),
+  });
   return (
     <div style={col}>
-      <CountdownBar durationMs={cd.totalMs} secondsLeft={cd.secondsLeft} fraction={cd.fraction} warnAt={5} chevrons />
-      <div style={{ display: 'flex', gap: gpx(16), flexWrap: 'wrap' }}>
-        <Button onClick={() => (cd.ticking ? cd.pause() : cd.resume())}>{cd.ticking ? 'Pause' : 'Resume'}</Button>
+      <CountdownBar
+        durationMs={cd.totalMs}
+        secondsLeft={cd.secondsLeft}
+        fraction={cd.fraction}
+        warnAt={5}
+        chevrons
+      />
+      <div style={{ display: "flex", gap: gpx(16), flexWrap: "wrap" }}>
+        <Button onClick={() => (cd.ticking ? cd.pause() : cd.resume())}>
+          {cd.ticking ? "Pause" : "Resume"}
+        </Button>
         <Button
           onClick={() => {
-            setRound((r) => r + 1)
-            setLog('')
-            cd.reset()
+            setRound((r) => r + 1);
+            setLog("");
+            cd.reset();
           }}
         >
           Next round
         </Button>
       </div>
-      <span style={caption}>{log || `Round ${round} · ${cd.secondsLeft}s left`}</span>
+      <span style={caption}>
+        {log || `Round ${round} · ${cd.secondsLeft}s left`}
+      </span>
     </div>
-  )
+  );
 }
 
 /** Controlled by `useCountdown()` (15 s rounds, warning at 5 s): pause / resume / reset. */
-export const WithUseCountdown: Story = { render: () => <QuizTimer /> }
+export const WithUseCountdown: Story = { render: () => <QuizTimer /> };
 
 /** Phone width (360 px at --zzz-scale 0.6): the bar is fluid, the readout keeps its width. */
 export const PhoneWidth: Story = {
-  parameters: { layout: 'centered' },
+  parameters: { layout: "centered" },
   render: () => (
     <Phone>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
         <CountdownBar durationMs={30_000} secondsLeft={24} />
         <CountdownBar durationMs={30_000} secondsLeft={9} chevrons />
         <CountdownBar durationMs={30_000} secondsLeft={0} />
@@ -180,4 +216,4 @@ export const PhoneWidth: Story = {
       </div>
     </Phone>
   ),
-}
+};

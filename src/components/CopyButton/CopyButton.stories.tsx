@@ -1,66 +1,80 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import type { CSSProperties, ReactNode } from 'react'
-import { CopyButton } from './CopyButton'
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import type { CSSProperties, ReactNode } from "react";
+import { CopyButton } from "./CopyButton";
 
-const gpx = (n: number) => `calc(${n} * var(--zzz-px))`
+const gpx = (n: number) => `calc(${n} * var(--zzz-px))`;
 const caption: CSSProperties = {
-  fontSize: 'var(--zzz-font-size-label)',
-  lineHeight: 'var(--zzz-line-height-dialog-item)',
-  color: 'var(--zzz-color-text-muted)',
-}
+  fontSize: "var(--zzz-font-size-label)",
+  lineHeight: "var(--zzz-line-height-dialog-item)",
+  color: "var(--zzz-color-text-muted)",
+};
 
 function Row({ label, children }: { label: ReactNode; children: ReactNode }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: gpx(12), alignItems: 'flex-start' }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: gpx(12),
+        alignItems: "flex-start",
+      }}
+    >
       <span style={caption}>{label}</span>
       {children}
     </div>
-  )
+  );
 }
 
 /** A clipboard that always fails, simulated with getText(). */
-const failing = () => Promise.reject(new Error('Clipboard blocked'))
+const failing = () => Promise.reject(new Error("Clipboard blocked"));
 
-const shareText = ['Daily Trivia #214  4/5', '🟩🟩🟥🟩🟩', 'Streak 12 · Top 18%'].join('\n')
+const shareText = [
+  "Daily Trivia #214  4/5",
+  "🟩🟩🟥🟩🟩",
+  "Streak 12 · Top 18%",
+].join("\n");
 
 const meta = {
-  title: 'Data Display/CopyButton',
+  title: "Data Display/CopyButton",
   component: CopyButton,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: [
-          'Copy-to-clipboard on the dark pill `Button` (same ring, dots, pressed accent recipe; no hover).',
-          '',
-          '- Click → `navigator.clipboard.writeText`, falling back to a hidden `<textarea>` + `execCommand("copy")` (old browsers, insecure origins, denied permission).',
-          '- Success: "Copied" + a check on the green confirm disc for `resetAfter` (2 s). Failure: "Copy failed" + a cross on the red cancel disc, `onError(err)`.',
-          '- The three labels share one grid cell, so an auto-width pill keeps the width of the widest label and never jumps.',
-          '- `text` or a lazy `getText()` (sync or async, read at click time — e.g. a share message built from the current results). `copyToClipboard(text)` is exported for custom triggers.',
-          '- A11y: the result is announced through a polite `role="status"` region next to the button; the button name follows the visible label.',
-          '- `size` `sm` / `md` (default) / `lg` — the shared control scale (about 32 / 40 / 48 px at the default scale), forwarded to `Button`.',
-        ].join('\n'),
+        component: "Copy-to-clipboard button built on the `Button` component",
       },
     },
   },
   args: { text: shareText },
-} satisfies Meta<typeof CopyButton>
+} satisfies Meta<typeof CopyButton>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 /** Copies a share message. Click it. */
-export const Default: Story = {}
+export const Default: Story = {};
 
 /** Labels and the leading glyph are configurable. */
 export const CustomLabels: Story = {
-  args: { children: 'Share results', copiedLabel: 'Link copied!', failedLabel: 'Could not copy', width: 'default' },
-}
+  args: {
+    children: "Share results",
+    copiedLabel: "Link copied!",
+    failedLabel: "Could not copy",
+    width: "default",
+  },
+};
 
 /** Every state, side by side (`status` forces the copied / failed look; the last one is wired to a blocked clipboard — click it). */
 export const States: Story = {
   render: (args) => (
-    <div style={{ display: 'flex', gap: gpx(40), flexWrap: 'wrap', alignItems: 'flex-start' }}>
+    <div
+      style={{
+        display: "flex",
+        gap: gpx(40),
+        flexWrap: "wrap",
+        alignItems: "flex-start",
+      }}
+    >
       <Row label="idle">
         <CopyButton {...args} />
       </Row>
@@ -84,15 +98,22 @@ export const States: Story = {
       </Row>
     </div>
   ),
-}
+};
 
 /** `sm` / `md` / `lg` (46 / 57 / 69 design units ≈ 32 / 40 / 48 px at the default scale), idle and copied. */
 export const Sizes: Story = {
   render: (args) => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: gpx(24), alignItems: 'flex-start' }}>
-      {(['sm', 'md', 'lg'] as const).map((size) => (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: gpx(24),
+        alignItems: "flex-start",
+      }}
+    >
+      {(["sm", "md", "lg"] as const).map((size) => (
         <Row key={size} label={size}>
-          <div style={{ display: 'flex', gap: gpx(24), alignItems: 'center' }}>
+          <div style={{ display: "flex", gap: gpx(24), alignItems: "center" }}>
             <CopyButton {...args} size={size} />
             <CopyButton {...args} size={size} status="copied" />
             <CopyButton {...args} size={size} pressed />
@@ -101,48 +122,74 @@ export const Sizes: Story = {
       ))}
     </div>
   ),
-}
+};
 
 /** Phone width (390 px, default web scale): a full-width `lg` share button (48 px tap target) under a results card. */
 export const Phone390: Story = {
   render: (args) => (
     <div
       className="zzz-theme zzz-bg-hatch"
-      style={{ width: 390, padding: 16, borderRadius: 12, display: 'grid', gap: 16 } as CSSProperties}
+      style={
+        {
+          width: 390,
+          padding: 16,
+          borderRadius: 12,
+          display: "grid",
+          gap: 16,
+        } as CSSProperties
+      }
     >
       <pre
         style={{
           margin: 0,
           padding: gpx(20),
           borderRadius: gpx(14),
-          background: 'var(--zzz-color-surface-stat-row)',
-          fontFamily: 'inherit',
-          fontSize: 'var(--zzz-font-size-body)',
-          lineHeight: 'var(--zzz-line-height-paragraph)',
-          whiteSpace: 'pre-wrap',
+          background: "var(--zzz-color-surface-stat-row)",
+          fontFamily: "inherit",
+          fontSize: "var(--zzz-font-size-body)",
+          lineHeight: "var(--zzz-line-height-paragraph)",
+          whiteSpace: "pre-wrap",
         }}
       >
         {shareText}
       </pre>
-      <CopyButton {...args} size="lg" style={{ width: '100%' }}>
+      <CopyButton {...args} size="lg" style={{ width: "100%" }}>
         Copy results
       </CopyButton>
     </div>
   ),
-}
+};
 
 /** Desktop width (1280 px, default web scale): share row under a results line. */
 export const Desktop1280: Story = {
-  parameters: { layout: 'fullscreen' },
+  parameters: { layout: "fullscreen" },
   render: (args) => (
-    <div className="zzz-theme" style={{ width: 1280, padding: 32, display: 'flex', gap: 24, alignItems: 'center' }}>
-      <span style={{ fontSize: 'var(--zzz-font-size-title)', lineHeight: 'var(--zzz-line-height-single)', marginRight: 'auto' }}>
+    <div
+      className="zzz-theme"
+      style={{
+        width: 1280,
+        padding: 32,
+        display: "flex",
+        gap: 24,
+        alignItems: "center",
+      }}
+    >
+      <span
+        style={{
+          fontSize: "var(--zzz-font-size-title)",
+          lineHeight: "var(--zzz-line-height-single)",
+          marginRight: "auto",
+        }}
+      >
         Daily Trivia #214 — 4/5
       </span>
       <CopyButton {...args}>Copy results</CopyButton>
-      <CopyButton text="https://example.com/trivia/214" copiedLabel="Link copied">
+      <CopyButton
+        text="https://example.com/trivia/214"
+        copiedLabel="Link copied"
+      >
         Copy link
       </CopyButton>
     </div>
   ),
-}
+};
