@@ -1,6 +1,2 @@
-export { SiteFooter } from './SiteFooter'
-export type {
-    SiteFooterProps,
-    SiteFooterSocial,
-    SiteFooterLink,
-} from './SiteFooter'
+export { SiteFooter } from './SiteFooter';
+export type { SiteFooterProps, SiteFooterSocial, SiteFooterLink } from './SiteFooter';

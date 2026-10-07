@@ -1,22 +1,22 @@
-import type { ComponentPropsWithoutRef, CSSProperties, Ref } from 'react'
-import { cx } from '../../utils'
-import './Stage.css'
+import type { ComponentPropsWithoutRef, CSSProperties, Ref } from 'react';
+import { cx } from '../../utils';
+import './Stage.css';
 
-export type StageFit = 'contain' | 'height' | 'none'
+export type StageFit = 'contain' | 'height' | 'none';
 
 export interface StageProps extends ComponentPropsWithoutRef<'div'> {
-    /** Artboard width in design units. Default 1920 (16:9). */
-    width?: number
-    /** Artboard height in design units. Default 1080. */
-    height?: number
-    /**
-     * How the artboard scales to the Stage box:
-     * - `'contain'` (default): largest scale at which the whole artboard fits (letterboxed);
-     * - `'height'`: scale with the box height (the sides crop on narrow boxes);
-     * - `'none'`: 1 design unit = 1 CSS px.
-     */
-    fit?: StageFit
-    ref?: Ref<HTMLDivElement>
+  /** Artboard width in design units. Default 1920 (16:9). */
+  width?: number;
+  /** Artboard height in design units. Default 1080. */
+  height?: number;
+  /**
+   * How the artboard scales to the Stage box:
+   * - `'contain'` (default): largest scale at which the whole artboard fits (letterboxed);
+   * - `'height'`: scale with the box height (the sides crop on narrow boxes);
+   * - `'none'`: 1 design unit = 1 CSS px.
+   */
+  fit?: StageFit;
+  ref?: Ref<HTMLDivElement>;
 }
 
 /**
@@ -33,39 +33,33 @@ export interface StageProps extends ComponentPropsWithoutRef<'div'> {
  * from the container (`fit`), so everything inside is laid out in design units.
  */
 export function Stage({
-    width = 1920,
-    height = 1080,
-    fit = 'contain',
-    className,
-    style,
-    children,
-    ref,
-    ...rest
+  width = 1920,
+  height = 1080,
+  fit = 'contain',
+  className,
+  style,
+  children,
+  ref,
+  ...rest
 }: StageProps) {
-    const px =
-        fit === 'none'
-            ? '1px'
-            : fit === 'height'
-              ? `calc(100cqh / ${height})`
-              : `min(100cqw / ${width}, 100cqh / ${height})`
+  const px =
+    fit === 'none'
+      ? '1px'
+      : fit === 'height'
+        ? `calc(100cqh / ${height})`
+        : `min(100cqw / ${width}, 100cqh / ${height})`;
 
-    const stageVars = {
-        '--zzz-stage-width': String(width),
-        '--zzz-stage-height': String(height),
-    } as CSSProperties
-    const canvasVars = { '--zzz-px': px } as CSSProperties
+  const stageVars = {
+    '--zzz-stage-width': String(width),
+    '--zzz-stage-height': String(height),
+  } as CSSProperties;
+  const canvasVars = { '--zzz-px': px } as CSSProperties;
 
-    return (
-        <div
-            ref={ref}
-            className={cx('zzz-stage', className)}
-            data-fit={fit}
-            style={{ ...stageVars, ...style }}
-            {...rest}
-        >
-            <div className="zzz-stage__canvas zzz-theme" style={canvasVars}>
-                {children}
-            </div>
-        </div>
-    )
+  return (
+    <div ref={ref} className={cx('zzz-stage', className)} data-fit={fit} style={{ ...stageVars, ...style }} {...rest}>
+      <div className="zzz-stage__canvas zzz-theme" style={canvasVars}>
+        {children}
+      </div>
+    </div>
+  );
 }

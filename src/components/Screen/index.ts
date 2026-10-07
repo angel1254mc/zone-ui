@@ -1,6 +1,2 @@
-export { Screen } from './Screen'
-export type {
-    ScreenProps,
-    ScreenOwnProps,
-    ScreenBackgroundVariant,
-} from './Screen'
+export { Screen } from './Screen';
+export type { ScreenProps, ScreenOwnProps, ScreenBackgroundVariant } from './Screen';

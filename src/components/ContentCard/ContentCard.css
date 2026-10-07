@@ -8,204 +8,195 @@
  * body (#191919). Layout responds to the card's own width (container queries, CSS px).
  */
 .zzz-content-card {
-    container: zzz-content-card / inline-size;
-    position: relative;
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-    min-width: 0;
-    margin: 0;
-    padding: calc(
-        var(--zzz-border-width-panel) + var(--zzz-border-width-keyline)
-    );
-    color: var(--zzz-color-text-primary);
-    list-style: none;
-    --zzz-card-pad-x: calc(28 * var(--zzz-px));
-    --zzz-card-pad-y: calc(24 * var(--zzz-px));
-    --zzz-card-header-h: calc(44 * var(--zzz-px));
+  container: zzz-content-card / inline-size;
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: calc(var(--zzz-border-width-panel) + var(--zzz-border-width-keyline));
+  color: var(--zzz-color-text-primary);
+  list-style: none;
+  --zzz-card-pad-x: calc(28 * var(--zzz-px));
+  --zzz-card-pad-y: calc(24 * var(--zzz-px));
+  --zzz-card-header-h: calc(44 * var(--zzz-px));
 }
 .zzz-content-card--compact {
-    --zzz-card-pad-x: calc(20 * var(--zzz-px));
-    --zzz-card-pad-y: calc(16 * var(--zzz-px));
-    --zzz-card-header-h: calc(36 * var(--zzz-px));
+  --zzz-card-pad-x: calc(20 * var(--zzz-px));
+  --zzz-card-pad-y: calc(16 * var(--zzz-px));
+  --zzz-card-header-h: calc(36 * var(--zzz-px));
 }
 
 .zzz-content-card__surface {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    min-height: 0;
-    overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
 }
 
 /* ── accent edge: a pulsing accent bar down the left side, inside the ring ─────────────────── */
 .zzz-content-card__edge {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 2;
-    width: calc(8 * var(--zzz-px));
-    background: var(--zzz-accent);
-    pointer-events: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  width: calc(8 * var(--zzz-px));
+  background: var(--zzz-accent);
+  pointer-events: none;
 }
 .zzz-content-card--accent {
-    --zzz-card-edge: calc(8 * var(--zzz-px));
+  --zzz-card-edge: calc(8 * var(--zzz-px));
 }
 
 /* ── header strip ───────────────────────────────────────────────────────────────────────── */
 .zzz-content-card__header {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex: none;
-    align-items: center;
-    gap: calc(14 * var(--zzz-px));
-    /* the strip height counts from the OUTER ring edge (tool panel: 44), the ring lies outside */
-    min-height: calc(var(--zzz-card-header-h) - var(--zzz-border-width-panel));
-    padding: calc(4 * var(--zzz-px))
-        calc(var(--zzz-card-pad-x) - 8 * var(--zzz-px)) calc(4 * var(--zzz-px))
-        calc(
-            var(--zzz-card-pad-x) + var(--zzz-card-edge, 0px) - 8 *
-                var(--zzz-px)
-        );
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: calc(14 * var(--zzz-px));
+  /* the strip height counts from the OUTER ring edge (tool panel: 44), the ring lies outside */
+  min-height: calc(var(--zzz-card-header-h) - var(--zzz-border-width-panel));
+  padding: calc(4 * var(--zzz-px)) calc(var(--zzz-card-pad-x) - 8 * var(--zzz-px)) calc(4 * var(--zzz-px))
+    calc(var(--zzz-card-pad-x) + var(--zzz-card-edge, 0px) - 8 * var(--zzz-px));
 }
 .zzz-content-card__eyebrow {
-    display: block;
-    flex: 1 1 auto;
-    min-width: 0;
-    overflow: hidden;
-    color: var(--zzz-color-text-muted);
-    font-size: calc(18.5 * var(--zzz-px));
-    line-height: var(--zzz-line-height-single);
-    white-space: nowrap;
-    text-overflow: ellipsis;
+  display: block;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--zzz-color-text-muted);
+  font-size: calc(18.5 * var(--zzz-px));
+  line-height: var(--zzz-line-height-single);
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .zzz-content-card--accent .zzz-content-card__eyebrow {
-    color: var(--zzz-accent);
+  color: var(--zzz-accent);
 }
 .zzz-content-card--compact .zzz-content-card__eyebrow {
-    font-size: var(--zzz-font-size-micro);
+  font-size: var(--zzz-font-size-micro);
 }
 .zzz-content-card__trailing {
-    display: flex;
-    flex: none;
-    align-items: center;
-    gap: calc(10 * var(--zzz-px));
-    margin-left: auto;
-    color: var(--zzz-color-text-secondary);
-    font-size: var(--zzz-font-size-body);
-    line-height: var(--zzz-line-height-single);
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: calc(10 * var(--zzz-px));
+  margin-left: auto;
+  color: var(--zzz-color-text-secondary);
+  font-size: var(--zzz-font-size-body);
+  line-height: var(--zzz-line-height-single);
 }
 
 /* ── main: media + body ─────────────────────────────────────────────────────────────────── */
 .zzz-content-card__main {
-    position: relative;
-    display: grid;
-    flex: 1 1 auto;
-    grid-template-columns: minmax(0, 1fr);
-    min-height: 0;
+  position: relative;
+  display: grid;
+  flex: 1 1 auto;
+  grid-template-columns: minmax(0, 1fr);
+  min-height: 0;
 }
 .zzz-content-card__media {
-    position: relative;
-    overflow: hidden;
-    aspect-ratio: var(--zzz-content-card-media-ratio, 16 / 9);
-    /* the art-stage vignette of the large panel (lit top-left, dark centre) behind transparent art */
-    background:
-        radial-gradient(
-            ellipse 70% 60% at 0% 0%,
-            color-mix(in srgb, var(--zzz-color-surface-art-stage), #ffffff 9%),
-            transparent 100%
-        ),
-        var(--zzz-color-surface-art-stage);
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: var(--zzz-content-card-media-ratio, 16 / 9);
+  /* the art-stage vignette of the large panel (lit top-left, dark centre) behind transparent art */
+  background:
+    radial-gradient(
+      ellipse 70% 60% at 0% 0%,
+      color-mix(in srgb, var(--zzz-color-surface-art-stage), #ffffff 9%),
+      transparent 100%
+    ),
+    var(--zzz-color-surface-art-stage);
 }
 .zzz-content-card__media > :is(img, picture, svg, video, canvas) {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .zzz-content-card__media > picture > img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .zzz-content-card__body {
-    display: flex;
-    flex-direction: column;
-    gap: calc(14 * var(--zzz-px));
-    min-width: 0;
-    padding: var(--zzz-card-pad-y) var(--zzz-card-pad-x)
-        calc(var(--zzz-card-pad-y) + 4 * var(--zzz-px))
-        calc(var(--zzz-card-pad-x) + var(--zzz-card-edge, 0px));
+  display: flex;
+  flex-direction: column;
+  gap: calc(14 * var(--zzz-px));
+  min-width: 0;
+  padding: var(--zzz-card-pad-y) var(--zzz-card-pad-x) calc(var(--zzz-card-pad-y) + 4 * var(--zzz-px))
+    calc(var(--zzz-card-pad-x) + var(--zzz-card-edge, 0px));
 }
 .zzz-content-card__title {
-    margin: 0;
-    color: var(--zzz-color-text-primary);
-    font-size: var(--zzz-font-size-event-title);
-    font-weight: 900;
-    line-height: calc(44 * var(--zzz-px));
-    overflow-wrap: anywhere;
-    text-wrap: balance;
+  margin: 0;
+  color: var(--zzz-color-text-primary);
+  font-size: var(--zzz-font-size-event-title);
+  font-weight: 900;
+  line-height: calc(44 * var(--zzz-px));
+  overflow-wrap: anywhere;
+  text-wrap: balance;
 }
 .zzz-content-card--compact .zzz-content-card__title {
-    font-size: var(--zzz-font-size-button);
-    line-height: calc(31 * var(--zzz-px));
+  font-size: var(--zzz-font-size-button);
+  line-height: calc(31 * var(--zzz-px));
 }
 .zzz-content-card__content {
-    min-width: 0;
-    color: var(--zzz-color-text-secondary);
-    font-size: var(--zzz-font-size-body-lg);
-    line-height: var(--zzz-line-height-paragraph);
+  min-width: 0;
+  color: var(--zzz-color-text-secondary);
+  font-size: var(--zzz-font-size-body-lg);
+  line-height: var(--zzz-line-height-paragraph);
 }
 .zzz-content-card--compact .zzz-content-card__content {
-    font-size: var(--zzz-font-size-body);
-    line-height: calc(25 * var(--zzz-px));
+  font-size: var(--zzz-font-size-body);
+  line-height: calc(25 * var(--zzz-px));
 }
 .zzz-content-card__content :where(p, ul, ol) {
-    margin: 0;
+  margin: 0;
 }
 .zzz-content-card__content :where(p, ul, ol) + :where(p, ul, ol) {
-    margin-top: calc(12 * var(--zzz-px));
+  margin-top: calc(12 * var(--zzz-px));
 }
 
 /* side media: a left column on wide cards (≥ 600 CSS px), stacked on top otherwise */
 @container zzz-content-card (min-width: 600px) {
-    .zzz-content-card--media-side .zzz-content-card__main {
-        grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-    }
-    .zzz-content-card--media-side .zzz-content-card__media {
-        aspect-ratio: auto;
-        min-height: calc(220 * var(--zzz-px));
-    }
-    .zzz-content-card--media-side .zzz-content-card__body {
-        padding-left: var(--zzz-card-pad-x);
-    }
-    .zzz-content-card--accent.zzz-content-card--media-side
-        .zzz-content-card__media {
-        margin-left: var(--zzz-card-edge);
-    }
+  .zzz-content-card--media-side .zzz-content-card__main {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  }
+  .zzz-content-card--media-side .zzz-content-card__media {
+    aspect-ratio: auto;
+    min-height: calc(220 * var(--zzz-px));
+  }
+  .zzz-content-card--media-side .zzz-content-card__body {
+    padding-left: var(--zzz-card-pad-x);
+  }
+  .zzz-content-card--accent.zzz-content-card--media-side .zzz-content-card__media {
+    margin-left: var(--zzz-card-edge);
+  }
 }
 
 /* ── footer actions: the textured lower body ───────────────────────────────────────────── */
 .zzz-content-card__footer {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex: none;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: flex-end;
-    /* room for pill rings, keylines and the 4 px press outset of the buttons inside */
-    gap: calc(20 * var(--zzz-px));
-    padding: calc(18 * var(--zzz-px)) var(--zzz-card-pad-x)
-        calc(20 * var(--zzz-px))
-        calc(var(--zzz-card-pad-x) + var(--zzz-card-edge, 0px));
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: none;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  /* room for pill rings, keylines and the 4 px press outset of the buttons inside */
+  gap: calc(20 * var(--zzz-px));
+  padding: calc(18 * var(--zzz-px)) var(--zzz-card-pad-x) calc(20 * var(--zzz-px))
+    calc(var(--zzz-card-pad-x) + var(--zzz-card-edge, 0px));
 }
 .zzz-content-card--compact .zzz-content-card__footer {
-    gap: calc(14 * var(--zzz-px));
-    padding-block: calc(14 * var(--zzz-px));
+  gap: calc(14 * var(--zzz-px));
+  padding-block: calc(14 * var(--zzz-px));
 }

@@ -1,62 +1,62 @@
 /* SplitPill: 354 × 66 incl. the 5 px black rim, #202020 fill, 4 px black divider leaning "/" at skew.divider, ~40 % from the left. */
 .zzz-split-pill {
-    display: inline-grid;
-    grid-template-columns: 40fr 60fr;
-    flex: none;
-    box-sizing: border-box;
-    width: calc(354 * var(--zzz-px));
-    height: calc(66 * var(--zzz-px));
-    overflow: hidden;
-    isolation: isolate;
-    border: calc(5 * var(--zzz-px)) solid var(--zzz-color-border-keyline);
-    border-radius: var(--zzz-radius-pill);
-    background: var(--zzz-color-surface-level-pill);
-    color: var(--zzz-color-text-secondary);
-    font-size: var(--zzz-font-size-body-xl);
-    font-weight: 900;
-    line-height: var(--zzz-line-height-single);
-    white-space: nowrap;
-    vertical-align: middle;
+  display: inline-grid;
+  grid-template-columns: 40fr 60fr;
+  flex: none;
+  box-sizing: border-box;
+  width: calc(354 * var(--zzz-px));
+  height: calc(66 * var(--zzz-px));
+  overflow: hidden;
+  isolation: isolate;
+  border: calc(5 * var(--zzz-px)) solid var(--zzz-color-border-keyline);
+  border-radius: var(--zzz-radius-pill);
+  background: var(--zzz-color-surface-level-pill);
+  color: var(--zzz-color-text-secondary);
+  font-size: var(--zzz-font-size-body-xl);
+  font-weight: 900;
+  line-height: var(--zzz-line-height-single);
+  white-space: nowrap;
+  vertical-align: middle;
 }
 .zzz-split-pill__half {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: calc(6 * var(--zzz-px));
-    min-width: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(6 * var(--zzz-px));
+  min-width: 0;
 }
 .zzz-split-pill__half:first-child {
-    padding-left: calc(10 * var(--zzz-px));
+  padding-left: calc(10 * var(--zzz-px));
 }
 .zzz-split-pill__half--second {
-    padding-right: calc(6 * var(--zzz-px));
+  padding-right: calc(6 * var(--zzz-px));
 }
 .zzz-split-pill__half--second::before {
-    content: '';
-    position: absolute;
-    top: calc(-4 * var(--zzz-px));
-    bottom: calc(-4 * var(--zzz-px));
-    left: calc(-2 * var(--zzz-px));
-    width: calc(4 * var(--zzz-px));
-    background: var(--zzz-color-border-keyline);
-    transform: skewX(var(--zzz-skew-divider));
+  content: '';
+  position: absolute;
+  top: calc(-4 * var(--zzz-px));
+  bottom: calc(-4 * var(--zzz-px));
+  left: calc(-2 * var(--zzz-px));
+  width: calc(4 * var(--zzz-px));
+  background: var(--zzz-color-border-keyline);
+  transform: skewX(var(--zzz-skew-divider));
 }
 .zzz-split-pill__icon {
-    display: inline-grid;
-    place-items: center;
-    flex: none;
-    width: calc(34 * var(--zzz-px));
-    height: calc(34 * var(--zzz-px));
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: calc(34 * var(--zzz-px));
+  height: calc(34 * var(--zzz-px));
 }
 .zzz-split-pill__icon > :is(svg, img) {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 .zzz-split-pill__label {
-    padding-block: 0.3em; /* keeps descenders inside the overflow clip */
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  padding-block: 0.3em; /* keeps descenders inside the overflow clip */
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

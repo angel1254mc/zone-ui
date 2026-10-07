@@ -10,185 +10,181 @@
  * surface.levelPillGhost #1D1D1D and holds the engraved max digits.
  */
 .zzz-level-pill {
-    --zzz-lp-rim: var(--zzz-border-width-keyline);
-    position: relative;
-    display: inline-flex;
-    flex: none;
-    align-items: center;
-    box-sizing: border-box;
-    border: var(--zzz-lp-rim) solid var(--zzz-color-border-keyline);
-    border-radius: var(--zzz-radius-pill);
-    color: var(--zzz-color-text-primary);
-    font-weight: 900;
-    line-height: var(--zzz-line-height-single);
-    white-space: nowrap;
-    vertical-align: middle;
+  --zzz-lp-rim: var(--zzz-border-width-keyline);
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  box-sizing: border-box;
+  border: var(--zzz-lp-rim) solid var(--zzz-color-border-keyline);
+  border-radius: var(--zzz-radius-pill);
+  color: var(--zzz-color-text-primary);
+  font-weight: 900;
+  line-height: var(--zzz-line-height-single);
+  white-space: nowrap;
+  vertical-align: middle;
 }
 
 /* ── panel / equip ─────────────────────────────────────────────────────────────────────── */
 .zzz-level-pill--panel {
-    /* The #161616 fill is 201 × 40 inside the 3 px keyline. */
-    width: calc(207 * var(--zzz-px));
-    height: calc(46 * var(--zzz-px));
-    gap: calc(13 * var(--zzz-px));
-    padding-left: calc(3 * var(--zzz-px));
-    background: var(--zzz-color-surface-stat-row);
+  /* The #161616 fill is 201 × 40 inside the 3 px keyline. */
+  width: calc(207 * var(--zzz-px));
+  height: calc(46 * var(--zzz-px));
+  gap: calc(13 * var(--zzz-px));
+  padding-left: calc(3 * var(--zzz-px));
+  background: var(--zzz-color-surface-stat-row);
 }
 .zzz-level-pill--equip {
-    width: calc(450 * var(--zzz-px));
-    height: var(--zzz-size-row-level-pill-panel);
-    justify-content: center;
-    padding-left: calc(3 * var(--zzz-px));
-    border: 0;
-    border-radius: 0 var(--zzz-radius-pill) var(--zzz-radius-pill) 0;
-    background: var(--zzz-color-surface-stat-row-agent);
+  width: calc(450 * var(--zzz-px));
+  height: var(--zzz-size-row-level-pill-panel);
+  justify-content: center;
+  padding-left: calc(3 * var(--zzz-px));
+  border: 0;
+  border-radius: 0 var(--zzz-radius-pill) var(--zzz-radius-pill) 0;
+  background: var(--zzz-color-surface-stat-row-agent);
 }
 .zzz-level-pill--equip .zzz-level-pill__coin {
-    position: absolute;
-    left: calc(7 * var(--zzz-px));
-    top: 50%;
-    translate: 0 -50%;
+  position: absolute;
+  left: calc(7 * var(--zzz-px));
+  top: 50%;
+  translate: 0 -50%;
 }
 .zzz-level-pill__text {
-    /* cap 18 -> 21.5 design units */
-    font-size: calc(21.5 * var(--zzz-px));
-    font-variant-numeric: tabular-nums;
+  /* cap 18 -> 21.5 design units */
+  font-size: calc(21.5 * var(--zzz-px));
+  font-variant-numeric: tabular-nums;
 }
 .zzz-level-pill--equip .zzz-level-pill__text {
-    font-size: var(--zzz-font-size-body-lg);
+  font-size: var(--zzz-font-size-body-lg);
 }
 /* "60/60": the slash with ~6 px of air on both sides. */
 .zzz-level-pill__slash {
-    margin-inline: calc(3 * var(--zzz-px));
+  margin-inline: calc(3 * var(--zzz-px));
 }
 
 /* ── large / agent ─────────────────────────────────────────────────────────────────────── */
 .zzz-level-pill--large,
 .zzz-level-pill--agent {
-    --zzz-lp-divider: calc(146 * var(--zzz-px));
-    overflow: hidden;
-    isolation: isolate;
-    background: var(--zzz-color-surface-level-pill);
-    box-shadow: inset 0 calc(1 * var(--zzz-px)) 0
-        var(--zzz-color-border-level-pill-highlight);
+  --zzz-lp-divider: calc(146 * var(--zzz-px));
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--zzz-color-surface-level-pill);
+  box-shadow: inset 0 calc(1 * var(--zzz-px)) 0 var(--zzz-color-border-level-pill-highlight);
 }
 .zzz-level-pill--large {
-    --zzz-lp-rim: calc(4 * var(--zzz-px));
-    width: calc(296 * var(--zzz-px));
-    height: var(--zzz-size-row-level-pill-large);
+  --zzz-lp-rim: calc(4 * var(--zzz-px));
+  width: calc(296 * var(--zzz-px));
+  height: var(--zzz-size-row-level-pill-large);
 }
 .zzz-level-pill--agent {
-    --zzz-lp-rim: calc(5 * var(--zzz-px));
-    --zzz-lp-divider: calc(159 * var(--zzz-px));
-    width: calc(355 * var(--zzz-px));
-    height: calc(66 * var(--zzz-px));
-    box-shadow: none;
+  --zzz-lp-rim: calc(5 * var(--zzz-px));
+  --zzz-lp-divider: calc(159 * var(--zzz-px));
+  width: calc(355 * var(--zzz-px));
+  height: calc(66 * var(--zzz-px));
+  box-shadow: none;
 }
 
 .zzz-level-pill__lead {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex: none;
-    align-items: center;
-    gap: calc(6 * var(--zzz-px));
-    box-sizing: border-box;
-    width: calc(var(--zzz-lp-divider) - var(--zzz-lp-rim));
-    height: 100%;
-    padding-left: calc(5 * var(--zzz-px));
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: calc(6 * var(--zzz-px));
+  box-sizing: border-box;
+  width: calc(var(--zzz-lp-divider) - var(--zzz-lp-rim));
+  height: 100%;
+  padding-left: calc(5 * var(--zzz-px));
 }
 .zzz-level-pill--agent .zzz-level-pill__lead {
-    padding-left: calc(21 * var(--zzz-px));
+  padding-left: calc(21 * var(--zzz-px));
 }
 .zzz-level-pill__level {
-    line-height: var(--zzz-line-height-single);
+  line-height: var(--zzz-line-height-single);
 }
 
 /* Ghost zone: everything right of the divider (runs under the end capsule / (i) sub-pill). */
 .zzz-level-pill__ghost {
-    position: relative;
-    flex: 1 1 auto;
-    align-self: stretch;
-    display: flex;
-    align-items: center;
-    min-width: 0;
-    padding-left: calc(1 * var(--zzz-px));
+  position: relative;
+  flex: 1 1 auto;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  padding-left: calc(1 * var(--zzz-px));
 }
 .zzz-level-pill__ghost::before {
-    content: '';
-    position: absolute;
-    top: calc(-2 * var(--zzz-px));
-    bottom: calc(-2 * var(--zzz-px));
-    left: 0;
-    right: calc(-120 * var(--zzz-px));
-    z-index: -1;
-    border-left: calc(4 * var(--zzz-px)) solid var(--zzz-color-border-keyline);
-    background: var(--zzz-color-surface-level-pill-ghost);
-    transform: skewX(var(--zzz-skew-divider));
+  content: '';
+  position: absolute;
+  top: calc(-2 * var(--zzz-px));
+  bottom: calc(-2 * var(--zzz-px));
+  left: 0;
+  right: calc(-120 * var(--zzz-px));
+  z-index: -1;
+  border-left: calc(4 * var(--zzz-px)) solid var(--zzz-color-border-keyline);
+  background: var(--zzz-color-surface-level-pill-ghost);
+  transform: skewX(var(--zzz-skew-divider));
 }
 .zzz-level-pill__ghost-digits {
-    /* Digits are narrow (~0.63 em): Mona at wdth 100 with slight negative tracking. */
-    color: var(--zzz-color-text-engraved);
-    font-size: calc(44 * var(--zzz-px));
-    font-stretch: 90%;
-    line-height: var(--zzz-line-height-single);
-    font-variant-numeric: tabular-nums;
-    letter-spacing: -0.03em;
+  /* Digits are narrow (~0.63 em): Mona at wdth 100 with slight negative tracking. */
+  color: var(--zzz-color-text-engraved);
+  font-size: calc(44 * var(--zzz-px));
+  font-stretch: 90%;
+  line-height: var(--zzz-line-height-single);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
 }
 .zzz-level-pill--agent .zzz-level-pill__ghost-digits {
-    font-size: var(--zzz-font-size-ghost-level);
-    margin-left: calc(-4 * var(--zzz-px));
+  font-size: var(--zzz-font-size-ghost-level);
+  margin-left: calc(-4 * var(--zzz-px));
 }
 
 /* Agent: black MAX capsule flush right, condensedLg "MAX" in text.maxLabel. */
 .zzz-level-pill__max {
-    position: absolute;
-    top: calc(-1 * var(--zzz-lp-rim));
-    right: calc(-1 * var(--zzz-lp-rim));
-    bottom: calc(-1 * var(--zzz-lp-rim));
-    z-index: 1;
-    display: grid;
-    place-items: center;
-    box-sizing: border-box;
-    width: calc(102 * var(--zzz-px));
-    padding-right: calc(4 * var(--zzz-px));
-    border-radius: var(--zzz-radius-pill);
-    background: var(--zzz-color-surface-level-pill-max);
-    color: var(--zzz-color-text-max-label);
-    font-family: var(--zzz-font-family-condensed);
-    font-stretch: var(--zzz-font-stretch-condensed);
-    font-size-adjust: cap-height 0.79;
-    font-size: var(--zzz-font-size-condensed-lg);
-    line-height: var(--zzz-line-height-single);
-    letter-spacing: 0;
-    word-spacing: normal;
-    text-transform: uppercase;
+  position: absolute;
+  top: calc(-1 * var(--zzz-lp-rim));
+  right: calc(-1 * var(--zzz-lp-rim));
+  bottom: calc(-1 * var(--zzz-lp-rim));
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  width: calc(102 * var(--zzz-px));
+  padding-right: calc(4 * var(--zzz-px));
+  border-radius: var(--zzz-radius-pill);
+  background: var(--zzz-color-surface-level-pill-max);
+  color: var(--zzz-color-text-max-label);
+  font-family: var(--zzz-font-family-condensed);
+  font-stretch: var(--zzz-font-stretch-condensed);
+  font-size-adjust: cap-height 0.79;
+  font-size: var(--zzz-font-size-condensed-lg);
+  line-height: var(--zzz-line-height-single);
+  letter-spacing: 0;
+  word-spacing: normal;
+  text-transform: uppercase;
 }
 
 /* Large: (i) sub-pill 85 wide, flush right, full outer height, 4 px #363636 ring. */
 .zzz-level-pill--has-info {
-    overflow: visible;
+  overflow: visible;
 }
 .zzz-level-pill--has-info .zzz-level-pill__ghost {
-    margin-right: calc(40 * var(--zzz-px));
-    /* Clip only the rounded right end. The left inset is negative so the leaning divider
+  margin-right: calc(40 * var(--zzz-px));
+  /* Clip only the rounded right end. The left inset is negative so the leaning divider
      (border-left of ::before, skewed about its centre) keeps its lower half, which leans
      ~13 px left of the ghost box (overflow: hidden used to cut it off). */
-    clip-path: inset(
-        0 0 0 calc(-30 * var(--zzz-px)) round 0 var(--zzz-radius-pill)
-            var(--zzz-radius-pill) 0
-    );
+  clip-path: inset(0 0 0 calc(-30 * var(--zzz-px)) round 0 var(--zzz-radius-pill) var(--zzz-radius-pill) 0);
 }
 .zzz-level-pill__info.zzz-button {
-    --zzz-mat-ring: calc(4 * var(--zzz-px));
-    position: absolute;
-    top: 50%;
-    right: calc(2 * var(--zzz-px) - var(--zzz-lp-rim));
-    translate: 0 -50%;
-    z-index: 2;
-    height: calc(56 * var(--zzz-px));
-    border-color: #363636;
+  --zzz-mat-ring: calc(4 * var(--zzz-px));
+  position: absolute;
+  top: 50%;
+  right: calc(2 * var(--zzz-px) - var(--zzz-lp-rim));
+  translate: 0 -50%;
+  z-index: 2;
+  height: calc(56 * var(--zzz-px));
+  border-color: #363636;
 }
 .zzz-level-pill__info .zzz-button__glyph {
-    font-size: calc(31 * var(--zzz-px));
+  font-size: calc(31 * var(--zzz-px));
 }

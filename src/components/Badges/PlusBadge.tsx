@@ -1,11 +1,10 @@
-import type { ComponentPropsWithRef } from 'react'
-import { cx, usePressFlash } from '../../utils'
-import './Badges.css'
+import type { ComponentPropsWithRef } from 'react';
+import { cx, usePressFlash } from '../../utils';
+import './Badges.css';
 
-export interface PlusBadgeProps
-    extends Omit<ComponentPropsWithRef<'button'>, 'children' | 'aria-label'> {
-    /** Accessible name, e.g. "Get more Battery Charge" (the badge shows only a "+"). */
-    label: string
+export interface PlusBadgeProps extends Omit<ComponentPropsWithRef<'button'>, 'children' | 'aria-label'> {
+  /** Accessible name, e.g. "Get more Battery Charge" (the badge shows only a "+"). */
+  label: string;
 }
 
 /**
@@ -14,44 +13,34 @@ export interface PlusBadgeProps
  * Pressed: the disc takes the live accent and grows 1 px per side.
  */
 export function PlusBadge({
-    label,
-    className,
-    type = 'button',
+  label,
+  className,
+  type = 'button',
+  disabled,
+  onKeyDown,
+  onKeyUp,
+  onBlur,
+  ...rest
+}: PlusBadgeProps) {
+  const press = usePressFlash<HTMLButtonElement>({
     disabled,
     onKeyDown,
     onKeyUp,
     onBlur,
-    ...rest
-}: PlusBadgeProps) {
-    const press = usePressFlash<HTMLButtonElement>({
-        disabled,
-        onKeyDown,
-        onKeyUp,
-        onBlur,
-    })
-    return (
-        <button
-            {...press}
-            {...rest}
-            type={type}
-            disabled={disabled}
-            aria-label={label}
-            className={cx(
-                'zzz-plus-badge',
-                'zzz-pressable',
-                'zzz-focusable',
-                className
-            )}
-        >
-            <svg
-                className="zzz-plus-badge__glyph"
-                viewBox="0 0 15 15"
-                aria-hidden="true"
-                focusable="false"
-            >
-                <rect x="3.5" y="6" width="8" height="3" />
-                <rect x="6" y="3.5" width="3" height="8" />
-            </svg>
-        </button>
-    )
+  });
+  return (
+    <button
+      {...press}
+      {...rest}
+      type={type}
+      disabled={disabled}
+      aria-label={label}
+      className={cx('zzz-plus-badge', 'zzz-pressable', 'zzz-focusable', className)}
+    >
+      <svg className="zzz-plus-badge__glyph" viewBox="0 0 15 15" aria-hidden="true" focusable="false">
+        <rect x="3.5" y="6" width="8" height="3" />
+        <rect x="6" y="3.5" width="3" height="8" />
+      </svg>
+    </button>
+  );
 }

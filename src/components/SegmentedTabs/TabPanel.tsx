@@ -1,11 +1,11 @@
-import type { ComponentPropsWithRef } from 'react'
-import { getTabId, getTabPanelId } from './useTabList'
+import type { ComponentPropsWithRef } from 'react';
+import { getTabId, getTabPanelId } from './useTabList';
 
 export interface TabPanelProps extends ComponentPropsWithRef<'div'> {
-    /** The `id` given to the SegmentedTabs / IconTabs that controls this panel. */
-    tabsId: string
-    /** The tab value this panel belongs to. */
-    value: string
+  /** The `id` given to the SegmentedTabs / IconTabs that controls this panel. */
+  tabsId: string;
+  /** The tab value this panel belongs to. */
+  value: string;
 }
 
 /**
@@ -14,14 +14,14 @@ export interface TabPanelProps extends ComponentPropsWithRef<'div'> {
  * panel, or render all and set `hidden` on the inactive ones.
  */
 export function TabPanel({ tabsId, value, ref, ...rest }: TabPanelProps) {
-    return (
-        <div
-            role="tabpanel"
-            id={getTabPanelId(tabsId, value)}
-            aria-labelledby={getTabId(tabsId, value)}
-            tabIndex={0}
-            ref={ref}
-            {...rest}
-        />
-    )
+  return (
+    <div
+      role="tabpanel"
+      id={getTabPanelId(tabsId, value)}
+      aria-labelledby={getTabId(tabsId, value)}
+      tabIndex={0}
+      ref={ref}
+      {...rest}
+    />
+  );
 }

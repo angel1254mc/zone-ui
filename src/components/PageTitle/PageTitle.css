@@ -4,72 +4,71 @@
 
 /* Upright title text; the heading's UA margins are removed. */
 .zzz-page-title {
-    margin: 0;
-    white-space: nowrap;
-    line-height: var(--zzz-line-height-single);
+  margin: 0;
+  white-space: nowrap;
+  line-height: var(--zzz-line-height-single);
 }
 
 /* ── SectionTitleStrip ─────────────────────────────────────────────────────────────────────
  * 5 rule, 4 black, 60 strip. */
 .zzz-section-strip {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 /* 5 px rule, then 4 px of black (content-box height + black bottom border). */
 .zzz-section-strip__rule {
-    flex: none;
-    box-sizing: content-box;
-    height: var(--zzz-border-width-rule);
-    border-bottom: calc(4 * var(--zzz-px)) solid var(--zzz-color-bg-base);
-    background: var(--zzz-color-border-rule);
+  flex: none;
+  box-sizing: content-box;
+  height: var(--zzz-border-width-rule);
+  border-bottom: calc(4 * var(--zzz-px)) solid var(--zzz-color-bg-base);
+  background: var(--zzz-color-border-rule);
 }
 
 /* .zzz-dots supplies the four dot layers; the header gradient is appended as a fifth layer. */
 .zzz-section-strip__band {
-    --zzz-dots-size: var(--zzz-pattern-dots-sm);
-    --zzz-dots-alpha: 0.025;
-    --zzz-dots-shade: 0.6;
-    position: relative;
-    display: flex;
-    align-items: center;
-    flex: none;
-    height: var(--zzz-layout-section-strip-height);
-    /* the title sits 4 px above the band centre */
-    padding: 0 calc(66 * var(--zzz-px)) calc(8 * var(--zzz-px))
-        calc(141 * var(--zzz-px));
-    background-color: var(--zzz-color-surface-header-strip-bottom);
-    background-image:
-        var(--zzz-dots-light), var(--zzz-dots-light), var(--zzz-dots-dark),
-        var(--zzz-dots-dark), var(--zzz-effect-header-strip);
-    background-position:
-        0 0,
-        calc(var(--zzz-dots-s) / 2) calc(var(--zzz-dots-s) / 2),
-        calc(var(--zzz-dots-s) / 2) 0,
-        0 calc(var(--zzz-dots-s) / 2),
-        0 0;
-    background-size:
-        var(--zzz-dots-s) var(--zzz-dots-s),
-        var(--zzz-dots-s) var(--zzz-dots-s),
-        var(--zzz-dots-s) var(--zzz-dots-s),
-        var(--zzz-dots-s) var(--zzz-dots-s),
-        100% 100%;
+  --zzz-dots-size: var(--zzz-pattern-dots-sm);
+  --zzz-dots-alpha: 0.025;
+  --zzz-dots-shade: 0.6;
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: none;
+  height: var(--zzz-layout-section-strip-height);
+  /* the title sits 4 px above the band centre */
+  padding: 0 calc(66 * var(--zzz-px)) calc(8 * var(--zzz-px)) calc(141 * var(--zzz-px));
+  background-color: var(--zzz-color-surface-header-strip-bottom);
+  background-image:
+    var(--zzz-dots-light), var(--zzz-dots-light), var(--zzz-dots-dark), var(--zzz-dots-dark),
+    var(--zzz-effect-header-strip);
+  background-position:
+    0 0,
+    calc(var(--zzz-dots-s) / 2) calc(var(--zzz-dots-s) / 2),
+    calc(var(--zzz-dots-s) / 2) 0,
+    0 calc(var(--zzz-dots-s) / 2),
+    0 0;
+  background-size:
+    var(--zzz-dots-s) var(--zzz-dots-s),
+    var(--zzz-dots-s) var(--zzz-dots-s),
+    var(--zzz-dots-s) var(--zzz-dots-s),
+    var(--zzz-dots-s) var(--zzz-dots-s),
+    100% 100%;
 }
 
 .zzz-section-strip__title {
-    margin: 0;
-    white-space: nowrap;
-    line-height: var(--zzz-line-height-single);
+  margin: 0;
+  white-space: nowrap;
+  line-height: var(--zzz-line-height-single);
 }
 
 /* Right content is centred on the band (IconTabs overlap it; shift them with your own margin). */
 .zzz-section-strip__right {
-    position: absolute;
-    top: 50%;
-    right: calc(66 * var(--zzz-px));
-    display: flex;
-    align-items: center;
-    translate: 0 -50%;
+  position: absolute;
+  top: 50%;
+  right: calc(66 * var(--zzz-px));
+  display: flex;
+  align-items: center;
+  translate: 0 -50%;
 }

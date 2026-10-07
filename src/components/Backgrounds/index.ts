@@ -1,11 +1,11 @@
-export { HatchBackground } from './HatchBackground'
-export type { HatchBackgroundProps, HatchTone } from './HatchBackground'
-export { DotTexture } from './DotTexture'
-export type { DotTextureProps } from './DotTexture'
-export { GraffitiLayer, GRAFFITI_LOOP_SECONDS } from './GraffitiLayer'
-export type { GraffitiLayerProps } from './GraffitiLayer'
-export { FilmStripBackground } from './FilmStripBackground'
-export type { FilmStripBackgroundProps } from './FilmStripBackground'
-export { StorageMuralBackground } from './StorageMuralBackground'
-export type { StorageMuralBackgroundProps } from './StorageMuralBackground'
-export type { BackgroundLayerProps } from './types'
+export { HatchBackground } from './HatchBackground';
+export type { HatchBackgroundProps, HatchTone } from './HatchBackground';
+export { DotTexture } from './DotTexture';
+export type { DotTextureProps } from './DotTexture';
+export { GraffitiLayer, GRAFFITI_LOOP_SECONDS } from './GraffitiLayer';
+export type { GraffitiLayerProps } from './GraffitiLayer';
+export { FilmStripBackground } from './FilmStripBackground';
+export type { FilmStripBackgroundProps } from './FilmStripBackground';
+export { StorageMuralBackground } from './StorageMuralBackground';
+export type { StorageMuralBackgroundProps } from './StorageMuralBackground';
+export type { BackgroundLayerProps } from './types';

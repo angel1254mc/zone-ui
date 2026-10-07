@@ -1,13 +1,13 @@
 /* Shared overlay layer root (DialogBand, Drawer, AgentSelectInterstitial). */
 .zzz-overlay {
-    position: fixed;
-    inset: 0;
-    overflow: hidden;
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
 }
 .zzz-overlay--contained {
-    position: absolute;
+  position: absolute;
 }
 /* The hidden inline anchor that reads the host theme. */
 .zzz-overlay-anchor {
-    display: none;
+  display: none;
 }

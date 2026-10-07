@@ -1,4 +1,4 @@
-import type { ComponentProps, FC } from 'react'
+import type { ComponentProps, FC } from 'react';
 
 /**
  * Props shared by every icon component.
@@ -13,8 +13,8 @@ import type { ComponentProps, FC } from 'react'
  * - Everything else is forwarded to the `<svg>` (React 19: `ref` included).
  */
 export interface IconProps extends Omit<ComponentProps<'svg'>, 'children'> {
-    size?: number | string
-    title?: string
+  size?: number | string;
+  title?: string;
 }
 
 /**
@@ -22,9 +22,9 @@ export interface IconProps extends Omit<ComponentProps<'svg'>, 'children'> {
  * width (32 for square icons; wider for the wide Home-dock glyphs — the grid is always 32 tall).
  */
 export type IconComponent = FC<IconProps> & {
-    displayName: string
-    iconName: string
-    viewBoxWidth: number
-}
+  displayName: string;
+  iconName: string;
+  viewBoxWidth: number;
+};
 
-export type { IconName } from './registry'
+export type { IconName } from './registry';

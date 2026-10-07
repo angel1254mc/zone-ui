@@ -5,78 +5,78 @@
  * Positioned (fixed) by Tooltip.tsx; --zzz-tooltip-arrow = arrow centre along the edge.
  */
 .zzz-tooltip {
-    --zzz-tooltip-bg: rgba(0, 0, 0, 0.6);
-    --zzz-tooltip-arrow-w: calc(12 * var(--zzz-px));
-    --zzz-tooltip-arrow-h: calc(10 * var(--zzz-px));
-    z-index: 1100;
-    max-width: calc(420 * var(--zzz-px));
-    width: max-content;
-    padding: var(--zzz-space-5) var(--zzz-space-7);
-    border-radius: var(--zzz-radius-tab-corner);
-    background: var(--zzz-tooltip-bg);
-    color: var(--zzz-color-text-primary);
-    font-family: var(--zzz-font-family-ui);
-    font-weight: 900;
-    font-stretch: var(--zzz-font-stretch-ui);
-    font-size-adjust: cap-height 0.84;
-    font-size: var(--zzz-font-size-label);
-    line-height: var(--zzz-line-height-dialog-item);
-    word-spacing: var(--zzz-font-word-spacing-ui);
-    text-align: left;
-    pointer-events: auto;
-    animation: zzz-tooltip-in 300ms ease-in-out both;
+  --zzz-tooltip-bg: rgba(0, 0, 0, 0.6);
+  --zzz-tooltip-arrow-w: calc(12 * var(--zzz-px));
+  --zzz-tooltip-arrow-h: calc(10 * var(--zzz-px));
+  z-index: 1100;
+  max-width: calc(420 * var(--zzz-px));
+  width: max-content;
+  padding: var(--zzz-space-5) var(--zzz-space-7);
+  border-radius: var(--zzz-radius-tab-corner);
+  background: var(--zzz-tooltip-bg);
+  color: var(--zzz-color-text-primary);
+  font-family: var(--zzz-font-family-ui);
+  font-weight: 900;
+  font-stretch: var(--zzz-font-stretch-ui);
+  font-size-adjust: cap-height 0.84;
+  font-size: var(--zzz-font-size-label);
+  line-height: var(--zzz-line-height-dialog-item);
+  word-spacing: var(--zzz-font-word-spacing-ui);
+  text-align: left;
+  pointer-events: auto;
+  animation: zzz-tooltip-in 300ms ease-in-out both;
 }
 
 @keyframes zzz-tooltip-in {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* Arrow: a 12×10 triangle of the bubble colour, pointing at the anchor. */
 .zzz-tooltip::after {
-    content: '';
-    position: absolute;
-    background: var(--zzz-tooltip-bg);
-    pointer-events: none;
+  content: '';
+  position: absolute;
+  background: var(--zzz-tooltip-bg);
+  pointer-events: none;
 }
 .zzz-tooltip[data-side='top']::after,
 .zzz-tooltip[data-side='bottom']::after {
-    left: calc(var(--zzz-tooltip-arrow, 50%) - var(--zzz-tooltip-arrow-w) / 2);
-    width: var(--zzz-tooltip-arrow-w);
-    height: var(--zzz-tooltip-arrow-h);
+  left: calc(var(--zzz-tooltip-arrow, 50%) - var(--zzz-tooltip-arrow-w) / 2);
+  width: var(--zzz-tooltip-arrow-w);
+  height: var(--zzz-tooltip-arrow-h);
 }
 .zzz-tooltip[data-side='top']::after {
-    top: 100%;
-    clip-path: polygon(0 0, 100% 0, 50% 100%);
+  top: 100%;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
 }
 .zzz-tooltip[data-side='bottom']::after {
-    bottom: 100%;
-    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  bottom: 100%;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
 }
 .zzz-tooltip[data-side='left']::after,
 .zzz-tooltip[data-side='right']::after {
-    top: calc(var(--zzz-tooltip-arrow, 50%) - var(--zzz-tooltip-arrow-w) / 2);
-    width: var(--zzz-tooltip-arrow-h);
-    height: var(--zzz-tooltip-arrow-w);
+  top: calc(var(--zzz-tooltip-arrow, 50%) - var(--zzz-tooltip-arrow-w) / 2);
+  width: var(--zzz-tooltip-arrow-h);
+  height: var(--zzz-tooltip-arrow-w);
 }
 .zzz-tooltip[data-side='left']::after {
-    left: 100%;
-    clip-path: polygon(0 0, 100% 50%, 0 100%);
+  left: 100%;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
 }
 .zzz-tooltip[data-side='right']::after {
-    right: 100%;
-    clip-path: polygon(100% 0, 100% 100%, 0 50%);
+  right: 100%;
+  clip-path: polygon(100% 0, 100% 100%, 0 50%);
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .zzz-tooltip {
-        animation: none;
-    }
+  .zzz-tooltip {
+    animation: none;
+  }
 }
 [data-reduced-motion] .zzz-tooltip {
-    animation: none;
+  animation: none;
 }

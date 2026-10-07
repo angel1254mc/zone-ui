@@ -2,57 +2,57 @@
  * rim, #202020 fill with a lit top row, label bodyXl from x +35, the Combat Readiness button
  * 265 wide filling the inner height, flush with the inner right edge. */
 .zzz-modifier-row {
-    position: relative;
-    display: flex;
-    align-items: center;
-    box-sizing: border-box;
-    width: calc(756 * var(--zzz-px));
-    max-width: 100%;
-    height: calc(70 * var(--zzz-px));
-    padding: 0 calc(24 * var(--zzz-px)) 0 calc(30 * var(--zzz-px));
-    border: calc(5 * var(--zzz-px)) solid var(--zzz-color-border-keyline);
-    border-radius: var(--zzz-radius-pill);
-    background: var(--zzz-color-surface-level-pill);
-    box-shadow: inset 0 calc(1 * var(--zzz-px)) 0 #2b2b2b;
-    color: var(--zzz-color-text-secondary);
-    font-size: var(--zzz-font-size-body-xl);
-    font-weight: 900;
-    line-height: var(--zzz-line-height-single);
-    white-space: nowrap;
+  position: relative;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: calc(756 * var(--zzz-px));
+  max-width: 100%;
+  height: calc(70 * var(--zzz-px));
+  padding: 0 calc(24 * var(--zzz-px)) 0 calc(30 * var(--zzz-px));
+  border: calc(5 * var(--zzz-px)) solid var(--zzz-color-border-keyline);
+  border-radius: var(--zzz-radius-pill);
+  background: var(--zzz-color-surface-level-pill);
+  box-shadow: inset 0 calc(1 * var(--zzz-px)) 0 #2b2b2b;
+  color: var(--zzz-color-text-secondary);
+  font-size: var(--zzz-font-size-body-xl);
+  font-weight: 900;
+  line-height: var(--zzz-line-height-single);
+  white-space: nowrap;
 }
 .zzz-modifier-row--has-action {
-    padding-right: calc(280 * var(--zzz-px));
+  padding-right: calc(280 * var(--zzz-px));
 }
 .zzz-modifier-row__label {
-    padding-block: 0.3em; /* keeps descenders inside the overflow clip */
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  padding-block: 0.3em; /* keeps descenders inside the overflow clip */
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .zzz-modifier-row__count {
-    color: var(--zzz-color-sage-base);
-    font-variant-numeric: tabular-nums;
+  color: var(--zzz-color-sage-base);
+  font-variant-numeric: tabular-nums;
 }
 .zzz-modifier-row__slot {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
 }
 .zzz-modifier-row__slot > .zzz-button {
-    height: 100%;
+  height: 100%;
 }
 .zzz-modifier-row__action.zzz-button {
-    width: calc(265 * var(--zzz-px));
+  width: calc(265 * var(--zzz-px));
 }
 /* Drop the button's own shadow, but never the keyboard focus ring (base.css .zzz-focusable). */
 .zzz-modifier-row__action.zzz-button:not(:focus-visible) {
-    box-shadow: none;
+  box-shadow: none;
 }
 /* "Combat / Readiness": label size, 21 px line pitch. */
 .zzz-modifier-row__action .zzz-button__text {
-    font-size: var(--zzz-font-size-label);
-    line-height: calc(21 * var(--zzz-px));
-    text-align: center;
+  font-size: var(--zzz-font-size-label);
+  line-height: calc(21 * var(--zzz-px));
+  text-align: center;
 }

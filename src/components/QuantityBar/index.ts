@@ -1,2 +1,2 @@
-export { QuantityBar } from './QuantityBar'
-export type { QuantityBarProps, QuantityBarSize } from './QuantityBar'
+export { QuantityBar } from './QuantityBar';
+export type { QuantityBarProps, QuantityBarSize } from './QuantityBar';

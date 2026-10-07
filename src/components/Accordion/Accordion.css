@@ -7,99 +7,98 @@
  * Pressed: the shared .zzz-pressable recipe (accent fill, black title / caret).
  */
 .zzz-accordion {
-    display: flex;
-    flex-direction: column;
-    gap: var(--zzz-space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--zzz-space-4);
 }
 
 .zzz-accordion__heading {
-    margin: 0;
-    font: inherit;
+  margin: 0;
+  font: inherit;
 }
 
 .zzz-accordion__trigger {
-    display: flex;
-    align-items: center;
-    gap: var(--zzz-space-6);
-    width: 100%;
-    height: calc(58 * var(--zzz-px));
-    margin: 0;
-    padding: 0 var(--zzz-space-10);
-    color: var(--zzz-color-text-primary);
-    /* bodyLg (22): label (17.5) would read smaller than the body (20) content under it; bodyLg
+  display: flex;
+  align-items: center;
+  gap: var(--zzz-space-6);
+  width: 100%;
+  height: calc(58 * var(--zzz-px));
+  margin: 0;
+  padding: 0 var(--zzz-space-10);
+  color: var(--zzz-color-text-primary);
+  /* bodyLg (22): label (17.5) would read smaller than the body (20) content under it; bodyLg
    * keeps the title above the content. */
-    font-size: var(--zzz-font-size-body-lg);
-    line-height: var(--zzz-line-height-list);
-    text-align: left;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
+  font-size: var(--zzz-font-size-body-lg);
+  line-height: var(--zzz-line-height-list);
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 .zzz-accordion__trigger:hover:not(:disabled) {
-    border-color: var(--zzz-color-border-button-bevel-top);
+  border-color: var(--zzz-color-border-button-bevel-top);
 }
 
 .zzz-accordion__title {
-    flex: 1 1 auto;
-    min-width: 0;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .zzz-accordion__meta {
-    flex: none;
-    color: var(--zzz-color-text-muted);
+  flex: none;
+  color: var(--zzz-color-text-muted);
 }
 
 .zzz-accordion__caret {
-    flex: none;
-    width: calc(16 * var(--zzz-px));
-    height: calc(15 * var(--zzz-px));
-    transition: rotate 200ms ease-in-out;
+  flex: none;
+  width: calc(16 * var(--zzz-px));
+  height: calc(15 * var(--zzz-px));
+  transition: rotate 200ms ease-in-out;
 }
 .zzz-accordion__item[data-state='open'] .zzz-accordion__caret {
-    rotate: 180deg;
+  rotate: 180deg;
 }
 
 /* Pressed: everything in the header goes black on the accent. */
-.zzz-accordion__trigger:is(:active:not(:disabled), [data-pressed])
-    .zzz-accordion__meta {
-    color: inherit;
+.zzz-accordion__trigger:is(:active:not(:disabled), [data-pressed]) .zzz-accordion__meta {
+  color: inherit;
 }
 
 /* Disabled: label / glyph grey, shape unchanged, no opacity. */
 .zzz-accordion__trigger:disabled {
-    color: var(--zzz-color-text-disabled);
-    cursor: default;
+  color: var(--zzz-color-text-disabled);
+  cursor: default;
 }
 
 .zzz-accordion__panel[hidden] {
-    display: none;
+  display: none;
 }
 
 .zzz-accordion__content {
-    padding: var(--zzz-space-6) var(--zzz-space-11) var(--zzz-space-4);
-    color: var(--zzz-color-text-tertiary);
-    font-size: var(--zzz-font-size-body);
-    line-height: var(--zzz-line-height-paragraph);
+  padding: var(--zzz-space-6) var(--zzz-space-11) var(--zzz-space-4);
+  color: var(--zzz-color-text-tertiary);
+  font-size: var(--zzz-font-size-body);
+  line-height: var(--zzz-line-height-paragraph);
 }
 .zzz-accordion__content > :first-child {
-    margin-top: 0;
+  margin-top: 0;
 }
 .zzz-accordion__content > :last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 /* plain: #222 header, muted content. */
 .zzz-accordion--plain .zzz-accordion__trigger {
-    background-color: var(--zzz-color-surface-panel-header);
+  background-color: var(--zzz-color-surface-panel-header);
 }
 .zzz-accordion--plain .zzz-accordion__content {
-    color: var(--zzz-color-text-subtle);
+  color: var(--zzz-color-text-subtle);
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .zzz-accordion__caret {
-        transition: none;
-    }
+  .zzz-accordion__caret {
+    transition: none;
+  }
 }
 [data-reduced-motion] .zzz-accordion__caret {
-    transition: none;
+  transition: none;
 }

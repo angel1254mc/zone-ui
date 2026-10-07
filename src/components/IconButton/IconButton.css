@@ -10,146 +10,121 @@
  */
 
 .zzz-icon-button {
-    --zzz-control-ratio: 1;
-    --zzz-icon-button-size: var(--zzz-size-control-md);
-    display: inline-grid;
-    place-items: center;
-    flex-shrink: 0;
-    width: var(--zzz-icon-button-size);
-    height: var(--zzz-icon-button-size);
-    margin: 0;
-    padding: 0;
-    vertical-align: middle;
-    border-radius: 50%;
-    color: var(--zzz-color-text-primary);
-    cursor: pointer;
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    appearance: none;
-    /* Glyph box: pill/circle glyphs use size.control.icon.md = size.icon.md (funnel 21×24, trash 23×32, lock 22×28). */
-    font-size: var(--zzz-size-control-icon-md);
+  --zzz-control-ratio: 1;
+  --zzz-icon-button-size: var(--zzz-size-control-md);
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: var(--zzz-icon-button-size);
+  height: var(--zzz-icon-button-size);
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+  border-radius: 50%;
+  color: var(--zzz-color-text-primary);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  appearance: none;
+  /* Glyph box: pill/circle glyphs use size.control.icon.md = size.icon.md (funnel 21×24, trash 23×32, lock 22×28). */
+  font-size: var(--zzz-size-control-icon-md);
 }
 
 /* Web scale. Two classes so the material knobs beat .zzz-mat-pill whatever the stylesheet order;
  * the keyline goes through --zzz-shadow-keyline so :focus-visible still replaces it, and an inline
  * --zzz-press-outset (pressOutset prop) still wins. */
 .zzz-icon-button.zzz-icon-button--sm {
-    --zzz-control-ratio: calc(
-        var(--zzz-size-control-sm-n) / var(--zzz-size-control-md-n)
-    );
-    --zzz-icon-button-size: var(--zzz-size-control-sm);
-    font-size: var(--zzz-size-control-icon-sm);
+  --zzz-control-ratio: calc(var(--zzz-size-control-sm-n) / var(--zzz-size-control-md-n));
+  --zzz-icon-button-size: var(--zzz-size-control-sm);
+  font-size: var(--zzz-size-control-icon-sm);
 }
 .zzz-icon-button.zzz-icon-button--lg {
-    --zzz-control-ratio: calc(
-        var(--zzz-size-control-lg-n) / var(--zzz-size-control-md-n)
-    );
-    --zzz-icon-button-size: var(--zzz-size-control-lg);
-    font-size: var(--zzz-size-control-icon-lg);
+  --zzz-control-ratio: calc(var(--zzz-size-control-lg-n) / var(--zzz-size-control-md-n));
+  --zzz-icon-button-size: var(--zzz-size-control-lg);
+  font-size: var(--zzz-size-control-icon-lg);
 }
 .zzz-icon-button.zzz-icon-button--sm,
 .zzz-icon-button.zzz-icon-button--lg {
-    --zzz-mat-ring: calc(
-        var(--zzz-border-width-ring) * var(--zzz-control-ratio)
-    );
-    --zzz-mat-bevel:
-        inset calc(1 * var(--zzz-control-ratio) * var(--zzz-px))
-            calc(1 * var(--zzz-control-ratio) * var(--zzz-px)) 0
-            var(--zzz-color-border-button-bevel-top),
-        inset calc(2 * var(--zzz-control-ratio) * var(--zzz-px))
-            calc(2 * var(--zzz-control-ratio) * var(--zzz-px)) 0 #373737;
-    --zzz-shadow-keyline: 0 0 0
-        calc(var(--zzz-border-width-keyline) * var(--zzz-control-ratio))
-        var(--zzz-color-border-keyline);
-    --zzz-press-outset: calc(
-        var(--zzz-size-control-press-outset) * var(--zzz-control-ratio)
-    );
+  --zzz-mat-ring: calc(var(--zzz-border-width-ring) * var(--zzz-control-ratio));
+  --zzz-mat-bevel:
+    inset calc(1 * var(--zzz-control-ratio) * var(--zzz-px)) calc(1 * var(--zzz-control-ratio) * var(--zzz-px)) 0
+      var(--zzz-color-border-button-bevel-top),
+    inset calc(2 * var(--zzz-control-ratio) * var(--zzz-px)) calc(2 * var(--zzz-control-ratio) * var(--zzz-px)) 0
+      #373737;
+  --zzz-shadow-keyline: 0 0 0 calc(var(--zzz-border-width-keyline) * var(--zzz-control-ratio))
+    var(--zzz-color-border-keyline);
+  --zzz-press-outset: calc(var(--zzz-size-control-press-outset) * var(--zzz-control-ratio));
 }
 
 .zzz-icon-button__glyph {
-    display: grid;
-    place-items: center;
-    line-height: 0;
-    pointer-events: none;
+  display: grid;
+  place-items: center;
+  line-height: 0;
+  pointer-events: none;
 }
 
 /* Presets (fixed geometry, outside the scale). `sort` is deprecated (→ md). */
 .zzz-icon-button--sort {
-    --zzz-icon-button-size: var(--zzz-size-control-circle-sort);
+  --zzz-icon-button-size: var(--zzz-size-control-circle-sort);
 }
 /* Slider stepper: 47, ring 4 #323232, fill #0C0C0C (flat, no bevel); minus 25×7, plus 26×26. */
 .zzz-icon-button--stepper {
-    --zzz-icon-button-size: var(--zzz-size-control-stepper);
-    --zzz-mat-ring: var(--zzz-border-width-ring-stepper);
-    --zzz-mat-bevel: none;
-    border-color: var(--zzz-color-border-stepper);
-    background-color: #0c0c0c; /* no token */
-    font-size: calc(26 * var(--zzz-px));
+  --zzz-icon-button-size: var(--zzz-size-control-stepper);
+  --zzz-mat-ring: var(--zzz-border-width-ring-stepper);
+  --zzz-mat-bevel: none;
+  border-color: var(--zzz-color-border-stepper);
+  background-color: #0c0c0c; /* no token */
+  font-size: calc(26 * var(--zzz-px));
 }
 /* Bare key circle ("T" under a lock in a top bar): 38, ring 3 #2F2F2F, fill #000. */
 .zzz-icon-button--key {
-    --zzz-icon-button-size: var(--zzz-size-control-key);
-    --zzz-mat-ring: var(--zzz-border-width-ring-key);
-    --zzz-mat-bevel: none;
-    border-color: var(--zzz-color-border-key);
-    background: var(--zzz-color-bg-base);
-    font-size: calc(18 * var(--zzz-px));
+  --zzz-icon-button-size: var(--zzz-size-control-key);
+  --zzz-mat-ring: var(--zzz-border-width-ring-key);
+  --zzz-mat-bevel: none;
+  border-color: var(--zzz-color-border-key);
+  background: var(--zzz-color-bg-base);
+  font-size: calc(18 * var(--zzz-px));
 }
 /* Event mission search circle: 48, 4 px #333034 ring, 2 px black gap, 4 px teal halo. */
 .zzz-icon-button--mission {
-    --zzz-icon-button-size: var(--zzz-size-control-mission-button);
-    --zzz-mat-ring: var(--zzz-border-width-mission-button);
-    --zzz-mat-bevel: none;
-    border-color: #333034; /* no token */
-    background: #0a0a0a; /* no token */
-    box-shadow:
-        0 0 0 calc(2 * var(--zzz-px)) var(--zzz-color-border-keyline),
-        0 0 0 calc(2 * var(--zzz-px) + var(--zzz-border-width-mission-button))
-            var(--zzz-icon-button-halo, var(--zzz-color-content-event-teal));
-    font-size: calc(26 * var(--zzz-px));
+  --zzz-icon-button-size: var(--zzz-size-control-mission-button);
+  --zzz-mat-ring: var(--zzz-border-width-mission-button);
+  --zzz-mat-bevel: none;
+  border-color: #333034; /* no token */
+  background: #0a0a0a; /* no token */
+  box-shadow:
+    0 0 0 calc(2 * var(--zzz-px)) var(--zzz-color-border-keyline),
+    0 0 0 calc(2 * var(--zzz-px) + var(--zzz-border-width-mission-button))
+      var(--zzz-icon-button-halo, var(--zzz-color-content-event-teal));
+  font-size: calc(26 * var(--zzz-px));
 }
 
 /* Locked padlock: light fill #8E8E8E (no mesh), black glyph; the dark ring stays. */
 .zzz-icon-button--lock-on {
-    background: var(--zzz-color-surface-lock-on);
-    color: var(--zzz-color-accent-on);
+  background: var(--zzz-color-surface-lock-on);
+  color: var(--zzz-color-accent-on);
 }
 
 /* Disabled: glyph #666, shape unchanged, no opacity (stepper at min/max). */
 .zzz-icon-button:disabled,
 .zzz-icon-button[aria-disabled='true'] {
-    color: var(--zzz-color-text-disabled);
-    cursor: default;
+  color: var(--zzz-color-text-disabled);
+  cursor: default;
 }
 
 /* Per-glyph ink boxes in the 57 circles: funnel 21×22, trash 23×32, locked padlock 24×29,
  * star 25×23. The icons fill the 32 grid differently, so
  * the em box is set per glyph (× ratio on sm / lg); other glyphs keep size.control.icon.*. */
-.zzz-icon-button:where(
-        .zzz-icon-button--sm,
-        .zzz-icon-button--md,
-        .zzz-icon-button--lg
-    )
-    .zzz-icon--filter {
-    font-size: calc(22 * var(--zzz-control-ratio) * var(--zzz-px));
+.zzz-icon-button:where(.zzz-icon-button--sm, .zzz-icon-button--md, .zzz-icon-button--lg) .zzz-icon--filter {
+  font-size: calc(22 * var(--zzz-control-ratio) * var(--zzz-px));
 }
-.zzz-icon-button:where(
-        .zzz-icon-button--sm,
-        .zzz-icon-button--md,
-        .zzz-icon-button--lg
-    )
-    .zzz-icon--trash {
-    font-size: calc(32 * var(--zzz-control-ratio) * var(--zzz-px));
+.zzz-icon-button:where(.zzz-icon-button--sm, .zzz-icon-button--md, .zzz-icon-button--lg) .zzz-icon--trash {
+  font-size: calc(32 * var(--zzz-control-ratio) * var(--zzz-px));
 }
-.zzz-icon-button:where(
-        .zzz-icon-button--sm,
-        .zzz-icon-button--md,
-        .zzz-icon-button--lg
-    )
-    .zzz-icon--star {
-    font-size: calc(25 * var(--zzz-control-ratio) * var(--zzz-px));
+.zzz-icon-button:where(.zzz-icon-button--sm, .zzz-icon-button--md, .zzz-icon-button--lg) .zzz-icon--star {
+  font-size: calc(25 * var(--zzz-control-ratio) * var(--zzz-px));
 }
 .zzz-icon-button--lock-on .zzz-icon--lock {
-    font-size: calc(29 * var(--zzz-control-ratio) * var(--zzz-px));
+  font-size: calc(29 * var(--zzz-control-ratio) * var(--zzz-px));
 }

@@ -11,110 +11,102 @@
  * radius, check and row height keep their proportions. Label: label / body / bodyLg.
  */
 .zzz-checkbox {
-    --zzz-checkbox-u: var(--zzz-px);
-    --zzz-checkbox-label: var(--zzz-font-size-body);
-    display: inline-flex;
-    align-items: center;
-    gap: calc(14 * var(--zzz-checkbox-u));
-    min-height: calc(40 * var(--zzz-checkbox-u));
-    color: var(--zzz-color-text-secondary);
-    cursor: pointer;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
+  --zzz-checkbox-u: var(--zzz-px);
+  --zzz-checkbox-label: var(--zzz-font-size-body);
+  display: inline-flex;
+  align-items: center;
+  gap: calc(14 * var(--zzz-checkbox-u));
+  min-height: calc(40 * var(--zzz-checkbox-u));
+  color: var(--zzz-color-text-secondary);
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .zzz-checkbox--sm {
-    --zzz-checkbox-u: calc(
-        var(--zzz-px) * var(--zzz-size-control-sm-n) /
-            var(--zzz-size-control-md-n)
-    );
-    --zzz-checkbox-label: var(--zzz-font-size-label);
+  --zzz-checkbox-u: calc(var(--zzz-px) * var(--zzz-size-control-sm-n) / var(--zzz-size-control-md-n));
+  --zzz-checkbox-label: var(--zzz-font-size-label);
 }
 .zzz-checkbox--lg {
-    --zzz-checkbox-u: calc(
-        var(--zzz-px) * var(--zzz-size-control-lg-n) /
-            var(--zzz-size-control-md-n)
-    );
-    --zzz-checkbox-label: var(--zzz-font-size-body-lg);
+  --zzz-checkbox-u: calc(var(--zzz-px) * var(--zzz-size-control-lg-n) / var(--zzz-size-control-md-n));
+  --zzz-checkbox-label: var(--zzz-font-size-body-lg);
 }
 
 .zzz-checkbox__control {
-    position: relative;
-    display: inline-flex;
-    flex: none;
-    width: calc(24 * var(--zzz-checkbox-u));
-    height: calc(24 * var(--zzz-checkbox-u));
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  width: calc(24 * var(--zzz-checkbox-u));
+  height: calc(24 * var(--zzz-checkbox-u));
 }
 
 .zzz-checkbox__input {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    opacity: 0;
-    cursor: inherit;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: inherit;
 }
 
 .zzz-checkbox__box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    border: calc(var(--zzz-border-width-ring-chip-n) * var(--zzz-checkbox-u))
-        solid var(--zzz-color-border-button);
-    border-radius: calc(5 * var(--zzz-checkbox-u));
-    background: var(--zzz-color-surface-panel);
-    box-shadow: 0 0 0 calc(1 * var(--zzz-checkbox-u))
-        var(--zzz-color-border-keyline);
-    color: var(--zzz-color-accent-on);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border: calc(var(--zzz-border-width-ring-chip-n) * var(--zzz-checkbox-u)) solid var(--zzz-color-border-button);
+  border-radius: calc(5 * var(--zzz-checkbox-u));
+  background: var(--zzz-color-surface-panel);
+  box-shadow: 0 0 0 calc(1 * var(--zzz-checkbox-u)) var(--zzz-color-border-keyline);
+  color: var(--zzz-color-accent-on);
 }
 
 .zzz-checkbox__check {
-    width: calc(16 * var(--zzz-checkbox-u));
-    height: calc(16 * var(--zzz-checkbox-u));
-    visibility: hidden;
+  width: calc(16 * var(--zzz-checkbox-u));
+  height: calc(16 * var(--zzz-checkbox-u));
+  visibility: hidden;
 }
 
 .zzz-checkbox__bar {
-    width: calc(10 * var(--zzz-checkbox-u));
-    height: calc(3 * var(--zzz-checkbox-u));
-    border-radius: calc(1 * var(--zzz-checkbox-u));
-    background: currentColor;
-    visibility: hidden;
+  width: calc(10 * var(--zzz-checkbox-u));
+  height: calc(3 * var(--zzz-checkbox-u));
+  border-radius: calc(1 * var(--zzz-checkbox-u));
+  background: currentColor;
+  visibility: hidden;
 }
 
 /* Two classes: beats the .zzz-text-body role class on the same element. */
 .zzz-checkbox .zzz-checkbox__label {
-    font-size: var(--zzz-checkbox-label);
-    /* line-height.list (21) over body (20), kept proportional to the label size */
-    line-height: calc(var(--zzz-checkbox-label) * 1.05);
+  font-size: var(--zzz-checkbox-label);
+  /* line-height.list (21) over body (20), kept proportional to the label size */
+  line-height: calc(var(--zzz-checkbox-label) * 1.05);
 }
 
 .zzz-checkbox[data-checked] .zzz-checkbox__box,
 .zzz-checkbox[data-indeterminate] .zzz-checkbox__box {
-    border-color: var(--zzz-accent);
-    background: var(--zzz-accent);
+  border-color: var(--zzz-accent);
+  background: var(--zzz-accent);
 }
 .zzz-checkbox[data-checked] .zzz-checkbox__check,
 .zzz-checkbox[data-indeterminate] .zzz-checkbox__bar {
-    visibility: visible;
+  visibility: visible;
 }
 .zzz-checkbox[data-checked],
 .zzz-checkbox[data-indeterminate] {
-    color: var(--zzz-color-text-primary);
+  color: var(--zzz-color-text-primary);
 }
 
 .zzz-checkbox__input:focus-visible + .zzz-checkbox__box {
-    box-shadow: var(--zzz-focus-ring);
+  box-shadow: var(--zzz-focus-ring);
 }
 
 .zzz-checkbox[data-disabled] {
-    color: var(--zzz-color-text-disabled);
-    cursor: default;
+  color: var(--zzz-color-text-disabled);
+  cursor: default;
 }
 .zzz-checkbox[data-disabled] .zzz-checkbox__box {
-    color: var(--zzz-color-text-disabled);
+  color: var(--zzz-color-text-disabled);
 }

@@ -6,111 +6,111 @@
  * Web colours are not theme tokens: they live here as local custom properties.
  */
 .zzz-voice-pill {
-    --zzz-voice-fill: var(--zzz-color-surface-button);
-    --zzz-voice-ring: var(--zzz-color-border-button);
-    --zzz-voice-text: var(--zzz-color-text-primary);
-    --zzz-voice-button: #000000;
-    --zzz-voice-glyph: #e8e8e8;
-    --zzz-voice-progress-color: #bfdb5a;
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: calc(10 * var(--zzz-px));
-    box-sizing: border-box;
-    min-width: calc(392 * var(--zzz-px));
-    height: calc(57 * var(--zzz-px));
-    padding: 0 calc(10 * var(--zzz-px)) 0 calc(60 * var(--zzz-px));
-    border: calc(6 * var(--zzz-px)) solid var(--zzz-voice-ring);
-    border-radius: var(--zzz-radius-pill);
-    background: var(--zzz-voice-fill);
-    color: var(--zzz-voice-text);
-    font-size: var(--zzz-font-size-body);
-    line-height: calc(30 * var(--zzz-px));
+  --zzz-voice-fill: var(--zzz-color-surface-button);
+  --zzz-voice-ring: var(--zzz-color-border-button);
+  --zzz-voice-text: var(--zzz-color-text-primary);
+  --zzz-voice-button: #000000;
+  --zzz-voice-glyph: #e8e8e8;
+  --zzz-voice-progress-color: #bfdb5a;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: calc(10 * var(--zzz-px));
+  box-sizing: border-box;
+  min-width: calc(392 * var(--zzz-px));
+  height: calc(57 * var(--zzz-px));
+  padding: 0 calc(10 * var(--zzz-px)) 0 calc(60 * var(--zzz-px));
+  border: calc(6 * var(--zzz-px)) solid var(--zzz-voice-ring);
+  border-radius: var(--zzz-radius-pill);
+  background: var(--zzz-voice-fill);
+  color: var(--zzz-voice-text);
+  font-size: var(--zzz-font-size-body);
+  line-height: calc(30 * var(--zzz-px));
 }
 
 .zzz-voice-pill[data-tone='light'] {
-    --zzz-voice-fill: #e8e8e8;
-    --zzz-voice-ring: #000000;
-    --zzz-voice-text: #000000;
+  --zzz-voice-fill: #e8e8e8;
+  --zzz-voice-ring: #000000;
+  --zzz-voice-text: #000000;
 }
 
 .zzz-voice-pill[data-skin='game'] {
-    --zzz-voice-progress-color: var(--zzz-accent);
+  --zzz-voice-progress-color: var(--zzz-accent);
 }
 
 /* The button covers the pill's left end, ring included. */
 .zzz-voice-pill__play {
-    position: absolute;
-    top: calc(-6 * var(--zzz-px));
-    left: calc(-6 * var(--zzz-px));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    width: calc(57 * var(--zzz-px));
-    height: calc(57 * var(--zzz-px));
-    margin: 0;
-    padding: 0;
-    border: 0;
-    border-radius: var(--zzz-radius-pill);
-    background: var(--zzz-voice-button);
-    color: var(--zzz-voice-glyph);
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
+  position: absolute;
+  top: calc(-6 * var(--zzz-px));
+  left: calc(-6 * var(--zzz-px));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: calc(57 * var(--zzz-px));
+  height: calc(57 * var(--zzz-px));
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--zzz-radius-pill);
+  background: var(--zzz-voice-button);
+  color: var(--zzz-voice-glyph);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 /* Dark tone: the button keeps the pill's ring so the lit ring runs unbroken. */
 .zzz-voice-pill[data-tone='dark'] .zzz-voice-pill__play {
-    border: calc(6 * var(--zzz-px)) solid var(--zzz-voice-ring);
+  border: calc(6 * var(--zzz-px)) solid var(--zzz-voice-ring);
 }
 
 .zzz-voice-pill__glyph {
-    display: block;
-    width: calc(24 * var(--zzz-px));
-    height: calc(33 * var(--zzz-px));
+  display: block;
+  width: calc(24 * var(--zzz-px));
+  height: calc(33 * var(--zzz-px));
 }
 .zzz-voice-pill__glyph--fill {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    color: var(--zzz-voice-progress-color);
-    transform: translate(-50%, -50%);
-    clip-path: inset(calc(100% - var(--zzz-voice-progress, 0%)) 0 0 0);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: var(--zzz-voice-progress-color);
+  transform: translate(-50%, -50%);
+  clip-path: inset(calc(100% - var(--zzz-voice-progress, 0%)) 0 0 0);
 }
 
 @media (prefers-reduced-motion: no-preference) {
-    .zzz-voice-pill__glyph--fill {
-        transition: clip-path 100ms linear;
-    }
+  .zzz-voice-pill__glyph--fill {
+    transition: clip-path 100ms linear;
+  }
 }
 
 .zzz-voice-pill__text {
-    display: flex;
-    align-items: baseline;
-    gap: calc(10 * var(--zzz-px));
-    min-width: 0;
-    white-space: nowrap;
+  display: flex;
+  align-items: baseline;
+  gap: calc(10 * var(--zzz-px));
+  min-width: 0;
+  white-space: nowrap;
 }
 .zzz-voice-pill__name {
-    overflow: hidden;
-    text-overflow: ellipsis;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .zzz-voice-pill__trailing {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-    margin-left: auto;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: auto;
 }
 
 /* Disabled: glyph and label only, shape unchanged, no opacity. */
 .zzz-voice-pill__play:disabled {
-    color: var(--zzz-color-text-disabled);
-    cursor: default;
+  color: var(--zzz-color-text-disabled);
+  cursor: default;
 }
 /* The progress copy declares its own colour, so it must be greyed explicitly. */
 .zzz-voice-pill__play:disabled .zzz-voice-pill__glyph--fill {
-    color: var(--zzz-color-text-disabled);
+  color: var(--zzz-color-text-disabled);
 }
 .zzz-voice-pill[data-disabled] .zzz-voice-pill__text {
-    color: var(--zzz-color-text-disabled);
+  color: var(--zzz-color-text-disabled);
 }

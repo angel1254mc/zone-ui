@@ -8,108 +8,106 @@
  * Reduced motion (OS or data-reduced-motion): no rotation / sweep (static arc / static bands).
  */
 .zzz-spinner {
-    position: relative;
-    display: inline-grid;
-    place-items: center;
-    flex: none;
-    height: var(--zzz-spinner-size);
-    line-height: 0;
-    vertical-align: middle;
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  height: var(--zzz-spinner-size);
+  line-height: 0;
+  vertical-align: middle;
 }
 
 /* ── ring ── */
 .zzz-spinner--ring {
-    width: var(--zzz-spinner-size);
-    color: var(--zzz-spinner-color, var(--zzz-accent));
+  width: var(--zzz-spinner-size);
+  color: var(--zzz-spinner-color, var(--zzz-accent));
 }
 .zzz-spinner--ring[data-tone='white'] {
-    --zzz-spinner-color: var(--zzz-color-text-primary);
+  --zzz-spinner-color: var(--zzz-color-text-primary);
 }
 .zzz-spinner--ring[data-tone='current'] {
-    --zzz-spinner-color: currentColor;
+  --zzz-spinner-color: currentColor;
 }
 
 .zzz-spinner__ring {
-    --zzz-spinner-thickness: calc(var(--zzz-spinner-size) / 8);
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background:
-        conic-gradient(from 0deg, transparent 0 10%, currentColor 100%),
-        var(--zzz-color-border-button);
-    mask: radial-gradient(
-        farthest-side,
-        transparent calc(100% - var(--zzz-spinner-thickness)),
-        #000 calc(100% - var(--zzz-spinner-thickness) + var(--zzz-px) / 2)
-    );
-    animation: zzz-spinner-rotate 800ms linear infinite;
+  --zzz-spinner-thickness: calc(var(--zzz-spinner-size) / 8);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0 10%, currentColor 100%), var(--zzz-color-border-button);
+  mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - var(--zzz-spinner-thickness)),
+    #000 calc(100% - var(--zzz-spinner-thickness) + var(--zzz-px) / 2)
+  );
+  animation: zzz-spinner-rotate 800ms linear infinite;
 }
 
 @keyframes zzz-spinner-rotate {
-    to {
-        rotate: 1turn;
-    }
+  to {
+    rotate: 1turn;
+  }
 }
 
 /* ── chevrons ── */
 .zzz-spinner__chevrons {
-    display: block;
-    height: 100%;
-    width: auto;
-    aspect-ratio: 72 / 44;
-    overflow: visible;
+  display: block;
+  height: 100%;
+  width: auto;
+  aspect-ratio: 72 / 44;
+  overflow: visible;
 }
 .zzz-spinner__base--sage {
-    fill: var(--zzz-color-interstitial-sage-dark);
+  fill: var(--zzz-color-interstitial-sage-dark);
 }
 .zzz-spinner__stripe--sage {
-    fill: var(--zzz-color-interstitial-sage-light);
+  fill: var(--zzz-color-interstitial-sage-light);
 }
 .zzz-spinner__base--teal {
-    fill: var(--zzz-color-interstitial-teal-dark);
+  fill: var(--zzz-color-interstitial-teal-dark);
 }
 .zzz-spinner__stripe--teal {
-    fill: var(--zzz-color-interstitial-teal-light);
+  fill: var(--zzz-color-interstitial-teal-light);
 }
 .zzz-spinner__base--deep {
-    fill: var(--zzz-color-interstitial-deep);
+  fill: var(--zzz-color-interstitial-deep);
 }
 .zzz-spinner__stripe--deep {
-    fill: var(--zzz-color-interstitial-teal-dark);
+  fill: var(--zzz-color-interstitial-teal-dark);
 }
 
 .zzz-spinner__chevron {
-    animation: zzz-spinner-sweep 900ms steps(1, end) infinite;
+  animation: zzz-spinner-sweep 900ms steps(1, end) infinite;
 }
 .zzz-spinner__chevron:nth-of-type(2) {
-    animation-delay: 150ms;
+  animation-delay: 150ms;
 }
 .zzz-spinner__chevron:nth-of-type(3) {
-    animation-delay: 300ms;
+  animation-delay: 300ms;
 }
 
 @keyframes zzz-spinner-sweep {
-    0%,
-    33% {
-        opacity: 1;
-        filter: brightness(1.45);
-    }
-    34%,
-    100% {
-        opacity: 0.55;
-        filter: none;
-    }
+  0%,
+  33% {
+    opacity: 1;
+    filter: brightness(1.45);
+  }
+  34%,
+  100% {
+    opacity: 0.55;
+    filter: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .zzz-spinner__ring,
-    .zzz-spinner__chevron {
-        animation: none;
-    }
+  .zzz-spinner__ring,
+  .zzz-spinner__chevron {
+    animation: none;
+  }
 }
 [data-reduced-motion] .zzz-spinner__ring,
 [data-reduced-motion] .zzz-spinner__chevron,
 .zzz-spinner[data-reduced-motion] .zzz-spinner__ring,
 .zzz-spinner[data-reduced-motion] .zzz-spinner__chevron {
-    animation: none;
+  animation: none;
 }

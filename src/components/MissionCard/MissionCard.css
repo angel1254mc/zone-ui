@@ -11,193 +11,181 @@
  * Some colour literals have no token.
  */
 .zzz-mission-card {
-    --zzz-mission-card-ring: var(--zzz-color-content-event-teal);
-    --zzz-mission-card-body: var(--zzz-color-content-event-pink);
-    --zzz-button-halo: var(--zzz-mission-card-ring);
-    --zzz-icon-button-halo: var(--zzz-mission-card-ring);
-    position: relative;
-    display: block;
-    width: var(--zzz-size-panel-mission-card-width);
-    height: var(--zzz-size-panel-mission-card-height);
-    margin: 0;
-    color: var(--zzz-color-text-primary);
+  --zzz-mission-card-ring: var(--zzz-color-content-event-teal);
+  --zzz-mission-card-body: var(--zzz-color-content-event-pink);
+  --zzz-button-halo: var(--zzz-mission-card-ring);
+  --zzz-icon-button-halo: var(--zzz-mission-card-ring);
+  position: relative;
+  display: block;
+  width: var(--zzz-size-panel-mission-card-width);
+  height: var(--zzz-size-panel-mission-card-height);
+  margin: 0;
+  color: var(--zzz-color-text-primary);
 }
 
 /* The ring + clip. The notch and NEW! live outside this element, so its overflow never cuts them. */
 .zzz-mission-card__frame {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    border: var(--zzz-border-width-mission-card) solid
-        var(--zzz-mission-card-ring);
-    border-radius: var(--zzz-radius-mission-card);
-    background: var(--zzz-mission-card-ring);
-    box-shadow: inset 0 calc(1 * var(--zzz-px)) 0
-        color-mix(in srgb, var(--zzz-mission-card-ring) 70%, #fff);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: var(--zzz-border-width-mission-card) solid var(--zzz-mission-card-ring);
+  border-radius: var(--zzz-radius-mission-card);
+  background: var(--zzz-mission-card-ring);
+  box-shadow: inset 0 calc(1 * var(--zzz-px)) 0 color-mix(in srgb, var(--zzz-mission-card-ring) 70%, #fff);
 }
 /* Lit outer row of the ring (#81D3D2 over the #45A7A3 core). */
 .zzz-mission-card__frame::before {
-    content: '';
-    position: absolute;
-    inset: calc(-1 * var(--zzz-border-width-mission-card));
-    z-index: 2;
-    border-radius: inherit;
-    box-shadow: inset 0 calc(1.5 * var(--zzz-px)) 0
-        color-mix(in srgb, var(--zzz-mission-card-ring) 55%, #fff);
-    pointer-events: none;
+  content: '';
+  position: absolute;
+  inset: calc(-1 * var(--zzz-border-width-mission-card));
+  z-index: 2;
+  border-radius: inherit;
+  box-shadow: inset 0 calc(1.5 * var(--zzz-px)) 0 color-mix(in srgb, var(--zzz-mission-card-ring) 55%, #fff);
+  pointer-events: none;
 }
 
 .zzz-mission-card__header {
-    position: relative;
-    z-index: 2; /* covers the top of the reward circle's outer band */
-    display: flex;
-    align-items: center;
-    flex: none;
-    height: calc(54 * var(--zzz-px));
-    padding: 0 calc(40 * var(--zzz-px)) 0 calc(25 * var(--zzz-px));
-    border-radius: calc(8 * var(--zzz-px)) calc(8 * var(--zzz-px)) 0 0;
-    background: linear-gradient(
-        180deg,
-        #3f3d3e 0%,
-        #353437 45%,
-        #2d2c2f 75%,
-        #28272a 100%
-    );
+  position: relative;
+  z-index: 2; /* covers the top of the reward circle's outer band */
+  display: flex;
+  align-items: center;
+  flex: none;
+  height: calc(54 * var(--zzz-px));
+  padding: 0 calc(40 * var(--zzz-px)) 0 calc(25 * var(--zzz-px));
+  border-radius: calc(8 * var(--zzz-px)) calc(8 * var(--zzz-px)) 0 0;
+  background: linear-gradient(180deg, #3f3d3e 0%, #353437 45%, #2d2c2f 75%, #28272a 100%);
 }
 .zzz-mission-card__title {
-    margin: 0;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    line-height: calc(24 * var(--zzz-px));
-    /* optical: glyph caps sit 1 px high in the 24 px line */
-    padding-top: calc(1 * var(--zzz-px));
+  margin: 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  line-height: calc(24 * var(--zzz-px));
+  /* optical: glyph caps sit 1 px high in the 24 px line */
+  padding-top: calc(1 * var(--zzz-px));
 }
 .zzz-mission-card__title[data-lines='1'] {
-    font-size: var(--zzz-font-size-body-lg);
+  font-size: var(--zzz-font-size-body-lg);
 }
 
 .zzz-mission-card__body {
-    position: relative;
-    flex: 1;
-    margin-top: calc(1 * var(--zzz-px));
-    border-radius: 0 0 calc(6 * var(--zzz-px)) calc(6 * var(--zzz-px));
-    background:
-        repeating-linear-gradient(
-            110deg,
-            transparent 0 calc(44 * var(--zzz-px)),
-            rgb(255 255 255 / 0.08) calc(44 * var(--zzz-px))
-                calc(66 * var(--zzz-px)),
-            transparent calc(66 * var(--zzz-px)) calc(96 * var(--zzz-px))
-        ),
-        linear-gradient(
-            180deg,
-            color-mix(in srgb, var(--zzz-mission-card-body) 40%, #fff) 0%,
-            color-mix(in srgb, var(--zzz-mission-card-body) 53%, #fff) 25%,
-            color-mix(in srgb, var(--zzz-mission-card-body) 67%, #fff) 50%,
-            color-mix(in srgb, var(--zzz-mission-card-body) 83%, #fff) 75%,
-            color-mix(in srgb, var(--zzz-mission-card-body) 93%, #fff) 94%,
-            color-mix(in srgb, var(--zzz-mission-card-body) 88%, #000) 100%
-        );
+  position: relative;
+  flex: 1;
+  margin-top: calc(1 * var(--zzz-px));
+  border-radius: 0 0 calc(6 * var(--zzz-px)) calc(6 * var(--zzz-px));
+  background:
+    repeating-linear-gradient(
+      110deg,
+      transparent 0 calc(44 * var(--zzz-px)),
+      rgb(255 255 255 / 0.08) calc(44 * var(--zzz-px)) calc(66 * var(--zzz-px)),
+      transparent calc(66 * var(--zzz-px)) calc(96 * var(--zzz-px))
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--zzz-mission-card-body) 40%, #fff) 0%,
+      color-mix(in srgb, var(--zzz-mission-card-body) 53%, #fff) 25%,
+      color-mix(in srgb, var(--zzz-mission-card-body) 67%, #fff) 50%,
+      color-mix(in srgb, var(--zzz-mission-card-body) 83%, #fff) 75%,
+      color-mix(in srgb, var(--zzz-mission-card-body) 93%, #fff) 94%,
+      color-mix(in srgb, var(--zzz-mission-card-body) 88%, #000) 100%
+    );
 }
 
 /* Teal tab down the left edge, running under the reward circle. */
 .zzz-mission-card__strip {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: calc(58 * var(--zzz-px));
-    border-radius: 0 calc(10 * var(--zzz-px)) 0 0;
-    background: linear-gradient(
-        90deg,
-        color-mix(in srgb, var(--zzz-mission-card-ring) 88%, #fff),
-        var(--zzz-mission-card-ring) 30%
-    );
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: calc(58 * var(--zzz-px));
+  border-radius: 0 calc(10 * var(--zzz-px)) 0 0;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--zzz-mission-card-ring) 88%, #fff),
+    var(--zzz-mission-card-ring) 30%
+  );
 }
 
 /* Card coordinates (it lives on the article, outside the clipping frame). */
 .zzz-mission-card__reward {
-    position: absolute;
-    left: calc(27 * var(--zzz-px));
-    top: calc(63 * var(--zzz-px));
-    z-index: 1;
-    box-sizing: border-box;
-    width: calc(80 * var(--zzz-px));
-    height: calc(80 * var(--zzz-px));
-    padding: calc(8 * var(--zzz-px));
-    border-radius: 50%;
-    /* light outer rim (150,233,220) */
-    border: calc(5 * var(--zzz-px)) solid
-        color-mix(in srgb, var(--zzz-mission-card-ring) 35%, #d8fff0);
-    /* dark teal inner ring (22,81,73) -> near black at the art edge */
-    background: color-mix(in srgb, var(--zzz-mission-card-ring) 40%, #00241c);
-    /* ring-colour band outside the rim (right side reads against the pink) */
-    box-shadow: 0 0 0 calc(6 * var(--zzz-px)) var(--zzz-mission-card-ring);
+  position: absolute;
+  left: calc(27 * var(--zzz-px));
+  top: calc(63 * var(--zzz-px));
+  z-index: 1;
+  box-sizing: border-box;
+  width: calc(80 * var(--zzz-px));
+  height: calc(80 * var(--zzz-px));
+  padding: calc(8 * var(--zzz-px));
+  border-radius: 50%;
+  /* light outer rim (150,233,220) */
+  border: calc(5 * var(--zzz-px)) solid color-mix(in srgb, var(--zzz-mission-card-ring) 35%, #d8fff0);
+  /* dark teal inner ring (22,81,73) -> near black at the art edge */
+  background: color-mix(in srgb, var(--zzz-mission-card-ring) 40%, #00241c);
+  /* ring-colour band outside the rim (right side reads against the pink) */
+  box-shadow: 0 0 0 calc(6 * var(--zzz-px)) var(--zzz-mission-card-ring);
 }
 .zzz-mission-card__reward-art {
-    display: block;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    border-radius: 50%;
-    background: color-mix(in srgb, var(--zzz-mission-card-ring) 40%, #000);
-    box-shadow: 0 0 0 calc(2 * var(--zzz-px)) rgb(0 0 0 / 0.55);
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--zzz-mission-card-ring) 40%, #000);
+  box-shadow: 0 0 0 calc(2 * var(--zzz-px)) rgb(0 0 0 / 0.55);
 }
 .zzz-mission-card__reward-art > :where(img, svg, picture) {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .zzz-mission-card__check {
-    position: absolute;
-    left: calc(73 * var(--zzz-px));
-    top: calc(73 * var(--zzz-px));
-    z-index: 2;
-    width: calc(32 * var(--zzz-px));
-    height: calc(23 * var(--zzz-px));
+  position: absolute;
+  left: calc(73 * var(--zzz-px));
+  top: calc(73 * var(--zzz-px));
+  z-index: 2;
+  width: calc(32 * var(--zzz-px));
+  height: calc(23 * var(--zzz-px));
 }
 
 .zzz-mission-card__inspect {
-    position: absolute;
-    left: calc(306 * var(--zzz-px));
-    top: calc(15 * var(--zzz-px));
+  position: absolute;
+  left: calc(306 * var(--zzz-px));
+  top: calc(15 * var(--zzz-px));
 }
 .zzz-mission-card__action {
-    position: absolute;
-    left: calc(372 * var(--zzz-px));
-    top: calc(15 * var(--zzz-px));
+  position: absolute;
+  left: calc(372 * var(--zzz-px));
+  top: calc(15 * var(--zzz-px));
 }
 
 /* Light bead on the chamfered top-right corner (18 × 18). */
 .zzz-mission-card__notch {
-    position: absolute;
-    top: calc(-1 * var(--zzz-px));
-    right: calc(-1 * var(--zzz-px));
-    width: calc(17 * var(--zzz-px));
-    height: calc(17 * var(--zzz-px));
-    fill: color-mix(in srgb, var(--zzz-mission-card-ring) 25%, #f4fff8);
-    pointer-events: none;
+  position: absolute;
+  top: calc(-1 * var(--zzz-px));
+  right: calc(-1 * var(--zzz-px));
+  width: calc(17 * var(--zzz-px));
+  height: calc(17 * var(--zzz-px));
+  fill: color-mix(in srgb, var(--zzz-mission-card-ring) 25%, #f4fff8);
+  pointer-events: none;
 }
 
 .zzz-mission-card__ornament {
-    position: absolute;
-    left: calc(-3 * var(--zzz-px));
-    bottom: calc(-2 * var(--zzz-px));
-    width: calc(18 * var(--zzz-px));
-    height: calc(13 * var(--zzz-px));
-    border-radius: 45% 55% 50% 50%;
-    background: var(--zzz-mission-card-ornament);
-    box-shadow: 0 0 0 calc(1.5 * var(--zzz-px))
-        color-mix(in srgb, var(--zzz-mission-card-ornament) 50%, #fff);
-    pointer-events: none;
+  position: absolute;
+  left: calc(-3 * var(--zzz-px));
+  bottom: calc(-2 * var(--zzz-px));
+  width: calc(18 * var(--zzz-px));
+  height: calc(13 * var(--zzz-px));
+  border-radius: 45% 55% 50% 50%;
+  background: var(--zzz-mission-card-ornament);
+  box-shadow: 0 0 0 calc(1.5 * var(--zzz-px)) color-mix(in srgb, var(--zzz-mission-card-ornament) 50%, #fff);
+  pointer-events: none;
 }
 
 .zzz-mission-card__new {
-    z-index: 3;
+  z-index: 3;
 }

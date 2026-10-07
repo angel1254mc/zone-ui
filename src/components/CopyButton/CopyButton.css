@@ -4,23 +4,20 @@
  * label and never jumps when the status changes; only the active one is visible.
  */
 .zzz-copy-button__labels {
-    display: inline-grid;
-    justify-items: center;
+  display: inline-grid;
+  justify-items: center;
 }
 .zzz-copy-button__label {
-    grid-area: 1 / 1;
-    visibility: hidden;
+  grid-area: 1 / 1;
+  visibility: hidden;
 }
 .zzz-copy-button__label[data-active] {
-    visibility: visible;
+  visibility: visible;
 }
 
 /* Button's auto-width capped pill butts the label against the cap (it is designed for fixed
  * widths). Capped dialog pills keep ~45 px between the cap and the ink on md, so add 36
  * here (the label is nudged 4 left inside Button). Both follow Button's size ratio (sm / md / lg). */
 .zzz-copy-button.zzz-button--capped.zzz-button--w-auto {
-    padding-left: calc(
-        var(--zzz-button-cap) - var(--zzz-mat-ring) + 36 *
-            var(--zzz-control-ratio) * var(--zzz-px)
-    );
+  padding-left: calc(var(--zzz-button-cap) - var(--zzz-mat-ring) + 36 * var(--zzz-control-ratio) * var(--zzz-px));
 }

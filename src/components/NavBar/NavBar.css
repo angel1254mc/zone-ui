@@ -15,280 +15,276 @@
  * read var(). It is a viewport-width breakpoint, not a design length, so it does not scale.
  */
 .zzz-navbar {
-    --zzz-navbar-bg: #000000;
-    --zzz-navbar-text: #787878;
-    --zzz-navbar-active-bg: #ffffff;
-    --zzz-navbar-active-text: #000000;
-    --zzz-navbar-cta: #d8fa00;
-    --zzz-navbar-on-cta: #000000;
-    --zzz-navbar-menu-bg: #111111;
-    container: zzz-navbar / inline-size;
-    position: relative;
-    z-index: var(--zzz-z-index-shell);
-    display: block;
-    width: 100%;
-    background: var(--zzz-navbar-bg);
-    color: var(--zzz-navbar-text);
+  --zzz-navbar-bg: #000000;
+  --zzz-navbar-text: #787878;
+  --zzz-navbar-active-bg: #ffffff;
+  --zzz-navbar-active-text: #000000;
+  --zzz-navbar-cta: #d8fa00;
+  --zzz-navbar-on-cta: #000000;
+  --zzz-navbar-menu-bg: #111111;
+  container: zzz-navbar / inline-size;
+  position: relative;
+  z-index: var(--zzz-z-index-shell);
+  display: block;
+  width: 100%;
+  background: var(--zzz-navbar-bg);
+  color: var(--zzz-navbar-text);
 }
 
 .zzz-navbar[data-skin='game'] {
-    --zzz-navbar-cta: var(--zzz-accent);
-    --zzz-navbar-on-cta: var(--zzz-color-accent-on);
+  --zzz-navbar-cta: var(--zzz-accent);
+  --zzz-navbar-on-cta: var(--zzz-color-accent-on);
 }
 
 .zzz-navbar__inner {
-    display: flex;
-    align-items: center;
-    gap: calc(40 * var(--zzz-px));
-    box-sizing: border-box;
-    max-width: calc(1920 * var(--zzz-px));
-    height: calc(100 * var(--zzz-px));
-    margin: 0 auto;
-    padding: 0 calc(56 * var(--zzz-px));
+  display: flex;
+  align-items: center;
+  gap: calc(40 * var(--zzz-px));
+  box-sizing: border-box;
+  max-width: calc(1920 * var(--zzz-px));
+  height: calc(100 * var(--zzz-px));
+  margin: 0 auto;
+  padding: 0 calc(56 * var(--zzz-px));
 }
 
 .zzz-navbar__logo {
-    display: flex;
-    flex: none;
-    align-items: center;
-    height: calc(54 * var(--zzz-px));
-    color: var(--zzz-color-text-primary);
+  display: flex;
+  flex: none;
+  align-items: center;
+  height: calc(54 * var(--zzz-px));
+  color: var(--zzz-color-text-primary);
 }
 .zzz-navbar__logo > :is(img, svg) {
-    display: block;
-    height: 100%;
-    width: auto;
+  display: block;
+  height: 100%;
+  width: auto;
 }
 
 .zzz-navbar__logo {
-    margin-right: auto;
+  margin-right: auto;
 }
 /* Shrinks first (clipped) so the CTA and actions never leave the canvas. The 16 px inline pad
  * (cancelled by the negative margin) keeps the end items' scale(1.12) pill (up to ~9 px
  * overhang) plus the 6 px focus ring unclipped. */
 .zzz-navbar__nav {
-    flex: 0 1 auto;
-    min-width: 0;
-    margin: 0 calc(-16 * var(--zzz-px));
-    overflow-x: clip;
+  flex: 0 1 auto;
+  min-width: 0;
+  margin: 0 calc(-16 * var(--zzz-px));
+  overflow-x: clip;
 }
 .zzz-navbar__nav > .zzz-navbar__links {
-    padding: 0 calc(16 * var(--zzz-px));
+  padding: 0 calc(16 * var(--zzz-px));
 }
 /* Without a logo the items still sit on the right. */
 .zzz-navbar__inner > .zzz-navbar__nav:first-child {
-    margin-left: auto;
+  margin-left: auto;
 }
 
 .zzz-navbar__links,
 .zzz-navbar__menu-links {
-    display: flex;
-    align-items: center;
-    gap: calc(40 * var(--zzz-px));
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: calc(40 * var(--zzz-px));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  white-space: nowrap;
 }
 
 .zzz-navbar__item {
-    display: flex;
+  display: flex;
 }
 
 .zzz-navbar__link,
 .zzz-navbar__cta {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    min-width: calc(124 * var(--zzz-px));
-    height: calc(44 * var(--zzz-px));
-    margin: 0;
-    padding: 0 calc(10 * var(--zzz-px));
-    border: 0;
-    border-radius: var(--zzz-radius-pill);
-    background: transparent;
-    color: inherit;
-    /* font.size.label (17.5, cap 14.7). */
-    font-size: var(--zzz-font-size-label);
-    line-height: var(--zzz-line-height-single);
-    white-space: nowrap;
-    text-decoration: none;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: calc(124 * var(--zzz-px));
+  height: calc(44 * var(--zzz-px));
+  margin: 0;
+  padding: 0 calc(10 * var(--zzz-px));
+  border: 0;
+  border-radius: var(--zzz-radius-pill);
+  background: transparent;
+  color: inherit;
+  /* font.size.label (17.5, cap 14.7). */
+  font-size: var(--zzz-font-size-label);
+  line-height: var(--zzz-line-height-single);
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .zzz-navbar__label {
-    line-height: var(--zzz-line-height-single);
+  line-height: var(--zzz-line-height-single);
 }
 
 .zzz-navbar__link[aria-current='page'],
 .zzz-navbar__link:hover:not([aria-disabled='true']) {
-    background: var(--zzz-navbar-active-bg);
-    color: var(--zzz-navbar-active-text);
+  background: var(--zzz-navbar-active-bg);
+  color: var(--zzz-navbar-active-text);
 }
 
 .zzz-navbar__link[aria-disabled='true'] {
-    color: var(--zzz-color-text-disabled);
-    cursor: default;
+  color: var(--zzz-color-text-disabled);
+  cursor: default;
 }
 
 .zzz-navbar__cta {
-    background: var(--zzz-navbar-cta);
-    color: var(--zzz-navbar-on-cta);
+  background: var(--zzz-navbar-cta);
+  color: var(--zzz-navbar-on-cta);
 }
 
 .zzz-navbar__cta-slot {
-    display: flex;
-    flex: none;
+  display: flex;
+  flex: none;
 }
 
 .zzz-navbar__actions {
-    display: flex;
-    flex: none;
-    align-items: center;
-    /* 52 (not 56) so the full-spacing row fits the 1920 content width (56 overflows by 3). */
-    gap: calc(52 * var(--zzz-px));
-    color: var(--zzz-color-text-primary);
+  display: flex;
+  flex: none;
+  align-items: center;
+  /* 52 (not 56) so the full-spacing row fits the 1920 content width (56 overflows by 3). */
+  gap: calc(52 * var(--zzz-px));
+  color: var(--zzz-color-text-primary);
 }
 
 /* The settled active look is the same with or without reduced motion; only the transition and
  * the hover grow (motion on interaction) are gated. */
 .zzz-navbar__link[aria-current='page'] {
-    transform: scale(1.12);
+  transform: scale(1.12);
 }
 
 @media (prefers-reduced-motion: no-preference) {
-    .zzz-navbar__link,
-    .zzz-navbar__cta {
-        transition:
-            background 500ms,
-            color 500ms,
-            transform 500ms;
-    }
-    .zzz-navbar__link:hover:not([aria-disabled='true']),
-    .zzz-navbar__cta:hover {
-        transform: scale(1.12);
-    }
+  .zzz-navbar__link,
+  .zzz-navbar__cta {
+    transition:
+      background 500ms,
+      color 500ms,
+      transform 500ms;
+  }
+  .zzz-navbar__link:hover:not([aria-disabled='true']),
+  .zzz-navbar__cta:hover {
+    transform: scale(1.12);
+  }
 }
 
 /* ── Collapsed layout ───────────────────────────────────────────────────────────────────── */
 .zzz-navbar__menu-button {
-    display: none;
-    flex: none;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    width: calc(44 * var(--zzz-px));
-    height: calc(44 * var(--zzz-px));
-    margin: 0;
-    padding: 0;
-    border: calc(3 * var(--zzz-px)) solid var(--zzz-color-border-button);
-    border-radius: var(--zzz-radius-pill);
-    background: var(--zzz-navbar-bg);
-    color: var(--zzz-color-text-primary);
-    cursor: pointer;
+  display: none;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: calc(44 * var(--zzz-px));
+  height: calc(44 * var(--zzz-px));
+  margin: 0;
+  padding: 0;
+  border: calc(3 * var(--zzz-px)) solid var(--zzz-color-border-button);
+  border-radius: var(--zzz-radius-pill);
+  background: var(--zzz-navbar-bg);
+  color: var(--zzz-color-text-primary);
+  cursor: pointer;
 }
 .zzz-navbar__menu-glyph {
-    width: calc(24 * var(--zzz-px));
-    height: calc(24 * var(--zzz-px));
+  width: calc(24 * var(--zzz-px));
+  height: calc(24 * var(--zzz-px));
 }
 
 .zzz-navbar__menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    left: 0;
-    box-sizing: border-box;
-    padding: calc(30 * var(--zzz-px)) calc(56 * var(--zzz-px))
-        calc(30 * var(--zzz-px));
-    border-radius: 0 0 calc(5 * var(--zzz-px)) calc(5 * var(--zzz-px));
-    background: var(--zzz-navbar-menu-bg);
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  box-sizing: border-box;
+  padding: calc(30 * var(--zzz-px)) calc(56 * var(--zzz-px)) calc(30 * var(--zzz-px));
+  border-radius: 0 0 calc(5 * var(--zzz-px)) calc(5 * var(--zzz-px));
+  background: var(--zzz-navbar-menu-bg);
 }
 /* The dropdown's lime top bar. */
 .zzz-navbar__menu::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    height: calc(10 * var(--zzz-px));
-    background: var(--zzz-navbar-cta);
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: calc(10 * var(--zzz-px));
+  background: var(--zzz-navbar-cta);
 }
 .zzz-navbar__menu-links {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: calc(16 * var(--zzz-px));
+  flex-direction: column;
+  align-items: flex-start;
+  gap: calc(16 * var(--zzz-px));
 }
 .zzz-navbar__menu-links .zzz-navbar__link {
-    min-width: 0;
-    padding: 0 calc(14 * var(--zzz-px));
+  min-width: 0;
+  padding: 0 calc(14 * var(--zzz-px));
 }
 .zzz-navbar__menu-cta {
-    margin-top: calc(24 * var(--zzz-px));
+  margin-top: calc(24 * var(--zzz-px));
 }
 
 /* Medium widths: tighten the spacing before the bar has to collapse. Narrower bars than the
  * content fold their items (data-overflow, detected in NavBar.tsx). */
 @container zzz-navbar (max-width: 1800px) {
-    .zzz-navbar__inner {
-        padding: 0 calc(32 * var(--zzz-px));
-    }
-    .zzz-navbar__inner,
-    .zzz-navbar__links {
-        gap: calc(16 * var(--zzz-px));
-    }
-    .zzz-navbar__links .zzz-navbar__link {
-        min-width: 0;
-        padding: 0 calc(14 * var(--zzz-px));
-    }
-    .zzz-navbar__actions {
-        gap: calc(16 * var(--zzz-px));
-    }
+  .zzz-navbar__inner {
+    padding: 0 calc(32 * var(--zzz-px));
+  }
+  .zzz-navbar__inner,
+  .zzz-navbar__links {
+    gap: calc(16 * var(--zzz-px));
+  }
+  .zzz-navbar__links .zzz-navbar__link {
+    min-width: 0;
+    padding: 0 calc(14 * var(--zzz-px));
+  }
+  .zzz-navbar__actions {
+    gap: calc(16 * var(--zzz-px));
+  }
 }
 
-.zzz-navbar[data-collapse='always']
-    :is(.zzz-navbar__nav, .zzz-navbar__cta-slot) {
-    display: none;
+.zzz-navbar[data-collapse='always'] :is(.zzz-navbar__nav, .zzz-navbar__cta-slot) {
+  display: none;
 }
 .zzz-navbar[data-collapse='always'] .zzz-navbar__menu-button {
-    display: flex;
+  display: flex;
 }
 .zzz-navbar[data-collapse='always'] .zzz-navbar__menu:not([hidden]) {
-    display: block;
+  display: block;
 }
 
 /* Items overflow (measured): fold them, keep the CTA in the bar. The nav stays in the row,
  * invisible, so NavBar.tsx can keep measuring the room it would get. */
 .zzz-navbar[data-collapse='auto'][data-overflow] .zzz-navbar__nav {
-    flex: 1 1 0;
-    visibility: hidden;
+  flex: 1 1 0;
+  visibility: hidden;
 }
 .zzz-navbar[data-collapse='auto'][data-overflow] .zzz-navbar__menu-button {
-    display: flex;
+  display: flex;
 }
-.zzz-navbar[data-collapse='auto'][data-overflow]
-    .zzz-navbar__menu:not([hidden]) {
-    display: block;
+.zzz-navbar[data-collapse='auto'][data-overflow] .zzz-navbar__menu:not([hidden]) {
+  display: block;
 }
 .zzz-navbar[data-collapse='auto'][data-overflow] .zzz-navbar__menu-cta {
-    display: none;
+  display: none;
 }
 
 @container zzz-navbar (max-width: 900px) {
-    .zzz-navbar[data-collapse='auto'] .zzz-navbar__menu-cta,
-    .zzz-navbar[data-collapse='auto'][data-overflow] .zzz-navbar__menu-cta {
-        display: block;
-    }
-    .zzz-navbar[data-collapse='auto']
-        :is(.zzz-navbar__nav, .zzz-navbar__cta-slot) {
-        display: none;
-    }
-    .zzz-navbar[data-collapse='auto'] .zzz-navbar__menu-button {
-        display: flex;
-    }
-    .zzz-navbar[data-collapse='auto'] .zzz-navbar__menu:not([hidden]) {
-        display: block;
-    }
+  .zzz-navbar[data-collapse='auto'] .zzz-navbar__menu-cta,
+  .zzz-navbar[data-collapse='auto'][data-overflow] .zzz-navbar__menu-cta {
+    display: block;
+  }
+  .zzz-navbar[data-collapse='auto'] :is(.zzz-navbar__nav, .zzz-navbar__cta-slot) {
+    display: none;
+  }
+  .zzz-navbar[data-collapse='auto'] .zzz-navbar__menu-button {
+    display: flex;
+  }
+  .zzz-navbar[data-collapse='auto'] .zzz-navbar__menu:not([hidden]) {
+    display: block;
+  }
 }

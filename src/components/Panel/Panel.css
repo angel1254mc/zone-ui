@@ -5,281 +5,253 @@
  * OUTER size and the surface is the inner area (radius = outer radius - ring).
  */
 .zzz-panel {
-    --zzz-panel-ring: var(--zzz-border-width-panel);
-    position: relative;
-    display: block;
-    box-sizing: border-box;
-    width: calc(var(--zzz-panel-w) * var(--zzz-px));
-    height: calc(var(--zzz-panel-h) * var(--zzz-px));
-    padding: var(--zzz-panel-ring);
-    color: var(--zzz-color-text-primary);
-    line-height: var(--zzz-line-height-list);
+  --zzz-panel-ring: var(--zzz-border-width-panel);
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  width: calc(var(--zzz-panel-w) * var(--zzz-px));
+  height: calc(var(--zzz-panel-h) * var(--zzz-px));
+  padding: var(--zzz-panel-ring);
+  color: var(--zzz-color-text-primary);
+  line-height: var(--zzz-line-height-list);
 }
 .zzz-panel--side {
-    --zzz-panel-w: var(--zzz-size-panel-detail-width-n);
-    --zzz-panel-h: var(--zzz-size-panel-detail-height-n);
+  --zzz-panel-w: var(--zzz-size-panel-detail-width-n);
+  --zzz-panel-h: var(--zzz-size-panel-detail-height-n);
 }
 .zzz-panel--tool {
-    --zzz-panel-w: var(--zzz-size-panel-tool-width-n);
-    --zzz-panel-h: var(--zzz-size-panel-tool-height-n);
+  --zzz-panel-w: var(--zzz-size-panel-tool-width-n);
+  --zzz-panel-h: var(--zzz-size-panel-tool-height-n);
 }
 .zzz-panel--large {
-    --zzz-panel-ring: var(--zzz-border-width-panel-large);
+  --zzz-panel-ring: var(--zzz-border-width-panel-large);
 }
 .zzz-panel--drawer-inner {
-    /* a unit is required: a unitless 0 would invalidate the calc(... - var(--zzz-panel-ring)) terms */
-    --zzz-panel-ring: 0px;
+  /* a unit is required: a unitless 0 would invalidate the calc(... - var(--zzz-panel-ring)) terms */
+  --zzz-panel-ring: 0px;
 }
 
 .zzz-panel__surface {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    min-height: 0;
-    overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
 }
 
 /* ── header strip ────────────────────────────────────────────────────────────────────── */
 .zzz-panel__header {
-    display: flex;
-    flex: none;
-    align-items: center;
-    position: relative;
-    z-index: 1;
+  display: flex;
+  flex: none;
+  align-items: center;
+  position: relative;
+  z-index: 1;
 }
 .zzz-panel__label {
-    display: block;
-    min-width: 0;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 /* side: 35 px black strip, "DETAIL" micro in text.faint, left inset 25 from the outer edge */
 .zzz-panel--side .zzz-panel__header {
-    height: var(--zzz-size-panel-header-detail);
-    padding-left: calc(25 * var(--zzz-px) - var(--zzz-panel-ring));
-    background: var(--zzz-color-surface-panel);
+  height: var(--zzz-size-panel-header-detail);
+  padding-left: calc(25 * var(--zzz-px) - var(--zzz-panel-ring));
+  background: var(--zzz-color-surface-panel);
 }
 /* The label sits ~29 px under the outer top (low in the strip), at 12.6 (a touch under micro);
  * the strip content sits 6.5 px below centre. */
 .zzz-panel--side .zzz-panel__label {
-    padding-top: calc(13 * var(--zzz-px));
-    color: var(--zzz-color-text-faint);
-    font-size: calc(12.6 * var(--zzz-px));
-    line-height: var(--zzz-line-height-single);
-    text-transform: uppercase;
+  padding-top: calc(13 * var(--zzz-px));
+  color: var(--zzz-color-text-faint);
+  font-size: calc(12.6 * var(--zzz-px));
+  line-height: var(--zzz-line-height-single);
+  text-transform: uppercase;
 }
 
 /* tool: 44 px textured strip (surface.panelHeader + dots lg), label bodyLg in text.panelTab,
  * left inset 20 from the outer edge. The 44 count from the outer top edge. */
 .zzz-panel--tool .zzz-panel__header {
-    height: calc(var(--zzz-size-panel-header-tool) - var(--zzz-panel-ring));
-    padding-left: calc(20 * var(--zzz-px) - var(--zzz-panel-ring));
+  height: calc(var(--zzz-size-panel-header-tool) - var(--zzz-panel-ring));
+  padding-left: calc(20 * var(--zzz-px) - var(--zzz-panel-ring));
 }
 /* Label at 18.5 (cap ~15.4), a size between body and bodyLg. */
 .zzz-panel--tool .zzz-panel__label {
-    padding-bottom: calc(2 * var(--zzz-px));
-    color: var(--zzz-color-text-panel-tab);
-    font-size: calc(18.5 * var(--zzz-px));
-    line-height: 1.3;
+  padding-bottom: calc(2 * var(--zzz-px));
+  color: var(--zzz-color-text-panel-tab);
+  font-size: calc(18.5 * var(--zzz-px));
+  line-height: 1.3;
 }
 
 /* ── body ───────────────────────────────────────────────────────────────────────────── */
 .zzz-panel__body {
-    position: relative;
-    display: flex;
-    flex: 1 1 auto;
-    flex-direction: column;
-    min-height: 0;
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-height: 0;
 }
 .zzz-panel--side .zzz-panel__body {
-    /* hero gradient right under the strip, then pure black for the rest of the body: ~#22-#26 at
+  /* hero gradient right under the strip, then pure black for the rest of the body: ~#22-#26 at
    * the strip, ~#13 at 95 px, #0A at 130 px and #000 by 160 px. The shared token stretches its
    * #101010 -> #000 tail to 100 % of the box (a visible grey down to ~520 px), so the stops are laid
    * out here from the same colour tokens: top -> hero-bottom at 110 px -> black at 160 px. */
-    background:
-        linear-gradient(
-            180deg,
-            var(--zzz-color-surface-panel-hero-top) 0,
-            var(--zzz-color-surface-panel-hero-bottom) calc(110 * var(--zzz-px)),
-            var(--zzz-color-surface-panel) calc(160 * var(--zzz-px))
-        ),
-        var(--zzz-color-surface-panel);
+  background:
+    linear-gradient(
+      180deg,
+      var(--zzz-color-surface-panel-hero-top) 0,
+      var(--zzz-color-surface-panel-hero-bottom) calc(110 * var(--zzz-px)),
+      var(--zzz-color-surface-panel) calc(160 * var(--zzz-px))
+    ),
+    var(--zzz-color-surface-panel);
 }
 .zzz-panel__content {
-    position: relative;
-    z-index: 1;
-    flex: 0 0 auto;
-    min-height: 0;
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  min-height: 0;
 }
 .zzz-panel__content:last-child {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 .zzz-panel--side .zzz-panel__content {
-    padding: 0 calc(24 * var(--zzz-px) - var(--zzz-panel-ring));
+  padding: 0 calc(24 * var(--zzz-px) - var(--zzz-panel-ring));
 }
 .zzz-panel--tool .zzz-panel__content {
-    padding: calc(20 * var(--zzz-px))
-        calc(25 * var(--zzz-px) - var(--zzz-panel-ring));
+  padding: calc(20 * var(--zzz-px)) calc(25 * var(--zzz-px) - var(--zzz-panel-ring));
 }
 .zzz-panel--drawer-inner .zzz-panel__content {
-    padding: calc(19 * var(--zzz-px)) calc(20 * var(--zzz-px))
-        calc(19 * var(--zzz-px)) calc(21 * var(--zzz-px));
+  padding: calc(19 * var(--zzz-px)) calc(20 * var(--zzz-px)) calc(19 * var(--zzz-px)) calc(21 * var(--zzz-px));
 }
 
 .zzz-panel__heading {
-    margin: 0;
-    padding-top: calc(14 * var(--zzz-px));
-    color: var(--zzz-color-text-primary);
-    font-size: var(--zzz-font-size-title);
-    font-weight: 900;
-    line-height: var(--zzz-line-height-single);
+  margin: 0;
+  padding-top: calc(14 * var(--zzz-px));
+  color: var(--zzz-color-text-primary);
+  font-size: var(--zzz-font-size-title);
+  font-weight: 900;
+  line-height: var(--zzz-line-height-single);
 }
 .zzz-panel--tool .zzz-panel__heading {
-    padding-top: 0;
+  padding-top: 0;
 }
 
 /* tool: textured lower section (hard edge, no divider) */
 .zzz-panel__lower {
-    position: relative;
-    z-index: 1;
-    flex: 1 1 auto;
-    min-height: 0;
-    padding: calc(20 * var(--zzz-px));
+  position: relative;
+  z-index: 1;
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: calc(20 * var(--zzz-px));
 }
 .zzz-panel__lower-bg {
-    position: absolute;
-    top: calc(var(--zzz-panel-lower-from, 0) * var(--zzz-px));
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 0;
+  position: absolute;
+  top: calc(var(--zzz-panel-lower-from, 0) * var(--zzz-px));
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
 }
 
 /* ── footer ─────────────────────────────────────────────────────────────────────────── */
 .zzz-panel__footer {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex: none;
-    align-items: center;
-    justify-content: center;
-    gap: calc(20 * var(--zzz-px));
-    padding: calc(12 * var(--zzz-px))
-        calc(24 * var(--zzz-px) - var(--zzz-panel-ring))
-        calc(20 * var(--zzz-px));
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  gap: calc(20 * var(--zzz-px));
+  padding: calc(12 * var(--zzz-px)) calc(24 * var(--zzz-px) - var(--zzz-panel-ring)) calc(20 * var(--zzz-px));
 }
 .zzz-panel--tool .zzz-panel__footer,
 .zzz-panel--side .zzz-panel__footer {
-    background: var(--zzz-color-surface-panel);
+  background: var(--zzz-color-surface-panel);
 }
 .zzz-panel--tool .zzz-panel__body:has(.zzz-panel__lower) + .zzz-panel__footer,
-.zzz-panel--tool
-    .zzz-panel__body:has(.zzz-panel__lower-bg)
-    + .zzz-panel__footer {
-    background: var(--zzz-color-surface-panel-body-textured);
+.zzz-panel--tool .zzz-panel__body:has(.zzz-panel__lower-bg) + .zzz-panel__footer {
+  background: var(--zzz-color-surface-panel-body-textured);
 }
 
 /* ── large: 4 px #2D2D2D ring + 3 px black, 70 px title band, art stage + raised column ── */
 .zzz-panel--large .zzz-panel__surface {
-    padding: calc(3 * var(--zzz-px));
-    background: var(--zzz-color-surface-panel);
+  padding: calc(3 * var(--zzz-px));
+  background: var(--zzz-color-surface-panel);
 }
 .zzz-panel__title-band {
-    --zzz-dots-size: var(--zzz-pattern-dots-md);
-    --zzz-dots-alpha: 0.015;
-    display: flex;
-    flex: none;
-    align-items: center;
-    height: var(--zzz-size-panel-header-large);
-    padding-left: calc(
-        37 * var(--zzz-px) - var(--zzz-panel-ring) - 3 * var(--zzz-px)
+  --zzz-dots-size: var(--zzz-pattern-dots-md);
+  --zzz-dots-alpha: 0.015;
+  display: flex;
+  flex: none;
+  align-items: center;
+  height: var(--zzz-size-panel-header-large);
+  padding-left: calc(37 * var(--zzz-px) - var(--zzz-panel-ring) - 3 * var(--zzz-px));
+  border-radius: calc(var(--zzz-radius-panel-large) - var(--zzz-panel-ring) - 3 * var(--zzz-px))
+    calc(var(--zzz-radius-panel-large) - var(--zzz-panel-ring) - 3 * var(--zzz-px)) 0 0;
+  background-color: var(--zzz-color-surface-title-band);
+  /* vertical falloff: ~#111 at the top to ~#060606 at the bottom */
+  background-image:
+    var(--zzz-dots-light), var(--zzz-dots-light),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--zzz-color-surface-title-band), #ffffff 1.5%),
+      color-mix(in srgb, var(--zzz-color-surface-title-band), #000000 57%)
     );
-    border-radius: calc(
-            var(--zzz-radius-panel-large) - var(--zzz-panel-ring) - 3 *
-                var(--zzz-px)
-        )
-        calc(
-            var(--zzz-radius-panel-large) - var(--zzz-panel-ring) - 3 *
-                var(--zzz-px)
-        )
-        0 0;
-    background-color: var(--zzz-color-surface-title-band);
-    /* vertical falloff: ~#111 at the top to ~#060606 at the bottom */
-    background-image:
-        var(--zzz-dots-light), var(--zzz-dots-light),
-        linear-gradient(
-            180deg,
-            color-mix(
-                in srgb,
-                var(--zzz-color-surface-title-band),
-                #ffffff 1.5%
-            ),
-            color-mix(in srgb, var(--zzz-color-surface-title-band), #000000 57%)
-        );
-    background-size:
-        var(--zzz-dots-s) var(--zzz-dots-s),
-        var(--zzz-dots-s) var(--zzz-dots-s),
-        100% 100%;
-    background-position:
-        0 0,
-        calc(var(--zzz-dots-s) / 2) calc(var(--zzz-dots-s) / 2),
-        0 0;
+  background-size:
+    var(--zzz-dots-s) var(--zzz-dots-s),
+    var(--zzz-dots-s) var(--zzz-dots-s),
+    100% 100%;
+  background-position:
+    0 0,
+    calc(var(--zzz-dots-s) / 2) calc(var(--zzz-dots-s) / 2),
+    0 0;
 }
 .zzz-panel__title {
-    margin: 0;
-    color: var(--zzz-color-text-primary);
-    font-size: var(--zzz-font-size-title);
-    font-weight: 900;
-    line-height: var(--zzz-line-height-single);
+  margin: 0;
+  color: var(--zzz-color-text-primary);
+  font-size: var(--zzz-font-size-title);
+  font-weight: 900;
+  line-height: var(--zzz-line-height-single);
 }
 .zzz-panel__split {
-    flex-direction: row;
-    overflow: hidden;
-    border-radius: 0 0
-        calc(
-            var(--zzz-radius-panel-large) - var(--zzz-panel-ring) - 3 *
-                var(--zzz-px)
-        )
-        calc(
-            var(--zzz-radius-panel-large) - var(--zzz-panel-ring) - 3 *
-                var(--zzz-px)
-        );
+  flex-direction: row;
+  overflow: hidden;
+  border-radius: 0 0 calc(var(--zzz-radius-panel-large) - var(--zzz-panel-ring) - 3 * var(--zzz-px))
+    calc(var(--zzz-radius-panel-large) - var(--zzz-panel-ring) - 3 * var(--zzz-px));
 }
 .zzz-panel__stage {
-    position: relative;
-    flex: 1 1 auto;
-    min-width: 0;
-    /* ~#1E at the top-left, darkening to ~#080808 through the middle, ~#0E at the
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+  /* ~#1E at the top-left, darkening to ~#080808 through the middle, ~#0E at the
    * bottom (a top-lit vignette behind the art) */
-    background:
-        radial-gradient(
-            ellipse 70% 60% at 0% 0%,
-            color-mix(in srgb, var(--zzz-color-surface-art-stage), #ffffff 9%),
-            transparent 100%
-        ),
-        linear-gradient(
-            180deg,
-            color-mix(in srgb, var(--zzz-color-surface-art-stage), #ffffff 6%)
-                0%,
-            var(--zzz-color-surface-art-stage) 45%,
-            var(--zzz-color-surface-art-stage) 80%,
-            color-mix(in srgb, var(--zzz-color-surface-art-stage), #ffffff 3%)
-                100%
-        );
+  background:
+    radial-gradient(
+      ellipse 70% 60% at 0% 0%,
+      color-mix(in srgb, var(--zzz-color-surface-art-stage), #ffffff 9%),
+      transparent 100%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--zzz-color-surface-art-stage), #ffffff 6%) 0%,
+      var(--zzz-color-surface-art-stage) 45%,
+      var(--zzz-color-surface-art-stage) 80%,
+      color-mix(in srgb, var(--zzz-color-surface-art-stage), #ffffff 3%) 100%
+    );
 }
 .zzz-panel__aside {
-    flex: none;
-    width: calc(var(--zzz-panel-aside-w, 725) * var(--zzz-px));
-    min-height: 0;
-    padding: calc(20 * var(--zzz-px)) calc(30 * var(--zzz-px));
-    background: var(--zzz-color-surface-raised);
+  flex: none;
+  width: calc(var(--zzz-panel-aside-w, 725) * var(--zzz-px));
+  min-height: 0;
+  padding: calc(20 * var(--zzz-px)) calc(30 * var(--zzz-px));
+  background: var(--zzz-color-surface-raised);
 }
 
 /* ── drawer inner panel: #030303, radius 12, no ring ─────────────────────────────────── */
 .zzz-panel--drawer-inner .zzz-panel__surface {
-    border-radius: var(--zzz-radius-inner);
-    background: var(--zzz-color-surface-drawer-inner);
+  border-radius: var(--zzz-radius-inner);
+  background: var(--zzz-color-surface-drawer-inner);
 }

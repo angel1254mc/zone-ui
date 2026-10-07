@@ -3,17 +3,17 @@
  * [label, row, label, row] keeps an even rhythm with plain margins:
  * label baseline -> next row top 11, row bottom -> next label cap top 12. */
 .zzz-section-label {
-    display: block;
-    margin: 0;
-    padding: 0 0 0 calc(16 * var(--zzz-px));
-    color: var(--zzz-color-text-muted);
-    font-size: var(--zzz-font-size-label);
-    font-weight: 900;
-    font-style: normal;
-    line-height: var(--zzz-font-size-body);
-    letter-spacing: 0;
-    white-space: nowrap;
+  display: block;
+  margin: 0;
+  padding: 0 0 0 calc(16 * var(--zzz-px));
+  color: var(--zzz-color-text-muted);
+  font-size: var(--zzz-font-size-label);
+  font-weight: 900;
+  font-style: normal;
+  line-height: var(--zzz-font-size-body);
+  letter-spacing: 0;
+  white-space: nowrap;
 }
 .zzz-section-label--flush {
-    padding-left: 0;
+  padding-left: 0;
 }

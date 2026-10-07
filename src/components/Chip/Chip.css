@@ -11,59 +11,46 @@
  * size.control.{sm,md,lg}); md is the base chip. The focus ring stays a hairline.
  */
 .zzz-chip {
-    --zzz-chip-k: 1;
-    --zzz-chip-u: calc(var(--zzz-px) * var(--zzz-chip-k));
-    --zzz-press-border: calc(
-        var(--zzz-border-width-ring-chip-n) * var(--zzz-chip-u)
-    );
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: calc(var(--zzz-size-control-chip-width-n) * var(--zzz-chip-u));
-    height: calc(var(--zzz-size-control-chip-n) * var(--zzz-chip-u));
-    margin: 0;
-    padding: 0 calc(16 * var(--zzz-chip-u));
-    border: var(--zzz-press-border) solid var(--zzz-color-border-chip);
-    border-radius: var(--zzz-radius-pill);
-    background: var(--zzz-color-surface-chip);
-    color: var(--zzz-color-text-primary);
-    cursor: pointer;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
+  --zzz-chip-k: 1;
+  --zzz-chip-u: calc(var(--zzz-px) * var(--zzz-chip-k));
+  --zzz-press-border: calc(var(--zzz-border-width-ring-chip-n) * var(--zzz-chip-u));
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--zzz-size-control-chip-width-n) * var(--zzz-chip-u));
+  height: calc(var(--zzz-size-control-chip-n) * var(--zzz-chip-u));
+  margin: 0;
+  padding: 0 calc(16 * var(--zzz-chip-u));
+  border: var(--zzz-press-border) solid var(--zzz-color-border-chip);
+  border-radius: var(--zzz-radius-pill);
+  background: var(--zzz-color-surface-chip);
+  color: var(--zzz-color-text-primary);
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .zzz-chip[data-size='sm'] {
-    --zzz-chip-k: calc(
-        var(--zzz-size-control-sm-n) / var(--zzz-size-control-md-n)
-    );
-    /* md keeps the inherited / default size.control.pressOutset. */
-    --zzz-press-outset: calc(
-        var(--zzz-size-control-press-outset-n) * var(--zzz-chip-u)
-    );
+  --zzz-chip-k: calc(var(--zzz-size-control-sm-n) / var(--zzz-size-control-md-n));
+  /* md keeps the inherited / default size.control.pressOutset. */
+  --zzz-press-outset: calc(var(--zzz-size-control-press-outset-n) * var(--zzz-chip-u));
 }
 .zzz-chip[data-size='lg'] {
-    --zzz-chip-k: calc(
-        var(--zzz-size-control-lg-n) / var(--zzz-size-control-md-n)
-    );
-    --zzz-press-outset: calc(
-        var(--zzz-size-control-press-outset-n) * var(--zzz-chip-u)
-    );
+  --zzz-chip-k: calc(var(--zzz-size-control-lg-n) / var(--zzz-size-control-md-n));
+  --zzz-press-outset: calc(var(--zzz-size-control-press-outset-n) * var(--zzz-chip-u));
 }
 
 /* 0,2,0: beats Text's .zzz-text-label size regardless of stylesheet order. Floored at the label
  * role itself, so an sm chip keeps the md text (12.25 CSS px at 0.7) instead of shrinking to ~10. */
 .zzz-chip .zzz-chip__label {
-    font-size: max(
-        calc(var(--zzz-font-size-label-n) * var(--zzz-chip-u)),
-        var(--zzz-font-size-label)
-    );
+  font-size: max(calc(var(--zzz-font-size-label-n) * var(--zzz-chip-u)), var(--zzz-font-size-label));
 }
 .zzz-chip__label {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    line-height: var(--zzz-line-height-single);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  line-height: var(--zzz-line-height-single);
 }
 
 /* Selected: the live accent over fill and ring, black label.
@@ -71,60 +58,55 @@
  * specificity (0,2,0, later in the cascade) would cancel .zzz-focusable:focus-visible's ring —
  * the roving tab stop of a single-select group IS the selected chip. */
 .zzz-chip[data-selected] {
-    border-color: var(--zzz-accent);
-    background: var(--zzz-accent);
-    color: var(--zzz-color-accent-on);
+  border-color: var(--zzz-accent);
+  background: var(--zzz-accent);
+  color: var(--zzz-color-accent-on);
 }
 
 .zzz-chip:disabled,
 .zzz-chip[aria-disabled='true'] {
-    border-color: var(--zzz-color-border-chip-disabled);
-    background: var(--zzz-color-surface-chip-disabled);
-    color: var(--zzz-color-text-muted);
-    cursor: default;
+  border-color: var(--zzz-color-border-chip-disabled);
+  background: var(--zzz-color-surface-chip-disabled);
+  color: var(--zzz-color-text-muted);
+  cursor: default;
 }
 
 /* The pressed ::before covers the ring; keep the label black on it even when selected. */
 .zzz-chip[data-pressed],
 .zzz-chip:active:not(:disabled, [aria-disabled='true']) {
-    border-color: transparent;
+  border-color: transparent;
 }
 
 /* ── ChipGroup ─────────────────────────────────────────────────────────────────────────────
  * Section label: fontSize.body, color.text.muted, ink 8 px in from the chip column's edge,
  * cap top 40 px above the first chip row. Grid: 2 columns x 262, column gap 19, row pitch 57. */
 .zzz-chip-group {
-    --zzz-chip-group-k: 1;
-    --zzz-chip-group-u: calc(var(--zzz-px) * var(--zzz-chip-group-k));
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+  --zzz-chip-group-k: 1;
+  --zzz-chip-group-u: calc(var(--zzz-px) * var(--zzz-chip-group-k));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 .zzz-chip-group[data-size='sm'] {
-    --zzz-chip-group-k: calc(
-        var(--zzz-size-control-sm-n) / var(--zzz-size-control-md-n)
-    );
+  --zzz-chip-group-k: calc(var(--zzz-size-control-sm-n) / var(--zzz-size-control-md-n));
 }
 .zzz-chip-group[data-size='lg'] {
-    --zzz-chip-group-k: calc(
-        var(--zzz-size-control-lg-n) / var(--zzz-size-control-md-n)
-    );
+  --zzz-chip-group-k: calc(var(--zzz-size-control-lg-n) / var(--zzz-size-control-md-n));
 }
 
 /* The section label keeps its text size (body); only its offsets follow the chip size. */
 .zzz-chip-group__label {
-    display: block;
-    margin: 0 0 calc(22 * var(--zzz-chip-group-u))
-        calc(8 * var(--zzz-chip-group-u));
-    line-height: var(--zzz-line-height-single);
+  display: block;
+  margin: 0 0 calc(22 * var(--zzz-chip-group-u)) calc(8 * var(--zzz-chip-group-u));
+  line-height: var(--zzz-line-height-single);
 }
 
 .zzz-chip-group__grid {
-    display: grid;
-    grid-template-columns: repeat(
-        var(--zzz-chip-columns, 2),
-        calc(var(--zzz-size-control-chip-width-n) * var(--zzz-chip-group-u))
-    );
-    column-gap: calc(19 * var(--zzz-chip-group-u));
-    row-gap: calc(var(--zzz-space-chip-row-gap-n) * var(--zzz-chip-group-u));
+  display: grid;
+  grid-template-columns: repeat(
+    var(--zzz-chip-columns, 2),
+    calc(var(--zzz-size-control-chip-width-n) * var(--zzz-chip-group-u))
+  );
+  column-gap: calc(19 * var(--zzz-chip-group-u));
+  row-gap: calc(var(--zzz-space-chip-row-gap-n) * var(--zzz-chip-group-u));
 }

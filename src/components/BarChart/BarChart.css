@@ -10,260 +10,254 @@
  *   value     bodyXl 23.5 sheared 10°; labels label 17.5 sheared 10°, text.secondary
  */
 .zzz-bar-chart {
-    --zzz-bc-h: calc(var(--zzz-bar-chart-h, 280) * var(--zzz-px));
-    --zzz-bc-reserve: calc(72 * var(--zzz-px));
-    --zzz-bc-gap: calc(14 * var(--zzz-px));
-    --zzz-bc-radius: var(--zzz-radius-card-art);
-    --zzz-bc-dur: 700ms;
-    --zzz-bc-stagger: 60ms;
-    display: block;
-    min-width: 0;
-    margin: 0;
-    color: var(--zzz-color-text-primary);
-    line-height: var(--zzz-line-height-single);
+  --zzz-bc-h: calc(var(--zzz-bar-chart-h, 280) * var(--zzz-px));
+  --zzz-bc-reserve: calc(72 * var(--zzz-px));
+  --zzz-bc-gap: calc(14 * var(--zzz-px));
+  --zzz-bc-radius: var(--zzz-radius-card-art);
+  --zzz-bc-dur: 700ms;
+  --zzz-bc-stagger: 60ms;
+  display: block;
+  min-width: 0;
+  margin: 0;
+  color: var(--zzz-color-text-primary);
+  line-height: var(--zzz-line-height-single);
 }
 
 .zzz-bar-chart__chart {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: 'plot' 'x';
-    column-gap: calc(12 * var(--zzz-px));
-    row-gap: calc(14 * var(--zzz-px));
-    min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: 'plot' 'x';
+  column-gap: calc(12 * var(--zzz-px));
+  row-gap: calc(14 * var(--zzz-px));
+  min-width: 0;
 }
 .zzz-bar-chart--y-axis .zzz-bar-chart__chart {
-    grid-template-columns: auto minmax(0, 1fr);
-    grid-template-areas: 'y plot' '. x';
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas: 'y plot' '. x';
 }
 
 /* ── plot ─────────────────────────────────────────────────────────────────────────────── */
 .zzz-bar-chart__plot {
-    grid-area: plot;
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(var(--zzz-bar-chart-n), minmax(0, 1fr));
-    column-gap: var(--zzz-bc-gap);
-    padding-top: var(--zzz-bc-reserve);
+  grid-area: plot;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--zzz-bar-chart-n), minmax(0, 1fr));
+  column-gap: var(--zzz-bc-gap);
+  padding-top: var(--zzz-bc-reserve);
 }
 /* the baseline, continuous under every column */
 .zzz-bar-chart__plot::after {
-    content: '';
-    position: absolute;
-    top: calc(var(--zzz-bc-reserve) + var(--zzz-bc-h));
-    left: calc(-6 * var(--zzz-px));
-    right: calc(-6 * var(--zzz-px));
-    height: var(--zzz-border-width-keyline);
-    border-radius: var(--zzz-radius-pill);
-    background: var(--zzz-color-border-button);
-    pointer-events: none;
+  content: '';
+  position: absolute;
+  top: calc(var(--zzz-bc-reserve) + var(--zzz-bc-h));
+  left: calc(-6 * var(--zzz-px));
+  right: calc(-6 * var(--zzz-px));
+  height: var(--zzz-border-width-keyline);
+  border-radius: var(--zzz-radius-pill);
+  background: var(--zzz-color-border-button);
+  pointer-events: none;
 }
 
 .zzz-bar-chart__col {
-    --zzz-bc-fill: var(--zzz-color-star-empty);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: calc(14 * var(--zzz-px));
-    min-width: 0;
+  --zzz-bc-fill: var(--zzz-color-star-empty);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(14 * var(--zzz-px));
+  min-width: 0;
 }
 .zzz-bar-chart__col[data-fill='light'] {
-    --zzz-bc-fill: var(--zzz-color-text-soft);
+  --zzz-bc-fill: var(--zzz-color-text-soft);
 }
 .zzz-bar-chart__col[data-fill='accent'] {
-    --zzz-bc-fill: var(--zzz-accent);
+  --zzz-bc-fill: var(--zzz-accent);
 }
 .zzz-bar-chart__col[data-fill='rarity-s'] {
-    --zzz-bc-fill: var(--zzz-color-rarity-s);
+  --zzz-bc-fill: var(--zzz-color-rarity-s);
 }
 .zzz-bar-chart__col[data-fill='rarity-a'] {
-    --zzz-bc-fill: var(--zzz-color-rarity-a);
+  --zzz-bc-fill: var(--zzz-color-rarity-a);
 }
 .zzz-bar-chart__col[data-fill='rarity-b'] {
-    --zzz-bc-fill: var(--zzz-color-rarity-b);
+  --zzz-bc-fill: var(--zzz-color-rarity-b);
 }
 .zzz-bar-chart__col[data-fill='rarity-c'] {
-    --zzz-bc-fill: var(--zzz-color-rarity-c);
+  --zzz-bc-fill: var(--zzz-color-rarity-c);
 }
 .zzz-bar-chart__col[data-fill='custom'] {
-    --zzz-bc-fill: var(--zzz-bar-chart-fill);
+  --zzz-bc-fill: var(--zzz-bar-chart-fill);
 }
 
 .zzz-bar-chart__track {
-    --zzz-hatch-base: var(--zzz-color-surface-stat-row-sunken);
-    position: relative;
-    width: 100%;
-    max-width: calc(120 * var(--zzz-px));
-    height: var(--zzz-bc-h);
-    border-radius: var(--zzz-bc-radius) var(--zzz-bc-radius) 0 0;
-    /* black keyline so the track reads on a hatched page too */
-    box-shadow: var(--zzz-shadow-keyline);
+  --zzz-hatch-base: var(--zzz-color-surface-stat-row-sunken);
+  position: relative;
+  width: 100%;
+  max-width: calc(120 * var(--zzz-px));
+  height: var(--zzz-bc-h);
+  border-radius: var(--zzz-bc-radius) var(--zzz-bc-radius) 0 0;
+  /* black keyline so the track reads on a hatched page too */
+  box-shadow: var(--zzz-shadow-keyline);
 }
 
 .zzz-bar-chart__bar {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: calc(var(--zzz-bar-chart-v) * 100%);
-    border-radius: var(--zzz-bc-radius) var(--zzz-bc-radius) 0 0;
-    background: var(--zzz-bc-fill);
-    box-shadow: inset 0 calc(2 * var(--zzz-px)) 0 rgb(255 255 255 / 0.3);
-    transform-origin: 50% 100%;
-    transition: height 400ms cubic-bezier(0.2, 0.75, 0.25, 1);
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: calc(var(--zzz-bar-chart-v) * 100%);
+  border-radius: var(--zzz-bc-radius) var(--zzz-bc-radius) 0 0;
+  background: var(--zzz-bc-fill);
+  box-shadow: inset 0 calc(2 * var(--zzz-px)) 0 rgb(255 255 255 / 0.3);
+  transform-origin: 50% 100%;
+  transition: height 400ms cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
 /* value + marker stack, riding just above the bar top */
 .zzz-bar-chart__annot {
-    position: absolute;
-    left: 50%;
-    bottom: calc(var(--zzz-bar-chart-v) * 100% + 8 * var(--zzz-px));
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: calc(10 * var(--zzz-px));
-    translate: -50% 0;
-    white-space: nowrap;
-    transition: bottom 400ms cubic-bezier(0.2, 0.75, 0.25, 1);
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--zzz-bar-chart-v) * 100% + 8 * var(--zzz-px));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(10 * var(--zzz-px));
+  translate: -50% 0;
+  white-space: nowrap;
+  transition: bottom 400ms cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
 .zzz-bar-chart__value {
-    display: inline-block;
-    font-size: var(--zzz-font-size-body-xl);
-    line-height: var(--zzz-line-height-single);
-    transform: skewX(var(--zzz-skew-italic));
-    transform-origin: 0 100%;
+  display: inline-block;
+  font-size: var(--zzz-font-size-body-xl);
+  line-height: var(--zzz-line-height-single);
+  transform: skewX(var(--zzz-skew-italic));
+  transform-origin: 0 100%;
 }
 .zzz-bar-chart__col[data-highlight] .zzz-bar-chart__value {
-    color: var(--zzz-accent);
+  color: var(--zzz-accent);
 }
 
 .zzz-bar-chart__marker {
-    position: relative;
-    display: inline-block;
-    padding: calc(5 * var(--zzz-px)) calc(12 * var(--zzz-px))
-        calc(4 * var(--zzz-px));
-    border-radius: calc(4 * var(--zzz-px));
-    background: var(--zzz-accent);
-    box-shadow: var(--zzz-shadow-keyline);
-    color: var(--zzz-color-accent-on);
-    font-size: var(--zzz-font-size-micro);
-    line-height: var(--zzz-line-height-single);
-    text-transform: uppercase;
-    transform: skewX(var(--zzz-skew-italic));
+  position: relative;
+  display: inline-block;
+  padding: calc(5 * var(--zzz-px)) calc(12 * var(--zzz-px)) calc(4 * var(--zzz-px));
+  border-radius: calc(4 * var(--zzz-px));
+  background: var(--zzz-accent);
+  box-shadow: var(--zzz-shadow-keyline);
+  color: var(--zzz-color-accent-on);
+  font-size: var(--zzz-font-size-micro);
+  line-height: var(--zzz-line-height-single);
+  text-transform: uppercase;
+  transform: skewX(var(--zzz-skew-italic));
 }
 /* pointer under the tag */
 .zzz-bar-chart__marker::after {
-    content: '';
-    position: absolute;
-    top: calc(100% - 1 * var(--zzz-px));
-    left: 50%;
-    width: calc(12 * var(--zzz-px));
-    height: calc(7 * var(--zzz-px));
-    translate: -50% 0;
-    background: var(--zzz-accent);
-    clip-path: polygon(0 0, 100% 0, 50% 100%);
+  content: '';
+  position: absolute;
+  top: calc(100% - 1 * var(--zzz-px));
+  left: 50%;
+  width: calc(12 * var(--zzz-px));
+  height: calc(7 * var(--zzz-px));
+  translate: -50% 0;
+  background: var(--zzz-accent);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
 }
 
 .zzz-bar-chart__label {
-    display: inline-block;
-    max-width: 100%;
-    overflow: hidden;
-    color: var(--zzz-color-text-secondary);
-    font-size: var(--zzz-font-size-label);
-    line-height: var(--zzz-line-height-single);
-    text-align: center;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    transform: skewX(var(--zzz-skew-italic));
-    /* the shear leans the ink right; room on both sides keeps the ellipsis inside the column */
-    padding-inline: calc(3 * var(--zzz-px));
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  color: var(--zzz-color-text-secondary);
+  font-size: var(--zzz-font-size-label);
+  line-height: var(--zzz-line-height-single);
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transform: skewX(var(--zzz-skew-italic));
+  /* the shear leans the ink right; room on both sides keeps the ellipsis inside the column */
+  padding-inline: calc(3 * var(--zzz-px));
 }
 .zzz-bar-chart__col[data-highlight] .zzz-bar-chart__label {
-    color: var(--zzz-color-text-primary);
+  color: var(--zzz-color-text-primary);
 }
 
 /* ── axes ─────────────────────────────────────────────────────────────────────────────── */
 .zzz-bar-chart__axis {
-    color: var(--zzz-color-text-muted);
-    font-size: var(--zzz-font-size-caption);
-    line-height: var(--zzz-line-height-single);
-    text-transform: uppercase;
+  color: var(--zzz-color-text-muted);
+  font-size: var(--zzz-font-size-caption);
+  line-height: var(--zzz-line-height-single);
+  text-transform: uppercase;
 }
 .zzz-bar-chart__axis--x {
-    grid-area: x;
-    justify-self: center;
+  grid-area: x;
+  justify-self: center;
 }
 .zzz-bar-chart__axis--y {
-    grid-area: y;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* centre on the tracks, not on the reserve above them */
-    margin-top: var(--zzz-bc-reserve);
-    height: var(--zzz-bc-h);
+  grid-area: y;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* centre on the tracks, not on the reserve above them */
+  margin-top: var(--zzz-bc-reserve);
+  height: var(--zzz-bc-h);
 }
 .zzz-bar-chart__axis-text {
-    display: block;
-    white-space: nowrap;
-    writing-mode: vertical-rl;
-    rotate: 180deg;
+  display: block;
+  white-space: nowrap;
+  writing-mode: vertical-rl;
+  rotate: 180deg;
 }
 
 /* ── growth on mount ──────────────────────────────────────────────────────────────────── */
 @keyframes zzz-bar-chart-grow {
-    from {
-        transform: scaleY(0);
-    }
-    to {
-        transform: scaleY(1);
-    }
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
 }
 @keyframes zzz-bar-chart-fade-in {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 .zzz-bar-chart[data-animate='true'] .zzz-bar-chart__bar {
-    animation: zzz-bar-chart-grow var(--zzz-bc-dur)
-        cubic-bezier(0.2, 0.75, 0.25, 1)
-        calc(var(--zzz-bar-chart-i) * var(--zzz-bc-stagger)) both;
+  animation: zzz-bar-chart-grow var(--zzz-bc-dur) cubic-bezier(0.2, 0.75, 0.25, 1)
+    calc(var(--zzz-bar-chart-i) * var(--zzz-bc-stagger)) both;
 }
 .zzz-bar-chart[data-animate='true'] .zzz-bar-chart__annot {
-    animation: zzz-bar-chart-fade-in 250ms ease-out
-        calc(
-            var(--zzz-bar-chart-i) * var(--zzz-bc-stagger) + var(--zzz-bc-dur) -
-                150ms
-        )
-        both;
+  animation: zzz-bar-chart-fade-in 250ms ease-out
+    calc(var(--zzz-bar-chart-i) * var(--zzz-bc-stagger) + var(--zzz-bc-dur) - 150ms) both;
 }
 
 [data-reduced-motion] .zzz-bar-chart__bar,
 [data-reduced-motion] .zzz-bar-chart__annot {
-    animation: none !important;
-    transition: none;
+  animation: none !important;
+  transition: none;
 }
 @media (prefers-reduced-motion: reduce) {
-    .zzz-bar-chart__bar,
-    .zzz-bar-chart__annot {
-        animation: none !important;
-        transition: none;
-    }
+  .zzz-bar-chart__bar,
+  .zzz-bar-chart__annot {
+    animation: none !important;
+    transition: none;
+  }
 }
 
 @media (forced-colors: active) {
-    .zzz-bar-chart__bar {
-        forced-color-adjust: none;
-        background: CanvasText;
-    }
-    .zzz-bar-chart__col[data-highlight] .zzz-bar-chart__bar {
-        background: Highlight;
-    }
-    .zzz-bar-chart__marker {
-        forced-color-adjust: none;
-        background: Highlight;
-        color: HighlightText;
-    }
+  .zzz-bar-chart__bar {
+    forced-color-adjust: none;
+    background: CanvasText;
+  }
+  .zzz-bar-chart__col[data-highlight] .zzz-bar-chart__bar {
+    background: Highlight;
+  }
+  .zzz-bar-chart__marker {
+    forced-color-adjust: none;
+    background: Highlight;
+    color: HighlightText;
+  }
 }

@@ -1,138 +1,138 @@
 /* ScrollHint. Lengths are design units (1 unit = var(--zzz-px)).
  * White glyphs: panel ▼ 32 x 15, list ▼ 25 x 12.5, chevron › 19 x 32. */
 .zzz-scroll-hint {
-    --zzz-scroll-hint-w: 32;
-    --zzz-scroll-hint-h: 15;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: content-box;
-    width: calc(var(--zzz-scroll-hint-w) * var(--zzz-px));
-    height: calc(var(--zzz-scroll-hint-h) * var(--zzz-px));
-    padding: 0;
-    margin: 0;
-    border: 0;
-    background: none;
-    color: var(--zzz-color-text-primary);
-    line-height: 0;
-    pointer-events: none;
-    transition:
-        opacity 120ms linear,
-        visibility 0s linear 0s;
+  --zzz-scroll-hint-w: 32;
+  --zzz-scroll-hint-h: 15;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: content-box;
+  width: calc(var(--zzz-scroll-hint-w) * var(--zzz-px));
+  height: calc(var(--zzz-scroll-hint-h) * var(--zzz-px));
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: none;
+  color: var(--zzz-color-text-primary);
+  line-height: 0;
+  pointer-events: none;
+  transition:
+    opacity 120ms linear,
+    visibility 0s linear 0s;
 }
 .zzz-scroll-hint--list {
-    --zzz-scroll-hint-w: 25;
-    --zzz-scroll-hint-h: 12.5;
+  --zzz-scroll-hint-w: 25;
+  --zzz-scroll-hint-h: 12.5;
 }
 .zzz-scroll-hint--chevron {
-    --zzz-scroll-hint-w: 19;
-    --zzz-scroll-hint-h: 32;
+  --zzz-scroll-hint-w: 19;
+  --zzz-scroll-hint-h: 32;
 }
 .zzz-scroll-hint__glyph {
-    display: block;
-    width: 100%;
-    height: 100%;
-    overflow: visible;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
 }
 /* the glyphs are drawn pointing down / right: the other directions are mirrors */
 .zzz-scroll-hint--up .zzz-scroll-hint__glyph,
 .zzz-scroll-hint--left .zzz-scroll-hint__glyph {
-    transform: scale(-1, -1);
+  transform: scale(-1, -1);
 }
 /* a chevron pointing down/up, or a triangle pointing left/right: swap the box and rotate */
 .zzz-scroll-hint--triangle.zzz-scroll-hint--right,
 .zzz-scroll-hint--triangle.zzz-scroll-hint--left,
 .zzz-scroll-hint--chevron.zzz-scroll-hint--down,
 .zzz-scroll-hint--chevron.zzz-scroll-hint--up {
-    width: calc(var(--zzz-scroll-hint-h) * var(--zzz-px));
-    height: calc(var(--zzz-scroll-hint-w) * var(--zzz-px));
+  width: calc(var(--zzz-scroll-hint-h) * var(--zzz-px));
+  height: calc(var(--zzz-scroll-hint-w) * var(--zzz-px));
 }
 .zzz-scroll-hint--triangle.zzz-scroll-hint--right .zzz-scroll-hint__glyph,
 .zzz-scroll-hint--triangle.zzz-scroll-hint--left .zzz-scroll-hint__glyph,
 .zzz-scroll-hint--chevron.zzz-scroll-hint--down .zzz-scroll-hint__glyph,
 .zzz-scroll-hint--chevron.zzz-scroll-hint--up .zzz-scroll-hint__glyph {
-    flex: none;
-    width: calc(var(--zzz-scroll-hint-w) * var(--zzz-px));
-    height: calc(var(--zzz-scroll-hint-h) * var(--zzz-px));
+  flex: none;
+  width: calc(var(--zzz-scroll-hint-w) * var(--zzz-px));
+  height: calc(var(--zzz-scroll-hint-h) * var(--zzz-px));
 }
 .zzz-scroll-hint--triangle.zzz-scroll-hint--right .zzz-scroll-hint__glyph {
-    transform: rotate(-90deg);
+  transform: rotate(-90deg);
 }
 .zzz-scroll-hint--chevron.zzz-scroll-hint--down .zzz-scroll-hint__glyph {
-    transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 .zzz-scroll-hint--triangle.zzz-scroll-hint--left .zzz-scroll-hint__glyph {
-    transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 .zzz-scroll-hint--chevron.zzz-scroll-hint--up .zzz-scroll-hint__glyph {
-    transform: rotate(-90deg);
+  transform: rotate(-90deg);
 }
 
 /* placement="end": on the edge the direction points at (the ▼'s bottom is flush with the clip edge) */
 .zzz-scroll-hint--end {
-    position: absolute;
-    z-index: 1;
+  position: absolute;
+  z-index: 1;
 }
 .zzz-scroll-hint--end.zzz-scroll-hint--down,
 .zzz-scroll-hint--end.zzz-scroll-hint--up {
-    left: 50%;
-    transform: translateX(-50%);
+  left: 50%;
+  transform: translateX(-50%);
 }
 .zzz-scroll-hint--end.zzz-scroll-hint--down {
-    bottom: 0;
+  bottom: 0;
 }
 .zzz-scroll-hint--end.zzz-scroll-hint--up {
-    top: 0;
+  top: 0;
 }
 .zzz-scroll-hint--end.zzz-scroll-hint--right,
 .zzz-scroll-hint--end.zzz-scroll-hint--left {
-    top: 50%;
-    transform: translateY(-50%);
+  top: 50%;
+  transform: translateY(-50%);
 }
 .zzz-scroll-hint--end.zzz-scroll-hint--right {
-    right: 0;
+  right: 0;
 }
 .zzz-scroll-hint--end.zzz-scroll-hint--left {
-    left: 0;
+  left: 0;
 }
 
 .zzz-scroll-hint[data-visible='false'] {
-    opacity: 0;
-    visibility: hidden;
-    transition:
-        opacity 120ms linear,
-        visibility 0s linear 120ms;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 120ms linear,
+    visibility 0s linear 120ms;
 }
 
 .zzz-scroll-hint--interactive {
-    pointer-events: auto;
-    cursor: pointer;
-    outline: none;
+  pointer-events: auto;
+  cursor: pointer;
+  outline: none;
 }
 /* the web tap target is the glyph box plus 8 px; no hover style (the shared state model) */
 .zzz-scroll-hint--interactive::before {
-    content: '';
-    position: absolute;
-    inset: calc(-8 * var(--zzz-px));
+  content: '';
+  position: absolute;
+  inset: calc(-8 * var(--zzz-px));
 }
 .zzz-scroll-hint--interactive:not(.zzz-scroll-hint--end) {
-    position: relative;
+  position: relative;
 }
 .zzz-scroll-hint--interactive:active,
 .zzz-scroll-hint--interactive[data-pressed] {
-    color: var(--zzz-accent);
+  color: var(--zzz-accent);
 }
 .zzz-scroll-hint--interactive:focus-visible {
-    box-shadow: var(--zzz-focus-ring);
-    border-radius: calc(4 * var(--zzz-px));
+  box-shadow: var(--zzz-focus-ring);
+  border-radius: calc(4 * var(--zzz-px));
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .zzz-scroll-hint,
-    .zzz-scroll-hint[data-visible='false'] {
-        transition: none;
-    }
+  .zzz-scroll-hint,
+  .zzz-scroll-hint[data-visible='false'] {
+    transition: none;
+  }
 }
 [data-reduced-motion] .zzz-scroll-hint {
-    transition: none;
+  transition: none;
 }

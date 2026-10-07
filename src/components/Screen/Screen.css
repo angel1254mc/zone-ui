@@ -5,91 +5,88 @@
  * sits in the bottom-right corner.
  */
 .zzz-screen {
-    position: relative;
-    isolation: isolate;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background: var(--zzz-color-bg-base);
-    color: var(--zzz-color-text-primary);
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--zzz-color-bg-base);
+  color: var(--zzz-color-text-primary);
 }
 .zzz-screen[data-background='flat'],
 .zzz-screen[data-background='mural'] {
-    background: var(--zzz-color-bg-content-flat);
+  background: var(--zzz-color-bg-content-flat);
 }
 
 .zzz-screen__bg {
-    position: absolute;
-    inset: 0;
-    z-index: var(--zzz-z-index-background);
-    pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: var(--zzz-z-index-background);
+  pointer-events: none;
 }
 /* Custom art fills the canvas. */
 .zzz-screen__bg > :where(img, picture, svg, video, canvas) {
-    position: absolute;
-    inset: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .zzz-screen__bg > picture > img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 /* Storage mural: only behind the top bar band. */
 .zzz-screen__mural.zzz-bg {
-    inset: 0 0 auto;
-    height: var(--zzz-layout-top-bar-height);
+  inset: 0 0 auto;
+  height: var(--zzz-layout-top-bar-height);
 }
 
 .zzz-screen__header,
 .zzz-screen__footer {
-    position: relative;
-    z-index: var(--zzz-z-index-shell);
-    flex: none;
+  position: relative;
+  z-index: var(--zzz-z-index-shell);
+  flex: none;
 }
 /* Rule one row below the 102-tall top band. */
 .zzz-screen__strip {
-    margin-top: calc(
-        var(--zzz-layout-rule-top) - var(--zzz-layout-top-bar-height)
-    );
+  margin-top: calc(var(--zzz-layout-rule-top) - var(--zzz-layout-top-bar-height));
 }
 
 .zzz-screen__main {
-    position: relative;
-    z-index: var(--zzz-z-index-content);
-    flex: 1 1 auto;
-    min-height: 0;
+  position: relative;
+  z-index: var(--zzz-z-index-content);
+  flex: 1 1 auto;
+  min-height: 0;
 }
 
 .zzz-screen__uid {
-    position: absolute;
-    right: calc(7 * var(--zzz-px));
-    bottom: calc(2 * var(--zzz-px));
-    z-index: var(--zzz-z-index-shell);
-    pointer-events: none;
+  position: absolute;
+  right: calc(7 * var(--zzz-px));
+  bottom: calc(2 * var(--zzz-px));
+  z-index: var(--zzz-z-index-shell);
+  pointer-events: none;
 }
 
 /* Entrance: fade from black (motion.duration.screenIn, easing.screenIn). */
 @keyframes zzz-screen-in {
-    from {
-        opacity: 0;
-    }
+  from {
+    opacity: 0;
+  }
 }
 .zzz-screen[data-entrance] {
-    animation: zzz-screen-in var(--zzz-motion-duration-screen-in)
-        var(--zzz-motion-easing-screen-in) both;
+  animation: zzz-screen-in var(--zzz-motion-duration-screen-in) var(--zzz-motion-easing-screen-in) both;
 }
 [data-reduced-motion] .zzz-screen[data-entrance],
 .zzz-screen[data-entrance][data-reduced-motion] {
-    animation: none;
+  animation: none;
 }
 @media (prefers-reduced-motion: reduce) {
-    .zzz-screen[data-entrance] {
-        animation: none;
-    }
+  .zzz-screen[data-entrance] {
+    animation: none;
+  }
 }

@@ -1,2 +1,2 @@
-export { NewsCard } from './NewsCard'
-export type { NewsCardProps, NewsCardTone } from './NewsCard'
+export { NewsCard } from './NewsCard';
+export type { NewsCardProps, NewsCardTone } from './NewsCard';

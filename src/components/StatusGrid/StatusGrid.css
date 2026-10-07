@@ -16,159 +16,154 @@
  *   empty    color.surface.statRowEmpty #0C0C0C    (dark slot, no glyph)
  */
 .zzz-status-grid {
-    --zzz-sg-cell: calc(64 * var(--zzz-px));
-    --zzz-sg-ring: var(--zzz-border-width-card);
-    --zzz-sg-radius: calc(11 * var(--zzz-px));
-    --zzz-sg-gap: calc(12 * var(--zzz-px));
-    --zzz-sg-glyph: calc(30 * var(--zzz-px));
-    --zzz-sg-caption: var(--zzz-font-size-label);
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    /* the keyline (3) sits outside each cell, so the gap must stay larger than it */
-    gap: var(--zzz-sg-gap);
-    margin: 0;
-    padding: var(--zzz-border-width-keyline);
-    list-style: none;
-    color: var(--zzz-color-text-primary);
-    line-height: var(--zzz-line-height-single);
+  --zzz-sg-cell: calc(64 * var(--zzz-px));
+  --zzz-sg-ring: var(--zzz-border-width-card);
+  --zzz-sg-radius: calc(11 * var(--zzz-px));
+  --zzz-sg-gap: calc(12 * var(--zzz-px));
+  --zzz-sg-glyph: calc(30 * var(--zzz-px));
+  --zzz-sg-caption: var(--zzz-font-size-label);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  /* the keyline (3) sits outside each cell, so the gap must stay larger than it */
+  gap: var(--zzz-sg-gap);
+  margin: 0;
+  padding: var(--zzz-border-width-keyline);
+  list-style: none;
+  color: var(--zzz-color-text-primary);
+  line-height: var(--zzz-line-height-single);
 }
 .zzz-status-grid--sm {
-    --zzz-sg-cell: calc(40 * var(--zzz-px));
-    --zzz-sg-ring: calc(3 * var(--zzz-px));
-    --zzz-sg-radius: calc(7 * var(--zzz-px));
-    --zzz-sg-gap: calc(8 * var(--zzz-px));
-    --zzz-sg-glyph: calc(19 * var(--zzz-px));
-    --zzz-sg-caption: var(--zzz-font-size-tiny);
+  --zzz-sg-cell: calc(40 * var(--zzz-px));
+  --zzz-sg-ring: calc(3 * var(--zzz-px));
+  --zzz-sg-radius: calc(7 * var(--zzz-px));
+  --zzz-sg-gap: calc(8 * var(--zzz-px));
+  --zzz-sg-glyph: calc(19 * var(--zzz-px));
+  --zzz-sg-caption: var(--zzz-font-size-tiny);
 }
 .zzz-status-grid--lg {
-    --zzz-sg-cell: calc(88 * var(--zzz-px));
-    --zzz-sg-ring: calc(5 * var(--zzz-px));
-    --zzz-sg-radius: calc(14 * var(--zzz-px));
-    --zzz-sg-gap: calc(16 * var(--zzz-px));
-    --zzz-sg-glyph: calc(42 * var(--zzz-px));
-    --zzz-sg-caption: var(--zzz-font-size-body);
+  --zzz-sg-cell: calc(88 * var(--zzz-px));
+  --zzz-sg-ring: calc(5 * var(--zzz-px));
+  --zzz-sg-radius: calc(14 * var(--zzz-px));
+  --zzz-sg-gap: calc(16 * var(--zzz-px));
+  --zzz-sg-glyph: calc(42 * var(--zzz-px));
+  --zzz-sg-caption: var(--zzz-font-size-body);
 }
 .zzz-status-grid--columns {
-    display: grid;
-    grid-template-columns: repeat(
-        var(--zzz-status-grid-columns),
-        var(--zzz-sg-cell)
-    );
+  display: grid;
+  grid-template-columns: repeat(var(--zzz-status-grid-columns), var(--zzz-sg-cell));
 }
 
 .zzz-status-grid__item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: calc(var(--zzz-sg-gap) * 0.6);
-    width: var(--zzz-sg-cell);
-    margin: 0;
-    padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(var(--zzz-sg-gap) * 0.6);
+  width: var(--zzz-sg-cell);
+  margin: 0;
+  padding: 0;
 }
 
 .zzz-status-grid__cell {
-    --zzz-sg-fill: var(--zzz-color-surface-stat-row-empty);
-    --zzz-sg-ink: var(--zzz-color-accent-on);
-    position: relative;
-    display: grid;
-    place-items: center;
-    width: var(--zzz-sg-cell);
-    height: var(--zzz-sg-cell);
-    border-radius: var(--zzz-sg-radius);
-    background: var(--zzz-sg-fill);
-    box-shadow: var(--zzz-shadow-keyline);
-    color: var(--zzz-sg-ink);
+  --zzz-sg-fill: var(--zzz-color-surface-stat-row-empty);
+  --zzz-sg-ink: var(--zzz-color-accent-on);
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--zzz-sg-cell);
+  height: var(--zzz-sg-cell);
+  border-radius: var(--zzz-sg-radius);
+  background: var(--zzz-sg-fill);
+  box-shadow: var(--zzz-shadow-keyline);
+  color: var(--zzz-sg-ink);
 }
 /* grey ring ON TOP of the fill (ItemCard recipe), with the lit top/left row of the dark pills */
 .zzz-status-grid__cell::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border: var(--zzz-sg-ring) solid var(--zzz-color-border-card);
-    border-radius: inherit;
-    box-shadow: inset calc(1 * var(--zzz-px)) calc(1 * var(--zzz-px)) 0
-        rgb(255 255 255 / 0.12);
-    pointer-events: none;
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: var(--zzz-sg-ring) solid var(--zzz-color-border-card);
+  border-radius: inherit;
+  box-shadow: inset calc(1 * var(--zzz-px)) calc(1 * var(--zzz-px)) 0 rgb(255 255 255 / 0.12);
+  pointer-events: none;
 }
 .zzz-status-grid__cell[data-status='success'] {
-    --zzz-sg-fill: var(--zzz-accent);
+  --zzz-sg-fill: var(--zzz-accent);
 }
 .zzz-status-grid__cell[data-status='error'] {
-    --zzz-sg-fill: var(--zzz-color-danger-base);
+  --zzz-sg-fill: var(--zzz-color-danger-base);
 }
 .zzz-status-grid__cell[data-status='warning'] {
-    --zzz-sg-fill: var(--zzz-color-icon-combat-readiness);
+  --zzz-sg-fill: var(--zzz-color-icon-combat-readiness);
 }
 .zzz-status-grid__cell[data-status='neutral'] {
-    --zzz-sg-fill: var(--zzz-color-star-empty);
+  --zzz-sg-fill: var(--zzz-color-star-empty);
 }
 .zzz-status-grid__cell[data-status='empty'] {
-    --zzz-sg-ink: var(--zzz-color-text-disabled);
+  --zzz-sg-ink: var(--zzz-color-text-disabled);
 }
 /* the dark slot reads as recessed: a faint inner shade under the ring */
 .zzz-status-grid__cell[data-status='empty']::before {
-    box-shadow: inset 0 calc(4 * var(--zzz-px)) calc(6 * var(--zzz-px))
-        rgb(0 0 0 / 0.6);
+  box-shadow: inset 0 calc(4 * var(--zzz-px)) calc(6 * var(--zzz-px)) rgb(0 0 0 / 0.6);
 }
 
 .zzz-status-grid__cell:focus-visible {
-    outline: none;
+  outline: none;
 }
 
 .zzz-status-grid__glyph {
-    position: relative;
-    display: grid;
-    place-items: center;
-    font-size: var(--zzz-sg-glyph);
-    line-height: 0;
+  position: relative;
+  display: grid;
+  place-items: center;
+  font-size: var(--zzz-sg-glyph);
+  line-height: 0;
 }
 
 .zzz-status-grid__content {
-    position: relative;
-    display: inline-block;
-    font-size: calc(var(--zzz-sg-cell) * 0.36);
-    line-height: var(--zzz-line-height-single);
-    font-variant-numeric: tabular-nums;
-    transform: skewX(var(--zzz-skew-italic));
+  position: relative;
+  display: inline-block;
+  font-size: calc(var(--zzz-sg-cell) * 0.36);
+  line-height: var(--zzz-line-height-single);
+  font-variant-numeric: tabular-nums;
+  transform: skewX(var(--zzz-skew-italic));
 }
 
 /* current cell: an accent ring directly against the grey ring (like the ItemCard selection ring:
  * no gap; it covers the keyline), with the black keyline moved outside it */
 .zzz-status-grid__item[data-current] .zzz-status-grid__cell::after {
-    content: '';
-    position: absolute;
-    inset: calc(-1 * var(--zzz-sg-ring));
-    border: var(--zzz-sg-ring) solid var(--zzz-accent);
-    border-radius: calc(var(--zzz-sg-radius) + var(--zzz-sg-ring));
-    box-shadow: var(--zzz-shadow-keyline);
-    pointer-events: none;
+  content: '';
+  position: absolute;
+  inset: calc(-1 * var(--zzz-sg-ring));
+  border: var(--zzz-sg-ring) solid var(--zzz-accent);
+  border-radius: calc(var(--zzz-sg-radius) + var(--zzz-sg-ring));
+  box-shadow: var(--zzz-shadow-keyline);
+  pointer-events: none;
 }
 
 .zzz-status-grid__caption {
-    display: block;
-    /* half a gap into each neighbour's space at most, so adjacent captions can never touch;
+  display: block;
+  /* half a gap into each neighbour's space at most, so adjacent captions can never touch;
    * longer words ellipsize: keep captions short (Q1, Mon, 12) */
-    max-width: calc(var(--zzz-sg-cell) + var(--zzz-sg-gap));
-    /* overflow:hidden (needed for the ellipsis) would clip descenders off the 1.0 line box:
+  max-width: calc(var(--zzz-sg-cell) + var(--zzz-sg-gap));
+  /* overflow:hidden (needed for the ellipsis) would clip descenders off the 1.0 line box:
    * pad the box vertically and pull the margins back so layout is unchanged */
-    padding-block: 0.4em;
-    margin-block: -0.4em;
-    overflow: hidden;
-    color: var(--zzz-color-text-muted);
-    font-size: var(--zzz-sg-caption);
-    line-height: var(--zzz-line-height-single);
-    text-align: center;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  padding-block: 0.4em;
+  margin-block: -0.4em;
+  overflow: hidden;
+  color: var(--zzz-color-text-muted);
+  font-size: var(--zzz-sg-caption);
+  line-height: var(--zzz-line-height-single);
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .zzz-status-grid__item[data-current] .zzz-status-grid__caption {
-    color: var(--zzz-color-text-primary);
+  color: var(--zzz-color-text-primary);
 }
 
 @media (forced-colors: active) {
-    .zzz-status-grid__cell {
-        forced-color-adjust: none;
-        outline: calc(1 * var(--zzz-px)) solid CanvasText;
-    }
+  .zzz-status-grid__cell {
+    forced-color-adjust: none;
+    outline: calc(1 * var(--zzz-px)) solid CanvasText;
+  }
 }

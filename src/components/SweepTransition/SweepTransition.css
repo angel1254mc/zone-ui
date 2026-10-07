@@ -11,260 +11,260 @@
  */
 
 .zzz-sweep {
-    z-index: var(--zzz-z-index-interstitial);
-    container-type: size;
-    pointer-events: none;
-    /* The timeline length, set inline from the `duration` prop (default 933 ms = SWEEP_TIMING.total, not the
+  z-index: var(--zzz-z-index-interstitial);
+  container-type: size;
+  pointer-events: none;
+  /* The timeline length, set inline from the `duration` prop (default 933 ms = SWEEP_TIMING.total, not the
    * rounded --zzz-motion-duration-interstitial 930 ms): every keyframe percentage below is t / 933 ms. */
-    --zzz-sweep-duration: 933ms;
-    /* Tip depth of the "<" edge: tan(16.2deg) × half the height (157 px on a 1080 px layer). On a tall, narrow layer
+  --zzz-sweep-duration: 933ms;
+  /* Tip depth of the "<" edge: tan(16.2deg) × half the height (157 px on a 1080 px layer). On a tall, narrow layer
    * (phone portrait) the tip is capped at 12 % of the width so the uncovered corners stay small. */
-    --zzz-sweep-tip: min(100cqh * 0.1453, 100cqw * 0.12);
-    /* Panel width: the screen + a tip on each side + slack. */
-    --zzz-sweep-w: calc(100cqw + 2 * var(--zzz-sweep-tip) + 40 * var(--zzz-px));
+  --zzz-sweep-tip: min(100cqh * 0.1453, 100cqw * 0.12);
+  /* Panel width: the screen + a tip on each side + slack. */
+  --zzz-sweep-w: calc(100cqw + 2 * var(--zzz-sweep-tip) + 40 * var(--zzz-px));
 }
 
 .zzz-sweep__panel {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: var(--zzz-sweep-w);
-    height: 100%;
-    /* "<" leading edge and a parallel "<" trailing edge (the reveal edge on exit). */
-    clip-path: polygon(
-        var(--zzz-sweep-tip) 0,
-        100% 0,
-        calc(100% - var(--zzz-sweep-tip)) 50%,
-        100% 100%,
-        var(--zzz-sweep-tip) 100%,
-        0 50%
-    );
-    transform: translateX(100cqw);
-    animation: var(--zzz-sweep-duration) linear both;
-    will-change: transform;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--zzz-sweep-w);
+  height: 100%;
+  /* "<" leading edge and a parallel "<" trailing edge (the reveal edge on exit). */
+  clip-path: polygon(
+    var(--zzz-sweep-tip) 0,
+    100% 0,
+    calc(100% - var(--zzz-sweep-tip)) 50%,
+    100% 100%,
+    var(--zzz-sweep-tip) 100%,
+    0 50%
+  );
+  transform: translateX(100cqw);
+  animation: var(--zzz-sweep-duration) linear both;
+  will-change: transform;
 }
 .zzz-sweep__panel > .zzz-hatch-bg,
 .zzz-sweep__panel > * {
-    position: absolute;
-    inset: 0;
+  position: absolute;
+  inset: 0;
 }
 .zzz-sweep__panel--light {
-    animation-name: zzz-sweep-light;
+  animation-name: zzz-sweep-light;
 }
 .zzz-sweep__panel--mid {
-    animation-name: zzz-sweep-mid;
+  animation-name: zzz-sweep-mid;
 }
 .zzz-sweep__panel--deep {
-    animation-name: zzz-sweep-deep;
+  animation-name: zzz-sweep-deep;
 }
 
 /* Light (sage): sweeps in over 33–167 ms and rests just past the left edge (the old screen peeks at
  * the corners). Teal covers @467, deep sweeps 433–533, and the stack exits left 567–633 ms. */
 @keyframes zzz-sweep-light {
-    0% {
-        transform: translateX(100cqw);
-    }
-    3.54% {
-        transform: translateX(94.2cqw);
-    }
-    7.18% {
-        transform: translateX(80.4cqw);
-    }
-    10.72% {
-        transform: translateX(65.1cqw);
-    }
-    14.26% {
-        transform: translateX(43.8cqw);
-    }
-    17.9%,
-    60.77% {
-        transform: translateX(-2.27cqw);
-    }
-    64.31% {
-        transform: translateX(calc(52.4cqw - var(--zzz-sweep-w)));
-    }
-    67.85%,
-    100% {
-        transform: translateX(calc(-1 * var(--zzz-sweep-w)));
-    }
+  0% {
+    transform: translateX(100cqw);
+  }
+  3.54% {
+    transform: translateX(94.2cqw);
+  }
+  7.18% {
+    transform: translateX(80.4cqw);
+  }
+  10.72% {
+    transform: translateX(65.1cqw);
+  }
+  14.26% {
+    transform: translateX(43.8cqw);
+  }
+  17.9%,
+  60.77% {
+    transform: translateX(-2.27cqw);
+  }
+  64.31% {
+    transform: translateX(calc(52.4cqw - var(--zzz-sweep-w)));
+  }
+  67.85%,
+  100% {
+    transform: translateX(calc(-1 * var(--zzz-sweep-w)));
+  }
 }
 /* Mid (teal): enters at 100 ms, rests @167 as a ~27 % strip on the right, holds, then covers
  * everything in one 33 ms step @467. */
 @keyframes zzz-sweep-mid {
-    0%,
-    7.18% {
-        transform: translateX(100cqw);
-    }
-    10.72% {
-        transform: translateX(96.8cqw);
-    }
-    14.26% {
-        transform: translateX(90.7cqw);
-    }
-    17.9%,
-    46.41% {
-        transform: translateX(72.9cqw);
-    }
-    50.05%,
-    60.77% {
-        transform: translateX(-2.27cqw);
-    }
-    64.31% {
-        transform: translateX(calc(52.4cqw - var(--zzz-sweep-w)));
-    }
-    67.85%,
-    100% {
-        transform: translateX(calc(-1 * var(--zzz-sweep-w)));
-    }
+  0%,
+  7.18% {
+    transform: translateX(100cqw);
+  }
+  10.72% {
+    transform: translateX(96.8cqw);
+  }
+  14.26% {
+    transform: translateX(90.7cqw);
+  }
+  17.9%,
+  46.41% {
+    transform: translateX(72.9cqw);
+  }
+  50.05%,
+  60.77% {
+    transform: translateX(-2.27cqw);
+  }
+  64.31% {
+    transform: translateX(calc(52.4cqw - var(--zzz-sweep-w)));
+  }
+  67.85%,
+  100% {
+    transform: translateX(calc(-1 * var(--zzz-sweep-w)));
+  }
 }
 /* Deep: sweeps in over 433–533 ms. */
 @keyframes zzz-sweep-deep {
-    0%,
-    46.41% {
-        transform: translateX(100cqw);
-    }
-    50.05% {
-        transform: translateX(65.3cqw);
-    }
-    53.59% {
-        transform: translateX(15.4cqw);
-    }
-    57.13%,
-    60.77% {
-        transform: translateX(-1.56cqw);
-    }
-    64.31% {
-        transform: translateX(calc(52.4cqw - var(--zzz-sweep-w)));
-    }
-    67.85%,
-    100% {
-        transform: translateX(calc(-1 * var(--zzz-sweep-w)));
-    }
+  0%,
+  46.41% {
+    transform: translateX(100cqw);
+  }
+  50.05% {
+    transform: translateX(65.3cqw);
+  }
+  53.59% {
+    transform: translateX(15.4cqw);
+  }
+  57.13%,
+  60.77% {
+    transform: translateX(-1.56cqw);
+  }
+  64.31% {
+    transform: translateX(calc(52.4cqw - var(--zzz-sweep-w)));
+  }
+  67.85%,
+  100% {
+    transform: translateX(calc(-1 * var(--zzz-sweep-w)));
+  }
 }
 
 /* Centre band (56 px, pure black), above the panels: 24 → 42 → 56 px in ~70 ms, then
  * 56 → 35 → 20 → 4 → 0 from 833 ms. */
 .zzz-sweep__band {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 50%;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: calc(56 * var(--zzz-px));
-    margin-top: calc(-27 * var(--zzz-px)); /* centred on the layer's mid-line */
-    background: var(--zzz-color-interstitial-band);
-    overflow: hidden;
-    animation: zzz-sweep-band var(--zzz-sweep-duration) linear both;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(56 * var(--zzz-px));
+  margin-top: calc(-27 * var(--zzz-px)); /* centred on the layer's mid-line */
+  background: var(--zzz-color-interstitial-band);
+  overflow: hidden;
+  animation: zzz-sweep-band var(--zzz-sweep-duration) linear both;
 }
 @keyframes zzz-sweep-band {
-    0% {
-        transform: scaleY(0.43);
-    }
-    3.54% {
-        transform: scaleY(0.75);
-    }
-    7.18%,
-    89.28% {
-        transform: scaleY(1);
-    }
-    92.93% {
-        transform: scaleY(0.625);
-    }
-    96.46% {
-        transform: scaleY(0.357);
-    }
-    99.9% {
-        transform: scaleY(0.07);
-    }
-    100% {
-        transform: scaleY(0);
-    }
+  0% {
+    transform: scaleY(0.43);
+  }
+  3.54% {
+    transform: scaleY(0.75);
+  }
+  7.18%,
+  89.28% {
+    transform: scaleY(1);
+  }
+  92.93% {
+    transform: scaleY(0.625);
+  }
+  96.46% {
+    transform: scaleY(0.357);
+  }
+  99.9% {
+    transform: scaleY(0.07);
+  }
+  100% {
+    transform: scaleY(0);
+  }
 }
 
 /* Label: #F8F8F8 condensed italic caps tracked 1.75em (letter pitch ~69 px). The trailing tracking is
  * cancelled so the word pair stays centred. Entry flicker (full @67, ~70 % @100, full @133) and exit
  * blink (35 % / full / 35 % / full / full, gone @833), one step per 33 ms. */
 .zzz-sweep .zzz-sweep__label {
-    color: var(--zzz-color-interstitial-text);
-    line-height: var(--zzz-line-height-single);
-    text-transform: uppercase;
-    white-space: pre;
-    /* Tracking 1.75em on a wide screen; on a narrow (phone) layer it shrinks with the layer width so a label
+  color: var(--zzz-color-interstitial-text);
+  line-height: var(--zzz-line-height-single);
+  text-transform: uppercase;
+  white-space: pre;
+  /* Tracking 1.75em on a wide screen; on a narrow (phone) layer it shrinks with the layer width so a label
    * like "QUESTION 3" still fits. The trailing tracking is cancelled to keep the label centred. */
-    --zzz-sweep-tracking: min(var(--zzz-letter-spacing-interstitial), 2.1cqw);
-    letter-spacing: var(--zzz-sweep-tracking);
-    margin-right: calc(-1 * var(--zzz-sweep-tracking));
-    animation: zzz-sweep-label var(--zzz-sweep-duration) step-end both;
+  --zzz-sweep-tracking: min(var(--zzz-letter-spacing-interstitial), 2.1cqw);
+  letter-spacing: var(--zzz-sweep-tracking);
+  margin-right: calc(-1 * var(--zzz-sweep-tracking));
+  animation: zzz-sweep-label var(--zzz-sweep-duration) step-end both;
 }
 @keyframes zzz-sweep-label {
-    0% {
-        opacity: 0;
-    }
-    7.18% {
-        opacity: 1;
-    }
-    10.72% {
-        opacity: 0.7;
-    }
-    14.26% {
-        opacity: 1;
-    }
-    71.49% {
-        opacity: 0.35;
-    }
-    75.03% {
-        opacity: 1;
-    }
-    78.56% {
-        opacity: 0.35;
-    }
-    82.21% {
-        opacity: 1;
-    }
-    89.28%,
-    100% {
-        opacity: 0;
-    }
+  0% {
+    opacity: 0;
+  }
+  7.18% {
+    opacity: 1;
+  }
+  10.72% {
+    opacity: 0.7;
+  }
+  14.26% {
+    opacity: 1;
+  }
+  71.49% {
+    opacity: 0.35;
+  }
+  75.03% {
+    opacity: 1;
+  }
+  78.56% {
+    opacity: 0.35;
+  }
+  82.21% {
+    opacity: 1;
+  }
+  89.28%,
+  100% {
+    opacity: 0;
+  }
 }
 
 /* Frozen timeline (`at`): pause every animation at −at ms. */
 .zzz-sweep[data-frozen] .zzz-sweep__panel,
 .zzz-sweep[data-frozen] .zzz-sweep__band,
 .zzz-sweep[data-frozen] .zzz-sweep__label {
-    animation-play-state: paused;
-    animation-delay: var(--zzz-sweep-at, 0ms);
+  animation-play-state: paused;
+  animation-delay: var(--zzz-sweep-at, 0ms);
 }
 
 /* Reduced motion: no sweep, blink or band growth; the deep panel + band fade in, hold and fade out. */
 .zzz-sweep[data-reduced] .zzz-sweep__panel--light,
 .zzz-sweep[data-reduced] .zzz-sweep__panel--mid {
-    display: none;
+  display: none;
 }
 .zzz-sweep[data-reduced] .zzz-sweep__panel--deep {
-    left: calc(-1 * var(--zzz-sweep-tip));
-    clip-path: none;
-    transform: none;
+  left: calc(-1 * var(--zzz-sweep-tip));
+  clip-path: none;
+  transform: none;
 }
 .zzz-sweep[data-reduced] .zzz-sweep__panel--deep,
 .zzz-sweep[data-reduced] .zzz-sweep__band {
-    transform: none;
-    animation: zzz-sweep-quick-fade 400ms linear both;
+  transform: none;
+  animation: zzz-sweep-quick-fade 400ms linear both;
 }
 .zzz-sweep[data-reduced] .zzz-sweep__label {
-    animation: none;
+  animation: none;
 }
 @keyframes zzz-sweep-quick-fade {
-    0% {
-        opacity: 0;
-    }
-    25%,
-    75% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
+  0% {
+    opacity: 0;
+  }
+  25%,
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }

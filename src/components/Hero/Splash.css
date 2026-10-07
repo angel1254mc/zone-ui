@@ -5,158 +5,158 @@
  * open). Fades out over 300 ms (SPLASH_EXIT_MS) when dismissed.
  */
 .zzz-splash {
-    position: fixed;
-    inset: 0;
-    z-index: var(--zzz-z-index-interstitial);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow-x: hidden;
-    overflow-y: auto;
-    isolation: isolate;
-    /* The logo box sizes against the splash itself (cqw / cqh), contained or full-viewport. */
-    container-type: size;
-    background: var(--zzz-color-bg-base);
-    color: var(--zzz-color-text-primary);
-    cursor: pointer;
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    animation: zzz-splash-in 200ms linear both;
+  position: fixed;
+  inset: 0;
+  z-index: var(--zzz-z-index-interstitial);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+  isolation: isolate;
+  /* The logo box sizes against the splash itself (cqw / cqh), contained or full-viewport. */
+  container-type: size;
+  background: var(--zzz-color-bg-base);
+  color: var(--zzz-color-text-primary);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  animation: zzz-splash-in 200ms linear both;
 }
 .zzz-splash--contained {
-    position: absolute;
+  position: absolute;
 }
 .zzz-splash[data-state='closed'] {
-    pointer-events: none;
-    opacity: 0; /* the end state; also what reduced motion shows at once */
-    animation: zzz-splash-out 300ms linear both;
+  pointer-events: none;
+  opacity: 0; /* the end state; also what reduced motion shows at once */
+  animation: zzz-splash-out 300ms linear both;
 }
 @keyframes zzz-splash-in {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 @keyframes zzz-splash-out {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 .zzz-splash__bg {
-    z-index: 0;
+  z-index: 0;
 }
 
 .zzz-splash__body {
-    position: relative;
-    z-index: 1;
-    /* Centred in the space above the footer; scrolls on very short screens. */
-    margin-block: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: calc(28 * var(--zzz-px));
-    box-sizing: border-box;
-    width: 100%;
-    padding: calc(48 * var(--zzz-px));
-    text-align: center;
+  position: relative;
+  z-index: 1;
+  /* Centred in the space above the footer; scrolls on very short screens. */
+  margin-block: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(28 * var(--zzz-px));
+  box-sizing: border-box;
+  width: 100%;
+  padding: calc(48 * var(--zzz-px));
+  text-align: center;
 }
 
 .zzz-splash__logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* A square box (fit any logo with object-fit: contain); never more than 80 % of the splash width or 36 % of its height. */
-    width: min(calc(520 * var(--zzz-px)), 80cqw, 36cqh);
-    aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* A square box (fit any logo with object-fit: contain); never more than 80 % of the splash width or 36 % of its height. */
+  width: min(calc(520 * var(--zzz-px)), 80cqw, 36cqh);
+  aspect-ratio: 1;
 }
 .zzz-splash__logo > * {
-    display: block;
-    max-width: 100%;
-    max-height: 100%;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 /* Title: the EventTitle sticker outline at a splash size; stroke and drop scale with it. */
 .zzz-splash .zzz-splash__title {
-    margin: 0;
-    font-size: calc(96 * var(--zzz-px));
-    line-height: 1.08;
-    overflow-wrap: anywhere;
-    padding-block: 0.08em 0.14em;
-    -webkit-text-stroke: 0.184em var(--zzz-color-bg-base);
-    text-shadow: none;
-    filter: drop-shadow(0 0.079em 0 var(--zzz-color-bg-base));
+  margin: 0;
+  font-size: calc(96 * var(--zzz-px));
+  line-height: 1.08;
+  overflow-wrap: anywhere;
+  padding-block: 0.08em 0.14em;
+  -webkit-text-stroke: 0.184em var(--zzz-color-bg-base);
+  text-shadow: none;
+  filter: drop-shadow(0 0.079em 0 var(--zzz-color-bg-base));
 }
 
 .zzz-splash .zzz-splash__subtitle {
-    margin: 0;
-    line-height: 1.35;
+  margin: 0;
+  line-height: 1.35;
 }
 
 /* Hint button: bare (no pill), the label pulses. */
 .zzz-splash__enter {
-    margin: calc(24 * var(--zzz-px)) 0 0;
-    padding: calc(12 * var(--zzz-px)) calc(36 * var(--zzz-px));
-    border: 0;
-    border-radius: var(--zzz-radius-pill);
-    background: none;
-    color: var(--zzz-color-text-primary);
-    cursor: pointer;
-    font: inherit;
+  margin: calc(24 * var(--zzz-px)) 0 0;
+  padding: calc(12 * var(--zzz-px)) calc(36 * var(--zzz-px));
+  border: 0;
+  border-radius: var(--zzz-radius-pill);
+  background: none;
+  color: var(--zzz-color-text-primary);
+  cursor: pointer;
+  font: inherit;
 }
 .zzz-splash .zzz-splash__hint {
-    display: inline-block;
-    line-height: var(--zzz-line-height-single);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    animation: zzz-splash-pulse 1600ms ease-in-out infinite;
+  display: inline-block;
+  line-height: var(--zzz-line-height-single);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  animation: zzz-splash-pulse 1600ms ease-in-out infinite;
 }
 @keyframes zzz-splash-pulse {
-    0%,
-    100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.35;
-    }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
 }
 /* Pressed: the accent recipe in its simplest form (accent label). */
 .zzz-splash__enter:active .zzz-splash__hint {
-    color: var(--zzz-accent);
-    animation-play-state: paused;
+  color: var(--zzz-accent);
+  animation-play-state: paused;
 }
 
 .zzz-splash .zzz-splash__footer {
-    position: relative;
-    z-index: 1;
-    flex: none;
-    box-sizing: border-box;
-    width: 100%;
-    padding: 0 calc(24 * var(--zzz-px)) calc(28 * var(--zzz-px));
-    line-height: 1.3;
-    text-align: center;
+  position: relative;
+  z-index: 1;
+  flex: none;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 calc(24 * var(--zzz-px)) calc(28 * var(--zzz-px));
+  line-height: 1.3;
+  text-align: center;
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .zzz-splash,
-    .zzz-splash[data-state='closed'],
-    .zzz-splash .zzz-splash__hint {
-        animation: none;
-    }
+  .zzz-splash,
+  .zzz-splash[data-state='closed'],
+  .zzz-splash .zzz-splash__hint {
+    animation: none;
+  }
 }
 [data-reduced-motion] .zzz-splash,
 [data-reduced-motion] .zzz-splash[data-state='closed'],
 .zzz-splash[data-reduced-motion],
 [data-reduced-motion] .zzz-splash .zzz-splash__hint,
 .zzz-splash[data-reduced-motion] .zzz-splash__hint {
-    animation: none;
+  animation: none;
 }

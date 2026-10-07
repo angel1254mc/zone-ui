@@ -1,24 +1,24 @@
 /* Stage: an optional fixed artboard for full-screen game-style scenes, scaled as one picture to
  * its container. Ordinary pages use the rem-based --zzz-scale density instead. */
 .zzz-stage {
-    position: relative;
-    display: grid;
-    place-items: center;
-    width: 100%;
-    height: 100%;
-    /* Used only when the height cannot resolve (auto-height parent): keep the artboard's ratio. */
-    aspect-ratio: var(--zzz-stage-width) / var(--zzz-stage-height);
-    overflow: hidden;
-    container-type: size;
-    background: var(--zzz-color-bg-base, #000000);
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  /* Used only when the height cannot resolve (auto-height parent): keep the artboard's ratio. */
+  aspect-ratio: var(--zzz-stage-width) / var(--zzz-stage-height);
+  overflow: hidden;
+  container-type: size;
+  background: var(--zzz-color-bg-base, #000000);
 }
 
 /* --zzz-px is set inline from `fit` (e.g. min(100cqw / W, 100cqh / H)). It is a registered
  * <length>, so it computes to an absolute px value here and every token below inherits it. */
 .zzz-stage__canvas {
-    position: relative;
-    flex: none;
-    width: calc(var(--zzz-stage-width) * var(--zzz-px));
-    height: calc(var(--zzz-stage-height) * var(--zzz-px));
-    overflow: hidden;
+  position: relative;
+  flex: none;
+  width: calc(var(--zzz-stage-width) * var(--zzz-px));
+  height: calc(var(--zzz-stage-height) * var(--zzz-px));
+  overflow: hidden;
 }

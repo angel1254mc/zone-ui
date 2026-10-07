@@ -11,283 +11,272 @@
  * ::after, 7 px directly outside (offset 0, outer radius 21). No :hover, no pressed look.
  */
 .zzz-item-card {
-    --zzz-card-ring-n: var(--zzz-border-width-card-n);
-    --zzz-card-ring: var(--zzz-border-width-card);
-    --zzz-card-radius: var(--zzz-radius-card);
-    --zzz-card-u: calc(var(--zzz-card-k, 1) * var(--zzz-px));
-    position: relative;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: calc(var(--zzz-card-gap) * var(--zzz-px));
-    width: calc(var(--zzz-card-w) * var(--zzz-px));
-    margin: 0;
-    padding: 0;
-    border: 0;
-    background: none;
-    color: var(--zzz-color-text-primary);
-    font: inherit;
-    line-height: var(--zzz-line-height-single);
-    text-align: center;
-    vertical-align: top;
-    -webkit-tap-highlight-color: transparent;
+  --zzz-card-ring-n: var(--zzz-border-width-card-n);
+  --zzz-card-ring: var(--zzz-border-width-card);
+  --zzz-card-radius: var(--zzz-radius-card);
+  --zzz-card-u: calc(var(--zzz-card-k, 1) * var(--zzz-px));
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: calc(var(--zzz-card-gap) * var(--zzz-px));
+  width: calc(var(--zzz-card-w) * var(--zzz-px));
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--zzz-color-text-primary);
+  font: inherit;
+  line-height: var(--zzz-line-height-single);
+  text-align: center;
+  vertical-align: top;
+  -webkit-tap-highlight-color: transparent;
 }
 button.zzz-item-card {
-    cursor: pointer;
+  cursor: pointer;
 }
 button.zzz-item-card:disabled {
-    cursor: default;
+  cursor: default;
 }
 .zzz-item-card:focus-visible {
-    outline: none;
+  outline: none;
 }
 .zzz-item-card[data-selected] {
-    z-index: var(--zzz-z-index-raised);
+  z-index: var(--zzz-z-index-raised);
 }
 
 /* Reward tile: 5 px ring, outer radius 16. */
 .zzz-item-card--reward {
-    --zzz-card-ring-n: var(--zzz-border-width-reward-tile-n);
-    --zzz-card-ring: var(--zzz-border-width-reward-tile);
-    --zzz-card-radius: var(--zzz-radius-reward-tile);
+  --zzz-card-ring-n: var(--zzz-border-width-reward-tile-n);
+  --zzz-card-ring: var(--zzz-border-width-reward-tile);
+  --zzz-card-radius: var(--zzz-radius-reward-tile);
 }
 
 /* Reward Preview tile: 95 outer with a 5 px ring. */
 .zzz-item-card--preview {
-    --zzz-card-ring-n: 5;
-    --zzz-card-ring: calc(5 * var(--zzz-px));
+  --zzz-card-ring-n: 5;
+  --zzz-card-ring: calc(5 * var(--zzz-px));
 }
 
 /* ── tile ─────────────────────────────────────────────────────────────────────────────── */
 .zzz-item-card__tile {
-    position: relative;
-    display: block;
-    flex: none;
-    width: calc(var(--zzz-card-w) * var(--zzz-px));
-    height: calc(var(--zzz-card-h) * var(--zzz-px));
-    border-radius: var(--zzz-card-radius);
-    background: var(--zzz-card-fill, var(--zzz-color-rarity-b));
+  position: relative;
+  display: block;
+  flex: none;
+  width: calc(var(--zzz-card-w) * var(--zzz-px));
+  height: calc(var(--zzz-card-h) * var(--zzz-px));
+  border-radius: var(--zzz-card-radius);
+  background: var(--zzz-card-fill, var(--zzz-color-rarity-b));
 }
 .zzz-item-card--rarity-s {
-    --zzz-card-fill: var(--zzz-color-rarity-s);
+  --zzz-card-fill: var(--zzz-color-rarity-s);
 }
 .zzz-item-card--rarity-a {
-    --zzz-card-fill: var(--zzz-color-rarity-a);
+  --zzz-card-fill: var(--zzz-color-rarity-a);
 }
 .zzz-item-card--rarity-b {
-    --zzz-card-fill: var(--zzz-color-rarity-b);
+  --zzz-card-fill: var(--zzz-color-rarity-b);
 }
 .zzz-item-card--rarity-c {
-    --zzz-card-fill: var(--zzz-color-rarity-c);
+  --zzz-card-fill: var(--zzz-color-rarity-c);
 }
 
 /* grey ring, above the art */
 .zzz-item-card__tile::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    border: var(--zzz-card-ring) solid var(--zzz-color-border-card);
-    border-radius: inherit;
-    pointer-events: none;
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border: var(--zzz-card-ring) solid var(--zzz-color-border-card);
+  border-radius: inherit;
+  pointer-events: none;
 }
 
 /* selection ring: 7 px accent directly outside the grey ring */
 .zzz-item-card[data-selected] .zzz-item-card__tile::after {
-    content: '';
-    position: absolute;
-    inset: calc(-1 * var(--zzz-border-width-selection));
-    z-index: 2;
-    border: var(--zzz-border-width-selection) solid var(--zzz-accent);
-    border-radius: calc(
-        var(--zzz-card-radius) + var(--zzz-border-width-selection)
-    );
-    pointer-events: none;
+  content: '';
+  position: absolute;
+  inset: calc(-1 * var(--zzz-border-width-selection));
+  z-index: 2;
+  border: var(--zzz-border-width-selection) solid var(--zzz-accent);
+  border-radius: calc(var(--zzz-card-radius) + var(--zzz-border-width-selection));
+  pointer-events: none;
 }
 
 /* Optional heartbeat: every 667 ms the ring contracts onto the tile
  * edge (7 -> 2 px over ~120 ms) and snaps back. */
 @keyframes zzz-item-card-beat {
-    0%,
-    70% {
-        inset: calc(-1 * var(--zzz-border-width-selection));
-        border-width: var(--zzz-border-width-selection);
-    }
-    88% {
-        inset: calc(-2 * var(--zzz-px));
-        border-width: calc(2 * var(--zzz-px));
-    }
-    100% {
-        inset: calc(-1 * var(--zzz-border-width-selection));
-        border-width: var(--zzz-border-width-selection);
-    }
+  0%,
+  70% {
+    inset: calc(-1 * var(--zzz-border-width-selection));
+    border-width: var(--zzz-border-width-selection);
+  }
+  88% {
+    inset: calc(-2 * var(--zzz-px));
+    border-width: calc(2 * var(--zzz-px));
+  }
+  100% {
+    inset: calc(-1 * var(--zzz-border-width-selection));
+    border-width: var(--zzz-border-width-selection);
+  }
 }
 .zzz-item-card[data-beat] .zzz-item-card__tile::after {
-    animation: zzz-item-card-beat var(--zzz-motion-duration-selection-beat)
-        linear infinite;
+  animation: zzz-item-card-beat var(--zzz-motion-duration-selection-beat) linear infinite;
 }
 @media (prefers-reduced-motion: reduce) {
-    .zzz-item-card[data-beat] .zzz-item-card__tile::after {
-        animation: none;
-    }
+  .zzz-item-card[data-beat] .zzz-item-card__tile::after {
+    animation: none;
+  }
 }
 [data-reduced-motion] .zzz-item-card[data-beat] .zzz-item-card__tile::after {
-    animation: none;
+  animation: none;
 }
 
 /* focus (web addition): keyline + accent ring around the tile, outside the selection ring */
 .zzz-item-card:focus-visible .zzz-item-card__tile,
 :focus-visible > .zzz-item-card .zzz-item-card__tile {
-    box-shadow: var(--zzz-focus-ring);
+  box-shadow: var(--zzz-focus-ring);
 }
 .zzz-item-card[data-selected]:focus-visible .zzz-item-card__tile,
 :focus-visible > .zzz-item-card[data-selected] .zzz-item-card__tile {
-    box-shadow:
-        0 0 0 calc(var(--zzz-border-width-selection) + 3 * var(--zzz-px))
-            #000000,
-        0 0 0 calc(var(--zzz-border-width-selection) + 6 * var(--zzz-px))
-            var(--zzz-accent);
+  box-shadow:
+    0 0 0 calc(var(--zzz-border-width-selection) + 3 * var(--zzz-px)) #000000,
+    0 0 0 calc(var(--zzz-border-width-selection) + 6 * var(--zzz-px)) var(--zzz-accent);
 }
 
 /* ── art panel: black, flush with the ring on top/left/right, rounded bottom over the band ── */
 .zzz-item-card__art {
-    position: absolute;
-    top: var(--zzz-card-ring);
-    left: var(--zzz-card-ring);
-    right: var(--zzz-card-ring);
-    bottom: calc(var(--zzz-card-ring) + var(--zzz-card-band) * var(--zzz-px));
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    border-radius: calc(var(--zzz-card-radius) - var(--zzz-card-ring))
-        calc(var(--zzz-card-radius) - var(--zzz-card-ring))
-        calc(var(--zzz-radius-card-art-n) * var(--zzz-card-u))
-        calc(var(--zzz-radius-card-art-n) * var(--zzz-card-u));
-    background: var(--zzz-color-surface-card);
+  position: absolute;
+  top: var(--zzz-card-ring);
+  left: var(--zzz-card-ring);
+  right: var(--zzz-card-ring);
+  bottom: calc(var(--zzz-card-ring) + var(--zzz-card-band) * var(--zzz-px));
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: calc(var(--zzz-card-radius) - var(--zzz-card-ring)) calc(var(--zzz-card-radius) - var(--zzz-card-ring))
+    calc(var(--zzz-radius-card-art-n) * var(--zzz-card-u)) calc(var(--zzz-radius-card-art-n) * var(--zzz-card-u));
+  background: var(--zzz-color-surface-card);
 }
 .zzz-item-card__art > * {
-    display: block;
-    flex: none;
-    width: 100%;
-    height: 100%;
-    max-width: 100%;
-    max-height: 100%;
+  display: block;
+  flex: none;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
 }
 .zzz-item-card__art > :is(img, picture, video) {
-    object-fit: contain;
+  object-fit: contain;
 }
 
 /* ── specialty glyph: 22 x 18, inset 9.5 / 12 from the outer edge ───────────────────────── */
 .zzz-item-card__specialty {
-    position: absolute;
-    left: calc(9.5 * var(--zzz-card-u));
-    top: calc(12 * var(--zzz-card-u));
-    z-index: 3;
-    display: block;
-    width: calc(22 * var(--zzz-card-u));
-    height: calc(18 * var(--zzz-card-u));
-    color: var(--zzz-color-icon-specialty);
-    line-height: 0;
+  position: absolute;
+  left: calc(9.5 * var(--zzz-card-u));
+  top: calc(12 * var(--zzz-card-u));
+  z-index: 3;
+  display: block;
+  width: calc(22 * var(--zzz-card-u));
+  height: calc(18 * var(--zzz-card-u));
+  color: var(--zzz-color-icon-specialty);
+  line-height: 0;
 }
 .zzz-item-card__specialty > * {
-    display: block;
-    width: 100%;
-    height: 100%;
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 /* ── slot hexagon: straddles the top-left corner (SlotHexBadge placement top-left) ────── */
 .zzz-item-card__slot {
-    z-index: 3;
+  z-index: 3;
 }
 
 /* ── stars: first star 18.5 from the left edge, centred ~2.5 px under the band's top edge ─ */
 .zzz-item-card__stars {
-    position: absolute;
-    left: calc(18.5 * var(--zzz-card-u));
-    bottom: calc(
-        (var(--zzz-card-ring-n) + var(--zzz-card-band) - 10.5) * var(--zzz-px)
-    );
-    z-index: 3;
+  position: absolute;
+  left: calc(18.5 * var(--zzz-card-u));
+  bottom: calc((var(--zzz-card-ring-n) + var(--zzz-card-band) - 10.5) * var(--zzz-px));
+  z-index: 3;
 }
 
 /* ── lock disc: 26 px #C1C1C1 + 2 px black ring, right edge 5.5 in, bottom 3.5 over the band */
 .zzz-item-card__lock {
-    position: absolute;
-    right: calc(5.5 * var(--zzz-card-u));
-    bottom: calc(
-        (var(--zzz-card-ring-n) + var(--zzz-card-band) + 3.5) * var(--zzz-px)
-    );
-    z-index: 3;
-    display: grid;
-    place-items: center;
-    width: calc(var(--zzz-size-icon-card-lock-n) * var(--zzz-card-u));
-    height: calc(var(--zzz-size-icon-card-lock-n) * var(--zzz-card-u));
-    border-radius: 50%;
-    background: var(--zzz-color-surface-card-lock-disc);
-    box-shadow: 0 0 0 calc(2 * var(--zzz-card-u)) #000000;
-    color: #000000;
+  position: absolute;
+  right: calc(5.5 * var(--zzz-card-u));
+  bottom: calc((var(--zzz-card-ring-n) + var(--zzz-card-band) + 3.5) * var(--zzz-px));
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: calc(var(--zzz-size-icon-card-lock-n) * var(--zzz-card-u));
+  height: calc(var(--zzz-size-icon-card-lock-n) * var(--zzz-card-u));
+  border-radius: 50%;
+  background: var(--zzz-color-surface-card-lock-disc);
+  box-shadow: 0 0 0 calc(2 * var(--zzz-card-u)) #000000;
+  color: #000000;
 }
 /* LockIcon spans 25 x 30 of its 32 grid: 18 px -> a 14 x 17 padlock */
 .zzz-item-card__lock-glyph {
-    display: block;
-    width: calc(18 * var(--zzz-card-u));
-    height: calc(18 * var(--zzz-card-u));
+  display: block;
+  width: calc(18 * var(--zzz-card-u));
+  height: calc(18 * var(--zzz-card-u));
 }
 
 /* ── equipped-by avatar: 44 px (38 + 3 px black ring), overhanging +8 right / -10 top ─── */
 .zzz-item-card__avatar {
-    position: absolute;
-    top: calc(-10 * var(--zzz-card-u));
-    right: calc(-8 * var(--zzz-card-u));
-    z-index: 4;
-    display: block;
-    width: calc(var(--zzz-size-icon-card-avatar-n) * var(--zzz-card-u));
-    height: calc(var(--zzz-size-icon-card-avatar-n) * var(--zzz-card-u));
-    overflow: hidden;
-    border: calc(3 * var(--zzz-card-u)) solid #000000;
-    border-radius: 50%;
-    background: #000000;
+  position: absolute;
+  top: calc(-10 * var(--zzz-card-u));
+  right: calc(-8 * var(--zzz-card-u));
+  z-index: 4;
+  display: block;
+  width: calc(var(--zzz-size-icon-card-avatar-n) * var(--zzz-card-u));
+  height: calc(var(--zzz-size-icon-card-avatar-n) * var(--zzz-card-u));
+  overflow: hidden;
+  border: calc(3 * var(--zzz-card-u)) solid #000000;
+  border-radius: 50%;
+  background: #000000;
 }
 .zzz-item-card__avatar > * {
-    display: block;
-    width: 100%;
-    height: 100%;
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 .zzz-item-card__avatar > img {
-    object-fit: cover;
+  object-fit: cover;
 }
 
 /* ── EMPTY slot: #2C2C2C ring, black fill, no band, 63 % broken X (stroke 9 on 115) ────── */
 .zzz-item-card[data-empty] .zzz-item-card__tile {
-    background: var(--zzz-color-surface-card);
+  background: var(--zzz-color-surface-card);
 }
 .zzz-item-card[data-empty] .zzz-item-card__tile::before {
-    border-color: var(--zzz-color-border-empty-slot);
+  border-color: var(--zzz-color-border-empty-slot);
 }
 .zzz-item-card__empty-x {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: calc(var(--zzz-card-w) * 0.626 * var(--zzz-px));
-    height: calc(var(--zzz-card-w) * 0.626 * var(--zzz-px));
-    transform: translate(-50%, -50%);
-    color: var(--zzz-color-icon-empty-x);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(var(--zzz-card-w) * 0.626 * var(--zzz-px));
+  height: calc(var(--zzz-card-w) * 0.626 * var(--zzz-px));
+  transform: translate(-50%, -50%);
+  color: var(--zzz-color-icon-empty-x);
 }
 
 /* ── capsule below ───────────────────────────────────────────────────────────────────── */
 .zzz-item-card__below {
-    display: block;
-    width: 100%;
+  display: block;
+  width: 100%;
 }
 .zzz-item-card .zzz-item-card__caption {
-    height: calc(var(--zzz-card-cap) * var(--zzz-px));
+  height: calc(var(--zzz-card-cap) * var(--zzz-px));
 }
 .zzz-item-card--slot[data-empty] .zzz-item-card__caption {
-    /* 'EMPTY' cap height 15 under the 87 slots (condensed-sm gives 13) */
-    font-size: calc(19 * var(--zzz-px));
+  /* 'EMPTY' cap height 15 under the 87 slots (condensed-sm gives 13) */
+  font-size: calc(19 * var(--zzz-px));
 }
 .zzz-item-card__owned[data-short] {
-    color: var(--zzz-color-danger-text);
+  color: var(--zzz-color-danger-text);
 }

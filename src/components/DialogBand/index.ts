@@ -1,16 +1,10 @@
-export { DialogBand } from './DialogBand'
-export type { DialogBandProps } from './DialogBand'
-export { DialogBackdrop } from './DialogBackdrop'
-export type { DialogBackdropProps } from './DialogBackdrop'
-export { ConfirmDialog } from './ConfirmDialog'
-export type { ConfirmDialogProps } from './ConfirmDialog'
-export { RewardDialog } from './RewardDialog'
-export type { RewardDialogProps } from './RewardDialog'
-export {
-    OverlayPortal,
-    usePresence,
-    useModalLayer,
-    getFocusable,
-    prefersReducedMotion,
-} from './overlay'
-export type { OverlayPortalProps, ModalLayerOptions } from './overlay'
+export { DialogBand } from './DialogBand';
+export type { DialogBandProps } from './DialogBand';
+export { DialogBackdrop } from './DialogBackdrop';
+export type { DialogBackdropProps } from './DialogBackdrop';
+export { ConfirmDialog } from './ConfirmDialog';
+export type { ConfirmDialogProps } from './ConfirmDialog';
+export { RewardDialog } from './RewardDialog';
+export type { RewardDialogProps } from './RewardDialog';
+export { OverlayPortal, usePresence, useModalLayer, getFocusable, prefersReducedMotion } from './overlay';
+export type { OverlayPortalProps, ModalLayerOptions } from './overlay';

@@ -12,751 +12,741 @@
 
 /* ── Page shell ───────────────────────────────────────────────────────────────────────── */
 .ikd {
-    container: ikd / inline-size;
-    position: relative;
-    overflow-x: hidden;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    background: var(--zzz-color-bg-base);
-    scroll-behavior: smooth;
-    scroll-padding-top: calc(110 * var(--zzz-px));
+  container: ikd / inline-size;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--zzz-color-bg-base);
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(110 * var(--zzz-px));
 }
 @media (prefers-reduced-motion: reduce) {
-    .ikd {
-        scroll-behavior: auto;
-    }
+  .ikd {
+    scroll-behavior: auto;
+  }
 }
 
 /* The density (--zzz-scale / --zzz-px) is inherited from the page / app theme (base.css). */
 .ikd .zzz-theme.ikd__theme,
 .zzz-theme.ikd__theme {
-    /* page measure in design units (x 0.7 = CSS px at the default density) */
-    --ikd-max: 1720;
-    --ikd-gutter: 72;
-    position: relative;
-    isolation: isolate;
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
-    color: var(--zzz-color-text-primary);
+  /* page measure in design units (x 0.7 = CSS px at the default density) */
+  --ikd-max: 1720;
+  --ikd-gutter: 72;
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  color: var(--zzz-color-text-primary);
 }
 @container ikd (max-width: 1100px) {
-    .ikd .zzz-theme.ikd__theme,
-    .zzz-theme.ikd__theme {
-        --ikd-gutter: 48;
-    }
+  .ikd .zzz-theme.ikd__theme,
+  .zzz-theme.ikd__theme {
+    --ikd-gutter: 48;
+  }
 }
 @container ikd (max-width: 640px) {
-    .ikd .zzz-theme.ikd__theme,
-    .zzz-theme.ikd__theme {
-        /* 16 css px side gutter at the 0.7 web default */
-        --ikd-gutter: 22.86;
-    }
+  .ikd .zzz-theme.ikd__theme,
+  .zzz-theme.ikd__theme {
+    /* 16 css px side gutter at the 0.7 web default */
+    --ikd-gutter: 22.86;
+  }
 }
 
 .ikd__hatch {
-    z-index: 0;
+  z-index: 0;
 }
 .ikd__nav,
 .ikd__main,
 .ikd__footer {
-    position: relative;
-    z-index: 1;
+  position: relative;
+  z-index: 1;
 }
 .ikd__nav {
-    position: sticky;
-    top: 0;
-    z-index: 20;
+  position: sticky;
+  top: 0;
+  z-index: 20;
 }
 .ikd__main {
-    flex: 1 0 auto;
-    display: flex;
-    flex-direction: column;
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 .ikd__content {
-    box-sizing: border-box;
-    width: 100%;
-    max-width: calc((var(--ikd-max) + 2 * var(--ikd-gutter)) * var(--zzz-px));
-    margin-inline: auto;
-    padding: calc(40 * var(--zzz-px)) calc(var(--ikd-gutter) * var(--zzz-px))
-        calc(150 * var(--zzz-px));
-    display: flex;
-    flex-direction: column;
-    gap: calc(150 * var(--zzz-px));
+  box-sizing: border-box;
+  width: 100%;
+  max-width: calc((var(--ikd-max) + 2 * var(--ikd-gutter)) * var(--zzz-px));
+  margin-inline: auto;
+  padding: calc(40 * var(--zzz-px)) calc(var(--ikd-gutter) * var(--zzz-px)) calc(150 * var(--zzz-px));
+  display: flex;
+  flex-direction: column;
+  gap: calc(150 * var(--zzz-px));
 }
 .ikd__footer {
-    margin-top: 0;
+  margin-top: 0;
 }
 /* Web-readable footer text. SiteFooter sets links and legal text to font.size.tiny (12 units =
  * 8.4 css px at the 0.7 web default) and has no size prop; use the label token (17.5 units =
  * 12.25 css px), the usual footer-link size on the web, with a matching line-height. */
 .ikd__footer .zzz-site-footer__link,
 .ikd__footer .zzz-site-footer__legal {
-    font-size: var(--zzz-font-size-label);
+  font-size: var(--zzz-font-size-label);
 }
 .ikd__footer .zzz-site-footer__legal {
-    line-height: calc(26 * var(--zzz-px));
+  line-height: calc(26 * var(--zzz-px));
 }
 
 /* ── Logo (NavBar + footer) ───────────────────────────────────────────────────────────── */
 .ikd__logo-link {
-    display: inline-flex;
-    color: inherit;
-    text-decoration: none;
-    border-radius: calc(14 * var(--zzz-px));
+  display: inline-flex;
+  color: inherit;
+  text-decoration: none;
+  border-radius: calc(14 * var(--zzz-px));
 }
 .ikd-logo {
-    display: inline-flex;
-    align-items: center;
-    gap: calc(14 * var(--zzz-px));
-    color: var(--zzz-color-text-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: calc(14 * var(--zzz-px));
+  color: var(--zzz-color-text-primary);
 }
 .ikd-logo__emblem {
-    flex: none;
-    width: calc(56 * var(--zzz-px));
-    height: calc(56 * var(--zzz-px));
-    color: var(--zzz-color-border-button);
+  flex: none;
+  width: calc(56 * var(--zzz-px));
+  height: calc(56 * var(--zzz-px));
+  color: var(--zzz-color-border-button);
 }
 .ikd-logo__text {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 .ikd-logo__top {
-    font-family: var(--zzz-font-family-condensed);
-    font-stretch: 75%;
-    font-size-adjust: var(--zzz-font-size-adjust-condensed);
-    font-size: calc(20 * var(--zzz-px));
-    line-height: calc(22 * var(--zzz-px));
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--zzz-color-text-tertiary);
+  font-family: var(--zzz-font-family-condensed);
+  font-stretch: 75%;
+  font-size-adjust: var(--zzz-font-size-adjust-condensed);
+  font-size: calc(20 * var(--zzz-px));
+  line-height: calc(22 * var(--zzz-px));
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--zzz-color-text-tertiary);
 }
 .ikd-logo__bottom {
-    font-size: calc(30 * var(--zzz-px));
-    line-height: calc(32 * var(--zzz-px));
-    text-transform: uppercase;
-    color: var(--zzz-color-text-primary);
+  font-size: calc(30 * var(--zzz-px));
+  line-height: calc(32 * var(--zzz-px));
+  text-transform: uppercase;
+  color: var(--zzz-color-text-primary);
 }
 
 /* ── Hero: a full-width DialogBand-style band ─────────────────────────────────────────── */
 .ikd-hero {
-    position: relative;
-    padding-top: calc(180 * var(--zzz-px));
-    /* the art's feet sit on the band's bottom edge line; room for the buttons below */
-    padding-bottom: calc(40 * var(--zzz-px));
+  position: relative;
+  padding-top: calc(180 * var(--zzz-px));
+  /* the art's feet sit on the band's bottom edge line; room for the buttons below */
+  padding-bottom: calc(40 * var(--zzz-px));
 }
 .ikd-hero__band {
-    position: relative;
-    min-height: calc(560 * var(--zzz-px));
-    background: var(--zzz-color-bg-base);
-    border-block: var(--zzz-border-width-dialog-edge) solid
-        var(--zzz-color-border-dialog-edge);
-    display: flex;
+  position: relative;
+  min-height: calc(560 * var(--zzz-px));
+  background: var(--zzz-color-bg-base);
+  border-block: var(--zzz-border-width-dialog-edge) solid var(--zzz-color-border-dialog-edge);
+  display: flex;
 }
 .ikd-hero__graffiti {
-    z-index: 0;
+  z-index: 0;
 }
 /* 45° accent stripe across the band's left end: the page-level diagonal motif. */
 .ikd-hero__band::before {
-    content: '';
-    position: absolute;
-    inset: 0 auto 0 0;
-    width: calc(26 * var(--zzz-px));
-    background: var(--zzz-accent);
-    clip-path: polygon(0 0, 100% 0, 0 100%);
-    z-index: 1;
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: calc(26 * var(--zzz-px));
+  background: var(--zzz-accent);
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  z-index: 1;
 }
 .ikd-hero__inner {
-    position: relative;
-    z-index: 1;
-    box-sizing: border-box;
-    width: 100%;
-    max-width: calc((var(--ikd-max) + 2 * var(--ikd-gutter)) * var(--zzz-px));
-    margin-inline: auto;
-    padding: calc(70 * var(--zzz-px)) calc(var(--ikd-gutter) * var(--zzz-px));
-    display: grid;
-    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-    align-items: center;
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: calc((var(--ikd-max) + 2 * var(--ikd-gutter)) * var(--zzz-px));
+  margin-inline: auto;
+  padding: calc(70 * var(--zzz-px)) calc(var(--ikd-gutter) * var(--zzz-px));
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  align-items: center;
 }
 .ikd-hero__copy {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: calc(30 * var(--zzz-px));
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: calc(30 * var(--zzz-px));
 }
 .ikd-hero__kicker {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: calc(10 * var(--zzz-px)) calc(18 * var(--zzz-px));
-    margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(10 * var(--zzz-px)) calc(18 * var(--zzz-px));
+  margin: 0;
 }
 .ikd-hero__kicker-chip {
-    padding: calc(6 * var(--zzz-px)) calc(20 * var(--zzz-px));
-    border-radius: var(--zzz-radius-pill);
-    background: var(--zzz-accent);
-    color: var(--zzz-color-accent-on);
-    font-size: var(--zzz-font-size-label);
-    line-height: calc(22 * var(--zzz-px));
-    text-transform: uppercase;
+  padding: calc(6 * var(--zzz-px)) calc(20 * var(--zzz-px));
+  border-radius: var(--zzz-radius-pill);
+  background: var(--zzz-accent);
+  color: var(--zzz-color-accent-on);
+  font-size: var(--zzz-font-size-label);
+  line-height: calc(22 * var(--zzz-px));
+  text-transform: uppercase;
 }
 .ikd-hero__kicker-text {
-    font-size: var(--zzz-font-size-body);
-    line-height: calc(24 * var(--zzz-px));
-    color: var(--zzz-color-text-tertiary);
+  font-size: var(--zzz-font-size-body);
+  line-height: calc(24 * var(--zzz-px));
+  color: var(--zzz-color-text-tertiary);
 }
 .ikd .ikd-hero__title {
-    --ikd-title: 104;
-    font-size: calc(var(--ikd-title) * var(--zzz-px));
-    white-space: normal;
-    line-height: 1.05;
-    max-width: 100%;
+  --ikd-title: 104;
+  font-size: calc(var(--ikd-title) * var(--zzz-px));
+  white-space: normal;
+  line-height: 1.05;
+  max-width: 100%;
 }
 .ikd-hero__lede {
-    max-width: calc(820 * var(--zzz-px));
-    margin: 0;
-    font-size: var(--zzz-font-size-body-lg);
-    line-height: calc(34 * var(--zzz-px));
-    color: var(--zzz-color-text-secondary);
+  max-width: calc(820 * var(--zzz-px));
+  margin: 0;
+  font-size: var(--zzz-font-size-body-lg);
+  line-height: calc(34 * var(--zzz-px));
+  color: var(--zzz-color-text-secondary);
 }
 .ikd-hero__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: calc(28 * var(--zzz-px)) calc(36 * var(--zzz-px));
-    padding-top: calc(16 * var(--zzz-px));
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(28 * var(--zzz-px)) calc(36 * var(--zzz-px));
+  padding-top: calc(16 * var(--zzz-px));
 }
 .ikd-hero__art {
-    position: absolute;
-    right: calc(var(--ikd-gutter) * var(--zzz-px));
-    bottom: 0;
-    width: 44%;
-    height: calc(100% + 220 * var(--zzz-px));
-    pointer-events: none;
-    z-index: 1;
+  position: absolute;
+  right: calc(var(--ikd-gutter) * var(--zzz-px));
+  bottom: 0;
+  width: 44%;
+  height: calc(100% + 220 * var(--zzz-px));
+  pointer-events: none;
+  z-index: 1;
 }
 .ikd-hero__agent {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center bottom;
-    filter: drop-shadow(calc(-14 * var(--zzz-px)) 0 0 rgb(0 0 0 / 0.85));
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(calc(-14 * var(--zzz-px)) 0 0 rgb(0 0 0 / 0.85));
 }
 /* The class sits on the art slot's <picture> (examples/art ArtSlot); its <img> inherits fit/position
    and the filter / mobile mask apply to the whole slot. The figure is a transparent cut-out over the
    band, so while it loads or when it is missing the slot draws no surface (no dark block over the
    hatch and graffiti): only the faint skeleton sheen while loading, nothing at all when missing. */
 .ikd-hero__agent.zart:not([data-state='loaded']) {
-    background-color: transparent;
-    box-shadow: none;
+  background-color: transparent;
+  box-shadow: none;
 }
 
 /* Accent CTA: Button has no accent variant — the dark pill with a live-accent fill. */
 .ikd .ikd-btn-accent.zzz-button {
-    background: var(--zzz-accent);
-    color: var(--zzz-color-accent-on);
+  background: var(--zzz-accent);
+  color: var(--zzz-color-accent-on);
 }
 .ikd-btn-accent__inner {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: calc(12 * var(--zzz-px));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(12 * var(--zzz-px));
 }
 .ikd-btn-accent__glyph {
-    width: calc(28 * var(--zzz-px));
-    height: calc(28 * var(--zzz-px));
-    /* counter the label's 10° shear so the arrow stays upright */
-    transform: skewX(10deg);
+  width: calc(28 * var(--zzz-px));
+  height: calc(28 * var(--zzz-px));
+  /* counter the label's 10° shear so the arrow stays upright */
+  transform: skewX(10deg);
 }
 .ikd-play {
-    width: calc(30 * var(--zzz-px));
-    height: calc(30 * var(--zzz-px));
-    translate: calc(2 * var(--zzz-px)) 0;
+  width: calc(30 * var(--zzz-px));
+  height: calc(30 * var(--zzz-px));
+  translate: calc(2 * var(--zzz-px)) 0;
 }
 
 /* ── Section headings ─────────────────────────────────────────────────────────────────── */
 .ikd-heading {
-    position: relative;
-    display: flex;
-    align-items: flex-end;
-    gap: calc(22 * var(--zzz-px));
-    min-height: calc(120 * var(--zzz-px));
-    margin-bottom: calc(44 * var(--zzz-px));
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: calc(22 * var(--zzz-px));
+  min-height: calc(120 * var(--zzz-px));
+  margin-bottom: calc(44 * var(--zzz-px));
 }
 .ikd-heading__mark {
-    position: absolute;
-    right: 0;
-    bottom: calc(-26 * var(--zzz-px));
-    z-index: -1;
-    font-family: var(--zzz-font-family-condensed);
-    font-stretch: 75%;
-    font-size-adjust: var(--zzz-font-size-adjust-condensed);
-    font-size: calc(190 * var(--zzz-px));
-    line-height: 1;
-    text-transform: uppercase;
-    white-space: nowrap;
-    color: transparent;
-    -webkit-text-stroke: calc(3 * var(--zzz-px)) #1e1e1e;
-    transform: skewX(-10deg);
-    pointer-events: none;
-    user-select: none;
+  position: absolute;
+  right: 0;
+  bottom: calc(-26 * var(--zzz-px));
+  z-index: -1;
+  font-family: var(--zzz-font-family-condensed);
+  font-stretch: 75%;
+  font-size-adjust: var(--zzz-font-size-adjust-condensed);
+  font-size: calc(190 * var(--zzz-px));
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: calc(3 * var(--zzz-px)) #1e1e1e;
+  transform: skewX(-10deg);
+  pointer-events: none;
+  user-select: none;
 }
 .ikd-heading__index {
-    font-family: var(--zzz-font-family-condensed);
-    font-stretch: 75%;
-    font-size-adjust: var(--zzz-font-size-adjust-condensed);
-    font-size: calc(64 * var(--zzz-px));
-    line-height: 0.9;
-    color: var(--zzz-accent);
-    display: inline-block;
-    transform: skewX(-10deg);
+  font-family: var(--zzz-font-family-condensed);
+  font-stretch: 75%;
+  font-size-adjust: var(--zzz-font-size-adjust-condensed);
+  font-size: calc(64 * var(--zzz-px));
+  line-height: 0.9;
+  color: var(--zzz-accent);
+  display: inline-block;
+  transform: skewX(-10deg);
 }
 .ikd-heading__title {
-    margin: 0;
-    font-size: calc(54 * var(--zzz-px));
-    line-height: calc(62 * var(--zzz-px));
-    color: var(--zzz-color-text-primary);
+  margin: 0;
+  font-size: calc(54 * var(--zzz-px));
+  line-height: calc(62 * var(--zzz-px));
+  color: var(--zzz-color-text-primary);
 }
 .ikd-heading::after {
-    content: '';
-    flex: 1 1 0;
-    align-self: center;
-    min-width: calc(40 * var(--zzz-px));
-    height: calc(4 * var(--zzz-px));
-    margin-left: calc(12 * var(--zzz-px));
-    margin-top: calc(30 * var(--zzz-px));
-    background: repeating-linear-gradient(
-        -45deg,
-        var(--zzz-color-border-button) 0 calc(6 * var(--zzz-px)),
-        transparent 0 calc(12 * var(--zzz-px))
-    );
+  content: '';
+  flex: 1 1 0;
+  align-self: center;
+  min-width: calc(40 * var(--zzz-px));
+  height: calc(4 * var(--zzz-px));
+  margin-left: calc(12 * var(--zzz-px));
+  margin-top: calc(30 * var(--zzz-px));
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--zzz-color-border-button) 0 calc(6 * var(--zzz-px)),
+    transparent 0 calc(12 * var(--zzz-px))
+  );
 }
 
 /* ── News ─────────────────────────────────────────────────────────────────────────────── */
 .ikd-news__tabs {
-    max-width: calc(820 * var(--zzz-px));
-    margin-bottom: calc(56 * var(--zzz-px));
+  max-width: calc(820 * var(--zzz-px));
+  margin-bottom: calc(56 * var(--zzz-px));
 }
 .ikd-news__panel {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: calc(72 * var(--zzz-px));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(72 * var(--zzz-px));
 }
 .ikd-news__grid {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(
-        auto-fill,
-        minmax(calc(460 * var(--zzz-px)), 1fr)
-    );
-    gap: calc(72 * var(--zzz-px)) calc(52 * var(--zzz-px));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(calc(460 * var(--zzz-px)), 1fr));
+  gap: calc(72 * var(--zzz-px)) calc(52 * var(--zzz-px));
 }
 .ikd-news__item {
-    position: relative;
-    min-width: 0;
+  position: relative;
+  min-width: 0;
 }
 .ikd .ikd-news__card {
-    width: 100%;
-    transition: translate 300ms ease;
+  width: 100%;
+  transition: translate 300ms ease;
 }
 /* Web-readable category tag at every width. CategoryTag text is 11 units (7.7 css px at the 0.7
  * web default) and has no size prop; 16 units = 11.2 css px still sits inside its 26-unit pill. */
 .ikd-news__card .zzz-news-card__tag {
-    font-size: calc(16 * var(--zzz-px));
+  font-size: calc(16 * var(--zzz-px));
 }
 .ikd-news__card .zzz-news-card__art-inner {
-    transition: scale 300ms ease;
+  transition: scale 300ms ease;
 }
 /* Web hover: the banner zooms 1.15 inside its box, the card lifts. */
 @media (hover: hover) {
-    .ikd .ikd-news__card:hover {
-        translate: 0 calc(-6 * var(--zzz-px));
-    }
-    .ikd-news__card:hover .zzz-news-card__art-inner {
-        scale: 1.15;
-    }
+  .ikd .ikd-news__card:hover {
+    translate: 0 calc(-6 * var(--zzz-px));
+  }
+  .ikd-news__card:hover .zzz-news-card__art-inner {
+    scale: 1.15;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
-    .ikd .ikd-news__card,
-    .ikd-news__card .zzz-news-card__art-inner {
-        transition: none;
-    }
+  .ikd .ikd-news__card,
+  .ikd-news__card .zzz-news-card__art-inner {
+    transition: none;
+  }
 }
 .ikd-news__new {
-    z-index: 2;
-    pointer-events: none;
+  z-index: 2;
+  pointer-events: none;
 }
 
 /* ── Agents ───────────────────────────────────────────────────────────────────────────── */
 .ikd-agents__layout {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: calc(56 * var(--zzz-px));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(56 * var(--zzz-px));
 }
 .ikd-agents__feature {
-    position: relative;
-    box-sizing: border-box;
-    width: 100%;
-    display: grid;
-    grid-template-columns: calc(380 * var(--zzz-px)) minmax(0, 1fr);
-    align-items: center;
-    gap: calc(56 * var(--zzz-px));
-    padding: calc(36 * var(--zzz-px)) calc(56 * var(--zzz-px));
-    border-radius: 0 calc(55 * var(--zzz-px)) 0 calc(55 * var(--zzz-px));
-    background:
-        linear-gradient(105deg, rgb(255 255 255 / 0.05), transparent 60%),
-        var(--zzz-color-surface-raised);
-    box-shadow: 0 0 0 calc(5 * var(--zzz-px)) var(--zzz-color-border-button);
-    overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  display: grid;
+  grid-template-columns: calc(380 * var(--zzz-px)) minmax(0, 1fr);
+  align-items: center;
+  gap: calc(56 * var(--zzz-px));
+  padding: calc(36 * var(--zzz-px)) calc(56 * var(--zzz-px));
+  border-radius: 0 calc(55 * var(--zzz-px)) 0 calc(55 * var(--zzz-px));
+  background: linear-gradient(105deg, rgb(255 255 255 / 0.05), transparent 60%), var(--zzz-color-surface-raised);
+  box-shadow: 0 0 0 calc(5 * var(--zzz-px)) var(--zzz-color-border-button);
+  overflow: hidden;
 }
 /* faint 45° diagonal block behind the portrait */
 .ikd-agents__feature::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: calc(-120 * var(--zzz-px));
-    width: calc(620 * var(--zzz-px));
-    background: rgb(255 255 255 / 0.04);
-    transform: skewX(-45deg);
-    pointer-events: none;
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(-120 * var(--zzz-px));
+  width: calc(620 * var(--zzz-px));
+  background: rgb(255 255 255 / 0.04);
+  transform: skewX(-45deg);
+  pointer-events: none;
 }
 .ikd-agents__portrait {
-    position: relative;
-    aspect-ratio: 1;
-    border-radius: 0 calc(40 * var(--zzz-px)) 0 calc(40 * var(--zzz-px));
-    overflow: hidden;
-    background: var(--zzz-color-bg-base);
-    box-shadow: 0 0 0 calc(4 * var(--zzz-px)) var(--zzz-accent);
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 0 calc(40 * var(--zzz-px)) 0 calc(40 * var(--zzz-px));
+  overflow: hidden;
+  background: var(--zzz-color-bg-base);
+  box-shadow: 0 0 0 calc(4 * var(--zzz-px)) var(--zzz-accent);
 }
 .ikd-agents__portrait > * {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .ikd-agents__info {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: calc(14 * var(--zzz-px));
-    min-width: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: calc(14 * var(--zzz-px));
+  min-width: 0;
 }
 .ikd-agents__name {
-    margin: 0;
-    font-size: calc(72 * var(--zzz-px));
-    line-height: calc(82 * var(--zzz-px));
-    color: var(--zzz-color-text-primary);
-    overflow-wrap: anywhere;
+  margin: 0;
+  font-size: calc(72 * var(--zzz-px));
+  line-height: calc(82 * var(--zzz-px));
+  color: var(--zzz-color-text-primary);
+  overflow-wrap: anywhere;
 }
 .ikd-agents__faction {
-    margin: 0;
-    font-family: var(--zzz-font-family-condensed);
-    font-stretch: 75%;
-    font-size-adjust: var(--zzz-font-size-adjust-condensed);
-    font-size: calc(26 * var(--zzz-px));
-    line-height: 1.2;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--zzz-accent);
+  margin: 0;
+  font-family: var(--zzz-font-family-condensed);
+  font-stretch: 75%;
+  font-size-adjust: var(--zzz-font-size-adjust-condensed);
+  font-size: calc(26 * var(--zzz-px));
+  line-height: 1.2;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--zzz-accent);
 }
 .ikd-agents__chips {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: calc(14 * var(--zzz-px));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(14 * var(--zzz-px));
 }
 /* attribute chip: a black pill holding element / specialty icons */
 .ikd-agents__chip {
-    display: inline-flex;
-    align-items: center;
-    gap: calc(10 * var(--zzz-px));
-    height: calc(50 * var(--zzz-px));
-    padding: 0 calc(22 * var(--zzz-px)) 0 calc(8 * var(--zzz-px));
-    border-radius: var(--zzz-radius-pill);
-    background: var(--zzz-color-bg-base);
-    box-shadow: inset 0 0 0 calc(3 * var(--zzz-px))
-        var(--zzz-color-border-button);
-    font-size: var(--zzz-font-size-body-lg);
-    line-height: 1;
-    color: var(--zzz-color-text-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: calc(10 * var(--zzz-px));
+  height: calc(50 * var(--zzz-px));
+  padding: 0 calc(22 * var(--zzz-px)) 0 calc(8 * var(--zzz-px));
+  border-radius: var(--zzz-radius-pill);
+  background: var(--zzz-color-bg-base);
+  box-shadow: inset 0 0 0 calc(3 * var(--zzz-px)) var(--zzz-color-border-button);
+  font-size: var(--zzz-font-size-body-lg);
+  line-height: 1;
+  color: var(--zzz-color-text-primary);
 }
 .ikd-agents__chip-icon {
-    display: grid;
-    width: calc(36 * var(--zzz-px));
-    height: calc(36 * var(--zzz-px));
+  display: grid;
+  width: calc(36 * var(--zzz-px));
+  height: calc(36 * var(--zzz-px));
 }
 .ikd-agents__chip-icon > * {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 .ikd-agents__chip--rank {
-    padding-left: calc(22 * var(--zzz-px));
-    font-family: var(--zzz-font-family-condensed);
-    font-stretch: 75%;
-    font-size-adjust: var(--zzz-font-size-adjust-condensed);
-    font-size: calc(22 * var(--zzz-px));
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--zzz-color-text-muted);
+  padding-left: calc(22 * var(--zzz-px));
+  font-family: var(--zzz-font-family-condensed);
+  font-stretch: 75%;
+  font-size-adjust: var(--zzz-font-size-adjust-condensed);
+  font-size: calc(22 * var(--zzz-px));
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--zzz-color-text-muted);
 }
 .ikd-agents__rank-letter {
-    font-size: calc(34 * var(--zzz-px));
-    color: var(--zzz-accent);
+  font-size: calc(34 * var(--zzz-px));
+  color: var(--zzz-accent);
 }
 .ikd-agents__blurb {
-    max-width: calc(760 * var(--zzz-px));
-    margin: calc(6 * var(--zzz-px)) 0 0;
-    font-size: var(--zzz-font-size-body-lg);
-    line-height: calc(34 * var(--zzz-px));
-    color: var(--zzz-color-text-tertiary);
+  max-width: calc(760 * var(--zzz-px));
+  margin: calc(6 * var(--zzz-px)) 0 0;
+  font-size: var(--zzz-font-size-body-lg);
+  line-height: calc(34 * var(--zzz-px));
+  color: var(--zzz-color-text-tertiary);
 }
 /* Roster rail: a horizontal ScrollArea holding a row of agent tiles (a 3-column grid on phones). */
 .ikd-agents__rail {
-    width: 100%;
-    max-width: 100%;
+  width: 100%;
+  max-width: 100%;
 }
 .ikd-agents__roster {
-    box-sizing: border-box;
-    display: flex;
-    width: max-content;
-    margin: 0 auto;
-    /* room for the 4 px tile rings / focus ring inside the clipping viewport */
-    padding: calc(10 * var(--zzz-px)) calc(10 * var(--zzz-px))
-        calc(14 * var(--zzz-px));
-    list-style: none;
-    gap: calc(24 * var(--zzz-px));
+  box-sizing: border-box;
+  display: flex;
+  width: max-content;
+  margin: 0 auto;
+  /* room for the 4 px tile rings / focus ring inside the clipping viewport */
+  padding: calc(10 * var(--zzz-px)) calc(10 * var(--zzz-px)) calc(14 * var(--zzz-px));
+  list-style: none;
+  gap: calc(24 * var(--zzz-px));
 }
 .ikd-agents__roster > li {
-    display: flex;
-    flex: 0 0 calc(190 * var(--zzz-px));
-    min-width: 0;
+  display: flex;
+  flex: 0 0 calc(190 * var(--zzz-px));
+  min-width: 0;
 }
 .ikd-agents__roster-btn {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: calc(10 * var(--zzz-px));
-    width: 100%;
-    margin: 0;
-    padding: calc(8 * var(--zzz-px));
-    border: 0;
-    border-radius: 0 calc(28 * var(--zzz-px)) 0 calc(28 * var(--zzz-px));
-    background: var(--zzz-color-surface-raised);
-    box-shadow: 0 0 0 calc(4 * var(--zzz-px)) var(--zzz-color-border-button);
-    color: var(--zzz-color-text-secondary);
-    font: inherit;
-    cursor: pointer;
-    appearance: none;
-    -webkit-tap-highlight-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: calc(10 * var(--zzz-px));
+  width: 100%;
+  margin: 0;
+  padding: calc(8 * var(--zzz-px));
+  border: 0;
+  border-radius: 0 calc(28 * var(--zzz-px)) 0 calc(28 * var(--zzz-px));
+  background: var(--zzz-color-surface-raised);
+  box-shadow: 0 0 0 calc(4 * var(--zzz-px)) var(--zzz-color-border-button);
+  color: var(--zzz-color-text-secondary);
+  font: inherit;
+  cursor: pointer;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
 }
 .ikd-agents__roster-face {
-    display: block;
-    aspect-ratio: 1;
-    overflow: hidden;
-    border-radius: 0 calc(22 * var(--zzz-px)) 0 calc(22 * var(--zzz-px));
-    background: var(--zzz-color-bg-base);
+  display: block;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 0 calc(22 * var(--zzz-px)) 0 calc(22 * var(--zzz-px));
+  background: var(--zzz-color-bg-base);
 }
 .ikd-agents__roster-face > * {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 50% 25%;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 25%;
 }
 .ikd-agents__roster-name {
-    overflow: hidden;
-    padding-bottom: calc(4 * var(--zzz-px));
-    font-size: var(--zzz-font-size-body);
-    line-height: calc(28 * var(--zzz-px));
-    text-align: center;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  overflow: hidden;
+  padding-bottom: calc(4 * var(--zzz-px));
+  font-size: var(--zzz-font-size-body);
+  line-height: calc(28 * var(--zzz-px));
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .ikd-agents__roster-btn[aria-pressed='true'] {
-    box-shadow: 0 0 0 calc(4 * var(--zzz-px)) var(--zzz-accent);
-    color: var(--zzz-color-text-primary);
+  box-shadow: 0 0 0 calc(4 * var(--zzz-px)) var(--zzz-accent);
+  color: var(--zzz-color-text-primary);
 }
 .ikd-agents__roster-btn:active {
-    background: var(--zzz-accent);
-    color: var(--zzz-color-accent-on);
+  background: var(--zzz-accent);
+  color: var(--zzz-color-accent-on);
 }
 .ikd-agents__roster-btn:focus-visible {
-    outline: none;
-    box-shadow: var(--zzz-focus-ring);
+  outline: none;
+  box-shadow: var(--zzz-focus-ring);
 }
 
 /* ── Newsletter + FAQ ─────────────────────────────────────────────────────────────────── */
 .ikd__split {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: calc(110 * var(--zzz-px));
-    align-items: start;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: calc(110 * var(--zzz-px));
+  align-items: start;
 }
 .ikd .ikd-newsletter__panel.zzz-panel {
-    width: 100%;
-    max-width: calc(780 * var(--zzz-px));
-    height: auto;
+  width: 100%;
+  max-width: calc(780 * var(--zzz-px));
+  height: auto;
 }
 .ikd-newsletter__form {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: calc(30 * var(--zzz-px));
-    padding: calc(16 * var(--zzz-px)) calc(12 * var(--zzz-px))
-        calc(36 * var(--zzz-px));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: calc(30 * var(--zzz-px));
+  padding: calc(16 * var(--zzz-px)) calc(12 * var(--zzz-px)) calc(36 * var(--zzz-px));
 }
 .ikd-newsletter__form .zzz-text-field {
-    max-width: 100%;
+  max-width: 100%;
 }
 .ikd-newsletter__copy {
-    margin: 0;
-    font-size: var(--zzz-font-size-body);
-    line-height: calc(30 * var(--zzz-px));
-    color: var(--zzz-color-text-tertiary);
+  margin: 0;
+  font-size: var(--zzz-font-size-body);
+  line-height: calc(30 * var(--zzz-px));
+  color: var(--zzz-color-text-tertiary);
 }
 .ikd-newsletter__mail {
-    width: calc(28 * var(--zzz-px));
-    height: calc(28 * var(--zzz-px));
+  width: calc(28 * var(--zzz-px));
+  height: calc(28 * var(--zzz-px));
 }
 .ikd-newsletter__consent {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: calc(4 * var(--zzz-px));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: calc(4 * var(--zzz-px));
 }
 .ikd .ikd-newsletter__error {
-    margin: 0;
-    /* line up with the TextField error message inset */
-    padding-left: calc(6 * var(--zzz-px));
-    text-align: start;
+  margin: 0;
+  /* line up with the TextField error message inset */
+  padding-left: calc(6 * var(--zzz-px));
+  text-align: start;
 }
 .ikd-newsletter__submit {
-    margin-top: calc(6 * var(--zzz-px));
+  margin-top: calc(6 * var(--zzz-px));
 }
 .ikd-faq__list {
-    width: 100%;
+  width: 100%;
 }
 /* The Accordion header is a fixed 58 design units; a question that wraps (phones) would squeeze two
  * lines into one pill. Let it grow, keeping 58 as the floor. */
 .ikd-faq__list .zzz-accordion__trigger {
-    height: auto;
-    min-height: calc(58 * var(--zzz-px));
-    padding-block: calc(8 * var(--zzz-px));
+  height: auto;
+  min-height: calc(58 * var(--zzz-px));
+  padding-block: calc(8 * var(--zzz-px));
 }
 .ikd-faq__list .zzz-accordion__title {
-    line-height: calc(30 * var(--zzz-px));
+  line-height: calc(30 * var(--zzz-px));
 }
 
 .ikd-nowrap {
-    white-space: nowrap;
+  white-space: nowrap;
 }
 
 /* ── Tablet / phone ───────────────────────────────────────────────────────────────────── */
 @container ikd (max-width: 1100px) {
-    .ikd .ikd-hero__title {
-        --ikd-title: 84;
-    }
-    .ikd__split {
-        grid-template-columns: minmax(0, 1fr);
-        gap: calc(150 * var(--zzz-px));
-    }
-    .ikd .ikd-newsletter__panel.zzz-panel {
-        max-width: none;
-    }
+  .ikd .ikd-hero__title {
+    --ikd-title: 84;
+  }
+  .ikd__split {
+    grid-template-columns: minmax(0, 1fr);
+    gap: calc(150 * var(--zzz-px));
+  }
+  .ikd .ikd-newsletter__panel.zzz-panel {
+    max-width: none;
+  }
 }
 
 @container ikd (max-width: 640px) {
-    .ikd-hero {
-        padding-top: calc(40 * var(--zzz-px));
-    }
-    .ikd-hero__band {
-        min-height: 0;
-    }
-    .ikd-hero__inner {
-        grid-template-columns: minmax(0, 1fr);
-        padding-block: calc(540 * var(--zzz-px)) calc(70 * var(--zzz-px));
-    }
-    .ikd-hero__art {
-        top: calc(-20 * var(--zzz-px));
-        bottom: auto;
-        left: 0;
-        right: 0;
-        width: 100%;
-        height: calc(580 * var(--zzz-px));
-    }
-    /* fade the art into the band behind the copy */
-    .ikd-hero__agent {
-        mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
-    }
-    .ikd .ikd-hero__title {
-        --ikd-title: 66;
-    }
-    .ikd-hero__actions {
-        width: 100%;
-    }
-    .ikd-hero__actions > .zzz-button {
-        flex: 1 1 calc(260 * var(--zzz-px));
-    }
-    .ikd-heading__mark {
-        font-size: calc(130 * var(--zzz-px));
-    }
-    .ikd-heading__index {
-        font-size: calc(52 * var(--zzz-px));
-    }
-    .ikd-heading__title {
-        font-size: calc(42 * var(--zzz-px));
-        line-height: calc(50 * var(--zzz-px));
-    }
-    .ikd-heading::after {
-        display: none;
-    }
-    /* phone legibility: the card's caption-size description reads ~10.5 css px at 0.7; use body size */
-    .ikd-news__card .zzz-news-card__desc {
-        font-size: var(--zzz-font-size-body);
-        line-height: calc(30 * var(--zzz-px));
-        max-height: calc(60 * var(--zzz-px));
-    }
-    .ikd-news__card .zzz-news-card__title {
-        font-size: var(--zzz-font-size-body-lg);
-    }
-    .ikd-agents__feature {
-        grid-template-columns: minmax(0, 1fr);
-        justify-items: center;
-        text-align: center;
-        padding: calc(40 * var(--zzz-px)) calc(32 * var(--zzz-px));
-    }
-    .ikd-agents__portrait {
-        width: calc(380 * var(--zzz-px));
-        max-width: 100%;
-    }
-    .ikd-agents__info {
-        align-items: center;
-    }
-    .ikd-agents__chips {
-        justify-content: center;
-    }
-    .ikd-agents__name {
-        font-size: calc(60 * var(--zzz-px));
-        line-height: calc(70 * var(--zzz-px));
-    }
-    /* Phones: the tile row wraps into a 3-column grid (nothing overflows, so no bar). */
-    .ikd-agents__roster {
-        display: grid;
-        width: 100%;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: calc(20 * var(--zzz-px));
-    }
+  .ikd-hero {
+    padding-top: calc(40 * var(--zzz-px));
+  }
+  .ikd-hero__band {
+    min-height: 0;
+  }
+  .ikd-hero__inner {
+    grid-template-columns: minmax(0, 1fr);
+    padding-block: calc(540 * var(--zzz-px)) calc(70 * var(--zzz-px));
+  }
+  .ikd-hero__art {
+    top: calc(-20 * var(--zzz-px));
+    bottom: auto;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: calc(580 * var(--zzz-px));
+  }
+  /* fade the art into the band behind the copy */
+  .ikd-hero__agent {
+    mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
+  }
+  .ikd .ikd-hero__title {
+    --ikd-title: 66;
+  }
+  .ikd-hero__actions {
+    width: 100%;
+  }
+  .ikd-hero__actions > .zzz-button {
+    flex: 1 1 calc(260 * var(--zzz-px));
+  }
+  .ikd-heading__mark {
+    font-size: calc(130 * var(--zzz-px));
+  }
+  .ikd-heading__index {
+    font-size: calc(52 * var(--zzz-px));
+  }
+  .ikd-heading__title {
+    font-size: calc(42 * var(--zzz-px));
+    line-height: calc(50 * var(--zzz-px));
+  }
+  .ikd-heading::after {
+    display: none;
+  }
+  /* phone legibility: the card's caption-size description reads ~10.5 css px at 0.7; use body size */
+  .ikd-news__card .zzz-news-card__desc {
+    font-size: var(--zzz-font-size-body);
+    line-height: calc(30 * var(--zzz-px));
+    max-height: calc(60 * var(--zzz-px));
+  }
+  .ikd-news__card .zzz-news-card__title {
+    font-size: var(--zzz-font-size-body-lg);
+  }
+  .ikd-agents__feature {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    text-align: center;
+    padding: calc(40 * var(--zzz-px)) calc(32 * var(--zzz-px));
+  }
+  .ikd-agents__portrait {
+    width: calc(380 * var(--zzz-px));
+    max-width: 100%;
+  }
+  .ikd-agents__info {
+    align-items: center;
+  }
+  .ikd-agents__chips {
+    justify-content: center;
+  }
+  .ikd-agents__name {
+    font-size: calc(60 * var(--zzz-px));
+    line-height: calc(70 * var(--zzz-px));
+  }
+  /* Phones: the tile row wraps into a 3-column grid (nothing overflows, so no bar). */
+  .ikd-agents__roster {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: calc(20 * var(--zzz-px));
+  }
 }

@@ -1,2 +1,2 @@
-export { Capsule } from './Capsule'
-export type { CapsuleProps, CapsuleTone } from './Capsule'
+export { Capsule } from './Capsule';
+export type { CapsuleProps, CapsuleTone } from './Capsule';
