@@ -9,118 +9,125 @@
  */
 
 .zzz-tag-button {
-  --zzz-control-ratio: 1;
-  position: relative;
-  display: inline-block;
-  flex-shrink: 0;
-  width: calc(var(--zzz-size-control-back) * var(--zzz-control-ratio));
-  height: calc(58 * var(--zzz-control-ratio) * var(--zzz-px));
-  margin: 0;
-  padding: 0;
-  border: 0;
-  /* Only shapes the web-only focus ring (box-shadow) around the tag. */
-  border-radius: calc(29 * var(--zzz-control-ratio) * var(--zzz-px));
-  background: none;
-  vertical-align: middle;
-  cursor: pointer;
-  user-select: none;
-  -webkit-user-select: none;
-  -webkit-tap-highlight-color: transparent;
-  appearance: none;
+    --zzz-control-ratio: 1;
+    position: relative;
+    display: inline-block;
+    flex-shrink: 0;
+    width: calc(var(--zzz-size-control-back) * var(--zzz-control-ratio));
+    height: calc(58 * var(--zzz-control-ratio) * var(--zzz-px));
+    margin: 0;
+    padding: 0;
+    border: 0;
+    /* Only shapes the web-only focus ring (box-shadow) around the tag. */
+    border-radius: calc(29 * var(--zzz-control-ratio) * var(--zzz-px));
+    background: none;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    appearance: none;
 }
 
 .zzz-tag-button--sm {
-  --zzz-control-ratio: calc(var(--zzz-size-control-sm-n) / var(--zzz-size-control-md-n));
+    --zzz-control-ratio: calc(
+        var(--zzz-size-control-sm-n) / var(--zzz-size-control-md-n)
+    );
 }
 .zzz-tag-button--lg {
-  --zzz-control-ratio: calc(var(--zzz-size-control-lg-n) / var(--zzz-size-control-md-n));
+    --zzz-control-ratio: calc(
+        var(--zzz-size-control-lg-n) / var(--zzz-size-control-md-n)
+    );
 }
 
 .zzz-tag-button__shape {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  pointer-events: none;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
 }
 
 /* Back: 5 px red ring (color.danger.base), #0A0A0A interior + dot mesh. */
 .zzz-tag-button__fill {
-  fill: #0A0A0A; /* interior; no exact token */
+    fill: #0a0a0a; /* interior; no exact token */
 }
 .zzz-tag-button__dot {
-  fill: rgb(255 255 255 / 0.045);
+    fill: rgb(255 255 255 / 0.045);
 }
 .zzz-tag-button__ring {
-  fill: none;
-  stroke: var(--zzz-color-danger-base);
-  stroke-width: 5;
+    fill: none;
+    stroke: var(--zzz-color-danger-base);
+    stroke-width: 5;
 }
 
 /* Close: red ring, a 2 px dark-red line inside it, red interior (color.danger.fill) + mesh.
  * The gap is a 9-wide stroke clipped to the inside of the path: 2.5 under the ring + 2 visible. */
 .zzz-tag-button--close .zzz-tag-button__fill {
-  fill: var(--zzz-color-danger-fill);
+    fill: var(--zzz-color-danger-fill);
 }
 .zzz-tag-button--close .zzz-tag-button__dot {
-  fill: rgb(0 0 0 / 0.1);
+    fill: rgb(0 0 0 / 0.1);
 }
 .zzz-tag-button__gap {
-  fill: none;
-  stroke: var(--zzz-color-danger-gap);
-  stroke-width: 9;
+    fill: none;
+    stroke: var(--zzz-color-danger-gap);
+    stroke-width: 9;
 }
 
 /* Glyph: Back U-turn 34×26 in red, centred at (44.5, 26.5); Close × 24×23 in black at (40, 29). */
 .zzz-tag-button__glyph {
-  position: absolute;
-  display: grid;
-  place-items: center;
-  line-height: 0;
-  translate: -50% -50%;
-  pointer-events: none;
+    position: absolute;
+    display: grid;
+    place-items: center;
+    line-height: 0;
+    translate: -50% -50%;
+    pointer-events: none;
 }
 .zzz-tag-button--back .zzz-tag-button__glyph {
-  left: calc(44.5 * var(--zzz-control-ratio) * var(--zzz-px));
-  top: calc(26.5 * var(--zzz-control-ratio) * var(--zzz-px));
-  font-size: calc(var(--zzz-size-icon-lg) * var(--zzz-control-ratio));
-  color: var(--zzz-color-danger-base);
+    left: calc(44.5 * var(--zzz-control-ratio) * var(--zzz-px));
+    top: calc(26.5 * var(--zzz-control-ratio) * var(--zzz-px));
+    font-size: calc(var(--zzz-size-icon-lg) * var(--zzz-control-ratio));
+    color: var(--zzz-color-danger-base);
 }
 .zzz-tag-button--close .zzz-tag-button__glyph {
-  left: calc(40 * var(--zzz-control-ratio) * var(--zzz-px));
-  top: calc(29 * var(--zzz-control-ratio) * var(--zzz-px));
-  font-size: calc(28 * var(--zzz-control-ratio) * var(--zzz-px));
-  color: var(--zzz-color-accent-on);
+    left: calc(40 * var(--zzz-control-ratio) * var(--zzz-px));
+    top: calc(29 * var(--zzz-control-ratio) * var(--zzz-px));
+    font-size: calc(28 * var(--zzz-control-ratio) * var(--zzz-px));
+    color: var(--zzz-color-accent-on);
 }
 
 /* Pressed: the tag fills with the live accent; the 10-wide stroke puts the outer edge 2.5 px beyond
  * the design box (94×62). Ring and interior vanish; glyph black. Instant. */
 .zzz-tag-button__press {
-  display: none;
-  fill: var(--zzz-accent);
-  stroke: var(--zzz-accent);
-  stroke-width: 10;
-  stroke-linejoin: round;
+    display: none;
+    fill: var(--zzz-accent);
+    stroke: var(--zzz-accent);
+    stroke-width: 10;
+    stroke-linejoin: round;
 }
-.zzz-tag-button:active:not(:disabled, [aria-disabled='true']) .zzz-tag-button__press,
+.zzz-tag-button:active:not(:disabled, [aria-disabled='true'])
+    .zzz-tag-button__press,
 .zzz-tag-button[data-pressed] .zzz-tag-button__press {
-  display: inline;
+    display: inline;
 }
-.zzz-tag-button:active:not(:disabled, [aria-disabled='true']) .zzz-tag-button__rest,
+.zzz-tag-button:active:not(:disabled, [aria-disabled='true'])
+    .zzz-tag-button__rest,
 .zzz-tag-button[data-pressed] .zzz-tag-button__rest {
-  visibility: hidden;
+    visibility: hidden;
 }
-.zzz-tag-button:active:not(:disabled, [aria-disabled='true']) .zzz-tag-button__glyph,
+.zzz-tag-button:active:not(:disabled, [aria-disabled='true'])
+    .zzz-tag-button__glyph,
 .zzz-tag-button[data-pressed] .zzz-tag-button__glyph {
-  color: var(--zzz-color-accent-on);
+    color: var(--zzz-color-accent-on);
 }
 
 /* Disabled: glyph #666, shape unchanged. */
 .zzz-tag-button:disabled,
 .zzz-tag-button[aria-disabled='true'] {
-  cursor: default;
+    cursor: default;
 }
 .zzz-tag-button:is(:disabled, [aria-disabled='true']) .zzz-tag-button__glyph {
-  color: var(--zzz-color-text-disabled);
+    color: var(--zzz-color-text-disabled);
 }

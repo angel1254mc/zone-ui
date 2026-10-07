@@ -12,9 +12,12 @@ import { registerZzzToolbar } from './addons/zzz-toolbar'
 import { installTreeHighlight } from './addons/tree-highlight'
 
 addons.setConfig({
-  // brandTitle is the logo's alt text / tooltip: name the kit for what it is (ZZZ-inspired, not a recreation).
-  theme: { ...zzzManagerTheme, brandTitle: 'Zone — a Zenless Zone Zero–inspired UI kit' },
-  sidebar: { showRoots: true },
+    // brandTitle is the logo's alt text / tooltip: name the kit for what it is (ZZZ-inspired, not a recreation).
+    theme: {
+        ...zzzManagerTheme,
+        brandTitle: 'Zone — a Zenless Zone Zero–inspired UI kit',
+    },
+    sidebar: { showRoots: true },
 })
 
 registerZzzToolbar()

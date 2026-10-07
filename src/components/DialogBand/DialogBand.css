@@ -7,196 +7,255 @@
 
 /* ── Layer ───────────────────────────────────────────────────────────────────────────────── */
 .zzz-dialog-layer {
-  z-index: var(--zzz-z-index-dialog-backdrop);
+    z-index: var(--zzz-z-index-dialog-backdrop);
 }
 
 /* ── Backdrop: blur 13 + static two-stripe dimming (effect.dialogBackdrop) ──────────────── */
 .zzz-dialog-backdrop {
-  position: absolute;
-  inset: 0;
-  pointer-events: auto;
+    position: absolute;
+    inset: 0;
+    pointer-events: auto;
 }
 .zzz-dialog-backdrop__blur,
 .zzz-dialog-backdrop__stripes,
 .zzz-dialog-backdrop__mosaic {
-  position: absolute;
-  inset: 0;
+    position: absolute;
+    inset: 0;
 }
 .zzz-dialog-backdrop__blur {
-  -webkit-backdrop-filter: var(--zzz-effect-dialog-backdrop-backdrop-filter);
-  backdrop-filter: var(--zzz-effect-dialog-backdrop-backdrop-filter);
+    -webkit-backdrop-filter: var(--zzz-effect-dialog-backdrop-backdrop-filter);
+    backdrop-filter: var(--zzz-effect-dialog-backdrop-backdrop-filter);
 }
 .zzz-dialog-backdrop__stripes {
-  background: var(--zzz-effect-dialog-backdrop-background);
-  animation: zzz-dialog-scrim-in 70ms cubic-bezier(0, 0, 0.58, 1) both;
+    background: var(--zzz-effect-dialog-backdrop-background);
+    animation: zzz-dialog-scrim-in 70ms cubic-bezier(0, 0, 0.58, 1) both;
 }
 .zzz-dialog-backdrop[data-state='closed'] .zzz-dialog-backdrop__stripes {
-  animation: zzz-dialog-scrim-out var(--zzz-motion-duration-scrim-out) linear var(--zzz-motion-duration-band-out) both;
+    animation: zzz-dialog-scrim-out var(--zzz-motion-duration-scrim-out) linear
+        var(--zzz-motion-duration-band-out) both;
 }
 @keyframes zzz-dialog-scrim-in {
-  from { opacity: 0.15; }
-  to { opacity: 1; }
+    from {
+        opacity: 0.15;
+    }
+    to {
+        opacity: 1;
+    }
 }
 @keyframes zzz-dialog-scrim-out {
-  from { opacity: 1; }
-  to { opacity: 0; }
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
 }
 
 /* Optional freeze (~100 ms): a 7 px mosaic grid over the backdrop, then it drops away. */
 .zzz-dialog-backdrop__mosaic {
-  background-image:
-    linear-gradient(90deg, rgb(0 0 0 / 0.35) 0 calc(1 * var(--zzz-px)), transparent 0),
-    linear-gradient(0deg, rgb(0 0 0 / 0.35) 0 calc(1 * var(--zzz-px)), transparent 0);
-  background-size: calc(7 * var(--zzz-px)) calc(7 * var(--zzz-px));
-  -webkit-backdrop-filter: blur(calc(3 * var(--zzz-px))) contrast(1.15);
-  backdrop-filter: blur(calc(3 * var(--zzz-px))) contrast(1.15);
-  animation: zzz-dialog-hide-after var(--zzz-motion-duration-backdrop-freeze) steps(1, end) both;
+    background-image:
+        linear-gradient(
+            90deg,
+            rgb(0 0 0 / 0.35) 0 calc(1 * var(--zzz-px)),
+            transparent 0
+        ),
+        linear-gradient(
+            0deg,
+            rgb(0 0 0 / 0.35) 0 calc(1 * var(--zzz-px)),
+            transparent 0
+        );
+    background-size: calc(7 * var(--zzz-px)) calc(7 * var(--zzz-px));
+    -webkit-backdrop-filter: blur(calc(3 * var(--zzz-px))) contrast(1.15);
+    backdrop-filter: blur(calc(3 * var(--zzz-px))) contrast(1.15);
+    animation: zzz-dialog-hide-after var(--zzz-motion-duration-backdrop-freeze)
+        steps(1, end) both;
 }
 @keyframes zzz-dialog-hide-after {
-  from { visibility: visible; }
-  to { visibility: hidden; }
+    from {
+        visibility: visible;
+    }
+    to {
+        visibility: hidden;
+    }
 }
 
 /* ── Band ────────────────────────────────────────────────────────────────────────────────── */
 .zzz-dialog-band {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  height: var(--zzz-size-panel-dialog-band);
-  /* The band centre sits ~1 px below the middle. */
-  margin-top: calc(var(--zzz-size-panel-dialog-band) / -2 + 1 * var(--zzz-px));
-  z-index: 1;
-  transform-origin: 50% 50%;
-  outline: none;
-  animation: zzz-band-in var(--zzz-motion-duration-band-in) linear both;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: var(--zzz-size-panel-dialog-band);
+    /* The band centre sits ~1 px below the middle. */
+    margin-top: calc(
+        var(--zzz-size-panel-dialog-band) / -2 + 1 * var(--zzz-px)
+    );
+    z-index: 1;
+    transform-origin: 50% 50%;
+    outline: none;
+    animation: zzz-band-in var(--zzz-motion-duration-band-in) linear both;
 }
 .zzz-dialog-layer[data-pixelate] .zzz-dialog-band {
-  animation:
-    zzz-band-wait var(--zzz-motion-duration-backdrop-freeze) steps(1, end) both,
-    zzz-band-in var(--zzz-motion-duration-band-in) linear var(--zzz-motion-duration-backdrop-freeze) both;
+    animation:
+        zzz-band-wait var(--zzz-motion-duration-backdrop-freeze) steps(1, end)
+            both,
+        zzz-band-in var(--zzz-motion-duration-band-in) linear
+            var(--zzz-motion-duration-backdrop-freeze) both;
 }
 .zzz-dialog-band[data-state='closed'] {
-  animation: zzz-band-out var(--zzz-motion-duration-band-out) cubic-bezier(0.42, 0, 1, 1) both;
-  pointer-events: none;
+    animation: zzz-band-out var(--zzz-motion-duration-band-out)
+        cubic-bezier(0.42, 0, 1, 1) both;
+    pointer-events: none;
 }
 @keyframes zzz-band-in {
-  0% { transform: scaleY(0.87); }
-  25% { transform: scaleY(1.023); }
-  50% { transform: scaleY(1.015); }
-  75% { transform: scaleY(1.009); }
-  100% { transform: scaleY(1); }
+    0% {
+        transform: scaleY(0.87);
+    }
+    25% {
+        transform: scaleY(1.023);
+    }
+    50% {
+        transform: scaleY(1.015);
+    }
+    75% {
+        transform: scaleY(1.009);
+    }
+    100% {
+        transform: scaleY(1);
+    }
 }
 @keyframes zzz-band-wait {
-  from { visibility: hidden; }
-  to { visibility: visible; }
+    from {
+        visibility: hidden;
+    }
+    to {
+        visibility: visible;
+    }
 }
 @keyframes zzz-band-out {
-  from { opacity: 1; }
-  to { opacity: 0; }
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
 }
 
 /* Fill: #000 with the 4 px edge lines. The lines are rgba(62,62,62,.5) OVER THE BACKDROP (not over the
  * black), so the fill is clipped to the padding box. The watermark is clipped here; the band itself
  * does not clip, because the buttons hang over its bottom edge. */
 .zzz-dialog-band__fill {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  border-block: var(--zzz-border-width-dialog-edge) solid var(--zzz-color-border-dialog-edge);
-  background: var(--zzz-color-surface-dialog-band);
-  background-clip: padding-box;
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-block: var(--zzz-border-width-dialog-edge) solid
+        var(--zzz-color-border-dialog-edge);
+    background: var(--zzz-color-surface-dialog-band);
+    background-clip: padding-box;
 }
 .zzz-dialog-band__watermark.zzz-graffiti {
-  z-index: 0;
+    z-index: 0;
 }
 /* White flash over the fill, under the content: .34 at the start -> 0 over 100 ms. */
 .zzz-dialog-band__flash {
-  position: absolute;
-  inset: 0;
-  background: #FFFFFF;
-  opacity: 0;
-  pointer-events: none;
-  animation: zzz-band-flash var(--zzz-motion-duration-band-flash) linear both;
+    position: absolute;
+    inset: 0;
+    background: #ffffff;
+    opacity: 0;
+    pointer-events: none;
+    animation: zzz-band-flash var(--zzz-motion-duration-band-flash) linear both;
 }
 @keyframes zzz-band-flash {
-  0% { opacity: var(--zzz-opacity-band-flash); }
-  33% { opacity: 0.18; }
-  66% { opacity: 0.02; }
-  100% { opacity: 0; }
+    0% {
+        opacity: var(--zzz-opacity-band-flash);
+    }
+    33% {
+        opacity: 0.18;
+    }
+    66% {
+        opacity: 0.02;
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
 .zzz-dialog-band__content,
 .zzz-dialog-band__actions {
-  animation: zzz-band-content-in var(--zzz-motion-duration-band-content-in) linear both;
+    animation: zzz-band-content-in var(--zzz-motion-duration-band-content-in)
+        linear both;
 }
 .zzz-dialog-layer[data-pixelate] .zzz-dialog-band__content,
 .zzz-dialog-layer[data-pixelate] .zzz-dialog-band__actions,
 .zzz-dialog-layer[data-pixelate] .zzz-dialog-band__flash {
-  animation-delay: var(--zzz-motion-duration-backdrop-freeze);
+    animation-delay: var(--zzz-motion-duration-backdrop-freeze);
 }
 @keyframes zzz-band-content-in {
-  from { opacity: var(--zzz-opacity-dialog-content-from); }
-  to { opacity: 1; }
+    from {
+        opacity: var(--zzz-opacity-dialog-content-from);
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .zzz-dialog-band__content {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-  padding-top: calc(62 * var(--zzz-px));
-  text-align: center;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    padding-top: calc(62 * var(--zzz-px));
+    text-align: center;
 }
 .zzz-dialog-band__title {
-  display: block;
-  margin: 0;
-  color: var(--zzz-color-text-primary);
-  white-space: nowrap;
+    display: block;
+    margin: 0;
+    color: var(--zzz-color-text-primary);
+    white-space: nowrap;
 }
 .zzz-dialog-band__body {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  margin-top: calc(22 * var(--zzz-px));
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: calc(22 * var(--zzz-px));
 }
 
 /* Buttons straddle the bottom edge line: box y 354.5..413.5 of the 390 band (incl. keyline). */
 .zzz-dialog-band__actions {
-  position: absolute;
-  z-index: 2;
-  left: 0;
-  right: 0;
-  top: calc(354.5 * var(--zzz-px));
-  display: flex;
-  justify-content: center;
-  gap: var(--zzz-space-dialog-button-gap);
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    top: calc(354.5 * var(--zzz-px));
+    display: flex;
+    justify-content: center;
+    gap: var(--zzz-space-dialog-button-gap);
 }
 
 /* Reduced motion: no scale, no flash; a plain 100 ms fade. */
 @media (prefers-reduced-motion: reduce) {
-  .zzz-dialog-band,
-  .zzz-dialog-layer[data-pixelate] .zzz-dialog-band {
-    animation: zzz-band-content-in 100ms linear both;
-  }
-  .zzz-dialog-band__flash {
-    display: none;
-  }
+    .zzz-dialog-band,
+    .zzz-dialog-layer[data-pixelate] .zzz-dialog-band {
+        animation: zzz-band-content-in 100ms linear both;
+    }
+    .zzz-dialog-band__flash {
+        display: none;
+    }
 }
 [data-reduced-motion] .zzz-dialog-band,
 [data-reduced-motion].zzz-dialog-layer .zzz-dialog-band {
-  animation: zzz-band-content-in 100ms linear both;
+    animation: zzz-band-content-in 100ms linear both;
 }
 [data-reduced-motion] .zzz-dialog-band__flash {
-  display: none;
+    display: none;
 }
 @media (prefers-reduced-motion: reduce) {
-  .zzz-dialog-band[data-state='closed'] {
-    animation: zzz-band-out 100ms linear both;
-  }
+    .zzz-dialog-band[data-state='closed'] {
+        animation: zzz-band-out 100ms linear both;
+    }
 }
 [data-reduced-motion] .zzz-dialog-band[data-state='closed'] {
-  animation: zzz-band-out 100ms linear both;
+    animation: zzz-band-out 100ms linear both;
 }

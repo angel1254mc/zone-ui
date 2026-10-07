@@ -10,8 +10,10 @@ import { create } from 'storybook/theming/create'
  */
 
 /** Mona Sans 900 at font-stretch 110% is the UI face (see src/styles/fonts.css). */
-export const ZZZ_FONT_UI = '"Inpin Hongmeng", "Mona Sans", "Geologica", "Epilogue", system-ui, sans-serif'
-export const ZZZ_FONT_CODE = '"JetBrains Mono", "Cascadia Code", Consolas, "SFMono-Regular", monospace'
+export const ZZZ_FONT_UI =
+    '"Inpin Hongmeng", "Mona Sans", "Geologica", "Epilogue", system-ui, sans-serif'
+export const ZZZ_FONT_CODE =
+    '"JetBrains Mono", "Cascadia Code", Consolas, "SFMono-Regular", monospace'
 
 /** An original mark (no HoYoverse artwork): a dark pill holding a "ZONE" wordmark (accent Z)
  * built from flat polygons (an <img> cannot use the page's web fonts), sheared 10deg like the
@@ -31,45 +33,45 @@ const LOGO_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 48" w
 export const ZZZ_LOGO = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(LOGO_SVG)}`
 
 const palette = {
-  base: 'dark' as const,
+    base: 'dark' as const,
 
-  colorPrimary: '#93BA00',
-  colorSecondary: '#93BA00',
+    colorPrimary: '#93BA00',
+    colorSecondary: '#93BA00',
 
-  appBg: '#000000',
-  appContentBg: '#0B0B0B',
-  appPreviewBg: '#0B0B0B',
-  appBorderColor: '#333333',
-  // radius.card (14 design units) at the manager's 0.5 density
-  appBorderRadius: 7,
+    appBg: '#000000',
+    appContentBg: '#0B0B0B',
+    appPreviewBg: '#0B0B0B',
+    appBorderColor: '#333333',
+    // radius.card (14 design units) at the manager's 0.5 density
+    appBorderRadius: 7,
 
-  fontBase: ZZZ_FONT_UI,
-  fontCode: ZZZ_FONT_CODE,
+    fontBase: ZZZ_FONT_UI,
+    fontCode: ZZZ_FONT_CODE,
 
-  textColor: '#F1F1F1',
-  textInverseColor: '#000000',
-  textMutedColor: '#8C8C8C',
+    textColor: '#F1F1F1',
+    textInverseColor: '#000000',
+    textMutedColor: '#8C8C8C',
 
-  barTextColor: '#8C8C8C',
-  barHoverColor: '#F1F1F1',
-  barSelectedColor: '#93BA00',
-  barBg: '#000000',
+    barTextColor: '#8C8C8C',
+    barHoverColor: '#F1F1F1',
+    barSelectedColor: '#93BA00',
+    barBg: '#000000',
 
-  buttonBg: '#090909',
-  buttonBorder: '#333333',
-  booleanBg: '#161616',
-  booleanSelectedBg: '#363636',
+    buttonBg: '#090909',
+    buttonBorder: '#333333',
+    booleanBg: '#161616',
+    booleanSelectedBg: '#363636',
 
-  inputBg: '#090909',
-  inputBorder: '#333333',
-  inputTextColor: '#F1F1F1',
-  // radius.pill: every game input is a capsule
-  inputBorderRadius: 999,
+    inputBg: '#090909',
+    inputBorder: '#333333',
+    inputTextColor: '#F1F1F1',
+    // radius.pill: every game input is a capsule
+    inputBorderRadius: 999,
 
-  brandTitle: 'Zone',
-  brandUrl: './',
-  brandImage: ZZZ_LOGO,
-  brandTarget: '_self',
+    brandTitle: 'Zone',
+    brandUrl: './',
+    brandImage: ZZZ_LOGO,
+    brandTarget: '_self',
 }
 
 /** Manager theme (addons.setConfig({ theme })). */

@@ -9,35 +9,46 @@
 const ATTR = 'data-sbz-highlighted'
 
 function sync(tree: HTMLElement) {
-  const id = tree.getAttribute('data-highlighted-item-id')
-  const current = tree.querySelector<HTMLElement>(`[${ATTR}]`)
-  const row = id ? tree.querySelector<HTMLElement>(`.sidebar-item[data-item-id="${CSS.escape(id)}"]`) : null
-  if (current === row) return
-  current?.removeAttribute(ATTR)
-  row?.setAttribute(ATTR, '')
+    const id = tree.getAttribute('data-highlighted-item-id')
+    const current = tree.querySelector<HTMLElement>(`[${ATTR}]`)
+    const row = id
+        ? tree.querySelector<HTMLElement>(
+              `.sidebar-item[data-item-id="${CSS.escape(id)}"]`
+          )
+        : null
+    if (current === row) return
+    current?.removeAttribute(ATTR)
+    row?.setAttribute(ATTR, '')
 }
 
 export function installTreeHighlight() {
-  if (typeof document === 'undefined' || typeof MutationObserver === 'undefined') return
-  let tree: HTMLElement | null = null
-  let treeObserver: MutationObserver | null = null
-  const attach = () => {
-    const next = document.getElementById('storybook-explorer-tree')
-    if (next === tree) return
-    treeObserver?.disconnect()
-    tree = next
-    if (!tree) return
-    const target = tree
-    treeObserver = new MutationObserver(() => sync(target))
-    treeObserver.observe(target, {
-      attributes: true,
-      attributeFilter: ['data-highlighted-item-id'],
-      childList: true,
-      subtree: true,
+    if (
+        typeof document === 'undefined' ||
+        typeof MutationObserver === 'undefined'
+    )
+        return
+    let tree: HTMLElement | null = null
+    let treeObserver: MutationObserver | null = null
+    const attach = () => {
+        const next = document.getElementById('storybook-explorer-tree')
+        if (next === tree) return
+        treeObserver?.disconnect()
+        tree = next
+        if (!tree) return
+        const target = tree
+        treeObserver = new MutationObserver(() => sync(target))
+        treeObserver.observe(target, {
+            attributes: true,
+            attributeFilter: ['data-highlighted-item-id'],
+            childList: true,
+            subtree: true,
+        })
+        sync(target)
+    }
+    // The sidebar mounts (and can remount) after the manager entry runs.
+    new MutationObserver(attach).observe(document.documentElement, {
+        childList: true,
+        subtree: true,
     })
-    sync(target)
-  }
-  // The sidebar mounts (and can remount) after the manager entry runs.
-  new MutationObserver(attach).observe(document.documentElement, { childList: true, subtree: true })
-  attach()
+    attach()
 }

@@ -10,56 +10,71 @@
  * (46 / 57 / 69) and glyph, ring and pressed outset follow. Bevel rows and keyline follow too; the focus ring stays fixed.
  */
 .zzz-sort-toggle {
-  --zzz-sort-toggle-k: 1;
-  --zzz-sort-toggle-u: calc(var(--zzz-px) * var(--zzz-sort-toggle-k));
-  display: inline-flex;
-  flex: none;
-  align-items: center;
-  justify-content: center;
-  width: calc(var(--zzz-size-control-circle-n) * var(--zzz-sort-toggle-u));
-  height: calc(var(--zzz-size-control-circle-n) * var(--zzz-sort-toggle-u));
-  margin: 0;
-  padding: 0;
-  color: var(--zzz-color-text-primary);
-  cursor: pointer;
-  vertical-align: middle;
-  -webkit-tap-highlight-color: transparent;
+    --zzz-sort-toggle-k: 1;
+    --zzz-sort-toggle-u: calc(var(--zzz-px) * var(--zzz-sort-toggle-k));
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: calc(var(--zzz-size-control-circle-n) * var(--zzz-sort-toggle-u));
+    height: calc(var(--zzz-size-control-circle-n) * var(--zzz-sort-toggle-u));
+    margin: 0;
+    padding: 0;
+    color: var(--zzz-color-text-primary);
+    cursor: pointer;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .zzz-sort-toggle[data-size='sm'] {
-  --zzz-sort-toggle-k: calc(var(--zzz-size-control-sm-n) / var(--zzz-size-control-md-n));
+    --zzz-sort-toggle-k: calc(
+        var(--zzz-size-control-sm-n) / var(--zzz-size-control-md-n)
+    );
 }
 .zzz-sort-toggle[data-size='lg'] {
-  --zzz-sort-toggle-k: calc(var(--zzz-size-control-lg-n) / var(--zzz-size-control-md-n));
+    --zzz-sort-toggle-k: calc(
+        var(--zzz-size-control-lg-n) / var(--zzz-size-control-md-n)
+    );
 }
 /* Material knobs in the size unit (0,2,0 so .zzz-mat-pill's own declarations never win by order). */
 .zzz-sort-toggle.zzz-mat-pill {
-  --zzz-mat-ring: calc(var(--zzz-border-width-ring-n) * var(--zzz-sort-toggle-u));
-  --zzz-dots-size: calc(var(--zzz-pattern-dots-sm-n) * var(--zzz-sort-toggle-u));
+    --zzz-mat-ring: calc(
+        var(--zzz-border-width-ring-n) * var(--zzz-sort-toggle-u)
+    );
+    --zzz-dots-size: calc(
+        var(--zzz-pattern-dots-sm-n) * var(--zzz-sort-toggle-u)
+    );
 }
 /* sm / lg: the lit bevel rows and the keyline follow the size too (as Button / IconButton); the
  * keyline goes through --zzz-shadow-keyline so :focus-visible still replaces it. md keeps the tokens. */
 .zzz-sort-toggle.zzz-mat-pill:is([data-size='sm'], [data-size='lg']) {
-  --zzz-mat-bevel:
-    inset calc(1 * var(--zzz-sort-toggle-u)) calc(1 * var(--zzz-sort-toggle-u)) 0 var(--zzz-color-border-button-bevel-top),
-    inset calc(2 * var(--zzz-sort-toggle-u)) calc(2 * var(--zzz-sort-toggle-u)) 0 #373737;
-  --zzz-shadow-keyline: 0 0 0 calc(var(--zzz-border-width-keyline-n) * var(--zzz-sort-toggle-u)) var(--zzz-color-border-keyline);
+    --zzz-mat-bevel:
+        inset calc(1 * var(--zzz-sort-toggle-u))
+            calc(1 * var(--zzz-sort-toggle-u)) 0
+            var(--zzz-color-border-button-bevel-top),
+        inset calc(2 * var(--zzz-sort-toggle-u))
+            calc(2 * var(--zzz-sort-toggle-u)) 0 #373737;
+    --zzz-shadow-keyline: 0 0 0
+        calc(var(--zzz-border-width-keyline-n) * var(--zzz-sort-toggle-u))
+        var(--zzz-color-border-keyline);
 }
 /* md keeps the inherited / default size.control.pressOutset. */
 .zzz-sort-toggle:is([data-size='sm'], [data-size='lg']) {
-  --zzz-press-outset: calc(var(--zzz-size-control-press-outset-n) * var(--zzz-sort-toggle-u));
+    --zzz-press-outset: calc(
+        var(--zzz-size-control-press-outset-n) * var(--zzz-sort-toggle-u)
+    );
 }
 
 .zzz-sort-toggle__glyph {
-  width: calc(29 * var(--zzz-sort-toggle-u));
-  height: calc(26 * var(--zzz-sort-toggle-u));
+    width: calc(29 * var(--zzz-sort-toggle-u));
+    height: calc(26 * var(--zzz-sort-toggle-u));
 }
 
 .zzz-sort-toggle[data-direction='asc'] .zzz-sort-toggle__glyph {
-  transform: scaleX(-1);
+    transform: scaleX(-1);
 }
 
 .zzz-sort-toggle:disabled {
-  color: var(--zzz-color-text-disabled);
-  cursor: default;
+    color: var(--zzz-color-text-disabled);
+    cursor: default;
 }

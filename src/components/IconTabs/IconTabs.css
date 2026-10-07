@@ -10,133 +10,157 @@
  * Ring, bevel rows, keyline and pressed outset follow the size; the focus ring stays a fixed hairline.
  */
 .zzz-icon-tabs {
-  --zzz-icon-tabs-k: 1;
-  --zzz-icon-tabs-u: calc(var(--zzz-px) * var(--zzz-icon-tabs-k));
-  --zzz-icon-tabs-pitch: calc(var(--zzz-size-control-icon-tab-pitch-n) * var(--zzz-icon-tabs-u));
-  --zzz-icon-tabs-active: calc(var(--zzz-size-control-icon-tab-active-n) * var(--zzz-icon-tabs-u));
-  --zzz-icon-tabs-inner: calc(var(--zzz-size-control-icon-tab-inner-n) * var(--zzz-icon-tabs-u));
-  --zzz-icon-tabs-glyph: calc(var(--zzz-size-icon-tab-n) * var(--zzz-icon-tabs-u));
-  --zzz-icon-tabs-glyph-active: calc(34 * var(--zzz-icon-tabs-u));
-  position: relative;
-  display: flex;
-  flex: none;
-  align-items: center;
-  justify-content: center;
-  width: calc(var(--zzz-icon-tabs-count) * var(--zzz-icon-tabs-pitch) + 120 * var(--zzz-icon-tabs-u));
-  height: calc(var(--zzz-size-control-pill-top-n) * var(--zzz-icon-tabs-u));
-  overflow: visible;
-  line-height: var(--zzz-line-height-single);
+    --zzz-icon-tabs-k: 1;
+    --zzz-icon-tabs-u: calc(var(--zzz-px) * var(--zzz-icon-tabs-k));
+    --zzz-icon-tabs-pitch: calc(
+        var(--zzz-size-control-icon-tab-pitch-n) * var(--zzz-icon-tabs-u)
+    );
+    --zzz-icon-tabs-active: calc(
+        var(--zzz-size-control-icon-tab-active-n) * var(--zzz-icon-tabs-u)
+    );
+    --zzz-icon-tabs-inner: calc(
+        var(--zzz-size-control-icon-tab-inner-n) * var(--zzz-icon-tabs-u)
+    );
+    --zzz-icon-tabs-glyph: calc(
+        var(--zzz-size-icon-tab-n) * var(--zzz-icon-tabs-u)
+    );
+    --zzz-icon-tabs-glyph-active: calc(34 * var(--zzz-icon-tabs-u));
+    position: relative;
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: calc(
+        var(--zzz-icon-tabs-count) * var(--zzz-icon-tabs-pitch) + 120 *
+            var(--zzz-icon-tabs-u)
+    );
+    height: calc(var(--zzz-size-control-pill-top-n) * var(--zzz-icon-tabs-u));
+    overflow: visible;
+    line-height: var(--zzz-line-height-single);
 }
 .zzz-icon-tabs[data-size='sm'] {
-  --zzz-icon-tabs-k: calc(var(--zzz-size-control-sm-n) / var(--zzz-size-control-md-n));
+    --zzz-icon-tabs-k: calc(
+        var(--zzz-size-control-sm-n) / var(--zzz-size-control-md-n)
+    );
 }
 .zzz-icon-tabs[data-size='lg'] {
-  --zzz-icon-tabs-k: calc(var(--zzz-size-control-lg-n) / var(--zzz-size-control-md-n));
+    --zzz-icon-tabs-k: calc(
+        var(--zzz-size-control-lg-n) / var(--zzz-size-control-md-n)
+    );
 }
 /* Material knobs in the size unit (0,2,0 so .zzz-mat-pill's own declarations never win by order). */
 .zzz-icon-tabs.zzz-mat-pill {
-  --zzz-mat-ring: calc(var(--zzz-border-width-ring-n) * var(--zzz-icon-tabs-u));
-  --zzz-dots-size: calc(var(--zzz-pattern-dots-sm-n) * var(--zzz-icon-tabs-u));
+    --zzz-mat-ring: calc(
+        var(--zzz-border-width-ring-n) * var(--zzz-icon-tabs-u)
+    );
+    --zzz-dots-size: calc(
+        var(--zzz-pattern-dots-sm-n) * var(--zzz-icon-tabs-u)
+    );
 }
 /* sm / lg: the lit bevel rows and the keyline follow the size too (as Button / IconButton); the
  * keyline goes through --zzz-shadow-keyline so :focus-visible still replaces it. md keeps the tokens. */
 .zzz-icon-tabs.zzz-mat-pill:is([data-size='sm'], [data-size='lg']) {
-  --zzz-mat-bevel:
-    inset calc(1 * var(--zzz-icon-tabs-u)) calc(1 * var(--zzz-icon-tabs-u)) 0 var(--zzz-color-border-button-bevel-top),
-    inset calc(2 * var(--zzz-icon-tabs-u)) calc(2 * var(--zzz-icon-tabs-u)) 0 #373737;
-  --zzz-shadow-keyline: 0 0 0 calc(var(--zzz-border-width-keyline-n) * var(--zzz-icon-tabs-u)) var(--zzz-color-border-keyline);
+    --zzz-mat-bevel:
+        inset calc(1 * var(--zzz-icon-tabs-u)) calc(1 * var(--zzz-icon-tabs-u))
+            0 var(--zzz-color-border-button-bevel-top),
+        inset calc(2 * var(--zzz-icon-tabs-u)) calc(2 * var(--zzz-icon-tabs-u))
+            0 #373737;
+    --zzz-shadow-keyline: 0 0 0
+        calc(var(--zzz-border-width-keyline-n) * var(--zzz-icon-tabs-u))
+        var(--zzz-color-border-keyline);
 }
 
 .zzz-icon-tabs__tab {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex: none;
-  align-items: center;
-  justify-content: center;
-  width: var(--zzz-icon-tabs-pitch);
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: var(--zzz-radius-pill);
-  background: none;
-  color: var(--zzz-color-text-primary);
-  line-height: var(--zzz-line-height-single);
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: var(--zzz-icon-tabs-pitch);
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: var(--zzz-radius-pill);
+    background: none;
+    color: var(--zzz-color-text-primary);
+    line-height: var(--zzz-line-height-single);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .zzz-icon-tabs__glyph {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--zzz-icon-tabs-glyph);
-  height: var(--zzz-icon-tabs-glyph);
-  font-size: var(--zzz-icon-tabs-glyph);
-  line-height: var(--zzz-line-height-single);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--zzz-icon-tabs-glyph);
+    height: var(--zzz-icon-tabs-glyph);
+    font-size: var(--zzz-icon-tabs-glyph);
+    line-height: var(--zzz-line-height-single);
 }
 .zzz-icon-tabs__glyph > :where(svg, img) {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 /* Active: 82 px accent circle + 44 px black disc; glyph in the accent. */
 .zzz-icon-tabs__disc {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: var(--zzz-icon-tabs-active);
-  height: var(--zzz-icon-tabs-active);
-  border-radius: var(--zzz-radius-pill);
-  background: var(--zzz-accent);
-  transform: translate(-50%, -50%);
-  pointer-events: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: var(--zzz-icon-tabs-active);
+    height: var(--zzz-icon-tabs-active);
+    border-radius: var(--zzz-radius-pill);
+    background: var(--zzz-accent);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
 }
 .zzz-icon-tabs__disc::after {
-  content: '';
-  position: absolute;
-  inset: calc((var(--zzz-icon-tabs-active) - var(--zzz-icon-tabs-inner)) / 2);
-  border-radius: var(--zzz-radius-pill);
-  background: var(--zzz-color-accent-on);
+    content: '';
+    position: absolute;
+    inset: calc((var(--zzz-icon-tabs-active) - var(--zzz-icon-tabs-inner)) / 2);
+    border-radius: var(--zzz-radius-pill);
+    background: var(--zzz-color-accent-on);
 }
 .zzz-icon-tabs__tab[data-active] {
-  z-index: 2;
-  color: var(--zzz-accent);
-  cursor: default;
+    z-index: 2;
+    color: var(--zzz-accent);
+    cursor: default;
 }
 .zzz-icon-tabs__tab[data-active] .zzz-icon-tabs__glyph {
-  --zzz-icon-tabs-glyph: var(--zzz-icon-tabs-glyph-active);
+    --zzz-icon-tabs-glyph: var(--zzz-icon-tabs-glyph-active);
 }
 
 /* Pointer held on an inactive tab (follows SegmentedTabs). */
 .zzz-icon-tabs__tab[data-pressed] {
-  color: var(--zzz-color-text-pressed);
+    color: var(--zzz-color-text-pressed);
 }
 .zzz-icon-tabs__tab[aria-disabled='true'] {
-  color: var(--zzz-color-text-disabled);
-  cursor: default;
+    color: var(--zzz-color-text-disabled);
+    cursor: default;
 }
 
 /* Optional selection beat: 82 -> 88 px bump every 667 ms. */
 .zzz-icon-tabs[data-beat] .zzz-icon-tabs__disc {
-  animation: zzz-icon-tabs-beat var(--zzz-motion-duration-selection-beat) ease-out infinite;
+    animation: zzz-icon-tabs-beat var(--zzz-motion-duration-selection-beat)
+        ease-out infinite;
 }
 @keyframes zzz-icon-tabs-beat {
-  0%,
-  70%,
-  100% {
-    transform: translate(-50%, -50%) scale(1);
-  }
-  82% {
-    transform: translate(-50%, -50%) scale(1.073);
-  }
+    0%,
+    70%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    82% {
+        transform: translate(-50%, -50%) scale(1.073);
+    }
 }
 @media (prefers-reduced-motion: reduce) {
-  .zzz-icon-tabs[data-beat] .zzz-icon-tabs__disc {
-    animation: none;
-  }
+    .zzz-icon-tabs[data-beat] .zzz-icon-tabs__disc {
+        animation: none;
+    }
 }

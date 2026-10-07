@@ -6,188 +6,220 @@
  */
 
 .zzz-drawer-layer {
-  --zzz-drawer-width: var(--zzz-size-panel-drawer-width);
-  z-index: var(--zzz-z-index-drawer-scrim);
+    --zzz-drawer-width: var(--zzz-size-panel-drawer-width);
+    z-index: var(--zzz-z-index-drawer-scrim);
 }
 
 /* Page dimming: rgba(12,12,12,.19) at x = 0 → .65 at the drawer's left edge. No blur, no hatch. */
 .zzz-drawer-scrim {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    rgb(12 12 12 / 0.19) 0,
-    rgb(12 12 12 / 0.65) calc(100% - var(--zzz-drawer-width)),
-    rgb(12 12 12 / 0.65) 100%
-  );
-  animation: zzz-drawer-fade var(--zzz-motion-duration-drawer-scrim) var(--zzz-motion-easing-out-expo) both;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        rgb(12 12 12 / 0.19) 0,
+        rgb(12 12 12 / 0.65) calc(100% - var(--zzz-drawer-width)),
+        rgb(12 12 12 / 0.65) 100%
+    );
+    animation: zzz-drawer-fade var(--zzz-motion-duration-drawer-scrim)
+        var(--zzz-motion-easing-out-expo) both;
 }
 .zzz-drawer-scrim[data-state='closed'] {
-  animation: zzz-drawer-fade-out var(--zzz-motion-duration-drawer-scrim) var(--zzz-motion-easing-in-accel) both;
+    animation: zzz-drawer-fade-out var(--zzz-motion-duration-drawer-scrim)
+        var(--zzz-motion-easing-in-accel) both;
 }
 @keyframes zzz-drawer-fade {
-  from { opacity: 0; }
-  to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 @keyframes zzz-drawer-fade-out {
-  from { opacity: 1; }
-  to { opacity: 0; }
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
 }
 
 .zzz-drawer {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  width: var(--zzz-drawer-width);
-  border-left: calc(4 * var(--zzz-px)) solid var(--zzz-color-bg-base);
-  background: var(--zzz-color-surface-drawer-header);
-  outline: none;
-  /* Keyframed rather than an ease-out-expo bezier (which settles by ~130 ms): the slide keeps easing
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    width: var(--zzz-drawer-width);
+    border-left: calc(4 * var(--zzz-px)) solid var(--zzz-color-bg-base);
+    background: var(--zzz-color-surface-drawer-header);
+    outline: none;
+    /* Keyframed rather than an ease-out-expo bezier (which settles by ~130 ms): the slide keeps easing
    * until 200 ms. Linear between keyframes. */
-  animation: zzz-drawer-in var(--zzz-motion-duration-drawer-in) linear both;
+    animation: zzz-drawer-in var(--zzz-motion-duration-drawer-in) linear both;
 }
 .zzz-drawer[data-state='closed'] {
-  animation: zzz-drawer-out var(--zzz-motion-duration-drawer-out) var(--zzz-motion-easing-in-accel) both;
-  pointer-events: none;
+    animation: zzz-drawer-out var(--zzz-motion-duration-drawer-out)
+        var(--zzz-motion-easing-in-accel) both;
+    pointer-events: none;
 }
 /* Offsets at 33/67/100/133/167 ms = 236/132/79/24/6 px of the 688 px drawer; 0 at 200 ms. */
 @keyframes zzz-drawer-in {
-  0% { transform: translateX(100%); }
-  16.5% { transform: translateX(34.3%); }
-  33.5% { transform: translateX(19.19%); }
-  50% { transform: translateX(11.48%); }
-  66.5% { transform: translateX(3.49%); }
-  83.5% { transform: translateX(0.9%); }
-  100% { transform: none; }
+    0% {
+        transform: translateX(100%);
+    }
+    16.5% {
+        transform: translateX(34.3%);
+    }
+    33.5% {
+        transform: translateX(19.19%);
+    }
+    50% {
+        transform: translateX(11.48%);
+    }
+    66.5% {
+        transform: translateX(3.49%);
+    }
+    83.5% {
+        transform: translateX(0.9%);
+    }
+    100% {
+        transform: none;
+    }
 }
 @keyframes zzz-drawer-out {
-  from { transform: none; }
-  to { transform: translateX(100%); }
+    from {
+        transform: none;
+    }
+    to {
+        transform: translateX(100%);
+    }
 }
 
 /* Header: funnel 21×22 at x 49 (from the drawer's outer left), title 14 px after it, Close tag top 21,
  * right edge 67 from the screen edge. */
 .zzz-drawer__header {
-  position: relative;
-  flex: none;
-  display: flex;
-  align-items: center;
-  height: var(--zzz-size-panel-drawer-header);
-  padding-left: calc(45 * var(--zzz-px));
-  padding-top: calc(28 * var(--zzz-px));
-  background: var(--zzz-color-surface-drawer-header);
+    position: relative;
+    flex: none;
+    display: flex;
+    align-items: center;
+    height: var(--zzz-size-panel-drawer-header);
+    padding-left: calc(45 * var(--zzz-px));
+    padding-top: calc(28 * var(--zzz-px));
+    background: var(--zzz-color-surface-drawer-header);
 }
 .zzz-drawer__icon {
-  display: inline-flex;
-  flex: none;
-  width: calc(21 * var(--zzz-px));
-  height: calc(22 * var(--zzz-px));
-  margin-right: var(--zzz-space-7);
-  color: var(--zzz-color-text-primary);
+    display: inline-flex;
+    flex: none;
+    width: calc(21 * var(--zzz-px));
+    height: calc(22 * var(--zzz-px));
+    margin-right: var(--zzz-space-7);
+    color: var(--zzz-color-text-primary);
 }
 .zzz-drawer__icon > svg {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 .zzz-drawer__title {
-  margin: 0;
-  color: var(--zzz-color-text-primary);
-  white-space: nowrap;
+    margin: 0;
+    color: var(--zzz-color-text-primary);
+    white-space: nowrap;
 }
 .zzz-drawer__close.zzz-tag-button {
-  position: absolute;
-  top: calc(21 * var(--zzz-px));
-  right: var(--zzz-space-screen-margin);
+    position: absolute;
+    top: calc(21 * var(--zzz-px));
+    right: var(--zzz-space-screen-margin);
 }
 
 /* Body: #1A1A1A + dots md, asymmetric margins around the inner panel (left 41, right 63, top 22,
  * bottom 23). */
 .zzz-drawer__body {
-  flex: 1 1 auto;
-  min-height: 0;
-  display: flex;
-  padding: calc(22 * var(--zzz-px)) calc(63 * var(--zzz-px)) calc(23 * var(--zzz-px)) var(--zzz-space-13);
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    padding: calc(22 * var(--zzz-px)) calc(63 * var(--zzz-px))
+        calc(23 * var(--zzz-px)) var(--zzz-space-13);
 }
 .zzz-drawer__body {
-  position: relative;
-  isolation: isolate;
+    position: relative;
+    isolation: isolate;
 }
 /* Faint vignette: the body brightens toward the right middle. */
 .zzz-drawer__body::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: radial-gradient(
-    ellipse calc(170 * var(--zzz-px)) 62% at 100% 50%,
-    rgb(255 255 255 / 0.026),
-    rgb(255 255 255 / 0.018) 55%,
-    transparent
-  );
-  pointer-events: none;
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(
+        ellipse calc(170 * var(--zzz-px)) 62% at 100% 50%,
+        rgb(255 255 255 / 0.026),
+        rgb(255 255 255 / 0.018) 55%,
+        transparent
+    );
+    pointer-events: none;
 }
 .zzz-drawer__panel {
-  flex: 1 1 auto;
-  min-width: 0;
-  overflow: auto;
-  padding: calc(19 * var(--zzz-px)) calc(20 * var(--zzz-px)) calc(19 * var(--zzz-px)) calc(21 * var(--zzz-px));
-  border-radius: var(--zzz-radius-inner);
-  background: var(--zzz-color-surface-drawer-inner);
-  scrollbar-width: none;
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: auto;
+    padding: calc(19 * var(--zzz-px)) calc(20 * var(--zzz-px))
+        calc(19 * var(--zzz-px)) calc(21 * var(--zzz-px));
+    border-radius: var(--zzz-radius-inner);
+    background: var(--zzz-color-surface-drawer-inner);
+    scrollbar-width: none;
 }
 
 /* Footer: 100 px, action centred on the inner panel (same side margins as the body). */
 .zzz-drawer__footer {
-  flex: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: var(--zzz-size-panel-drawer-footer);
-  padding: 0 calc(63 * var(--zzz-px)) 0 var(--zzz-space-13);
-  background: var(--zzz-color-surface-drawer-header);
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--zzz-size-panel-drawer-footer);
+    padding: 0 calc(63 * var(--zzz-px)) 0 var(--zzz-space-13);
+    background: var(--zzz-color-surface-drawer-header);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .zzz-drawer,
-  .zzz-drawer[data-state='closed'] {
-    animation-name: zzz-drawer-fade;
-    animation-duration: 100ms;
-  }
-  .zzz-drawer[data-state='closed'] {
-    animation-name: zzz-drawer-fade-out;
-  }
+    .zzz-drawer,
+    .zzz-drawer[data-state='closed'] {
+        animation-name: zzz-drawer-fade;
+        animation-duration: 100ms;
+    }
+    .zzz-drawer[data-state='closed'] {
+        animation-name: zzz-drawer-fade-out;
+    }
 }
 [data-reduced-motion] .zzz-drawer,
 [data-reduced-motion].zzz-drawer-layer .zzz-drawer {
-  animation: zzz-drawer-fade 100ms linear both;
+    animation: zzz-drawer-fade 100ms linear both;
 }
 [data-reduced-motion] .zzz-drawer[data-state='closed'],
 [data-reduced-motion].zzz-drawer-layer .zzz-drawer[data-state='closed'] {
-  animation: zzz-drawer-fade-out 100ms linear both;
+    animation: zzz-drawer-fade-out 100ms linear both;
 }
 
 /* ── FilterDrawer content ───────────────────────────────────────────────────────────────── */
 .zzz-filter-drawer__sort {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--zzz-space-9);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--zzz-space-9);
 }
 /* 4 px divider 20 below the select, a faint dark shadow beneath. */
 .zzz-filter-drawer__divider {
-  height: var(--zzz-border-width-divider);
-  margin: var(--zzz-space-9) calc(3 * var(--zzz-px)) 0;
-  border: 0;
-  background: var(--zzz-color-border-divider);
-  box-shadow: 0 calc(3 * var(--zzz-px)) calc(3 * var(--zzz-px)) rgb(0 0 0 / 0.8);
+    height: var(--zzz-border-width-divider);
+    margin: var(--zzz-space-9) calc(3 * var(--zzz-px)) 0;
+    border: 0;
+    background: var(--zzz-color-border-divider);
+    box-shadow: 0 calc(3 * var(--zzz-px)) calc(3 * var(--zzz-px))
+        rgb(0 0 0 / 0.8);
 }
 .zzz-filter-drawer__groups {
-  display: flex;
-  flex-direction: column;
-  gap: calc(23 * var(--zzz-px));
-  margin-top: calc(44 * var(--zzz-px));
+    display: flex;
+    flex-direction: column;
+    gap: calc(23 * var(--zzz-px));
+    margin-top: calc(44 * var(--zzz-px));
 }

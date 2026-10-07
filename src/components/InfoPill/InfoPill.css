@@ -1,42 +1,42 @@
 /* InfoPill: pill 36 tall, glyph inset 4, text starts 12 after the glyph box, ~5 px right padding. */
 .zzz-info-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: calc(11 * var(--zzz-px));
-  height: var(--zzz-size-control-info-pill);
-  padding: 0 calc(8 * var(--zzz-px)) 0 calc(4 * var(--zzz-px));
-  margin: 0;
-  border: 0;
-  border-radius: calc(18 * var(--zzz-px));
-  background: var(--zzz-color-bg-base);
-  color: var(--zzz-color-text-primary);
-  white-space: nowrap;
-  vertical-align: middle;
+    display: inline-flex;
+    align-items: center;
+    gap: calc(11 * var(--zzz-px));
+    height: var(--zzz-size-control-info-pill);
+    padding: 0 calc(8 * var(--zzz-px)) 0 calc(4 * var(--zzz-px));
+    margin: 0;
+    border: 0;
+    border-radius: calc(18 * var(--zzz-px));
+    background: var(--zzz-color-bg-base);
+    color: var(--zzz-color-text-primary);
+    white-space: nowrap;
+    vertical-align: middle;
 }
 .zzz-info-pill--button {
-  /* The button pill's label hugs the glyph (~5 px) and has ~16 px end padding,
+    /* The button pill's label hugs the glyph (~5 px) and has ~16 px end padding,
    * unlike the static timer pill (12 px glyph gap, ~8 px end). */
-  gap: calc(5 * var(--zzz-px));
-  padding-right: calc(16 * var(--zzz-px));
-  cursor: pointer;
-  appearance: none;
+    gap: calc(5 * var(--zzz-px));
+    padding-right: calc(16 * var(--zzz-px));
+    cursor: pointer;
+    appearance: none;
 }
 .zzz-info-pill__icon {
-  display: inline-flex;
-  flex: none;
-  width: calc(27 * var(--zzz-px));
-  height: calc(27 * var(--zzz-px));
+    display: inline-flex;
+    flex: none;
+    width: calc(27 * var(--zzz-px));
+    height: calc(27 * var(--zzz-px));
 }
 .zzz-info-pill__icon > svg {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 .zzz-info-pill__text {
-  /* optical: the cap sits 1 px low in a centred line box */
-  translate: 0 calc(0.5 * var(--zzz-px));
+    /* optical: the cap sits 1 px low in a centred line box */
+    translate: 0 calc(0.5 * var(--zzz-px));
 }
 /* Pressed: the glyph turns black with the label (the pill has no ring/cap to hide). */
 .zzz-info-pill--button:disabled {
-  color: var(--zzz-color-text-disabled);
-  cursor: default;
+    color: var(--zzz-color-text-disabled);
+    cursor: default;
 }

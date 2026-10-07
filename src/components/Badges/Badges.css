@@ -5,293 +5,322 @@
 /* ── Placement on a host corner (host: position: relative) ─────────────────────────────── */
 .zzz-badge--top-left,
 .zzz-badge--top-right {
-  position: absolute;
-  z-index: 1;
-  top: calc(-1 * var(--zzz-badge-dy, var(--zzz-badge-dy-d, 0)) * var(--zzz-px));
+    position: absolute;
+    z-index: 1;
+    top: calc(
+        -1 * var(--zzz-badge-dy, var(--zzz-badge-dy-d, 0)) * var(--zzz-px)
+    );
 }
 .zzz-badge--top-left {
-  left: calc(-1 * var(--zzz-badge-dx, var(--zzz-badge-dx-d, 0)) * var(--zzz-px));
+    left: calc(
+        -1 * var(--zzz-badge-dx, var(--zzz-badge-dx-d, 0)) * var(--zzz-px)
+    );
 }
 .zzz-badge--top-right {
-  right: calc(-1 * var(--zzz-badge-dx, var(--zzz-badge-dx-d, 0)) * var(--zzz-px));
+    right: calc(
+        -1 * var(--zzz-badge-dx, var(--zzz-badge-dx-d, 0)) * var(--zzz-px)
+    );
 }
 .zzz-badge--inline {
-  position: relative;
-  vertical-align: middle;
+    position: relative;
+    vertical-align: middle;
 }
 
 /* ── NewBadge ──────────────────────────────────────────────────────────────────────────── */
 .zzz-new-badge {
-  --zzz-badge-dx-d: 6;
-  --zzz-badge-dy-d: 8;
-  display: inline-block;
-  font-family: var(--zzz-font-family-ui);
-  font-weight: 900;
-  /* NEW! is set tight (letters nearly touch): narrower than the ui stretch, negative tracking. */
-  font-stretch: 92%;
-  font-size-adjust: cap-height 0.84;
-  /* Glyphs ~51 wide × ~16 tall at md (fontSize.badgeNew 22 is too big). */
-  font-size: calc(19 * var(--zzz-px));
-  line-height: var(--zzz-line-height-single);
-  letter-spacing: -0.06em;
-  white-space: nowrap;
-  pointer-events: none;
+    --zzz-badge-dx-d: 6;
+    --zzz-badge-dy-d: 8;
+    display: inline-block;
+    font-family: var(--zzz-font-family-ui);
+    font-weight: 900;
+    /* NEW! is set tight (letters nearly touch): narrower than the ui stretch, negative tracking. */
+    font-stretch: 92%;
+    font-size-adjust: cap-height 0.84;
+    /* Glyphs ~51 wide × ~16 tall at md (fontSize.badgeNew 22 is too big). */
+    font-size: calc(19 * var(--zzz-px));
+    line-height: var(--zzz-line-height-single);
+    letter-spacing: -0.06em;
+    white-space: nowrap;
+    pointer-events: none;
 }
 .zzz-new-badge--sm {
-  font-size: calc(17.8 * var(--zzz-px));
+    font-size: calc(17.8 * var(--zzz-px));
 }
 /* Padding leaves room for the 3 px of stroke outside the glyphs. */
 .zzz-new-badge__skew {
-  position: relative;
-  padding: calc(3 * var(--zzz-px)) calc(4 * var(--zzz-px));
+    position: relative;
+    padding: calc(3 * var(--zzz-px)) calc(4 * var(--zzz-px));
 }
 .zzz-new-badge__stroke {
-  position: absolute;
-  inset: calc(3 * var(--zzz-px)) calc(4 * var(--zzz-px));
-  color: #000000;
-  /* shadow.textNew is a 6 px text-stroke (3 px outside); -webkit-text-stroke mitres into spikes at
+    position: absolute;
+    inset: calc(3 * var(--zzz-px)) calc(4 * var(--zzz-px));
+    color: #000000;
+    /* shadow.textNew is a 6 px text-stroke (3 px outside); -webkit-text-stroke mitres into spikes at
    * the sharp N / ! corners, so the same 3 px ring is drawn as round text-shadows instead. */
-  --zzz-new-r: calc(3 * var(--zzz-px));
-  --zzz-new-d: calc(2.12 * var(--zzz-px));
-  text-shadow:
-    var(--zzz-new-r) 0 0 #000, calc(-1 * var(--zzz-new-r)) 0 0 #000,
-    0 var(--zzz-new-r) 0 #000, 0 calc(-1 * var(--zzz-new-r)) 0 #000,
-    var(--zzz-new-d) var(--zzz-new-d) 0 #000, calc(-1 * var(--zzz-new-d)) var(--zzz-new-d) 0 #000,
-    var(--zzz-new-d) calc(-1 * var(--zzz-new-d)) 0 #000, calc(-1 * var(--zzz-new-d)) calc(-1 * var(--zzz-new-d)) 0 #000,
-    calc(1.5 * var(--zzz-px)) calc(2.6 * var(--zzz-px)) 0 #000, calc(-1.5 * var(--zzz-px)) calc(2.6 * var(--zzz-px)) 0 #000,
-    calc(1.5 * var(--zzz-px)) calc(-2.6 * var(--zzz-px)) 0 #000, calc(-1.5 * var(--zzz-px)) calc(-2.6 * var(--zzz-px)) 0 #000,
-    calc(2.6 * var(--zzz-px)) calc(1.5 * var(--zzz-px)) 0 #000, calc(-2.6 * var(--zzz-px)) calc(1.5 * var(--zzz-px)) 0 #000,
-    calc(2.6 * var(--zzz-px)) calc(-1.5 * var(--zzz-px)) 0 #000, calc(-2.6 * var(--zzz-px)) calc(-1.5 * var(--zzz-px)) 0 #000;
+    --zzz-new-r: calc(3 * var(--zzz-px));
+    --zzz-new-d: calc(2.12 * var(--zzz-px));
+    text-shadow:
+        var(--zzz-new-r) 0 0 #000,
+        calc(-1 * var(--zzz-new-r)) 0 0 #000,
+        0 var(--zzz-new-r) 0 #000,
+        0 calc(-1 * var(--zzz-new-r)) 0 #000,
+        var(--zzz-new-d) var(--zzz-new-d) 0 #000,
+        calc(-1 * var(--zzz-new-d)) var(--zzz-new-d) 0 #000,
+        var(--zzz-new-d) calc(-1 * var(--zzz-new-d)) 0 #000,
+        calc(-1 * var(--zzz-new-d)) calc(-1 * var(--zzz-new-d)) 0 #000,
+        calc(1.5 * var(--zzz-px)) calc(2.6 * var(--zzz-px)) 0 #000,
+        calc(-1.5 * var(--zzz-px)) calc(2.6 * var(--zzz-px)) 0 #000,
+        calc(1.5 * var(--zzz-px)) calc(-2.6 * var(--zzz-px)) 0 #000,
+        calc(-1.5 * var(--zzz-px)) calc(-2.6 * var(--zzz-px)) 0 #000,
+        calc(2.6 * var(--zzz-px)) calc(1.5 * var(--zzz-px)) 0 #000,
+        calc(-2.6 * var(--zzz-px)) calc(1.5 * var(--zzz-px)) 0 #000,
+        calc(2.6 * var(--zzz-px)) calc(-1.5 * var(--zzz-px)) 0 #000,
+        calc(-2.6 * var(--zzz-px)) calc(-1.5 * var(--zzz-px)) 0 #000;
 }
 .zzz-new-badge__fill {
-  position: relative;
-  background: var(--zzz-color-badge-new-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
+    position: relative;
+    background: var(--zzz-color-badge-new-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
 }
 
 /* ── PlusBadge ─────────────────────────────────────────────────────────────────────────── */
 .zzz-plus-badge {
-  --zzz-press-outset: calc(1 * var(--zzz-px));
-  display: inline-grid;
-  place-items: center;
-  flex: none;
-  width: calc(15 * var(--zzz-px));
-  height: calc(15 * var(--zzz-px));
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: var(--zzz-color-badge-plus);
-  box-shadow: 0 0 0 calc(1.5 * var(--zzz-px)) #141414;
-  color: #000000;
-  cursor: pointer;
-  vertical-align: middle;
-  -webkit-tap-highlight-color: transparent;
+    --zzz-press-outset: calc(1 * var(--zzz-px));
+    display: inline-grid;
+    place-items: center;
+    flex: none;
+    width: calc(15 * var(--zzz-px));
+    height: calc(15 * var(--zzz-px));
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: var(--zzz-color-badge-plus);
+    box-shadow: 0 0 0 calc(1.5 * var(--zzz-px)) #141414;
+    color: #000000;
+    cursor: pointer;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: transparent;
 }
 /* Invisible 31 px hit area around the 15 px disc. */
 .zzz-plus-badge::after {
-  content: '';
-  position: absolute;
-  inset: calc(-8 * var(--zzz-px));
-  border-radius: 50%;
+    content: '';
+    position: absolute;
+    inset: calc(-8 * var(--zzz-px));
+    border-radius: 50%;
 }
 .zzz-plus-badge__glyph {
-  display: block;
-  width: 100%;
-  height: 100%;
-  fill: currentColor;
+    display: block;
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
 }
 .zzz-plus-badge:disabled,
 .zzz-plus-badge[aria-disabled='true'] {
-  color: var(--zzz-color-text-disabled);
-  cursor: default;
+    color: var(--zzz-color-text-disabled);
+    cursor: default;
 }
 
 /* ── RankCoin ──────────────────────────────────────────────────────────────────────────── */
 .zzz-rank-coin {
-  position: relative;
-  display: inline-block;
-  flex: none;
-  font-size: calc(var(--zzz-badge-size, 30) * var(--zzz-px));
-  width: 1em;
-  height: 1em;
-  line-height: 0;
-  vertical-align: middle;
-  border-radius: 50%;
-  /* 2–3 px dark ring with a light top-left highlight */
-  background: linear-gradient(135deg, #8A8A8A 0%, #4A4A4A 30%, var(--zzz-color-rarity-coin-ring) 55%, #262626 100%);
+    position: relative;
+    display: inline-block;
+    flex: none;
+    font-size: calc(var(--zzz-badge-size, 30) * var(--zzz-px));
+    width: 1em;
+    height: 1em;
+    line-height: 0;
+    vertical-align: middle;
+    border-radius: 50%;
+    /* 2–3 px dark ring with a light top-left highlight */
+    background: linear-gradient(
+        135deg,
+        #8a8a8a 0%,
+        #4a4a4a 30%,
+        var(--zzz-color-rarity-coin-ring) 55%,
+        #262626 100%
+    );
 }
 .zzz-rank-coin__body {
-  position: absolute;
-  inset: 0.085em;
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 0.035em var(--zzz-coin-rim, rgba(255, 255, 255, 0.35));
+    position: absolute;
+    inset: 0.085em;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 0.035em
+        var(--zzz-coin-rim, rgba(255, 255, 255, 0.35));
 }
 .zzz-rank-coin--s .zzz-rank-coin__body {
-  --zzz-coin-rim: var(--zzz-color-rarity-coin-s-rim);
-  background: linear-gradient(
-    172deg,
-    var(--zzz-color-rarity-coin-s-highlight) 0%,
-    var(--zzz-color-rarity-coin-s-body) 30%,
-    #F7B514 52%,
-    var(--zzz-color-rarity-coin-s-shade) 72%,
-    #EE980B 100%
-  );
+    --zzz-coin-rim: var(--zzz-color-rarity-coin-s-rim);
+    background: linear-gradient(
+        172deg,
+        var(--zzz-color-rarity-coin-s-highlight) 0%,
+        var(--zzz-color-rarity-coin-s-body) 30%,
+        #f7b514 52%,
+        var(--zzz-color-rarity-coin-s-shade) 72%,
+        #ee980b 100%
+    );
 }
 .zzz-rank-coin--a .zzz-rank-coin__body {
-  --zzz-coin-rim: #C77FBF;
-  background: linear-gradient(
-    172deg,
-    var(--zzz-color-rarity-coin-a-highlight) 0%,
-    var(--zzz-color-rarity-coin-a-body) 32%,
-    #E45ED9 58%,
-    var(--zzz-color-rarity-coin-a-shade) 100%
-  );
+    --zzz-coin-rim: #c77fbf;
+    background: linear-gradient(
+        172deg,
+        var(--zzz-color-rarity-coin-a-highlight) 0%,
+        var(--zzz-color-rarity-coin-a-body) 32%,
+        #e45ed9 58%,
+        var(--zzz-color-rarity-coin-a-shade) 100%
+    );
 }
 /* B: built from color.rarity.b */
 .zzz-rank-coin--b .zzz-rank-coin__body {
-  --zzz-coin-rim: #7CC4EC;
-  background: linear-gradient(172deg, #D8F1FF 0%, #6ACBFF 32%, var(--zzz-color-rarity-b) 62%, #0079CC 100%);
+    --zzz-coin-rim: #7cc4ec;
+    background: linear-gradient(
+        172deg,
+        #d8f1ff 0%,
+        #6acbff 32%,
+        var(--zzz-color-rarity-b) 62%,
+        #0079cc 100%
+    );
 }
 .zzz-rank-coin__letter {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  /* The glyph fills its 32-unit viewBox top to bottom; the knocked-out letter is ~0.5 of the
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    /* The glyph fills its 32-unit viewBox top to bottom; the knocked-out letter is ~0.5 of the
    * diameter, leaving body visible all round. */
-  width: 0.5em;
-  height: 0.5em;
-  transform: translate(-50%, -50%);
-  color: var(--zzz-color-rarity-coin-s-letter);
+    width: 0.5em;
+    height: 0.5em;
+    transform: translate(-50%, -50%);
+    color: var(--zzz-color-rarity-coin-s-letter);
 }
 
 /* ── RankBadge (agent-card sun) ────────────────────────────────────────────────────────── */
 .zzz-rank-badge {
-  position: relative;
-  display: inline-block;
-  flex: none;
-  font-size: calc(var(--zzz-badge-size, 37) * var(--zzz-px));
-  width: 1em;
-  height: 1em;
-  line-height: 0;
-  vertical-align: middle;
+    position: relative;
+    display: inline-block;
+    flex: none;
+    font-size: calc(var(--zzz-badge-size, 37) * var(--zzz-px));
+    width: 1em;
+    height: 1em;
+    line-height: 0;
+    vertical-align: middle;
 }
 .zzz-rank-badge__sun {
-  display: block;
-  width: 100%;
-  height: 100%;
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 .zzz-rank-badge__glyph {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 0.66em;
-  height: 0.66em;
-  transform: translate(-50%, -50%);
-  color: #000000;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0.66em;
+    height: 0.66em;
+    transform: translate(-50%, -50%);
+    color: #000000;
 }
 .zzz-rank-badge--infinity .zzz-rank-badge__glyph {
-  width: 0.72em;
-  height: 0.72em;
+    width: 0.72em;
+    height: 0.72em;
 }
 
 /* ── CombatBadge ───────────────────────────────────────────────────────────────────────── */
 .zzz-combat-badge {
-  display: inline-block;
-  flex: none;
-  font-size: calc(var(--zzz-badge-size, 40) * var(--zzz-px));
-  width: 1em;
-  height: 1em;
-  line-height: 0;
-  vertical-align: middle;
+    display: inline-block;
+    flex: none;
+    font-size: calc(var(--zzz-badge-size, 40) * var(--zzz-px));
+    width: 1em;
+    height: 1em;
+    line-height: 0;
+    vertical-align: middle;
 }
 .zzz-combat-badge__icon {
-  display: block;
-  width: 100%;
-  height: 100%;
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 /* ── SlotHexBadge ──────────────────────────────────────────────────────────────────────── */
 .zzz-slot-hex {
-  --zzz-badge-dx-d: 4.5;
-  --zzz-badge-dy-d: 2;
-  display: inline-block;
-  flex: none;
-  width: calc(38 * var(--zzz-px));
-  height: calc(36 * var(--zzz-px));
-  line-height: 0;
+    --zzz-badge-dx-d: 4.5;
+    --zzz-badge-dy-d: 2;
+    display: inline-block;
+    flex: none;
+    width: calc(38 * var(--zzz-px));
+    height: calc(36 * var(--zzz-px));
+    line-height: 0;
 }
 .zzz-slot-hex:not(.zzz-badge--top-left) {
-  position: relative;
-  vertical-align: middle;
+    position: relative;
+    vertical-align: middle;
 }
 /* HexBadge spans 29.5 × 27.8 of its 32 grid: 41.2 px renders the hexagon at 38 × 36. */
 .zzz-slot-hex__hex,
 .zzz-slot-hex__digit {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 .zzz-slot-hex__hex {
-  width: calc(41.2 * var(--zzz-px));
-  height: calc(41.2 * var(--zzz-px));
+    width: calc(41.2 * var(--zzz-px));
+    height: calc(41.2 * var(--zzz-px));
 }
 /* Digits span 20.4 × 28 of the grid → 17 × 16 rendered. The bars are ~4 px (25 % of
  * the height), heavier than the icon's segments, so they get a 2-unit same-colour stroke. */
 .zzz-slot-hex__digit {
-  width: calc(24 * var(--zzz-px));
-  height: calc(17.5 * var(--zzz-px));
-  color: #B4B3B6;
-  overflow: visible;
+    width: calc(24 * var(--zzz-px));
+    height: calc(17.5 * var(--zzz-px));
+    color: #b4b3b6;
+    overflow: visible;
 }
 .zzz-slot-hex__digit path {
-  stroke: currentColor;
-  stroke-width: 2.4;
-  stroke-linejoin: miter;
+    stroke: currentColor;
+    stroke-width: 2.4;
+    stroke-linejoin: miter;
 }
 
 /* ── StatusCheck ───────────────────────────────────────────────────────────────────────── */
 .zzz-status-check {
-  --zzz-badge-dx-d: 12;
-  --zzz-badge-dy-d: 3;
-  display: inline-block;
-  flex: none;
-  width: calc(18 * var(--zzz-px));
-  height: calc(18 * var(--zzz-px));
-  line-height: 0;
+    --zzz-badge-dx-d: 12;
+    --zzz-badge-dy-d: 3;
+    display: inline-block;
+    flex: none;
+    width: calc(18 * var(--zzz-px));
+    height: calc(18 * var(--zzz-px));
+    line-height: 0;
 }
 .zzz-status-check:not(.zzz-badge--top-left) {
-  position: relative;
-  vertical-align: middle;
+    position: relative;
+    vertical-align: middle;
 }
 .zzz-status-check__icon {
-  display: block;
-  width: 100%;
-  height: 100%;
-  filter: drop-shadow(0 0 calc(1 * var(--zzz-px)) #000000) drop-shadow(0 0 calc(0.8 * var(--zzz-px)) #000000) drop-shadow(0 0 calc(0.5 * var(--zzz-px)) #000000);
+    display: block;
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 calc(1 * var(--zzz-px)) #000000)
+        drop-shadow(0 0 calc(0.8 * var(--zzz-px)) #000000)
+        drop-shadow(0 0 calc(0.5 * var(--zzz-px)) #000000);
 }
 
 /* ── RecommendBadge ────────────────────────────────────────────────────────────────────── */
 .zzz-recommend-badge {
-  --zzz-badge-dx-d: 10;
-  --zzz-badge-dy-d: 5;
-  display: inline-block;
-  flex: none;
-  width: calc(32 * var(--zzz-px));
-  height: calc(22 * var(--zzz-px));
-  line-height: 0;
+    --zzz-badge-dx-d: 10;
+    --zzz-badge-dy-d: 5;
+    display: inline-block;
+    flex: none;
+    width: calc(32 * var(--zzz-px));
+    height: calc(22 * var(--zzz-px));
+    line-height: 0;
 }
 .zzz-recommend-badge:not(.zzz-badge--top-left) {
-  position: relative;
-  vertical-align: middle;
+    position: relative;
+    vertical-align: middle;
 }
 .zzz-recommend-badge__svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
 }

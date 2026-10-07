@@ -9,69 +9,80 @@
 .zzz-text--outline-md,
 .zzz-text--outline-event,
 .zzz-text--outline-new {
-  paint-order: stroke fill;
+    paint-order: stroke fill;
 }
-.zzz-text--outline-sm { -webkit-text-stroke: var(--zzz-shadow-text-outline-sm); }
-.zzz-text--outline-md { -webkit-text-stroke: var(--zzz-shadow-text-outline-md); }
+.zzz-text--outline-sm {
+    -webkit-text-stroke: var(--zzz-shadow-text-outline-sm);
+}
+.zzz-text--outline-md {
+    -webkit-text-stroke: var(--zzz-shadow-text-outline-md);
+}
 .zzz-text--outline-event {
-  -webkit-text-stroke: var(--zzz-shadow-text-event-title);
-  text-shadow: var(--zzz-shadow-text-event-title-drop);
+    -webkit-text-stroke: var(--zzz-shadow-text-event-title);
+    text-shadow: var(--zzz-shadow-text-event-title-drop);
 }
-.zzz-text--outline-new { -webkit-text-stroke: var(--zzz-shadow-text-new); }
+.zzz-text--outline-new {
+    -webkit-text-stroke: var(--zzz-shadow-text-new);
+}
 
 /* The italic wrapper is its own inline-block box: the stroke must reach it too. */
 .zzz-text[class*='zzz-text--outline-'] > .zzz-italic {
-  -webkit-text-stroke: inherit;
-  paint-order: inherit;
+    -webkit-text-stroke: inherit;
+    paint-order: inherit;
 }
 
 /* Deboss: dark text on a slightly lighter plate (EVENTS, AGENT INFO).
  * Local override of shadow.textDeboss: a single faint row under the glyph, 0 1px 1px rgba(0,0,0,.35)
  * (the token's 0 2px 2px rgba(0,0,0,.6) draws two fused dark rows). */
 .zzz-text--deboss {
-  text-shadow: 0 calc(1 * var(--zzz-px)) calc(1 * var(--zzz-px)) rgb(0 0 0 / 0.35);
+    text-shadow: 0 calc(1 * var(--zzz-px)) calc(1 * var(--zzz-px))
+        rgb(0 0 0 / 0.35);
 }
 
 /* condensedXl (e.g. "EVENTS"). Local override of fontSize.condensed.xl / letterSpacing.condensed:
  * 45.5 px (a ~36 px cap) with the letters spread to 0.06 em. */
 .zzz-text.zzz-text-condensed-xl,
 .zzz-text.zzz-text-condensedXl {
-  font-size: calc(45.5 * var(--zzz-px));
-  letter-spacing: 0.06em;
+    font-size: calc(45.5 * var(--zzz-px));
+    letter-spacing: 0.06em;
 }
 
 /* Tracked: a widely spaced name watermark such as "B a n y u e" (+0.44 em, #323232) … */
 .zzz-text--tracked-name {
-  letter-spacing: var(--zzz-letter-spacing-name-watermark);
+    letter-spacing: var(--zzz-letter-spacing-name-watermark);
 }
 .zzz-text--tracked-name:not([class*='zzz-tone-']) {
-  color: var(--zzz-color-text-watermark-name);
+    color: var(--zzz-color-text-watermark-name);
 }
 /* … and the sweep-transition label, e.g. "A G E N T  S E L E C T" (≈1.75 em, condensed). */
 .zzz-text--tracked-interstitial {
-  letter-spacing: var(--zzz-letter-spacing-interstitial);
+    letter-spacing: var(--zzz-letter-spacing-interstitial);
 }
 .zzz-text--tracked-interstitial:not([class*='zzz-tone-']) {
-  color: var(--zzz-color-interstitial-text);
+    color: var(--zzz-color-interstitial-text);
 }
 
 /* Figures: the theme's plain figures by default (font.numeric.default = proportional-nums). Mona Sans's
  * tnum set swaps in a slashed 0 and a footed 1, so tabular figures are opt-in
  * (`tabular` prop, font.numeric.tabular); use Zeros for fixed-pitch counters with plain digits. */
-.zzz-text { font-variant-numeric: var(--zzz-font-numeric-default); }
-.zzz-text.zzz-text--tabular { font-variant-numeric: var(--zzz-font-numeric-tabular); }
+.zzz-text {
+    font-variant-numeric: var(--zzz-font-numeric-default);
+}
+.zzz-text.zzz-text--tabular {
+    font-variant-numeric: var(--zzz-font-numeric-tabular);
+}
 
 /* Auto-fit: a single-line block the component shrinks (inline font-size) until it fits. */
 .zzz-text--fit {
-  display: block;
-  min-width: 0;
-  max-width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  /* overflow:hidden would also clip descenders (p, g, y) under tight line-heights; give the clip box
+    display: block;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    /* overflow:hidden would also clip descenders (p, g, y) under tight line-heights; give the clip box
      vertical room without moving the layout. The horizontal fit is unaffected. */
-  padding-block: 0.2em;
-  margin-block: -0.2em;
+    padding-block: 0.2em;
+    margin-block: -0.2em;
 }
 
 /* Zeros: 8-digit counters with the non-significant zeros dimmed.
@@ -80,35 +91,41 @@
  * and its figures are ~15 % wider. So the counter uses the default (plain-zero) figures and puts every
  * digit in a fixed 0.651 em cell, centred: the same pitch whatever the face (Inpin fits it natively). */
 .zzz-zeros {
-  font-variant-numeric: normal;
-  white-space: nowrap;
+    font-variant-numeric: normal;
+    white-space: nowrap;
 }
-.zzz-text .zzz-zeros { font-variant-numeric: normal; }
+.zzz-text .zzz-zeros {
+    font-variant-numeric: normal;
+}
 .zzz-zeros__d {
-  display: inline-block;
-  width: 0.651em;
-  text-align: center;
-  letter-spacing: 0;
-  /* Mona's wdth-110 figures are wider than Inpin's and touch inside a 0.651 em cell; wdth 100 gives
+    display: inline-block;
+    width: 0.651em;
+    text-align: center;
+    letter-spacing: 0;
+    /* Mona's wdth-110 figures are wider than Inpin's and touch inside a 0.651 em cell; wdth 100 gives
    * them a ~2 px gap. No effect on a face without a wdth axis (Inpin). */
-  font-stretch: 100%;
+    font-stretch: 100%;
 }
-.zzz-zeros__pad { color: var(--zzz-color-text-zero-pad); }
-.zzz-zeros__digits { color: var(--zzz-color-text-primary); }
+.zzz-zeros__pad {
+    color: var(--zzz-color-text-zero-pad);
+}
+.zzz-zeros__digits {
+    color: var(--zzz-color-text-primary);
+}
 
 /* Keyword: orange highlight, optional leading icon sized to the cap height. */
 .zzz-keyword {
-  display: inline;
-  white-space: nowrap;
+    display: inline;
+    white-space: nowrap;
 }
 .zzz-keyword__icon {
-  display: inline-flex;
-  vertical-align: -0.12em;
-  width: 1em;
-  height: 1em;
-  margin-inline-end: 0.15em;
+    display: inline-flex;
+    vertical-align: -0.12em;
+    width: 1em;
+    height: 1em;
+    margin-inline-end: 0.15em;
 }
 .zzz-keyword__icon > svg {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }

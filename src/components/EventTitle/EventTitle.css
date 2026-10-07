@@ -1,15 +1,21 @@
 /* EventTitle. Type, stroke and drop come from Text (role eventTitle, outline event). */
 .zzz-event-title {
-  display: block;
-  margin: 0;
-  /* Leave room for the ~3.5 px stroke rim and the 3 px drop (~6.5 px under the glyph) inside the line box. */
-  padding-block: calc(3 * var(--zzz-px)) calc(5 * var(--zzz-px));
-  line-height: var(--zzz-line-height-single);
-  white-space: nowrap;
+    display: block;
+    margin: 0;
+    /* Leave room for the ~3.5 px stroke rim and the 3 px drop (~6.5 px under the glyph) inside the line box. */
+    padding-block: calc(3 * var(--zzz-px)) calc(5 * var(--zzz-px));
+    line-height: var(--zzz-line-height-single);
+    white-space: nowrap;
 }
-.zzz-event-title--start { text-align: start; }
-.zzz-event-title--center { text-align: center; }
-.zzz-event-title--end { text-align: end; }
+.zzz-event-title--start {
+    text-align: start;
+}
+.zzz-event-title--center {
+    text-align: center;
+}
+.zzz-event-title--end {
+    text-align: end;
+}
 
 /* Sticker outline: ~3.5 px black rim on top, ~6.5 px under the
  * glyph (rim + hard drop). The token pair (6 px stroke + text-shadow 0 4px) renders a 2–3 px rim
@@ -17,7 +23,7 @@
  * only and hides behind the stroke. A drop-shadow() filter shadows the stroked silhouette instead.
  * This overrides the token pair locally. */
 .zzz-event-title.zzz-text--outline-event {
-  -webkit-text-stroke: calc(7 * var(--zzz-px)) var(--zzz-color-bg-base);
-  text-shadow: none;
-  filter: drop-shadow(0 calc(3 * var(--zzz-px)) 0 var(--zzz-color-bg-base));
+    -webkit-text-stroke: calc(7 * var(--zzz-px)) var(--zzz-color-bg-base);
+    text-shadow: none;
+    filter: drop-shadow(0 calc(3 * var(--zzz-px)) 0 var(--zzz-color-bg-base));
 }

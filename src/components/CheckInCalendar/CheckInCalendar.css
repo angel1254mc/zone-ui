@@ -13,263 +13,329 @@
  *   tag        "Outfit Select" 114 × 38 at (29, 169), overhanging the right edge by 2
  */
 .zzz-check-in-calendar {
-  display: grid;
-  grid-template-columns: repeat(var(--zzz-check-in-columns, 7), var(--zzz-size-check-in-tile-width));
-  column-gap: calc(var(--zzz-size-check-in-pitch-x) - var(--zzz-size-check-in-tile-width));
-  row-gap: calc(var(--zzz-size-check-in-pitch-y) - var(--zzz-size-check-in-tile-height));
-  margin: 0;
-  padding: 0;
-  list-style: none;
+    display: grid;
+    grid-template-columns: repeat(
+        var(--zzz-check-in-columns, 7),
+        var(--zzz-size-check-in-tile-width)
+    );
+    column-gap: calc(
+        var(--zzz-size-check-in-pitch-x) - var(--zzz-size-check-in-tile-width)
+    );
+    row-gap: calc(
+        var(--zzz-size-check-in-pitch-y) - var(--zzz-size-check-in-tile-height)
+    );
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 .zzz-check-in-calendar__cell {
-  display: block;
-  margin: 0;
-  padding: 0;
+    display: block;
+    margin: 0;
+    padding: 0;
 }
 
 .zzz-check-in-tile {
-  --zzz-check-in-card-top: var(--zzz-color-check-in-card-top);
-  --zzz-check-in-card-bottom: var(--zzz-color-check-in-card-bottom);
-  position: relative;
-  display: block;
-  width: var(--zzz-size-check-in-tile-width);
-  height: var(--zzz-size-check-in-tile-height);
-  color: var(--zzz-color-text-primary);
-  isolation: isolate;
+    --zzz-check-in-card-top: var(--zzz-color-check-in-card-top);
+    --zzz-check-in-card-bottom: var(--zzz-color-check-in-card-bottom);
+    position: relative;
+    display: block;
+    width: var(--zzz-size-check-in-tile-width);
+    height: var(--zzz-size-check-in-tile-height);
+    color: var(--zzz-color-text-primary);
+    isolation: isolate;
 }
 .zzz-check-in-tile--special {
-  --zzz-check-in-card-top: color-mix(in srgb, var(--zzz-color-check-in-card-special) 80%, #fff);
-  --zzz-check-in-card-bottom: var(--zzz-color-check-in-card-special);
+    --zzz-check-in-card-top: color-mix(
+        in srgb,
+        var(--zzz-color-check-in-card-special) 80%,
+        #fff
+    );
+    --zzz-check-in-card-bottom: var(--zzz-color-check-in-card-special);
 }
 
 /* Silver ticket with perforated side strips (the notches are masked out of this layer only, so they never
  * nick the day disc that overhangs the corner). */
 .zzz-check-in-tile__frame {
-  --zzz-check-in-notch: calc(1.8 * var(--zzz-px));
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: calc(215 * var(--zzz-px));
-  border-radius: var(--zzz-radius-check-in-card) var(--zzz-radius-check-in-card) 0 0;
-  /* Side rail: lit top, #F4F5F8 at y 72, #E2E3EA at y 121, then a steady blue-grey
+    --zzz-check-in-notch: calc(1.8 * var(--zzz-px));
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: calc(215 * var(--zzz-px));
+    border-radius: var(--zzz-radius-check-in-card)
+        var(--zzz-radius-check-in-card) 0 0;
+    /* Side rail: lit top, #F4F5F8 at y 72, #E2E3EA at y 121, then a steady blue-grey
    * darkening (#D3D3E8 y 151 -> #BBBDD8 y 191 -> #B5BAC7 y 201) and the band under the window
    * #9C9AB8..#9698B3 at y 201..211. The blue-grey stops have no token (shading of color.checkIn.frame). */
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--zzz-color-check-in-frame) 25%, #fff) 0,
-    var(--zzz-color-check-in-frame) calc(12 * var(--zzz-px)),
-    color-mix(in srgb, var(--zzz-color-check-in-frame) 40%, #fff) calc(75 * var(--zzz-px)),
-    var(--zzz-color-check-in-frame) calc(122 * var(--zzz-px)),
-    #D2D2E6 calc(155 * var(--zzz-px)),
-    #BDBED9 calc(190 * var(--zzz-px)),
-    #A9AAC4 calc(200 * var(--zzz-px)),
-    #9698B2 calc(211 * var(--zzz-px)),
-    #8E90A9 100%
-  );
-  box-shadow: inset 0 calc(-1 * var(--zzz-px)) 0 rgb(0 0 0 / 0.08);
-  -webkit-mask-image:
-    radial-gradient(circle at 0 50%, transparent var(--zzz-check-in-notch), #000 calc(var(--zzz-check-in-notch) + 0.6 * var(--zzz-px))),
-    radial-gradient(circle at 100% 50%, transparent var(--zzz-check-in-notch), #000 calc(var(--zzz-check-in-notch) + 0.6 * var(--zzz-px)));
-  mask-image:
-    radial-gradient(circle at 0 50%, transparent var(--zzz-check-in-notch), #000 calc(var(--zzz-check-in-notch) + 0.6 * var(--zzz-px))),
-    radial-gradient(circle at 100% 50%, transparent var(--zzz-check-in-notch), #000 calc(var(--zzz-check-in-notch) + 0.6 * var(--zzz-px)));
-  -webkit-mask-size: 100% calc(10 * var(--zzz-px));
-  mask-size: 100% calc(10 * var(--zzz-px));
-  -webkit-mask-position: 0 calc(3 * var(--zzz-px));
-  mask-position: 0 calc(3 * var(--zzz-px));
-  -webkit-mask-composite: source-in;
-  mask-composite: intersect;
+    background: linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--zzz-color-check-in-frame) 25%, #fff) 0,
+        var(--zzz-color-check-in-frame) calc(12 * var(--zzz-px)),
+        color-mix(in srgb, var(--zzz-color-check-in-frame) 40%, #fff)
+            calc(75 * var(--zzz-px)),
+        var(--zzz-color-check-in-frame) calc(122 * var(--zzz-px)),
+        #d2d2e6 calc(155 * var(--zzz-px)),
+        #bdbed9 calc(190 * var(--zzz-px)),
+        #a9aac4 calc(200 * var(--zzz-px)),
+        #9698b2 calc(211 * var(--zzz-px)),
+        #8e90a9 100%
+    );
+    box-shadow: inset 0 calc(-1 * var(--zzz-px)) 0 rgb(0 0 0 / 0.08);
+    -webkit-mask-image:
+        radial-gradient(
+            circle at 0 50%,
+            transparent var(--zzz-check-in-notch),
+            #000 calc(var(--zzz-check-in-notch) + 0.6 * var(--zzz-px))
+        ),
+        radial-gradient(
+            circle at 100% 50%,
+            transparent var(--zzz-check-in-notch),
+            #000 calc(var(--zzz-check-in-notch) + 0.6 * var(--zzz-px))
+        );
+    mask-image:
+        radial-gradient(
+            circle at 0 50%,
+            transparent var(--zzz-check-in-notch),
+            #000 calc(var(--zzz-check-in-notch) + 0.6 * var(--zzz-px))
+        ),
+        radial-gradient(
+            circle at 100% 50%,
+            transparent var(--zzz-check-in-notch),
+            #000 calc(var(--zzz-check-in-notch) + 0.6 * var(--zzz-px))
+        );
+    -webkit-mask-size: 100% calc(10 * var(--zzz-px));
+    mask-size: 100% calc(10 * var(--zzz-px));
+    -webkit-mask-position: 0 calc(3 * var(--zzz-px));
+    mask-position: 0 calc(3 * var(--zzz-px));
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
 }
 
 .zzz-check-in-tile__window {
-  position: absolute;
-  left: calc(9 * var(--zzz-px));
-  top: calc(11 * var(--zzz-px));
-  width: calc(120 * var(--zzz-px));
-  height: calc(182 * var(--zzz-px));
-  overflow: hidden;
-  border-radius: calc(8 * var(--zzz-px));
-  /* Card gradient (window-local y): #F0E483 10, #EFDB6E 30, #ECCF59 50, #E4B440 70..80,
+    position: absolute;
+    left: calc(9 * var(--zzz-px));
+    top: calc(11 * var(--zzz-px));
+    width: calc(120 * var(--zzz-px));
+    height: calc(182 * var(--zzz-px));
+    overflow: hidden;
+    border-radius: calc(8 * var(--zzz-px));
+    /* Card gradient (window-local y): #F0E483 10, #EFDB6E 30, #ECCF59 50, #E4B440 70..80,
    * #EAC348 130..170, #D1AA42 at the bottom edge. The cardBottom token #D1BD71 renders the lower card beige,
    * so the lower stops use a saturated amber instead. */
-  background: linear-gradient(
-    180deg,
-    var(--zzz-check-in-card-top) 0,
-    #EEDA6E calc(30 * var(--zzz-px)),
-    #E9C755 calc(52 * var(--zzz-px)),
-    #E3B440 calc(76 * var(--zzz-px)),
-    #E2B13C calc(100 * var(--zzz-px)),
-    #E8C246 calc(135 * var(--zzz-px)),
-    #E6BF44 calc(172 * var(--zzz-px)),
-    #D1AA42 100%
-  );
-  box-shadow: inset 0 calc(1.5 * var(--zzz-px)) calc(1.5 * var(--zzz-px)) rgb(0 0 0 / 0.25);
+    background: linear-gradient(
+        180deg,
+        var(--zzz-check-in-card-top) 0,
+        #eeda6e calc(30 * var(--zzz-px)),
+        #e9c755 calc(52 * var(--zzz-px)),
+        #e3b440 calc(76 * var(--zzz-px)),
+        #e2b13c calc(100 * var(--zzz-px)),
+        #e8c246 calc(135 * var(--zzz-px)),
+        #e6bf44 calc(172 * var(--zzz-px)),
+        #d1aa42 100%
+    );
+    box-shadow: inset 0 calc(1.5 * var(--zzz-px)) calc(1.5 * var(--zzz-px))
+        rgb(0 0 0 / 0.25);
 }
 .zzz-check-in-tile--special .zzz-check-in-tile__window {
-  background: linear-gradient(180deg, var(--zzz-check-in-card-top), var(--zzz-check-in-card-bottom));
+    background: linear-gradient(
+        180deg,
+        var(--zzz-check-in-card-top),
+        var(--zzz-check-in-card-bottom)
+    );
 }
 /* Faint swirl printed on the card. */
 .zzz-check-in-tile__swirl {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 15% 105%, transparent 0 calc(46 * var(--zzz-px)), rgb(255 255 255 / 0.16) calc(47 * var(--zzz-px)) calc(58 * var(--zzz-px)), transparent calc(59 * var(--zzz-px))),
-    radial-gradient(circle at 105% 35%, transparent 0 calc(38 * var(--zzz-px)), rgb(255 255 255 / 0.12) calc(39 * var(--zzz-px)) calc(47 * var(--zzz-px)), transparent calc(48 * var(--zzz-px)));
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(
+            circle at 15% 105%,
+            transparent 0 calc(46 * var(--zzz-px)),
+            rgb(255 255 255 / 0.16) calc(47 * var(--zzz-px))
+                calc(58 * var(--zzz-px)),
+            transparent calc(59 * var(--zzz-px))
+        ),
+        radial-gradient(
+            circle at 105% 35%,
+            transparent 0 calc(38 * var(--zzz-px)),
+            rgb(255 255 255 / 0.12) calc(39 * var(--zzz-px))
+                calc(47 * var(--zzz-px)),
+            transparent calc(48 * var(--zzz-px))
+        );
 }
 .zzz-check-in-tile__art {
-  position: absolute;
-  left: calc(16 * var(--zzz-px));
-  top: calc(62 * var(--zzz-px));
-  width: calc(90 * var(--zzz-px));
-  height: calc(90 * var(--zzz-px));
+    position: absolute;
+    left: calc(16 * var(--zzz-px));
+    top: calc(62 * var(--zzz-px));
+    width: calc(90 * var(--zzz-px));
+    height: calc(90 * var(--zzz-px));
 }
 .zzz-check-in-tile__art > :where(img, svg, picture) {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 .zzz-check-in-tile__check {
-  position: absolute;
-  left: calc(79 * var(--zzz-px));
-  top: calc(121 * var(--zzz-px));
-  width: calc(35 * var(--zzz-px));
-  height: calc(25 * var(--zzz-px));
+    position: absolute;
+    left: calc(79 * var(--zzz-px));
+    top: calc(121 * var(--zzz-px));
+    width: calc(35 * var(--zzz-px));
+    height: calc(25 * var(--zzz-px));
 }
 
 .zzz-check-in-tile__type {
-  position: absolute;
-  left: calc(15 * var(--zzz-px));
-  top: calc(14 * var(--zzz-px));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: calc(24 * var(--zzz-px));
-  height: calc(24 * var(--zzz-px));
-  border-radius: 50%;
-  background: var(--zzz-color-bg-base);
-  color: var(--zzz-color-text-primary);
+    position: absolute;
+    left: calc(15 * var(--zzz-px));
+    top: calc(14 * var(--zzz-px));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(24 * var(--zzz-px));
+    height: calc(24 * var(--zzz-px));
+    border-radius: 50%;
+    background: var(--zzz-color-bg-base);
+    color: var(--zzz-color-text-primary);
 }
 .zzz-check-in-tile__type > svg {
-  width: calc(17 * var(--zzz-px));
-  height: calc(17 * var(--zzz-px));
+    width: calc(17 * var(--zzz-px));
+    height: calc(17 * var(--zzz-px));
 }
 
 /* Clip = the ticket's outer rect: the disc is flush with the frame top/right, no silver outside the ticket. */
 .zzz-check-in-tile__day-clip {
-  position: absolute;
-  top: calc(1.5 * var(--zzz-px));
-  right: 0;
-  left: 0;
-  z-index: 1;
-  height: calc(70 * var(--zzz-px));
-  overflow: hidden;
-  border-radius: 0 calc(var(--zzz-radius-check-in-card) - 1.5 * var(--zzz-px)) 0 0;
-  pointer-events: none;
+    position: absolute;
+    top: calc(1.5 * var(--zzz-px));
+    right: 0;
+    left: 0;
+    z-index: 1;
+    height: calc(70 * var(--zzz-px));
+    overflow: hidden;
+    border-radius: 0 calc(var(--zzz-radius-check-in-card) - 1.5 * var(--zzz-px))
+        0 0;
+    pointer-events: none;
 }
 .zzz-check-in-tile__day {
-  position: absolute;
-  /* circle 68 (the 57 of size.checkIn.dayBadge is its visible width), centre (118, 28.5) in tile coords */
-  left: calc(84 * var(--zzz-px));
-  top: calc(-7 * var(--zzz-px));
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: calc(3 * var(--zzz-px));
-  width: calc(68 * var(--zzz-px));
-  height: calc(68 * var(--zzz-px));
-  /* text centres on the visible part ("01" centre x 122, "DAY" 124.5 vs circle centre 128) */
-  padding: calc(4 * var(--zzz-px)) calc(10 * var(--zzz-px)) 0 0;
-  border-radius: 50%;
-  background: var(--zzz-color-check-in-day-badge);
-  box-shadow: 0 0 0 calc(2 * var(--zzz-px)) var(--zzz-color-check-in-frame);
-  color: var(--zzz-color-text-primary);
+    position: absolute;
+    /* circle 68 (the 57 of size.checkIn.dayBadge is its visible width), centre (118, 28.5) in tile coords */
+    left: calc(84 * var(--zzz-px));
+    top: calc(-7 * var(--zzz-px));
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: calc(3 * var(--zzz-px));
+    width: calc(68 * var(--zzz-px));
+    height: calc(68 * var(--zzz-px));
+    /* text centres on the visible part ("01" centre x 122, "DAY" 124.5 vs circle centre 128) */
+    padding: calc(4 * var(--zzz-px)) calc(10 * var(--zzz-px)) 0 0;
+    border-radius: 50%;
+    background: var(--zzz-color-check-in-day-badge);
+    box-shadow: 0 0 0 calc(2 * var(--zzz-px)) var(--zzz-color-check-in-frame);
+    color: var(--zzz-color-text-primary);
 }
 .zzz-check-in-tile__day-num {
-  line-height: calc(24 * var(--zzz-px));
-  /* Mona Sans draws a slashed zero with tabular figures; keep a plain 0. */
-  font-variant-numeric: proportional-nums;
-  letter-spacing: -0.02em;
+    line-height: calc(24 * var(--zzz-px));
+    /* Mona Sans draws a slashed zero with tabular figures; keep a plain 0. */
+    font-variant-numeric: proportional-nums;
+    letter-spacing: -0.02em;
 }
 .zzz-check-in-tile__day-label {
-  font-size: calc(12 * var(--zzz-px)); /* "DAY" ink ~36 x 9-10 */
-  line-height: var(--zzz-line-height-single);
-  letter-spacing: 0.25em;
-  /* trailing letter-spacing would push the ink left of centre; "DAY" sits ~2 px right of "01" */
-  margin-right: -0.25em;
-  translate: calc(1.5 * var(--zzz-px)) 0;
+    font-size: calc(12 * var(--zzz-px)); /* "DAY" ink ~36 x 9-10 */
+    line-height: var(--zzz-line-height-single);
+    letter-spacing: 0.25em;
+    /* trailing letter-spacing would push the ink left of centre; "DAY" sits ~2 px right of "01" */
+    margin-right: -0.25em;
+    translate: calc(1.5 * var(--zzz-px)) 0;
 }
 
 .zzz-check-in-tile__tag {
-  position: absolute;
-  left: calc(29 * var(--zzz-px));
-  right: calc(-2 * var(--zzz-px));
-  top: calc(169 * var(--zzz-px));
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: calc(38 * var(--zzz-px));
-  padding: calc(1 * var(--zzz-px)) calc(4 * var(--zzz-px)) 0 calc(14 * var(--zzz-px));
-  border-radius: calc(14 * var(--zzz-px)) calc(6 * var(--zzz-px)) calc(6 * var(--zzz-px)) calc(14 * var(--zzz-px));
-  background: linear-gradient(90deg, color-mix(in srgb, var(--zzz-color-check-in-day-badge) 70%, transparent), var(--zzz-color-check-in-day-badge) 45%);
+    position: absolute;
+    left: calc(29 * var(--zzz-px));
+    right: calc(-2 * var(--zzz-px));
+    top: calc(169 * var(--zzz-px));
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(38 * var(--zzz-px));
+    padding: calc(1 * var(--zzz-px)) calc(4 * var(--zzz-px)) 0
+        calc(14 * var(--zzz-px));
+    border-radius: calc(14 * var(--zzz-px)) calc(6 * var(--zzz-px))
+        calc(6 * var(--zzz-px)) calc(14 * var(--zzz-px));
+    background: linear-gradient(
+        90deg,
+        color-mix(
+            in srgb,
+            var(--zzz-color-check-in-day-badge) 70%,
+            transparent
+        ),
+        var(--zzz-color-check-in-day-badge) 45%
+    );
 }
 .zzz-check-in-tile__tag-text {
-  display: block;
-  text-align: center;
-  white-space: pre-line;
-  line-height: calc(18 * var(--zzz-px));
-  color: var(--zzz-color-text-primary);
-  text-shadow: 0 0 calc(2 * var(--zzz-px)) color-mix(in srgb, var(--zzz-color-check-in-day-badge) 50%, #fff);
+    display: block;
+    text-align: center;
+    white-space: pre-line;
+    line-height: calc(18 * var(--zzz-px));
+    color: var(--zzz-color-text-primary);
+    text-shadow: 0 0 calc(2 * var(--zzz-px))
+        color-mix(in srgb, var(--zzz-color-check-in-day-badge) 50%, #fff);
 }
 
 .zzz-check-in-tile__perforation {
-  position: absolute;
-  left: calc(6 * var(--zzz-px));
-  right: calc(6 * var(--zzz-px));
-  top: calc(203 * var(--zzz-px));
-  height: calc(2 * var(--zzz-px));
-  background: repeating-linear-gradient(
-    90deg,
-    #5A5D6C 0 calc(3 * var(--zzz-px)),
-    transparent calc(3 * var(--zzz-px)) calc(5.5 * var(--zzz-px))
-  ); /* dash ink #5A5D6C / #444756; no token */
+    position: absolute;
+    left: calc(6 * var(--zzz-px));
+    right: calc(6 * var(--zzz-px));
+    top: calc(203 * var(--zzz-px));
+    height: calc(2 * var(--zzz-px));
+    background: repeating-linear-gradient(
+        90deg,
+        #5a5d6c 0 calc(3 * var(--zzz-px)),
+        transparent calc(3 * var(--zzz-px)) calc(5.5 * var(--zzz-px))
+    ); /* dash ink #5A5D6C / #444756; no token */
 }
 
 .zzz-check-in-tile__strip {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: var(--zzz-size-check-in-count-strip);
-  border-radius: 0 0 calc(6 * var(--zzz-px)) calc(6 * var(--zzz-px));
-  background: linear-gradient(180deg, color-mix(in srgb, var(--zzz-color-check-in-count-strip) 80%, #000), var(--zzz-color-check-in-count-strip) 30%);
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--zzz-size-check-in-count-strip);
+    border-radius: 0 0 calc(6 * var(--zzz-px)) calc(6 * var(--zzz-px));
+    background: linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--zzz-color-check-in-count-strip) 80%, #000),
+        var(--zzz-color-check-in-count-strip) 30%
+    );
 }
 .zzz-check-in-tile__capsule {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: calc(119 * var(--zzz-px));
-  height: calc(38 * var(--zzz-px));
-  border-radius: calc(19 * var(--zzz-px));
-  background: color-mix(in srgb, var(--zzz-color-check-in-count-strip) 62%, #000);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(119 * var(--zzz-px));
+    height: calc(38 * var(--zzz-px));
+    border-radius: calc(19 * var(--zzz-px));
+    background: color-mix(
+        in srgb,
+        var(--zzz-color-check-in-count-strip) 62%,
+        #000
+    );
 }
 .zzz-check-in-tile__count {
-  /* digit cap ≈ 21.7 (bodyXl renders 19.7) -> 26 */
-  font-size: var(--zzz-font-size-button);
-  translate: 0 calc(0.5 * var(--zzz-px));
-  font-variant-numeric: proportional-nums;
-  word-spacing: 0.1em;
+    /* digit cap ≈ 21.7 (bodyXl renders 19.7) -> 26 */
+    font-size: var(--zzz-font-size-button);
+    translate: 0 calc(0.5 * var(--zzz-px));
+    font-variant-numeric: proportional-nums;
+    word-spacing: 0.1em;
 }
 .zzz-check-in-tile__times {
-  font-size: 0.8em;
+    font-size: 0.8em;
 }
 .zzz-check-in-tile--claimed .zzz-check-in-tile__count {
-  color: var(--zzz-color-check-in-claimed-count);
+    color: var(--zzz-color-check-in-claimed-count);
 }

@@ -11,23 +11,23 @@ npm install @angel1254mc/zone-ui
 ```
 
 ```tsx
-import "@angel1254mc/zone-ui/styles.css"; // tokens + base + every component style
-import "@angel1254mc/zone-ui/fonts.css"; // optional: loads Mona Sans from Google Fonts
-import { Button, SegmentedTabs, ZzzTheme } from "@angel1254mc/zone-ui";
+import '@angel1254mc/zone-ui/styles.css' // tokens + base + every component style
+import '@angel1254mc/zone-ui/fonts.css' // optional: loads Mona Sans from Google Fonts
+import { Button, SegmentedTabs, ZzzTheme } from '@angel1254mc/zone-ui'
 
 export function App() {
-  return (
-    <ZzzTheme>
-      <SegmentedTabs
-        items={[
-          { value: "daily", label: "Daily" },
-          { value: "archive", label: "Archive" },
-        ]}
-        defaultValue="daily"
-      />
-      <Button>Start</Button>
-    </ZzzTheme>
-  );
+    return (
+        <ZzzTheme>
+            <SegmentedTabs
+                items={[
+                    { value: 'daily', label: 'Daily' },
+                    { value: 'archive', label: 'Archive' },
+                ]}
+                defaultValue="daily"
+            />
+            <Button>Start</Button>
+        </ZzzTheme>
+    )
 }
 ```
 
@@ -50,127 +50,132 @@ cap height.
 | Anywhere   | `Toast` for "copied!", `DialogBand` / `ConfirmDialog` for "quit today's run?", `ZzzTheme` + `HatchBackground` as the page frame                                                                                                |
 
 ```tsx
-import { useState } from "react";
+import { useState } from 'react'
 import {
-  ZzzTheme,
-  HatchBackground,
-  Button,
-  StepProgress,
-  ContentCard,
-  ChoiceGroup,
-  CountdownBar,
-  SweepTransition,
-  StatTiles,
-  StatTile,
-  StatusGrid,
-  BarChart,
-  CopyButton,
-  Countdown,
-} from "@angel1254mc/zone-ui";
+    ZzzTheme,
+    HatchBackground,
+    Button,
+    StepProgress,
+    ContentCard,
+    ChoiceGroup,
+    CountdownBar,
+    SweepTransition,
+    StatTiles,
+    StatTile,
+    StatusGrid,
+    BarChart,
+    CopyButton,
+    Countdown,
+} from '@angel1254mc/zone-ui'
 // Your app logic: date-seeded questions, scoring, share text, score distribution.
 import {
-  todaysQuestions,
-  shareText,
-  tomorrowAtMidnight,
-  scoreDistribution,
-} from "./my-trivia-logic";
+    todaysQuestions,
+    shareText,
+    tomorrowAtMidnight,
+    scoreDistribution,
+} from './my-trivia-logic'
 
 export function DailyTrivia() {
-  const questions = todaysQuestions(new Date());
-  const [index, setIndex] = useState(0);
-  const [picked, setPicked] = useState<string | null>(null);
-  const [revealed, setRevealed] = useState(false);
-  const [answers, setAnswers] = useState<boolean[]>([]);
-  const [sweep, setSweep] = useState(true);
-  const done = answers.length === questions.length;
-  const q = questions[index];
+    const questions = todaysQuestions(new Date())
+    const [index, setIndex] = useState(0)
+    const [picked, setPicked] = useState<string | null>(null)
+    const [revealed, setRevealed] = useState(false)
+    const [answers, setAnswers] = useState<boolean[]>([])
+    const [sweep, setSweep] = useState(true)
+    const done = answers.length === questions.length
+    const q = questions[index]
 
-  const confirm = () => {
-    setRevealed(true);
-    setAnswers([...answers, picked === q.answer]);
-  };
-  const next = () => {
-    setPicked(null);
-    setRevealed(false);
-    setIndex(index + 1);
-    setSweep(true);
-  };
+    const confirm = () => {
+        setRevealed(true)
+        setAnswers([...answers, picked === q.answer])
+    }
+    const next = () => {
+        setPicked(null)
+        setRevealed(false)
+        setIndex(index + 1)
+        setSweep(true)
+    }
 
-  return (
-    <ZzzTheme scale={0.6}>
-      <HatchBackground />
-      <SweepTransition
-        active={sweep}
-        label={done ? "Results" : `Question ${index + 1}`}
-        onDone={() => setSweep(false)}
-      />
-      {!done ? (
-        <main>
-          <StepProgress steps={questions.length} current={index} />
-          {/* Per-question timer; key restarts it on every question. */}
-          <CountdownBar
-            key={index}
-            durationMs={20_000}
-            running={!revealed}
-            onExpire={confirm}
-            label="Time left"
-          />
-          <ContentCard
-            eyebrow={`Question ${index + 1}`}
-            title={q.prompt}
-            media={q.art}
-          />
-          <ChoiceGroup
-            label={q.prompt}
-            items={q.options.map((text, i) => ({
-              value: String(i),
-              label: text,
-            }))}
-            value={picked}
-            onValueChange={setPicked}
-            locked={revealed}
-            results={
-              revealed
-                ? {
-                    [q.answer]: "correct",
-                    ...(picked !== q.answer && picked
-                      ? { [picked]: "incorrect" }
-                      : {}),
-                  }
-                : undefined
-            }
-          />
-          {revealed ? (
-            <Button onClick={next}>Next</Button>
-          ) : (
-            <Button disabled={picked === null} onClick={confirm}>
-              Confirm
-            </Button>
-          )}
-        </main>
-      ) : (
-        <main>
-          <StatTiles>
-            <StatTile
-              label="Score"
-              value={`${answers.filter(Boolean).length}/${questions.length}`}
-              highlight
+    return (
+        <ZzzTheme scale={0.6}>
+            <HatchBackground />
+            <SweepTransition
+                active={sweep}
+                label={done ? 'Results' : `Question ${index + 1}`}
+                onDone={() => setSweep(false)}
             />
-            <StatTile label="Streak" value={3} delta={1} />
-          </StatTiles>
-          <StatusGrid
-            items={answers.map((ok) => ({ status: ok ? "success" : "error" }))}
-          />
-          <BarChart
-            data={scoreDistribution()}
-            highlight={answers.filter(Boolean).length}
-          />
-          <CopyButton text={shareText(answers)}>Share</CopyButton>
-          <Countdown target={tomorrowAtMidnight()} prefix="Next set in" />
-        </main>
-      )}
-    </ZzzTheme>
-  );
+            {!done ? (
+                <main>
+                    <StepProgress steps={questions.length} current={index} />
+                    {/* Per-question timer; key restarts it on every question. */}
+                    <CountdownBar
+                        key={index}
+                        durationMs={20_000}
+                        running={!revealed}
+                        onExpire={confirm}
+                        label="Time left"
+                    />
+                    <ContentCard
+                        eyebrow={`Question ${index + 1}`}
+                        title={q.prompt}
+                        media={q.art}
+                    />
+                    <ChoiceGroup
+                        label={q.prompt}
+                        items={q.options.map((text, i) => ({
+                            value: String(i),
+                            label: text,
+                        }))}
+                        value={picked}
+                        onValueChange={setPicked}
+                        locked={revealed}
+                        results={
+                            revealed
+                                ? {
+                                      [q.answer]: 'correct',
+                                      ...(picked !== q.answer && picked
+                                          ? { [picked]: 'incorrect' }
+                                          : {}),
+                                  }
+                                : undefined
+                        }
+                    />
+                    {revealed ? (
+                        <Button onClick={next}>Next</Button>
+                    ) : (
+                        <Button disabled={picked === null} onClick={confirm}>
+                            Confirm
+                        </Button>
+                    )}
+                </main>
+            ) : (
+                <main>
+                    <StatTiles>
+                        <StatTile
+                            label="Score"
+                            value={`${answers.filter(Boolean).length}/${questions.length}`}
+                            highlight
+                        />
+                        <StatTile label="Streak" value={3} delta={1} />
+                    </StatTiles>
+                    <StatusGrid
+                        items={answers.map((ok) => ({
+                            status: ok ? 'success' : 'error',
+                        }))}
+                    />
+                    <BarChart
+                        data={scoreDistribution()}
+                        highlight={answers.filter(Boolean).length}
+                    />
+                    <CopyButton text={shareText(answers)}>Share</CopyButton>
+                    <Countdown
+                        target={tomorrowAtMidnight()}
+                        prefix="Next set in"
+                    />
+                </main>
+            )}
+        </ZzzTheme>
+    )
 }
 ```
 

@@ -3,90 +3,100 @@
  * 9 x 8 in #808080, 8 px from the outer ends. Thumb 4 px #808080, square ends, running between
  * 23 px insets (arrow 8 + 8 + gap 7). */
 .zzz-scroll-area {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  grid-template-rows: minmax(0, 1fr);
-  column-gap: calc(var(--zzz-scroll-gap) * var(--zzz-px));
-  min-height: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: minmax(0, 1fr);
+    column-gap: calc(var(--zzz-scroll-gap) * var(--zzz-px));
+    min-height: 0;
 }
 .zzz-scroll-area--left {
-  grid-template-columns: auto minmax(0, 1fr);
+    grid-template-columns: auto minmax(0, 1fr);
 }
 .zzz-scroll-area--left .zzz-scroll-area__viewport {
-  grid-column: 2;
-  grid-row: 1;
+    grid-column: 2;
+    grid-row: 1;
 }
 .zzz-scroll-area--left .zzz-scroll-area__bar {
-  grid-column: 1;
-  grid-row: 1;
+    grid-column: 1;
+    grid-row: 1;
 }
 
 .zzz-scroll-area__viewport {
-  min-width: 0;
-  min-height: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  scrollbar-width: none;
-  outline: none;
+    min-width: 0;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
+    outline: none;
 }
 .zzz-scroll-area__viewport::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 .zzz-scroll-area__viewport:focus-visible {
-  box-shadow: inset 0 0 0 calc(3 * var(--zzz-px)) var(--zzz-accent);
+    box-shadow: inset 0 0 0 calc(3 * var(--zzz-px)) var(--zzz-accent);
 }
 
 .zzz-scroll-area__bar {
-  --zzz-thumb-size: 1;
-  --zzz-thumb-progress: 0;
-  /* the run inside the 2 px outline */
-  --zzz-thumb-run: calc(100% - 2 * (23 * var(--zzz-px) - var(--zzz-border-width-scrollbar)));
-  position: relative;
-  box-sizing: border-box;
-  width: var(--zzz-size-scrollbar-track);
-  height: 100%;
-  border: var(--zzz-border-width-scrollbar) solid var(--zzz-color-border-scrollbar);
-  border-radius: var(--zzz-radius-pill);
-  background: var(--zzz-color-surface-scroll-track);
-  color: #808080;
-  touch-action: none;
-  user-select: none;
+    --zzz-thumb-size: 1;
+    --zzz-thumb-progress: 0;
+    /* the run inside the 2 px outline */
+    --zzz-thumb-run: calc(
+        100% - 2 * (23 * var(--zzz-px) - var(--zzz-border-width-scrollbar))
+    );
+    position: relative;
+    box-sizing: border-box;
+    width: var(--zzz-size-scrollbar-track);
+    height: 100%;
+    border: var(--zzz-border-width-scrollbar) solid
+        var(--zzz-color-border-scrollbar);
+    border-radius: var(--zzz-radius-pill);
+    background: var(--zzz-color-surface-scroll-track);
+    color: #808080;
+    touch-action: none;
+    user-select: none;
 }
 
 .zzz-scroll-area__arrow {
-  position: absolute;
-  left: 50%;
-  width: calc(9 * var(--zzz-px));
-  height: calc(8 * var(--zzz-px));
-  transform: translateX(-50%);
-  cursor: pointer;
+    position: absolute;
+    left: 50%;
+    width: calc(9 * var(--zzz-px));
+    height: calc(8 * var(--zzz-px));
+    transform: translateX(-50%);
+    cursor: pointer;
 }
 /* offsets are from the outer edge; the absolute box starts inside the 2 px outline */
 .zzz-scroll-area__arrow--up {
-  top: calc(8 * var(--zzz-px) - var(--zzz-border-width-scrollbar));
+    top: calc(8 * var(--zzz-px) - var(--zzz-border-width-scrollbar));
 }
 .zzz-scroll-area__arrow--down {
-  bottom: calc(8 * var(--zzz-px) - var(--zzz-border-width-scrollbar));
+    bottom: calc(8 * var(--zzz-px) - var(--zzz-border-width-scrollbar));
 }
 
 .zzz-scroll-area__thumb {
-  /* length = visible fraction of the run (at least the minimum); offset = progress x the free run */
-  --zzz-thumb-len: min(
-    var(--zzz-thumb-run),
-    max(calc(var(--zzz-scroll-min-thumb, 20) * var(--zzz-px)), calc(var(--zzz-thumb-run) * var(--zzz-thumb-size)))
-  );
-  position: absolute;
-  left: 50%;
-  top: calc(23 * var(--zzz-px) - var(--zzz-border-width-scrollbar) + (var(--zzz-thumb-run) - var(--zzz-thumb-len)) * var(--zzz-thumb-progress));
-  width: var(--zzz-size-scrollbar-thumb);
-  height: var(--zzz-thumb-len);
-  transform: translateX(-50%);
-  background: currentColor;
-  cursor: grab;
+    /* length = visible fraction of the run (at least the minimum); offset = progress x the free run */
+    --zzz-thumb-len: min(
+        var(--zzz-thumb-run),
+        max(
+            calc(var(--zzz-scroll-min-thumb, 20) * var(--zzz-px)),
+            calc(var(--zzz-thumb-run) * var(--zzz-thumb-size))
+        )
+    );
+    position: absolute;
+    left: 50%;
+    top: calc(
+        23 * var(--zzz-px) - var(--zzz-border-width-scrollbar) +
+            (var(--zzz-thumb-run) - var(--zzz-thumb-len)) *
+            var(--zzz-thumb-progress)
+    );
+    width: var(--zzz-size-scrollbar-thumb);
+    height: var(--zzz-thumb-len);
+    transform: translateX(-50%);
+    background: currentColor;
+    cursor: grab;
 }
 .zzz-scroll-area__bar[data-dragging] .zzz-scroll-area__thumb {
-  cursor: grabbing;
+    cursor: grabbing;
 }
 
 /* ------------------------------------------------------------------------------------------------
@@ -94,90 +104,96 @@
  * ------------------------------------------------------------------------------------------------ */
 .zzz-scroll-area--horizontal,
 .zzz-scroll-area--both {
-  grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: minmax(0, 1fr) auto;
-  grid-template-areas: 'view' 'hbar';
-  row-gap: calc(var(--zzz-scroll-gap) * var(--zzz-px));
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) auto;
+    grid-template-areas: 'view' 'hbar';
+    row-gap: calc(var(--zzz-scroll-gap) * var(--zzz-px));
 }
 .zzz-scroll-area--horizontal.zzz-scroll-area--top {
-  grid-template-rows: auto minmax(0, 1fr);
-  grid-template-areas: 'hbar' 'view';
+    grid-template-rows: auto minmax(0, 1fr);
+    grid-template-areas: 'hbar' 'view';
 }
 .zzz-scroll-area--both {
-  grid-template-columns: minmax(0, 1fr) auto;
-  grid-template-areas: 'view vbar' 'hbar corner';
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: 'view vbar' 'hbar corner';
 }
 .zzz-scroll-area--both.zzz-scroll-area--left {
-  grid-template-columns: auto minmax(0, 1fr);
-  grid-template-areas: 'vbar view' 'corner hbar';
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas: 'vbar view' 'corner hbar';
 }
 .zzz-scroll-area--both.zzz-scroll-area--h-top {
-  grid-template-rows: auto minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
 }
 .zzz-scroll-area--both.zzz-scroll-area--left.zzz-scroll-area--h-top {
-  grid-template-areas: 'corner hbar' 'vbar view';
-  grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas: 'corner hbar' 'vbar view';
+    grid-template-columns: auto minmax(0, 1fr);
 }
 .zzz-scroll-area--both.zzz-scroll-area--right.zzz-scroll-area--h-top {
-  grid-template-areas: 'hbar corner' 'view vbar';
+    grid-template-areas: 'hbar corner' 'view vbar';
 }
 .zzz-scroll-area--horizontal .zzz-scroll-area__viewport,
 .zzz-scroll-area--both .zzz-scroll-area__viewport {
-  grid-area: view;
+    grid-area: view;
 }
 .zzz-scroll-area--both .zzz-scroll-area__bar {
-  grid-area: vbar;
+    grid-area: vbar;
 }
 .zzz-scroll-area--horizontal .zzz-scroll-area__bar--horizontal,
 .zzz-scroll-area--both .zzz-scroll-area__bar--horizontal {
-  grid-area: hbar;
+    grid-area: hbar;
 }
 .zzz-scroll-area__corner {
-  grid-area: corner;
+    grid-area: corner;
 }
 .zzz-scroll-area--horizontal .zzz-scroll-area__viewport {
-  overflow-x: auto;
-  overflow-y: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 .zzz-scroll-area--both .zzz-scroll-area__viewport {
-  overflow: auto;
+    overflow: auto;
 }
 
 .zzz-scroll-area__bar--horizontal {
-  --zzz-thumb-run: calc(100% - 2 * (23 * var(--zzz-px) - var(--zzz-border-width-scrollbar)));
-  width: 100%;
-  height: var(--zzz-size-scrollbar-track);
+    --zzz-thumb-run: calc(
+        100% - 2 * (23 * var(--zzz-px) - var(--zzz-border-width-scrollbar))
+    );
+    width: 100%;
+    height: var(--zzz-size-scrollbar-track);
 }
 .zzz-scroll-area__bar--horizontal .zzz-scroll-area__arrow {
-  left: auto;
-  top: 50%;
+    left: auto;
+    top: 50%;
 }
 /* the 9 x 8 cap box, turned: 8 wide x 9 tall, 8 px from the outer ends */
 .zzz-scroll-area__bar--horizontal .zzz-scroll-area__arrow--up {
-  left: calc(7.5 * var(--zzz-px) - var(--zzz-border-width-scrollbar));
-  transform: translateY(-50%) rotate(-90deg);
+    left: calc(7.5 * var(--zzz-px) - var(--zzz-border-width-scrollbar));
+    transform: translateY(-50%) rotate(-90deg);
 }
 .zzz-scroll-area__bar--horizontal .zzz-scroll-area__arrow--down {
-  bottom: auto;
-  right: calc(7.5 * var(--zzz-px) - var(--zzz-border-width-scrollbar));
-  transform: translateY(-50%) rotate(-90deg);
+    bottom: auto;
+    right: calc(7.5 * var(--zzz-px) - var(--zzz-border-width-scrollbar));
+    transform: translateY(-50%) rotate(-90deg);
 }
 .zzz-scroll-area__bar--horizontal .zzz-scroll-area__thumb {
-  top: 50%;
-  left: calc(23 * var(--zzz-px) - var(--zzz-border-width-scrollbar) + (var(--zzz-thumb-run) - var(--zzz-thumb-len)) * var(--zzz-thumb-progress));
-  width: var(--zzz-thumb-len);
-  height: var(--zzz-size-scrollbar-thumb);
-  transform: translateY(-50%);
+    top: 50%;
+    left: calc(
+        23 * var(--zzz-px) - var(--zzz-border-width-scrollbar) +
+            (var(--zzz-thumb-run) - var(--zzz-thumb-len)) *
+            var(--zzz-thumb-progress)
+    );
+    width: var(--zzz-thumb-len);
+    height: var(--zzz-size-scrollbar-thumb);
+    transform: translateY(-50%);
 }
 
 /* a hint (placement="end") pins to the ScrollArea's own box */
 .zzz-scroll-area--with-hint {
-  position: relative;
+    position: relative;
 }
 
 /* alwaysShow={false}: the bar only while the content overflows */
 .zzz-scroll-area--auto-hide .zzz-scroll-area__bar:not([data-overflow]) {
-  visibility: hidden;
+    visibility: hidden;
 }
 
 /* ------------------------------------------------------------------------------------------------
@@ -185,35 +201,50 @@
  * ------------------------------------------------------------------------------------------------ */
 .zzz-scroll-area--panel,
 .zzz-scroll-area--list {
-  position: relative;
-  grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: minmax(0, 1fr);
-  grid-template-areas: 'view';
-  gap: 0;
+    position: relative;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+    grid-template-areas: 'view';
+    gap: 0;
 }
 .zzz-scroll-area--panel .zzz-scroll-area__viewport,
 .zzz-scroll-area--list .zzz-scroll-area__viewport {
-  grid-area: view;
+    grid-area: view;
 }
 /* panel: a 12 px fade on each edge with more content */
 .zzz-scroll-area--panel {
-  --zzz-scroll-fade: calc(12 * var(--zzz-px));
+    --zzz-scroll-fade: calc(12 * var(--zzz-px));
 }
 .zzz-scroll-area--panel .zzz-scroll-area__viewport {
-  --zzz-fade-start: 0px;
-  --zzz-fade-end: 0px;
-  -webkit-mask-image: linear-gradient(var(--zzz-fade-dir, to bottom), transparent 0, #000 var(--zzz-fade-start), #000 calc(100% - var(--zzz-fade-end)), transparent 100%);
-  mask-image: linear-gradient(var(--zzz-fade-dir, to bottom), transparent 0, #000 var(--zzz-fade-start), #000 calc(100% - var(--zzz-fade-end)), transparent 100%);
+    --zzz-fade-start: 0px;
+    --zzz-fade-end: 0px;
+    -webkit-mask-image: linear-gradient(
+        var(--zzz-fade-dir, to bottom),
+        transparent 0,
+        #000 var(--zzz-fade-start),
+        #000 calc(100% - var(--zzz-fade-end)),
+        transparent 100%
+    );
+    mask-image: linear-gradient(
+        var(--zzz-fade-dir, to bottom),
+        transparent 0,
+        #000 var(--zzz-fade-start),
+        #000 calc(100% - var(--zzz-fade-end)),
+        transparent 100%
+    );
 }
-.zzz-scroll-area--panel[data-more-down]:not(.zzz-scroll-area--horizontal) .zzz-scroll-area__viewport,
-.zzz-scroll-area--panel.zzz-scroll-area--horizontal[data-more-right] .zzz-scroll-area__viewport {
-  --zzz-fade-end: var(--zzz-scroll-fade);
+.zzz-scroll-area--panel[data-more-down]:not(.zzz-scroll-area--horizontal)
+    .zzz-scroll-area__viewport,
+.zzz-scroll-area--panel.zzz-scroll-area--horizontal[data-more-right]
+    .zzz-scroll-area__viewport {
+    --zzz-fade-end: var(--zzz-scroll-fade);
 }
-.zzz-scroll-area--panel[data-more-up]:not(.zzz-scroll-area--horizontal) .zzz-scroll-area__viewport,
-.zzz-scroll-area--panel.zzz-scroll-area--horizontal[data-more-left] .zzz-scroll-area__viewport {
-  --zzz-fade-start: var(--zzz-scroll-fade);
+.zzz-scroll-area--panel[data-more-up]:not(.zzz-scroll-area--horizontal)
+    .zzz-scroll-area__viewport,
+.zzz-scroll-area--panel.zzz-scroll-area--horizontal[data-more-left]
+    .zzz-scroll-area__viewport {
+    --zzz-fade-start: var(--zzz-scroll-fade);
 }
 .zzz-scroll-area--panel.zzz-scroll-area--horizontal .zzz-scroll-area__viewport {
-  --zzz-fade-dir: to right;
+    --zzz-fade-dir: to right;
 }
-

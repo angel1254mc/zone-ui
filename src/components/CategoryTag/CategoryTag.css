@@ -4,43 +4,43 @@
  * dx/dy 0.5 (26.5°, skew.tabEdge), lightly rounded corners. Text 12 px heavy #BFDB5A.
  */
 .zzz-category-tag {
-  --zzz-category-tag-bg: #000000;
-  --zzz-category-tag-text: #BFDB5A;
-  position: relative;
-  isolation: isolate;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  min-width: calc(40 * var(--zzz-px));
-  height: calc(26 * var(--zzz-px));
-  /* The slanted end adds ~14 px of black on the right; the text sits over the rectangle part. */
-  margin-right: calc(14 * var(--zzz-px));
-  padding: 0 0 0 calc(10 * var(--zzz-px));
-  border-radius: var(--zzz-radius-pill) 0 0 var(--zzz-radius-pill);
-  background: var(--zzz-category-tag-bg);
-  color: var(--zzz-category-tag-text);
-  /* Cap ~9: 11 design units at cap-height 0.84 = 9.2. */
-  font-size: calc(11 * var(--zzz-px));
-  line-height: var(--zzz-line-height-single);
-  white-space: nowrap;
-  vertical-align: middle;
+    --zzz-category-tag-bg: #000000;
+    --zzz-category-tag-text: #bfdb5a;
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-width: calc(40 * var(--zzz-px));
+    height: calc(26 * var(--zzz-px));
+    /* The slanted end adds ~14 px of black on the right; the text sits over the rectangle part. */
+    margin-right: calc(14 * var(--zzz-px));
+    padding: 0 0 0 calc(10 * var(--zzz-px));
+    border-radius: var(--zzz-radius-pill) 0 0 var(--zzz-radius-pill);
+    background: var(--zzz-category-tag-bg);
+    color: var(--zzz-category-tag-text);
+    /* Cap ~9: 11 design units at cap-height 0.84 = 9.2. */
+    font-size: calc(11 * var(--zzz-px));
+    line-height: var(--zzz-line-height-single);
+    white-space: nowrap;
+    vertical-align: middle;
 }
 
 /* Slanted right end: a skewed block behind the text, sticking out of the right edge. */
 .zzz-category-tag::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: calc(-14 * var(--zzz-px));
-  bottom: 0;
-  z-index: -1;
-  width: calc(24 * var(--zzz-px));
-  border-radius: 0 calc(6 * var(--zzz-px)) calc(6 * var(--zzz-px)) 0;
-  background: var(--zzz-category-tag-bg);
-  transform: skewX(var(--zzz-skew-tab-edge));
+    content: '';
+    position: absolute;
+    top: 0;
+    right: calc(-14 * var(--zzz-px));
+    bottom: 0;
+    z-index: -1;
+    width: calc(24 * var(--zzz-px));
+    border-radius: 0 calc(6 * var(--zzz-px)) calc(6 * var(--zzz-px)) 0;
+    background: var(--zzz-category-tag-bg);
+    transform: skewX(var(--zzz-skew-tab-edge));
 }
 
 .zzz-category-tag[data-skin='game'] {
-  --zzz-category-tag-text: var(--zzz-accent);
+    --zzz-category-tag-text: var(--zzz-accent);
 }

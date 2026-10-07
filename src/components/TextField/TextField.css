@@ -13,127 +13,138 @@
  * so the proportions hold at every size. (Select md is 57 too, so the two line up in a form row.)
  */
 .zzz-text-field {
-  --zzz-text-field-width: 100%;
-  --zzz-text-field-u: var(--zzz-px);
-  --zzz-text-field-h: var(--zzz-size-control-md);
-  --zzz-text-field-font: var(--zzz-font-size-body-lg);
-  --zzz-text-field-label: var(--zzz-font-size-body);
-  --zzz-text-field-icon: var(--zzz-size-control-icon-md);
-  display: inline-flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: calc(10 * var(--zzz-text-field-u));
-  width: var(--zzz-text-field-width);
-  max-width: 100%;
-  vertical-align: top;
+    --zzz-text-field-width: 100%;
+    --zzz-text-field-u: var(--zzz-px);
+    --zzz-text-field-h: var(--zzz-size-control-md);
+    --zzz-text-field-font: var(--zzz-font-size-body-lg);
+    --zzz-text-field-label: var(--zzz-font-size-body);
+    --zzz-text-field-icon: var(--zzz-size-control-icon-md);
+    display: inline-flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: calc(10 * var(--zzz-text-field-u));
+    width: var(--zzz-text-field-width);
+    max-width: 100%;
+    vertical-align: top;
 }
 
 .zzz-text-field--sm {
-  --zzz-text-field-u: calc(var(--zzz-px) * var(--zzz-size-control-sm-n) / var(--zzz-size-control-md-n));
-  --zzz-text-field-h: var(--zzz-size-control-sm);
-  --zzz-text-field-font: var(--zzz-font-size-body);
-  --zzz-text-field-label: var(--zzz-font-size-label);
-  --zzz-text-field-icon: var(--zzz-size-control-icon-sm);
+    --zzz-text-field-u: calc(
+        var(--zzz-px) * var(--zzz-size-control-sm-n) /
+            var(--zzz-size-control-md-n)
+    );
+    --zzz-text-field-h: var(--zzz-size-control-sm);
+    --zzz-text-field-font: var(--zzz-font-size-body);
+    --zzz-text-field-label: var(--zzz-font-size-label);
+    --zzz-text-field-icon: var(--zzz-size-control-icon-sm);
 }
 .zzz-text-field--md {
-  --zzz-text-field-h: var(--zzz-size-control-md);
+    --zzz-text-field-h: var(--zzz-size-control-md);
 }
 .zzz-text-field--lg {
-  --zzz-text-field-u: calc(var(--zzz-px) * var(--zzz-size-control-lg-n) / var(--zzz-size-control-md-n));
-  --zzz-text-field-h: var(--zzz-size-control-lg);
-  --zzz-text-field-font: var(--zzz-font-size-button);
-  --zzz-text-field-label: var(--zzz-font-size-body-lg);
-  --zzz-text-field-icon: var(--zzz-size-control-icon-lg);
+    --zzz-text-field-u: calc(
+        var(--zzz-px) * var(--zzz-size-control-lg-n) /
+            var(--zzz-size-control-md-n)
+    );
+    --zzz-text-field-h: var(--zzz-size-control-lg);
+    --zzz-text-field-font: var(--zzz-font-size-button);
+    --zzz-text-field-label: var(--zzz-font-size-body-lg);
+    --zzz-text-field-icon: var(--zzz-size-control-icon-lg);
 }
 
 /* Two classes: beats the .zzz-text-body role class on the same element. */
 .zzz-text-field .zzz-text-field__label {
-  display: block;
-  margin-left: calc(8 * var(--zzz-text-field-u));
-  font-size: var(--zzz-text-field-label);
-  line-height: var(--zzz-line-height-single);
-  cursor: default;
+    display: block;
+    margin-left: calc(8 * var(--zzz-text-field-u));
+    font-size: var(--zzz-text-field-label);
+    line-height: var(--zzz-line-height-single);
+    cursor: default;
 }
 
 /* Two classes: the ring width overrides .zzz-mat-pill's own --zzz-mat-ring. */
 .zzz-text-field .zzz-text-field__control {
-  --zzz-mat-ring: calc(var(--zzz-border-width-ring-n) * var(--zzz-text-field-u));
-  display: flex;
-  align-items: center;
-  height: var(--zzz-text-field-h);
-  padding: 0 calc(24 * var(--zzz-text-field-u));
-  cursor: text;
+    --zzz-mat-ring: calc(
+        var(--zzz-border-width-ring-n) * var(--zzz-text-field-u)
+    );
+    display: flex;
+    align-items: center;
+    height: var(--zzz-text-field-h);
+    padding: 0 calc(24 * var(--zzz-text-field-u));
+    cursor: text;
 }
 
 .zzz-text-field--with-icon .zzz-text-field__control {
-  padding-left: calc(var(--zzz-text-field-h) - var(--zzz-mat-ring) + 14 * var(--zzz-text-field-u));
+    padding-left: calc(
+        var(--zzz-text-field-h) - var(--zzz-mat-ring) + 14 *
+            var(--zzz-text-field-u)
+    );
 }
 
 .zzz-text-field__cap {
-  position: absolute;
-  top: calc(-1 * var(--zzz-mat-ring));
-  left: calc(-1 * var(--zzz-mat-ring));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--zzz-text-field-h);
-  height: var(--zzz-text-field-h);
-  border: var(--zzz-mat-ring) solid var(--zzz-color-border-button);
-  border-radius: 50%;
-  background: var(--zzz-color-surface-panel);
-  color: var(--zzz-color-text-primary);
-  font-size: var(--zzz-text-field-icon);
-  pointer-events: none;
+    position: absolute;
+    top: calc(-1 * var(--zzz-mat-ring));
+    left: calc(-1 * var(--zzz-mat-ring));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--zzz-text-field-h);
+    height: var(--zzz-text-field-h);
+    border: var(--zzz-mat-ring) solid var(--zzz-color-border-button);
+    border-radius: 50%;
+    background: var(--zzz-color-surface-panel);
+    color: var(--zzz-color-text-primary);
+    font-size: var(--zzz-text-field-icon);
+    pointer-events: none;
 }
 
 .zzz-text-field__cap > svg {
-  width: var(--zzz-text-field-icon);
-  height: var(--zzz-text-field-icon);
+    width: var(--zzz-text-field-icon);
+    height: var(--zzz-text-field-icon);
 }
 
 /* Two classes: beats the .zzz-text-body-lg role class on the same element. */
 .zzz-text-field .zzz-text-field__input {
-  flex: 1 1 auto;
-  min-width: 0;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  outline: none;
-  background: transparent;
-  color: var(--zzz-color-text-primary);
-  font-size: var(--zzz-text-field-font);
-  line-height: var(--zzz-line-height-single);
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    background: transparent;
+    color: var(--zzz-color-text-primary);
+    font-size: var(--zzz-text-field-font);
+    line-height: var(--zzz-line-height-single);
 }
 
 .zzz-text-field__input::placeholder {
-  color: var(--zzz-color-text-disabled);
-  opacity: 1;
+    color: var(--zzz-color-text-disabled);
+    opacity: 1;
 }
 
 /* Focus: the ring takes the live accent (and the cap's ring with it). */
 .zzz-text-field .zzz-text-field__control:focus-within,
 .zzz-text-field__control:focus-within .zzz-text-field__cap {
-  border-color: var(--zzz-accent);
+    border-color: var(--zzz-accent);
 }
 
 .zzz-text-field[data-invalid] .zzz-text-field__control,
 .zzz-text-field[data-invalid] .zzz-text-field__cap {
-  border-color: var(--zzz-color-danger-base);
+    border-color: var(--zzz-color-danger-base);
 }
 
 .zzz-text-field[data-disabled] .zzz-text-field__control {
-  background-color: #2E2E2E;
-  background-image: none;
-  cursor: default;
+    background-color: #2e2e2e;
+    background-image: none;
+    cursor: default;
 }
 .zzz-text-field[data-disabled] .zzz-text-field__input,
 .zzz-text-field[data-disabled] .zzz-text-field__cap {
-  color: var(--zzz-color-text-subtle);
+    color: var(--zzz-color-text-subtle);
 }
 
 .zzz-text-field__description,
 .zzz-text-field__error {
-  display: block;
-  margin-left: calc(8 * var(--zzz-text-field-u));
+    display: block;
+    margin-left: calc(8 * var(--zzz-text-field-u));
 }

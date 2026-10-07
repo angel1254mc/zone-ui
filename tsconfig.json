@@ -1,26 +1,39 @@
 {
-  "compilerOptions": {
-    "target": "ES2022",
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "jsx": "react-jsx",
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitOverride": true,
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "resolveJsonModule": true,
-    "allowImportingTsExtensions": false,
-    "types": ["node", "vite/client", "vitest/globals", "@testing-library/jest-dom/vitest"],
-    "noEmit": true,
-    "baseUrl": ".",
-    "paths": {
-      "@angel1254mc/zone-ui": ["src/index.ts"]
-    }
-  },
-  "include": ["src", "examples", "demo", ".storybook", "vite.config.ts", "vite.demo.config.ts", "vitest.setup.ts"]
+    "compilerOptions": {
+        "target": "ES2022",
+        "lib": ["ES2022", "DOM", "DOM.Iterable"],
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "jsx": "react-jsx",
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitOverride": true,
+        "isolatedModules": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "resolveJsonModule": true,
+        "allowImportingTsExtensions": false,
+        "types": [
+            "node",
+            "vite/client",
+            "vitest/globals",
+            "@testing-library/jest-dom/vitest"
+        ],
+        "noEmit": true,
+        "baseUrl": ".",
+        "paths": {
+            "@angel1254mc/zone-ui": ["src/index.ts"]
+        }
+    },
+    "include": [
+        "src",
+        "examples",
+        "demo",
+        ".storybook",
+        "vite.config.ts",
+        "vite.demo.config.ts",
+        "vitest.setup.ts"
+    ]
 }

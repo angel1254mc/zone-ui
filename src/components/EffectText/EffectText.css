@@ -2,124 +2,124 @@
  * EffectText / EffectNameBar.
  */
 .zzz-effect-text {
-  margin: 0;
-  color: var(--zzz-color-text-primary);
-  font-size: var(--zzz-font-size-body);
-  font-weight: 900;
-  font-style: normal;
-  line-height: var(--zzz-line-height-compact);
-  letter-spacing: 0;
-  white-space: normal;
-  overflow-wrap: break-word;
+    margin: 0;
+    color: var(--zzz-color-text-primary);
+    font-size: var(--zzz-font-size-body);
+    font-weight: 900;
+    font-style: normal;
+    line-height: var(--zzz-line-height-compact);
+    letter-spacing: 0;
+    white-space: normal;
+    overflow-wrap: break-word;
 }
 .zzz-effect-text--paragraph {
-  line-height: var(--zzz-line-height-paragraph);
+    line-height: var(--zzz-line-height-paragraph);
 }
 .zzz-effect-text--loose {
-  line-height: var(--zzz-line-height-paragraph-loose);
+    line-height: var(--zzz-line-height-paragraph-loose);
 }
 .zzz-effect-text--muted {
-  color: var(--zzz-color-text-muted);
+    color: var(--zzz-color-text-muted);
 }
 .zzz-effect-text :is(strong, b) {
-  font-weight: inherit;
-  color: var(--zzz-color-text-primary);
+    font-weight: inherit;
+    color: var(--zzz-color-text-primary);
 }
 
 /* Allow a break between the specialty glyph and its keyword ("…with the [glyph] / Attack specialty");
  * Keyword's own nowrap (Text.css) would drag the glyph onto the next line. */
 .zzz-effect-text .zzz-keyword {
-  white-space: normal;
+    white-space: normal;
 }
 
 /* Specialty glyph before an inline keyword: 23 × 20 grey (#8B8B8B ≈ text.muted), 6 px gap. */
 .zzz-effect-text .zzz-keyword__icon {
-  width: calc(23 * var(--zzz-px));
-  height: calc(20 * var(--zzz-px));
-  margin-inline: calc(2 * var(--zzz-px)) calc(6 * var(--zzz-px));
-  vertical-align: calc(-3 * var(--zzz-px));
-  color: var(--zzz-color-text-muted);
+    width: calc(23 * var(--zzz-px));
+    height: calc(20 * var(--zzz-px));
+    margin-inline: calc(2 * var(--zzz-px)) calc(6 * var(--zzz-px));
+    vertical-align: calc(-3 * var(--zzz-px));
+    color: var(--zzz-color-text-muted);
 }
 .zzz-effect-text .zzz-keyword__icon > :is(svg, img) {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 /* `color` cannot tint a raster glyph: monochrome white glyph art
  * is mapped to ≈ #8C8C8C (text.muted) instead. Art with transparent padding should be scaled up by
  * the caller (the stories pass `scale: 1.4` for the 80 × 71-in-100 specialty art). */
 .zzz-effect-text .zzz-keyword__icon > img {
-  filter: grayscale(1) brightness(0.55);
+    filter: grayscale(1) brightness(0.55);
 }
 
 /* ── EffectNameBar ─────────────────────────────────────────────────────────────────────── */
 .zzz-effect-name-bar {
-  position: relative;
-  display: flex;
-  align-items: center;
-  box-sizing: border-box;
-  width: 100%;
-  height: var(--zzz-size-row-effect-name);
-  padding: 0 calc(18 * var(--zzz-px));
-  border-radius: var(--zzz-radius-pill);
-  background: var(--zzz-color-surface-stat-row);
-  color: var(--zzz-color-text-primary);
-  font-size: var(--zzz-font-size-body);
-  font-weight: 900;
-  line-height: var(--zzz-line-height-single);
-  white-space: nowrap;
+    position: relative;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    height: var(--zzz-size-row-effect-name);
+    padding: 0 calc(18 * var(--zzz-px));
+    border-radius: var(--zzz-radius-pill);
+    background: var(--zzz-color-surface-stat-row);
+    color: var(--zzz-color-text-primary);
+    font-size: var(--zzz-font-size-body);
+    font-weight: 900;
+    line-height: var(--zzz-line-height-single);
+    white-space: nowrap;
 }
 .zzz-effect-name-bar--sunken {
-  background: var(--zzz-color-surface-stat-row-sunken);
+    background: var(--zzz-color-surface-stat-row-sunken);
 }
 .zzz-effect-name-bar--black {
-  background: var(--zzz-color-surface-stat-row-agent);
+    background: var(--zzz-color-surface-stat-row-agent);
 }
 .zzz-effect-name-bar__label {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  /* room for descenders inside the clipping box ("Scorching") */
-  line-height: var(--zzz-line-height-single);
-  padding-block: 0.3em;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* room for descenders inside the clipping box ("Scorching") */
+    line-height: var(--zzz-line-height-single);
+    padding-block: 0.3em;
 }
 
 /* White inverted triangle 32 × 15, centred, its top edge 2 px above the bar's bottom. */
 .zzz-effect-name-bar__chevron {
-  position: absolute;
-  left: 50%;
-  top: calc(100% - 2 * var(--zzz-px));
-  translate: -50% 0;
-  display: block;
-  width: calc(32 * var(--zzz-px));
-  height: calc(15 * var(--zzz-px));
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: calc(3 * var(--zzz-px));
-  background: none;
-  color: var(--zzz-color-text-primary);
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
+    position: absolute;
+    left: 50%;
+    top: calc(100% - 2 * var(--zzz-px));
+    translate: -50% 0;
+    display: block;
+    width: calc(32 * var(--zzz-px));
+    height: calc(15 * var(--zzz-px));
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: calc(3 * var(--zzz-px));
+    background: none;
+    color: var(--zzz-color-text-primary);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 }
 /* 8 px hit slop around the glyph. */
 .zzz-effect-name-bar__chevron::after {
-  content: '';
-  position: absolute;
-  inset: calc(-8 * var(--zzz-px));
+    content: '';
+    position: absolute;
+    inset: calc(-8 * var(--zzz-px));
 }
 .zzz-effect-name-bar__chevron > svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-  fill: currentColor;
+    display: block;
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
 }
 /* Expanded: the triangle points up. */
 .zzz-effect-name-bar__chevron[data-expanded] > svg {
-  rotate: 180deg;
+    rotate: 180deg;
 }
 /* Pressed: the glyph takes the live accent. */
 .zzz-effect-name-bar__chevron:active,
 .zzz-effect-name-bar__chevron[data-pressed] {
-  color: var(--zzz-accent);
+    color: var(--zzz-accent);
 }

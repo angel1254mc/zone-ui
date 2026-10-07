@@ -4,111 +4,157 @@
  * (black, or the blurThrough grey scrim) sits above them.
  */
 .zzz-screen-transition {
-  position: relative;
-  display: grid;
-  isolation: isolate;
+    position: relative;
+    display: grid;
+    isolation: isolate;
 }
 .zzz-screen-transition__layer {
-  grid-area: 1 / 1;
-  min-width: 0;
-  min-height: 0;
+    grid-area: 1 / 1;
+    min-width: 0;
+    min-height: 0;
 }
 
 .zzz-screen-transition__veil {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: var(--zzz-effect-screen-fade);
-  opacity: 0;
-  pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: var(--zzz-effect-screen-fade);
+    opacity: 0;
+    pointer-events: none;
 }
 
 /* Out: 220 ms ease-in to black, then hold black. The curve is keyframed (slow start, steep finish)
  * rather than driven by the `motion.easing.screenOut` bezier. */
 .zzz-screen-transition[data-phase='out'] > .zzz-screen-transition__veil {
-  animation: zzz-screen-out-fade var(--zzz-motion-duration-screen-out) linear both;
+    animation: zzz-screen-out-fade var(--zzz-motion-duration-screen-out) linear
+        both;
 }
 @keyframes zzz-screen-out-fade {
-  0% { opacity: 0; }
-  15% { opacity: 0.03; }
-  30.5% { opacity: 0.09; }
-  45.5% { opacity: 0.21; }
-  60.5% { opacity: 0.44; }
-  76% { opacity: 0.92; }
-  91%, 100% { opacity: 1; }
+    0% {
+        opacity: 0;
+    }
+    15% {
+        opacity: 0.03;
+    }
+    30.5% {
+        opacity: 0.09;
+    }
+    45.5% {
+        opacity: 0.21;
+    }
+    60.5% {
+        opacity: 0.44;
+    }
+    76% {
+        opacity: 0.92;
+    }
+    91%,
+    100% {
+        opacity: 1;
+    }
 }
 .zzz-screen-transition[data-phase='hold'] > .zzz-screen-transition__veil {
-  opacity: 1;
+    opacity: 1;
 }
 /* In (fadeThroughBlack / fadeFromBlack / appear): 300 ms ease-out-quad from black. `cut` never enters it. */
 .zzz-screen-transition[data-phase='in'] > .zzz-screen-transition__veil {
-  animation: zzz-screen-transition-veil-out var(--zzz-motion-duration-screen-in) var(--zzz-motion-easing-screen-in) both;
+    animation: zzz-screen-transition-veil-out
+        var(--zzz-motion-duration-screen-in) var(--zzz-motion-easing-screen-in)
+        both;
 }
 @keyframes zzz-screen-out {
-  from { opacity: 0; }
-  to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 @keyframes zzz-screen-transition-veil-out {
-  from { opacity: 1; }
-  to { opacity: 0; }
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
 }
 
 /* blurThrough: the outgoing screen is blurred at once (σ 8) under a #1A1A1A scrim fading .28 → .70
  * over 33 ms; the new screen then cuts in on top. */
 .zzz-screen-transition[data-phase='blur'] > .zzz-screen-transition__layer {
-  filter: blur(var(--zzz-blur-screen-transition));
+    filter: blur(var(--zzz-blur-screen-transition));
 }
 .zzz-screen-transition[data-phase='blur'] > .zzz-screen-transition__veil {
-  background: var(--zzz-color-surface-raised);
-  animation: zzz-screen-blur-scrim var(--zzz-motion-duration-frame) linear both;
+    background: var(--zzz-color-surface-raised);
+    animation: zzz-screen-blur-scrim var(--zzz-motion-duration-frame) linear
+        both;
 }
 @keyframes zzz-screen-blur-scrim {
-  from { opacity: 0.28; }
-  to { opacity: 0.7; }
+    from {
+        opacity: 0.28;
+    }
+    to {
+        opacity: 0.7;
+    }
 }
 
 /* Reduced motion: the new layer cross-fades over the old one in 100 ms. */
-.zzz-screen-transition[data-phase='xfade'] > .zzz-screen-transition__layer[data-current] {
-  animation: zzz-screen-out 100ms linear both;
+.zzz-screen-transition[data-phase='xfade']
+    > .zzz-screen-transition__layer[data-current] {
+    animation: zzz-screen-out 100ms linear both;
 }
 
 /* Tile stagger: 100 ms ease-out fade per tile, 33 ms + i × 8.5 ms (or × 18 ms slow), reading order. */
 .zzz-stagger-tile {
-  animation: zzz-stagger-tile-in var(--zzz-motion-duration-tile-in) var(--zzz-motion-easing-out-expo) both;
-  animation-delay: calc(var(--zzz-motion-duration-frame) + var(--i, 0) * var(--zzz-motion-duration-tile-stagger));
+    animation: zzz-stagger-tile-in var(--zzz-motion-duration-tile-in)
+        var(--zzz-motion-easing-out-expo) both;
+    animation-delay: calc(
+        var(--zzz-motion-duration-frame) + var(--i, 0) *
+            var(--zzz-motion-duration-tile-stagger)
+    );
 }
 .zzz-stagger-tile--slow {
-  animation-delay: calc(var(--zzz-motion-duration-frame) + var(--i, 0) * var(--zzz-motion-duration-tile-stagger-slow));
+    animation-delay: calc(
+        var(--zzz-motion-duration-frame) + var(--i, 0) *
+            var(--zzz-motion-duration-tile-stagger-slow)
+    );
 }
 @keyframes zzz-stagger-tile-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 @media (prefers-reduced-motion: reduce) {
-  .zzz-stagger-tile {
-    animation: none;
-  }
+    .zzz-stagger-tile {
+        animation: none;
+    }
 }
 [data-reduced-motion] .zzz-stagger-tile {
-  animation: none;
+    animation: none;
 }
 
 /* ScreenFade: an absolutely positioned black veil. */
 .zzz-screen-fade {
-  position: absolute;
-  inset: 0;
-  z-index: var(--zzz-z-index-screen-fade);
-  background: var(--zzz-effect-screen-fade);
-  opacity: 0;
-  pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: var(--zzz-z-index-screen-fade);
+    background: var(--zzz-effect-screen-fade);
+    opacity: 0;
+    pointer-events: none;
 }
 .zzz-screen-fade[data-state='toBlack'] {
-  animation: zzz-screen-out-fade var(--zzz-motion-duration-screen-out) linear both;
+    animation: zzz-screen-out-fade var(--zzz-motion-duration-screen-out) linear
+        both;
 }
 .zzz-screen-fade[data-state='black'] {
-  opacity: 1;
-  pointer-events: auto;
+    opacity: 1;
+    pointer-events: auto;
 }
 .zzz-screen-fade[data-state='fromBlack'] {
-  animation: zzz-screen-transition-veil-out var(--zzz-motion-duration-screen-in) var(--zzz-motion-easing-screen-in) both;
+    animation: zzz-screen-transition-veil-out
+        var(--zzz-motion-duration-screen-in) var(--zzz-motion-easing-screen-in)
+        both;
 }

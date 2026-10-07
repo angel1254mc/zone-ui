@@ -4,16 +4,16 @@ import { Text } from '../Text'
 import './EventDescription.css'
 
 export interface EventDescriptionOwnProps {
-  /** Horizontal alignment. Default `end` (right-aligned under the title). */
-  align?: 'start' | 'center' | 'end'
-  /** Maximum width in design units. Default 620; `none` for no limit. */
-  maxWidth?: number | 'none'
-  children?: ReactNode
-  ref?: Ref<HTMLParagraphElement>
+    /** Horizontal alignment. Default `end` (right-aligned under the title). */
+    align?: 'start' | 'center' | 'end'
+    /** Maximum width in design units. Default 620; `none` for no limit. */
+    maxWidth?: number | 'none'
+    children?: ReactNode
+    ref?: Ref<HTMLParagraphElement>
 }
 
 export type EventDescriptionProps = EventDescriptionOwnProps &
-  Omit<ComponentPropsWithoutRef<'p'>, keyof EventDescriptionOwnProps>
+    Omit<ComponentPropsWithoutRef<'p'>, keyof EventDescriptionOwnProps>
 
 /**
  * Event blurb under the title and info pills: `bodyXl`
@@ -21,26 +21,36 @@ export type EventDescriptionProps = EventDescriptionOwnProps &
  * (`lineHeight.description`). Right-aligned by default.
  */
 export function EventDescription({
-  align = 'end',
-  maxWidth = 620,
-  className,
-  style,
-  children,
-  ref,
-  ...rest
+    align = 'end',
+    maxWidth = 620,
+    className,
+    style,
+    children,
+    ref,
+    ...rest
 }: EventDescriptionProps) {
-  return (
-    <Text
-      {...rest}
-      as="p"
-      ref={ref}
-      role="bodyXl"
-      outline="md"
-      tone="primary"
-      className={cx('zzz-event-description', `zzz-event-description--${align}`, className)}
-      style={{ maxWidth: maxWidth === 'none' ? 'none' : `calc(${maxWidth} * var(--zzz-px))`, ...style }}
-    >
-      {children}
-    </Text>
-  )
+    return (
+        <Text
+            {...rest}
+            as="p"
+            ref={ref}
+            role="bodyXl"
+            outline="md"
+            tone="primary"
+            className={cx(
+                'zzz-event-description',
+                `zzz-event-description--${align}`,
+                className
+            )}
+            style={{
+                maxWidth:
+                    maxWidth === 'none'
+                        ? 'none'
+                        : `calc(${maxWidth} * var(--zzz-px))`,
+                ...style,
+            }}
+        >
+            {children}
+        </Text>
+    )
 }

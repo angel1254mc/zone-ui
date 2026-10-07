@@ -1,49 +1,49 @@
 /* Capsule under item cards. #000 pill, card width, 24 tall. */
 .zzz-capsule {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  width: 100%;
-  min-width: 0;
-  height: var(--zzz-size-card-capsule);
-  padding: 0 calc(10 * var(--zzz-px));
-  border-radius: var(--zzz-radius-pill);
-  background: var(--zzz-color-surface-card);
-  color: var(--zzz-color-text-primary);
-  font-family: var(--zzz-font-family-ui);
-  font-weight: 900;
-  font-stretch: var(--zzz-font-stretch-ui);
-  font-size-adjust: cap-height 0.84;
-  font-size: var(--zzz-font-size-label);
-  word-spacing: var(--zzz-font-word-spacing-ui);
-  font-variant-numeric: var(--zzz-font-numeric-default);
-  letter-spacing: 0;
-  line-height: var(--zzz-line-height-single);
-  white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    height: var(--zzz-size-card-capsule);
+    padding: 0 calc(10 * var(--zzz-px));
+    border-radius: var(--zzz-radius-pill);
+    background: var(--zzz-color-surface-card);
+    color: var(--zzz-color-text-primary);
+    font-family: var(--zzz-font-family-ui);
+    font-weight: 900;
+    font-stretch: var(--zzz-font-stretch-ui);
+    font-size-adjust: cap-height 0.84;
+    font-size: var(--zzz-font-size-label);
+    word-spacing: var(--zzz-font-word-spacing-ui);
+    font-variant-numeric: var(--zzz-font-numeric-default);
+    letter-spacing: 0;
+    line-height: var(--zzz-line-height-single);
+    white-space: nowrap;
 }
 .zzz-capsule--sm {
-  height: calc(23 * var(--zzz-px));
+    height: calc(23 * var(--zzz-px));
 }
 .zzz-capsule--lg {
-  height: calc(27 * var(--zzz-px));
+    height: calc(27 * var(--zzz-px));
 }
 
 .zzz-capsule__text {
-  overflow: hidden;
-  text-overflow: ellipsis;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .zzz-capsule--empty {
-  color: var(--zzz-color-text-faint);
-  font-family: var(--zzz-font-family-condensed);
-  font-stretch: var(--zzz-font-stretch-condensed);
-  font-size-adjust: cap-height 0.79;
-  font-size: var(--zzz-font-size-condensed-sm);
-  word-spacing: normal;
-  text-transform: uppercase;
+    color: var(--zzz-color-text-faint);
+    font-family: var(--zzz-font-family-condensed);
+    font-stretch: var(--zzz-font-stretch-condensed);
+    font-size-adjust: cap-height 0.79;
+    font-size: var(--zzz-font-size-condensed-sm);
+    word-spacing: normal;
+    text-transform: uppercase;
 }
 
 .zzz-capsule--danger {
-  color: var(--zzz-color-danger-text);
+    color: var(--zzz-color-danger-text);
 }

@@ -10,131 +10,145 @@
  * its own gaps and label the same way.
  */
 .zzz-radio-group {
-  --zzz-radio-group-u: var(--zzz-px);
-  --zzz-radio-group-label: var(--zzz-font-size-body);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: calc(8 * var(--zzz-radio-group-u));
+    --zzz-radio-group-u: var(--zzz-px);
+    --zzz-radio-group-label: var(--zzz-font-size-body);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: calc(8 * var(--zzz-radio-group-u));
 }
 
 .zzz-radio-group--sm {
-  --zzz-radio-group-u: calc(var(--zzz-px) * var(--zzz-size-control-sm-n) / var(--zzz-size-control-md-n));
-  --zzz-radio-group-label: var(--zzz-font-size-label);
+    --zzz-radio-group-u: calc(
+        var(--zzz-px) * var(--zzz-size-control-sm-n) /
+            var(--zzz-size-control-md-n)
+    );
+    --zzz-radio-group-label: var(--zzz-font-size-label);
 }
 .zzz-radio-group--lg {
-  --zzz-radio-group-u: calc(var(--zzz-px) * var(--zzz-size-control-lg-n) / var(--zzz-size-control-md-n));
-  --zzz-radio-group-label: var(--zzz-font-size-body-lg);
+    --zzz-radio-group-u: calc(
+        var(--zzz-px) * var(--zzz-size-control-lg-n) /
+            var(--zzz-size-control-md-n)
+    );
+    --zzz-radio-group-label: var(--zzz-font-size-body-lg);
 }
 
 /* Two classes: beats the .zzz-text-body role class on the same element. */
 .zzz-radio-group .zzz-radio-group__label {
-  display: block;
-  font-size: var(--zzz-radio-group-label);
-  margin-left: calc(8 * var(--zzz-radio-group-u));
-  line-height: var(--zzz-line-height-single);
+    display: block;
+    font-size: var(--zzz-radio-group-label);
+    margin-left: calc(8 * var(--zzz-radio-group-u));
+    line-height: var(--zzz-line-height-single);
 }
 
 .zzz-radio-group__options {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .zzz-radio-group--horizontal .zzz-radio-group__options {
-  flex-direction: row;
-  flex-wrap: wrap;
-  column-gap: calc(32 * var(--zzz-radio-group-u));
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: calc(32 * var(--zzz-radio-group-u));
 }
 
 .zzz-radio {
-  --zzz-radio-u: var(--zzz-px);
-  --zzz-radio-label: var(--zzz-font-size-body);
-  display: inline-flex;
-  align-items: center;
-  gap: calc(14 * var(--zzz-radio-u));
-  min-height: calc(40 * var(--zzz-radio-u));
-  color: var(--zzz-color-text-secondary);
-  cursor: pointer;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
+    --zzz-radio-u: var(--zzz-px);
+    --zzz-radio-label: var(--zzz-font-size-body);
+    display: inline-flex;
+    align-items: center;
+    gap: calc(14 * var(--zzz-radio-u));
+    min-height: calc(40 * var(--zzz-radio-u));
+    color: var(--zzz-color-text-secondary);
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .zzz-radio--sm {
-  --zzz-radio-u: calc(var(--zzz-px) * var(--zzz-size-control-sm-n) / var(--zzz-size-control-md-n));
-  --zzz-radio-label: var(--zzz-font-size-label);
+    --zzz-radio-u: calc(
+        var(--zzz-px) * var(--zzz-size-control-sm-n) /
+            var(--zzz-size-control-md-n)
+    );
+    --zzz-radio-label: var(--zzz-font-size-label);
 }
 .zzz-radio--lg {
-  --zzz-radio-u: calc(var(--zzz-px) * var(--zzz-size-control-lg-n) / var(--zzz-size-control-md-n));
-  --zzz-radio-label: var(--zzz-font-size-body-lg);
+    --zzz-radio-u: calc(
+        var(--zzz-px) * var(--zzz-size-control-lg-n) /
+            var(--zzz-size-control-md-n)
+    );
+    --zzz-radio-label: var(--zzz-font-size-body-lg);
 }
 
 .zzz-radio__control {
-  position: relative;
-  display: inline-flex;
-  flex: none;
-  width: calc(24 * var(--zzz-radio-u));
-  height: calc(24 * var(--zzz-radio-u));
+    position: relative;
+    display: inline-flex;
+    flex: none;
+    width: calc(24 * var(--zzz-radio-u));
+    height: calc(24 * var(--zzz-radio-u));
 }
 
 .zzz-radio__input {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  opacity: 0;
-  cursor: inherit;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: inherit;
 }
 
 .zzz-radio__circle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  border: calc(var(--zzz-border-width-ring-chip-n) * var(--zzz-radio-u)) solid var(--zzz-color-border-button);
-  border-radius: 50%;
-  background: var(--zzz-color-surface-panel);
-  box-shadow: 0 0 0 calc(1 * var(--zzz-radio-u)) var(--zzz-color-border-keyline);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border: calc(var(--zzz-border-width-ring-chip-n) * var(--zzz-radio-u)) solid
+        var(--zzz-color-border-button);
+    border-radius: 50%;
+    background: var(--zzz-color-surface-panel);
+    box-shadow: 0 0 0 calc(1 * var(--zzz-radio-u))
+        var(--zzz-color-border-keyline);
 }
 
 .zzz-radio__dot {
-  width: calc(10 * var(--zzz-radio-u));
-  height: calc(10 * var(--zzz-radio-u));
-  border-radius: 50%;
-  background: var(--zzz-color-accent-on);
-  visibility: hidden;
+    width: calc(10 * var(--zzz-radio-u));
+    height: calc(10 * var(--zzz-radio-u));
+    border-radius: 50%;
+    background: var(--zzz-color-accent-on);
+    visibility: hidden;
 }
 
 /* Two classes: beats the .zzz-text-body role class on the same element. */
 .zzz-radio .zzz-radio__label {
-  font-size: var(--zzz-radio-label);
-  /* line-height.list (21) over body (20), kept proportional to the label size */
-  line-height: calc(var(--zzz-radio-label) * 1.05);
+    font-size: var(--zzz-radio-label);
+    /* line-height.list (21) over body (20), kept proportional to the label size */
+    line-height: calc(var(--zzz-radio-label) * 1.05);
 }
 
 .zzz-radio[data-checked] {
-  color: var(--zzz-color-text-primary);
+    color: var(--zzz-color-text-primary);
 }
 .zzz-radio[data-checked] .zzz-radio__circle {
-  border-color: var(--zzz-accent);
-  background: var(--zzz-accent);
+    border-color: var(--zzz-accent);
+    background: var(--zzz-accent);
 }
 .zzz-radio[data-checked] .zzz-radio__dot {
-  visibility: visible;
+    visibility: visible;
 }
 
 .zzz-radio__input:focus-visible + .zzz-radio__circle {
-  box-shadow: var(--zzz-focus-ring);
+    box-shadow: var(--zzz-focus-ring);
 }
 
 .zzz-radio[data-disabled] {
-  color: var(--zzz-color-text-disabled);
-  cursor: default;
+    color: var(--zzz-color-text-disabled);
+    cursor: default;
 }
 .zzz-radio[data-disabled] .zzz-radio__dot {
-  background: var(--zzz-color-text-disabled);
+    background: var(--zzz-color-text-disabled);
 }
 
 /*
@@ -143,18 +157,18 @@
  * real outline (outlines survive forced colors).
  */
 @media (forced-colors: active) {
-  .zzz-radio__dot {
-    forced-color-adjust: none;
-    background: CanvasText;
-  }
-  .zzz-radio[data-disabled] .zzz-radio__dot {
-    background: GrayText;
-  }
-  .zzz-radio[data-checked]:not([data-disabled]) .zzz-radio__circle {
-    border-color: Highlight;
-  }
-  .zzz-radio__input:focus-visible + .zzz-radio__circle {
-    outline: calc(3 * var(--zzz-radio-u)) solid Highlight;
-    outline-offset: calc(2 * var(--zzz-radio-u));
-  }
+    .zzz-radio__dot {
+        forced-color-adjust: none;
+        background: CanvasText;
+    }
+    .zzz-radio[data-disabled] .zzz-radio__dot {
+        background: GrayText;
+    }
+    .zzz-radio[data-checked]:not([data-disabled]) .zzz-radio__circle {
+        border-color: Highlight;
+    }
+    .zzz-radio__input:focus-visible + .zzz-radio__circle {
+        outline: calc(3 * var(--zzz-radio-u)) solid Highlight;
+        outline-offset: calc(2 * var(--zzz-radio-u));
+    }
 }

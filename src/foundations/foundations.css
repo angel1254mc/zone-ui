@@ -1,279 +1,291 @@
 /* Storybook-only chrome for the Foundations stories (not part of the library bundle). */
 .zzz-doc {
-  display: flex;
-  flex-direction: column;
-  gap: calc(32 * var(--zzz-px));
-  max-width: calc(1500 * var(--zzz-px));
+    display: flex;
+    flex-direction: column;
+    gap: calc(32 * var(--zzz-px));
+    max-width: calc(1500 * var(--zzz-px));
 }
 .zzz-doc-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  gap: calc(32 * var(--zzz-px));
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: calc(32 * var(--zzz-px));
 }
 .zzz-doc-cell {
-  display: flex;
-  flex-direction: column;
-  gap: calc(10 * var(--zzz-px));
+    display: flex;
+    flex-direction: column;
+    gap: calc(10 * var(--zzz-px));
 }
 .zzz-doc-caption {
-  font-size: var(--zzz-font-size-label);
-  line-height: var(--zzz-line-height-dialog-item);
-  color: var(--zzz-color-text-muted);
+    font-size: var(--zzz-font-size-label);
+    line-height: var(--zzz-line-height-dialog-item);
+    color: var(--zzz-color-text-muted);
 }
 .zzz-doc-code {
-  font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
-  /* 18 units = 12.6 px at the 0.7 default (readable doc chrome), 18 px at game density. */
-  font-size: calc(18 * var(--zzz-px));
-  font-stretch: normal;
-  font-weight: 400;
-  font-size-adjust: none;
-  word-spacing: normal;
-  line-height: calc(24 * var(--zzz-px));
-  color: var(--zzz-color-text-tertiary);
+    font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+    /* 18 units = 12.6 px at the 0.7 default (readable doc chrome), 18 px at game density. */
+    font-size: calc(18 * var(--zzz-px));
+    font-stretch: normal;
+    font-weight: 400;
+    font-size-adjust: none;
+    word-spacing: normal;
+    line-height: calc(24 * var(--zzz-px));
+    color: var(--zzz-color-text-tertiary);
 }
 .zzz-doc-heading {
-  margin: 0;
-  font-size: var(--zzz-font-size-title);
-  line-height: var(--zzz-line-height-single);
-  color: var(--zzz-color-text-title);
+    margin: 0;
+    font-size: var(--zzz-font-size-title);
+    line-height: var(--zzz-line-height-single);
+    color: var(--zzz-color-text-title);
 }
 .zzz-doc-subheading {
-  margin: 0;
-  font-size: var(--zzz-font-size-body-lg);
-  line-height: var(--zzz-line-height-single);
-  color: var(--zzz-color-text-subtle);
+    margin: 0;
+    font-size: var(--zzz-font-size-body-lg);
+    line-height: var(--zzz-line-height-single);
+    color: var(--zzz-color-text-subtle);
 }
 .zzz-doc-black {
-  background-color: #000000;
+    background-color: #000000;
 }
 
 /* A plain pill box for material samples (the Button component owns the real anatomy). */
 .zzz-doc-pill {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--zzz-size-control-pill-width);
-  height: var(--zzz-size-control-pill);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--zzz-size-control-pill-width);
+    height: var(--zzz-size-control-pill);
 }
 .zzz-doc-pill__label {
-  font-size: var(--zzz-font-size-button);
-  line-height: var(--zzz-line-height-single);
+    font-size: var(--zzz-font-size-button);
+    line-height: var(--zzz-line-height-single);
 }
 .zzz-doc-cap {
-  position: absolute;
-  top: calc(-1 * var(--zzz-border-width-ring));
-  left: calc(-1 * var(--zzz-border-width-ring));
-  display: grid;
-  place-items: center;
-  width: var(--zzz-size-control-pill);
-  height: var(--zzz-size-control-pill);
-  border: var(--zzz-border-width-ring) solid var(--zzz-color-border-button);
-  border-radius: 50%;
-  background: var(--zzz-color-surface-button-cap);
+    position: absolute;
+    top: calc(-1 * var(--zzz-border-width-ring));
+    left: calc(-1 * var(--zzz-border-width-ring));
+    display: grid;
+    place-items: center;
+    width: var(--zzz-size-control-pill);
+    height: var(--zzz-size-control-pill);
+    border: var(--zzz-border-width-ring) solid var(--zzz-color-border-button);
+    border-radius: 50%;
+    background: var(--zzz-color-surface-button-cap);
 }
 .zzz-doc-cap__disc {
-  width: var(--zzz-size-control-icon-disc);
-  height: var(--zzz-size-control-icon-disc);
-  border-radius: 50%;
-  background: var(--zzz-color-icon-recycle);
+    width: var(--zzz-size-control-icon-disc);
+    height: var(--zzz-size-control-icon-disc);
+    border-radius: 50%;
+    background: var(--zzz-color-icon-recycle);
 }
 .zzz-doc-pill--with-cap {
-  justify-content: flex-start;
-  padding-left: calc(var(--zzz-size-control-pill) + 18 * var(--zzz-px));
+    justify-content: flex-start;
+    padding-left: calc(var(--zzz-size-control-pill) + 18 * var(--zzz-px));
 }
 
 .zzz-doc-swatch-area {
-  width: calc(256 * var(--zzz-px));
-  height: calc(160 * var(--zzz-px));
+    width: calc(256 * var(--zzz-px));
+    height: calc(160 * var(--zzz-px));
 }
 
 /* Tokens story */
 .zzz-doc-row--tight {
-  gap: calc(16 * var(--zzz-px));
+    gap: calc(16 * var(--zzz-px));
 }
 .zzz-doc-dim {
-  color: var(--zzz-color-text-muted);
+    color: var(--zzz-color-text-muted);
 }
 .zzz-doc-swatch {
-  display: flex;
-  flex-direction: column;
-  gap: calc(4 * var(--zzz-px));
-  width: calc(170 * var(--zzz-px));
+    display: flex;
+    flex-direction: column;
+    gap: calc(4 * var(--zzz-px));
+    width: calc(170 * var(--zzz-px));
 }
 .zzz-doc-swatch__chip {
-  height: calc(64 * var(--zzz-px));
-  border-radius: calc(8 * var(--zzz-px));
-  box-shadow: 0 0 0 calc(1 * var(--zzz-px)) #333333;
+    height: calc(64 * var(--zzz-px));
+    border-radius: calc(8 * var(--zzz-px));
+    box-shadow: 0 0 0 calc(1 * var(--zzz-px)) #333333;
 }
 .zzz-doc-table {
-  border-collapse: collapse;
+    border-collapse: collapse;
 }
 .zzz-doc-table td {
-  padding: calc(3 * var(--zzz-px)) calc(16 * var(--zzz-px)) calc(3 * var(--zzz-px)) 0;
-  vertical-align: middle;
+    padding: calc(3 * var(--zzz-px)) calc(16 * var(--zzz-px))
+        calc(3 * var(--zzz-px)) 0;
+    vertical-align: middle;
 }
 .zzz-doc-bar {
-  height: calc(12 * var(--zzz-px));
-  min-width: calc(1 * var(--zzz-px));
-  background: var(--zzz-color-text-muted);
+    height: calc(12 * var(--zzz-px));
+    min-width: calc(1 * var(--zzz-px));
+    background: var(--zzz-color-text-muted);
 }
 .zzz-doc-radius {
-  height: calc(90 * var(--zzz-px));
-  border: calc(3 * var(--zzz-px)) solid var(--zzz-color-border-button);
-  background: var(--zzz-color-surface-button);
+    height: calc(90 * var(--zzz-px));
+    border: calc(3 * var(--zzz-px)) solid var(--zzz-color-border-button);
+    background: var(--zzz-color-surface-button);
 }
 .zzz-doc-border {
-  width: calc(160 * var(--zzz-px));
-  border-top-style: solid;
-  border-top-color: var(--zzz-color-text-muted);
+    width: calc(160 * var(--zzz-px));
+    border-top-style: solid;
+    border-top-color: var(--zzz-color-text-muted);
 }
 .zzz-doc-skew {
-  width: calc(40 * var(--zzz-px));
-  height: calc(28 * var(--zzz-px));
-  background: var(--zzz-color-text-muted);
+    width: calc(40 * var(--zzz-px));
+    height: calc(28 * var(--zzz-px));
+    background: var(--zzz-color-text-muted);
 }
 
 /* Accent Clock story */
 .zzz-doc-accent-chip {
-  width: calc(160 * var(--zzz-px));
-  height: calc(57 * var(--zzz-px));
-  border-radius: var(--zzz-radius-pill);
-  background: var(--zzz-accent);
-  box-shadow: var(--zzz-shadow-keyline);
+    width: calc(160 * var(--zzz-px));
+    height: calc(57 * var(--zzz-px));
+    border-radius: var(--zzz-radius-pill);
+    background: var(--zzz-accent);
+    box-shadow: var(--zzz-shadow-keyline);
 }
 
 /* Stage story */
 .zzz-doc-stage-host {
-  width: 100vw;
-  height: 100vh;
+    width: 100vw;
+    height: 100vh;
 }
 .zzz-doc-stage-grid {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(to right, #262626 calc(2 * var(--zzz-px)), transparent 0),
-    linear-gradient(to bottom, #262626 calc(2 * var(--zzz-px)), transparent 0);
-  background-size: calc(120 * var(--zzz-px)) calc(120 * var(--zzz-px));
-  background-position: calc(-1 * var(--zzz-px)) calc(-1 * var(--zzz-px));
-  background-color: #0B0B0B;
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(
+            to right,
+            #262626 calc(2 * var(--zzz-px)),
+            transparent 0
+        ),
+        linear-gradient(
+            to bottom,
+            #262626 calc(2 * var(--zzz-px)),
+            transparent 0
+        );
+    background-size: calc(120 * var(--zzz-px)) calc(120 * var(--zzz-px));
+    background-position: calc(-1 * var(--zzz-px)) calc(-1 * var(--zzz-px));
+    background-color: #0b0b0b;
 }
 .zzz-doc-stage-marker {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  translate: -50% -50%;
-  display: grid;
-  place-items: center;
-  width: calc(360 * var(--zzz-px));
-  height: calc(360 * var(--zzz-px));
-  border: calc(5 * var(--zzz-px)) solid var(--zzz-accent);
-  border-radius: 50%;
-  text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    display: grid;
+    place-items: center;
+    width: calc(360 * var(--zzz-px));
+    height: calc(360 * var(--zzz-px));
+    border: calc(5 * var(--zzz-px)) solid var(--zzz-accent);
+    border-radius: 50%;
+    text-align: center;
 }
 .zzz-doc-stage-corner {
-  position: absolute;
-  width: calc(80 * var(--zzz-px));
-  height: calc(80 * var(--zzz-px));
-  border: 0 solid var(--zzz-accent);
+    position: absolute;
+    width: calc(80 * var(--zzz-px));
+    height: calc(80 * var(--zzz-px));
+    border: 0 solid var(--zzz-accent);
 }
 
 /* Sizing story: the sm / md / lg control scale, drawn straight from the size tokens. */
 .zzz-doc-size {
-  --zzz-doc-h: var(--zzz-size-control-md);
-  --zzz-doc-cap: var(--zzz-size-control-cap-md);
-  --zzz-doc-disc: var(--zzz-size-control-disc-md);
-  --zzz-doc-icon: var(--zzz-size-control-icon-md);
-  --zzz-doc-pad: var(--zzz-size-control-padding-x-md);
-  --zzz-doc-label: var(--zzz-font-size-control-md);
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: calc(24 * var(--zzz-px));
+    --zzz-doc-h: var(--zzz-size-control-md);
+    --zzz-doc-cap: var(--zzz-size-control-cap-md);
+    --zzz-doc-disc: var(--zzz-size-control-disc-md);
+    --zzz-doc-icon: var(--zzz-size-control-icon-md);
+    --zzz-doc-pad: var(--zzz-size-control-padding-x-md);
+    --zzz-doc-label: var(--zzz-font-size-control-md);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: calc(24 * var(--zzz-px));
 }
 .zzz-doc-size[data-size='sm'] {
-  --zzz-doc-h: var(--zzz-size-control-sm);
-  --zzz-doc-cap: var(--zzz-size-control-cap-sm);
-  --zzz-doc-disc: var(--zzz-size-control-disc-sm);
-  --zzz-doc-icon: var(--zzz-size-control-icon-sm);
-  --zzz-doc-pad: var(--zzz-size-control-padding-x-sm);
-  --zzz-doc-label: var(--zzz-font-size-control-sm);
+    --zzz-doc-h: var(--zzz-size-control-sm);
+    --zzz-doc-cap: var(--zzz-size-control-cap-sm);
+    --zzz-doc-disc: var(--zzz-size-control-disc-sm);
+    --zzz-doc-icon: var(--zzz-size-control-icon-sm);
+    --zzz-doc-pad: var(--zzz-size-control-padding-x-sm);
+    --zzz-doc-label: var(--zzz-font-size-control-sm);
 }
 .zzz-doc-size[data-size='lg'] {
-  --zzz-doc-h: var(--zzz-size-control-lg);
-  --zzz-doc-cap: var(--zzz-size-control-cap-lg);
-  --zzz-doc-disc: var(--zzz-size-control-disc-lg);
-  --zzz-doc-icon: var(--zzz-size-control-icon-lg);
-  --zzz-doc-pad: var(--zzz-size-control-padding-x-lg);
-  --zzz-doc-label: var(--zzz-font-size-control-lg);
+    --zzz-doc-h: var(--zzz-size-control-lg);
+    --zzz-doc-cap: var(--zzz-size-control-cap-lg);
+    --zzz-doc-disc: var(--zzz-size-control-disc-lg);
+    --zzz-doc-icon: var(--zzz-size-control-icon-lg);
+    --zzz-doc-pad: var(--zzz-size-control-padding-x-lg);
+    --zzz-doc-label: var(--zzz-font-size-control-lg);
 }
 .zzz-doc-size__tag {
-  width: calc(60 * var(--zzz-px));
-  font-size: var(--zzz-font-size-body-lg);
-  line-height: var(--zzz-line-height-single);
-  color: var(--zzz-color-text-subtle);
+    width: calc(60 * var(--zzz-px));
+    font-size: var(--zzz-font-size-body-lg);
+    line-height: var(--zzz-line-height-single);
+    color: var(--zzz-color-text-subtle);
 }
 .zzz-doc-size__pill {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: var(--zzz-doc-h);
-  padding-inline: var(--zzz-doc-pad);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--zzz-doc-h);
+    padding-inline: var(--zzz-doc-pad);
 }
 .zzz-doc-size__pill--capped {
-  padding-left: calc(var(--zzz-doc-cap) - var(--zzz-mat-ring) + 0.5 * var(--zzz-doc-pad));
+    padding-left: calc(
+        var(--zzz-doc-cap) - var(--zzz-mat-ring) + 0.5 * var(--zzz-doc-pad)
+    );
 }
 .zzz-doc-size__label {
-  font-size: var(--zzz-doc-label);
-  line-height: var(--zzz-line-height-single);
+    font-size: var(--zzz-doc-label);
+    line-height: var(--zzz-line-height-single);
 }
 .zzz-doc-size__cap {
-  position: absolute;
-  top: calc(-1 * var(--zzz-mat-ring));
-  left: calc(-1 * var(--zzz-mat-ring));
-  display: grid;
-  place-items: center;
-  width: var(--zzz-doc-cap);
-  height: var(--zzz-doc-cap);
-  border: var(--zzz-mat-ring) solid var(--zzz-color-border-button);
-  border-radius: 50%;
-  background: var(--zzz-color-surface-button-cap);
+    position: absolute;
+    top: calc(-1 * var(--zzz-mat-ring));
+    left: calc(-1 * var(--zzz-mat-ring));
+    display: grid;
+    place-items: center;
+    width: var(--zzz-doc-cap);
+    height: var(--zzz-doc-cap);
+    border: var(--zzz-mat-ring) solid var(--zzz-color-border-button);
+    border-radius: 50%;
+    background: var(--zzz-color-surface-button-cap);
 }
 .zzz-doc-size__disc {
-  width: var(--zzz-doc-disc);
-  height: var(--zzz-doc-disc);
-  border-radius: 50%;
-  background: var(--zzz-color-icon-confirm);
+    width: var(--zzz-doc-disc);
+    height: var(--zzz-doc-disc);
+    border-radius: 50%;
+    background: var(--zzz-color-icon-confirm);
 }
 .zzz-doc-size__circle {
-  display: grid;
-  place-items: center;
-  width: var(--zzz-doc-h);
-  height: var(--zzz-doc-h);
-  color: var(--zzz-color-text-primary);
+    display: grid;
+    place-items: center;
+    width: var(--zzz-doc-h);
+    height: var(--zzz-doc-h);
+    color: var(--zzz-color-text-primary);
 }
 .zzz-doc-size__circle svg {
-  width: var(--zzz-doc-icon);
-  height: var(--zzz-doc-icon);
+    width: var(--zzz-doc-icon);
+    height: var(--zzz-doc-icon);
 }
 .zzz-doc-size__field {
-  display: flex;
-  align-items: center;
-  box-sizing: border-box;
-  width: calc(360 * var(--zzz-px));
-  height: var(--zzz-doc-h);
-  padding-inline: calc(0.6 * var(--zzz-doc-pad));
-  border-radius: var(--zzz-radius-pill);
-  background: #000000;
-  box-shadow: inset 0 0 0 var(--zzz-border-width-ring) var(--zzz-color-border-button);
-  font-size: calc(0.8 * var(--zzz-doc-label));
-  line-height: var(--zzz-line-height-single);
-  color: var(--zzz-color-text-muted);
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    width: calc(360 * var(--zzz-px));
+    height: var(--zzz-doc-h);
+    padding-inline: calc(0.6 * var(--zzz-doc-pad));
+    border-radius: var(--zzz-radius-pill);
+    background: #000000;
+    box-shadow: inset 0 0 0 var(--zzz-border-width-ring)
+        var(--zzz-color-border-button);
+    font-size: calc(0.8 * var(--zzz-doc-label));
+    line-height: var(--zzz-line-height-single);
+    color: var(--zzz-color-text-muted);
 }
 .zzz-doc-size__readout {
-  white-space: nowrap;
+    white-space: nowrap;
 }
 .zzz-doc-type-sample {
-  margin: 0;
-  color: var(--zzz-color-text-primary);
+    margin: 0;
+    color: var(--zzz-color-text-primary);
 }

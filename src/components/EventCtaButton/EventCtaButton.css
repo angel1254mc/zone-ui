@@ -9,71 +9,94 @@
  * would clip the bevel and the press outset); the chevron layer rounds itself instead.
  */
 .zzz-event-cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--zzz-size-event-cta-width);
-  height: var(--zzz-size-event-cta-height);
-  padding: 0;
-  margin: 0;
-  appearance: none;
-  cursor: pointer;
-  color: var(--zzz-color-text-primary);
-  background-color: var(--zzz-color-event-cta-chevron-dark);
-  background-image: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--zzz-size-event-cta-width);
+    height: var(--zzz-size-event-cta-height);
+    padding: 0;
+    margin: 0;
+    appearance: none;
+    cursor: pointer;
+    color: var(--zzz-color-text-primary);
+    background-color: var(--zzz-color-event-cta-chevron-dark);
+    background-image: none;
 }
 
 .zzz-event-cta__chevrons {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  border-radius: inherit;
-  background: var(--zzz-color-event-cta-chevron-light);
-  --zzz-event-cta-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 35 47' preserveAspectRatio='none'%3E%3Cpath d='M0 0H23L36 20.5Q37.5 23.5 36 26.5L23 47H0L13 26.5Q14.5 23.5 13 20.5Z M-35 0H-12L1 20.5Q2.5 23.5 1 26.5L-12 47H-35L-22 26.5Q-20.5 23.5 -22 20.5Z'/%3E%3C/svg%3E");
-  --zzz-event-cta-fade: linear-gradient(90deg, rgb(0 0 0 / 0.45), #000 38%, #000 62%, rgb(0 0 0 / 0.45));
-  -webkit-mask-image: var(--zzz-event-cta-tile), var(--zzz-event-cta-fade);
-  mask-image: var(--zzz-event-cta-tile), var(--zzz-event-cta-fade);
-  -webkit-mask-size: var(--zzz-size-event-cta-chevron-period) 100%, 100% 100%;
-  mask-size: var(--zzz-size-event-cta-chevron-period) 100%, 100% 100%;
-  -webkit-mask-repeat: repeat-x, no-repeat;
-  mask-repeat: repeat-x, no-repeat;
-  -webkit-mask-composite: source-in;
-  mask-composite: intersect;
-  -webkit-mask-position: 0 0, 0 0;
-  mask-position: 0 0, 0 0;
-  animation: zzz-event-cta-drift var(--zzz-motion-duration-cta-chevron-drift) linear infinite;
-  pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: inherit;
+    background: var(--zzz-color-event-cta-chevron-light);
+    --zzz-event-cta-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 35 47' preserveAspectRatio='none'%3E%3Cpath d='M0 0H23L36 20.5Q37.5 23.5 36 26.5L23 47H0L13 26.5Q14.5 23.5 13 20.5Z M-35 0H-12L1 20.5Q2.5 23.5 1 26.5L-12 47H-35L-22 26.5Q-20.5 23.5 -22 20.5Z'/%3E%3C/svg%3E");
+    --zzz-event-cta-fade: linear-gradient(
+        90deg,
+        rgb(0 0 0 / 0.45),
+        #000 38%,
+        #000 62%,
+        rgb(0 0 0 / 0.45)
+    );
+    -webkit-mask-image: var(--zzz-event-cta-tile), var(--zzz-event-cta-fade);
+    mask-image: var(--zzz-event-cta-tile), var(--zzz-event-cta-fade);
+    -webkit-mask-size:
+        var(--zzz-size-event-cta-chevron-period) 100%,
+        100% 100%;
+    mask-size:
+        var(--zzz-size-event-cta-chevron-period) 100%,
+        100% 100%;
+    -webkit-mask-repeat: repeat-x, no-repeat;
+    mask-repeat: repeat-x, no-repeat;
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+    -webkit-mask-position:
+        0 0,
+        0 0;
+    mask-position:
+        0 0,
+        0 0;
+    animation: zzz-event-cta-drift var(--zzz-motion-duration-cta-chevron-drift)
+        linear infinite;
+    pointer-events: none;
 }
 
 @keyframes zzz-event-cta-drift {
-  from {
-    -webkit-mask-position: 0 0, 0 0;
-    mask-position: 0 0, 0 0;
-  }
-  to {
-    -webkit-mask-position: var(--zzz-size-event-cta-chevron-period) 0, 0 0;
-    mask-position: var(--zzz-size-event-cta-chevron-period) 0, 0 0;
-  }
+    from {
+        -webkit-mask-position:
+            0 0,
+            0 0;
+        mask-position:
+            0 0,
+            0 0;
+    }
+    to {
+        -webkit-mask-position:
+            var(--zzz-size-event-cta-chevron-period) 0,
+            0 0;
+        mask-position:
+            var(--zzz-size-event-cta-chevron-period) 0,
+            0 0;
+    }
 }
 
 .zzz-event-cta--still .zzz-event-cta__chevrons {
-  animation: none;
+    animation: none;
 }
 @media (prefers-reduced-motion: reduce) {
-  .zzz-event-cta__chevrons {
-    animation: none;
-  }
+    .zzz-event-cta__chevrons {
+        animation: none;
+    }
 }
 
 .zzz-event-cta__label {
-  position: relative;
-  z-index: 1;
-  /* optical: italic cap centred on the pill (same nudge as Button) */
-  translate: 0 calc(1 * var(--zzz-px));
+    position: relative;
+    z-index: 1;
+    /* optical: italic cap centred on the pill (same nudge as Button) */
+    translate: 0 calc(1 * var(--zzz-px));
 }
 
 .zzz-event-cta:disabled,
 .zzz-event-cta[aria-disabled='true'] {
-  color: var(--zzz-color-text-disabled);
-  cursor: default;
+    color: var(--zzz-color-text-disabled);
+    cursor: default;
 }

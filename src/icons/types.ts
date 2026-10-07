@@ -13,14 +13,18 @@ import type { ComponentProps, FC } from 'react'
  * - Everything else is forwarded to the `<svg>` (React 19: `ref` included).
  */
 export interface IconProps extends Omit<ComponentProps<'svg'>, 'children'> {
-  size?: number | string
-  title?: string
+    size?: number | string
+    title?: string
 }
 
 /**
  * An icon component (`BackIcon`, `HomeIcon`, …). `viewBoxWidth` is the glyph grid
  * width (32 for square icons; wider for the wide Home-dock glyphs — the grid is always 32 tall).
  */
-export type IconComponent = FC<IconProps> & { displayName: string; iconName: string; viewBoxWidth: number }
+export type IconComponent = FC<IconProps> & {
+    displayName: string
+    iconName: string
+    viewBoxWidth: number
+}
 
 export type { IconName } from './registry'

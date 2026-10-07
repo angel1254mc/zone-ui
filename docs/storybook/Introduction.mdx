@@ -1,5 +1,5 @@
-import { Meta, Unstyled } from "@storybook/addon-docs/blocks";
-import { IntroShowcase } from "../../src/foundations/IntroShowcase.story-helpers";
+import { Meta, Unstyled } from '@storybook/addon-docs/blocks'
+import { IntroShowcase } from '../../src/foundations/IntroShowcase.story-helpers'
 
 <Meta title="Introduction" />
 
@@ -14,7 +14,7 @@ It is an unofficial fan project; Zenless Zone Zero and its art are © HoYoverse.
 A few of the components working together. Everything below is live: switch tabs, toggle chips, pick an answer and confirm it, or let the timer run out.
 
 <Unstyled>
-  <IntroShowcase />
+    <IntroShowcase />
 </Unstyled>
 
 ## Install and use
@@ -24,16 +24,16 @@ npm install @angel1254mc/zone-ui
 ```
 
 ```tsx
-import "@angel1254mc/zone-ui/fonts.css"; // optional: Mona Sans from Google Fonts
-import "@angel1254mc/zone-ui/styles.css"; // tokens + base styles + component styles
-import { ZzzTheme, Button } from "@angel1254mc/zone-ui";
+import '@angel1254mc/zone-ui/fonts.css' // optional: Mona Sans from Google Fonts
+import '@angel1254mc/zone-ui/styles.css' // tokens + base styles + component styles
+import { ZzzTheme, Button } from '@angel1254mc/zone-ui'
 
 export function App() {
-  return (
-    <ZzzTheme>
-      <Button>View</Button>
-    </ZzzTheme>
-  );
+    return (
+        <ZzzTheme>
+            <Button>View</Button>
+        </ZzzTheme>
+    )
 }
 ```
 

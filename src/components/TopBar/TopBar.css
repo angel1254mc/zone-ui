@@ -3,47 +3,48 @@
  * control 24 px after the Back tag, a page title 28 px after it. No bottom edge line.
  */
 .zzz-top-bar {
-  position: relative;
-  isolation: isolate;
-  display: flex;
-  align-items: center;
-  gap: var(--zzz-space-control-gap);
-  box-sizing: border-box;
-  width: 100%;
-  height: var(--zzz-layout-top-bar-height);
-  /* side margins: 68 left (Back tag ring), 66 right */
-  padding: 0 calc(66 * var(--zzz-px)) calc(1 * var(--zzz-px)) calc(68 * var(--zzz-px));
-  background: var(--zzz-color-bg-base);
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    gap: var(--zzz-space-control-gap);
+    box-sizing: border-box;
+    width: 100%;
+    height: var(--zzz-layout-top-bar-height);
+    /* side margins: 68 left (Back tag ring), 66 right */
+    padding: 0 calc(66 * var(--zzz-px)) calc(1 * var(--zzz-px))
+        calc(68 * var(--zzz-px));
+    background: var(--zzz-color-bg-base);
 }
 .zzz-top-bar[data-background='translucent'] {
-  /* Translucent band: token color.bg.topBarHome rgba(0,0,0,.68), flat. */
-  background: var(--zzz-color-bg-top-bar-home);
+    /* Translucent band: token color.bg.topBarHome rgba(0,0,0,.68), flat. */
+    background: var(--zzz-color-bg-top-bar-home);
 }
 .zzz-top-bar[data-background='none'],
 .zzz-top-bar[data-background='mural'] {
-  background: none;
+    background: none;
 }
 
 .zzz-top-bar__mural {
-  z-index: -1;
+    z-index: -1;
 }
 
 .zzz-top-bar__left,
 .zzz-top-bar__right {
-  display: flex;
-  align-items: center;
-  gap: var(--zzz-space-control-gap);
-  min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--zzz-space-control-gap);
+    min-width: 0;
 }
 .zzz-top-bar__right {
-  margin-left: auto;
+    margin-left: auto;
 }
 
 /* The Back tag's 90 × 58 box starts 1 px left of its ring (ring x 68–156). */
 .zzz-top-bar__back {
-  margin-left: calc(-1 * var(--zzz-px));
+    margin-left: calc(-1 * var(--zzz-px));
 }
 /* Page title: 28 px after the Back button (4 more than the 24 control gap). */
 .zzz-top-bar__title {
-  margin-left: calc(4 * var(--zzz-px));
+    margin-left: calc(4 * var(--zzz-px));
 }

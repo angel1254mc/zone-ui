@@ -1,45 +1,45 @@
 /* RewardTile. */
 .zzz-reward-tile {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: stretch;
-  width: var(--zzz-size-card-reward);
-  vertical-align: top;
-  text-align: center;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: var(--zzz-size-card-reward);
+    vertical-align: top;
+    text-align: center;
 }
 
 /* Black count strip: tile width, 24 tall, 8 below the tile. */
 .zzz-reward-tile .zzz-reward-tile__count {
-  margin-top: calc(8 * var(--zzz-px));
-  height: var(--zzz-size-card-capsule);
-  border-radius: calc(10 * var(--zzz-px));
+    margin-top: calc(8 * var(--zzz-px));
+    height: var(--zzz-size-card-capsule);
+    border-radius: calc(10 * var(--zzz-px));
 }
 
 /* Two-line name: label size, 19 px line pitch, clipped with an ellipsis. */
 .zzz-reward-tile__name {
-  display: -webkit-box;
-  margin-top: calc(7 * var(--zzz-px));
-  overflow: hidden;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  color: var(--zzz-color-text-primary);
-  font-size: var(--zzz-font-size-label);
-  line-height: var(--zzz-line-height-dialog-item);
-  overflow-wrap: anywhere;
+    display: -webkit-box;
+    margin-top: calc(7 * var(--zzz-px));
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    color: var(--zzz-color-text-primary);
+    font-size: var(--zzz-font-size-label);
+    line-height: var(--zzz-line-height-dialog-item);
+    overflow-wrap: anywhere;
 }
 
 .zzz-reward-tile-group {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: calc(25 * var(--zzz-px));
-  margin: 0;
-  padding: 0;
-  list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: calc(25 * var(--zzz-px));
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 .zzz-reward-tile-group__item {
-  display: block;
-  margin: 0;
-  padding: 0;
+    display: block;
+    margin: 0;
+    padding: 0;
 }

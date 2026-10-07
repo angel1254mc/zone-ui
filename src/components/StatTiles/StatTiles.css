@@ -12,164 +12,175 @@
  *   sm   12 / 16   caption 15        34 /10°               label 17.5
  */
 .zzz-stat-tiles {
-  --zzz-st-frame: calc(var(--zzz-border-width-panel) + var(--zzz-border-width-keyline));
-  display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(min(100%, calc(var(--zzz-stat-tiles-min, 220) * var(--zzz-px))), 1fr)
-  );
-  gap: calc(22 * var(--zzz-px));
-  margin: 0;
-  padding: var(--zzz-st-frame);
+    --zzz-st-frame: calc(
+        var(--zzz-border-width-panel) + var(--zzz-border-width-keyline)
+    );
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(
+            min(100%, calc(var(--zzz-stat-tiles-min, 220) * var(--zzz-px))),
+            1fr
+        )
+    );
+    gap: calc(22 * var(--zzz-px));
+    margin: 0;
+    padding: var(--zzz-st-frame);
 }
 .zzz-stat-tiles--sm {
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(min(100%, calc(var(--zzz-stat-tiles-min, 190) * var(--zzz-px))), 1fr)
-  );
-  gap: calc(20 * var(--zzz-px));
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(
+            min(100%, calc(var(--zzz-stat-tiles-min, 190) * var(--zzz-px))),
+            1fr
+        )
+    );
+    gap: calc(20 * var(--zzz-px));
 }
 .zzz-stat-tiles--columns,
 .zzz-stat-tiles--sm.zzz-stat-tiles--columns {
-  grid-template-columns: repeat(var(--zzz-stat-tiles-columns), minmax(0, 1fr));
+    grid-template-columns: repeat(
+        var(--zzz-stat-tiles-columns),
+        minmax(0, 1fr)
+    );
 }
 
 .zzz-stat-tile {
-  --zzz-st-pad-y: calc(18 * var(--zzz-px));
-  --zzz-st-pad-x: calc(22 * var(--zzz-px));
-  --zzz-st-label: var(--zzz-font-size-label);
-  --zzz-st-value: var(--zzz-font-size-display-name);
-  --zzz-st-foot: var(--zzz-font-size-body);
-  --zzz-st-gap: calc(10 * var(--zzz-px));
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: var(--zzz-st-gap);
-  min-width: 0;
-  margin: 0;
-  padding: var(--zzz-st-pad-y) var(--zzz-st-pad-x);
-  overflow: hidden;
-  color: var(--zzz-color-text-primary);
-  line-height: var(--zzz-line-height-single);
+    --zzz-st-pad-y: calc(18 * var(--zzz-px));
+    --zzz-st-pad-x: calc(22 * var(--zzz-px));
+    --zzz-st-label: var(--zzz-font-size-label);
+    --zzz-st-value: var(--zzz-font-size-display-name);
+    --zzz-st-foot: var(--zzz-font-size-body);
+    --zzz-st-gap: calc(10 * var(--zzz-px));
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: var(--zzz-st-gap);
+    min-width: 0;
+    margin: 0;
+    padding: var(--zzz-st-pad-y) var(--zzz-st-pad-x);
+    overflow: hidden;
+    color: var(--zzz-color-text-primary);
+    line-height: var(--zzz-line-height-single);
 }
 /* material overrides: two classes so they beat .zzz-mat-panel (base.css) regardless of
  * stylesheet order */
 .zzz-stat-tile.zzz-mat-panel {
-  --zzz-mat-radius: calc(22 * var(--zzz-px));
-  background: linear-gradient(
-    180deg,
-    var(--zzz-color-surface-panel-hero-top) 0,
-    var(--zzz-color-surface-panel-hero-bottom) 55%,
-    var(--zzz-color-surface-panel) 100%
-  );
+    --zzz-mat-radius: calc(22 * var(--zzz-px));
+    background: linear-gradient(
+        180deg,
+        var(--zzz-color-surface-panel-hero-top) 0,
+        var(--zzz-color-surface-panel-hero-bottom) 55%,
+        var(--zzz-color-surface-panel) 100%
+    );
 }
 .zzz-stat-tiles--sm .zzz-stat-tile.zzz-mat-panel,
 .zzz-stat-tile--sm.zzz-mat-panel {
-  --zzz-mat-radius: calc(18 * var(--zzz-px));
+    --zzz-mat-radius: calc(18 * var(--zzz-px));
 }
 .zzz-stat-tiles--sm .zzz-stat-tile,
 .zzz-stat-tile--sm {
-  --zzz-st-pad-y: calc(12 * var(--zzz-px));
-  --zzz-st-pad-x: calc(16 * var(--zzz-px));
-  --zzz-st-label: var(--zzz-font-size-caption);
-  --zzz-st-value: calc(34 * var(--zzz-px));
-  --zzz-st-foot: var(--zzz-font-size-label);
-  --zzz-st-gap: calc(7 * var(--zzz-px));
+    --zzz-st-pad-y: calc(12 * var(--zzz-px));
+    --zzz-st-pad-x: calc(16 * var(--zzz-px));
+    --zzz-st-label: var(--zzz-font-size-caption);
+    --zzz-st-value: calc(34 * var(--zzz-px));
+    --zzz-st-foot: var(--zzz-font-size-label);
+    --zzz-st-gap: calc(7 * var(--zzz-px));
 }
 
 /* highlight: accent ring (lit row too, so it reads as one live band) */
 .zzz-stat-tile--highlight.zzz-mat-panel {
-  --zzz-mat-ring-color: var(--zzz-accent);
-  --zzz-mat-lit: var(--zzz-accent);
+    --zzz-mat-ring-color: var(--zzz-accent);
+    --zzz-mat-lit: var(--zzz-accent);
 }
 
 .zzz-stat-tile__label {
-  display: flex;
-  align-items: center;
-  gap: calc(8 * var(--zzz-px));
-  min-width: 0;
-  margin: 0;
-  color: var(--zzz-color-text-muted);
-  font-size: var(--zzz-st-label);
-  line-height: var(--zzz-line-height-single);
-  text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: calc(8 * var(--zzz-px));
+    min-width: 0;
+    margin: 0;
+    color: var(--zzz-color-text-muted);
+    font-size: var(--zzz-st-label);
+    line-height: var(--zzz-line-height-single);
+    text-transform: uppercase;
 }
 .zzz-stat-tile--highlight .zzz-stat-tile__label {
-  color: var(--zzz-accent);
+    color: var(--zzz-accent);
 }
 .zzz-stat-tile__label-text {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .zzz-stat-tile__icon {
-  display: inline-grid;
-  place-items: center;
-  flex: none;
-  width: calc(var(--zzz-st-label) * 1.4);
-  height: calc(var(--zzz-st-label) * 1.4);
-  font-size: calc(var(--zzz-st-label) * 1.4);
-  line-height: 0;
+    display: inline-grid;
+    place-items: center;
+    flex: none;
+    width: calc(var(--zzz-st-label) * 1.4);
+    height: calc(var(--zzz-st-label) * 1.4);
+    font-size: calc(var(--zzz-st-label) * 1.4);
+    line-height: 0;
 }
 .zzz-stat-tile__icon > :is(svg, img) {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .zzz-stat-tile__body {
-  display: flex;
-  flex-direction: column;
-  gap: var(--zzz-st-gap);
-  min-width: 0;
-  margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--zzz-st-gap);
+    min-width: 0;
+    margin: 0;
 }
 
 /* the big number: sheared 10° (zzz-italic recipe) */
 .zzz-stat-tile__value {
-  display: inline-block;
-  align-self: flex-start;
-  max-width: 100%;
-  overflow: hidden;
-  font-size: var(--zzz-st-value);
-  line-height: var(--zzz-line-height-single);
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  transform: skewX(var(--zzz-skew-italic));
-  transform-origin: 0 100%;
-  /* the shear leans the ink right of its box; keep the last glyph inside the clip */
-  padding-right: calc(var(--zzz-st-value) * 0.12);
+    display: inline-block;
+    align-self: flex-start;
+    max-width: 100%;
+    overflow: hidden;
+    font-size: var(--zzz-st-value);
+    line-height: var(--zzz-line-height-single);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transform: skewX(var(--zzz-skew-italic));
+    transform-origin: 0 100%;
+    /* the shear leans the ink right of its box; keep the last glyph inside the clip */
+    padding-right: calc(var(--zzz-st-value) * 0.12);
 }
 
 .zzz-stat-tile__foot {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: calc(6 * var(--zzz-px)) calc(10 * var(--zzz-px));
-  min-width: 0;
-  font-size: var(--zzz-st-foot);
-  line-height: var(--zzz-line-height-single);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: calc(6 * var(--zzz-px)) calc(10 * var(--zzz-px));
+    min-width: 0;
+    font-size: var(--zzz-st-foot);
+    line-height: var(--zzz-line-height-single);
 }
 .zzz-stat-tile__sub {
-  min-width: 0;
-  color: var(--zzz-color-text-tertiary);
+    min-width: 0;
+    color: var(--zzz-color-text-tertiary);
 }
 
 /* delta: a small black capsule with coloured figures (like the stat capsules) */
 .zzz-stat-tile__delta {
-  --zzz-st-delta: var(--zzz-color-text-muted);
-  display: inline-flex;
-  align-items: center;
-  flex: none;
-  padding: calc(4 * var(--zzz-px)) calc(10 * var(--zzz-px));
-  border-radius: var(--zzz-radius-pill);
-  background: var(--zzz-color-surface-stat-row-empty);
-  color: var(--zzz-st-delta);
+    --zzz-st-delta: var(--zzz-color-text-muted);
+    display: inline-flex;
+    align-items: center;
+    flex: none;
+    padding: calc(4 * var(--zzz-px)) calc(10 * var(--zzz-px));
+    border-radius: var(--zzz-radius-pill);
+    background: var(--zzz-color-surface-stat-row-empty);
+    color: var(--zzz-st-delta);
 }
 .zzz-stat-tile__delta[data-tone='positive'] {
-  --zzz-st-delta: var(--zzz-color-icon-confirm);
+    --zzz-st-delta: var(--zzz-color-icon-confirm);
 }
 .zzz-stat-tile__delta[data-tone='negative'] {
-  --zzz-st-delta: var(--zzz-color-danger-text);
+    --zzz-st-delta: var(--zzz-color-danger-text);
 }
