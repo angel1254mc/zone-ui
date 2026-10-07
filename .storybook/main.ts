@@ -40,7 +40,6 @@ const relativeDocgenPaths = (): Plugin => ({
 const config: StorybookConfig = {
   stories: [
     '../docs/storybook/**/*.mdx',
-    '../src/**/*.mdx',
     '../src/**/*.stories.@(ts|tsx)',
     '../examples/**/*.stories.@(ts|tsx)',
   ],
