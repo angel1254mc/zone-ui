@@ -85,7 +85,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "A simple countdown bar compoonent that counts down from durationMs. Controllable via `secondsLeft`",
+          "A simple countdown bar component that counts down from durationMs. Controllable via `secondsLeft`",
       },
     },
   },
