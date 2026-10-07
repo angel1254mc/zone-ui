@@ -1,33 +1,33 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import { Tooltip } from './Tooltip'
-import { Button } from '../Button'
-import { IconButton } from '../IconButton'
-import { InfoAlertIcon, FilterIcon } from '../../icons'
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { Tooltip } from "./Tooltip";
+import { Button } from "../Button";
+import { IconButton } from "../IconButton";
+import { InfoAlertIcon, FilterIcon } from "../../icons";
 
 /** calc(N * var(--zzz-px)) */
-const gpx = (n: number) => `calc(${n} * var(--zzz-px))`
+const gpx = (n: number) => `calc(${n} * var(--zzz-px))`;
 const meta = {
-  title: 'Overlays/Tooltip',
+  title: "Overlays/Tooltip",
   component: Tooltip,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: [
-          'Hover / focus tooltip.',
-          '',
-          '- Bubble `rgba(0,0,0,.6)`, radius 10, padding 10/14, `fontSize.label` white, 12×10 arrow, 16 px from the anchor, 300 ms opacity in.',
-          '- Hover (after `delay`, default 300 ms) or focus opens it; Escape, blur or pointer-leave closes it. `role="tooltip"`; the trigger gets `aria-describedby` while it is open.',
-          '- `placement` top / bottom / left / right with a collision flip and a cross-axis clamp. Portalled to `<body>` (never clipped by Panel / Table) and keeps the host `--zzz-scale`.',
-        ].join('\n'),
+        component: "Hover / focus tooltip.",
       },
     },
   },
-  args: { content: 'Base ATK of the equipped W-Engine', children: <Button>ATK</Button> },
-} satisfies Meta<typeof Tooltip>
+  args: {
+    content: "Base ATK of the equipped W-Engine",
+    children: <Button>ATK</Button>,
+  },
+  argTypes: {
+    children: { control: false },
+  },
+} satisfies Meta<typeof Tooltip>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 /** Hover or focus the button. */
 export const Default: Story = {
@@ -38,18 +38,18 @@ export const Default: Story = {
       </Tooltip>
     </div>
   ),
-}
+};
 
 /** Forced open (`defaultOpen`) on every side. */
 export const Placements: Story = {
   render: () => (
     <div
       style={{
-        display: 'grid',
+        display: "grid",
         gridTemplateColumns: `repeat(2, ${gpx(420)})`,
         gap: `${gpx(150)} ${gpx(60)}`,
         padding: `${gpx(110)} ${gpx(170)}`,
-        justifyItems: 'center',
+        justifyItems: "center",
       }}
     >
       <Tooltip content="Top tooltip" placement="top" defaultOpen>
@@ -66,19 +66,30 @@ export const Placements: Story = {
       </Tooltip>
     </div>
   ),
-}
+};
 
 /** `placement="top"` at the top edge of the viewport flips to the bottom. */
 export const CollisionFlip: Story = {
-  parameters: { layout: 'fullscreen' },
+  parameters: { layout: "fullscreen" },
   render: () => (
-    <div style={{ padding: `${gpx(8)} ${gpx(40)}`, display: 'flex', gap: gpx(40), alignItems: 'flex-start' }}>
-      <Tooltip content="Asked for top, flipped to bottom" placement="top" defaultOpen>
+    <div
+      style={{
+        padding: `${gpx(8)} ${gpx(40)}`,
+        display: "flex",
+        gap: gpx(40),
+        alignItems: "flex-start",
+      }}
+    >
+      <Tooltip
+        content="Asked for top, flipped to bottom"
+        placement="top"
+        defaultOpen
+      >
         <Button width="compact">Top edge</Button>
       </Tooltip>
     </div>
   ),
-}
+};
 
 /** Multi-line content wraps at 360 px. */
 export const LongContent: Story = {
@@ -93,7 +104,7 @@ export const LongContent: Story = {
       </Tooltip>
     </div>
   ),
-}
+};
 
 export const Disabled: Story = {
   render: () => (
@@ -103,4 +114,4 @@ export const Disabled: Story = {
       </Tooltip>
     </div>
   ),
-}
+};

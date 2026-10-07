@@ -1,51 +1,56 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import { useEffect, useRef } from 'react'
-import type { CSSProperties, ReactNode } from 'react'
-import { Toast } from './Toast'
-import { ToastProvider, useToast } from './ToastProvider'
-import { Button } from '../Button'
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { useEffect, useRef } from "react";
+import type { CSSProperties, ReactNode } from "react";
+import { Toast } from "./Toast";
+import { ToastProvider, useToast } from "./ToastProvider";
+import { Button } from "../Button";
 
 /** calc(N * var(--zzz-px)) */
-const gpx = (n: number) => `calc(${n} * var(--zzz-px))`
-const caption: CSSProperties = { color: 'var(--zzz-color-text-muted)', fontSize: gpx(14), lineHeight: 1.2 }
+const gpx = (n: number) => `calc(${n} * var(--zzz-px))`;
+const caption: CSSProperties = {
+  color: "var(--zzz-color-text-muted)",
+  fontSize: gpx(14),
+  lineHeight: 1.2,
+};
 
 function Cell({ label, children }: { label: string; children: ReactNode }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: gpx(10), alignItems: 'flex-start' }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: gpx(10),
+        alignItems: "flex-start",
+      }}
+    >
       {children}
       <span style={caption}>{label}</span>
     </div>
-  )
+  );
 }
 
 const meta = {
-  title: 'Overlays/Toast',
+  title: "Overlays/Toast",
   component: Toast,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: [
-          'Transient message pills (`ToastProvider` + `useToast`).',
-          '',
-          '- 34-tall black full pill, `fontSize.label` white, padding 0 17; icon disc per variant: info = `color.icon.recycle`, success = `color.icon.confirm`, error = `color.icon.cancel` (black glyph). Success / error mix the status colour 50/50 with black (fill) and white (text).',
-          '- Enter: grows from its centre over 630 ms under three 70 ms white/black flashes; the text fades in over 420 ms. Exit reverses in 210 ms. Reduced motion: none.',
-          '- `ToastProvider` + `useToast()`: `toast(message | options)` → id, `dismiss(id?)`. Fixed top-centre viewport (23 px), at most `max` visible (the rest queue), auto-dismiss after `duration` (paused on hover / focus). The list is an `aria-live="polite"` region mounted up-front; errors are `role="alert"`.',
-        ].join('\n'),
+        component: "Transient message pills (`ToastProvider` + `useToast`).",
       },
     },
   },
-  args: { children: 'Settings saved', variant: 'info' },
-} satisfies Meta<typeof Toast>
+  args: { children: "Settings saved", variant: "info" },
+} satisfies Meta<typeof Toast>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {}
+export const Default: Story = {};
 
 export const Variants: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: gpx(24) }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: gpx(24) }}>
       <Cell label="info">
         <Toast variant="info" animate={false}>
           New event: Their Secret Histories
@@ -73,64 +78,98 @@ export const Variants: Story = {
       </Cell>
     </div>
   ),
-}
+};
 
 function Demo() {
-  const { toast, dismiss } = useToast()
-  const n = useRef(0)
+  const { toast, dismiss } = useToast();
+  const n = useRef(0);
   return (
-    <div style={{ display: 'flex', gap: gpx(20), flexWrap: 'wrap', justifyContent: 'center' }}>
-      <Button width="compact" onClick={() => toast(`Hint #${++n.current}: tap an Agent to view details`)}>
+    <div
+      style={{
+        display: "flex",
+        gap: gpx(20),
+        flexWrap: "wrap",
+        justifyContent: "center",
+      }}
+    >
+      <Button
+        width="compact"
+        onClick={() =>
+          toast(`Hint #${++n.current}: tap an Agent to view details`)
+        }
+      >
         Info
       </Button>
-      <Button width="compact" iconTone="confirm" onClick={() => toast({ message: 'Build saved', variant: 'success' })}>
+      <Button
+        width="compact"
+        iconTone="confirm"
+        onClick={() => toast({ message: "Build saved", variant: "success" })}
+      >
         Success
       </Button>
-      <Button width="compact" iconTone="cancel" onClick={() => toast({ message: 'Insufficient Dennies', variant: 'error' })}>
+      <Button
+        width="compact"
+        iconTone="cancel"
+        onClick={() =>
+          toast({ message: "Insufficient Dennies", variant: "error" })
+        }
+      >
         Error
       </Button>
       <Button width="compact" onClick={() => dismiss()}>
         Dismiss all
       </Button>
     </div>
-  )
+  );
 }
 
 /** Click the buttons: toasts queue at the top centre (max 3) and auto-dismiss after 4 s. */
 export const WithProvider: Story = {
-  parameters: { layout: 'fullscreen', docs: { story: { inline: false, iframeHeight: 420 } } },
+  parameters: {
+    layout: "fullscreen",
+    docs: { story: { inline: false, iframeHeight: 420 } },
+  },
   render: () => (
     <ToastProvider>
-      <div style={{ minHeight: gpx(600), display: 'grid', placeItems: 'center' }}>
+      <div
+        style={{ minHeight: gpx(600), display: "grid", placeItems: "center" }}
+      >
         <Demo />
       </div>
     </ToastProvider>
   ),
-}
+};
 
-function Fire({ items }: { items: Parameters<ReturnType<typeof useToast>['toast']>[0][] }) {
-  const { toast } = useToast()
+function Fire({
+  items,
+}: {
+  items: Parameters<ReturnType<typeof useToast>["toast"]>[0][];
+}) {
+  const { toast } = useToast();
   useEffect(() => {
-    items.forEach((i) => toast(i))
+    items.forEach((i) => toast(i));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-  return null
+  }, []);
+  return null;
 }
 
 /** Four toasts fired on mount, `max` 3: the fourth waits in the queue. Sticky (duration 0) for inspection. */
 export const Queue: Story = {
-  parameters: { layout: 'fullscreen', docs: { story: { inline: false, iframeHeight: 260 } } },
+  parameters: {
+    layout: "fullscreen",
+    docs: { story: { inline: false, iframeHeight: 260 } },
+  },
   render: () => (
     <ToastProvider duration={0}>
       <Fire
         items={[
-          { message: 'New event: Their Secret Histories', id: 'q1' },
-          { message: 'Build saved', variant: 'success', id: 'q2' },
-          { message: 'Insufficient Dennies', variant: 'error', id: 'q3' },
-          { message: 'Queued (4th)', id: 'q4' },
+          { message: "New event: Their Secret Histories", id: "q1" },
+          { message: "Build saved", variant: "success", id: "q2" },
+          { message: "Insufficient Dennies", variant: "error", id: "q3" },
+          { message: "Queued (4th)", id: "q4" },
         ]}
       />
       <div style={{ minHeight: gpx(400) }} />
     </ToastProvider>
   ),
-}
+};

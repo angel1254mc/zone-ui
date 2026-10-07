@@ -58,6 +58,10 @@ const meta = {
     cta,
     actions: <DemoActions />,
   },
+  argTypes: {
+    logo: { control: false },
+    actions: { control: false },
+  },
 } satisfies Meta<typeof NavBar>;
 
 export default meta;

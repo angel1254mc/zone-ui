@@ -68,6 +68,9 @@ const meta = {
       options: ["default", "accent", "compact"],
     },
     mediaPosition: { control: "inline-radio", options: ["top", "side"] },
+    trailing: { control: false },
+    children: { control: false },
+    footer: { control: false },
   },
   parameters: {
     docs: {
