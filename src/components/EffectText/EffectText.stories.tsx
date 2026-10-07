@@ -44,7 +44,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Span-like wrapper for text. Mirrors the green/yellow highlights used on effect descriptors for W-Engines, Drive Disks, etc.",
+          "Span-like wrapper for text. Mirrors the green/yellow highlights used on effect descriptors for W-Engines, Drive Discs, etc.",
       },
     },
   },
