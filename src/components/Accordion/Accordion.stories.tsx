@@ -1,12 +1,16 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import { useState } from 'react'
-import type { CSSProperties, ReactNode } from 'react'
-import { Accordion, AccordionItem } from './Accordion'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useState } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
+import { Accordion, AccordionItem } from './Accordion';
 
 /** calc(N * var(--zzz-px)) */
-const gpx = (n: number) => `calc(${n} * var(--zzz-px))`
-const caption: CSSProperties = { color: 'var(--zzz-color-text-muted)', fontSize: gpx(14), lineHeight: 1.2 }
-const frame: CSSProperties = { width: gpx(640), padding: gpx(12) }
+const gpx = (n: number) => `calc(${n} * var(--zzz-px))`;
+const caption: CSSProperties = {
+  color: 'var(--zzz-color-text-muted)',
+  fontSize: gpx(14),
+  lineHeight: 1.2,
+};
+const frame: CSSProperties = { width: gpx(640), padding: gpx(12) };
 
 function Cell({ label, children }: { label: string; children: ReactNode }) {
   return (
@@ -14,7 +18,7 @@ function Cell({ label, children }: { label: string; children: ReactNode }) {
       {children}
       <span style={caption}>{label}</span>
     </div>
-  )
+  );
 }
 
 const FAQ = [
@@ -33,7 +37,7 @@ const FAQ = [
     title: 'How do Drive Disc set bonuses work?',
     body: 'Equipping two discs of a set grants its 2-piece bonus; four discs add the 4-piece effect.',
   },
-]
+];
 
 const meta = {
   title: 'Data Display/Accordion',
@@ -42,22 +46,15 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: [
-          'A disclosure list for FAQ-style web pages.',
-          '',
-          '- Header: the dark pill (`.zzz-mat-pill`, 58 tall) with a `fontSize.label` white title and a caret that turns 180° when open. Content: `fontSize.body` in `color.text.tertiary`, padding 12/28/8; items 8 apart.',
-          '- `type="single"` (default; `collapsible`) or `"multiple"`; `value` / `defaultValue` / `onValueChange` (string[]).',
-          '- Pressed: the shared accent recipe; disabled greys the title only. Hover lifts the ring.',
-          '- WAI-ARIA accordion: `h3 > button[aria-expanded][aria-controls]` + `role="region"` (`headingLevel` configurable).',
-        ].join('\n'),
+        component: 'A disclosure list for FAQ-style web pages.',
       },
     },
   },
   args: { type: 'single', defaultValue: ['wengine'] },
-} satisfies Meta<typeof Accordion>
+} satisfies Meta<typeof Accordion>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: (args) => (
@@ -71,7 +68,7 @@ export const Default: Story = {
       </Accordion>
     </div>
   ),
-}
+};
 
 export const Multiple: Story = {
   render: () => (
@@ -85,11 +82,18 @@ export const Multiple: Story = {
       </Accordion>
     </div>
   ),
-}
+};
 
 export const States: Story = {
   render: () => (
-    <div style={{ ...frame, display: 'flex', flexDirection: 'column', gap: gpx(26) }}>
+    <div
+      style={{
+        ...frame,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: gpx(26),
+      }}
+    >
       <Cell label="closed">
         <Accordion>
           <AccordionItem value="a" title="Closed item">
@@ -134,13 +138,20 @@ export const States: Story = {
       </Cell>
     </div>
   ),
-}
+};
 
 export const Controlled: Story = {
   render: function Render() {
-    const [open, setOpen] = useState<string[]>([])
+    const [open, setOpen] = useState<string[]>([]);
     return (
-      <div style={{ ...frame, display: 'flex', flexDirection: 'column', gap: gpx(12) }}>
+      <div
+        style={{
+          ...frame,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: gpx(12),
+        }}
+      >
         <Accordion type="multiple" value={open} onValueChange={setOpen}>
           {FAQ.map((f) => (
             <AccordionItem key={f.value} value={f.value} title={f.title}>
@@ -150,6 +161,6 @@ export const Controlled: Story = {
         </Accordion>
         <span style={caption}>open: {open.join(', ') || '—'}</span>
       </div>
-    )
+    );
   },
-}
+};

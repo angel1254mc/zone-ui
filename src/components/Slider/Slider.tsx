@@ -1,69 +1,69 @@
-import { useRef } from 'react'
-import type { ComponentPropsWithRef, CSSProperties, KeyboardEvent, PointerEvent, ReactNode } from 'react'
-import { cx, useControllableState, usePressFlash } from '../../utils'
-import { MinusIcon, PlusIcon } from '../../icons'
-import { Text } from '../Text'
-import './Slider.css'
+import { useRef } from 'react';
+import type { ComponentPropsWithRef, CSSProperties, KeyboardEvent, PointerEvent, ReactNode } from 'react';
+import { cx, useControllableState, usePressFlash } from '../../utils';
+import { MinusIcon, PlusIcon } from '../../icons';
+import { Text } from '../Text';
+import './Slider.css';
 
 /** `sm` / `md` / `lg`: steppers 38 / 47 / 57, thumb 27 / 34 / 41 design units; numbers `fontSize.control.{sm,md,lg}`. */
-export type SliderSize = 'sm' | 'md' | 'lg'
+export type SliderSize = 'sm' | 'md' | 'lg';
 
 export interface SliderProps extends Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange'> {
-  min: number
-  max: number
+  min: number;
+  max: number;
   /** Step for arrows, steppers and snapping (default 1). */
-  step?: number
+  step?: number;
   /** PageUp / PageDown step (default max(step, range / 10)). */
-  pageStep?: number
+  pageStep?: number;
   /** Value (controlled). */
-  value?: number
+  value?: number;
   /** Initial value (uncontrolled; default `min`). */
-  defaultValue?: number
-  onValueChange?(value: number): void
+  defaultValue?: number;
+  onValueChange?(value: number): void;
   /** Show the − / + stepper circles (default true). */
-  showSteppers?: boolean
+  showSteppers?: boolean;
   /** Show the min / max numbers (default true). */
-  showBounds?: boolean
+  showBounds?: boolean;
   /** Formats the min / max numbers (default: the number). */
-  formatBound?(value: number): ReactNode
+  formatBound?(value: number): ReactNode;
   /** `aria-valuetext` for the thumb. */
-  getValueText?(value: number): string
-  disabled?: boolean
+  getValueText?(value: number): string;
+  disabled?: boolean;
   /** Total width in design units (default 581), at every size. */
-  width?: number
+  width?: number;
   /**
    * Steppers, thumb, track, number slots and the press outset scale with the web size scale
    * (sm = md × 46/57, lg = md × 69/57); the min / max numbers use `fontSize.control.{sm,md,lg}`
    * (21 / 26 / 30). Default `md`.
    */
-  size?: SliderSize
+  size?: SliderSize;
   /** Accessible names of the steppers. */
-  decrementLabel?: string
-  incrementLabel?: string
+  decrementLabel?: string;
+  incrementLabel?: string;
 }
 
-const clamp = (n: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, n))
+const clamp = (n: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, n));
 
 /** Round to the step grid anchored at `min`, without float noise (2.5 * 3 = 7.5, not 7.500000001). */
 function snap(n: number, min: number, step: number) {
-  const decimals = (String(step).split('.')[1] ?? '').length
-  const snapped = min + Math.round((n - min) / step) * step
-  return Number(snapped.toFixed(decimals))
+  const decimals = (String(step).split('.')[1] ?? '').length;
+  const snapped = min + Math.round((n - min) / step) * step;
+  return Number(snapped.toFixed(decimals));
 }
 
 interface StepperProps {
-  kind: 'dec' | 'inc'
-  label: string
+  kind: 'dec' | 'inc';
+  label: string;
   /** The whole slider is disabled: native `disabled` (not focusable). */
-  disabled: boolean
+  disabled: boolean;
   /** The value sits at this stepper's bound: `aria-disabled`, still focusable, click is a no-op. */
-  atBound: boolean
-  onStep(): void
+  atBound: boolean;
+  onStep(): void;
 }
 
 function Stepper({ kind, label, disabled, atBound, onStep }: StepperProps) {
-  const inactive = disabled || atBound
-  const flash = usePressFlash<HTMLButtonElement>({ disabled: inactive })
+  const inactive = disabled || atBound;
+  const flash = usePressFlash<HTMLButtonElement>({ disabled: inactive });
   return (
     <button
       type="button"
@@ -72,13 +72,19 @@ function Stepper({ kind, label, disabled, atBound, onStep }: StepperProps) {
       // At a bound the button stays focusable (native `disabled` would drop keyboard focus to
       // <body> under a user pressing Enter / Space on it), so it is only aria-disabled.
       aria-disabled={!disabled && atBound ? true : undefined}
-      className={cx('zzz-slider__stepper', `zzz-slider__stepper--${kind}`, 'zzz-dots', 'zzz-pressable', 'zzz-focusable')}
+      className={cx(
+        'zzz-slider__stepper',
+        `zzz-slider__stepper--${kind}`,
+        'zzz-dots',
+        'zzz-pressable',
+        'zzz-focusable'
+      )}
       {...flash}
       onClick={inactive ? undefined : onStep}
     >
       {kind === 'dec' ? <MinusIcon className="zzz-slider__glyph" /> : <PlusIcon className="zzz-slider__glyph" />}
     </button>
-  )
+  );
 }
 
 /**
@@ -116,80 +122,80 @@ export function Slider({
   'aria-describedby': ariaDescribedBy,
   ...rest
 }: SliderProps) {
-  const hi = Math.max(min, max)
-  const [rawValue, setRawValue] = useControllableState(valueProp, defaultValue ?? min, onValueChange)
-  const value = clamp(rawValue, min, hi)
-  const trackRef = useRef<HTMLDivElement>(null)
-  const dragging = useRef<number | null>(null)
+  const hi = Math.max(min, max);
+  const [rawValue, setRawValue] = useControllableState(valueProp, defaultValue ?? min, onValueChange);
+  const value = clamp(rawValue, min, hi);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const dragging = useRef<number | null>(null);
 
   const commit = (next: number) => {
-    if (disabled) return
-    setRawValue(clamp(snap(next, min, step), min, hi))
-  }
+    if (disabled) return;
+    setRawValue(clamp(snap(next, min, step), min, hi));
+  };
 
-  const range = hi - min
-  const fraction = range > 0 ? (value - min) / range : 1
-  const bigStep = pageStep ?? Math.max(step, range / 10)
+  const range = hi - min;
+  const fraction = range > 0 ? (value - min) / range : 1;
+  const bigStep = pageStep ?? Math.max(step, range / 10);
 
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-    if (disabled) return
-    let next: number | null = null
+    if (disabled) return;
+    let next: number | null = null;
     switch (event.key) {
       case 'ArrowRight':
       case 'ArrowUp':
-        next = value + step
-        break
+        next = value + step;
+        break;
       case 'ArrowLeft':
       case 'ArrowDown':
-        next = value - step
-        break
+        next = value - step;
+        break;
       case 'PageUp':
-        next = value + bigStep
-        break
+        next = value + bigStep;
+        break;
       case 'PageDown':
-        next = value - bigStep
-        break
+        next = value - bigStep;
+        break;
       case 'Home':
-        next = min
-        break
+        next = min;
+        break;
       case 'End':
-        next = hi
-        break
+        next = hi;
+        break;
     }
-    if (next === null) return
-    event.preventDefault()
-    commit(next)
-  }
+    if (next === null) return;
+    event.preventDefault();
+    commit(next);
+  };
 
   const valueAt = (clientX: number) => {
-    const rect = trackRef.current?.getBoundingClientRect()
-    if (!rect || rect.width <= 0) return value
-    return min + clamp((clientX - rect.left) / rect.width, 0, 1) * range
-  }
+    const rect = trackRef.current?.getBoundingClientRect();
+    if (!rect || rect.width <= 0) return value;
+    return min + clamp((clientX - rect.left) / rect.width, 0, 1) * range;
+  };
 
   const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
-    if (disabled || event.button !== 0 || range <= 0) return
-    dragging.current = event.pointerId
-    event.currentTarget.setPointerCapture?.(event.pointerId)
-    event.currentTarget.querySelector<HTMLElement>('[role="slider"]')?.focus({ preventScroll: true })
-    event.preventDefault()
-    commit(valueAt(event.clientX))
-  }
+    if (disabled || event.button !== 0 || range <= 0) return;
+    dragging.current = event.pointerId;
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+    event.currentTarget.querySelector<HTMLElement>('[role="slider"]')?.focus({ preventScroll: true });
+    event.preventDefault();
+    commit(valueAt(event.clientX));
+  };
   const onPointerMove = (event: PointerEvent<HTMLDivElement>) => {
-    if (dragging.current !== event.pointerId) return
-    commit(valueAt(event.clientX))
-  }
+    if (dragging.current !== event.pointerId) return;
+    commit(valueAt(event.clientX));
+  };
   const endDrag = (event: PointerEvent<HTMLDivElement>) => {
-    if (dragging.current !== event.pointerId) return
-    dragging.current = null
-    event.currentTarget.releasePointerCapture?.(event.pointerId)
-  }
+    if (dragging.current !== event.pointerId) return;
+    dragging.current = null;
+    event.currentTarget.releasePointerCapture?.(event.pointerId);
+  };
 
   const rootStyle = {
     '--zzz-slider-fraction': String(fraction),
     ...(width != null ? { '--zzz-slider-width': `calc(${width} * var(--zzz-px))` } : null),
     ...style,
-  } as CSSProperties
+  } as CSSProperties;
 
   return (
     <div
@@ -198,7 +204,7 @@ export function Slider({
         `zzz-slider--${size}`,
         !showSteppers && 'zzz-slider--no-steppers',
         !showBounds && 'zzz-slider--no-bounds',
-        className,
+        className
       )}
       style={rootStyle}
       data-size={size}
@@ -206,7 +212,13 @@ export function Slider({
       {...rest}
     >
       {showSteppers ? (
-        <Stepper kind="dec" label={decrementLabel} disabled={disabled} atBound={value <= min} onStep={() => commit(value - step)} />
+        <Stepper
+          kind="dec"
+          label={decrementLabel}
+          disabled={disabled}
+          atBound={value <= min}
+          onStep={() => commit(value - step)}
+        />
       ) : null}
       {showBounds ? (
         <span className="zzz-slider__bound zzz-slider__bound--min" aria-hidden="true">
@@ -243,8 +255,14 @@ export function Slider({
         </span>
       ) : null}
       {showSteppers ? (
-        <Stepper kind="inc" label={incrementLabel} disabled={disabled} atBound={value >= hi} onStep={() => commit(value + step)} />
+        <Stepper
+          kind="inc"
+          label={incrementLabel}
+          disabled={disabled}
+          atBound={value >= hi}
+          onStep={() => commit(value + step)}
+        />
       ) : null}
     </div>
-  )
+  );
 }

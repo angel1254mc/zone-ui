@@ -1,55 +1,60 @@
-import { useRef } from 'react'
-import type { ComponentPropsWithRef, CSSProperties, ReactNode } from 'react'
-import { cx } from '../../utils'
-import { useTabList } from './useTabList'
-import type { TabListItem } from './useTabList'
-import { CAP_PATH, CAP_WIDTH, FILL_HEIGHT } from './geometry'
-import './SegmentedTabs.css'
+import { useRef } from 'react';
+import type { ComponentPropsWithRef, CSSProperties, ReactNode } from 'react';
+import { cx } from '../../utils';
+import { useTabList } from './useTabList';
+import type { TabListItem } from './useTabList';
+import { CAP_PATH, CAP_WIDTH, FILL_HEIGHT } from './geometry';
+import './SegmentedTabs.css';
 
 export interface SegmentedTabsItem extends TabListItem {
-  value: string
-  label: ReactNode
-  disabled?: boolean
+  value: string;
+  label: ReactNode;
+  disabled?: boolean;
   /** Accessible name when `label` is not plain text. */
-  'aria-label'?: string
+  'aria-label'?: string;
 }
 
-export type SegmentedTabsSurface = 'black' | 'mesh'
+export type SegmentedTabsSurface = 'black' | 'mesh';
 
 /** Control size: sm / md / lg ≈ 32 / 40 / 48 CSS px controls at the default scale (md = the base geometry). */
-export type SegmentedTabsSize = 'sm' | 'md' | 'lg'
+export type SegmentedTabsSize = 'sm' | 'md' | 'lg';
 
-export interface SegmentedTabsProps
-  extends Omit<ComponentPropsWithRef<'div'>, 'children' | 'defaultValue' | 'onChange'> {
-  items: readonly SegmentedTabsItem[]
+export interface SegmentedTabsProps extends Omit<
+  ComponentPropsWithRef<'div'>,
+  'children' | 'defaultValue' | 'onChange'
+> {
+  items: readonly SegmentedTabsItem[];
   /** Selected value (controlled). */
-  value?: string
+  value?: string;
   /** Initial value (uncontrolled). Default: the first enabled item. */
-  defaultValue?: string
-  onValueChange?: (value: string) => void
+  defaultValue?: string;
+  onValueChange?: (value: string) => void;
   /**
    * `black` = pure #000 track (e.g. in a top bar);
    * `mesh` = #090909 dot mesh (e.g. in a bottom bar).
    */
-  surface?: SegmentedTabsSurface
+  surface?: SegmentedTabsSurface;
   /**
    * Control size (default `md`). Every length (height 59, active fill, slant caps, ring, pop) scales
    * by the control-size ratio (sm 46/57, lg 69/57); the italic label uses `fontSize.control.{size}`.
    */
-  size?: SegmentedTabsSize
+  size?: SegmentedTabsSize;
   /**
    * Outer width in design units. Default: 703 (`black`) / 786 (`mesh`), scaled to
    * the item count (234.33 / 262 per tab) and to `size`. An explicit number is literal (not
    * size-scaled). `'fill'` = 100% of the parent.
    */
-  width?: number | 'fill'
+  width?: number | 'fill';
   /** Force the pressed look on this (inactive) tab: grey label + inflated indicator. Docs / visual tests. */
-  pressed?: string
+  pressed?: string;
 }
 
-const PER_TAB: Record<SegmentedTabsSurface, number> = { black: 703 / 3, mesh: 786 / 3 }
+const PER_TAB: Record<SegmentedTabsSurface, number> = {
+  black: 703 / 3,
+  mesh: 786 / 3,
+};
 
-const round = (n: number) => Math.round(n * 100) / 100
+const round = (n: number) => Math.round(n * 100) / 100;
 
 /** Slanted end of the active fill (see geometry.ts); `flip` = the left edge. */
 function Cap({ flip }: { flip?: boolean }) {
@@ -64,7 +69,7 @@ function Cap({ flip }: { flip?: boolean }) {
     >
       <path d={CAP_PATH} />
     </svg>
-  )
+  );
 }
 
 /**
@@ -94,29 +99,29 @@ export function SegmentedTabs({
     onValueChange,
     id,
     pressed,
-  })
+  });
   // Pop only after the selection changed (never on mount); once set, the attribute stays and the
   // key={value} remount below restarts the animation on every later switch.
-  const firstValue = useRef(value)
-  const hasSwitched = useRef(false)
-  if (value !== firstValue.current) hasSwitched.current = true
+  const firstValue = useRef(value);
+  const hasSwitched = useRef(false);
+  if (value !== firstValue.current) hasSwitched.current = true;
 
-  const n = items.length
-  const shape = selectedIndex <= 0 ? 'start' : selectedIndex >= n - 1 ? 'end' : 'middle'
-  const seg = n === 1 ? 'only' : shape
+  const n = items.length;
+  const shape = selectedIndex <= 0 ? 'start' : selectedIndex >= n - 1 ? 'end' : 'middle';
+  const seg = n === 1 ? 'only' : shape;
   const cssWidth =
     width === 'fill'
       ? '100%'
       : typeof width === 'number'
         ? `calc(${round(width)} * var(--zzz-px))`
-        : `calc(${round(PER_TAB[surface] * n)} * var(--zzz-seg-u))`
+        : `calc(${round(PER_TAB[surface] * n)} * var(--zzz-seg-u))`;
 
   const rootStyle = {
     '--zzz-seg-width': cssWidth,
     '--zzz-seg-count': n,
     '--zzz-seg-index': Math.max(0, selectedIndex),
     ...style,
-  } as CSSProperties
+  } as CSSProperties;
 
   return (
     <div
@@ -148,7 +153,7 @@ export function SegmentedTabs({
       </div>
       <div className="zzz-segmented-tabs__row">
         {items.map((item, index) => {
-          const { 'aria-label': ariaLabel } = item
+          const { 'aria-label': ariaLabel } = item;
           return (
             <button
               key={item.value}
@@ -159,9 +164,9 @@ export function SegmentedTabs({
             >
               <span className="zzz-segmented-tabs__label zzz-italic">{item.label}</span>
             </button>
-          )
+          );
         })}
       </div>
     </div>
-  )
+  );
 }

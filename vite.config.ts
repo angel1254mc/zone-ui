@@ -1,8 +1,8 @@
 /// <reference types="vitest/config" />
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import { resolve } from 'node:path'
-import { copyFileSync, mkdirSync } from 'node:fs'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { resolve } from 'node:path';
+import { copyFileSync, mkdirSync } from 'node:fs';
 
 export default defineConfig({
   plugins: [
@@ -10,14 +10,24 @@ export default defineConfig({
     {
       name: 'zzz-copy-tokens',
       closeBundle() {
-        mkdirSync(resolve(import.meta.dirname, 'dist'), { recursive: true })
-        copyFileSync(resolve(import.meta.dirname, 'src/styles/tokens.css'), resolve(import.meta.dirname, 'dist/tokens.css'))
-        copyFileSync(resolve(import.meta.dirname, 'src/styles/fonts.css'), resolve(import.meta.dirname, 'dist/fonts.css'))
+        mkdirSync(resolve(import.meta.dirname, 'dist'), {
+          recursive: true,
+        });
+        copyFileSync(
+          resolve(import.meta.dirname, 'src/styles/tokens.css'),
+          resolve(import.meta.dirname, 'dist/tokens.css')
+        );
+        copyFileSync(
+          resolve(import.meta.dirname, 'src/styles/fonts.css'),
+          resolve(import.meta.dirname, 'dist/fonts.css')
+        );
       },
     },
   ],
   resolve: {
-    alias: { '@angel1254mc/zone-ui': resolve(import.meta.dirname, 'src/index.ts') },
+    alias: {
+      '@angel1254mc/zone-ui': resolve(import.meta.dirname, 'src/index.ts'),
+    },
   },
   build: {
     lib: {
@@ -49,4 +59,4 @@ export default defineConfig({
     // Full example pages render hundreds of components in jsdom; give them room under parallel load.
     testTimeout: 30000,
   },
-})
+});

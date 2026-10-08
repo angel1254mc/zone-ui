@@ -1,25 +1,38 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import type { CSSProperties, ReactNode } from 'react'
-import { useState } from 'react'
-import { FireIcon, LockIcon, StarIcon } from '../../icons'
-import { AgentImage, WEngineImage } from '../../../examples/art'
-import { ChoiceButton } from './ChoiceButton'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { CSSProperties, ReactNode } from 'react';
+import { useState } from 'react';
+import { FireIcon, LockIcon, StarIcon } from '../../icons';
+import { AgentImage, WEngineImage } from '../../../examples/art';
+import { ChoiceButton } from './ChoiceButton';
 
 /** calc(N * var(--zzz-px)) */
-const gpx = (n: number) => `calc(${n} * var(--zzz-px))`
-const caption: CSSProperties = { font: '600 13px/1.3 system-ui, sans-serif', color: '#9a9a9a' }
+const gpx = (n: number) => `calc(${n} * var(--zzz-px))`;
+const caption: CSSProperties = {
+  font: '600 13px/1.3 system-ui, sans-serif',
+  color: '#9a9a9a',
+};
 
 const Stage = ({ children, width = 560, style }: { children: ReactNode; width?: number; style?: CSSProperties }) => (
-  <div style={{ background: '#000', padding: gpx(28), width: gpx(width + 56), display: 'flex', flexDirection: 'column', gap: gpx(24), ...style }}>
+  <div
+    style={{
+      background: '#000',
+      padding: gpx(28),
+      width: gpx(width + 56),
+      display: 'flex',
+      flexDirection: 'column',
+      gap: gpx(24),
+      ...style,
+    }}
+  >
     {children}
   </div>
-)
+);
 const Labelled = ({ label, children }: { label: string; children: ReactNode }) => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: gpx(8) }}>
     <span style={caption}>{label}</span>
     {children}
   </div>
-)
+);
 
 const meta = {
   title: 'Forms/ChoiceButton',
@@ -28,30 +41,27 @@ const meta = {
   args: { children: 'Ballet Twins Road', badge: 'A' },
   argTypes: {
     size: { control: 'inline-radio', options: ['sm', 'md', 'lg'] },
-    result: { control: 'select', options: [undefined, 'correct', 'incorrect', 'revealed'] },
+    result: {
+      control: 'select',
+      options: [undefined, 'correct', 'incorrect', 'revealed'],
+    },
     correctTone: { control: 'inline-radio', options: ['green', 'accent'] },
     mediaLayout: { control: 'inline-radio', options: ['inline', 'cover'] },
   },
   parameters: {
     docs: {
       description: {
-        component:
-          'A large selectable option on the dark pill material (lit 5 px ring, dot mesh, black keyline) with an optional badge cap ' +
-          '(an icon cap: letter, number or icon), a heavy 10°-sheared label that wraps, an optional description and media slot. ' +
-          'Selected = pulsing accent ring + accent cap; pressed = the shared accent-fill recipe; results `correct` / `incorrect` / `revealed` for quizzes, ' +
-          'validation or "this was the answer" reveals. The visual state is mirrored on `data-state`. Use it alone as a toggle (`aria-pressed`) or through ChoiceGroup. ' +
-          '**Sizes** `size="sm" | "md" | "lg"` (default `md`) follow the web control scale: min-height 63 / 78 / 94, badge cap 45 / 56 / 68 design units, ' +
-          'label `fontSize.control.{sm,md,lg}` (21 / 26 / 30), description label / body / bodyLg; ring, radius, padding, media and press outset scale with it.',
+        component: 'A large selectable option.',
       },
     },
   },
   decorators: [(S) => <Stage>{S()}</Stage>],
-} satisfies Meta<typeof ChoiceButton>
+} satisfies Meta<typeof ChoiceButton>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Playground: Story = {}
+export const Playground: Story = {};
 
 /** Every state side by side (accent phase pinned for a stable render). */
 export const States: Story = {
@@ -101,7 +111,7 @@ export const States: Story = {
       </Labelled>
     </>
   ),
-}
+};
 
 /** sm / md / lg: idle, selected and a result, each with a description (pinned accent phase). */
 export const Sizes: Story = {
@@ -109,8 +119,17 @@ export const Sizes: Story = {
   render: () => (
     <>
       {(['sm', 'md', 'lg'] as const).map((size) => (
-        <Labelled key={size} label={`${size} — min-height ${{ sm: 63, md: 78, lg: 94 }[size]}, cap ${{ sm: 45, md: 56, lg: 68 }[size]}, label ${{ sm: 21, md: 26, lg: 30 }[size]}`}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: gpx(16) }}>
+        <Labelled
+          key={size}
+          label={`${size} — min-height ${{ sm: 63, md: 78, lg: 94 }[size]}, cap ${{ sm: 45, md: 56, lg: 68 }[size]}, label ${{ sm: 21, md: 26, lg: 30 }[size]}`}
+        >
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: gpx(16),
+            }}
+          >
             <ChoiceButton size={size} badge="A">
               Ballet Twins Road
             </ChoiceButton>
@@ -125,7 +144,7 @@ export const Sizes: Story = {
       ))}
     </>
   ),
-}
+};
 
 /** Labels wrap to 2–3 lines; descriptions are upright and muted. */
 export const LongLabelAndDescription: Story = {
@@ -135,12 +154,16 @@ export const LongLabelAndDescription: Story = {
       <ChoiceButton badge="1" description="Ads, priority support and 2 extra save slots. Cancel any time.">
         Proxy Plus
       </ChoiceButton>
-      <ChoiceButton badge={<StarIcon />} description="Everything in Plus, for the whole squad (up to 6 accounts)." selected>
+      <ChoiceButton
+        badge={<StarIcon />}
+        description="Everything in Plus, for the whole squad (up to 6 accounts)."
+        selected
+      >
         Squad bundle
       </ChoiceButton>
     </>
   ),
-}
+};
 
 /** Badges can be letters, numbers or icons; or omitted entirely. */
 export const Badges: Story = {
@@ -155,7 +178,7 @@ export const Badges: Story = {
       <ChoiceButton>No badge</ChoiceButton>
     </>
   ),
-}
+};
 
 /** `media` takes any node: `<img>`, `<picture>`, SVG. `inline` is a 64 px thumbnail; `cover` a wide image on top. */
 export const Media: Story = {
@@ -164,7 +187,13 @@ export const Media: Story = {
       <ChoiceButton badge="A" media={<AgentImage seed={3} crop="circle" />} description="Inline media (avatar)">
         Pick this agent
       </ChoiceButton>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: gpx(22) }}>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: gpx(22),
+        }}
+      >
         <ChoiceButton badge="A" mediaLayout="cover" media={<WEngineImage seed={5} />}>
           Option with cover art
         </ChoiceButton>
@@ -174,16 +203,21 @@ export const Media: Story = {
       </div>
     </>
   ),
-}
+};
 
 /** Standalone toggle: `selected` + `aria-pressed`, driven by your own state. */
 export const StandaloneToggle: Story = {
   render: function Render() {
-    const [on, setOn] = useState(false)
+    const [on, setOn] = useState(false);
     return (
-      <ChoiceButton badge={<StarIcon />} selected={on} onClick={() => setOn((v) => !v)} description="Click to toggle (aria-pressed)">
+      <ChoiceButton
+        badge={<StarIcon />}
+        selected={on}
+        onClick={() => setOn((v) => !v)}
+        description="Click to toggle (aria-pressed)"
+      >
         Subscribe to daily reminders
       </ChoiceButton>
-    )
+    );
   },
-}
+};

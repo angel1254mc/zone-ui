@@ -33,26 +33,42 @@
   --zzz-event-cta-fade: linear-gradient(90deg, rgb(0 0 0 / 0.45), #000 38%, #000 62%, rgb(0 0 0 / 0.45));
   -webkit-mask-image: var(--zzz-event-cta-tile), var(--zzz-event-cta-fade);
   mask-image: var(--zzz-event-cta-tile), var(--zzz-event-cta-fade);
-  -webkit-mask-size: var(--zzz-size-event-cta-chevron-period) 100%, 100% 100%;
-  mask-size: var(--zzz-size-event-cta-chevron-period) 100%, 100% 100%;
+  -webkit-mask-size:
+    var(--zzz-size-event-cta-chevron-period) 100%,
+    100% 100%;
+  mask-size:
+    var(--zzz-size-event-cta-chevron-period) 100%,
+    100% 100%;
   -webkit-mask-repeat: repeat-x, no-repeat;
   mask-repeat: repeat-x, no-repeat;
   -webkit-mask-composite: source-in;
   mask-composite: intersect;
-  -webkit-mask-position: 0 0, 0 0;
-  mask-position: 0 0, 0 0;
+  -webkit-mask-position:
+    0 0,
+    0 0;
+  mask-position:
+    0 0,
+    0 0;
   animation: zzz-event-cta-drift var(--zzz-motion-duration-cta-chevron-drift) linear infinite;
   pointer-events: none;
 }
 
 @keyframes zzz-event-cta-drift {
   from {
-    -webkit-mask-position: 0 0, 0 0;
-    mask-position: 0 0, 0 0;
+    -webkit-mask-position:
+      0 0,
+      0 0;
+    mask-position:
+      0 0,
+      0 0;
   }
   to {
-    -webkit-mask-position: var(--zzz-size-event-cta-chevron-period) 0, 0 0;
-    mask-position: var(--zzz-size-event-cta-chevron-period) 0, 0 0;
+    -webkit-mask-position:
+      var(--zzz-size-event-cta-chevron-period) 0,
+      0 0;
+    mask-position:
+      var(--zzz-size-event-cta-chevron-period) 0,
+      0 0;
   }
 }
 

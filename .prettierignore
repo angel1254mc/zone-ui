@@ -1,0 +1,9 @@
+# Lockfile
+package-lock.json
+
+# Generated (re-running the script would undo any formatting)
+src/index.ts
+src/styles/tokens.css
+src/styles/tokens.ts
+examples/art/art-manifest.json
+examples/pages/Trivia/facts.json

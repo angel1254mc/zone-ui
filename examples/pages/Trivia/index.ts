@@ -1,5 +1,5 @@
-export { TriviaPage, MOCK_DISTRIBUTION } from './TriviaPage'
-export type { TriviaPageProps } from './TriviaPage'
+export { TriviaPage, MOCK_DISTRIBUTION } from './TriviaPage';
+export type { TriviaPageProps } from './TriviaPage';
 export {
   generateDailySet,
   rankFor,
@@ -21,7 +21,7 @@ export {
   TIMED_OUT,
   STORAGE_KEY,
   EMPTY_RECORD,
-} from './questions'
+} from './questions';
 export type {
   DailySet,
   TriviaQuestion,
@@ -32,4 +32,4 @@ export type {
   TriviaAnswer,
   TriviaRank,
   QuestionKind,
-} from './questions'
+} from './questions';

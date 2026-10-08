@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useId, useRef, useState, useSyncExternalStore } from 'react'
+import { useCallback, useEffect, useId, useRef, useState, useSyncExternalStore } from 'react';
 import {
   Button,
   HatchBackground,
@@ -12,25 +12,25 @@ import {
   Text,
   ZZZ_DEFAULT_SCALE,
   ZzzTheme,
-} from '@angel1254mc/zone-ui'
-import { GROUPS, ROUTES, findRoute, type DemoNav, type DemoRoute } from './routes'
+} from '@angel1254mc/zone-ui';
+import { GROUPS, ROUTES, findRoute, type DemoNav, type DemoRoute } from './routes';
 
 /* ------------------------------------------------------------------ hash router */
 
 const subscribeHash = (onChange: () => void) => {
-  window.addEventListener('hashchange', onChange)
-  return () => window.removeEventListener('hashchange', onChange)
-}
-const readHash = () => window.location.hash
+  window.addEventListener('hashchange', onChange);
+  return () => window.removeEventListener('hashchange', onChange);
+};
+const readHash = () => window.location.hash;
 
 /**
  * The slug from a route hash `#/<slug>` (`''` = the launcher, also for an empty hash or `#`). Any other hash
  * (`#ikd-news`, `#download`, ...) is an in-page anchor, not a route: returns `null`.
  */
 export function parseSlug(hash: string): string | null {
-  if (hash === '' || hash === '#') return ''
-  if (!hash.startsWith('#/')) return null
-  return hash.slice(2).split(/[/?]/)[0] ?? ''
+  if (hash === '' || hash === '#') return '';
+  if (!hash.startsWith('#/')) return null;
+  return hash.slice(2).split(/[/?]/)[0] ?? '';
 }
 
 /**
@@ -38,46 +38,46 @@ export function parseSlug(hash: string): string | null {
  * and the browser's native anchor scrolling works (pages use plain `#id` links for their own nav).
  */
 export function useHashSlug(): string {
-  const hash = useSyncExternalStore(subscribeHash, readHash, () => '')
-  const last = useRef('')
-  const parsed = parseSlug(hash)
-  if (parsed !== null) last.current = parsed
-  return last.current
+  const hash = useSyncExternalStore(subscribeHash, readHash, () => '');
+  const last = useRef('');
+  const parsed = parseSlug(hash);
+  if (parsed !== null) last.current = parsed;
+  return last.current;
 }
 
-export const hrefFor = (slug: string) => (slug ? `#/${slug}` : '#/')
+export const hrefFor = (slug: string) => (slug ? `#/${slug}` : '#/');
 
 const navigate = (slug: string) => {
-  window.location.hash = hrefFor(slug)
-}
+  window.location.hash = hrefFor(slug);
+};
 
 /* ------------------------------------------------------------------ persisted settings */
 
 /** Density presets, as in the Storybook Scale tool: 0.7 = the web default, 1 = game density. */
-export const SCALES = ['0.5', '0.7', '1', '1.333'] as const
-type Scale = (typeof SCALES)[number]
+export const SCALES = ['0.5', '0.7', '1', '1.333'] as const;
+type Scale = (typeof SCALES)[number];
 
 function usePersisted<T extends string>(key: string, initial: T, valid: readonly T[]): [T, (v: T) => void] {
   const [value, setValue] = useState<T>(() => {
     try {
-      const stored = window.localStorage.getItem(key) as T | null
-      return stored && valid.includes(stored) ? stored : initial
+      const stored = window.localStorage.getItem(key) as T | null;
+      return stored && valid.includes(stored) ? stored : initial;
     } catch {
-      return initial
+      return initial;
     }
-  })
+  });
   const set = useCallback(
     (v: T) => {
-      setValue(v)
+      setValue(v);
       try {
-        window.localStorage.setItem(key, v)
+        window.localStorage.setItem(key, v);
       } catch {
         /* storage unavailable: keep the in-memory value */
       }
     },
-    [key],
-  )
-  return [value, set]
+    [key]
+  );
+  return [value, set];
 }
 
 /* ------------------------------------------------------------------ launcher */
@@ -94,13 +94,13 @@ function Launcher() {
           Example pages
         </Text>
         <Text as="p" role="bodyLg" tone="secondary" className="zzz-demo-launcher__lede">
-          Example pages built with Zone, a general-purpose Zenless Zone Zero–inspired UI kit for game-flavoured
-          web apps and sites. Pick a page; the Home pill brings you back here.
+          Example pages built with Zone, a general-purpose Zenless Zone Zero–inspired UI kit for game-flavoured web apps
+          and sites. Pick a page; the Home pill brings you back here.
         </Text>
       </header>
       {GROUPS.map((group) => {
-        const routes = ROUTES.filter((r) => r.group === group.id)
-        if (routes.length === 0) return null
+        const routes = ROUTES.filter((r) => r.group === group.id);
+        if (routes.length === 0) return null;
         return (
           <section key={group.id} className="zzz-demo-launcher__group" aria-labelledby={`zzz-demo-group-${group.id}`}>
             <SectionLabel as="h2" id={`zzz-demo-group-${group.id}`}>
@@ -122,7 +122,7 @@ function Launcher() {
               ))}
             </ul>
           </section>
-        )
+        );
       })}
       <section className="zzz-demo-launcher__group" aria-labelledby="zzz-demo-group-gallery">
         <SectionLabel as="h2" id="zzz-demo-group-gallery">
@@ -134,13 +134,13 @@ function Launcher() {
         </Text>
       </section>
     </main>
-  )
+  );
 }
 
 /* ------------------------------------------------------------------ page frames */
 
 function PageView({ route, nav }: { route: DemoRoute; nav: DemoNav }) {
-  const page = route.render(nav)
+  const page = route.render(nav);
   return (
     // tabIndex -1: the programmatic focus target after a route change (see App), so keyboard and
     // screen-reader users land on the new page instead of <body>.
@@ -154,7 +154,7 @@ function PageView({ route, nav }: { route: DemoRoute; nav: DemoNav }) {
     >
       {route.frame === 'stage' ? <Stage>{page}</Stage> : page}
     </div>
-  )
+  );
 }
 
 /* ------------------------------------------------------------------ corner chrome */
@@ -165,34 +165,40 @@ function Chrome({
   atHome,
   dock,
 }: {
-  scale: Scale
-  onScale: (s: Scale) => void
-  atHome: boolean
+  scale: Scale;
+  onScale: (s: Scale) => void;
+  atHome: boolean;
   /** 'top' on full-screen (Stage) pages: the top-centre spot sits in the letterbox when there is one, else over
    * the top bar's free centre. 'bottom' on the launcher and the scrolling web pages. */
-  dock: 'top' | 'bottom'
+  dock: 'top' | 'bottom';
 }) {
-  const [open, setOpen] = useState(false)
-  const panelId = useId()
-  const toggleRef = useRef<HTMLButtonElement>(null)
+  const [open, setOpen] = useState(false);
+  const panelId = useId();
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
   // Escape closes the disclosure; focus goes back to its button when it was inside the panel.
   useEffect(() => {
-    if (!open) return
+    if (!open) return;
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key !== 'Escape' || event.defaultPrevented) return
-      const panel = document.getElementById(panelId)
-      const focusInside = panel?.contains(document.activeElement) ?? false
-      setOpen(false)
-      if (focusInside) toggleRef.current?.focus()
-    }
-    document.addEventListener('keydown', onKeyDown)
-    return () => document.removeEventListener('keydown', onKeyDown)
-  }, [open, panelId])
+      if (event.key !== 'Escape' || event.defaultPrevented) return;
+      const panel = document.getElementById(panelId);
+      const focusInside = panel?.contains(document.activeElement) ?? false;
+      setOpen(false);
+      if (focusInside) toggleRef.current?.focus();
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [open, panelId]);
 
   return (
     // Pinned to the web default so the controls keep their size while the Scale switch previews other densities.
-    <ZzzTheme scale={ZZZ_DEFAULT_SCALE} className="zzz-demo-chrome" data-dock={dock} role="region" aria-label="Demo controls">
+    <ZzzTheme
+      scale={ZZZ_DEFAULT_SCALE}
+      className="zzz-demo-chrome"
+      data-dock={dock}
+      role="region"
+      aria-label="Demo controls"
+    >
       {open && (
         <div className="zzz-demo-chrome__panel zzz-mat-panel" id={panelId}>
           <div className="zzz-demo-chrome__row">
@@ -201,7 +207,10 @@ function Chrome({
             </Text>
             <SegmentedTabs
               aria-labelledby="zzz-demo-scale-label"
-              items={SCALES.map((s) => ({ value: s, label: `${s}x` }))}
+              items={SCALES.map((s) => ({
+                value: s,
+                label: `${s}x`,
+              }))}
               value={scale}
               onValueChange={(v) => onScale(v as Scale)}
               width={480}
@@ -229,58 +238,63 @@ function Chrome({
         />
       </div>
     </ZzzTheme>
-  )
+  );
 }
 
 /* ------------------------------------------------------------------ app */
 
 export function App() {
-  const slug = useHashSlug()
-  const route = findRoute(slug)
-  const [scale, setScale] = usePersisted<Scale>('zzz-demo:scale', '0.7', SCALES)
+  const slug = useHashSlug();
+  const route = findRoute(slug);
+  const [scale, setScale] = usePersisted<Scale>('zzz-demo:scale', '0.7', SCALES);
 
   // The demo once persisted an art mode ('zzz-demo:art'); art is now always real game art by URL. Drop the key.
   useEffect(() => {
     try {
-      window.localStorage.removeItem('zzz-demo:art')
+      window.localStorage.removeItem('zzz-demo:art');
     } catch {
       /* storage unavailable */
     }
-  }, [])
+  }, []);
 
   // The slug we came from: on returning Home its launcher tile gets focus back (and is scrolled into view).
-  const prevSlug = useRef<string | null>(null)
+  const prevSlug = useRef<string | null>(null);
 
   useEffect(() => {
-    document.title = route ? `${route.title} · Zone` : 'Zone Examples'
-    const from = prevSlug.current
-    prevSlug.current = route ? route.slug : ''
-    if (from === null) return // first render: leave focus and scroll to the browser
+    document.title = route ? `${route.title} · Zone` : 'Zone Examples';
+    const from = prevSlug.current;
+    prevSlug.current = route ? route.slug : '';
+    if (from === null) return; // first render: leave focus and scroll to the browser
 
     if (route) {
       // A new page: the launcher's scroll position does not apply; focus the page frame so focus is not
       // dropped on <body> when the activated tile unmounts.
-      document.documentElement.scrollTop = 0
-      document.querySelector<HTMLElement>(`.zzz-demo-page[data-slug="${route.slug}"]`)?.focus({ preventScroll: true })
-      return
+      document.documentElement.scrollTop = 0;
+      document.querySelector<HTMLElement>(`.zzz-demo-page[data-slug="${route.slug}"]`)?.focus({ preventScroll: true });
+      return;
     }
     // Back on the launcher: restore focus to the tile that was activated, else the launcher heading region.
-    const tile = from ? document.querySelector<HTMLElement>(`.zzz-demo-launcher a[href="${hrefFor(from)}"]`) : null
+    const tile = from ? document.querySelector<HTMLElement>(`.zzz-demo-launcher a[href="${hrefFor(from)}"]`) : null;
     if (tile) {
-      tile.focus({ preventScroll: true })
-      tile.scrollIntoView?.({ block: 'center' })
+      tile.focus({ preventScroll: true });
+      tile.scrollIntoView?.({ block: 'center' });
     } else {
-      document.documentElement.scrollTop = 0
+      document.documentElement.scrollTop = 0;
     }
-  }, [route])
+  }, [route]);
 
-  const nav: DemoNav = { go: navigate }
+  const nav: DemoNav = { go: navigate };
 
   return (
     <ZzzTheme scale={Number(scale)} className="zzz-demo-root">
       {/* keyed so every visit remounts the page fresh (entrance animations, initial state) */}
       {route ? <PageView key={route.slug} route={route} nav={nav} /> : <Launcher />}
-      <Chrome scale={scale} onScale={setScale} atHome={!route} dock={route && route.frame !== 'web' ? 'top' : 'bottom'} />
+      <Chrome
+        scale={scale}
+        onScale={setScale}
+        atHome={!route}
+        dock={route && route.frame !== 'web' ? 'top' : 'bottom'}
+      />
     </ZzzTheme>
-  )
+  );
 }

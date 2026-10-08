@@ -1,8 +1,8 @@
-import type { ComponentPropsWithRef, ReactNode } from 'react'
-import { cx } from '../../utils'
-import './Capsule.css'
+import type { ComponentPropsWithRef, ReactNode } from 'react';
+import { cx } from '../../utils';
+import './Capsule.css';
 
-export type CapsuleTone = 'default' | 'empty' | 'danger'
+export type CapsuleTone = 'default' | 'empty' | 'danger';
 
 export interface CapsuleProps extends ComponentPropsWithRef<'span'> {
   /**
@@ -10,11 +10,11 @@ export interface CapsuleProps extends ComponentPropsWithRef<'span'> {
    * `empty`: condensed `condensedSm` "EMPTY" in `color.text.faint`.
    * `danger`: `color.danger.text` (insufficient count). Default `default`.
    */
-  tone?: CapsuleTone
+  tone?: CapsuleTone;
   /** Height: `sm` 23 (EMPTY slots), `md` 24 (cards, default), `lg` 27 (ingredient tiles). */
-  size?: 'sm' | 'md' | 'lg'
+  size?: 'sm' | 'md' | 'lg';
   /** Content. The `empty` tone defaults to "EMPTY". */
-  children?: ReactNode
+  children?: ReactNode;
 }
 
 /**
@@ -26,5 +26,5 @@ export function Capsule({ tone = 'default', size = 'md', className, children, ..
     <span {...rest} className={cx('zzz-capsule', `zzz-capsule--${tone}`, `zzz-capsule--${size}`, className)}>
       <span className="zzz-capsule__text">{children ?? (tone === 'empty' ? 'EMPTY' : null)}</span>
     </span>
-  )
+  );
 }

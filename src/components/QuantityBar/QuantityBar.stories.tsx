@@ -1,18 +1,29 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import type { CSSProperties, ReactNode } from 'react'
-import { QuantityBar } from './QuantityBar'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { CSSProperties, ReactNode } from 'react';
+import { QuantityBar } from './QuantityBar';
 
 /** calc(N * var(--zzz-px)) */
-const gpx = (n: number) => `calc(${n} * var(--zzz-px))`
-const caption: CSSProperties = { color: 'var(--zzz-color-text-muted)', fontSize: gpx(14), lineHeight: 1.2 }
+const gpx = (n: number) => `calc(${n} * var(--zzz-px))`;
+const caption: CSSProperties = {
+  color: 'var(--zzz-color-text-muted)',
+  fontSize: gpx(14),
+  lineHeight: 1.2,
+};
 
 function Cell({ label, children }: { label: string; children: ReactNode }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: gpx(12), alignItems: 'flex-start' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: gpx(12),
+        alignItems: 'flex-start',
+      }}
+    >
       {children}
       <span style={caption}>{label}</span>
     </div>
-  )
+  );
 }
 
 const meta = {
@@ -22,21 +33,15 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: [
-          'Crafting quantity readout.',
-          '',
-          '- Flat 581 × 38 pill in `color.surface.track` #373737, no ring; centred upright white `fontSize.body` text with a real × sign.',
-          '- Slots: `label` and `value` (plus `separator`). A polite live region (`aria-live`), so changes are announced.',
-          '- **Sizes** `size="sm" | "md" | "lg"` (default `md`): 31 / 38 / 46 design units tall, text `fontSize.label` / `body` / `bodyLg`; pair it with the Slider of the same size. The width stays 581.',
-        ].join('\n'),
+        component: 'Crafting quantity readout.',
       },
     },
   },
   args: { label: 'Craft Quantity', value: 1 },
-} satisfies Meta<typeof QuantityBar>
+} satisfies Meta<typeof QuantityBar>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: (args) => (
@@ -44,11 +49,19 @@ export const Default: Story = {
       <QuantityBar {...args} />
     </div>
   ),
-}
+};
 
 export const Variants: Story = {
   render: () => (
-    <div style={{ background: '#000', padding: gpx(24), display: 'flex', flexDirection: 'column', gap: gpx(24) }}>
+    <div
+      style={{
+        background: '#000',
+        padding: gpx(24),
+        display: 'flex',
+        flexDirection: 'column',
+        gap: gpx(24),
+      }}
+    >
       <Cell label="label + value">
         <QuantityBar label="Craft Quantity" value={12} />
       </Cell>
@@ -60,12 +73,20 @@ export const Variants: Story = {
       </Cell>
     </div>
   ),
-}
+};
 
 /** sm / md / lg, matching the Slider sizes. */
 export const Sizes: Story = {
   render: () => (
-    <div style={{ background: '#000', padding: gpx(24), display: 'flex', flexDirection: 'column', gap: gpx(24) }}>
+    <div
+      style={{
+        background: '#000',
+        padding: gpx(24),
+        display: 'flex',
+        flexDirection: 'column',
+        gap: gpx(24),
+      }}
+    >
       {(['sm', 'md', 'lg'] as const).map((size) => (
         <Cell key={size} label={size}>
           <QuantityBar size={size} label="Craft Quantity" value={12} />
@@ -73,4 +94,4 @@ export const Sizes: Story = {
       ))}
     </div>
   ),
-}
+};

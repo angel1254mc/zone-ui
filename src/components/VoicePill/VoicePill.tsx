@@ -1,36 +1,36 @@
-import type { ComponentPropsWithRef, CSSProperties, ReactNode } from 'react'
-import { cx, useControllableState } from '../../utils'
-import type { WebSkin } from '../WebTabs'
-import './VoicePill.css'
+import type { ComponentPropsWithRef, CSSProperties, ReactNode } from 'react';
+import { cx, useControllableState } from '../../utils';
+import type { WebSkin } from '../WebTabs';
+import './VoicePill.css';
 
-export type VoicePillTone = 'dark' | 'light'
+export type VoicePillTone = 'dark' | 'light';
 
 export interface VoicePillProps extends Omit<ComponentPropsWithRef<'div'>, 'children' | 'onChange'> {
   /** Voice-actor name. */
-  name: ReactNode
+  name: ReactNode;
   /** Leading caption. Default `CV:`. */
-  label?: ReactNode
+  label?: ReactNode;
   /** Playing state (controlled). */
-  playing?: boolean
+  playing?: boolean;
   /** Initial playing state (uncontrolled). Default false. */
-  defaultPlaying?: boolean
-  onPlayingChange?: (playing: boolean) => void
+  defaultPlaying?: boolean;
+  onPlayingChange?: (playing: boolean) => void;
   /**
    * Playback progress 0..1: fills the mic glyph bottom-up and is exposed as a progressbar.
    * When omitted the glyph is fully filled while playing and empty otherwise.
    */
-  progress?: number
+  progress?: number;
   /** Accessible name of the play button. Default `Play voice sample`. */
-  playLabel?: string
+  playLabel?: string;
   /** Accessible name of the progressbar. Default `Playback progress`. */
-  progressLabel?: string
+  progressLabel?: string;
   /** Right-hand slot, e.g. a language toggle. */
-  trailing?: ReactNode
+  trailing?: ReactNode;
   /** Fill colour: `web` = static `#BFDB5A`, `game` = the live `--zzz-accent`. Default `web`. */
-  skin?: WebSkin
+  skin?: WebSkin;
   /** `dark` (default): the dark pill. `light`: an #E8E8E8 pill with a black ring. */
-  tone?: VoicePillTone
-  disabled?: boolean
+  tone?: VoicePillTone;
+  disabled?: boolean;
 }
 
 /** Microphone glyph (24×33). */
@@ -38,9 +38,15 @@ function Mic({ className }: { className: string }) {
   return (
     <svg className={className} viewBox="0 0 24 33" aria-hidden="true" focusable="false">
       <rect x="6" y="1" width="12" height="19" rx="6" fill="currentColor" />
-      <path d="M2.5 14.5v1.5a9.5 9.5 0 0 0 19 0v-1.5M12 25.5v4.5M6 31h12" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" />
+      <path
+        d="M2.5 14.5v1.5a9.5 9.5 0 0 0 19 0v-1.5M12 25.5v4.5M6 31h12"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="3.5"
+        strokeLinecap="round"
+      />
     </svg>
-  )
+  );
 }
 
 /**
@@ -64,8 +70,8 @@ export function VoicePill({
   style,
   ...rest
 }: VoicePillProps) {
-  const [playing, setPlaying] = useControllableState(playingProp, defaultPlaying, onPlayingChange)
-  const pct = progress === undefined ? (playing ? 100 : 0) : Math.round(Math.min(1, Math.max(0, progress)) * 100)
+  const [playing, setPlaying] = useControllableState(playingProp, defaultPlaying, onPlayingChange);
+  const pct = progress === undefined ? (playing ? 100 : 0) : Math.round(Math.min(1, Math.max(0, progress)) * 100);
 
   return (
     <div
@@ -104,5 +110,5 @@ export function VoicePill({
         />
       )}
     </div>
-  )
+  );
 }

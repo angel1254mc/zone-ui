@@ -1,28 +1,31 @@
-import { useEffect, useRef } from 'react'
-import type { ChangeEvent, ComponentPropsWithRef, ReactNode } from 'react'
-import { cx, mergeRefs, useControllableState } from '../../utils'
-import { CheckIcon } from '../../icons'
-import { Text } from '../Text'
-import './Checkbox.css'
+import { useEffect, useRef } from 'react';
+import type { ChangeEvent, ComponentPropsWithRef, ReactNode } from 'react';
+import { cx, mergeRefs, useControllableState } from '../../utils';
+import { CheckIcon } from '../../icons';
+import { Text } from '../Text';
+import './Checkbox.css';
 
 /** `sm` / `md` / `lg`: box 19 / 24 / 29 and row 32 / 40 / 48 design units (≈ 13.5 / 17 / 20 px boxes at the default scale). */
-export type CheckboxSize = 'sm' | 'md' | 'lg'
+export type CheckboxSize = 'sm' | 'md' | 'lg';
 
-export interface CheckboxProps extends Omit<ComponentPropsWithRef<'input'>, 'type' | 'size' | 'children' | 'checked' | 'defaultChecked'> {
+export interface CheckboxProps extends Omit<
+  ComponentPropsWithRef<'input'>,
+  'type' | 'size' | 'children' | 'checked' | 'defaultChecked'
+> {
   /** Checked (controlled). */
-  checked?: boolean
+  checked?: boolean;
   /** Initial state (uncontrolled). */
-  defaultChecked?: boolean
-  onCheckedChange?(checked: boolean): void
+  defaultChecked?: boolean;
+  onCheckedChange?(checked: boolean): void;
   /** Mixed state ("some selected"): a black bar on the accent box; `aria-checked="mixed"`. */
-  indeterminate?: boolean
+  indeterminate?: boolean;
   /** Visible label. */
-  children?: ReactNode
+  children?: ReactNode;
   /**
    * Box, ring, check and row height scale with the control scale (sm = md × 46/57, lg = md × 69/57);
    * the label is `fontSize.label` / `body` / `bodyLg`. Default `md`.
    */
-  size?: CheckboxSize
+  size?: CheckboxSize;
 }
 
 /**
@@ -46,18 +49,18 @@ export function Checkbox({
   ref,
   ...rest
 }: CheckboxProps) {
-  const [checked, setChecked] = useControllableState(checkedProp, defaultChecked, onCheckedChange)
-  const inputRef = useRef<HTMLInputElement>(null)
+  const [checked, setChecked] = useControllableState(checkedProp, defaultChecked, onCheckedChange);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (inputRef.current) inputRef.current.indeterminate = indeterminate
-  }, [indeterminate])
+    if (inputRef.current) inputRef.current.indeterminate = indeterminate;
+  }, [indeterminate]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onChange?.(event)
-    if (event.defaultPrevented) return
-    setChecked(event.target.checked)
-  }
+    onChange?.(event);
+    if (event.defaultPrevented) return;
+    setChecked(event.target.checked);
+  };
 
   return (
     <label
@@ -88,5 +91,5 @@ export function Checkbox({
         </Text>
       ) : null}
     </label>
-  )
+  );
 }

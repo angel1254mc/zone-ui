@@ -1,54 +1,63 @@
-import { useId, useLayoutEffect, useRef } from 'react'
-import type { ComponentPropsWithoutRef, CSSProperties, MouseEvent, ReactNode, Ref } from 'react'
-import { cx } from '../../utils'
-import { SearchIcon } from '../../icons'
-import { Button } from '../Button'
-import { IconButton } from '../IconButton'
-import { NewBadge } from '../Badges'
-import { ClaimedCheck } from '../CheckInCalendar/ClaimedCheck'
-import { Text } from '../Text'
-import './MissionCard.css'
+import { useId, useLayoutEffect, useRef } from 'react';
+import type { ComponentPropsWithoutRef, CSSProperties, MouseEvent, ReactNode, Ref } from 'react';
+import { cx } from '../../utils';
+import { SearchIcon } from '../../icons';
+import { Button } from '../Button';
+import { IconButton } from '../IconButton';
+import { NewBadge } from '../Badges';
+import { ClaimedCheck } from '../CheckInCalendar/ClaimedCheck';
+import { Text } from '../Text';
+import './MissionCard.css';
 
 /** `go`: the mission can be done (black "Go"); `claimed`: reward taken; `locked`: not yet available ("Stay Tuned"). */
-export type MissionStatus = 'go' | 'claimed' | 'locked'
+export type MissionStatus = 'go' | 'claimed' | 'locked';
 
 /** Per-event colours. Defaults: ring `content.eventTeal`, body `content.eventPink`. */
 export interface MissionCardTheme {
   /** Frame ring, left strip, reward-circle ring and the button halos. */
-  ring?: string
+  ring?: string;
   /** Body band colour (drawn as a lighter-at-the-top gradient with a faint diagonal pattern). */
-  body?: string
+  body?: string;
   /** Optional sticker ornament on the bottom-left corner (e.g. an orange candy). Omitted = none. */
-  ornament?: string
+  ornament?: string;
 }
 
 export interface MissionCardOwnProps {
   /** Mission text in the dark header (1–2 lines; a single line renders at `bodyLg`, two at `body`). */
-  title: ReactNode
+  title: ReactNode;
   /** Reward art slot (an `<img>`, `<picture>` or SVG), fitted into the 80 px teal-ringed circle (54 px art window). */
-  reward?: ReactNode
+  reward?: ReactNode;
   /** Accessible name of the reward (e.g. "Outfit: Angels of Delusion"). */
-  rewardLabel?: string
+  rewardLabel?: string;
   /** Default `go`. */
-  status?: MissionStatus
-  theme?: MissionCardTheme
+  status?: MissionStatus;
+  theme?: MissionCardTheme;
   /** Shows the "NEW!" tag over the header's top-right corner. */
-  isNew?: boolean
+  isNew?: boolean;
   /** Action button ("Go"). Only fires when `status="go"`. */
-  onGo?: (event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void
+  onGo?: (event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void;
   /** Magnifier button (reward / mission details). */
-  onInspect?: (event: MouseEvent<HTMLButtonElement>) => void
+  onInspect?: (event: MouseEvent<HTMLButtonElement>) => void;
   /** Override the action label. Defaults: Go / Claimed / Stay Tuned. */
-  actionLabel?: ReactNode
+  actionLabel?: ReactNode;
   /** Accessible name of the magnifier. Default "Details". */
-  inspectLabel?: string
-  ref?: Ref<HTMLElement>
+  inspectLabel?: string;
+  ref?: Ref<HTMLElement>;
 }
 
-export type MissionCardProps = MissionCardOwnProps & Omit<ComponentPropsWithoutRef<'article'>, keyof MissionCardOwnProps>
+export type MissionCardProps = MissionCardOwnProps &
+  Omit<ComponentPropsWithoutRef<'article'>, keyof MissionCardOwnProps>;
 
-const LABELS: Record<MissionStatus, string> = { go: 'Go', claimed: 'Claimed', locked: 'Stay Tuned' }
-const MISSION_STATE = { go: 'default', claimed: 'claimed', locked: 'locked' } as const
+const LABELS: Record<MissionStatus, string> = {
+  go: 'Go',
+  claimed: 'Claimed',
+  locked: 'Stay Tuned',
+};
+const MISSION_STATE = {
+  go: 'default',
+  claimed: 'claimed',
+  locked: 'locked',
+} as const;
 
 /**
  * Event mission card: 581 × 150, 8 px teal
@@ -72,33 +81,33 @@ export function MissionCard(props: MissionCardProps) {
     style,
     ref,
     ...rest
-  } = props
-  const titleId = useId()
-  const titleRef = useRef<HTMLHeadingElement | null>(null)
+  } = props;
+  const titleId = useId();
+  const titleRef = useRef<HTMLHeadingElement | null>(null);
 
   // Auto-sizing: a one-line mission renders at bodyLg (cap 19), a wrapped one at
   // body (cap 17, 24 px pitch). Try the large size first; drop to the small one when it wraps.
   useLayoutEffect(() => {
-    const el = titleRef.current
-    if (!el) return
+    const el = titleRef.current;
+    if (!el) return;
     const fit = () => {
-      el.dataset.lines = '1'
-      const lh = parseFloat(getComputedStyle(el).lineHeight)
-      if (lh && el.scrollHeight > lh * 1.5) el.dataset.lines = '2'
-    }
-    fit()
-    const fonts = typeof document !== 'undefined' ? document.fonts : undefined
-    let alive = true
-    fonts?.ready.then(() => alive && fit())
+      el.dataset.lines = '1';
+      const lh = parseFloat(getComputedStyle(el).lineHeight);
+      if (lh && el.scrollHeight > lh * 1.5) el.dataset.lines = '2';
+    };
+    fit();
+    const fonts = typeof document !== 'undefined' ? document.fonts : undefined;
+    let alive = true;
+    fonts?.ready.then(() => alive && fit());
     return () => {
-      alive = false
-    }
-  }, [title])
+      alive = false;
+    };
+  }, [title]);
 
-  const vars: Record<string, string> = {}
-  if (theme?.ring) vars['--zzz-mission-card-ring'] = theme.ring
-  if (theme?.body) vars['--zzz-mission-card-body'] = theme.body
-  if (theme?.ornament) vars['--zzz-mission-card-ornament'] = theme.ornament
+  const vars: Record<string, string> = {};
+  if (theme?.ring) vars['--zzz-mission-card-ring'] = theme.ring;
+  if (theme?.body) vars['--zzz-mission-card-body'] = theme.body;
+  if (theme?.ornament) vars['--zzz-mission-card-ornament'] = theme.ornament;
 
   return (
     <article
@@ -151,5 +160,5 @@ export function MissionCard(props: MissionCardProps) {
       {theme?.ornament ? <span className="zzz-mission-card__ornament" aria-hidden="true" /> : null}
       {isNew ? <NewBadge size="sm" placement="top-right" offset={[2, -4]} className="zzz-mission-card__new" /> : null}
     </article>
-  )
+  );
 }

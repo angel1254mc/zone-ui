@@ -11,13 +11,19 @@
 .zzz-text--outline-new {
   paint-order: stroke fill;
 }
-.zzz-text--outline-sm { -webkit-text-stroke: var(--zzz-shadow-text-outline-sm); }
-.zzz-text--outline-md { -webkit-text-stroke: var(--zzz-shadow-text-outline-md); }
+.zzz-text--outline-sm {
+  -webkit-text-stroke: var(--zzz-shadow-text-outline-sm);
+}
+.zzz-text--outline-md {
+  -webkit-text-stroke: var(--zzz-shadow-text-outline-md);
+}
 .zzz-text--outline-event {
   -webkit-text-stroke: var(--zzz-shadow-text-event-title);
   text-shadow: var(--zzz-shadow-text-event-title-drop);
 }
-.zzz-text--outline-new { -webkit-text-stroke: var(--zzz-shadow-text-new); }
+.zzz-text--outline-new {
+  -webkit-text-stroke: var(--zzz-shadow-text-new);
+}
 
 /* The italic wrapper is its own inline-block box: the stroke must reach it too. */
 .zzz-text[class*='zzz-text--outline-'] > .zzz-italic {
@@ -58,8 +64,12 @@
 /* Figures: the theme's plain figures by default (font.numeric.default = proportional-nums). Mona Sans's
  * tnum set swaps in a slashed 0 and a footed 1, so tabular figures are opt-in
  * (`tabular` prop, font.numeric.tabular); use Zeros for fixed-pitch counters with plain digits. */
-.zzz-text { font-variant-numeric: var(--zzz-font-numeric-default); }
-.zzz-text.zzz-text--tabular { font-variant-numeric: var(--zzz-font-numeric-tabular); }
+.zzz-text {
+  font-variant-numeric: var(--zzz-font-numeric-default);
+}
+.zzz-text.zzz-text--tabular {
+  font-variant-numeric: var(--zzz-font-numeric-tabular);
+}
 
 /* Auto-fit: a single-line block the component shrinks (inline font-size) until it fits. */
 .zzz-text--fit {
@@ -83,7 +93,9 @@
   font-variant-numeric: normal;
   white-space: nowrap;
 }
-.zzz-text .zzz-zeros { font-variant-numeric: normal; }
+.zzz-text .zzz-zeros {
+  font-variant-numeric: normal;
+}
 .zzz-zeros__d {
   display: inline-block;
   width: 0.651em;
@@ -93,8 +105,12 @@
    * them a ~2 px gap. No effect on a face without a wdth axis (Inpin). */
   font-stretch: 100%;
 }
-.zzz-zeros__pad { color: var(--zzz-color-text-zero-pad); }
-.zzz-zeros__digits { color: var(--zzz-color-text-primary); }
+.zzz-zeros__pad {
+  color: var(--zzz-color-text-zero-pad);
+}
+.zzz-zeros__digits {
+  color: var(--zzz-color-text-primary);
+}
 
 /* Keyword: orange highlight, optional leading icon sized to the cap height. */
 .zzz-keyword {

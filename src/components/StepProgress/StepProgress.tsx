@@ -1,47 +1,48 @@
-import type { ComponentPropsWithoutRef, ReactNode, Ref } from 'react'
-import { cx } from '../../utils'
-import { CheckIcon, CloseIcon, MinusIcon } from '../../icons'
-import './StepProgress.css'
+import type { ComponentPropsWithoutRef, ReactNode, Ref } from 'react';
+import { cx } from '../../utils';
+import { CheckIcon, CloseIcon, MinusIcon } from '../../icons';
+import './StepProgress.css';
 
-export type StepStatus = 'pending' | 'current' | 'complete' | 'success' | 'error' | 'skipped'
+export type StepStatus = 'pending' | 'current' | 'complete' | 'success' | 'error' | 'skipped';
 
 /** Web size scale: `sm` compact, `md` default, `lg` = md × 69/57. */
-export type StepProgressSize = 'sm' | 'md' | 'lg'
+export type StepProgressSize = 'sm' | 'md' | 'lg';
 
 export interface StepItem {
   /** Visible label (capsules variant). */
-  label?: ReactNode
+  label?: ReactNode;
   /** Explicit status; otherwise derived from `current` (before → complete, at → current, after → pending). */
-  status?: StepStatus
+  status?: StepStatus;
   /** Accessible text for this step, replacing "{stepName} {n}: {status}". */
-  'aria-label'?: string
+  'aria-label'?: string;
 }
 
 export interface StepProgressOwnProps {
   /** Number of steps, or one item per step. */
-  steps: number | StepItem[]
+  steps: number | StepItem[];
   /** 0-based index of the current step. Default 0. Pass `steps.length` (or -1) when nothing is current. */
-  current?: number
+  current?: number;
   /** 'pips' (default, compact slanted bars), 'capsules' (numbered pills with labels) or 'text' ("Step 3 of 5"). */
-  variant?: 'pips' | 'capsules' | 'text'
+  variant?: 'pips' | 'capsules' | 'text';
   /**
    * Default `md`. Pips 28 × 8 / 44 × 12 / 53 × 15, capsules 32 / 41 / 50 tall (capsule label and
    * disc text never below `fontSize.label`, 17.5 units), text
    * `fontSize.control.{sm,md,lg}` (21 / 26 / 30) design units. `lg` scales every md length by 69/57.
    */
-  size?: StepProgressSize
+  size?: StepProgressSize;
   /** Accessible name of the list. Default "Progress". */
-  label?: string
+  label?: string;
   /** Noun used in the text variant and the per-step accessible text. Default "Step" ("Question", "Round"…). */
-  stepName?: string
+  stepName?: string;
   /** Text variant content. Default `{stepName} {n} of {total}` with n emphasised. */
-  formatText?: (step: number, total: number) => ReactNode
+  formatText?: (step: number, total: number) => ReactNode;
   /** Accessible words per status, e.g. `{ success: 'correct', error: 'wrong' }` for a quiz. */
-  statusLabels?: Partial<Record<StepStatus, string>>
-  ref?: Ref<HTMLElement>
+  statusLabels?: Partial<Record<StepStatus, string>>;
+  ref?: Ref<HTMLElement>;
 }
 
-export type StepProgressProps = StepProgressOwnProps & Omit<ComponentPropsWithoutRef<'ol'>, keyof StepProgressOwnProps | 'children'>
+export type StepProgressProps = StepProgressOwnProps &
+  Omit<ComponentPropsWithoutRef<'ol'>, keyof StepProgressOwnProps | 'children'>;
 
 const DEFAULT_STATUS_LABELS: Record<StepStatus, string> = {
   pending: 'not started',
@@ -50,14 +51,14 @@ const DEFAULT_STATUS_LABELS: Record<StepStatus, string> = {
   success: 'succeeded',
   error: 'failed',
   skipped: 'skipped',
-}
+};
 
 const GLYPHS: Partial<Record<StepStatus, ReactNode>> = {
   complete: <CheckIcon />,
   success: <CheckIcon />,
   error: <CloseIcon />,
   skipped: <MinusIcon />,
-}
+};
 
 /**
  * Horizontal step indicator for quizzes, wizards, onboarding and checkout. Each step is pending,
@@ -79,16 +80,17 @@ export function StepProgress(props: StepProgressProps) {
     className,
     ref,
     ...rest
-  } = props
+  } = props;
 
-  const items: StepItem[] = typeof steps === 'number' ? Array.from({ length: Math.max(0, steps) }, () => ({})) : steps
-  const total = items.length
-  const words = { ...DEFAULT_STATUS_LABELS, ...statusLabels }
-  const statusOf = (item: StepItem, i: number): StepStatus => item.status ?? (i < current ? 'complete' : i === current ? 'current' : 'pending')
+  const items: StepItem[] = typeof steps === 'number' ? Array.from({ length: Math.max(0, steps) }, () => ({})) : steps;
+  const total = items.length;
+  const words = { ...DEFAULT_STATUS_LABELS, ...statusLabels };
+  const statusOf = (item: StepItem, i: number): StepStatus =>
+    item.status ?? (i < current ? 'complete' : i === current ? 'current' : 'pending');
 
   if (variant === 'text') {
-    const n = Math.min(total, Math.max(1, current + 1))
-    const restP = rest as ComponentPropsWithoutRef<'p'>
+    const n = Math.min(total, Math.max(1, current + 1));
+    const restP = rest as ComponentPropsWithoutRef<'p'>;
     return (
       <p
         {...restP}
@@ -107,7 +109,7 @@ export function StepProgress(props: StepProgressProps) {
           )}
         </span>
       </p>
-    )
+    );
   }
 
   return (
@@ -119,8 +121,10 @@ export function StepProgress(props: StepProgressProps) {
       data-size={size}
     >
       {items.map((item, i) => {
-        const status = statusOf(item, i)
-        const a11y = item['aria-label'] ?? `${stepName} ${i + 1}${typeof item.label === 'string' ? `, ${item.label}` : ''}: ${words[status]}`
+        const status = statusOf(item, i);
+        const a11y =
+          item['aria-label'] ??
+          `${stepName} ${i + 1}${typeof item.label === 'string' ? `, ${item.label}` : ''}: ${words[status]}`;
         return (
           <li
             key={i}
@@ -138,8 +142,8 @@ export function StepProgress(props: StepProgressProps) {
               </span>
             )}
           </li>
-        )
+        );
       })}
     </ol>
-  )
+  );
 }

@@ -1,32 +1,32 @@
-import type { ComponentPropsWithoutRef, ReactNode, Ref } from 'react'
-import { cx } from '../../utils'
-import { Text } from '../Text'
-import { ClaimedCheck } from './ClaimedCheck'
-import './CheckInCalendar.css'
+import type { ComponentPropsWithoutRef, ReactNode, Ref } from 'react';
+import { cx } from '../../utils';
+import { Text } from '../Text';
+import { ClaimedCheck } from './ClaimedCheck';
+import './CheckInCalendar.css';
 
 export interface CheckInTileOwnProps {
   /** Day number (1-based). Rendered zero-padded ("01") in the red disc. */
-  day: number
+  day: number;
   /** Reward art slot (an `<img>`, `<picture>` or SVG), ~90 px, centred in the art window. */
-  item?: ReactNode
+  item?: ReactNode;
   /** Reward name for the accessible name ("Day 1, 30 × Film, claimed"). */
-  itemName?: string
+  itemName?: string;
   /** Quantity ("× 30"). */
-  count: number
+  count: number;
   /** Day already claimed: static lime tick over the art, greyed count. */
-  claimed?: boolean
+  claimed?: boolean;
   /** Special reward day: pink art window instead of yellow. */
-  special?: boolean
+  special?: boolean;
   /** Red tag over the art bottom (e.g. "Outfit Select"). `\n` breaks the line. */
-  tag?: ReactNode
+  tag?: ReactNode;
   /** Glyph in the small black disc at the top-left (item type). Default: a cube. `null` hides the disc. */
-  typeIcon?: ReactNode
-  ref?: Ref<HTMLDivElement>
+  typeIcon?: ReactNode;
+  ref?: Ref<HTMLDivElement>;
 }
 
-export type CheckInTileProps = CheckInTileOwnProps & Omit<ComponentPropsWithoutRef<'div'>, keyof CheckInTileOwnProps>
+export type CheckInTileProps = CheckInTileOwnProps & Omit<ComponentPropsWithoutRef<'div'>, keyof CheckInTileOwnProps>;
 
-const pad2 = (n: number) => String(n).padStart(2, '0')
+const pad2 = (n: number) => String(n).padStart(2, '0');
 
 /** Default item-type glyph: an isometric cube outline (original drawing). */
 function CubeGlyph() {
@@ -40,7 +40,7 @@ function CubeGlyph() {
         strokeLinejoin="round"
       />
     </svg>
-  )
+  );
 }
 
 /**
@@ -51,7 +51,19 @@ function CubeGlyph() {
  * Display only (claiming is handled by the page, not the tile).
  */
 export function CheckInTile(props: CheckInTileProps) {
-  const { day, item, itemName, count, claimed = false, special = false, tag, typeIcon, className, ref, ...rest } = props
+  const {
+    day,
+    item,
+    itemName,
+    count,
+    claimed = false,
+    special = false,
+    tag,
+    typeIcon,
+    className,
+    ref,
+    ...rest
+  } = props;
   const name = [
     `Day ${day}`,
     `${count} × ${itemName ?? 'reward'}`,
@@ -60,8 +72,8 @@ export function CheckInTile(props: CheckInTileProps) {
     typeof tag === 'string' ? tag.replace(/\s+/g, ' ') : null,
   ]
     .filter(Boolean)
-    .join(', ')
-  const glyph = typeIcon === undefined ? <CubeGlyph /> : typeIcon
+    .join(', ');
+  const glyph = typeIcon === undefined ? <CubeGlyph /> : typeIcon;
 
   return (
     <div
@@ -69,7 +81,12 @@ export function CheckInTile(props: CheckInTileProps) {
       aria-label={name}
       {...rest}
       ref={ref}
-      className={cx('zzz-check-in-tile', claimed && 'zzz-check-in-tile--claimed', special && 'zzz-check-in-tile--special', className)}
+      className={cx(
+        'zzz-check-in-tile',
+        claimed && 'zzz-check-in-tile--claimed',
+        special && 'zzz-check-in-tile--special',
+        className
+      )}
       data-claimed={claimed ? '' : undefined}
     >
       <span className="zzz-check-in-tile__frame" aria-hidden="true" />
@@ -109,5 +126,5 @@ export function CheckInTile(props: CheckInTileProps) {
         </span>
       </span>
     </div>
-  )
+  );
 }

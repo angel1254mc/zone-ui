@@ -45,8 +45,16 @@
   border: var(--zzz-border-width-keyline) solid var(--zzz-color-border-keyline);
   border-radius: var(--zzz-modal-radius) 0 var(--zzz-modal-radius) var(--zzz-modal-radius);
   background:
-    repeating-linear-gradient(65deg, var(--zzz-modal-grid) 0 var(--zzz-border-width-hairline), transparent var(--zzz-border-width-hairline) calc(8 * var(--zzz-px))),
-    repeating-linear-gradient(115deg, var(--zzz-modal-grid) 0 var(--zzz-border-width-hairline), transparent var(--zzz-border-width-hairline) calc(8 * var(--zzz-px))),
+    repeating-linear-gradient(
+      65deg,
+      var(--zzz-modal-grid) 0 var(--zzz-border-width-hairline),
+      transparent var(--zzz-border-width-hairline) calc(8 * var(--zzz-px))
+    ),
+    repeating-linear-gradient(
+      115deg,
+      var(--zzz-modal-grid) 0 var(--zzz-border-width-hairline),
+      transparent var(--zzz-border-width-hairline) calc(8 * var(--zzz-px))
+    ),
     linear-gradient(170deg, var(--zzz-color-surface-panel-header), var(--zzz-color-bg-base) 80%);
   box-shadow:
     0 0 0 calc(3 * var(--zzz-px)) rgba(66, 66, 66, 0.66),

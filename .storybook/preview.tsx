@@ -1,11 +1,11 @@
-import type { Decorator, Preview } from '@storybook/react-vite'
-import '../src/styles/fonts.css'
-import '../src/styles/tokens.css'
-import '../src/styles/base.css'
-import './preview.css'
-import './preview-docs.css'
-import { configureArt } from '../examples/art'
-import { zzzDocsTheme } from './zzzTheme'
+import type { Decorator, Preview } from '@storybook/react-vite';
+import '../src/styles/fonts.css';
+import '../src/styles/tokens.css';
+import '../src/styles/base.css';
+import './preview.css';
+import './preview-docs.css';
+import { configureArt } from '../examples/art';
+import { zzzDocsTheme } from './zzzTheme';
 
 /*
  * Game art in stories and examples is loaded BY URL at runtime: examples/art resolves names from the
@@ -15,8 +15,8 @@ import { zzzDocsTheme } from './zzzTheme'
  * or an unreachable one to see the empty frames).
  */
 try {
-  const artBase = new URLSearchParams(window.location.search).get('artBase')
-  if (artBase) configureArt({ nanokaBase: artBase, enkaBase: artBase })
+  const artBase = new URLSearchParams(window.location.search).get('artBase');
+  if (artBase) configureArt({ nanokaBase: artBase, enkaBase: artBase });
 } catch {
   /* no window.location (never in a browser): keep the default sources */
 }
@@ -28,8 +28,8 @@ try {
  * 1 = game density (1 design unit = 1 CSS px at a 16 px root).
  */
 const withTheme: Decorator = (Story, context) => {
-  const scale = context.globals.zzzScale ?? '0.7'
-  const surface = context.parameters.zzzSurface ?? 'app'
+  const scale = context.globals.zzzScale ?? '0.7';
+  const surface = context.parameters.zzzSurface ?? 'app';
   return (
     <div
       className={`zzz-theme sb-zzz-frame sb-zzz-frame--${surface}`}
@@ -38,8 +38,8 @@ const withTheme: Decorator = (Story, context) => {
     >
       <Story />
     </div>
-  )
-}
+  );
+};
 
 const preview: Preview = {
   decorators: [withTheme],
@@ -68,14 +68,30 @@ const preview: Preview = {
     backgrounds: { disable: true },
     // Autodocs / MDX pages: the dark ZZZ theme (zzzTheme.ts) + the docs rules in preview.css.
     docs: { theme: zzzDocsTheme },
-    controls: { expanded: true, matchers: { color: /(background|color)$/i } },
+    controls: {
+      expanded: true,
+      matchers: { color: /(background|color)$/i },
+    },
     a11y: { test: 'todo' },
     options: {
       storySort: {
-        order: ['Introduction', 'Using this Storybook', 'Foundations', 'Primitives', 'Forms', 'Data Display', 'Inventory', 'Overlays', 'Shell', 'Game', 'Examples', '*'],
+        order: [
+          'Introduction',
+          'Using this Storybook',
+          'Foundations',
+          'Primitives',
+          'Forms',
+          'Data Display',
+          'Inventory',
+          'Overlays',
+          'Shell',
+          'Game',
+          'Examples',
+          '*',
+        ],
       },
     },
   },
-}
+};
 
-export default preview
+export default preview;

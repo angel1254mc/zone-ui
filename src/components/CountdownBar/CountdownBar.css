@@ -85,7 +85,7 @@
 }
 .zzz-countdown-bar[data-state='warning'] .zzz-countdown-bar__fill,
 .zzz-countdown-bar[data-state='critical'] .zzz-countdown-bar__fill {
-  animation: zzz-countdown-warn 500ms cubic-bezier(.45, 0, .55, 1) infinite alternate;
+  animation: zzz-countdown-warn 500ms cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
 }
 .zzz-countdown-bar[data-paused] .zzz-countdown-bar__fill {
   animation-play-state: paused;

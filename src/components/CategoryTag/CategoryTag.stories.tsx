@@ -1,14 +1,14 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import type { CSSProperties, ReactNode } from 'react'
-import { CategoryTag } from './CategoryTag'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { CSSProperties, ReactNode } from 'react';
+import { CategoryTag } from './CategoryTag';
 
 /** calc(N * var(--zzz-px)) */
-const gpx = (n: number) => `calc(${n} * var(--zzz-px))`
+const gpx = (n: number) => `calc(${n} * var(--zzz-px))`;
 const caption: CSSProperties = {
   fontSize: 'var(--zzz-font-size-label)',
   lineHeight: 'var(--zzz-line-height-dialog-item)',
   color: 'var(--zzz-color-text-muted)',
-}
+};
 
 function Row({ label, children }: { label: ReactNode; children: ReactNode }) {
   return (
@@ -16,7 +16,7 @@ function Row({ label, children }: { label: ReactNode; children: ReactNode }) {
       <span style={caption}>{label}</span>
       {children}
     </div>
-  )
+  );
 }
 
 const meta = {
@@ -26,23 +26,17 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: [
-          'News category tag.',
-          '',
-          '- 26 tall black tag, round left end, right end cut on a 26.5° slant. The slanted end overhangs 14 px, reserved with `margin-right`.',
-          '- Label 11 design units in `#BFDB5A` (`skin="web"`) or the live `--zzz-accent` (`skin="game"`).',
-          '- Static text, no interaction states.',
-        ].join('\n'),
+        component: 'News category tag.',
       },
     },
   },
   args: { children: 'Notices' },
-} satisfies Meta<typeof CategoryTag>
+} satisfies Meta<typeof CategoryTag>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {}
+export const Default: Story = {};
 
 /** Every category, both skins. */
 export const Categories: Story = {
@@ -50,7 +44,13 @@ export const Categories: Story = {
     <div style={{ display: 'flex', flexDirection: 'column', gap: gpx(20) }}>
       {(['web', 'game'] as const).map((skin) => (
         <Row key={skin} label={skin}>
-          <div style={{ display: 'flex', gap: gpx(16), alignItems: 'center' }}>
+          <div
+            style={{
+              display: 'flex',
+              gap: gpx(16),
+              alignItems: 'center',
+            }}
+          >
             <CategoryTag skin={skin}>News</CategoryTag>
             <CategoryTag skin={skin}>Notices</CategoryTag>
             <CategoryTag skin={skin}>Events</CategoryTag>
@@ -60,4 +60,4 @@ export const Categories: Story = {
       ))}
     </div>
   ),
-}
+};

@@ -1,4 +1,4 @@
-export { OverclockBar, XpBar, ProgressPill } from './Progress'
+export { OverclockBar, XpBar, ProgressPill } from './Progress';
 export type {
   OverclockBarProps,
   OverclockBarOwnProps,
@@ -6,4 +6,4 @@ export type {
   XpBarOwnProps,
   ProgressPillProps,
   ProgressPillOwnProps,
-} from './Progress'
+} from './Progress';

@@ -156,7 +156,7 @@
     linear-gradient(to bottom, #262626 calc(2 * var(--zzz-px)), transparent 0);
   background-size: calc(120 * var(--zzz-px)) calc(120 * var(--zzz-px));
   background-position: calc(-1 * var(--zzz-px)) calc(-1 * var(--zzz-px));
-  background-color: #0B0B0B;
+  background-color: #0b0b0b;
 }
 .zzz-doc-stage-marker {
   position: absolute;

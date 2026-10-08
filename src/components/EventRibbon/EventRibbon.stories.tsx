@@ -1,13 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import type { CSSProperties } from 'react'
-import { EventDescription } from '../EventDescription'
-import { EventTitle } from '../EventTitle'
-import { EventRibbon } from './EventRibbon'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { CSSProperties } from 'react';
+import { EventDescription } from '../EventDescription';
+import { EventTitle } from '../EventTitle';
+import { EventRibbon } from './EventRibbon';
 
-const gpx = (n: number) => `calc(${n} * var(--zzz-px))`
+const gpx = (n: number) => `calc(${n} * var(--zzz-px))`;
 /** Stand-in for dark blue key art behind an event header. */
-const dusk: CSSProperties = { background: 'linear-gradient(160deg, #2E3B55, #50668C 60%, #3A4A68)' }
-const BLURB = "Miracles never appear alone. They're\nalways accompanied by soaring birds\nand the bright dawn."
+const dusk: CSSProperties = {
+  background: 'linear-gradient(160deg, #2E3B55, #50668C 60%, #3A4A68)',
+};
+const BLURB = "Miracles never appear alone. They're\nalways accompanied by soaring birds\nand the bright dawn.";
 
 const meta = {
   title: 'Game/EventRibbon',
@@ -24,30 +26,33 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component:
-          'Event subtitle ribbon: full pill 41 tall with a 4 px black outline, `color.event.ribbonFill` body, ' +
-          'black centred `bodyXl` text and a black halftone dot fade (~50 px) at both ends, the dots shrinking toward the ' +
-          'centre. The dots are drawn as SVG circles (a CSS dot lattice cannot vary the dot size). Static.',
+        component: 'Event subtitle ribbon',
       },
     },
   },
-} satisfies Meta<typeof EventRibbon>
+} satisfies Meta<typeof EventRibbon>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {}
-export const Short: Story = { args: { children: 'New Chapter' } }
+export const Default: Story = {};
+export const Short: Story = { args: { children: 'New Chapter' } };
 
 function Header() {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+      }}
+    >
       <EventTitle size={47}>Their Secret Histories</EventTitle>
       <EventRibbon style={{ marginTop: gpx(23) }}>Main Story Season 3 New Chapter Unlocked</EventRibbon>
       <EventDescription style={{ marginTop: gpx(32) }}>{BLURB}</EventDescription>
     </div>
-  )
+  );
 }
 
 /** An event header: title, ribbon, description, right-aligned. */
-export const EventHeader: Story = { render: () => <Header /> }
+export const EventHeader: Story = { render: () => <Header /> };

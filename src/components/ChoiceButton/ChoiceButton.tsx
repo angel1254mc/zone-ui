@@ -1,8 +1,8 @@
-import { useId } from 'react'
-import type { ComponentPropsWithRef, KeyboardEvent, MouseEvent, ReactNode } from 'react'
-import { cx, usePressFlash } from '../../utils'
-import { CheckIcon, CloseIcon } from '../../icons'
-import './ChoiceButton.css'
+import { useId } from 'react';
+import type { ComponentPropsWithRef, KeyboardEvent, MouseEvent, ReactNode } from 'react';
+import { cx, usePressFlash } from '../../utils';
+import { CheckIcon, CloseIcon } from '../../icons';
+import './ChoiceButton.css';
 
 /**
  * Outcome shown on a choice. `success` / `error` are aliases of `correct` / `incorrect`.
@@ -10,57 +10,57 @@ import './ChoiceButton.css'
  * - `incorrect`: this choice was picked and is wrong (red) + x
  * - `revealed`: the right choice, shown after the user picked another one (green outline + check)
  */
-export type ChoiceResult = 'correct' | 'incorrect' | 'revealed' | 'success' | 'error'
+export type ChoiceResult = 'correct' | 'incorrect' | 'revealed' | 'success' | 'error';
 
 /** Normalised visual state, mirrored on `data-state`. */
-export type ChoiceState = 'idle' | 'selected' | 'correct' | 'incorrect' | 'revealed'
+export type ChoiceState = 'idle' | 'selected' | 'correct' | 'incorrect' | 'revealed';
 
 /** `inline`: a small square thumbnail beside the label. `cover`: a wide image above the label (image options). */
-export type ChoiceMediaLayout = 'inline' | 'cover'
+export type ChoiceMediaLayout = 'inline' | 'cover';
 
 /** Colour of the `correct` result: `green` (`color.icon.confirm`, default) or the live accent fill. */
-export type ChoiceCorrectTone = 'green' | 'accent'
+export type ChoiceCorrectTone = 'green' | 'accent';
 
 /**
  * Web size scale. `md` (default) is a 78-unit min-height plate with a 56 badge cap and a 26 label;
  * `sm` / `lg` scale every length by 46/57 / 69/57 and use the control label sizes 21 / 30.
  */
-export type ChoiceSize = 'sm' | 'md' | 'lg'
+export type ChoiceSize = 'sm' | 'md' | 'lg';
 
 export interface ChoiceButtonOwnProps {
   /** The heavy, sheared label (wraps to 2–3 lines). */
-  children?: ReactNode
+  children?: ReactNode;
   /** Secondary line under the label (upright, muted). Exposed as the accessible description. */
-  description?: ReactNode
+  description?: ReactNode;
   /** Content of the leading round cap: a letter, a number or an icon. Omit for no cap. */
-  badge?: ReactNode
+  badge?: ReactNode;
   /** Image / avatar / SVG slot (decorative: it is hidden from assistive tech, so the label must stand alone). */
-  media?: ReactNode
+  media?: ReactNode;
   /** Default `inline`. */
-  mediaLayout?: ChoiceMediaLayout
+  mediaLayout?: ChoiceMediaLayout;
   /** Selected look (pulsing accent ring + accent cap). Standalone buttons also get `aria-pressed`. */
-  selected?: boolean
+  selected?: boolean;
   /** Outcome; overrides the selected look. */
-  result?: ChoiceResult | null
+  result?: ChoiceResult | null;
   /** Default `green`. */
-  correctTone?: ChoiceCorrectTone
+  correctTone?: ChoiceCorrectTone;
   /** Screen-reader text appended to the label for `result`. Defaults: "Correct", "Incorrect", "Correct answer". */
-  resultLabel?: string
+  resultLabel?: string;
   /** Force the pressed look (stories, tests, externally driven presses). */
-  pressed?: boolean
+  pressed?: boolean;
   /** Mirrored on `data-value` (handy for delegation and tests). */
-  value?: string
+  value?: string;
   /**
    * `sm` / `md` / `lg` (default `md`): min-height 63 / 78 / 94, badge cap 45 / 56 / 68 design units,
    * label `fontSize.control.{sm,md,lg}` (21 / 26 / 30), description label / body / bodyLg; ring,
    * radius, padding, media and press outset scale with it. Mirrored on `data-size`.
    */
-  size?: ChoiceSize
-  ref?: ComponentPropsWithRef<'button'>['ref']
+  size?: ChoiceSize;
+  ref?: ComponentPropsWithRef<'button'>['ref'];
 }
 
 export type ChoiceButtonProps = ChoiceButtonOwnProps &
-  Omit<ComponentPropsWithRef<'button'>, keyof ChoiceButtonOwnProps>
+  Omit<ComponentPropsWithRef<'button'>, keyof ChoiceButtonOwnProps>;
 
 const RESULT_STATE: Record<ChoiceResult, ChoiceState> = {
   correct: 'correct',
@@ -68,18 +68,18 @@ const RESULT_STATE: Record<ChoiceResult, ChoiceState> = {
   incorrect: 'incorrect',
   error: 'incorrect',
   revealed: 'revealed',
-}
+};
 
 export const DEFAULT_RESULT_LABELS: Record<'correct' | 'incorrect' | 'revealed', string> = {
   correct: 'Correct',
   incorrect: 'Incorrect',
   revealed: 'Correct answer',
-}
+};
 
 /** Map a result (including the aliases) and the selected flag to the visual state. */
 export function choiceState(selected: boolean | undefined, result: ChoiceResult | null | undefined): ChoiceState {
-  if (result) return RESULT_STATE[result]
-  return selected ? 'selected' : 'idle'
+  if (result) return RESULT_STATE[result];
+  return selected ? 'selected' : 'idle';
 }
 
 /**
@@ -87,15 +87,23 @@ export function choiceState(selected: boolean | undefined, result: ChoiceResult 
  * to 2–3 lines keeps every line on the same left edge instead of the staircase a sheared block makes.
  */
 function shearWords(text: string): ReactNode[] {
-  const out: ReactNode[] = []
+  const out: ReactNode[] = [];
   text.split(/(\s+)/).forEach((part, i) => {
-    if (part === '') return
-    out.push(/^\s+$/.test(part) ? ' ' : <span key={i} className="zzz-italic">{part}</span>)
-  })
-  return out
+    if (part === '') return;
+    out.push(
+      /^\s+$/.test(part) ? (
+        ' '
+      ) : (
+        <span key={i} className="zzz-italic">
+          {part}
+        </span>
+      )
+    );
+  });
+  return out;
 }
 
-const TOGGLE_ROLES = new Set(['radio', 'checkbox', 'menuitemradio', 'menuitemcheckbox', 'switch', 'option'])
+const TOGGLE_ROLES = new Set(['radio', 'checkbox', 'menuitemradio', 'menuitemcheckbox', 'switch', 'option']);
 
 /**
  * A large selectable option on the dark pill material (ring + lit bevel + dot mesh), with an
@@ -133,26 +141,33 @@ export function ChoiceButton(props: ChoiceButtonProps) {
     onBlur,
     ref,
     ...rest
-  } = props
+  } = props;
 
-  const uid = useId()
-  const labelId = `${uid}-label`
-  const descId = `${uid}-desc`
-  const ariaDisabled = rest['aria-disabled'] === true || rest['aria-disabled'] === 'true'
-  const inert = disabled || ariaDisabled
-  const state = choiceState(selected, result)
-  const isResult = state === 'correct' || state === 'incorrect' || state === 'revealed'
-  const hasCap = badge != null && badge !== false
-  const hasMedia = media != null && media !== false
-  const hasDesc = description != null && description !== false
+  const uid = useId();
+  const labelId = `${uid}-label`;
+  const descId = `${uid}-desc`;
+  const ariaDisabled = rest['aria-disabled'] === true || rest['aria-disabled'] === 'true';
+  const inert = disabled || ariaDisabled;
+  const state = choiceState(selected, result);
+  const isResult = state === 'correct' || state === 'incorrect' || state === 'revealed';
+  const hasCap = badge != null && badge !== false;
+  const hasMedia = media != null && media !== false;
+  const hasDesc = description != null && description !== false;
 
-  const flash = usePressFlash<HTMLButtonElement>({ disabled: inert, onKeyDown, onKeyUp, onBlur })
-  const isPressed = !inert && (pressed || 'data-pressed' in flash)
+  const flash = usePressFlash<HTMLButtonElement>({
+    disabled: inert,
+    onKeyDown,
+    onKeyUp,
+    onBlur,
+  });
+  const isPressed = !inert && (pressed || 'data-pressed' in flash);
 
-  const glyph = state === 'incorrect' ? <CloseIcon /> : <CheckIcon />
-  const srResult = isResult ? (resultLabel ?? DEFAULT_RESULT_LABELS[state as keyof typeof DEFAULT_RESULT_LABELS]) : null
+  const glyph = state === 'incorrect' ? <CloseIcon /> : <CheckIcon />;
+  const srResult = isResult
+    ? (resultLabel ?? DEFAULT_RESULT_LABELS[state as keyof typeof DEFAULT_RESULT_LABELS])
+    : null;
 
-  const toggleRole = role != null && TOGGLE_ROLES.has(role)
+  const toggleRole = role != null && TOGGLE_ROLES.has(role);
   const stateAria =
     selected === undefined
       ? null
@@ -160,18 +175,18 @@ export function ChoiceButton(props: ChoiceButtonProps) {
         ? { 'aria-checked': selected }
         : role == null
           ? { 'aria-pressed': selected }
-          : null
+          : null;
 
-  const named = rest['aria-label'] != null || rest['aria-labelledby'] != null
+  const named = rest['aria-label'] != null || rest['aria-labelledby'] != null;
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     if (inert) {
-      event.preventDefault()
-      event.stopPropagation()
-      return
+      event.preventDefault();
+      event.stopPropagation();
+      return;
     }
-    onClick?.(event)
-  }
+    onClick?.(event);
+  };
 
   return (
     <button
@@ -196,7 +211,7 @@ export function ChoiceButton(props: ChoiceButtonProps) {
         'zzz-focusable',
         hasCap && 'zzz-choice--capped',
         hasMedia && `zzz-choice--media-${mediaLayout}`,
-        className,
+        className
       )}
       onClick={handleClick}
       onKeyDown={flash.onKeyDown as (e: KeyboardEvent<HTMLButtonElement>) => void}
@@ -213,7 +228,9 @@ export function ChoiceButton(props: ChoiceButtonProps) {
           <span className="zzz-choice__cap" aria-hidden="true">
             <span className="zzz-choice__disc zzz-pressable__hide" />
             {isResult ? <span className="zzz-choice__dot zzz-pressable__hide" /> : null}
-            <span className="zzz-choice__badge">{isResult ? <span className="zzz-choice__glyph">{glyph}</span> : badge}</span>
+            <span className="zzz-choice__badge">
+              {isResult ? <span className="zzz-choice__glyph">{glyph}</span> : badge}
+            </span>
           </span>
         ) : null}
         {hasMedia && mediaLayout === 'inline' ? (
@@ -250,5 +267,5 @@ export function ChoiceButton(props: ChoiceButtonProps) {
         ) : null}
       </span>
     </button>
-  )
+  );
 }

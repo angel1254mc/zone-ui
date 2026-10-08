@@ -64,9 +64,15 @@
   gap: calc(28 * var(--zzz-px)) calc(48 * var(--zzz-px));
   align-items: start;
 }
-.zzz-intro-showcase__results > :nth-child(1) { grid-area: tiles; }
-.zzz-intro-showcase__results > :nth-child(2) { grid-area: grid; }
-.zzz-intro-showcase__results > :nth-child(3) { grid-area: chart; }
+.zzz-intro-showcase__results > :nth-child(1) {
+  grid-area: tiles;
+}
+.zzz-intro-showcase__results > :nth-child(2) {
+  grid-area: grid;
+}
+.zzz-intro-showcase__results > :nth-child(3) {
+  grid-area: chart;
+}
 
 @container (max-width: 820px) {
   .zzz-intro-showcase__grid,
@@ -74,7 +80,9 @@
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas: none;
   }
-  .zzz-intro-showcase__results > :nth-child(n) { grid-area: auto; }
+  .zzz-intro-showcase__results > :nth-child(n) {
+    grid-area: auto;
+  }
 }
 
 .zzz-intro-showcase__question {

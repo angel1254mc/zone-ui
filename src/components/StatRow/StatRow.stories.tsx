@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import { AttackIcon } from '../../icons'
-import { SectionLabel } from '../SectionLabel'
-import { EmptyStatRow, StatGrid, StatRow } from './StatRow'
-import { Specimen, Specimens } from './Specimens.story-helpers'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { AttackIcon } from '../../icons';
+import { SectionLabel } from '../SectionLabel';
+import { EmptyStatRow, StatGrid, StatRow } from './StatRow';
+import { Specimen, Specimens } from './Specimens.story-helpers';
 
-const gpx = (n: number) => `calc(${n} * var(--zzz-px))`
+const gpx = (n: number) => `calc(${n} * var(--zzz-px))`;
 
 const meta = {
   title: 'Data Display/StatRow',
@@ -12,7 +12,10 @@ const meta = {
   tags: ['autodocs'],
   args: { label: 'Base ATK', value: '684', variant: 'panel' },
   argTypes: {
-    variant: { control: 'inline-radio', options: ['panel', 'grid', 'agent', 'equip'] },
+    variant: {
+      control: 'inline-radio',
+      options: ['panel', 'grid', 'agent', 'equip'],
+    },
     highlight: { control: 'boolean' },
     rollCount: { control: { type: 'number', min: 0, max: 5 } },
     fit: { control: 'inline-radio', options: [false, true, 'wrap'] },
@@ -20,12 +23,7 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component:
-          'Label/value capsule. Variants: `panel` 412 × 41 #161616 (side detail panel), `grid` 300 × 40 #0D0D0D ' +
-          '(large panel), `agent` 350 × 37 black with `bodyLg` text (profile sheet, pitch 52), `equip` ~550 × 45 black ' +
-          'with a flush left end (equipment list). `highlight` turns label and value orange; `rollCount` appends the drive-disc ' +
-          '"+n" tag; `fit` shrinks (`true`) or wraps (`"wrap"`) long labels. Standalone rows are a `<dl>`; inside `StatGrid` they are ' +
-          '`<div>` groups of the grid `<dl>`. `EmptyStatRow` is the #0C0C0C "EMPTY" slot with 4 px rules.',
+        component: 'Label/value stat capsule.',
       },
     },
   },
@@ -36,35 +34,111 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof StatRow>
+} satisfies Meta<typeof StatRow>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Panel: Story = {}
+export const Panel: Story = {};
 export const Grid: Story = {
   args: { variant: 'grid' },
-  decorators: [(Story) => <div style={{ padding: gpx(20), background: 'var(--zzz-color-surface-raised)' }}><Story /></div>],
-}
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          padding: gpx(20),
+          background: 'var(--zzz-color-surface-raised)',
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
+};
 export const Agent: Story = {
   args: { variant: 'agent', label: 'ATK', value: '2,155' },
-  decorators: [(Story) => <div style={{ padding: gpx(20), background: 'var(--zzz-color-surface-agent-info)' }}><Story /></div>],
-}
-export const Equip: Story = { args: { variant: 'equip', label: 'Base ATK', value: '594' } }
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          padding: gpx(20),
+          background: 'var(--zzz-color-surface-agent-info)',
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
+};
+export const Equip: Story = {
+  args: { variant: 'equip', label: 'Base ATK', value: '594' },
+};
 export const Highlight: Story = {
-  args: { variant: 'agent', label: 'CRIT Rate', value: '45.8%', highlight: true },
-  decorators: [(Story) => <div style={{ padding: gpx(20), background: 'var(--zzz-color-surface-agent-info)' }}><Story /></div>],
-}
-export const RollCount: Story = { args: { label: 'CRIT Rate', value: '4.8%', rollCount: 2 } }
-export const WithIcon: Story = { args: { label: 'ATK', value: '30%', icon: <AttackIcon /> } }
+  args: {
+    variant: 'agent',
+    label: 'CRIT Rate',
+    value: '45.8%',
+    highlight: true,
+  },
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          padding: gpx(20),
+          background: 'var(--zzz-color-surface-agent-info)',
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
+};
+export const RollCount: Story = {
+  args: { label: 'CRIT Rate', value: '4.8%', rollCount: 2 },
+};
+export const WithIcon: Story = {
+  args: { label: 'ATK', value: '30%', icon: <AttackIcon /> },
+};
 export const FitShrink: Story = {
-  args: { variant: 'agent', label: 'Anomaly Proficiency', value: '152', fit: true },
-  decorators: [(Story) => <div style={{ padding: gpx(20), background: 'var(--zzz-color-surface-agent-info)' }}><Story /></div>],
-}
+  args: {
+    variant: 'agent',
+    label: 'Anomaly Proficiency',
+    value: '152',
+    fit: true,
+  },
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          padding: gpx(20),
+          background: 'var(--zzz-color-surface-agent-info)',
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
+};
 export const FitWrap: Story = {
-  args: { variant: 'agent', label: 'Automatic Adrenaline Accumulation', value: '2', fit: 'wrap' },
-  decorators: [(Story) => <div style={{ padding: gpx(20), background: 'var(--zzz-color-surface-agent-info)' }}><Story /></div>],
-}
+  args: {
+    variant: 'agent',
+    label: 'Automatic Adrenaline Accumulation',
+    value: '2',
+    fit: 'wrap',
+  },
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          padding: gpx(20),
+          background: 'var(--zzz-color-surface-agent-info)',
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
+};
 
 export const Empty: StoryObj<typeof EmptyStatRow> = {
   render: () => (
@@ -77,12 +151,19 @@ export const Empty: StoryObj<typeof EmptyStatRow> = {
       </Specimen>
     </Specimens>
   ),
-}
+};
 
 /** Large-panel stat grid: 2 columns, 21 / 14 gaps, EMPTY sub-stat slots. */
 export const TwoColumnGrid: Story = {
   render: () => (
-    <div style={{ padding: gpx(20), background: 'var(--zzz-color-surface-raised)', display: 'grid', gap: gpx(10) }}>
+    <div
+      style={{
+        padding: gpx(20),
+        background: 'var(--zzz-color-surface-raised)',
+        display: 'grid',
+        gap: gpx(10),
+      }}
+    >
       <SectionLabel>Base Stat</SectionLabel>
       <StatGrid columns={2} variant="grid">
         <StatRow label="Base ATK" value="684" />
@@ -97,7 +178,7 @@ export const TwoColumnGrid: Story = {
       </StatGrid>
     </div>
   ),
-}
+};
 
 const agentStats = (
   <StatGrid columns={2} variant="agent">
@@ -112,9 +193,18 @@ const agentStats = (
     <StatRow label="Sheer Force" value="2,352" highlight />
     <StatRow label="Automatic Adrenaline Accumulation" value="2" fit="wrap" />
   </StatGrid>
-)
+);
 
 /** Profile-sheet stat grid: black rows on #232323, pitch 52, orange highlighted stats. */
 export const AgentGrid: Story = {
-  render: () => <div style={{ padding: gpx(20), background: 'var(--zzz-color-surface-agent-info)' }}>{agentStats}</div>,
-}
+  render: () => (
+    <div
+      style={{
+        padding: gpx(20),
+        background: 'var(--zzz-color-surface-agent-info)',
+      }}
+    >
+      {agentStats}
+    </div>
+  ),
+};

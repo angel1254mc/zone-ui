@@ -107,7 +107,11 @@
   aspect-ratio: var(--zzz-content-card-media-ratio, 16 / 9);
   /* the art-stage vignette of the large panel (lit top-left, dark centre) behind transparent art */
   background:
-    radial-gradient(ellipse 70% 60% at 0% 0%, color-mix(in srgb, var(--zzz-color-surface-art-stage), #ffffff 9%), transparent 100%),
+    radial-gradient(
+      ellipse 70% 60% at 0% 0%,
+      color-mix(in srgb, var(--zzz-color-surface-art-stage), #ffffff 9%),
+      transparent 100%
+    ),
     var(--zzz-color-surface-art-stage);
 }
 .zzz-content-card__media > :is(img, picture, svg, video, canvas) {

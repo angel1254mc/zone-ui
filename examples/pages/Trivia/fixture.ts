@@ -5,1343 +5,1198 @@
  * <GameArtProvider state={{ status: 'ready', manifest: fixtureManifest }}>. Regenerate by slicing
  * art-manifest.json again when the manifest schema changes.
  */
-import type { GameArtManifest } from '../../art'
+import type { GameArtManifest } from '../../art';
 
 export const fixtureManifest: GameArtManifest = {
- "schema": 2,
- "source": "https://static.nanoka.cc",
- "version": "3.2",
- "credits": "Game data and art: static.nanoka.cc (community datamine) and Enka.Network (namecards). Zenless Zone Zero © HoYoverse. Images are loaded by URL at runtime and are not part of this repository or the published package.",
- "sources": {
-  "nanoka": "https://static.nanoka.cc/assets/zzz/",
-  "enka": "https://enka.network/ui/zzz/"
- },
- "agents": [
-  {
-   "id": "1011",
-   "name": "Anby",
-   "code": "Anby",
-   "rank": "A",
-   "element": "Electric",
-   "baseElement": "Electric",
-   "specialty": "Stun",
-   "faction": 1,
-   "images": {
-    "circle": "IconRoleCircle01.webp",
-    "select": "IconRoleSelect01.webp",
-    "crop": "IconRoleCrop01.webp",
-    "general": "IconRoleGeneral01.webp",
-    "full": "IconRole01.webp"
-   },
-   "fullSize": [
-    1268,
-    1716
-   ],
-   "namecard": "ImgCardRoleS0001.png"
-  },
-  {
-   "id": "1021",
-   "name": "Nekomata",
-   "code": "Nekomata",
-   "rank": "S",
-   "element": "Physical",
-   "baseElement": "Physical",
-   "specialty": "Attack",
-   "faction": 1,
-   "images": {
-    "circle": "IconRoleCircle11.webp",
-    "select": "IconRoleSelect11.webp",
-    "crop": "IconRoleCrop11.webp",
-    "general": "IconRoleGeneral11.webp",
-    "full": "IconRole11.webp"
-   },
-   "fullSize": [
-    932,
-    1480
-   ],
-   "namecard": "ImgCardRoleS0011.png"
-  },
-  {
-   "id": "1031",
-   "name": "Nicole",
-   "code": "Nicole",
-   "rank": "A",
-   "element": "Ether",
-   "baseElement": "Ether",
-   "specialty": "Support",
-   "faction": 1,
-   "images": {
-    "circle": "IconRoleCircle12.webp",
-    "select": "IconRoleSelect12.webp",
-    "crop": "IconRoleCrop12.webp",
-    "general": "IconRoleGeneral12.webp",
-    "full": "IconRole12.webp"
-   },
-   "fullSize": [1078, 1904],
-   "namecard": "ImgCardRoleS0012.png"
-  },
-  {
-   "id": "1041",
-   "name": "Soldier 11",
-   "code": "Soldier 11",
-   "rank": "S",
-   "element": "Fire",
-   "baseElement": "Fire",
-   "specialty": "Attack",
-   "faction": 5,
-   "images": {
-    "circle": "IconRoleCircle05.webp",
-    "select": "IconRoleSelect05.webp",
-    "crop": "IconRoleCrop05.webp",
-    "general": "IconRoleGeneral05.webp",
-    "full": "IconRole05.webp"
-   },
-   "fullSize": [
-    892,
-    1936
-   ],
-   "namecard": "ImgCardRoleS0005.png"
-  },
-  {
-   "id": "1061",
-   "name": "Corin",
-   "code": "Corin",
-   "rank": "A",
-   "element": "Physical",
-   "baseElement": "Physical",
-   "specialty": "Attack",
-   "faction": 2,
-   "images": {
-    "circle": "IconRoleCircle09.webp",
-    "select": "IconRoleSelect09.webp",
-    "crop": "IconRoleCrop09.webp",
-    "general": "IconRoleGeneral09.webp",
-    "full": "IconRole09.webp"
-   },
-   "fullSize": [
-    1344,
-    1752
-   ],
-   "namecard": "ImgCardRoleS0009.png"
-  },
-  {
-   "id": "1081",
-   "name": "Billy",
-   "code": "Billy",
-   "rank": "A",
-   "element": "Physical",
-   "baseElement": "Physical",
-   "specialty": "Attack",
-   "faction": 1,
-   "images": {
-    "circle": "IconRoleCircle10.webp",
-    "select": "IconRoleSelect10.webp",
-    "crop": "IconRoleCrop10.webp",
-    "general": "IconRoleGeneral10.webp",
-    "full": "IconRole10.webp"
-   },
-   "fullSize": [
-    1516,
-    2424
-   ],
-   "namecard": "ImgCardRoleS0010.png"
-  },
-  {
-   "id": "1091",
-   "name": "Miyabi",
-   "code": "Miyabi",
-   "rank": "S",
-   "element": "Frost",
-   "baseElement": "Ice",
-   "specialty": "Anomaly",
-   "faction": 6,
-   "images": {
-    "circle": "IconRoleCircle13.webp",
-    "select": "IconRoleSelect13.webp",
-    "crop": "IconRoleCrop13.webp",
-    "general": "IconRoleGeneral13.webp",
-    "full": "IconRole13.webp"
-   },
-   "fullSize": [
-    1516,
-    2128
-   ],
-   "namecard": "ImgCardRoleS0013.png"
-  },
-  {
-   "id": "1101",
-   "name": "Koleda",
-   "code": "Koleda",
-   "rank": "S",
-   "element": "Fire",
-   "baseElement": "Fire",
-   "specialty": "Stun",
-   "faction": 3,
-   "images": {
-    "circle": "IconRoleCircle14.webp",
-    "select": "IconRoleSelect14.webp",
-    "crop": "IconRoleCrop14.webp",
-    "general": "IconRoleGeneral14.webp",
-    "full": "IconRole14.webp"
-   },
-   "fullSize": [
-    1472,
-    1712
-   ],
-   "namecard": "ImgCardRoleS0014.png"
-  },
-  {
-   "id": "1111",
-   "name": "Anton",
-   "code": "Anton",
-   "rank": "A",
-   "element": "Electric",
-   "baseElement": "Electric",
-   "specialty": "Attack",
-   "faction": 3,
-   "images": {
-    "circle": "IconRoleCircle15.webp",
-    "select": "IconRoleSelect15.webp",
-    "crop": "IconRoleCrop15.webp",
-    "general": "IconRoleGeneral15.webp",
-    "full": "IconRole15.webp"
-   },
-   "fullSize": [
-    1440,
-    2456
-   ],
-   "namecard": "ImgCardRoleS0015.png"
-  },
-  {
-   "id": "1121",
-   "name": "Ben",
-   "code": "Ben",
-   "rank": "A",
-   "element": "Fire",
-   "baseElement": "Fire",
-   "specialty": "Defense",
-   "faction": 3,
-   "images": {
-    "circle": "IconRoleCircle16.webp",
-    "select": "IconRoleSelect16.webp",
-    "crop": "IconRoleCrop16.webp",
-    "general": "IconRoleGeneral16.webp",
-    "full": "IconRole16.webp"
-   },
-   "fullSize": [
-    1716,
-    2268
-   ],
-   "namecard": "ImgCardRoleS0016.png"
-  },
-  {
-   "id": "1131",
-   "name": "Soukaku",
-   "code": "Soukaku",
-   "rank": "A",
-   "element": "Ice",
-   "baseElement": "Ice",
-   "specialty": "Support",
-   "faction": 6,
-   "images": {
-    "circle": "IconRoleCircle17.webp",
-    "select": "IconRoleSelect17.webp",
-    "crop": "IconRoleCrop17.webp",
-    "general": "IconRoleGeneral17.webp",
-    "full": "IconRole17.webp"
-   },
-   "fullSize": [
-    1332,
-    1776
-   ],
-   "namecard": "ImgCardRoleS0017.png"
-  },
-  {
-   "id": "1141",
-   "name": "Lycaon",
-   "code": "Lycaon",
-   "rank": "S",
-   "element": "Ice",
-   "baseElement": "Ice",
-   "specialty": "Stun",
-   "faction": 2,
-   "images": {
-    "circle": "IconRoleCircle18.webp",
-    "select": "IconRoleSelect18.webp",
-    "crop": "IconRoleCrop18.webp",
-    "general": "IconRoleGeneral18.webp",
-    "full": "IconRole18.webp"
-   },
-   "fullSize": [
-    1836,
-    2480
-   ],
-   "namecard": "ImgCardRoleS0018.png"
-  },
-  {
-   "id": "1151",
-   "name": "Lucy",
-   "code": "Lucy",
-   "rank": "A",
-   "element": "Fire",
-   "baseElement": "Fire",
-   "specialty": "Support",
-   "faction": 4,
-   "images": {
-    "circle": "IconRoleCircle27.webp",
-    "select": "IconRoleSelect27.webp",
-    "crop": "IconRoleCrop27.webp",
-    "general": "IconRoleGeneral27.webp",
-    "full": "IconRole27.webp"
-   },
-   "fullSize": [
-    1356,
-    1560
-   ],
-   "namecard": "ImgCardRoleS0027.png"
-  },
-  {
-   "id": "1181",
-   "name": "Grace",
-   "code": "Grace",
-   "rank": "S",
-   "element": "Electric",
-   "baseElement": "Electric",
-   "specialty": "Anomaly",
-   "faction": 3,
-   "images": {
-    "circle": "IconRoleCircle20.webp",
-    "select": "IconRoleSelect20.webp",
-    "crop": "IconRoleCrop20.webp",
-    "general": "IconRoleGeneral20.webp",
-    "full": "IconRole20.webp"
-   },
-   "fullSize": [
-    780,
-    2008
-   ],
-   "namecard": "ImgCardRoleS0020.png"
-  },
-  {
-   "id": "1191",
-   "name": "Ellen",
-   "code": "Ellen",
-   "rank": "S",
-   "element": "Ice",
-   "baseElement": "Ice",
-   "specialty": "Attack",
-   "faction": 2,
-   "images": {
-    "circle": "IconRoleCircle21.webp",
-    "select": "IconRoleSelect21.webp",
-    "crop": "IconRoleCrop21.webp",
-    "general": "IconRoleGeneral21.webp",
-    "full": "IconRole21.webp"
-   },
-   "fullSize": [
-    1644,
-    1932
-   ],
-   "namecard": "ImgCardRoleS0021.png"
-  },
-  {
-   "id": "1211",
-   "name": "Rina",
-   "code": "Rina",
-   "rank": "S",
-   "element": "Electric",
-   "baseElement": "Electric",
-   "specialty": "Support",
-   "faction": 2,
-   "images": {
-    "circle": "IconRoleCircle22.webp",
-    "select": "IconRoleSelect22.webp",
-    "crop": "IconRoleCrop22.webp",
-    "general": "IconRoleGeneral22.webp",
-    "full": "IconRole22.webp"
-   },
-   "fullSize": [
-    1544,
-    2012
-   ],
-   "namecard": "ImgCardRoleS0022.png"
-  },
-  {
-   "id": "1241",
-   "name": "Zhu Yuan",
-   "code": "Zhu Yuan",
-   "rank": "S",
-   "element": "Ether",
-   "baseElement": "Ether",
-   "specialty": "Attack",
-   "faction": 7,
-   "images": {
-    "circle": "IconRoleCircle23.webp",
-    "select": "IconRoleSelect23.webp",
-    "crop": "IconRoleCrop23.webp",
-    "general": "IconRoleGeneral23.webp",
-    "full": "IconRole23.webp"
-   },
-   "fullSize": [
-    1016,
-    2300
-   ],
-   "namecard": "ImgCardRoleS0023.png"
-  },
-  {
-   "id": "1261",
-   "name": "Jane",
-   "code": "Jane",
-   "rank": "S",
-   "element": "Physical",
-   "baseElement": "Physical",
-   "specialty": "Anomaly",
-   "faction": 7,
-   "images": {
-    "circle": "IconRoleCircle24.webp",
-    "select": "IconRoleSelect24.webp",
-    "crop": "IconRoleCrop24.webp",
-    "general": "IconRoleGeneral24.webp",
-    "full": "IconRole24.webp"
-   },
-   "fullSize": [
-    1132,
-    2120
-   ],
-   "namecard": "ImgCardRoleS0024.png"
-  },
-  {
-   "id": "1271",
-   "name": "Seth",
-   "code": "Seth",
-   "rank": "A",
-   "element": "Electric",
-   "baseElement": "Electric",
-   "specialty": "Defense",
-   "faction": 7,
-   "images": {
-    "circle": "IconRoleCircle30.webp",
-    "select": "IconRoleSelect30.webp",
-    "crop": "IconRoleCrop30.webp",
-    "general": "IconRoleGeneral30.webp",
-    "full": "IconRole30.webp"
-   },
-   "fullSize": [
-    1656,
-    2480
-   ],
-   "namecard": "ImgCardRoleS0030.png"
-  },
-  {
-   "id": "1311",
-   "name": "Astra Yao",
-   "code": "Astra",
-   "rank": "S",
-   "element": "Ether",
-   "baseElement": "Ether",
-   "specialty": "Support",
-   "faction": 8,
-   "images": {
-    "circle": "IconRoleCircle36.webp",
-    "select": "IconRoleSelect36.webp",
-    "crop": "IconRoleCrop36.webp",
-    "general": "IconRoleGeneral36.webp",
-    "full": "IconRole36.webp"
-   },
-   "fullSize": [
-    1276,
-    2204
-   ],
-   "namecard": "ImgCardRoleS0036.png"
-  },
-  {
-   "id": "1371",
-   "name": "Yixuan",
-   "code": "YiXuan",
-   "rank": "S",
-   "element": "Auric Ink",
-   "baseElement": "Ether",
-   "specialty": "Rupture",
-   "faction": 10,
-   "images": {
-    "circle": "IconRoleCircle44.webp",
-    "select": "IconRoleSelect44.webp",
-    "crop": "IconRoleCrop44.webp",
-    "general": "IconRoleGeneral44.webp",
-    "full": "IconRole44.webp"
-   },
-   "fullSize": [
-    1484,
-    2048
-   ],
-   "namecard": "ImgCardRoleS0044.png"
-  },
-  {
-   "id": "1431",
-   "name": "Ye Shunguang",
-   "code": "Ye Shunguang",
-   "rank": "S",
-   "element": "Honed Edge",
-   "baseElement": "Physical",
-   "specialty": "Attack",
-   "faction": 10,
-   "images": {
-    "circle": "IconRoleCircle55.webp",
-    "select": "IconRoleSelect55.webp",
-    "crop": "IconRoleCrop55.webp",
-    "general": "IconRoleGeneral55.webp",
-    "full": "IconRole55.webp"
-   },
-   "fullSize": [
-    1792,
-    2556
-   ],
-   "namecard": "ImgCardRoleS0055.png"
-  },
-  {
-   "id": "1561",
-   "name": "Velina",
-   "code": "Velina",
-   "rank": "S",
-   "element": "Wind",
-   "baseElement": "Wind",
-   "specialty": "Anomaly",
-   "faction": 16,
-   "images": {
-    "circle": "IconRoleCircle64.webp",
-    "select": "IconRoleSelect64.webp",
-    "crop": "IconRoleCrop64.webp",
-    "general": "IconRoleGeneral64.webp",
-    "full": "IconRole64.webp"
-   },
-   "fullSize": [
-    1520,
-    1896
-   ],
-   "namecard": "ImgCardRoleS0064.png"
-  },
-  {
-   "id": "1581",
-   "name": "Remielle",
-   "code": "Remielle",
-   "rank": "S",
-   "element": "Lumiflux",
-   "baseElement": "Lumiflux",
-   "specialty": "Anomaly",
-   "faction": 17,
-   "images": {
-    "circle": "IconRoleCircle67.webp",
-    "select": "IconRoleSelect67.webp",
-    "crop": "IconRoleCrop67.webp",
-    "general": "IconRoleGeneral67.webp",
-    "full": "IconRole67.webp"
-   },
-   "fullSize": [
-    2128,
-    1324
-   ],
-   "namecard": "ImgCardRoleS0067.png"
-  },
-  {
-   "id": "1611",
-   "name": "Claret",
-   "code": "Claret",
-   "rank": "S",
-   "element": "Electric",
-   "baseElement": "Electric",
-   "specialty": "Armorer",
-   "faction": 16,
-   "images": {
-    "circle": "IconRoleCircle1611.webp",
-    "select": "IconRoleSelect1611.webp",
-    "crop": "IconRoleCrop1611.webp",
-    "general": "IconRoleGeneral1611.webp",
-    "full": "IconRole1611.webp"
-   },
-   "fullSize": [
-    1952,
-    2776
-   ],
-   "namecard": null
-  }
- ],
- "wEngines": [
-  {
-   "id": "12001",
-   "name": "[Lunar] Pleniluna",
-   "rank": "B",
-   "specialty": "Attack",
-   "baseAtk": 475,
-   "advancedStat": "ATK",
-   "description": "A W-Engine that prioritizes damage output over noise reduction. It can indiscriminately deal considerable damage to all units nearby.",
-   "image": "Weapon_B_Common_01.webp"
-  },
-  {
-   "id": "12005",
-   "name": "[Reverb] Mark II",
-   "rank": "B",
-   "specialty": "Support",
-   "baseAtk": 475,
-   "advancedStat": "Energy Regen",
-   "description": "A standardized W-Engine with balanced performance that enhances its owner's and their teammates' combat effectiveness in all aspects.",
-   "image": "Weapon_B_Common_05.webp"
-  },
-  {
-   "id": "12009",
-   "name": "[Vortex] Hatchet",
-   "rank": "B",
-   "specialty": "Stun",
-   "baseAtk": 475,
-   "advancedStat": "Energy Regen",
-   "description": "A frequency-converting W-Engine that can quickly generate excessive power and effectively increase its user's battle prowess.",
-   "image": "Weapon_B_Common_09.webp"
-  },
-  {
-   "id": "12013",
-   "name": "[Identity] Base",
-   "rank": "B",
-   "specialty": "Defense",
-   "baseAtk": 475,
-   "advancedStat": "DEF",
-   "description": "A W-Engine with a component structure adjusted according to specific parameters. It can enhance the defensive capabilities of those who have a certain style of combat.",
-   "image": "Weapon_B_Common_13.webp"
-  },
-  {
-   "id": "13001",
-   "name": "Street Superstar",
-   "rank": "A",
-   "specialty": "Attack",
-   "baseAtk": 594,
-   "advancedStat": "ATK",
-   "description": "A custom-made W-Engine designed for urban music lovers. It sacrifices heat dissipation components for improved sound quality.",
-   "image": "Weapon_A_Common_01.webp"
-  },
-  {
-   "id": "13002",
-   "name": "Slice of Time",
-   "rank": "A",
-   "specialty": "Support",
-   "baseAtk": 594,
-   "advancedStat": "PEN Ratio",
-   "description": "A special W-Engine equipped with a high-speed camera module. The best choice for in-Hollow photography enthusiasts.",
-   "image": "Weapon_A_Common_02.webp"
-  },
-  {
-   "id": "13005",
-   "name": "Steam Oven",
-   "rank": "A",
-   "specialty": "Stun",
-   "baseAtk": 594,
-   "advancedStat": "Energy Regen",
-   "description": "A high-power W-Engine that boasts a cutting-edge energy conversion system. It collects excess heat and supplies it to the steamer.",
-   "image": "Weapon_A_Common_05.webp"
-  },
-  {
-   "id": "13009",
-   "name": "Electro-Lip Gloss",
-   "rank": "A",
-   "specialty": "Anomaly",
-   "baseAtk": 594,
-   "advancedStat": "Anomaly Proficiency",
-   "description": "This damage-type W-Engine boasts a built-in current transformer, and automatically attracts electrically sensitive objects around the operator and deals additional damage to them.",
-   "image": "Weapon_A_Common_09.webp"
-  },
-  {
-   "id": "13010",
-   "name": "Bunny Band",
-   "rank": "A",
-   "specialty": "Defense",
-   "baseAtk": 594,
-   "advancedStat": "DEF",
-   "description": "A special W-Engine decorated with a fluffy bunny. However, it is just an imitation of the real animal.",
-   "image": "Weapon_A_Common_10.webp"
-  },
-  {
-   "id": "13013",
-   "name": "Gilded Blossom",
-   "rank": "A",
-   "specialty": "Attack",
-   "baseAtk": 594,
-   "advancedStat": "ATK",
-   "description": "A W-Engine with a grandiose and luxurious appearance equipped with a premium Ether-powered anti-theft device. It's actually used to provide the equipper with energy.",
-   "image": "Weapon_A_Common_13.webp"
-  },
-  {
-   "id": "13017",
-   "name": "Catty Luck",
-   "rank": "A",
-   "specialty": "Armorer",
-   "baseAtk": 356,
-   "advancedStat": "DEF",
-   "description": "Meow your way to good luck!",
-   "image": "Weapon_A_Common_17.webp"
-  },
-  {
-   "id": "13021",
-   "name": "Bloodmarrow Coffer",
-   "rank": "A",
-   "specialty": "Armorer",
-   "baseAtk": 356,
-   "advancedStat": "CRIT Rate",
-   "description": "A special W-Engine developed by the Flint family.",
-   "image": "Weapon_A_Common_21.webp"
-  },
-  {
-   "id": "13108",
-   "name": "Starlight Engine Replica",
-   "rank": "A",
-   "specialty": "Attack",
-   "baseAtk": 624,
-   "advancedStat": "ATK",
-   "description": "A customized supercomputing W-Engine, specialized in aim support and ballistic calculations. Modified by Billy, it now looks like some sort of knock-off Starlight Knight figurine.",
-   "image": "Weapon_A_1081.webp"
-  },
-  {
-   "id": "13115",
-   "name": "Kaboom the Cannon",
-   "rank": "A",
-   "specialty": "Support",
-   "baseAtk": 624,
-   "advancedStat": "Energy Regen",
-   "description": "A support W-Engine propelled by jets that is both mobile and impactful, it can traverse the entire battlefield providing combat buffs.",
-   "image": "Weapon_A_1151.webp"
-  },
-  {
-   "id": "13142",
-   "name": "Tremor Trigram Vessel",
-   "rank": "A",
-   "specialty": "Defense",
-   "baseAtk": 624,
-   "advancedStat": "ATK",
-   "description": "Pressing acupoints is like cooking. Striking the fatal acupoint is like setting the stove on fire, bringing disaster.",
-   "image": "Weapon_A_1421.webp"
-  },
-  {
-   "id": "14003",
-   "name": "Six Shooter",
-   "rank": "A",
-   "specialty": "Stun",
-   "baseAtk": 594,
-   "advancedStat": "Impact",
-   "description": "A special W-Engine modeled after a revolver. It can load bullet-shaped condensed Ether batteries, which release a great amount of power when fired.",
-   "image": "Weapon_S_Common_03.webp"
-  },
-  {
-   "id": "14107",
-   "name": "Tusks of Fury",
-   "rank": "S",
-   "specialty": "Defense",
-   "baseAtk": 713,
-   "advancedStat": "Impact",
-   "description": "A versatile W-Engine based on a motorcycle tire that Big Daddy made for Caesar.",
-   "image": "Weapon_S_1071.webp"
-  },
-  {
-   "id": "14116",
-   "name": "Blazing Laurel",
-   "rank": "S",
-   "specialty": "Stun",
-   "baseAtk": 713,
-   "advancedStat": "Impact",
-   "description": "A violent W-Engine that can ignite flames with a siphon. It deals simple and crude burn damage, encouraging relentless, bone-crushing follow-up attacks.",
-   "image": "Weapon_S_1161.webp"
-  },
-  {
-   "id": "14120",
-   "name": "Zanshin Herb Case",
-   "rank": "S",
-   "specialty": "Attack",
-   "baseAtk": 713,
-   "advancedStat": "CRIT DMG",
-   "description": "Bitterness and pain beget hope, and he devours them all.",
-   "image": "Weapon_S_1201.webp"
-  },
-  {
-   "id": "14125",
-   "name": "Ice-Jade Teapot",
-   "rank": "S",
-   "specialty": "Stun",
-   "baseAtk": 713,
-   "advancedStat": "Impact",
-   "description": "A custom stun W-Engine made for an Automaton referencing the combat style and abilities of one. Energy is stored within, then lashes outwards upon conversion.",
-   "image": "Weapon_S_1251.webp"
-  },
-  {
-   "id": "14131",
-   "name": "Elegant Vanity",
-   "rank": "S",
-   "specialty": "Support",
-   "baseAtk": 713,
-   "advancedStat": "ATK",
-   "description": "Underneath the radiant splendor, her genuine self has never been hidden.",
-   "image": "Weapon_S_1311.webp"
-  },
-  {
-   "id": "14136",
-   "name": "Spectral Gaze",
-   "rank": "S",
-   "specialty": "Stun",
-   "baseAtk": 713,
-   "advancedStat": "CRIT Rate",
-   "description": "Broken eyes hold both resilience and vulnerability.",
-   "image": "Weapon_S_1361.webp"
-  },
-  {
-   "id": "14140",
-   "name": "Practiced Perfection",
-   "rank": "S",
-   "specialty": "Anomaly",
-   "baseAtk": 713,
-   "advancedStat": "ATK",
-   "description": "Starlight became her blade, and she held courage and love firmly in her hands.",
-   "image": "Weapon_S_1401.webp"
-  },
-  {
-   "id": "14146",
-   "name": "Cordis Germina",
-   "rank": "S",
-   "specialty": "Attack",
-   "baseAtk": 713,
-   "advancedStat": "CRIT Rate",
-   "description": "Her journey continues along the long, endless circle.",
-   "image": "Weapon_S_1461.webp"
-  },
-  {
-   "id": "14150",
-   "name": "Angel in the Shell",
-   "rank": "S",
-   "specialty": "Anomaly",
-   "baseAtk": 713,
-   "advancedStat": "Anomaly Mastery",
-   "description": "There is a soul, even within a shell of steel.",
-   "image": "Weapon_S_1501.webp"
-  },
-  {
-   "id": "14154",
-   "name": "Frostfall Sickle",
-   "rank": "S",
-   "specialty": "Anomaly",
-   "baseAtk": 713,
-   "advancedStat": "Anomaly Mastery",
-   "description": "Carry out judgment until the end comes.",
-   "image": "Weapon_S_1541.webp"
-  },
-  {
-   "id": "14158",
-   "name": "Ode of Resurrected Wings",
-   "rank": "S",
-   "specialty": "Anomaly",
-   "baseAtk": 743,
-   "advancedStat": "ATK",
-   "description": "Drifting through the cracks of time in search of the light.",
-   "image": "Weapon_S_1581.webp",
-   "size": [
-    156,
-    156
-   ]
-  }
- ],
- "driveDiscSets": [
-  {
-   "id": "31000",
-   "name": "Woodpecker Electro",
-   "twoPiece": "CRIT Rate +8%",
-   "fourPiece": "Landing a critical hit on an enemy with a Basic Attack, Dodge Counter, or EX Special Attack increases the equipper's ATK by 9% for 6s. The buff duration for different skills are calculated separately.",
-   "image": "SuitWoodpeckerElectro.webp"
-  },
-  {
-   "id": "31200",
-   "name": "Shockstar Disco",
-   "twoPiece": "Impact +6%",
-   "fourPiece": "Basic Attacks, Dash Attacks, and Dodge Counters inflict 20% more Daze to the main target.",
-   "image": "SuitShockstarDisco.webp"
-  },
-  {
-   "id": "31400",
-   "name": "Hormone Punk",
-   "twoPiece": "ATK +10%",
-   "fourPiece": "Upon becoming the active character in combat, the equipper's ATK increases by 25% for 10s. This effect can trigger once every 20s.",
-   "image": "SuitHormonePunk.webp"
-  },
-  {
-   "id": "31600",
-   "name": "Swing Jazz",
-   "twoPiece": "Energy Regen +20%",
-   "fourPiece": "Launching a Chain Attack or Ultimate increases all squad members' DMG by 15% for 12s. Passive effects of the same name do not stack.",
-   "image": "SuitSwingJazz.webp"
-  },
-  {
-   "id": "31900",
-   "name": "Proto Punk",
-   "twoPiece": "Increases Shield effect by 15%.",
-   "fourPiece": "When any squad member triggers a Defensive Assist or Evasive Assist, all squad members deal 15% increased DMG, lasting 10s. Passive effects of the same name do not stack.",
-   "image": "SuitProtoPunk.webp"
-  },
-  {
-   "id": "32300",
-   "name": "Chaotic Metal",
-   "twoPiece": "<color=#FE437E>Ether DMG</color> +10%",
-   "fourPiece": "The equipper's CRIT DMG increases by 20%. When any character in the squad triggers Corruption DMG, this effect further increases by 5.5% for 8s, stacking up to 6 times. Repeated triggers reset the duration.",
-   "image": "SuitChaosMetal.webp"
-  },
-  {
-   "id": "32500",
-   "name": "Polar Metal",
-   "twoPiece": "<color=#98EFF0>Ice DMG</color> +10%",
-   "fourPiece": "Increase the DMG of Basic Attack and Dash Attack by 20%. When any squad member inflicts Freeze or Shatter, this effect increases by an additional 20% for 12s.",
-   "image": "SuitPolarMetal.webp"
-  },
-  {
-   "id": "32700",
-   "name": "Branch & Blade Song",
-   "twoPiece": "CRIT DMG +16%",
-   "fourPiece": "When Anomaly Mastery exceeds or equals 115 points, the equipper's CRIT DMG increases by 30%. When any squad member applies Freeze or triggers the Shatter effect on an enemy, the equipper's CRIT Rate increases by 12%, lasting 15s.",
-   "image": "SuitBranch&BladeSong.webp"
-  },
-  {
-   "id": "32900",
-   "name": "Shadow Harmony",
-   "twoPiece": "The DMG of <color=#FFFFFF>Aftershocks</color> and <color=#FFFFFF>Dash Attacks</color> is increased by 15%.",
-   "fourPiece": "Upon hitting an enemy with an Aftershock or Dash Attack, if the DMG dealt aligns with the equipper's attribute, the equipper gains 1 stack of a buff effect, at most once per use of a skill. For each stack, the equipper's ATK increases by 4%, and CRIT Rate increases by 4%. The effect can stack up to 3 times and lasts for 15s. Repeated triggers reset the duration.",
-   "image": "SuitShadow.webp"
-  },
-  {
-   "id": "33100",
-   "name": "Yunkui Tales",
-   "twoPiece": "HP +10%",
-   "fourPiece": "When using EX Special Attack, Chain Attack, or Ultimate, CRIT Rate increases by 4%, stacking up to 3 times and lasting 15s. Repeated triggers reset the duration. When having 3 stacks of this effect, Sheer DMG increases by 10%.",
-   "image": "SuitYunkuiTales.webp"
-  },
-  {
-   "id": "33300",
-   "name": "Dawn's Bloom",
-   "twoPiece": "Increases <color=#FFFFFF>Basic Attack</color> DMG by 15%.",
-   "fourPiece": "Increases Basic Attack DMG by 20%. When equipped by an Attack character, using an EX Special Attack or Ultimate will further increase Basic Attack DMG by 20% for 25s. Repeated triggers reset the duration.",
-   "image": "SuitDawnsBloom.webp"
-  },
-  {
-   "id": "33500",
-   "name": "White Water Ballad",
-   "twoPiece": "<color=#F0D12B>Physical DMG</color> +10%",
-   "fourPiece": "When the equipper is within any Ether Veil, their CRIT Rate increases by 10%. After leaving the Ether Veil, this buff remains for 15s. If the equipper is an Attack character, activating an Ether Veil or extending an Ether Veil's duration increases their CRIT Rate by 10% and ATK by 10% for 30s. Repeated triggers reset the duration.",
-   "image": "SuitWhiteWaterBallad.webp"
-  },
-  {
-   "id": "33700",
-   "name": "Bunny in Wonderland",
-   "twoPiece": "HP +10%",
-   "fourPiece": "When the equipper is a Defense character: When the equipper launches an EX Special Attack or any squad member triggers a Defensive Assist or Evasive Assist, all squad members' DMG increases by 6%, stacking up to 3 times, lasting 25s. Stacks decay one at a time, and duration refreshes when gained or decayed. Passive effects of the same name do not stack.",
-   "image": "SuitBunnyinWonderland.webp"
-  },
-  {
-   "id": "33900",
-   "name": "Wuthering Salon",
-   "twoPiece": "<color=#A6C5FD>Wind DMG</color> +10%.",
-   "fourPiece": "When the equipper uses an EX Special Attack, their Anomaly Proficiency increases by 25, stacking up to 2 times, and lasting 40s; repeated triggers reset the duration. When the equipper triggers Windswept, their DMG increases by 18% for 40s. Repeated triggers reset the duration.",
-   "image": "SuitWutheringSalon.webp"
-  },
-  {
-   "id": "34100",
-   "name": "Feathered Fate",
-   "twoPiece": "Anomaly Proficiency +30",
-   "fourPiece": "When the equipper enters the battlefield or is switched in as the active character, they gain the following buff: Anomaly Proficiency increases by 50. If the equipper is a Lumiflux character, Attribute Anomaly DMG increases by 15%, lasting 15s.\nThis buff remains active while the equipper is off-field.",
-   "image": "SuitFeatheredFate.webp"
-  }
- ],
- "items": [
-  {
-   "id": "10",
-   "name": "Denny",
-   "rarity": "b",
-   "category": "currency",
-   "class": 1,
-   "iconName": "IconCoin",
-   "image": "IconCoin.webp",
-   "size": [
-    156,
-    156
-   ]
-  },
-  {
-   "id": "100",
-   "name": "Polychrome",
-   "rarity": "s",
-   "category": "currency",
-   "class": 1,
-   "iconName": "IconCurrency",
-   "image": "IconCurrency.webp",
-   "size": [
-    256,
-    256
-   ]
-  },
-  {
-   "id": "501",
-   "name": "Battery Charge",
-   "rarity": "a",
-   "category": "currency",
-   "class": 2,
-   "iconName": "IconStamina",
-   "image": "IconStamina.webp",
-   "size": [
-    256,
-    256
-   ]
-  }
- ],
- "namecards": [
-  {
-   "id": "ImgCardEvent02",
-   "group": "event",
-   "image": "ImgCardEvent02.png",
-   "size": [
-    4096,
-    404
-   ]
-  },
-  {
-   "id": "ImgCardEvent03",
-   "group": "event",
-   "image": "ImgCardEvent03.png",
-   "size": [
-    4096,
-    404
-   ]
-  },
-  {
-   "id": "ImgCardEvent04",
-   "group": "event",
-   "image": "ImgCardEvent04.png",
-   "size": [
-    4096,
-    404
-   ]
-  },
-  {
-   "id": "ImgCardEvent05",
-   "group": "event",
-   "image": "ImgCardEvent05.png",
-   "size": [
-    4096,
-    404
-   ]
-  },
-  {
-   "id": "ImgCardEvent06",
-   "group": "event",
-   "image": "ImgCardEvent06.png",
-   "size": [
-    4096,
-    404
-   ]
-  },
-  {
-   "id": "ImgCardEvent09",
-   "group": "event",
-   "image": "ImgCardEvent09.png",
-   "size": [
-    4096,
-    402
-   ]
-  },
-  {
-   "id": "ImgCardEvent23",
-   "group": "event",
-   "image": "ImgCardEvent23.png",
-   "size": [
-    3000,
-    211
-   ]
-  },
-  {
-   "id": "ImgCardRoleS0001",
-   "group": "role",
-   "agentId": "1011",
-   "name": "Anby",
-   "image": "ImgCardRoleS0001.png",
-   "size": [
-    4096,
-    404
-   ]
-  },
-  {
-   "id": "ImgCardRoleS0005",
-   "group": "role",
-   "agentId": "1041",
-   "name": "Soldier 11",
-   "image": "ImgCardRoleS0005.png",
-   "size": [
-    4096,
-    404
-   ]
-  },
-  {
-   "id": "ImgCardRoleS0009",
-   "group": "role",
-   "agentId": "1061",
-   "name": "Corin",
-   "image": "ImgCardRoleS0009.png",
-   "size": [
-    4096,
-    404
-   ]
-  },
-  {
-   "id": "ImgCardRoleS0010",
-   "group": "role",
-   "agentId": "1081",
-   "name": "Billy",
-   "image": "ImgCardRoleS0010.png",
-   "size": [
-    4096,
-    404
-   ]
-  },
-  {
-   "id": "ImgCardRoleS0011",
-   "group": "role",
-   "agentId": "1021",
-   "name": "Nekomata",
-   "image": "ImgCardRoleS0011.png",
-   "size": [
-    4096,
-    404
-   ]
-  },
-  {
-   "id": "ImgCardRoleS0012",
-   "group": "role",
-   "agentId": "1031",
-   "name": "Nicole",
-   "image": "ImgCardRoleS0012.png",
-   "size": [
-    4096,
-    404
-   ]
-  },
-  {
-   "id": "ImgCardRoleS0013",
-   "group": "role",
-   "agentId": "1091",
-   "name": "Miyabi",
-   "image": "ImgCardRoleS0013.png",
-   "size": [
-    4096,
-    404
-   ]
-  },
-  {
-   "id": "ImgCardRoleS0014",
-   "group": "role",
-   "agentId": "1101",
-   "name": "Koleda",
-   "image": "ImgCardRoleS0014.png",
-   "size": [
-    4096,
-    404
-   ]
-  },
-  {
-   "id": "ImgCardRoleS0015",
-   "group": "role",
-   "agentId": "1111",
-   "name": "Anton",
-   "image": "ImgCardRoleS0015.png",
-   "size": [
-    4096,
-    404
-   ]
-  },
-  {
-   "id": "ImgCardRoleS0016",
-   "group": "role",
-   "agentId": "1121",
-   "name": "Ben",
-   "image": "ImgCardRoleS0016.png",
-   "size": [
-    4096,
-    404
-   ]
-  },
-  {
-   "id": "ImgCardRoleS0017",
-   "group": "role",
-   "agentId": "1131",
-   "name": "Soukaku",
-   "image": "ImgCardRoleS0017.png",
-   "size": [
-    4096,
-    404
-   ]
-  },
-  {
-   "id": "ImgCardRoleS0018",
-   "group": "role",
-   "agentId": "1141",
-   "name": "Lycaon",
-   "image": "ImgCardRoleS0018.png",
-   "size": [
-    4096,
-    404
-   ]
-  },
-  {
-   "id": "ImgCardRoleS0020",
-   "group": "role",
-   "agentId": "1181",
-   "name": "Grace",
-   "image": "ImgCardRoleS0020.png",
-   "size": [
-    4096,
-    404
-   ]
-  },
-  {
-   "id": "ImgCardRoleS0021",
-   "group": "role",
-   "agentId": "1191",
-   "name": "Ellen",
-   "image": "ImgCardRoleS0021.png",
-   "size": [
-    4096,
-    404
-   ]
-  },
-  {
-   "id": "ImgCardRoleS0022",
-   "group": "role",
-   "agentId": "1211",
-   "name": "Rina",
-   "image": "ImgCardRoleS0022.png",
-   "size": [
-    4096,
-    404
-   ]
-  },
-  {
-   "id": "ImgCardRoleS0023",
-   "group": "role",
-   "agentId": "1241",
-   "name": "Zhu Yuan",
-   "image": "ImgCardRoleS0023.png",
-   "size": [
-    4096,
-    404
-   ]
-  },
-  {
-   "id": "ImgCardRoleS0024",
-   "group": "role",
-   "agentId": "1261",
-   "name": "Jane",
-   "image": "ImgCardRoleS0024.png",
-   "size": [
-    4096,
-    404
-   ]
-  },
-  {
-   "id": "ImgCardRoleS0027",
-   "group": "role",
-   "agentId": "1151",
-   "name": "Lucy",
-   "image": "ImgCardRoleS0027.png",
-   "size": [
-    4096,
-    404
-   ]
-  },
-  {
-   "id": "ImgCardRoleS0030",
-   "group": "role",
-   "agentId": "1271",
-   "name": "Seth",
-   "image": "ImgCardRoleS0030.png",
-   "size": [
-    4096,
-    404
-   ]
-  },
-  {
-   "id": "ImgCardRoleS0036",
-   "group": "role",
-   "agentId": "1311",
-   "name": "Astra Yao",
-   "image": "ImgCardRoleS0036.png",
-   "size": [
-    4096,
-    404
-   ]
-  },
-  {
-   "id": "ImgCardRoleS0044",
-   "group": "role",
-   "agentId": "1371",
-   "name": "Yixuan",
-   "image": "ImgCardRoleS0044.png",
-   "size": [
-    4096,
-    404
-   ]
-  },
-  {
-   "id": "ImgCardRoleS0055",
-   "group": "role",
-   "agentId": "1431",
-   "name": "Ye Shunguang",
-   "image": "ImgCardRoleS0055.png",
-   "size": [
-    4096,
-    402
-   ]
-  },
-  {
-   "id": "ImgCardRoleS0064",
-   "group": "role",
-   "agentId": "1561",
-   "name": "Velina",
-   "image": "ImgCardRoleS0064.png",
-   "size": [
-    4096,
-    402
-   ]
-  },
-  {
-   "id": "ImgCardRoleS0067",
-   "group": "role",
-   "agentId": "1581",
-   "name": "Remielle",
-   "image": "ImgCardRoleS0067.png",
-   "size": [
-    4096,
-    402
-   ]
-  }
- ],
- "icons": {
-  "elements": {
-   "Physical": "IconPhysical.webp",
-   "Fire": "IconFire.webp",
-   "Ice": "IconIce.webp",
-   "Electric": "IconElectric.webp",
-   "Ether": "IconEther.webp",
-   "Wind": "IconWind.webp",
-   "Lumiflux": null,
-   "Frost": "IconFrost.webp",
-   "Auric Ink": "IconAuricInk.webp",
-   "Honed Edge": "IconHonedEdge.webp"
-  },
-  "specialties": {
-   "Attack": "IconAttack.webp",
-   "Stun": "IconStun.webp",
-   "Anomaly": "IconAnomaly.webp",
-   "Support": "IconSupport.webp",
-   "Defense": "IconDefense.webp",
-   "Rupture": "IconRupture.webp"
-  },
-  "misc": {
-   "polychrome": "IconCurrency.webp",
-   "coin": "IconCoin.webp"
-  }
- }
-}
+  schema: 2,
+  source: 'https://static.nanoka.cc',
+  version: '3.2',
+  credits:
+    'Game data and art: static.nanoka.cc (community datamine) and Enka.Network (namecards). Zenless Zone Zero © HoYoverse. Images are loaded by URL at runtime and are not part of this repository or the published package.',
+  sources: {
+    nanoka: 'https://static.nanoka.cc/assets/zzz/',
+    enka: 'https://enka.network/ui/zzz/',
+  },
+  agents: [
+    {
+      id: '1011',
+      name: 'Anby',
+      code: 'Anby',
+      rank: 'A',
+      element: 'Electric',
+      baseElement: 'Electric',
+      specialty: 'Stun',
+      faction: 1,
+      images: {
+        circle: 'IconRoleCircle01.webp',
+        select: 'IconRoleSelect01.webp',
+        crop: 'IconRoleCrop01.webp',
+        general: 'IconRoleGeneral01.webp',
+        full: 'IconRole01.webp',
+      },
+      fullSize: [1268, 1716],
+      namecard: 'ImgCardRoleS0001.png',
+    },
+    {
+      id: '1021',
+      name: 'Nekomata',
+      code: 'Nekomata',
+      rank: 'S',
+      element: 'Physical',
+      baseElement: 'Physical',
+      specialty: 'Attack',
+      faction: 1,
+      images: {
+        circle: 'IconRoleCircle11.webp',
+        select: 'IconRoleSelect11.webp',
+        crop: 'IconRoleCrop11.webp',
+        general: 'IconRoleGeneral11.webp',
+        full: 'IconRole11.webp',
+      },
+      fullSize: [932, 1480],
+      namecard: 'ImgCardRoleS0011.png',
+    },
+    {
+      id: '1031',
+      name: 'Nicole',
+      code: 'Nicole',
+      rank: 'A',
+      element: 'Ether',
+      baseElement: 'Ether',
+      specialty: 'Support',
+      faction: 1,
+      images: {
+        circle: 'IconRoleCircle12.webp',
+        select: 'IconRoleSelect12.webp',
+        crop: 'IconRoleCrop12.webp',
+        general: 'IconRoleGeneral12.webp',
+        full: 'IconRole12.webp',
+      },
+      fullSize: [1078, 1904],
+      namecard: 'ImgCardRoleS0012.png',
+    },
+    {
+      id: '1041',
+      name: 'Soldier 11',
+      code: 'Soldier 11',
+      rank: 'S',
+      element: 'Fire',
+      baseElement: 'Fire',
+      specialty: 'Attack',
+      faction: 5,
+      images: {
+        circle: 'IconRoleCircle05.webp',
+        select: 'IconRoleSelect05.webp',
+        crop: 'IconRoleCrop05.webp',
+        general: 'IconRoleGeneral05.webp',
+        full: 'IconRole05.webp',
+      },
+      fullSize: [892, 1936],
+      namecard: 'ImgCardRoleS0005.png',
+    },
+    {
+      id: '1061',
+      name: 'Corin',
+      code: 'Corin',
+      rank: 'A',
+      element: 'Physical',
+      baseElement: 'Physical',
+      specialty: 'Attack',
+      faction: 2,
+      images: {
+        circle: 'IconRoleCircle09.webp',
+        select: 'IconRoleSelect09.webp',
+        crop: 'IconRoleCrop09.webp',
+        general: 'IconRoleGeneral09.webp',
+        full: 'IconRole09.webp',
+      },
+      fullSize: [1344, 1752],
+      namecard: 'ImgCardRoleS0009.png',
+    },
+    {
+      id: '1081',
+      name: 'Billy',
+      code: 'Billy',
+      rank: 'A',
+      element: 'Physical',
+      baseElement: 'Physical',
+      specialty: 'Attack',
+      faction: 1,
+      images: {
+        circle: 'IconRoleCircle10.webp',
+        select: 'IconRoleSelect10.webp',
+        crop: 'IconRoleCrop10.webp',
+        general: 'IconRoleGeneral10.webp',
+        full: 'IconRole10.webp',
+      },
+      fullSize: [1516, 2424],
+      namecard: 'ImgCardRoleS0010.png',
+    },
+    {
+      id: '1091',
+      name: 'Miyabi',
+      code: 'Miyabi',
+      rank: 'S',
+      element: 'Frost',
+      baseElement: 'Ice',
+      specialty: 'Anomaly',
+      faction: 6,
+      images: {
+        circle: 'IconRoleCircle13.webp',
+        select: 'IconRoleSelect13.webp',
+        crop: 'IconRoleCrop13.webp',
+        general: 'IconRoleGeneral13.webp',
+        full: 'IconRole13.webp',
+      },
+      fullSize: [1516, 2128],
+      namecard: 'ImgCardRoleS0013.png',
+    },
+    {
+      id: '1101',
+      name: 'Koleda',
+      code: 'Koleda',
+      rank: 'S',
+      element: 'Fire',
+      baseElement: 'Fire',
+      specialty: 'Stun',
+      faction: 3,
+      images: {
+        circle: 'IconRoleCircle14.webp',
+        select: 'IconRoleSelect14.webp',
+        crop: 'IconRoleCrop14.webp',
+        general: 'IconRoleGeneral14.webp',
+        full: 'IconRole14.webp',
+      },
+      fullSize: [1472, 1712],
+      namecard: 'ImgCardRoleS0014.png',
+    },
+    {
+      id: '1111',
+      name: 'Anton',
+      code: 'Anton',
+      rank: 'A',
+      element: 'Electric',
+      baseElement: 'Electric',
+      specialty: 'Attack',
+      faction: 3,
+      images: {
+        circle: 'IconRoleCircle15.webp',
+        select: 'IconRoleSelect15.webp',
+        crop: 'IconRoleCrop15.webp',
+        general: 'IconRoleGeneral15.webp',
+        full: 'IconRole15.webp',
+      },
+      fullSize: [1440, 2456],
+      namecard: 'ImgCardRoleS0015.png',
+    },
+    {
+      id: '1121',
+      name: 'Ben',
+      code: 'Ben',
+      rank: 'A',
+      element: 'Fire',
+      baseElement: 'Fire',
+      specialty: 'Defense',
+      faction: 3,
+      images: {
+        circle: 'IconRoleCircle16.webp',
+        select: 'IconRoleSelect16.webp',
+        crop: 'IconRoleCrop16.webp',
+        general: 'IconRoleGeneral16.webp',
+        full: 'IconRole16.webp',
+      },
+      fullSize: [1716, 2268],
+      namecard: 'ImgCardRoleS0016.png',
+    },
+    {
+      id: '1131',
+      name: 'Soukaku',
+      code: 'Soukaku',
+      rank: 'A',
+      element: 'Ice',
+      baseElement: 'Ice',
+      specialty: 'Support',
+      faction: 6,
+      images: {
+        circle: 'IconRoleCircle17.webp',
+        select: 'IconRoleSelect17.webp',
+        crop: 'IconRoleCrop17.webp',
+        general: 'IconRoleGeneral17.webp',
+        full: 'IconRole17.webp',
+      },
+      fullSize: [1332, 1776],
+      namecard: 'ImgCardRoleS0017.png',
+    },
+    {
+      id: '1141',
+      name: 'Lycaon',
+      code: 'Lycaon',
+      rank: 'S',
+      element: 'Ice',
+      baseElement: 'Ice',
+      specialty: 'Stun',
+      faction: 2,
+      images: {
+        circle: 'IconRoleCircle18.webp',
+        select: 'IconRoleSelect18.webp',
+        crop: 'IconRoleCrop18.webp',
+        general: 'IconRoleGeneral18.webp',
+        full: 'IconRole18.webp',
+      },
+      fullSize: [1836, 2480],
+      namecard: 'ImgCardRoleS0018.png',
+    },
+    {
+      id: '1151',
+      name: 'Lucy',
+      code: 'Lucy',
+      rank: 'A',
+      element: 'Fire',
+      baseElement: 'Fire',
+      specialty: 'Support',
+      faction: 4,
+      images: {
+        circle: 'IconRoleCircle27.webp',
+        select: 'IconRoleSelect27.webp',
+        crop: 'IconRoleCrop27.webp',
+        general: 'IconRoleGeneral27.webp',
+        full: 'IconRole27.webp',
+      },
+      fullSize: [1356, 1560],
+      namecard: 'ImgCardRoleS0027.png',
+    },
+    {
+      id: '1181',
+      name: 'Grace',
+      code: 'Grace',
+      rank: 'S',
+      element: 'Electric',
+      baseElement: 'Electric',
+      specialty: 'Anomaly',
+      faction: 3,
+      images: {
+        circle: 'IconRoleCircle20.webp',
+        select: 'IconRoleSelect20.webp',
+        crop: 'IconRoleCrop20.webp',
+        general: 'IconRoleGeneral20.webp',
+        full: 'IconRole20.webp',
+      },
+      fullSize: [780, 2008],
+      namecard: 'ImgCardRoleS0020.png',
+    },
+    {
+      id: '1191',
+      name: 'Ellen',
+      code: 'Ellen',
+      rank: 'S',
+      element: 'Ice',
+      baseElement: 'Ice',
+      specialty: 'Attack',
+      faction: 2,
+      images: {
+        circle: 'IconRoleCircle21.webp',
+        select: 'IconRoleSelect21.webp',
+        crop: 'IconRoleCrop21.webp',
+        general: 'IconRoleGeneral21.webp',
+        full: 'IconRole21.webp',
+      },
+      fullSize: [1644, 1932],
+      namecard: 'ImgCardRoleS0021.png',
+    },
+    {
+      id: '1211',
+      name: 'Rina',
+      code: 'Rina',
+      rank: 'S',
+      element: 'Electric',
+      baseElement: 'Electric',
+      specialty: 'Support',
+      faction: 2,
+      images: {
+        circle: 'IconRoleCircle22.webp',
+        select: 'IconRoleSelect22.webp',
+        crop: 'IconRoleCrop22.webp',
+        general: 'IconRoleGeneral22.webp',
+        full: 'IconRole22.webp',
+      },
+      fullSize: [1544, 2012],
+      namecard: 'ImgCardRoleS0022.png',
+    },
+    {
+      id: '1241',
+      name: 'Zhu Yuan',
+      code: 'Zhu Yuan',
+      rank: 'S',
+      element: 'Ether',
+      baseElement: 'Ether',
+      specialty: 'Attack',
+      faction: 7,
+      images: {
+        circle: 'IconRoleCircle23.webp',
+        select: 'IconRoleSelect23.webp',
+        crop: 'IconRoleCrop23.webp',
+        general: 'IconRoleGeneral23.webp',
+        full: 'IconRole23.webp',
+      },
+      fullSize: [1016, 2300],
+      namecard: 'ImgCardRoleS0023.png',
+    },
+    {
+      id: '1261',
+      name: 'Jane',
+      code: 'Jane',
+      rank: 'S',
+      element: 'Physical',
+      baseElement: 'Physical',
+      specialty: 'Anomaly',
+      faction: 7,
+      images: {
+        circle: 'IconRoleCircle24.webp',
+        select: 'IconRoleSelect24.webp',
+        crop: 'IconRoleCrop24.webp',
+        general: 'IconRoleGeneral24.webp',
+        full: 'IconRole24.webp',
+      },
+      fullSize: [1132, 2120],
+      namecard: 'ImgCardRoleS0024.png',
+    },
+    {
+      id: '1271',
+      name: 'Seth',
+      code: 'Seth',
+      rank: 'A',
+      element: 'Electric',
+      baseElement: 'Electric',
+      specialty: 'Defense',
+      faction: 7,
+      images: {
+        circle: 'IconRoleCircle30.webp',
+        select: 'IconRoleSelect30.webp',
+        crop: 'IconRoleCrop30.webp',
+        general: 'IconRoleGeneral30.webp',
+        full: 'IconRole30.webp',
+      },
+      fullSize: [1656, 2480],
+      namecard: 'ImgCardRoleS0030.png',
+    },
+    {
+      id: '1311',
+      name: 'Astra Yao',
+      code: 'Astra',
+      rank: 'S',
+      element: 'Ether',
+      baseElement: 'Ether',
+      specialty: 'Support',
+      faction: 8,
+      images: {
+        circle: 'IconRoleCircle36.webp',
+        select: 'IconRoleSelect36.webp',
+        crop: 'IconRoleCrop36.webp',
+        general: 'IconRoleGeneral36.webp',
+        full: 'IconRole36.webp',
+      },
+      fullSize: [1276, 2204],
+      namecard: 'ImgCardRoleS0036.png',
+    },
+    {
+      id: '1371',
+      name: 'Yixuan',
+      code: 'YiXuan',
+      rank: 'S',
+      element: 'Auric Ink',
+      baseElement: 'Ether',
+      specialty: 'Rupture',
+      faction: 10,
+      images: {
+        circle: 'IconRoleCircle44.webp',
+        select: 'IconRoleSelect44.webp',
+        crop: 'IconRoleCrop44.webp',
+        general: 'IconRoleGeneral44.webp',
+        full: 'IconRole44.webp',
+      },
+      fullSize: [1484, 2048],
+      namecard: 'ImgCardRoleS0044.png',
+    },
+    {
+      id: '1431',
+      name: 'Ye Shunguang',
+      code: 'Ye Shunguang',
+      rank: 'S',
+      element: 'Honed Edge',
+      baseElement: 'Physical',
+      specialty: 'Attack',
+      faction: 10,
+      images: {
+        circle: 'IconRoleCircle55.webp',
+        select: 'IconRoleSelect55.webp',
+        crop: 'IconRoleCrop55.webp',
+        general: 'IconRoleGeneral55.webp',
+        full: 'IconRole55.webp',
+      },
+      fullSize: [1792, 2556],
+      namecard: 'ImgCardRoleS0055.png',
+    },
+    {
+      id: '1561',
+      name: 'Velina',
+      code: 'Velina',
+      rank: 'S',
+      element: 'Wind',
+      baseElement: 'Wind',
+      specialty: 'Anomaly',
+      faction: 16,
+      images: {
+        circle: 'IconRoleCircle64.webp',
+        select: 'IconRoleSelect64.webp',
+        crop: 'IconRoleCrop64.webp',
+        general: 'IconRoleGeneral64.webp',
+        full: 'IconRole64.webp',
+      },
+      fullSize: [1520, 1896],
+      namecard: 'ImgCardRoleS0064.png',
+    },
+    {
+      id: '1581',
+      name: 'Remielle',
+      code: 'Remielle',
+      rank: 'S',
+      element: 'Lumiflux',
+      baseElement: 'Lumiflux',
+      specialty: 'Anomaly',
+      faction: 17,
+      images: {
+        circle: 'IconRoleCircle67.webp',
+        select: 'IconRoleSelect67.webp',
+        crop: 'IconRoleCrop67.webp',
+        general: 'IconRoleGeneral67.webp',
+        full: 'IconRole67.webp',
+      },
+      fullSize: [2128, 1324],
+      namecard: 'ImgCardRoleS0067.png',
+    },
+    {
+      id: '1611',
+      name: 'Claret',
+      code: 'Claret',
+      rank: 'S',
+      element: 'Electric',
+      baseElement: 'Electric',
+      specialty: 'Armorer',
+      faction: 16,
+      images: {
+        circle: 'IconRoleCircle1611.webp',
+        select: 'IconRoleSelect1611.webp',
+        crop: 'IconRoleCrop1611.webp',
+        general: 'IconRoleGeneral1611.webp',
+        full: 'IconRole1611.webp',
+      },
+      fullSize: [1952, 2776],
+      namecard: null,
+    },
+  ],
+  wEngines: [
+    {
+      id: '12001',
+      name: '[Lunar] Pleniluna',
+      rank: 'B',
+      specialty: 'Attack',
+      baseAtk: 475,
+      advancedStat: 'ATK',
+      description:
+        'A W-Engine that prioritizes damage output over noise reduction. It can indiscriminately deal considerable damage to all units nearby.',
+      image: 'Weapon_B_Common_01.webp',
+    },
+    {
+      id: '12005',
+      name: '[Reverb] Mark II',
+      rank: 'B',
+      specialty: 'Support',
+      baseAtk: 475,
+      advancedStat: 'Energy Regen',
+      description:
+        "A standardized W-Engine with balanced performance that enhances its owner's and their teammates' combat effectiveness in all aspects.",
+      image: 'Weapon_B_Common_05.webp',
+    },
+    {
+      id: '12009',
+      name: '[Vortex] Hatchet',
+      rank: 'B',
+      specialty: 'Stun',
+      baseAtk: 475,
+      advancedStat: 'Energy Regen',
+      description:
+        "A frequency-converting W-Engine that can quickly generate excessive power and effectively increase its user's battle prowess.",
+      image: 'Weapon_B_Common_09.webp',
+    },
+    {
+      id: '12013',
+      name: '[Identity] Base',
+      rank: 'B',
+      specialty: 'Defense',
+      baseAtk: 475,
+      advancedStat: 'DEF',
+      description:
+        'A W-Engine with a component structure adjusted according to specific parameters. It can enhance the defensive capabilities of those who have a certain style of combat.',
+      image: 'Weapon_B_Common_13.webp',
+    },
+    {
+      id: '13001',
+      name: 'Street Superstar',
+      rank: 'A',
+      specialty: 'Attack',
+      baseAtk: 594,
+      advancedStat: 'ATK',
+      description:
+        'A custom-made W-Engine designed for urban music lovers. It sacrifices heat dissipation components for improved sound quality.',
+      image: 'Weapon_A_Common_01.webp',
+    },
+    {
+      id: '13002',
+      name: 'Slice of Time',
+      rank: 'A',
+      specialty: 'Support',
+      baseAtk: 594,
+      advancedStat: 'PEN Ratio',
+      description:
+        'A special W-Engine equipped with a high-speed camera module. The best choice for in-Hollow photography enthusiasts.',
+      image: 'Weapon_A_Common_02.webp',
+    },
+    {
+      id: '13005',
+      name: 'Steam Oven',
+      rank: 'A',
+      specialty: 'Stun',
+      baseAtk: 594,
+      advancedStat: 'Energy Regen',
+      description:
+        'A high-power W-Engine that boasts a cutting-edge energy conversion system. It collects excess heat and supplies it to the steamer.',
+      image: 'Weapon_A_Common_05.webp',
+    },
+    {
+      id: '13009',
+      name: 'Electro-Lip Gloss',
+      rank: 'A',
+      specialty: 'Anomaly',
+      baseAtk: 594,
+      advancedStat: 'Anomaly Proficiency',
+      description:
+        'This damage-type W-Engine boasts a built-in current transformer, and automatically attracts electrically sensitive objects around the operator and deals additional damage to them.',
+      image: 'Weapon_A_Common_09.webp',
+    },
+    {
+      id: '13010',
+      name: 'Bunny Band',
+      rank: 'A',
+      specialty: 'Defense',
+      baseAtk: 594,
+      advancedStat: 'DEF',
+      description:
+        'A special W-Engine decorated with a fluffy bunny. However, it is just an imitation of the real animal.',
+      image: 'Weapon_A_Common_10.webp',
+    },
+    {
+      id: '13013',
+      name: 'Gilded Blossom',
+      rank: 'A',
+      specialty: 'Attack',
+      baseAtk: 594,
+      advancedStat: 'ATK',
+      description:
+        "A W-Engine with a grandiose and luxurious appearance equipped with a premium Ether-powered anti-theft device. It's actually used to provide the equipper with energy.",
+      image: 'Weapon_A_Common_13.webp',
+    },
+    {
+      id: '13017',
+      name: 'Catty Luck',
+      rank: 'A',
+      specialty: 'Armorer',
+      baseAtk: 356,
+      advancedStat: 'DEF',
+      description: 'Meow your way to good luck!',
+      image: 'Weapon_A_Common_17.webp',
+    },
+    {
+      id: '13021',
+      name: 'Bloodmarrow Coffer',
+      rank: 'A',
+      specialty: 'Armorer',
+      baseAtk: 356,
+      advancedStat: 'CRIT Rate',
+      description: 'A special W-Engine developed by the Flint family.',
+      image: 'Weapon_A_Common_21.webp',
+    },
+    {
+      id: '13108',
+      name: 'Starlight Engine Replica',
+      rank: 'A',
+      specialty: 'Attack',
+      baseAtk: 624,
+      advancedStat: 'ATK',
+      description:
+        'A customized supercomputing W-Engine, specialized in aim support and ballistic calculations. Modified by Billy, it now looks like some sort of knock-off Starlight Knight figurine.',
+      image: 'Weapon_A_1081.webp',
+    },
+    {
+      id: '13115',
+      name: 'Kaboom the Cannon',
+      rank: 'A',
+      specialty: 'Support',
+      baseAtk: 624,
+      advancedStat: 'Energy Regen',
+      description:
+        'A support W-Engine propelled by jets that is both mobile and impactful, it can traverse the entire battlefield providing combat buffs.',
+      image: 'Weapon_A_1151.webp',
+    },
+    {
+      id: '13142',
+      name: 'Tremor Trigram Vessel',
+      rank: 'A',
+      specialty: 'Defense',
+      baseAtk: 624,
+      advancedStat: 'ATK',
+      description:
+        'Pressing acupoints is like cooking. Striking the fatal acupoint is like setting the stove on fire, bringing disaster.',
+      image: 'Weapon_A_1421.webp',
+    },
+    {
+      id: '14003',
+      name: 'Six Shooter',
+      rank: 'A',
+      specialty: 'Stun',
+      baseAtk: 594,
+      advancedStat: 'Impact',
+      description:
+        'A special W-Engine modeled after a revolver. It can load bullet-shaped condensed Ether batteries, which release a great amount of power when fired.',
+      image: 'Weapon_S_Common_03.webp',
+    },
+    {
+      id: '14107',
+      name: 'Tusks of Fury',
+      rank: 'S',
+      specialty: 'Defense',
+      baseAtk: 713,
+      advancedStat: 'Impact',
+      description: 'A versatile W-Engine based on a motorcycle tire that Big Daddy made for Caesar.',
+      image: 'Weapon_S_1071.webp',
+    },
+    {
+      id: '14116',
+      name: 'Blazing Laurel',
+      rank: 'S',
+      specialty: 'Stun',
+      baseAtk: 713,
+      advancedStat: 'Impact',
+      description:
+        'A violent W-Engine that can ignite flames with a siphon. It deals simple and crude burn damage, encouraging relentless, bone-crushing follow-up attacks.',
+      image: 'Weapon_S_1161.webp',
+    },
+    {
+      id: '14120',
+      name: 'Zanshin Herb Case',
+      rank: 'S',
+      specialty: 'Attack',
+      baseAtk: 713,
+      advancedStat: 'CRIT DMG',
+      description: 'Bitterness and pain beget hope, and he devours them all.',
+      image: 'Weapon_S_1201.webp',
+    },
+    {
+      id: '14125',
+      name: 'Ice-Jade Teapot',
+      rank: 'S',
+      specialty: 'Stun',
+      baseAtk: 713,
+      advancedStat: 'Impact',
+      description:
+        'A custom stun W-Engine made for an Automaton referencing the combat style and abilities of one. Energy is stored within, then lashes outwards upon conversion.',
+      image: 'Weapon_S_1251.webp',
+    },
+    {
+      id: '14131',
+      name: 'Elegant Vanity',
+      rank: 'S',
+      specialty: 'Support',
+      baseAtk: 713,
+      advancedStat: 'ATK',
+      description: 'Underneath the radiant splendor, her genuine self has never been hidden.',
+      image: 'Weapon_S_1311.webp',
+    },
+    {
+      id: '14136',
+      name: 'Spectral Gaze',
+      rank: 'S',
+      specialty: 'Stun',
+      baseAtk: 713,
+      advancedStat: 'CRIT Rate',
+      description: 'Broken eyes hold both resilience and vulnerability.',
+      image: 'Weapon_S_1361.webp',
+    },
+    {
+      id: '14140',
+      name: 'Practiced Perfection',
+      rank: 'S',
+      specialty: 'Anomaly',
+      baseAtk: 713,
+      advancedStat: 'ATK',
+      description: 'Starlight became her blade, and she held courage and love firmly in her hands.',
+      image: 'Weapon_S_1401.webp',
+    },
+    {
+      id: '14146',
+      name: 'Cordis Germina',
+      rank: 'S',
+      specialty: 'Attack',
+      baseAtk: 713,
+      advancedStat: 'CRIT Rate',
+      description: 'Her journey continues along the long, endless circle.',
+      image: 'Weapon_S_1461.webp',
+    },
+    {
+      id: '14150',
+      name: 'Angel in the Shell',
+      rank: 'S',
+      specialty: 'Anomaly',
+      baseAtk: 713,
+      advancedStat: 'Anomaly Mastery',
+      description: 'There is a soul, even within a shell of steel.',
+      image: 'Weapon_S_1501.webp',
+    },
+    {
+      id: '14154',
+      name: 'Frostfall Sickle',
+      rank: 'S',
+      specialty: 'Anomaly',
+      baseAtk: 713,
+      advancedStat: 'Anomaly Mastery',
+      description: 'Carry out judgment until the end comes.',
+      image: 'Weapon_S_1541.webp',
+    },
+    {
+      id: '14158',
+      name: 'Ode of Resurrected Wings',
+      rank: 'S',
+      specialty: 'Anomaly',
+      baseAtk: 743,
+      advancedStat: 'ATK',
+      description: 'Drifting through the cracks of time in search of the light.',
+      image: 'Weapon_S_1581.webp',
+      size: [156, 156],
+    },
+  ],
+  driveDiscSets: [
+    {
+      id: '31000',
+      name: 'Woodpecker Electro',
+      twoPiece: 'CRIT Rate +8%',
+      fourPiece:
+        "Landing a critical hit on an enemy with a Basic Attack, Dodge Counter, or EX Special Attack increases the equipper's ATK by 9% for 6s. The buff duration for different skills are calculated separately.",
+      image: 'SuitWoodpeckerElectro.webp',
+    },
+    {
+      id: '31200',
+      name: 'Shockstar Disco',
+      twoPiece: 'Impact +6%',
+      fourPiece: 'Basic Attacks, Dash Attacks, and Dodge Counters inflict 20% more Daze to the main target.',
+      image: 'SuitShockstarDisco.webp',
+    },
+    {
+      id: '31400',
+      name: 'Hormone Punk',
+      twoPiece: 'ATK +10%',
+      fourPiece:
+        "Upon becoming the active character in combat, the equipper's ATK increases by 25% for 10s. This effect can trigger once every 20s.",
+      image: 'SuitHormonePunk.webp',
+    },
+    {
+      id: '31600',
+      name: 'Swing Jazz',
+      twoPiece: 'Energy Regen +20%',
+      fourPiece:
+        "Launching a Chain Attack or Ultimate increases all squad members' DMG by 15% for 12s. Passive effects of the same name do not stack.",
+      image: 'SuitSwingJazz.webp',
+    },
+    {
+      id: '31900',
+      name: 'Proto Punk',
+      twoPiece: 'Increases Shield effect by 15%.',
+      fourPiece:
+        'When any squad member triggers a Defensive Assist or Evasive Assist, all squad members deal 15% increased DMG, lasting 10s. Passive effects of the same name do not stack.',
+      image: 'SuitProtoPunk.webp',
+    },
+    {
+      id: '32300',
+      name: 'Chaotic Metal',
+      twoPiece: '<color=#FE437E>Ether DMG</color> +10%',
+      fourPiece:
+        "The equipper's CRIT DMG increases by 20%. When any character in the squad triggers Corruption DMG, this effect further increases by 5.5% for 8s, stacking up to 6 times. Repeated triggers reset the duration.",
+      image: 'SuitChaosMetal.webp',
+    },
+    {
+      id: '32500',
+      name: 'Polar Metal',
+      twoPiece: '<color=#98EFF0>Ice DMG</color> +10%',
+      fourPiece:
+        'Increase the DMG of Basic Attack and Dash Attack by 20%. When any squad member inflicts Freeze or Shatter, this effect increases by an additional 20% for 12s.',
+      image: 'SuitPolarMetal.webp',
+    },
+    {
+      id: '32700',
+      name: 'Branch & Blade Song',
+      twoPiece: 'CRIT DMG +16%',
+      fourPiece:
+        "When Anomaly Mastery exceeds or equals 115 points, the equipper's CRIT DMG increases by 30%. When any squad member applies Freeze or triggers the Shatter effect on an enemy, the equipper's CRIT Rate increases by 12%, lasting 15s.",
+      image: 'SuitBranch&BladeSong.webp',
+    },
+    {
+      id: '32900',
+      name: 'Shadow Harmony',
+      twoPiece:
+        'The DMG of <color=#FFFFFF>Aftershocks</color> and <color=#FFFFFF>Dash Attacks</color> is increased by 15%.',
+      fourPiece:
+        "Upon hitting an enemy with an Aftershock or Dash Attack, if the DMG dealt aligns with the equipper's attribute, the equipper gains 1 stack of a buff effect, at most once per use of a skill. For each stack, the equipper's ATK increases by 4%, and CRIT Rate increases by 4%. The effect can stack up to 3 times and lasts for 15s. Repeated triggers reset the duration.",
+      image: 'SuitShadow.webp',
+    },
+    {
+      id: '33100',
+      name: 'Yunkui Tales',
+      twoPiece: 'HP +10%',
+      fourPiece:
+        'When using EX Special Attack, Chain Attack, or Ultimate, CRIT Rate increases by 4%, stacking up to 3 times and lasting 15s. Repeated triggers reset the duration. When having 3 stacks of this effect, Sheer DMG increases by 10%.',
+      image: 'SuitYunkuiTales.webp',
+    },
+    {
+      id: '33300',
+      name: "Dawn's Bloom",
+      twoPiece: 'Increases <color=#FFFFFF>Basic Attack</color> DMG by 15%.',
+      fourPiece:
+        'Increases Basic Attack DMG by 20%. When equipped by an Attack character, using an EX Special Attack or Ultimate will further increase Basic Attack DMG by 20% for 25s. Repeated triggers reset the duration.',
+      image: 'SuitDawnsBloom.webp',
+    },
+    {
+      id: '33500',
+      name: 'White Water Ballad',
+      twoPiece: '<color=#F0D12B>Physical DMG</color> +10%',
+      fourPiece:
+        "When the equipper is within any Ether Veil, their CRIT Rate increases by 10%. After leaving the Ether Veil, this buff remains for 15s. If the equipper is an Attack character, activating an Ether Veil or extending an Ether Veil's duration increases their CRIT Rate by 10% and ATK by 10% for 30s. Repeated triggers reset the duration.",
+      image: 'SuitWhiteWaterBallad.webp',
+    },
+    {
+      id: '33700',
+      name: 'Bunny in Wonderland',
+      twoPiece: 'HP +10%',
+      fourPiece:
+        "When the equipper is a Defense character: When the equipper launches an EX Special Attack or any squad member triggers a Defensive Assist or Evasive Assist, all squad members' DMG increases by 6%, stacking up to 3 times, lasting 25s. Stacks decay one at a time, and duration refreshes when gained or decayed. Passive effects of the same name do not stack.",
+      image: 'SuitBunnyinWonderland.webp',
+    },
+    {
+      id: '33900',
+      name: 'Wuthering Salon',
+      twoPiece: '<color=#A6C5FD>Wind DMG</color> +10%.',
+      fourPiece:
+        'When the equipper uses an EX Special Attack, their Anomaly Proficiency increases by 25, stacking up to 2 times, and lasting 40s; repeated triggers reset the duration. When the equipper triggers Windswept, their DMG increases by 18% for 40s. Repeated triggers reset the duration.',
+      image: 'SuitWutheringSalon.webp',
+    },
+    {
+      id: '34100',
+      name: 'Feathered Fate',
+      twoPiece: 'Anomaly Proficiency +30',
+      fourPiece:
+        'When the equipper enters the battlefield or is switched in as the active character, they gain the following buff: Anomaly Proficiency increases by 50. If the equipper is a Lumiflux character, Attribute Anomaly DMG increases by 15%, lasting 15s.\nThis buff remains active while the equipper is off-field.',
+      image: 'SuitFeatheredFate.webp',
+    },
+  ],
+  items: [
+    {
+      id: '10',
+      name: 'Denny',
+      rarity: 'b',
+      category: 'currency',
+      class: 1,
+      iconName: 'IconCoin',
+      image: 'IconCoin.webp',
+      size: [156, 156],
+    },
+    {
+      id: '100',
+      name: 'Polychrome',
+      rarity: 's',
+      category: 'currency',
+      class: 1,
+      iconName: 'IconCurrency',
+      image: 'IconCurrency.webp',
+      size: [256, 256],
+    },
+    {
+      id: '501',
+      name: 'Battery Charge',
+      rarity: 'a',
+      category: 'currency',
+      class: 2,
+      iconName: 'IconStamina',
+      image: 'IconStamina.webp',
+      size: [256, 256],
+    },
+  ],
+  namecards: [
+    {
+      id: 'ImgCardEvent02',
+      group: 'event',
+      image: 'ImgCardEvent02.png',
+      size: [4096, 404],
+    },
+    {
+      id: 'ImgCardEvent03',
+      group: 'event',
+      image: 'ImgCardEvent03.png',
+      size: [4096, 404],
+    },
+    {
+      id: 'ImgCardEvent04',
+      group: 'event',
+      image: 'ImgCardEvent04.png',
+      size: [4096, 404],
+    },
+    {
+      id: 'ImgCardEvent05',
+      group: 'event',
+      image: 'ImgCardEvent05.png',
+      size: [4096, 404],
+    },
+    {
+      id: 'ImgCardEvent06',
+      group: 'event',
+      image: 'ImgCardEvent06.png',
+      size: [4096, 404],
+    },
+    {
+      id: 'ImgCardEvent09',
+      group: 'event',
+      image: 'ImgCardEvent09.png',
+      size: [4096, 402],
+    },
+    {
+      id: 'ImgCardEvent23',
+      group: 'event',
+      image: 'ImgCardEvent23.png',
+      size: [3000, 211],
+    },
+    {
+      id: 'ImgCardRoleS0001',
+      group: 'role',
+      agentId: '1011',
+      name: 'Anby',
+      image: 'ImgCardRoleS0001.png',
+      size: [4096, 404],
+    },
+    {
+      id: 'ImgCardRoleS0005',
+      group: 'role',
+      agentId: '1041',
+      name: 'Soldier 11',
+      image: 'ImgCardRoleS0005.png',
+      size: [4096, 404],
+    },
+    {
+      id: 'ImgCardRoleS0009',
+      group: 'role',
+      agentId: '1061',
+      name: 'Corin',
+      image: 'ImgCardRoleS0009.png',
+      size: [4096, 404],
+    },
+    {
+      id: 'ImgCardRoleS0010',
+      group: 'role',
+      agentId: '1081',
+      name: 'Billy',
+      image: 'ImgCardRoleS0010.png',
+      size: [4096, 404],
+    },
+    {
+      id: 'ImgCardRoleS0011',
+      group: 'role',
+      agentId: '1021',
+      name: 'Nekomata',
+      image: 'ImgCardRoleS0011.png',
+      size: [4096, 404],
+    },
+    {
+      id: 'ImgCardRoleS0012',
+      group: 'role',
+      agentId: '1031',
+      name: 'Nicole',
+      image: 'ImgCardRoleS0012.png',
+      size: [4096, 404],
+    },
+    {
+      id: 'ImgCardRoleS0013',
+      group: 'role',
+      agentId: '1091',
+      name: 'Miyabi',
+      image: 'ImgCardRoleS0013.png',
+      size: [4096, 404],
+    },
+    {
+      id: 'ImgCardRoleS0014',
+      group: 'role',
+      agentId: '1101',
+      name: 'Koleda',
+      image: 'ImgCardRoleS0014.png',
+      size: [4096, 404],
+    },
+    {
+      id: 'ImgCardRoleS0015',
+      group: 'role',
+      agentId: '1111',
+      name: 'Anton',
+      image: 'ImgCardRoleS0015.png',
+      size: [4096, 404],
+    },
+    {
+      id: 'ImgCardRoleS0016',
+      group: 'role',
+      agentId: '1121',
+      name: 'Ben',
+      image: 'ImgCardRoleS0016.png',
+      size: [4096, 404],
+    },
+    {
+      id: 'ImgCardRoleS0017',
+      group: 'role',
+      agentId: '1131',
+      name: 'Soukaku',
+      image: 'ImgCardRoleS0017.png',
+      size: [4096, 404],
+    },
+    {
+      id: 'ImgCardRoleS0018',
+      group: 'role',
+      agentId: '1141',
+      name: 'Lycaon',
+      image: 'ImgCardRoleS0018.png',
+      size: [4096, 404],
+    },
+    {
+      id: 'ImgCardRoleS0020',
+      group: 'role',
+      agentId: '1181',
+      name: 'Grace',
+      image: 'ImgCardRoleS0020.png',
+      size: [4096, 404],
+    },
+    {
+      id: 'ImgCardRoleS0021',
+      group: 'role',
+      agentId: '1191',
+      name: 'Ellen',
+      image: 'ImgCardRoleS0021.png',
+      size: [4096, 404],
+    },
+    {
+      id: 'ImgCardRoleS0022',
+      group: 'role',
+      agentId: '1211',
+      name: 'Rina',
+      image: 'ImgCardRoleS0022.png',
+      size: [4096, 404],
+    },
+    {
+      id: 'ImgCardRoleS0023',
+      group: 'role',
+      agentId: '1241',
+      name: 'Zhu Yuan',
+      image: 'ImgCardRoleS0023.png',
+      size: [4096, 404],
+    },
+    {
+      id: 'ImgCardRoleS0024',
+      group: 'role',
+      agentId: '1261',
+      name: 'Jane',
+      image: 'ImgCardRoleS0024.png',
+      size: [4096, 404],
+    },
+    {
+      id: 'ImgCardRoleS0027',
+      group: 'role',
+      agentId: '1151',
+      name: 'Lucy',
+      image: 'ImgCardRoleS0027.png',
+      size: [4096, 404],
+    },
+    {
+      id: 'ImgCardRoleS0030',
+      group: 'role',
+      agentId: '1271',
+      name: 'Seth',
+      image: 'ImgCardRoleS0030.png',
+      size: [4096, 404],
+    },
+    {
+      id: 'ImgCardRoleS0036',
+      group: 'role',
+      agentId: '1311',
+      name: 'Astra Yao',
+      image: 'ImgCardRoleS0036.png',
+      size: [4096, 404],
+    },
+    {
+      id: 'ImgCardRoleS0044',
+      group: 'role',
+      agentId: '1371',
+      name: 'Yixuan',
+      image: 'ImgCardRoleS0044.png',
+      size: [4096, 404],
+    },
+    {
+      id: 'ImgCardRoleS0055',
+      group: 'role',
+      agentId: '1431',
+      name: 'Ye Shunguang',
+      image: 'ImgCardRoleS0055.png',
+      size: [4096, 402],
+    },
+    {
+      id: 'ImgCardRoleS0064',
+      group: 'role',
+      agentId: '1561',
+      name: 'Velina',
+      image: 'ImgCardRoleS0064.png',
+      size: [4096, 402],
+    },
+    {
+      id: 'ImgCardRoleS0067',
+      group: 'role',
+      agentId: '1581',
+      name: 'Remielle',
+      image: 'ImgCardRoleS0067.png',
+      size: [4096, 402],
+    },
+  ],
+  icons: {
+    elements: {
+      Physical: 'IconPhysical.webp',
+      Fire: 'IconFire.webp',
+      Ice: 'IconIce.webp',
+      Electric: 'IconElectric.webp',
+      Ether: 'IconEther.webp',
+      Wind: 'IconWind.webp',
+      Lumiflux: null,
+      Frost: 'IconFrost.webp',
+      'Auric Ink': 'IconAuricInk.webp',
+      'Honed Edge': 'IconHonedEdge.webp',
+    },
+    specialties: {
+      Attack: 'IconAttack.webp',
+      Stun: 'IconStun.webp',
+      Anomaly: 'IconAnomaly.webp',
+      Support: 'IconSupport.webp',
+      Defense: 'IconDefense.webp',
+      Rupture: 'IconRupture.webp',
+    },
+    misc: {
+      polychrome: 'IconCurrency.webp',
+      coin: 'IconCoin.webp',
+    },
+  },
+};

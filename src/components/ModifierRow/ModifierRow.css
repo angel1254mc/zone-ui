@@ -13,7 +13,7 @@
   border: calc(5 * var(--zzz-px)) solid var(--zzz-color-border-keyline);
   border-radius: var(--zzz-radius-pill);
   background: var(--zzz-color-surface-level-pill);
-  box-shadow: inset 0 calc(1 * var(--zzz-px)) 0 #2B2B2B;
+  box-shadow: inset 0 calc(1 * var(--zzz-px)) 0 #2b2b2b;
   color: var(--zzz-color-text-secondary);
   font-size: var(--zzz-font-size-body-xl);
   font-weight: 900;

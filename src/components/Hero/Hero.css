@@ -97,7 +97,12 @@
   background: var(--zzz-hero-scrim);
 }
 .zzz-hero--art-background.zzz-hero--align-center {
-  --zzz-hero-scrim: radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.55) 55%, rgba(0, 0, 0, 0.25) 100%);
+  --zzz-hero-scrim: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(0, 0, 0, 0.82) 0%,
+    rgba(0, 0, 0, 0.55) 55%,
+    rgba(0, 0, 0, 0.25) 100%
+  );
 }
 
 /* ── Content ───────────────────────────────────────────────────────────────────────────── */

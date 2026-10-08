@@ -1,11 +1,17 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import type { CSSProperties } from 'react'
-import { ClockIcon, InfoAlertIcon } from '../../icons'
-import { InfoPill } from './InfoPill'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { CSSProperties } from 'react';
+import { ClockIcon, InfoAlertIcon } from '../../icons';
+import { InfoPill } from './InfoPill';
 
-const gpx = (n: number) => `calc(${n} * var(--zzz-px))`
-const pastel: CSSProperties = { background: 'linear-gradient(100deg, #E9F4F2, #F4D9E3 55%, #F6E7EC)' }
-const row: CSSProperties = { display: 'flex', gap: gpx(11), alignItems: 'center' }
+const gpx = (n: number) => `calc(${n} * var(--zzz-px))`;
+const pastel: CSSProperties = {
+  background: 'linear-gradient(100deg, #E9F4F2, #F4D9E3 55%, #F6E7EC)',
+};
+const row: CSSProperties = {
+  display: 'flex',
+  gap: gpx(11),
+  alignItems: 'center',
+};
 
 const meta = {
   title: 'Game/InfoPill',
@@ -24,24 +30,21 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component:
-          'Event timer / info pill: 36 px black full pill, no ring, a 27 px white outline ' +
-          'glyph inset 4 and `bodyXl` upright white text. Static text by default; ' +
-          'with `onClick` it is a button with the standard pressed rule (accent fill, 4 px outset, black label and glyph).',
+        component: 'Event timer / info pill',
       },
     },
   },
-} satisfies Meta<typeof InfoPill>
+} satisfies Meta<typeof InfoPill>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Timer: Story = {}
+export const Timer: Story = {};
 
 export const EventDetails: Story = {
   args: { children: 'Event Details', onClick: () => {} },
   render: (args) => <InfoPill {...args} icon={<InfoAlertIcon />} />,
-}
+};
 
 export const Pair: Story = {
   render: () => (
@@ -52,7 +55,7 @@ export const Pair: Story = {
       </InfoPill>
     </div>
   ),
-}
+};
 
 export const CheckInEvent: Story = {
   render: () => (
@@ -63,16 +66,18 @@ export const CheckInEvent: Story = {
       </InfoPill>
     </div>
   ),
-}
+};
 
 export const Pressed: Story = {
   args: { children: 'Event Details', onClick: () => {}, pressed: true },
   render: (args) => <InfoPill {...args} icon={<InfoAlertIcon />} />,
-}
+};
 
 export const Disabled: Story = {
   args: { children: 'Event Details', onClick: () => {}, disabled: true },
   render: (args) => <InfoPill {...args} icon={<InfoAlertIcon />} />,
-}
+};
 
-export const NoIcon: Story = { render: () => <InfoPill>Limited Time</InfoPill> }
+export const NoIcon: Story = {
+  render: () => <InfoPill>Limited Time</InfoPill>,
+};

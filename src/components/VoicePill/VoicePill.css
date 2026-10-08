@@ -10,8 +10,8 @@
   --zzz-voice-ring: var(--zzz-color-border-button);
   --zzz-voice-text: var(--zzz-color-text-primary);
   --zzz-voice-button: #000000;
-  --zzz-voice-glyph: #E8E8E8;
-  --zzz-voice-progress-color: #BFDB5A;
+  --zzz-voice-glyph: #e8e8e8;
+  --zzz-voice-progress-color: #bfdb5a;
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -29,7 +29,7 @@
 }
 
 .zzz-voice-pill[data-tone='light'] {
-  --zzz-voice-fill: #E8E8E8;
+  --zzz-voice-fill: #e8e8e8;
   --zzz-voice-ring: #000000;
   --zzz-voice-text: #000000;
 }

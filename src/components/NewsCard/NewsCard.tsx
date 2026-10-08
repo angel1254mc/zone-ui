@@ -1,29 +1,29 @@
-import { useId } from 'react'
-import type { ComponentPropsWithRef, CSSProperties, ReactNode } from 'react'
-import { cx } from '../../utils'
-import { CategoryTag } from '../CategoryTag'
-import type { WebSkin } from '../WebTabs'
-import './NewsCard.css'
+import { useId } from 'react';
+import type { ComponentPropsWithRef, CSSProperties, ReactNode } from 'react';
+import { cx } from '../../utils';
+import { CategoryTag } from '../CategoryTag';
+import type { WebSkin } from '../WebTabs';
+import './NewsCard.css';
 
-export type NewsCardTone = 'dark' | 'light'
+export type NewsCardTone = 'dark' | 'light';
 
 export interface NewsCardProps extends Omit<ComponentPropsWithRef<'a'>, 'title'> {
   /** Banner art slot (an `<img>`, `<picture>` or SVG). Cropped to 396×220 with `object-fit: cover`. Decorative. */
-  art?: ReactNode
+  art?: ReactNode;
   /** Date line, in the condensed face (e.g. `2024/07/04`). */
-  date?: ReactNode
+  date?: ReactNode;
   /** A string renders a CategoryTag; any other node is rendered as given. */
-  category?: ReactNode
+  category?: ReactNode;
   /** Headline: the link's accessible name. One line, ellipsised. */
-  title: ReactNode
+  title: ReactNode;
   /** Two-line clamped summary. */
-  description?: ReactNode
+  description?: ReactNode;
   /** `dark` (default): theme text colours (title white, description tertiary). `light`: dark text for a light page. */
-  tone?: NewsCardTone
+  tone?: NewsCardTone;
   /** Skin of the CategoryTag. */
-  skin?: WebSkin
+  skin?: WebSkin;
   /** Card width in design units (default 396). */
-  width?: number
+  width?: number;
 }
 
 /**
@@ -44,15 +44,15 @@ export function NewsCard({
   style,
   ...rest
 }: NewsCardProps) {
-  const id = useId()
-  const titleId = `${id}-title`
-  const dateId = `${id}-date`
-  const categoryId = `${id}-category`
-  const descId = `${id}-desc`
-  const hasMeta = date != null || category != null
+  const id = useId();
+  const titleId = `${id}-title`;
+  const dateId = `${id}-date`;
+  const categoryId = `${id}-category`;
+  const descId = `${id}-desc`;
+  const hasMeta = date != null || category != null;
   const describedBy = [date != null && dateId, category != null && categoryId, description != null && descId]
     .filter(Boolean)
-    .join(' ')
+    .join(' ');
 
   return (
     <a
@@ -60,7 +60,14 @@ export function NewsCard({
       data-tone={tone}
       aria-labelledby={titleId}
       aria-describedby={describedBy || undefined}
-      style={(width !== undefined ? { '--zzz-news-card-width': `calc(${width} * var(--zzz-px))`, ...style } : style) as CSSProperties}
+      style={
+        (width !== undefined
+          ? {
+              '--zzz-news-card-width': `calc(${width} * var(--zzz-px))`,
+              ...style,
+            }
+          : style) as CSSProperties
+      }
       {...rest}
     >
       <span className="zzz-news-card__art" aria-hidden="true">
@@ -94,5 +101,5 @@ export function NewsCard({
         </span>
       )}
     </a>
-  )
+  );
 }

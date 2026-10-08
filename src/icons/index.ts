@@ -1,8 +1,8 @@
-export type { IconProps, IconComponent, IconName } from './types'
-export { createIcon, iconSize } from './createIcon'
-export { icons, iconNames } from './registry'
-export { Icon } from './Icon'
-export type { IconLookupProps } from './Icon'
+export type { IconProps, IconComponent, IconName } from './types';
+export { createIcon, iconSize } from './createIcon';
+export { icons, iconNames } from './registry';
+export { Icon } from './Icon';
+export type { IconLookupProps } from './Icon';
 
 // actions and navigation
 export {
@@ -35,9 +35,14 @@ export {
   HangerIcon,
   CameraModeIcon,
   ArchiveReelIcon,
-} from './actions'
+} from './actions';
 // storage categories
-export { WEngineCategoryIcon, DriveDiscCategoryIcon, MaterialsCategoryIcon, ConsumablesCategoryIcon } from './categories'
+export {
+  WEngineCategoryIcon,
+  DriveDiscCategoryIcon,
+  MaterialsCategoryIcon,
+  ConsumablesCategoryIcon,
+} from './categories';
 // home dock
 export {
   MoreIcon,
@@ -52,13 +57,21 @@ export {
   StoreIcon,
   CityFundIcon,
   SignalSearchIcon,
-} from './dock'
+} from './dock';
 // events
-export { GiftIcon, TargetLoopIcon, HourglassIcon, CompletedCheckIcon } from './events'
+export { GiftIcon, TargetLoopIcon, HourglassIcon, CompletedCheckIcon } from './events';
 // specialties
-export { AttackIcon, RuptureIcon, StunIcon, AnomalyIcon, SupportIcon, DefenseIcon, ArmorerIcon } from './specialty'
+export { AttackIcon, RuptureIcon, StunIcon, AnomalyIcon, SupportIcon, DefenseIcon, ArmorerIcon } from './specialty';
 // elements
-export { FireIcon, StarSparkIcon, SnowflakeIcon, HexStarIcon, GoldDiamondIcon, SwirlIcon, ElectricIcon } from './elements'
+export {
+  FireIcon,
+  StarSparkIcon,
+  SnowflakeIcon,
+  HexStarIcon,
+  GoldDiamondIcon,
+  SwirlIcon,
+  ElectricIcon,
+} from './elements';
 // rank, rarity and badges
 export {
   RankLetterS,
@@ -74,8 +87,14 @@ export {
   SlotDigit5,
   SlotDigit6,
   HexBadge,
-} from './rank'
+} from './rank';
 // currency and resources
-export { BatteryIcon, DennyIcon, PolychromeIcon, CoinSmallIcon } from './currency'
+export { BatteryIcon, DennyIcon, PolychromeIcon, CoinSmallIcon } from './currency';
 // decorative vectors
-export { EmptySlotX, OverclockChevron, SignalBars as SignalBarsIcon, FilmSprocket, DotGridOrnament } from './decorative'
+export {
+  EmptySlotX,
+  OverclockChevron,
+  SignalBars as SignalBarsIcon,
+  FilmSprocket,
+  DotGridOrnament,
+} from './decorative';

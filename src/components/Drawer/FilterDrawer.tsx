@@ -1,39 +1,39 @@
-import type { ReactNode } from 'react'
-import { FilterIcon, ResetIcon } from '../../icons'
-import { Button } from '../Button'
-import { ChipGroup, type ChipGroupProps } from '../Chip'
-import { Select, type SelectProps } from '../Select'
-import { SortToggle, type SortDirection } from '../SortToggle'
-import { Drawer, type DrawerProps } from './Drawer'
+import type { ReactNode } from 'react';
+import { FilterIcon, ResetIcon } from '../../icons';
+import { Button } from '../Button';
+import { ChipGroup, type ChipGroupProps } from '../Chip';
+import { Select, type SelectProps } from '../Select';
+import { SortToggle, type SortDirection } from '../SortToggle';
+import { Drawer, type DrawerProps } from './Drawer';
 
 export interface FilterDrawerSort extends SelectProps {
   /** Sort direction (controlled). */
-  direction?: SortDirection
+  direction?: SortDirection;
   /** Initial direction (uncontrolled). Default `desc`. */
-  defaultDirection?: SortDirection
-  onDirectionChange?(direction: SortDirection): void
+  defaultDirection?: SortDirection;
+  onDirectionChange?(direction: SortDirection): void;
   /** Accessible names of the sort toggle per state. */
-  directionLabels?: { asc: string; desc: string }
+  directionLabels?: { asc: string; desc: string };
 }
 
 export interface FilterDrawerSection extends ChipGroupProps {
   /** React key (default: the label when it is a string, else the index). */
-  id?: string
+  id?: string;
 }
 
 export interface FilterDrawerProps extends Omit<DrawerProps, 'children' | 'footer' | 'title'> {
   /** Default "Filter W-Engines". */
-  title?: ReactNode
+  title?: ReactNode;
   /** The sort row (Select + SortToggle). Omit for no sort row. */
-  sort?: FilterDrawerSort
+  sort?: FilterDrawerSort;
   /** Chip sections, as data ("Rarity" S/A/B, "Agent Specialties" …). */
-  groups: FilterDrawerSection[]
+  groups: FilterDrawerSection[];
   /** Reset pressed. */
-  onReset?(): void
+  onReset?(): void;
   /** Default "Reset". */
-  resetLabel?: string
+  resetLabel?: string;
   /** Extra content under the sections. */
-  children?: ReactNode
+  children?: ReactNode;
 }
 
 /**
@@ -51,7 +51,8 @@ export function FilterDrawer({
   children,
   ...rest
 }: FilterDrawerProps) {
-  const { direction, defaultDirection, onDirectionChange, directionLabels, ...select } = sort ?? ({} as FilterDrawerSort)
+  const { direction, defaultDirection, onDirectionChange, directionLabels, ...select } =
+    sort ?? ({} as FilterDrawerSort);
   return (
     <Drawer
       {...rest}
@@ -84,5 +85,5 @@ export function FilterDrawer({
       </div>
       {children}
     </Drawer>
-  )
+  );
 }

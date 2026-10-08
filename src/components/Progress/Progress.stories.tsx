@@ -1,12 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import { PolychromeIcon } from '../../icons'
-import { GameIcon } from '../../../examples/art'
-import { OverclockBar, ProgressPill, XpBar } from './Progress'
-import { Specimen, Specimens } from '../StatRow/Specimens.story-helpers'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { PolychromeIcon } from '../../icons';
+import { GameIcon } from '../../../examples/art';
+import { OverclockBar, ProgressPill, XpBar } from './Progress';
+import { Specimen, Specimens } from '../StatRow/Specimens.story-helpers';
 
-const gpx = (n: number) => `calc(${n} * var(--zzz-px))`
-const fill = { width: '100%', height: '100%', objectFit: 'contain' as const }
-const polychrome = <GameIcon kind="misc" name="polychrome" style={fill} fallback={<PolychromeIcon />} />
+const gpx = (n: number) => `calc(${n} * var(--zzz-px))`;
+const fill = { width: '100%', height: '100%', objectFit: 'contain' as const };
+const polychrome = <GameIcon kind="misc" name="polychrome" style={fill} fallback={<PolychromeIcon />} />;
 
 const meta = {
   title: 'Data Display/Progress',
@@ -16,11 +16,7 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component:
-          'Progress displays. `OverclockBar` 544 × 56 static lime capsule: current-phase stars, four black ">" chevrons, ' +
-          'next-phase stars (`role="img"`, "Phase 1 → Phase 2"; `left` / `right` replace the star groups). `XpBar` 174 × 13 indigo → cyan ' +
-          'gradient with an italic "MAX / MAX" label (`role="progressbar"`). `ProgressPill` the ' +
-          '"Polychrome Progress: 19%" stat pill (no proportional fill) with an icon well and an optional NEW! badge.',
+        component: 'Simple progress display component.',
       },
     },
   },
@@ -31,12 +27,12 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof OverclockBar>
+} satisfies Meta<typeof OverclockBar>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Overclock: Story = {}
+export const Overclock: Story = {};
 export const OverclockPhases: Story = {
   render: () => (
     <Specimens column>
@@ -52,7 +48,7 @@ export const OverclockPhases: Story = {
       ))}
     </Specimens>
   ),
-}
+};
 
 export const Xp: StoryObj<typeof XpBar> = {
   render: () => (
@@ -65,7 +61,7 @@ export const Xp: StoryObj<typeof XpBar> = {
       </Specimen>
     </Specimens>
   ),
-}
+};
 
 export const Polychrome: StoryObj<typeof ProgressPill> = {
   render: () => (
@@ -80,4 +76,4 @@ export const Polychrome: StoryObj<typeof ProgressPill> = {
       </Specimen>
     </Specimens>
   ),
-}
+};

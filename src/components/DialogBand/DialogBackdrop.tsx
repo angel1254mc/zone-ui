@@ -1,15 +1,15 @@
-import type { ComponentPropsWithRef } from 'react'
-import { cx } from '../../utils'
-import './DialogBand.css'
+import type { ComponentPropsWithRef } from 'react';
+import { cx } from '../../utils';
+import './DialogBand.css';
 
 export interface DialogBackdropProps extends Omit<ComponentPropsWithRef<'div'>, 'children'> {
   /** 'open' fades the stripes in (70 ms); 'closed' fades them out (100 ms after 60 ms) and keeps the blur. */
-  state?: 'open' | 'closed'
+  state?: 'open' | 'closed';
   /**
    * Show a ~100 ms pixelated "freeze" of the page before the band appears (a coarse mosaic grid
    * over a light blur).
    */
-  pixelate?: boolean
+  pixelate?: boolean;
 }
 
 /**
@@ -30,5 +30,5 @@ export function DialogBackdrop({ state = 'open', pixelate = false, className, ..
       <div className="zzz-dialog-backdrop__stripes" />
       {pixelate ? <div className="zzz-dialog-backdrop__mosaic" /> : null}
     </div>
-  )
+  );
 }

@@ -1,7 +1,7 @@
-import type { ComponentPropsWithoutRef } from 'react'
-import { cx } from '../../utils'
+import type { ComponentPropsWithoutRef } from 'react';
+import { cx } from '../../utils';
 
-export type ClaimedCheckProps = Omit<ComponentPropsWithoutRef<'svg'>, 'children'>
+export type ClaimedCheckProps = Omit<ComponentPropsWithoutRef<'svg'>, 'children'>;
 
 /**
  * Static lime "claimed" tick with a black outline (`color.checkIn.claimed` #B6F906, ~35 × 25; the
@@ -34,5 +34,5 @@ export function ClaimedCheck({ className, ...rest }: ClaimedCheckProps) {
         strokeLinejoin="round"
       />
     </svg>
-  )
+  );
 }

@@ -87,10 +87,18 @@
   box-shadow: inset calc(1 * var(--zzz-px)) calc(1 * var(--zzz-px)) 0 rgb(255 255 255 / 0.12);
   pointer-events: none;
 }
-.zzz-status-grid__cell[data-status='success'] { --zzz-sg-fill: var(--zzz-accent); }
-.zzz-status-grid__cell[data-status='error'] { --zzz-sg-fill: var(--zzz-color-danger-base); }
-.zzz-status-grid__cell[data-status='warning'] { --zzz-sg-fill: var(--zzz-color-icon-combat-readiness); }
-.zzz-status-grid__cell[data-status='neutral'] { --zzz-sg-fill: var(--zzz-color-star-empty); }
+.zzz-status-grid__cell[data-status='success'] {
+  --zzz-sg-fill: var(--zzz-accent);
+}
+.zzz-status-grid__cell[data-status='error'] {
+  --zzz-sg-fill: var(--zzz-color-danger-base);
+}
+.zzz-status-grid__cell[data-status='warning'] {
+  --zzz-sg-fill: var(--zzz-color-icon-combat-readiness);
+}
+.zzz-status-grid__cell[data-status='neutral'] {
+  --zzz-sg-fill: var(--zzz-color-star-empty);
+}
 .zzz-status-grid__cell[data-status='empty'] {
   --zzz-sg-ink: var(--zzz-color-text-disabled);
 }

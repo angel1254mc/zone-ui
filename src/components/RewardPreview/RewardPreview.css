@@ -38,8 +38,11 @@
   gap: calc((var(--zzz-reward-preview-pitch) - var(--zzz-size-card-preview-n)) * var(--zzz-px));
   /* visible tiles × pitch minus one trailing gap (pitch − tile) */
   width: calc(
-    (var(--zzz-reward-preview-visible, 6) * var(--zzz-reward-preview-pitch) -
-      (var(--zzz-reward-preview-pitch) - var(--zzz-size-card-preview-n))) * var(--zzz-px)
+    (
+        var(--zzz-reward-preview-visible, 6) * var(--zzz-reward-preview-pitch) -
+          (var(--zzz-reward-preview-pitch) - var(--zzz-size-card-preview-n))
+      ) *
+      var(--zzz-px)
   );
   margin: 0;
   /* room for the card rings / selection ring without clipping */

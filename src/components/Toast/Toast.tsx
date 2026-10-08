@@ -1,27 +1,27 @@
-import type { ComponentPropsWithRef, ReactNode } from 'react'
-import { cx } from '../../utils'
-import { CheckIcon, CloseIcon } from '../../icons'
-import './Toast.css'
+import type { ComponentPropsWithRef, ReactNode } from 'react';
+import { cx } from '../../utils';
+import { CheckIcon, CloseIcon } from '../../icons';
+import './Toast.css';
 
-export type ToastVariant = 'info' | 'success' | 'error'
+export type ToastVariant = 'info' | 'success' | 'error';
 
 export interface ToastProps extends Omit<ComponentPropsWithRef<'div'>, 'title'> {
   /** Default `info`. Picks the icon disc colour; success / error also tint the pill. */
-  variant?: ToastVariant
+  variant?: ToastVariant;
   /** Glyph in the icon disc (default per variant). `null` hides the disc. */
-  icon?: ReactNode
+  icon?: ReactNode;
   /** Renders a close button that calls this. */
-  onDismiss?(): void
+  onDismiss?(): void;
   /** Accessible name of the close button. Default "Dismiss". */
-  dismissLabel?: string
+  dismissLabel?: string;
   /**
    * Announce itself: `role="status"` (`role="alert"` for error). Default true. ToastProvider
    * turns it off for info / success because its list is already an `aria-live="polite"` region.
    */
-  live?: boolean
+  live?: boolean;
   /** Play the enter animation (grow + 3× flash). Default true. */
-  animate?: boolean
-  children?: ReactNode
+  animate?: boolean;
+  children?: ReactNode;
 }
 
 /** Black "i" / "!" glyphs for the icon disc (drawn on the 0 0 32 32 icon grid). */
@@ -40,14 +40,14 @@ function DiscGlyph({ kind }: { kind: 'info' | 'error' }) {
         </>
       )}
     </svg>
-  )
+  );
 }
 
 const DEFAULT_ICON: Record<ToastVariant, ReactNode> = {
   info: <DiscGlyph kind="info" />,
   success: <CheckIcon />,
   error: <DiscGlyph kind="error" />,
-}
+};
 
 /**
  * Toast notification: a 34-tall black full pill, `fontSize.label` white, padding 0 17, with a coloured icon disc
@@ -67,8 +67,8 @@ export function Toast({
   children,
   ...rest
 }: ToastProps) {
-  const glyph = icon === undefined ? DEFAULT_ICON[variant] : icon
-  const role = live ? (variant === 'error' ? 'alert' : 'status') : undefined
+  const glyph = icon === undefined ? DEFAULT_ICON[variant] : icon;
+  const role = live ? (variant === 'error' ? 'alert' : 'status') : undefined;
   return (
     <div
       role={role}
@@ -94,5 +94,5 @@ export function Toast({
         </button>
       ) : null}
     </div>
-  )
+  );
 }

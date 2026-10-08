@@ -2,9 +2,9 @@
  * Currency and resource art: simplified flat originals. No tokens exist for
  * these colours.
  */
-import { createIcon } from './createIcon'
-import { circle, ellipse, join, poly, rect } from './geometry'
-import { sparkle } from './actions'
+import { createIcon } from './createIcon';
+import { circle, ellipse, join, poly, rect } from './geometry';
+import { sparkle } from './actions';
 
 /** Stamina battery: a tilted blue cylinder with a light cap and a yellow bolt. */
 export const BatteryIcon = createIcon('BatteryIcon', 'battery', (uid) => (
@@ -35,12 +35,12 @@ export const BatteryIcon = createIcon('BatteryIcon', 'battery', (uid) => (
             [16.8, 17.8],
             [18.9, 12.2],
           ],
-          0.3,
+          0.3
         )}
       />
     </g>
   </>
-))
+));
 
 /** Denny: a silver coin at a slight angle, thick rim, embossed 4-point star. */
 export const DennyIcon = createIcon('DennyIcon', 'denny', (uid) => (
@@ -58,7 +58,7 @@ export const DennyIcon = createIcon('DennyIcon', 'denny', (uid) => (
     <path fill="#80879E" d={sparkle(16.2, 16.6, 8.4, 0.2)} />
     <path fill="#FFFFFF" d={sparkle(15.4, 15.8, 8, 0.2)} />
   </>
-))
+));
 
 /** Polychrome: a film card tilted ~−10°, rainbow holographic face, two punched holes on the left. */
 export const PolychromeIcon = createIcon('PolychromeIcon', 'polychrome', (uid) => (
@@ -77,12 +77,16 @@ export const PolychromeIcon = createIcon('PolychromeIcon', 'polychrome', (uid) =
     </defs>
     <g transform="rotate(-10 16 16)">
       <path fill="#494851" d={rect(4.2, 1.2, 23.6, 29.6, 3)} />
-      <path fill={`url(#${uid}-frame)`} fillRule="evenodd" d={join(rect(5.2, 2.2, 21.6, 27.6, 2.2), rect(7.3, 5.4, 2.4, 2.4, 0.5), rect(7.3, 10.2, 2.4, 2.4, 0.5))} />
+      <path
+        fill={`url(#${uid}-frame)`}
+        fillRule="evenodd"
+        d={join(rect(5.2, 2.2, 21.6, 27.6, 2.2), rect(7.3, 5.4, 2.4, 2.4, 0.5), rect(7.3, 10.2, 2.4, 2.4, 0.5))}
+      />
       <path fill="#76737E" d={rect(11.2, 4.4, 13.6, 23.2, 1.6)} />
       <path fill={`url(#${uid}-holo)`} d={rect(12, 5.2, 12, 21.6, 1.2)} />
     </g>
   </>
-))
+));
 
 /** Flat front-view Denny coin for the CurrencyActionBar (34 px). */
 export const CoinSmallIcon = createIcon('CoinSmallIcon', 'coinSmall', (uid) => (
@@ -99,4 +103,4 @@ export const CoinSmallIcon = createIcon('CoinSmallIcon', 'coinSmall', (uid) => (
     <path fill="#80879E" d={sparkle(16.6, 16.6, 8.6, 0.2)} />
     <path fill="#FFFFFF" d={sparkle(16, 16, 8.2, 0.2)} />
   </>
-))
+));

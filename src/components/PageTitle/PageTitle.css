@@ -40,7 +40,8 @@
   /* the title sits 4 px above the band centre */
   padding: 0 calc(66 * var(--zzz-px)) calc(8 * var(--zzz-px)) calc(141 * var(--zzz-px));
   background-color: var(--zzz-color-surface-header-strip-bottom);
-  background-image: var(--zzz-dots-light), var(--zzz-dots-light), var(--zzz-dots-dark), var(--zzz-dots-dark),
+  background-image:
+    var(--zzz-dots-light), var(--zzz-dots-light), var(--zzz-dots-dark), var(--zzz-dots-dark),
     var(--zzz-effect-header-strip);
   background-position:
     0 0,

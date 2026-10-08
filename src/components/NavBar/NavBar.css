@@ -17,9 +17,9 @@
 .zzz-navbar {
   --zzz-navbar-bg: #000000;
   --zzz-navbar-text: #787878;
-  --zzz-navbar-active-bg: #FFFFFF;
+  --zzz-navbar-active-bg: #ffffff;
   --zzz-navbar-active-text: #000000;
-  --zzz-navbar-cta: #D8FA00;
+  --zzz-navbar-cta: #d8fa00;
   --zzz-navbar-on-cta: #000000;
   --zzz-navbar-menu-bg: #111111;
   container: zzz-navbar / inline-size;
@@ -161,7 +161,10 @@
 @media (prefers-reduced-motion: no-preference) {
   .zzz-navbar__link,
   .zzz-navbar__cta {
-    transition: background 500ms, color 500ms, transform 500ms;
+    transition:
+      background 500ms,
+      color 500ms,
+      transform 500ms;
   }
   .zzz-navbar__link:hover:not([aria-disabled='true']),
   .zzz-navbar__cta:hover {

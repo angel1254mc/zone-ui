@@ -1,4 +1,4 @@
-import { create } from 'storybook/theming/create'
+import { create } from 'storybook/theming/create';
 
 /**
  * Storybook themes for the Zone reskin. One palette for the manager (sidebar, toolbar,
@@ -10,8 +10,8 @@ import { create } from 'storybook/theming/create'
  */
 
 /** Mona Sans 900 at font-stretch 110% is the UI face (see src/styles/fonts.css). */
-export const ZZZ_FONT_UI = '"Inpin Hongmeng", "Mona Sans", "Geologica", "Epilogue", system-ui, sans-serif'
-export const ZZZ_FONT_CODE = '"JetBrains Mono", "Cascadia Code", Consolas, "SFMono-Regular", monospace'
+export const ZZZ_FONT_UI = '"Inpin Hongmeng", "Mona Sans", "Geologica", "Epilogue", system-ui, sans-serif';
+export const ZZZ_FONT_CODE = '"JetBrains Mono", "Cascadia Code", Consolas, "SFMono-Regular", monospace';
 
 /** An original mark (no HoYoverse artwork): a dark pill holding a "ZONE" wordmark (accent Z)
  * built from flat polygons (an <img> cannot use the page's web fonts), sheared 10deg like the
@@ -26,9 +26,9 @@ const LOGO_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 48" w
 <path fill="#F1F1F1" d="M50 0h6l8 13V0h6v24h-6l-8-13v13h-6z"/>
 <path fill="#F1F1F1" d="M75 0h20v5H81v4.5h12v5H81V19h14v5H75z"/>
 </g>
-</svg>`
+</svg>`;
 
-export const ZZZ_LOGO = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(LOGO_SVG)}`
+export const ZZZ_LOGO = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(LOGO_SVG)}`;
 
 const palette = {
   base: 'dark' as const,
@@ -70,10 +70,10 @@ const palette = {
   brandUrl: './',
   brandImage: ZZZ_LOGO,
   brandTarget: '_self',
-}
+};
 
 /** Manager theme (addons.setConfig({ theme })). */
-export const zzzManagerTheme = create(palette)
+export const zzzManagerTheme = create(palette);
 
 /** Docs theme (parameters.docs.theme): same palette, docs pages render on the app background. */
-export const zzzDocsTheme = create({ ...palette, appContentBg: '#000000' })
+export const zzzDocsTheme = create({ ...palette, appContentBg: '#000000' });

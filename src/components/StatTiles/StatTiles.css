@@ -14,19 +14,13 @@
 .zzz-stat-tiles {
   --zzz-st-frame: calc(var(--zzz-border-width-panel) + var(--zzz-border-width-keyline));
   display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(min(100%, calc(var(--zzz-stat-tiles-min, 220) * var(--zzz-px))), 1fr)
-  );
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, calc(var(--zzz-stat-tiles-min, 220) * var(--zzz-px))), 1fr));
   gap: calc(22 * var(--zzz-px));
   margin: 0;
   padding: var(--zzz-st-frame);
 }
 .zzz-stat-tiles--sm {
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(min(100%, calc(var(--zzz-stat-tiles-min, 190) * var(--zzz-px))), 1fr)
-  );
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, calc(var(--zzz-stat-tiles-min, 190) * var(--zzz-px))), 1fr));
   gap: calc(20 * var(--zzz-px));
 }
 .zzz-stat-tiles--columns,

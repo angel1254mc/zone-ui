@@ -1,17 +1,23 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import { useState } from 'react'
-import type { CSSProperties, ReactNode } from 'react'
-import { Button } from '../Button'
-import { StepProgress } from './StepProgress'
-import type { StepItem } from './StepProgress'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useState } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
+import { Button } from '../Button';
+import { StepProgress } from './StepProgress';
+import type { StepItem } from './StepProgress';
 
-const gpx = (n: number) => `calc(${n} * var(--zzz-px))`
+const gpx = (n: number) => `calc(${n} * var(--zzz-px))`;
 const caption: CSSProperties = {
   fontSize: 'var(--zzz-font-size-label)',
   lineHeight: 'var(--zzz-line-height-single)',
   color: 'var(--zzz-color-text-muted)',
-}
-const col: CSSProperties = { display: 'flex', flexDirection: 'column', gap: gpx(26), width: gpx(860), maxWidth: '100%' }
+};
+const col: CSSProperties = {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: gpx(26),
+  width: gpx(860),
+  maxWidth: '100%',
+};
 
 function Labeled({ label, children }: { label: string; children: ReactNode }) {
   return (
@@ -19,11 +25,11 @@ function Labeled({ label, children }: { label: string; children: ReactNode }) {
       <span style={caption}>{label}</span>
       {children}
     </div>
-  )
+  );
 }
 
-const quiz: StepItem[] = [{ status: 'success' }, { status: 'error' }, { status: 'success' }, {}, {}]
-const checkout: StepItem[] = [{ label: 'Cart' }, { label: 'Shipping' }, { label: 'Payment' }, { label: 'Review' }]
+const quiz: StepItem[] = [{ status: 'success' }, { status: 'error' }, { status: 'success' }, {}, {}];
+const checkout: StepItem[] = [{ label: 'Cart' }, { label: 'Shipping' }, { label: 'Payment' }, { label: 'Review' }];
 const allStatuses: StepItem[] = [
   { label: 'Pending', status: 'pending' },
   { label: 'Current', status: 'current' },
@@ -31,10 +37,10 @@ const allStatuses: StepItem[] = [
   { label: 'Success', status: 'success' },
   { label: 'Error', status: 'error' },
   { label: 'Skipped', status: 'skipped' },
-]
+];
 
 /** Stories that draw their own frame (story decorators cannot remove the meta one). */
-const BARE = ['Phone Width']
+const BARE = ['Phone Width'];
 
 const meta = {
   title: 'Data Display/StepProgress',
@@ -42,7 +48,10 @@ const meta = {
   tags: ['autodocs'],
   args: { steps: 5, current: 2 },
   argTypes: {
-    variant: { control: 'inline-radio', options: ['pips', 'capsules', 'text'] },
+    variant: {
+      control: 'inline-radio',
+      options: ['pips', 'capsules', 'text'],
+    },
     size: { control: 'inline-radio', options: ['sm', 'md', 'lg'] },
     steps: { control: 'object' },
   },
@@ -51,7 +60,12 @@ const meta = {
       BARE.includes(ctx.name) ? (
         <Story />
       ) : (
-        <div style={{ padding: gpx(28), background: 'var(--zzz-color-bg-base)' }}>
+        <div
+          style={{
+            padding: gpx(28),
+            background: 'var(--zzz-color-bg-base)',
+          }}
+        >
           <Story />
         </div>
       ),
@@ -59,24 +73,16 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component:
-          'Built from the kit vocabulary (slanted carousel bars, filter-chip pills, accent ' +
-          'selection). Horizontal step indicator for quizzes, wizards, onboarding and checkout. Statuses: pending, current ' +
-          '(accent + pulsing ring), complete, success (green `highlight.value`), error (red `danger.base`), skipped (hollow). ' +
-          'Status comes from `current` unless a step sets it. Variants: `pips`, `capsules` (labels ellipsise on narrow screens) ' +
-          'and `text` ("Step 3 of 5"). An `<ol>` with `aria-current="step"` and per-step text ("Question 2: wrong" via ' +
-          '`stepName` + `statusLabels`). Presentational — not interactive, so no keyboard or disabled state. ' +
-          '**Sizes** `size="sm" | "md" | "lg"` (default `md`): pips 28 × 8 / 44 × 12 / 53 × 15, capsules 32 / 41 / 50 tall (capsule label and disc text never below `fontSize.label`, 17.5 units ≈ 12 px at 0.7), text ' +
-          '`fontSize.control.{sm,md,lg}` (21 / 26 / 30) design units; `lg` scales every md length by 69/57 (the web control scale).',
+        component: 'Horizontal step indicator for quizzes, wizards, onboarding and checkout.',
       },
     },
   },
-} satisfies Meta<typeof StepProgress>
+} satisfies Meta<typeof StepProgress>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Pips: Story = {}
+export const Pips: Story = {};
 
 /** Every variant at sm / md / lg. */
 export const Sizes: Story = {
@@ -84,8 +90,23 @@ export const Sizes: Story = {
     <div style={col}>
       {(['sm', 'md', 'lg'] as const).map((size) => (
         <Labeled key={size} label={size}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: gpx(16) }}>
-            <StepProgress steps={quiz} current={3} size={size} stepName="Question" statusLabels={{ success: 'correct', error: 'wrong' }} />
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: gpx(16),
+            }}
+          >
+            <StepProgress
+              steps={quiz}
+              current={3}
+              size={size}
+              stepName="Question"
+              statusLabels={{
+                success: 'correct',
+                error: 'wrong',
+              }}
+            />
             <StepProgress variant="capsules" steps={checkout} current={2} size={size} label={`Checkout (${size})`} />
             <StepProgress variant="text" steps={5} current={2} size={size} />
           </div>
@@ -93,13 +114,18 @@ export const Sizes: Story = {
       ))}
     </div>
   ),
-}
+};
 
 export const Variants: Story = {
   render: () => (
     <div style={col}>
       <Labeled label="pips · quiz (success / error / success / current / pending)">
-        <StepProgress steps={quiz} current={3} stepName="Question" statusLabels={{ success: 'correct', error: 'wrong' }} />
+        <StepProgress
+          steps={quiz}
+          current={3}
+          stepName="Question"
+          statusLabels={{ success: 'correct', error: 'wrong' }}
+        />
       </Labeled>
       <Labeled label="pips · sm">
         <StepProgress steps={8} current={5} size="sm" />
@@ -118,7 +144,7 @@ export const Variants: Story = {
       </Labeled>
     </div>
   ),
-}
+};
 
 export const AllStatuses: Story = {
   render: () => (
@@ -130,11 +156,11 @@ export const AllStatuses: Story = {
       <StepProgress variant="capsules" steps={allStatuses} />
     </div>
   ),
-}
+};
 
 function WizardDemo() {
-  const [step, setStep] = useState(0)
-  const steps: StepItem[] = [{ label: 'Account' }, { label: 'Profile' }, { label: 'Preferences' }, { label: 'Done' }]
+  const [step, setStep] = useState(0);
+  const steps: StepItem[] = [{ label: 'Account' }, { label: 'Profile' }, { label: 'Preferences' }, { label: 'Done' }];
   return (
     <div style={col}>
       <StepProgress variant="capsules" steps={steps} current={step} label="Onboarding" />
@@ -148,18 +174,28 @@ function WizardDemo() {
         </Button>
       </div>
     </div>
-  )
+  );
 }
 
 /** Wizard: step forward / back. */
-export const Wizard: Story = { render: () => <WizardDemo /> }
+export const Wizard: Story = { render: () => <WizardDemo /> };
 
 /** Phone width (360 px at --zzz-scale 0.6): pips shrink, capsule labels ellipsise. */
 export const PhoneWidth: Story = {
   render: () => (
     <div
       className="zzz-theme"
-      style={{ '--zzz-scale': 0.6, width: 360, padding: 16, background: '#000', display: 'flex', flexDirection: 'column', gap: 18 } as CSSProperties}
+      style={
+        {
+          '--zzz-scale': 0.6,
+          width: 360,
+          padding: 16,
+          background: '#000',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 18,
+        } as CSSProperties
+      }
     >
       <StepProgress steps={quiz} current={3} />
       <StepProgress steps={10} current={6} />
@@ -167,4 +203,4 @@ export const PhoneWidth: Story = {
       <StepProgress variant="text" steps={5} current={3} stepName="Question" />
     </div>
   ),
-}
+};

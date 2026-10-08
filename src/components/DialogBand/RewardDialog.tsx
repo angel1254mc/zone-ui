@@ -1,18 +1,18 @@
-import { useControllableState } from '../../utils'
-import { CheckIcon } from '../../icons'
-import { Button } from '../Button'
-import { RewardTile, RewardTileGroup, type RewardTileProps } from '../RewardTile'
-import { DialogBand, type DialogBandProps } from './DialogBand'
+import { useControllableState } from '../../utils';
+import { CheckIcon } from '../../icons';
+import { Button } from '../Button';
+import { RewardTile, RewardTileGroup, type RewardTileProps } from '../RewardTile';
+import { DialogBand, type DialogBandProps } from './DialogBand';
 
 export interface RewardDialogProps extends Omit<DialogBandProps, 'actions' | 'title' | 'children'> {
   /** Default "Obtained". */
-  title?: string
+  title?: string;
   /** The rewards, rendered as RewardTiles 141 px apart and centred. */
-  items: RewardTileProps[]
+  items: RewardTileProps[];
   /** Confirm pressed or Escape; the dialog then closes. */
-  onClose?(): void
+  onClose?(): void;
   /** Default "Confirm". */
-  confirmLabel?: string
+  confirmLabel?: string;
 }
 
 /**
@@ -29,7 +29,7 @@ export function RewardDialog({
   onOpenChange,
   ...rest
 }: RewardDialogProps) {
-  const [open, setOpen] = useControllableState(openProp, defaultOpen, onOpenChange)
+  const [open, setOpen] = useControllableState(openProp, defaultOpen, onOpenChange);
   return (
     <DialogBand
       {...rest}
@@ -44,8 +44,8 @@ export function RewardDialog({
           iconTone="confirm"
           pressOutset={0}
           onClick={() => {
-            onClose?.()
-            setOpen(false)
+            onClose?.();
+            setOpen(false);
           }}
         >
           {confirmLabel}
@@ -58,5 +58,5 @@ export function RewardDialog({
         ))}
       </RewardTileGroup>
     </DialogBand>
-  )
+  );
 }

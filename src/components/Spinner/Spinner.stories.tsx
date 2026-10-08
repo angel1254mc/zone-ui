@@ -1,19 +1,30 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import type { CSSProperties, ReactNode } from 'react'
-import { Spinner } from './Spinner'
-import { Button } from '../Button'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { CSSProperties, ReactNode } from 'react';
+import { Spinner } from './Spinner';
+import { Button } from '../Button';
 
 /** calc(N * var(--zzz-px)) */
-const gpx = (n: number) => `calc(${n} * var(--zzz-px))`
-const caption: CSSProperties = { color: 'var(--zzz-color-text-muted)', fontSize: gpx(14), lineHeight: 1.2 }
+const gpx = (n: number) => `calc(${n} * var(--zzz-px))`;
+const caption: CSSProperties = {
+  color: 'var(--zzz-color-text-muted)',
+  fontSize: gpx(14),
+  lineHeight: 1.2,
+};
 
 function Cell({ label, children }: { label: string; children: ReactNode }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: gpx(12), alignItems: 'center' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: gpx(12),
+        alignItems: 'center',
+      }}
+    >
       {children}
       <span style={caption}>{label}</span>
     </div>
-  )
+  );
 }
 
 const meta = {
@@ -23,23 +34,17 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: [
-          'Loading indicator.',
-          '',
-          '- `ring`: `conic-gradient(transparent → colour)` over the ring grey #333, rotating 800 ms. Colour = live accent (default), white or `currentColor`.',
-          '- `chevrons`: three ">" bands hatched at `skew.hatch` 39.8° in the SweepTransition sage / teal / deep, each half leaning `skew.chevron` 16.2°; a light sweep runs through them.',
-          '- `role="status"` with a visually-hidden `label` (default "Loading"). Reduced motion (OS setting or `data-reduced-motion`) stops the rotation / sweep.',
-        ].join('\n'),
+        component: 'Loading indicator.',
       },
     },
   },
   args: { variant: 'ring', label: 'Loading' },
-} satisfies Meta<typeof Spinner>
+} satisfies Meta<typeof Spinner>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {}
+export const Default: Story = {};
 
 export const Variants: Story = {
   render: () => (
@@ -60,7 +65,7 @@ export const Variants: Story = {
       </Cell>
     </div>
   ),
-}
+};
 
 export const Sizes: Story = {
   render: () => (
@@ -73,7 +78,7 @@ export const Sizes: Story = {
       <Spinner variant="chevrons" size={88} />
     </div>
   ),
-}
+};
 
 /** Reduced motion: `data-reduced-motion` on an ancestor freezes both variants. */
 export const ReducedMotion: Story = {
@@ -83,21 +88,34 @@ export const ReducedMotion: Story = {
       <Spinner variant="chevrons" />
     </div>
   ),
-}
+};
 
 /** In context: a loading button label and a panel placeholder. */
 export const InContext: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: gpx(40), alignItems: 'center' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: gpx(40),
+        alignItems: 'center',
+      }}
+    >
       <Button disabled icon={<Spinner size={26} tone="white" label="Saving" />}>
         Saving
       </Button>
       <div
         className="zzz-mat-panel"
-        style={{ width: gpx(460), height: gpx(220), display: 'grid', placeItems: 'center', margin: gpx(8) }}
+        style={{
+          width: gpx(460),
+          height: gpx(220),
+          display: 'grid',
+          placeItems: 'center',
+          margin: gpx(8),
+        }}
       >
         <Spinner variant="chevrons" size={56} label="Loading agent roster" />
       </div>
     </div>
   ),
-}
+};

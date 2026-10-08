@@ -1,4 +1,4 @@
-import { cloneElement, isValidElement, useEffect, useId, useRef } from 'react'
+import { cloneElement, isValidElement, useEffect, useId, useRef } from 'react';
 import type {
   ComponentPropsWithRef,
   CSSProperties,
@@ -9,47 +9,47 @@ import type {
   ReactNode,
   Ref,
   RefObject,
-} from 'react'
-import { cx, mergeRefs, useControllableState } from '../../utils'
-import { CloseIcon } from '../../icons'
-import { IconButton } from '../IconButton'
-import { OverlayPortal, getFocusable, useModalLayer } from '../DialogBand/overlay'
-import './Modal.css'
+} from 'react';
+import { cx, mergeRefs, useControllableState } from '../../utils';
+import { CloseIcon } from '../../icons';
+import { IconButton } from '../IconButton';
+import { OverlayPortal, getFocusable, useModalLayer } from '../DialogBand/overlay';
+import './Modal.css';
 
 type TriggerProps = {
-  ref?: Ref<HTMLElement>
-  onClick?(e: MouseEvent<HTMLElement>): void
-}
+  ref?: Ref<HTMLElement>;
+  onClick?(e: MouseEvent<HTMLElement>): void;
+};
 
 export interface ModalProps extends Omit<ComponentPropsWithRef<'div'>, 'title'> {
   /** Controlled open state. */
-  open?: boolean
+  open?: boolean;
   /** Initial open state (uncontrolled). */
-  defaultOpen?: boolean
-  onOpenChange?(open: boolean): void
+  defaultOpen?: boolean;
+  onOpenChange?(open: boolean): void;
   /** Dialog title (its accessible name). */
-  title: ReactNode
+  title: ReactNode;
   /** Optional lead text under the title (its accessible description). */
-  description?: ReactNode
+  description?: ReactNode;
   /** Footer actions, right-aligned (e.g. two `Button`s). */
-  footer?: ReactNode
+  footer?: ReactNode;
   /** Optional opener: ONE button element; clicking it opens the modal (uncontrolled use). */
-  trigger?: ReactElement
+  trigger?: ReactElement;
   /** Close when the backdrop is clicked. Default true. */
-  closeOnBackdrop?: boolean
+  closeOnBackdrop?: boolean;
   /** Close on Escape. Default true. */
-  closeOnEscape?: boolean
+  closeOnEscape?: boolean;
   /** Hide the top-right close button. */
-  hideClose?: boolean
+  hideClose?: boolean;
   /** Accessible name of the close button. Default "Close". */
-  closeLabel?: string
+  closeLabel?: string;
   /** Panel width in design units. Default 450. */
-  width?: number
+  width?: number;
   /** Element to focus on open. Default: the first focusable element in the body / footer. */
-  initialFocus?: RefObject<HTMLElement | null>
+  initialFocus?: RefObject<HTMLElement | null>;
   /** Use `alertdialog` (confirmations that interrupt). */
-  alert?: boolean
-  children?: ReactNode
+  alert?: boolean;
+  children?: ReactNode;
 }
 
 /**
@@ -87,14 +87,14 @@ export function Modal({
   onKeyDown,
   ...rest
 }: ModalProps) {
-  const uid = useId().replace(/[^a-zA-Z0-9_-]/g, '')
-  const titleId = `zzz-modal${uid}-title`
-  const descId = `zzz-modal${uid}-desc`
-  const [open, setOpen] = useControllableState(openProp, defaultOpen, onOpenChange)
-  const layerRef = useRef<HTMLDivElement | null>(null)
-  const panelRef = useRef<HTMLDivElement | null>(null)
-  const bodyRef = useRef<HTMLDivElement | null>(null)
-  const triggerRef = useRef<HTMLElement | null>(null)
+  const uid = useId().replace(/[^a-zA-Z0-9_-]/g, '');
+  const titleId = `zzz-modal${uid}-title`;
+  const descId = `zzz-modal${uid}-desc`;
+  const [open, setOpen] = useControllableState(openProp, defaultOpen, onOpenChange);
+  const layerRef = useRef<HTMLDivElement | null>(null);
+  const panelRef = useRef<HTMLDivElement | null>(null);
+  const bodyRef = useRef<HTMLDivElement | null>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
 
   // Shared modal layer: focus in, Tab trap, Escape, scroll lock, inert page, focus restore (LIFO stack,
   // so a Modal over a Drawer only traps itself).
@@ -106,46 +106,51 @@ export function Modal({
       initialFocus?.current ?? (bodyRef.current ? getFocusable(bodyRef.current)[0] : undefined) ?? undefined,
     lockScroll: true,
     onEscape: closeOnEscape ? () => setOpen(false) : undefined,
-  })
+  });
 
   // Fallback restore: when nothing was focused at open (e.g. Safari does not focus clicked buttons),
   // send focus back to the trigger. Declared after useModalLayer, so this cleanup runs after its restore.
   useEffect(() => {
-    if (!open) return
+    if (!open) return;
     return () => {
-      const a = document.activeElement
-      const t = triggerRef.current
-      if ((a == null || a === document.body) && t && t.isConnected) t.focus({ preventScroll: true })
-    }
-  }, [open])
+      const a = document.activeElement;
+      const t = triggerRef.current;
+      if ((a == null || a === document.body) && t && t.isConnected) t.focus({ preventScroll: true });
+    };
+  }, [open]);
 
-  const close = () => setOpen(false)
+  const close = () => setOpen(false);
 
   const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
-    onKeyDown?.(e)
-    layerKeyDown(e)
-  }
+    onKeyDown?.(e);
+    layerKeyDown(e);
+  };
 
   const onBackdropDown = (e: PointerEvent<HTMLDivElement>) => {
-    if (closeOnBackdrop && e.target === e.currentTarget) close()
-  }
+    if (closeOnBackdrop && e.target === e.currentTarget) close();
+  };
 
-  let triggerEl: ReactNode = null
+  let triggerEl: ReactNode = null;
   if (trigger && isValidElement<TriggerProps>(trigger)) {
-    const tp = trigger.props
+    const tp = trigger.props;
     triggerEl = cloneElement(trigger, {
       ref: mergeRefs(tp.ref, triggerRef),
       'aria-haspopup': 'dialog',
       onClick: (e: MouseEvent<HTMLElement>) => {
-        tp.onClick?.(e)
-        if (!e.defaultPrevented) setOpen(true)
+        tp.onClick?.(e);
+        if (!e.defaultPrevented) setOpen(true);
       },
-    } as Partial<TriggerProps> & Record<string, unknown>)
+    } as Partial<TriggerProps> & Record<string, unknown>);
   }
 
-  const panelStyle = (width != null ? { '--zzz-modal-width': `calc(${width} * var(--zzz-px))`, ...style } : style) as
-    | CSSProperties
-    | undefined
+  const panelStyle = (
+    width != null
+      ? {
+          '--zzz-modal-width': `calc(${width} * var(--zzz-px))`,
+          ...style,
+        }
+      : style
+  ) as CSSProperties | undefined;
 
   return (
     <>
@@ -193,5 +198,5 @@ export function Modal({
         </OverlayPortal>
       ) : null}
     </>
-  )
+  );
 }

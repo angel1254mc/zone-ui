@@ -7,9 +7,15 @@
   line-height: var(--zzz-line-height-single);
   white-space: nowrap;
 }
-.zzz-event-title--start { text-align: start; }
-.zzz-event-title--center { text-align: center; }
-.zzz-event-title--end { text-align: end; }
+.zzz-event-title--start {
+  text-align: start;
+}
+.zzz-event-title--center {
+  text-align: center;
+}
+.zzz-event-title--end {
+  text-align: end;
+}
 
 /* Sticker outline: ~3.5 px black rim on top, ~6.5 px under the
  * glyph (rim + hard drop). The token pair (6 px stroke + text-shadow 0 4px) renders a 2–3 px rim

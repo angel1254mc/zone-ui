@@ -25,7 +25,7 @@ export {
   NamecardImage,
   GameIcon,
   resetGameArtForTests,
-} from './gameArt'
+} from './gameArt';
 export type {
   ArtStatus,
   ArtSource,
@@ -40,11 +40,10 @@ export type {
   GameArtManifest,
   GameArtState,
   GameImageProps,
-} from './gameArt'
-export { ArtSlot } from './ArtSlot'
-export type { ArtSlotProps, ArtSlotState } from './ArtSlot'
-export { STORY_ITEMS } from './storyItems'
-export type { StoryItem } from './storyItems'
-export { hashSeed } from './rng'
-export type { Seed } from './rng'
-
+} from './gameArt';
+export { ArtSlot } from './ArtSlot';
+export type { ArtSlotProps, ArtSlotState } from './ArtSlot';
+export { STORY_ITEMS } from './storyItems';
+export type { StoryItem } from './storyItems';
+export { hashSeed } from './rng';
+export type { Seed } from './rng';

@@ -66,13 +66,27 @@
   gap: calc(14 * var(--zzz-px));
   min-width: 0;
 }
-.zzz-bar-chart__col[data-fill='light'] { --zzz-bc-fill: var(--zzz-color-text-soft); }
-.zzz-bar-chart__col[data-fill='accent'] { --zzz-bc-fill: var(--zzz-accent); }
-.zzz-bar-chart__col[data-fill='rarity-s'] { --zzz-bc-fill: var(--zzz-color-rarity-s); }
-.zzz-bar-chart__col[data-fill='rarity-a'] { --zzz-bc-fill: var(--zzz-color-rarity-a); }
-.zzz-bar-chart__col[data-fill='rarity-b'] { --zzz-bc-fill: var(--zzz-color-rarity-b); }
-.zzz-bar-chart__col[data-fill='rarity-c'] { --zzz-bc-fill: var(--zzz-color-rarity-c); }
-.zzz-bar-chart__col[data-fill='custom'] { --zzz-bc-fill: var(--zzz-bar-chart-fill); }
+.zzz-bar-chart__col[data-fill='light'] {
+  --zzz-bc-fill: var(--zzz-color-text-soft);
+}
+.zzz-bar-chart__col[data-fill='accent'] {
+  --zzz-bc-fill: var(--zzz-accent);
+}
+.zzz-bar-chart__col[data-fill='rarity-s'] {
+  --zzz-bc-fill: var(--zzz-color-rarity-s);
+}
+.zzz-bar-chart__col[data-fill='rarity-a'] {
+  --zzz-bc-fill: var(--zzz-color-rarity-a);
+}
+.zzz-bar-chart__col[data-fill='rarity-b'] {
+  --zzz-bc-fill: var(--zzz-color-rarity-b);
+}
+.zzz-bar-chart__col[data-fill='rarity-c'] {
+  --zzz-bc-fill: var(--zzz-color-rarity-c);
+}
+.zzz-bar-chart__col[data-fill='custom'] {
+  --zzz-bc-fill: var(--zzz-bar-chart-fill);
+}
 
 .zzz-bar-chart__track {
   --zzz-hatch-base: var(--zzz-color-surface-stat-row-sunken);
@@ -95,7 +109,7 @@
   background: var(--zzz-bc-fill);
   box-shadow: inset 0 calc(2 * var(--zzz-px)) 0 rgb(255 255 255 / 0.3);
   transform-origin: 50% 100%;
-  transition: height 400ms cubic-bezier(.2, .75, .25, 1);
+  transition: height 400ms cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
 /* value + marker stack, riding just above the bar top */
@@ -109,7 +123,7 @@
   gap: calc(10 * var(--zzz-px));
   translate: -50% 0;
   white-space: nowrap;
-  transition: bottom 400ms cubic-bezier(.2, .75, .25, 1);
+  transition: bottom 400ms cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
 .zzz-bar-chart__value {
@@ -212,7 +226,7 @@
   }
 }
 .zzz-bar-chart[data-animate='true'] .zzz-bar-chart__bar {
-  animation: zzz-bar-chart-grow var(--zzz-bc-dur) cubic-bezier(.2, .75, .25, 1)
+  animation: zzz-bar-chart-grow var(--zzz-bc-dur) cubic-bezier(0.2, 0.75, 0.25, 1)
     calc(var(--zzz-bar-chart-i) * var(--zzz-bc-stagger)) both;
 }
 .zzz-bar-chart[data-animate='true'] .zzz-bar-chart__annot {

@@ -65,19 +65,30 @@
 .zzz-button.zzz-button--lg {
   --zzz-mat-ring: calc(var(--zzz-border-width-ring) * var(--zzz-control-ratio));
   --zzz-mat-bevel:
-    inset calc(1 * var(--zzz-control-ratio) * var(--zzz-px)) calc(1 * var(--zzz-control-ratio) * var(--zzz-px)) 0 var(--zzz-color-border-button-bevel-top),
-    inset calc(2 * var(--zzz-control-ratio) * var(--zzz-px)) calc(2 * var(--zzz-control-ratio) * var(--zzz-px)) 0 #373737;
-  --zzz-shadow-keyline: 0 0 0 calc(var(--zzz-border-width-keyline) * var(--zzz-control-ratio)) var(--zzz-color-border-keyline);
+    inset calc(1 * var(--zzz-control-ratio) * var(--zzz-px)) calc(1 * var(--zzz-control-ratio) * var(--zzz-px)) 0
+      var(--zzz-color-border-button-bevel-top),
+    inset calc(2 * var(--zzz-control-ratio) * var(--zzz-px)) calc(2 * var(--zzz-control-ratio) * var(--zzz-px)) 0
+      #373737;
+  --zzz-shadow-keyline: 0 0 0 calc(var(--zzz-border-width-keyline) * var(--zzz-control-ratio))
+    var(--zzz-color-border-keyline);
   --zzz-press-outset: calc(var(--zzz-size-control-press-outset) * var(--zzz-control-ratio));
 }
 
 /* Widths are the outer ring box (box-sizing: border-box). Preset widths keep the md pill's
  * proportions on sm / lg (× ratio); a numeric width is absolute. Fixed widths drop the side padding
  * so the label box spans the whole inner area (the label is centred in it). */
-.zzz-button--w-compact { width: calc(var(--zzz-size-control-pill-width-compact) * var(--zzz-control-ratio)); }
-.zzz-button--w-default { width: calc(var(--zzz-size-control-pill-width) * var(--zzz-control-ratio)); }
-.zzz-button--w-dialog { width: calc(var(--zzz-size-control-pill-width-dialog) * var(--zzz-control-ratio)); }
-.zzz-button--w-wide { width: calc(var(--zzz-size-control-pill-width-wide) * var(--zzz-control-ratio)); }
+.zzz-button--w-compact {
+  width: calc(var(--zzz-size-control-pill-width-compact) * var(--zzz-control-ratio));
+}
+.zzz-button--w-default {
+  width: calc(var(--zzz-size-control-pill-width) * var(--zzz-control-ratio));
+}
+.zzz-button--w-dialog {
+  width: calc(var(--zzz-size-control-pill-width-dialog) * var(--zzz-control-ratio));
+}
+.zzz-button--w-wide {
+  width: calc(var(--zzz-size-control-pill-width-wide) * var(--zzz-control-ratio));
+}
 .zzz-button:not(.zzz-button--w-auto) {
   padding-inline: calc(12 * var(--zzz-control-ratio) * var(--zzz-px));
 }
@@ -166,13 +177,27 @@
   border-radius: 50%;
   background: var(--zzz-button-disc, transparent);
 }
-.zzz-button[data-icon-tone='confirm'] { --zzz-button-disc: var(--zzz-color-icon-confirm); }
-.zzz-button[data-icon-tone='cancel'] { --zzz-button-disc: var(--zzz-color-icon-cancel); }
-.zzz-button[data-icon-tone='recycle'] { --zzz-button-disc: var(--zzz-color-icon-recycle); }
-.zzz-button[data-icon-tone='reset'] { --zzz-button-disc: var(--zzz-color-icon-reset); }
-.zzz-button[data-icon-tone='compare'] { --zzz-button-disc: var(--zzz-color-icon-compare); }
-.zzz-button[data-icon-tone='recommend'] { --zzz-button-disc: var(--zzz-color-icon-recommend); }
-.zzz-button[data-icon-tone='combat'] { --zzz-button-disc: var(--zzz-color-icon-combat-readiness); }
+.zzz-button[data-icon-tone='confirm'] {
+  --zzz-button-disc: var(--zzz-color-icon-confirm);
+}
+.zzz-button[data-icon-tone='cancel'] {
+  --zzz-button-disc: var(--zzz-color-icon-cancel);
+}
+.zzz-button[data-icon-tone='recycle'] {
+  --zzz-button-disc: var(--zzz-color-icon-recycle);
+}
+.zzz-button[data-icon-tone='reset'] {
+  --zzz-button-disc: var(--zzz-color-icon-reset);
+}
+.zzz-button[data-icon-tone='compare'] {
+  --zzz-button-disc: var(--zzz-color-icon-compare);
+}
+.zzz-button[data-icon-tone='recommend'] {
+  --zzz-button-disc: var(--zzz-color-icon-recommend);
+}
+.zzz-button[data-icon-tone='combat'] {
+  --zzz-button-disc: var(--zzz-color-icon-combat-readiness);
+}
 
 .zzz-button__glyph {
   position: relative;
@@ -184,8 +209,12 @@
   color: currentColor;
 }
 /* Per-glyph sizes in the md caps: funnel 22×22 (Filter), (i) 32×33 (Stat Bonuses). */
-.zzz-button__cap .zzz-icon--filter { font-size: calc(22 * var(--zzz-control-ratio) * var(--zzz-px)); }
-.zzz-button__cap .zzz-icon--infoAlert { font-size: calc(33 * var(--zzz-control-ratio) * var(--zzz-px)); }
+.zzz-button__cap .zzz-icon--filter {
+  font-size: calc(22 * var(--zzz-control-ratio) * var(--zzz-px));
+}
+.zzz-button__cap .zzz-icon--infoAlert {
+  font-size: calc(33 * var(--zzz-control-ratio) * var(--zzz-px));
+}
 /* … glyphs on a coloured disc are black, ~18 px. */
 .zzz-button:not([data-icon-tone='plain']) .zzz-button__cap .zzz-button__glyph {
   font-size: calc(18 * var(--zzz-control-ratio) * var(--zzz-px));
@@ -249,10 +278,11 @@
   height: var(--zzz-size-control-mission-button);
   border: var(--zzz-border-width-mission-button) solid #333034; /* no token */
   border-radius: var(--zzz-radius-pill);
-  background: #0A0A0A; /* no token */
+  background: #0a0a0a; /* no token */
   box-shadow:
     0 0 0 calc(2 * var(--zzz-px)) var(--zzz-color-border-keyline),
-    0 0 0 calc(2 * var(--zzz-px) + var(--zzz-border-width-mission-button)) var(--zzz-button-halo, var(--zzz-color-content-event-teal));
+    0 0 0 calc(2 * var(--zzz-px) + var(--zzz-border-width-mission-button))
+      var(--zzz-button-halo, var(--zzz-color-content-event-teal));
 }
 .zzz-button--mission.zzz-button--w-auto {
   width: var(--zzz-size-control-mission-button-width);
@@ -266,6 +296,6 @@
   color: var(--zzz-color-text-claimed);
 }
 .zzz-button--mission.zzz-button--locked {
-  background: #0B050C;
+  background: #0b050c;
   color: var(--zzz-color-text-claimed);
 }

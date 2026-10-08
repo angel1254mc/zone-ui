@@ -2,7 +2,7 @@
  * The host's reaction lines. Deliberately generic (quiz-show flavour addressed to "Proxy"): no
  * character-specific dialogue or lore is attributed to the real agent shown as today's host.
  */
-import { hashString } from './questions'
+import { hashString } from './questions';
 
 export const HOST_LINES = {
   intro: [
@@ -25,15 +25,15 @@ export const HOST_LINES = {
     'Flawless work, Proxy! Same time tomorrow?',
   ],
   played: ["You've already played today. Come back tomorrow!", 'One try a day, Proxy. New set at midnight!'],
-} as const
+} as const;
 
 /** Deterministic pick so a given date/question always gets the same line (stable stories). */
 export function hostLine(list: readonly string[], ...salt: (string | number)[]): string {
-  return list[hashString(salt.join(':')) % list.length]
+  return list[hashString(salt.join(':')) % list.length];
 }
 
 /** The results line for `score` of `total` (scaled onto the 0–5 list). */
 export function resultLine(score: number, total: number): string {
-  const i = total > 0 ? Math.round((score / total) * (HOST_LINES.results.length - 1)) : 0
-  return HOST_LINES.results[Math.max(0, Math.min(HOST_LINES.results.length - 1, i))]
+  const i = total > 0 ? Math.round((score / total) * (HOST_LINES.results.length - 1)) : 0;
+  return HOST_LINES.results[Math.max(0, Math.min(HOST_LINES.results.length - 1, i))];
 }

@@ -45,7 +45,11 @@
   background: var(--zzz-color-surface-panel);
   box-shadow: var(--sbz-ring-shadow);
 }
-.sbdocs-content :where(p, li, td, th, span, a, h1, h2, h3, h4, h5, h6, strong, em, blockquote, label, button):not(.docs-story *, .sb-unstyled *) {
+.sbdocs-content
+  :where(p, li, td, th, span, a, h1, h2, h3, h4, h5, h6, strong, em, blockquote, label, button):not(
+    .docs-story *,
+    .sb-unstyled *
+  ) {
   font-weight: 900 !important;
   font-stretch: var(--zzz-font-stretch-ui);
 }
@@ -80,7 +84,8 @@
   border: 0 !important;
   border-radius: calc(14 * var(--sbz-u)) calc(14 * var(--sbz-u)) calc(4 * var(--sbz-u)) calc(4 * var(--sbz-u));
   background:
-    radial-gradient(circle, rgb(255 255 255 / 0.03) 0 calc(2 * var(--sbz-u)), transparent calc(4.6 * var(--sbz-u))) 0 0 / calc(14 * var(--sbz-u)) calc(14 * var(--sbz-u)),
+    radial-gradient(circle, rgb(255 255 255 / 0.03) 0 calc(2 * var(--sbz-u)), transparent calc(4.6 * var(--sbz-u))) 0
+      0 / calc(14 * var(--sbz-u)) calc(14 * var(--sbz-u)),
     linear-gradient(180deg, var(--zzz-color-surface-film-cap-top), var(--zzz-color-surface-film-cap-bottom));
   box-shadow: inset 0 calc(1 * var(--sbz-u)) 0 #3a3a3a;
   color: var(--zzz-color-text-muted) !important;
@@ -233,7 +238,9 @@
   background: #000 !important;
   color: var(--zzz-color-text-secondary) !important;
 }
-.sbdocs-content .docblock-argstable :is(input:not([type='radio'], [type='checkbox'], [type='range'], [type='color']), select, textarea) {
+.sbdocs-content
+  .docblock-argstable
+  :is(input:not([type='radio'], [type='checkbox'], [type='range'], [type='color']), select, textarea) {
   border: 0 !important;
   border-radius: var(--zzz-radius-pill) !important;
   background: var(--zzz-color-surface-button) !important;
@@ -248,7 +255,9 @@
 .sbdocs-wrapper :is(a, button, input, select, textarea):not(.docs-story *, .sb-unstyled *):focus-visible {
   outline: calc(4 * var(--sbz-u)) solid transparent !important;
   outline-offset: calc(3 * var(--sbz-u));
-  box-shadow: 0 0 0 calc(3 * var(--sbz-u)) #000, 0 0 0 calc(6 * var(--sbz-u)) var(--zzz-accent) !important;
+  box-shadow:
+    0 0 0 calc(3 * var(--sbz-u)) #000,
+    0 0 0 calc(6 * var(--sbz-u)) var(--zzz-accent) !important;
 }
 
 /* Docs scrollbars: the .zzz-scrollbar look (src/components/ScrollArea/scrollbar.css) on the docs
@@ -283,13 +292,15 @@
     background-clip: padding-box;
   }
   html:has(.sbdocs-wrapper)::-webkit-scrollbar-thumb:vertical,
-  .sbdocs-content :is(pre, .docblock-source, table):not(.docs-story *, .sb-unstyled *)::-webkit-scrollbar-thumb:vertical {
+  .sbdocs-content
+    :is(pre, .docblock-source, table):not(.docs-story *, .sb-unstyled *)::-webkit-scrollbar-thumb:vertical {
     border-left-width: calc(8 * 0.5px);
     border-right-width: calc(8 * 0.5px);
     min-height: calc(20 * 0.5px);
   }
   html:has(.sbdocs-wrapper)::-webkit-scrollbar-thumb:horizontal,
-  .sbdocs-content :is(pre, .docblock-source, table):not(.docs-story *, .sb-unstyled *)::-webkit-scrollbar-thumb:horizontal {
+  .sbdocs-content
+    :is(pre, .docblock-source, table):not(.docs-story *, .sb-unstyled *)::-webkit-scrollbar-thumb:horizontal {
     border-top-width: calc(8 * 0.5px);
     border-bottom-width: calc(8 * 0.5px);
     min-width: calc(20 * 0.5px);

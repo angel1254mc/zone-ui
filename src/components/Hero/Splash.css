@@ -33,12 +33,20 @@
   animation: zzz-splash-out 300ms linear both;
 }
 @keyframes zzz-splash-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 @keyframes zzz-splash-out {
-  from { opacity: 1; }
-  to { opacity: 0; }
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 .zzz-splash__bg {
@@ -113,8 +121,13 @@
   animation: zzz-splash-pulse 1600ms ease-in-out infinite;
 }
 @keyframes zzz-splash-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.35; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
 }
 /* Pressed: the accent recipe in its simplest form (accent label). */
 .zzz-splash__enter:active .zzz-splash__hint {

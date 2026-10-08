@@ -48,41 +48,98 @@
   position: absolute;
   inset: 0;
 }
-.zzz-sweep__panel--light { animation-name: zzz-sweep-light; }
-.zzz-sweep__panel--mid { animation-name: zzz-sweep-mid; }
-.zzz-sweep__panel--deep { animation-name: zzz-sweep-deep; }
+.zzz-sweep__panel--light {
+  animation-name: zzz-sweep-light;
+}
+.zzz-sweep__panel--mid {
+  animation-name: zzz-sweep-mid;
+}
+.zzz-sweep__panel--deep {
+  animation-name: zzz-sweep-deep;
+}
 
 /* Light (sage): sweeps in over 33–167 ms and rests just past the left edge (the old screen peeks at
  * the corners). Teal covers @467, deep sweeps 433–533, and the stack exits left 567–633 ms. */
 @keyframes zzz-sweep-light {
-  0% { transform: translateX(100cqw); }
-  3.54% { transform: translateX(94.2cqw); }
-  7.18% { transform: translateX(80.4cqw); }
-  10.72% { transform: translateX(65.1cqw); }
-  14.26% { transform: translateX(43.8cqw); }
-  17.9%, 60.77% { transform: translateX(-2.27cqw); }
-  64.31% { transform: translateX(calc(52.4cqw - var(--zzz-sweep-w))); }
-  67.85%, 100% { transform: translateX(calc(-1 * var(--zzz-sweep-w))); }
+  0% {
+    transform: translateX(100cqw);
+  }
+  3.54% {
+    transform: translateX(94.2cqw);
+  }
+  7.18% {
+    transform: translateX(80.4cqw);
+  }
+  10.72% {
+    transform: translateX(65.1cqw);
+  }
+  14.26% {
+    transform: translateX(43.8cqw);
+  }
+  17.9%,
+  60.77% {
+    transform: translateX(-2.27cqw);
+  }
+  64.31% {
+    transform: translateX(calc(52.4cqw - var(--zzz-sweep-w)));
+  }
+  67.85%,
+  100% {
+    transform: translateX(calc(-1 * var(--zzz-sweep-w)));
+  }
 }
 /* Mid (teal): enters at 100 ms, rests @167 as a ~27 % strip on the right, holds, then covers
  * everything in one 33 ms step @467. */
 @keyframes zzz-sweep-mid {
-  0%, 7.18% { transform: translateX(100cqw); }
-  10.72% { transform: translateX(96.8cqw); }
-  14.26% { transform: translateX(90.7cqw); }
-  17.9%, 46.41% { transform: translateX(72.9cqw); }
-  50.05%, 60.77% { transform: translateX(-2.27cqw); }
-  64.31% { transform: translateX(calc(52.4cqw - var(--zzz-sweep-w))); }
-  67.85%, 100% { transform: translateX(calc(-1 * var(--zzz-sweep-w))); }
+  0%,
+  7.18% {
+    transform: translateX(100cqw);
+  }
+  10.72% {
+    transform: translateX(96.8cqw);
+  }
+  14.26% {
+    transform: translateX(90.7cqw);
+  }
+  17.9%,
+  46.41% {
+    transform: translateX(72.9cqw);
+  }
+  50.05%,
+  60.77% {
+    transform: translateX(-2.27cqw);
+  }
+  64.31% {
+    transform: translateX(calc(52.4cqw - var(--zzz-sweep-w)));
+  }
+  67.85%,
+  100% {
+    transform: translateX(calc(-1 * var(--zzz-sweep-w)));
+  }
 }
 /* Deep: sweeps in over 433–533 ms. */
 @keyframes zzz-sweep-deep {
-  0%, 46.41% { transform: translateX(100cqw); }
-  50.05% { transform: translateX(65.3cqw); }
-  53.59% { transform: translateX(15.4cqw); }
-  57.13%, 60.77% { transform: translateX(-1.56cqw); }
-  64.31% { transform: translateX(calc(52.4cqw - var(--zzz-sweep-w))); }
-  67.85%, 100% { transform: translateX(calc(-1 * var(--zzz-sweep-w))); }
+  0%,
+  46.41% {
+    transform: translateX(100cqw);
+  }
+  50.05% {
+    transform: translateX(65.3cqw);
+  }
+  53.59% {
+    transform: translateX(15.4cqw);
+  }
+  57.13%,
+  60.77% {
+    transform: translateX(-1.56cqw);
+  }
+  64.31% {
+    transform: translateX(calc(52.4cqw - var(--zzz-sweep-w)));
+  }
+  67.85%,
+  100% {
+    transform: translateX(calc(-1 * var(--zzz-sweep-w)));
+  }
 }
 
 /* Centre band (56 px, pure black), above the panels: 24 → 42 → 56 px in ~70 ms, then
@@ -103,13 +160,28 @@
   animation: zzz-sweep-band var(--zzz-sweep-duration) linear both;
 }
 @keyframes zzz-sweep-band {
-  0% { transform: scaleY(0.43); }
-  3.54% { transform: scaleY(0.75); }
-  7.18%, 89.28% { transform: scaleY(1); }
-  92.93% { transform: scaleY(0.625); }
-  96.46% { transform: scaleY(0.357); }
-  99.9% { transform: scaleY(0.07); }
-  100% { transform: scaleY(0); }
+  0% {
+    transform: scaleY(0.43);
+  }
+  3.54% {
+    transform: scaleY(0.75);
+  }
+  7.18%,
+  89.28% {
+    transform: scaleY(1);
+  }
+  92.93% {
+    transform: scaleY(0.625);
+  }
+  96.46% {
+    transform: scaleY(0.357);
+  }
+  99.9% {
+    transform: scaleY(0.07);
+  }
+  100% {
+    transform: scaleY(0);
+  }
 }
 
 /* Label: #F8F8F8 condensed italic caps tracked 1.75em (letter pitch ~69 px). The trailing tracking is
@@ -128,15 +200,34 @@
   animation: zzz-sweep-label var(--zzz-sweep-duration) step-end both;
 }
 @keyframes zzz-sweep-label {
-  0% { opacity: 0; }
-  7.18% { opacity: 1; }
-  10.72% { opacity: 0.7; }
-  14.26% { opacity: 1; }
-  71.49% { opacity: 0.35; }
-  75.03% { opacity: 1; }
-  78.56% { opacity: 0.35; }
-  82.21% { opacity: 1; }
-  89.28%, 100% { opacity: 0; }
+  0% {
+    opacity: 0;
+  }
+  7.18% {
+    opacity: 1;
+  }
+  10.72% {
+    opacity: 0.7;
+  }
+  14.26% {
+    opacity: 1;
+  }
+  71.49% {
+    opacity: 0.35;
+  }
+  75.03% {
+    opacity: 1;
+  }
+  78.56% {
+    opacity: 0.35;
+  }
+  82.21% {
+    opacity: 1;
+  }
+  89.28%,
+  100% {
+    opacity: 0;
+  }
 }
 
 /* Frozen timeline (`at`): pause every animation at −at ms. */
@@ -166,7 +257,14 @@
   animation: none;
 }
 @keyframes zzz-sweep-quick-fade {
-  0% { opacity: 0; }
-  25%, 75% { opacity: 1; }
-  100% { opacity: 0; }
+  0% {
+    opacity: 0;
+  }
+  25%,
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }

@@ -1,7 +1,7 @@
-import { useState } from 'react'
-import { cx } from '../../utils'
-import type { BackgroundLayerProps } from './types'
-import './Backgrounds.css'
+import { useState } from 'react';
+import { cx } from '../../utils';
+import type { BackgroundLayerProps } from './types';
+import './Backgrounds.css';
 
 export interface StorageMuralBackgroundProps extends BackgroundLayerProps {
   /**
@@ -10,7 +10,7 @@ export interface StorageMuralBackgroundProps extends BackgroundLayerProps {
    * loaded and then fades in (no progressive / partial paint); while it loads, or if the URL fails
    * (the failed `<img>` is removed, so no broken-image glyph), the same flat band shows.
    */
-  src?: string
+  src?: string;
 }
 
 /**
@@ -19,17 +19,20 @@ export interface StorageMuralBackgroundProps extends BackgroundLayerProps {
  * with no `src` the band reads ≈ #080808 — the tone of a typical mural behind the veil.
  */
 export function StorageMuralBackground({ src, className, ref, ...rest }: StorageMuralBackgroundProps) {
-  const [failedSrc, setFailedSrc] = useState<string | null>(null)
-  const [loaded, setLoaded] = useState<{ src: string; instant: boolean } | null>(null)
-  const showImage = Boolean(src) && failedSrc !== src
-  const isLoaded = loaded !== null && loaded.src === src
+  const [failedSrc, setFailedSrc] = useState<string | null>(null);
+  const [loaded, setLoaded] = useState<{
+    src: string;
+    instant: boolean;
+  } | null>(null);
+  const showImage = Boolean(src) && failedSrc !== src;
+  const isLoaded = loaded !== null && loaded.src === src;
 
   /** Cached images are complete on mount: show them at once, without a fade. */
   const checkCached = (img: HTMLImageElement | null) => {
     if (img && src && img.complete && img.naturalWidth > 0 && !(loaded && loaded.src === src)) {
-      setLoaded({ src, instant: true })
+      setLoaded({ src, instant: true });
     }
-  }
+  };
 
   return (
     <div ref={ref} aria-hidden="true" className={cx('zzz-bg', 'zzz-mural', className)} {...rest}>
@@ -48,5 +51,5 @@ export function StorageMuralBackground({ src, className, ref, ...rest }: Storage
       ) : null}
       <div className="zzz-mural__veil" />
     </div>
-  )
+  );
 }

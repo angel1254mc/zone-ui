@@ -24,9 +24,9 @@
 
 .zzz-news-card[data-tone='light'] {
   --zzz-news-card-title: #222122;
-  --zzz-news-card-desc: #6B6B6B; /* 4.63:1 on #EFEFEF: meets WCAG AA for body text */
+  --zzz-news-card-desc: #6b6b6b; /* 4.63:1 on #EFEFEF: meets WCAG AA for body text */
   --zzz-news-card-date: #000000;
-  --zzz-news-card-art-bg: #DFDFDF;
+  --zzz-news-card-art-bg: #dfdfdf;
 }
 
 .zzz-news-card__art {

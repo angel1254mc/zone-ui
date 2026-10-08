@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import type { CSSProperties, ReactNode } from 'react'
-import './foundations.css'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { CSSProperties, ReactNode } from 'react';
+import './foundations.css';
 
 /** calc(N * var(--zzz-px)) */
-const gpx = (n: number) => `calc(${n} * var(--zzz-px))`
+const gpx = (n: number) => `calc(${n} * var(--zzz-px))`;
 
 const meta = {
   title: 'Foundations/Materials',
@@ -34,10 +34,10 @@ const meta = {
       },
     },
   },
-} satisfies Meta
+} satisfies Meta;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 function Cell({ caption, children }: { caption: ReactNode; children: ReactNode }) {
   return (
@@ -45,10 +45,20 @@ function Cell({ caption, children }: { caption: ReactNode; children: ReactNode }
       {children}
       <span className="zzz-doc-caption">{caption}</span>
     </div>
-  )
+  );
 }
 
-function Pill({ label = 'View', pressed, cap, style }: { label?: string; pressed?: boolean; cap?: boolean; style?: CSSProperties }) {
+function Pill({
+  label = 'View',
+  pressed,
+  cap,
+  style,
+}: {
+  label?: string;
+  pressed?: boolean;
+  cap?: boolean;
+  style?: CSSProperties;
+}) {
   return (
     <div
       className={`zzz-mat-pill zzz-pressable zzz-doc-pill${cap ? ' zzz-doc-pill--with-cap' : ''}`}
@@ -62,7 +72,7 @@ function Pill({ label = 'View', pressed, cap, style }: { label?: string; pressed
       )}
       <span className="zzz-doc-pill__label zzz-italic">{label}</span>
     </div>
-  )
+  );
 }
 
 export const Pill_: Story = {
@@ -80,7 +90,7 @@ export const Pill_: Story = {
       </Cell>
     </div>
   ),
-}
+};
 
 export const Pressed: Story = {
   parameters: {
@@ -96,8 +106,8 @@ export const Pressed: Story = {
           'Knobs: `--zzz-press-outset` (set `0` for dialog buttons; inherits), `--zzz-press-border` (the host border width; `.zzz-mat-pill` sets it, never inherits).',
           '',
           '```tsx',
-          "const press = usePressFlash({ disabled, onKeyDown, onKeyUp, onBlur })",
-          '<button className="zzz-mat-pill zzz-pressable zzz-focusable" data-pressed={forced ? \'\' : press[\'data-pressed\']} {...press}>…</button>',
+          'const press = usePressFlash({ disabled, onKeyDown, onKeyUp, onBlur })',
+          "<button className=\"zzz-mat-pill zzz-pressable zzz-focusable\" data-pressed={forced ? '' : press['data-pressed']} {...press}>…</button>",
           '```',
         ].join('\n'),
       },
@@ -124,22 +134,37 @@ export const Pressed: Story = {
       </Cell>
     </div>
   ),
-}
+};
 
 export const Panel: Story = {
   render: () => (
     <div className="zzz-doc-row zzz-bg-hatch" style={{ padding: gpx(40) }}>
       <Cell caption=".zzz-mat-panel + .zzz-mat-textured header">
-        <div className="zzz-mat-panel" style={{ width: gpx(460 - 10), height: gpx(300 - 10), margin: gpx(5), overflow: 'hidden' }}>
+        <div
+          className="zzz-mat-panel"
+          style={{
+            width: gpx(460 - 10),
+            height: gpx(300 - 10),
+            margin: gpx(5),
+            overflow: 'hidden',
+          }}
+        >
           <div className="zzz-mat-textured" style={{ height: gpx(39) }} />
         </div>
       </Cell>
       <Cell caption=".zzz-mat-panel--large">
-        <div className="zzz-mat-panel zzz-mat-panel--large" style={{ width: gpx(460 - 8), height: gpx(300 - 8), margin: gpx(4) }} />
+        <div
+          className="zzz-mat-panel zzz-mat-panel--large"
+          style={{
+            width: gpx(460 - 8),
+            height: gpx(300 - 8),
+            margin: gpx(4),
+          }}
+        />
       </Cell>
     </div>
   ),
-}
+};
 
 export const Surfaces: Story = {
   render: () => (
@@ -158,7 +183,7 @@ export const Surfaces: Story = {
       </Cell>
     </div>
   ),
-}
+};
 
 export const Dots: Story = {
   render: () => (
@@ -187,7 +212,7 @@ export const Dots: Story = {
       ))}
     </div>
   ),
-}
+};
 
 export const Accent: Story = {
   render: () => (
@@ -209,4 +234,4 @@ export const Accent: Story = {
       </Cell>
     </div>
   ),
-}
+};

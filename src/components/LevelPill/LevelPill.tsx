@@ -1,12 +1,12 @@
-import type { ComponentPropsWithoutRef, ReactNode, Ref } from 'react'
-import { cx } from '../../utils'
-import { InfoAlertIcon } from '../../icons'
-import { RankCoin } from '../Badges'
-import type { Rank } from '../Badges'
-import { Button } from '../Button'
-import type { ButtonProps } from '../Button'
-import { Text } from '../Text'
-import './LevelPill.css'
+import type { ComponentPropsWithoutRef, ReactNode, Ref } from 'react';
+import { cx } from '../../utils';
+import { InfoAlertIcon } from '../../icons';
+import { RankCoin } from '../Badges';
+import type { Rank } from '../Badges';
+import { Button } from '../Button';
+import type { ButtonProps } from '../Button';
+import { Text } from '../Text';
+import './LevelPill.css';
 
 /**
  * - `panel`: 200 × 44 #161616 capsule, RankCoin, upright "Lv. 60/60" (side detail panel)
@@ -15,30 +15,31 @@ import './LevelPill.css'
  *   max digits, `(i)` sub-pill 85 × 56 (big item panel)
  * - `agent`: 355 × 66 pill, big italic "Lv. 60", divider, ghost "60", black MAX capsule (character info)
  */
-export type LevelPillVariant = 'panel' | 'equip' | 'large' | 'agent'
+export type LevelPillVariant = 'panel' | 'equip' | 'large' | 'agent';
 
 export interface LevelPillOwnProps {
-  variant?: LevelPillVariant
-  level: number
-  max: number
+  variant?: LevelPillVariant;
+  level: number;
+  max: number;
   /** Rarity coin (panel / equip / large). Omit to hide it. */
-  rank?: Rank
+  rank?: Rank;
   /** Agent variant: show "MAX" in the black end capsule. Default `level >= max`. */
-  showMax?: boolean
+  showMax?: boolean;
   /** Large variant: shows the `(i)` "Details" sub-pill and calls this on activation. */
-  onInfo?: () => void
+  onInfo?: () => void;
   /** Accessible name of the `(i)` button. Default "Details". */
-  infoLabel?: string
+  infoLabel?: string;
   /** Extra props for the `(i)` button (`disabled`, `pressed`…). */
-  infoProps?: Omit<ButtonProps, 'onClick' | 'children' | 'variant' | 'icon'>
+  infoProps?: Omit<ButtonProps, 'onClick' | 'children' | 'variant' | 'icon'>;
   /** Custom glyph for the `(i)` button. Default `InfoAlertIcon`. */
-  infoIcon?: ReactNode
+  infoIcon?: ReactNode;
   /** Accessible name of the pill. Default "Level {level} of {max}". */
-  label?: string
-  ref?: Ref<HTMLDivElement>
+  label?: string;
+  ref?: Ref<HTMLDivElement>;
 }
 
-export type LevelPillProps = LevelPillOwnProps & Omit<ComponentPropsWithoutRef<'div'>, keyof LevelPillOwnProps | 'children'>
+export type LevelPillProps = LevelPillOwnProps &
+  Omit<ComponentPropsWithoutRef<'div'>, keyof LevelPillOwnProps | 'children'>;
 
 /**
  * Level display. The pill is a `role="group"` named "Level 60 of 60"; the visible digits
@@ -60,13 +61,26 @@ export function LevelPill({
   ref,
   ...rest
 }: LevelPillProps) {
-  const name = label ?? `Level ${level} of ${max}`
-  const withCoin = rank != null && variant !== 'agent'
-  const coin = withCoin ? <RankCoin rank={rank} size={variant === 'large' ? 29 : variant === 'panel' ? 33 : 30} decorative className="zzz-level-pill__coin" /> : null
+  const name = label ?? `Level ${level} of ${max}`;
+  const withCoin = rank != null && variant !== 'agent';
+  const coin = withCoin ? (
+    <RankCoin
+      rank={rank}
+      size={variant === 'large' ? 29 : variant === 'panel' ? 33 : 30}
+      decorative
+      className="zzz-level-pill__coin"
+    />
+  ) : null;
 
   if (variant === 'panel' || variant === 'equip') {
     return (
-      <div {...rest} ref={ref} role="group" aria-label={name} className={cx('zzz-level-pill', `zzz-level-pill--${variant}`, className)}>
+      <div
+        {...rest}
+        ref={ref}
+        role="group"
+        aria-label={name}
+        className={cx('zzz-level-pill', `zzz-level-pill--${variant}`, className)}
+      >
         {coin}
         <span className="zzz-level-pill__text" aria-hidden="true">
           Lv. {level}
@@ -74,12 +88,12 @@ export function LevelPill({
           {max}
         </span>
       </div>
-    )
+    );
   }
 
-  const isAgent = variant === 'agent'
-  const maxShown = showMax ?? level >= max
-  const hasInfo = !isAgent && onInfo != null
+  const isAgent = variant === 'agent';
+  const maxShown = showMax ?? level >= max;
+  const hasInfo = !isAgent && onInfo != null;
 
   return (
     <div
@@ -91,7 +105,12 @@ export function LevelPill({
     >
       <span className="zzz-level-pill__lead" aria-hidden="true">
         {coin}
-        <Text role={isAgent ? 'titlePill' : 'bodyXl'} italic outline={isAgent ? 'md' : 'sm'} className="zzz-level-pill__level">
+        <Text
+          role={isAgent ? 'titlePill' : 'bodyXl'}
+          italic
+          outline={isAgent ? 'md' : 'sm'}
+          className="zzz-level-pill__level"
+        >
           Lv. {level}
         </Text>
       </span>
@@ -115,5 +134,5 @@ export function LevelPill({
         />
       ) : null}
     </div>
-  )
+  );
 }

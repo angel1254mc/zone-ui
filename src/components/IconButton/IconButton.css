@@ -48,9 +48,12 @@
 .zzz-icon-button.zzz-icon-button--lg {
   --zzz-mat-ring: calc(var(--zzz-border-width-ring) * var(--zzz-control-ratio));
   --zzz-mat-bevel:
-    inset calc(1 * var(--zzz-control-ratio) * var(--zzz-px)) calc(1 * var(--zzz-control-ratio) * var(--zzz-px)) 0 var(--zzz-color-border-button-bevel-top),
-    inset calc(2 * var(--zzz-control-ratio) * var(--zzz-px)) calc(2 * var(--zzz-control-ratio) * var(--zzz-px)) 0 #373737;
-  --zzz-shadow-keyline: 0 0 0 calc(var(--zzz-border-width-keyline) * var(--zzz-control-ratio)) var(--zzz-color-border-keyline);
+    inset calc(1 * var(--zzz-control-ratio) * var(--zzz-px)) calc(1 * var(--zzz-control-ratio) * var(--zzz-px)) 0
+      var(--zzz-color-border-button-bevel-top),
+    inset calc(2 * var(--zzz-control-ratio) * var(--zzz-px)) calc(2 * var(--zzz-control-ratio) * var(--zzz-px)) 0
+      #373737;
+  --zzz-shadow-keyline: 0 0 0 calc(var(--zzz-border-width-keyline) * var(--zzz-control-ratio))
+    var(--zzz-color-border-keyline);
   --zzz-press-outset: calc(var(--zzz-size-control-press-outset) * var(--zzz-control-ratio));
 }
 
@@ -71,7 +74,7 @@
   --zzz-mat-ring: var(--zzz-border-width-ring-stepper);
   --zzz-mat-bevel: none;
   border-color: var(--zzz-color-border-stepper);
-  background-color: #0C0C0C; /* no token */
+  background-color: #0c0c0c; /* no token */
   font-size: calc(26 * var(--zzz-px));
 }
 /* Bare key circle ("T" under a lock in a top bar): 38, ring 3 #2F2F2F, fill #000. */
@@ -89,10 +92,11 @@
   --zzz-mat-ring: var(--zzz-border-width-mission-button);
   --zzz-mat-bevel: none;
   border-color: #333034; /* no token */
-  background: #0A0A0A; /* no token */
+  background: #0a0a0a; /* no token */
   box-shadow:
     0 0 0 calc(2 * var(--zzz-px)) var(--zzz-color-border-keyline),
-    0 0 0 calc(2 * var(--zzz-px) + var(--zzz-border-width-mission-button)) var(--zzz-icon-button-halo, var(--zzz-color-content-event-teal));
+    0 0 0 calc(2 * var(--zzz-px) + var(--zzz-border-width-mission-button))
+      var(--zzz-icon-button-halo, var(--zzz-color-content-event-teal));
   font-size: calc(26 * var(--zzz-px));
 }
 
@@ -112,7 +116,15 @@
 /* Per-glyph ink boxes in the 57 circles: funnel 21×22, trash 23×32, locked padlock 24×29,
  * star 25×23. The icons fill the 32 grid differently, so
  * the em box is set per glyph (× ratio on sm / lg); other glyphs keep size.control.icon.*. */
-.zzz-icon-button:where(.zzz-icon-button--sm, .zzz-icon-button--md, .zzz-icon-button--lg) .zzz-icon--filter { font-size: calc(22 * var(--zzz-control-ratio) * var(--zzz-px)); }
-.zzz-icon-button:where(.zzz-icon-button--sm, .zzz-icon-button--md, .zzz-icon-button--lg) .zzz-icon--trash { font-size: calc(32 * var(--zzz-control-ratio) * var(--zzz-px)); }
-.zzz-icon-button:where(.zzz-icon-button--sm, .zzz-icon-button--md, .zzz-icon-button--lg) .zzz-icon--star { font-size: calc(25 * var(--zzz-control-ratio) * var(--zzz-px)); }
-.zzz-icon-button--lock-on .zzz-icon--lock { font-size: calc(29 * var(--zzz-control-ratio) * var(--zzz-px)); }
+.zzz-icon-button:where(.zzz-icon-button--sm, .zzz-icon-button--md, .zzz-icon-button--lg) .zzz-icon--filter {
+  font-size: calc(22 * var(--zzz-control-ratio) * var(--zzz-px));
+}
+.zzz-icon-button:where(.zzz-icon-button--sm, .zzz-icon-button--md, .zzz-icon-button--lg) .zzz-icon--trash {
+  font-size: calc(32 * var(--zzz-control-ratio) * var(--zzz-px));
+}
+.zzz-icon-button:where(.zzz-icon-button--sm, .zzz-icon-button--md, .zzz-icon-button--lg) .zzz-icon--star {
+  font-size: calc(25 * var(--zzz-control-ratio) * var(--zzz-px));
+}
+.zzz-icon-button--lock-on .zzz-icon--lock {
+  font-size: calc(29 * var(--zzz-control-ratio) * var(--zzz-px));
+}

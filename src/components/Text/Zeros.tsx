@@ -1,13 +1,13 @@
-import type { ComponentPropsWithoutRef, Ref } from 'react'
-import { cx } from '../../utils'
-import './Text.css'
+import type { ComponentPropsWithoutRef, Ref } from 'react';
+import { cx } from '../../utils';
+import './Text.css';
 
 export interface ZerosProps extends Omit<ComponentPropsWithoutRef<'span'>, 'children'> {
   /** The number (non-negative integer). */
-  value: number
+  value: number;
   /** Total digit count; missing leading digits are drawn as dimmed zeros (default 8). */
-  digits?: number
-  ref?: Ref<HTMLSpanElement>
+  digits?: number;
+  ref?: Ref<HTMLSpanElement>;
 }
 
 /** One fixed-pitch cell per digit (see .zzz-zeros__d in Text.css). */
@@ -16,7 +16,7 @@ function cells(s: string) {
     <span key={i} className="zzz-zeros__d">
       {ch}
     </span>
-  ))
+  ));
 }
 
 /**
@@ -24,8 +24,8 @@ function cells(s: string) {
  * (currency "00076418"). Screen readers get the plain number.
  */
 export function Zeros({ value, digits = 8, className, ref, ...rest }: ZerosProps) {
-  const text = String(Math.max(0, Math.trunc(value)))
-  const pad = Math.max(0, digits - text.length)
+  const text = String(Math.max(0, Math.trunc(value)));
+  const pad = Math.max(0, digits - text.length);
   return (
     <span ref={ref} role="img" aria-label={text} className={cx('zzz-zeros', className)} {...rest}>
       {pad > 0 && (
@@ -37,5 +37,5 @@ export function Zeros({ value, digits = 8, className, ref, ...rest }: ZerosProps
         {cells(text)}
       </span>
     </span>
-  )
+  );
 }

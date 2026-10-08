@@ -78,7 +78,10 @@
   );
   position: absolute;
   left: 50%;
-  top: calc(23 * var(--zzz-px) - var(--zzz-border-width-scrollbar) + (var(--zzz-thumb-run) - var(--zzz-thumb-len)) * var(--zzz-thumb-progress));
+  top: calc(
+    23 * var(--zzz-px) - var(--zzz-border-width-scrollbar) + (var(--zzz-thumb-run) - var(--zzz-thumb-len)) *
+      var(--zzz-thumb-progress)
+  );
   width: var(--zzz-size-scrollbar-thumb);
   height: var(--zzz-thumb-len);
   transform: translateX(-50%);
@@ -164,7 +167,10 @@
 }
 .zzz-scroll-area__bar--horizontal .zzz-scroll-area__thumb {
   top: 50%;
-  left: calc(23 * var(--zzz-px) - var(--zzz-border-width-scrollbar) + (var(--zzz-thumb-run) - var(--zzz-thumb-len)) * var(--zzz-thumb-progress));
+  left: calc(
+    23 * var(--zzz-px) - var(--zzz-border-width-scrollbar) + (var(--zzz-thumb-run) - var(--zzz-thumb-len)) *
+      var(--zzz-thumb-progress)
+  );
   width: var(--zzz-thumb-len);
   height: var(--zzz-size-scrollbar-thumb);
   transform: translateY(-50%);
@@ -202,8 +208,20 @@
 .zzz-scroll-area--panel .zzz-scroll-area__viewport {
   --zzz-fade-start: 0px;
   --zzz-fade-end: 0px;
-  -webkit-mask-image: linear-gradient(var(--zzz-fade-dir, to bottom), transparent 0, #000 var(--zzz-fade-start), #000 calc(100% - var(--zzz-fade-end)), transparent 100%);
-  mask-image: linear-gradient(var(--zzz-fade-dir, to bottom), transparent 0, #000 var(--zzz-fade-start), #000 calc(100% - var(--zzz-fade-end)), transparent 100%);
+  -webkit-mask-image: linear-gradient(
+    var(--zzz-fade-dir, to bottom),
+    transparent 0,
+    #000 var(--zzz-fade-start),
+    #000 calc(100% - var(--zzz-fade-end)),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    var(--zzz-fade-dir, to bottom),
+    transparent 0,
+    #000 var(--zzz-fade-start),
+    #000 calc(100% - var(--zzz-fade-end)),
+    transparent 100%
+  );
 }
 .zzz-scroll-area--panel[data-more-down]:not(.zzz-scroll-area--horizontal) .zzz-scroll-area__viewport,
 .zzz-scroll-area--panel.zzz-scroll-area--horizontal[data-more-right] .zzz-scroll-area__viewport {
@@ -216,4 +234,3 @@
 .zzz-scroll-area--panel.zzz-scroll-area--horizontal .zzz-scroll-area__viewport {
   --zzz-fade-dir: to right;
 }
-

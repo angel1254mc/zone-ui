@@ -34,12 +34,20 @@
   animation: zzz-dialog-scrim-out var(--zzz-motion-duration-scrim-out) linear var(--zzz-motion-duration-band-out) both;
 }
 @keyframes zzz-dialog-scrim-in {
-  from { opacity: 0.15; }
-  to { opacity: 1; }
+  from {
+    opacity: 0.15;
+  }
+  to {
+    opacity: 1;
+  }
 }
 @keyframes zzz-dialog-scrim-out {
-  from { opacity: 1; }
-  to { opacity: 0; }
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 /* Optional freeze (~100 ms): a 7 px mosaic grid over the backdrop, then it drops away. */
@@ -53,8 +61,12 @@
   animation: zzz-dialog-hide-after var(--zzz-motion-duration-backdrop-freeze) steps(1, end) both;
 }
 @keyframes zzz-dialog-hide-after {
-  from { visibility: visible; }
-  to { visibility: hidden; }
+  from {
+    visibility: visible;
+  }
+  to {
+    visibility: hidden;
+  }
 }
 
 /* ── Band ────────────────────────────────────────────────────────────────────────────────── */
@@ -81,19 +93,37 @@
   pointer-events: none;
 }
 @keyframes zzz-band-in {
-  0% { transform: scaleY(0.87); }
-  25% { transform: scaleY(1.023); }
-  50% { transform: scaleY(1.015); }
-  75% { transform: scaleY(1.009); }
-  100% { transform: scaleY(1); }
+  0% {
+    transform: scaleY(0.87);
+  }
+  25% {
+    transform: scaleY(1.023);
+  }
+  50% {
+    transform: scaleY(1.015);
+  }
+  75% {
+    transform: scaleY(1.009);
+  }
+  100% {
+    transform: scaleY(1);
+  }
 }
 @keyframes zzz-band-wait {
-  from { visibility: hidden; }
-  to { visibility: visible; }
+  from {
+    visibility: hidden;
+  }
+  to {
+    visibility: visible;
+  }
 }
 @keyframes zzz-band-out {
-  from { opacity: 1; }
-  to { opacity: 0; }
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 /* Fill: #000 with the 4 px edge lines. The lines are rgba(62,62,62,.5) OVER THE BACKDROP (not over the
@@ -114,16 +144,24 @@
 .zzz-dialog-band__flash {
   position: absolute;
   inset: 0;
-  background: #FFFFFF;
+  background: #ffffff;
   opacity: 0;
   pointer-events: none;
   animation: zzz-band-flash var(--zzz-motion-duration-band-flash) linear both;
 }
 @keyframes zzz-band-flash {
-  0% { opacity: var(--zzz-opacity-band-flash); }
-  33% { opacity: 0.18; }
-  66% { opacity: 0.02; }
-  100% { opacity: 0; }
+  0% {
+    opacity: var(--zzz-opacity-band-flash);
+  }
+  33% {
+    opacity: 0.18;
+  }
+  66% {
+    opacity: 0.02;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 .zzz-dialog-band__content,
@@ -136,8 +174,12 @@
   animation-delay: var(--zzz-motion-duration-backdrop-freeze);
 }
 @keyframes zzz-band-content-in {
-  from { opacity: var(--zzz-opacity-dialog-content-from); }
-  to { opacity: 1; }
+  from {
+    opacity: var(--zzz-opacity-dialog-content-from);
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .zzz-dialog-band__content {

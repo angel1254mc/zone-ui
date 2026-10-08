@@ -1,44 +1,36 @@
-/**
- * Content for the "Inter-Knot Dispatch" fan news site. All copy is ORIGINAL filler
- * written for this demo. Art is referenced by real id from the committed art manifest
- * (examples/art/art-manifest.json): agent ids (nanoka busts / full-body art) and Enka.Network
- * Inter-Knot event namecards (ImgCardEvent##). Names here are used as-is when the manifest is
- * unavailable, and image slots then render empty frames.
- */
-
-export type NewsCategory = 'news' | 'notices' | 'events'
+export type NewsCategory = 'news' | 'notices' | 'events';
 
 export interface NewsPost {
-  id: string
-  category: NewsCategory
-  date: string
-  title: string
-  description: string
+  id: string;
+  category: NewsCategory;
+  date: string;
+  title: string;
+  description: string;
   /**
    * Banner art (real art only): an agent bust (`crop`, cover-cropped on the face), or an in-game
    * Inter-Knot event namecard by id (`ImgCardEvent##`, cover-cropped; `position` = object-position).
    */
-  art: { kind: 'agent'; agentId: string } | { kind: 'namecard'; id: string; position?: string }
-  isNew?: boolean
+  art: { kind: 'agent'; agentId: string } | { kind: 'namecard'; id: string; position?: string };
+  isNew?: boolean;
 }
 
 export const CATEGORY_LABEL: Record<NewsCategory, string> = {
   news: 'News',
   notices: 'Notices',
   events: 'Events',
-}
+};
 
 export const NEWS_TABS = [
   { value: 'all', label: 'All' },
   { value: 'news', label: 'News' },
   { value: 'notices', label: 'Notices' },
   { value: 'events', label: 'Events' },
-] as const
+] as const;
 
-export type NewsTab = (typeof NEWS_TABS)[number]['value']
+export type NewsTab = (typeof NEWS_TABS)[number]['value'];
 
 /** Cards per page of the grid. */
-export const PAGE_SIZE = 6
+export const PAGE_SIZE = 6;
 
 /** Newest first. */
 export const NEWS_POSTS: readonly NewsPost[] = [
@@ -56,7 +48,8 @@ export const NEWS_POSTS: readonly NewsPost[] = [
     category: 'news',
     date: '2026/09/26',
     title: 'Victoria Housekeeping takes on a new contract',
-    description: 'Word on the Inter-Knot is that Ellen was spotted near Lumina Square with a very large shark-shaped umbrella.',
+    description:
+      'Word on the Inter-Knot is that Ellen was spotted near Lumina Square with a very large shark-shaped umbrella.',
     art: { kind: 'agent', agentId: '1191' },
     isNew: true,
   },
@@ -65,7 +58,8 @@ export const NEWS_POSTS: readonly NewsPost[] = [
     category: 'notices',
     date: '2026/09/25',
     title: 'Scheduled maintenance for the Inter-Knot relay',
-    description: 'The relay goes quiet for about five hours while the HDD gets dusted. Compensation is waiting in your mail.',
+    description:
+      'The relay goes quiet for about five hours while the HDD gets dusted. Compensation is waiting in your mail.',
     art: { kind: 'namecard', id: 'ImgCardEvent04' },
     isNew: true,
   },
@@ -157,42 +151,105 @@ export const NEWS_POSTS: readonly NewsPost[] = [
     description: 'Astra Yao headlines a one-night-only show. Tickets are free, the queue is not.',
     art: { kind: 'agent', agentId: '1311' },
   },
-]
+];
 
 export function filterPosts(tab: NewsTab): NewsPost[] {
-  return tab === 'all' ? [...NEWS_POSTS] : NEWS_POSTS.filter((p) => p.category === tab)
+  return tab === 'all' ? [...NEWS_POSTS] : NEWS_POSTS.filter((p) => p.category === tab);
 }
 
 export interface DispatchAgent {
-  id: string
-  name: string
-  faction: string
-  element: string
-  specialty: string
+  id: string;
+  name: string;
+  faction: string;
+  element: string;
+  specialty: string;
   /** One original line of flavour text. */
-  blurb: string
+  blurb: string;
 }
 
 /** Featured agents (ids from the committed art manifest; names used when the manifest is unavailable). */
 export const FEATURED_AGENTS: readonly DispatchAgent[] = [
-  { id: '1191', name: 'Ellen', faction: 'Victoria Housekeeping', element: 'Ice', specialty: 'Attack', blurb: 'Off the clock at 5 p.m. sharp. Do not make her work overtime.' },
-  { id: '1091', name: 'Miyabi', faction: 'Section 6', element: 'Frost', specialty: 'Anomaly', blurb: 'The youngest Void Hunter on record, and the calmest person in any room.' },
-  { id: '1241', name: 'Zhu Yuan', faction: 'Public Security', element: 'Ether', specialty: 'Attack', blurb: 'By the book, every page of it, with a very large gun.' },
-  { id: '1261', name: 'Jane', faction: 'Criminal Investigation', element: 'Physical', specialty: 'Anomaly', blurb: 'Undercover, under suspicion and always one step ahead.' },
-  { id: '1031', name: 'Nicole', faction: 'Cunning Hares', element: 'Ether', specialty: 'Support', blurb: 'Runs the Hares, the books and occasionally from creditors.' },
-  { id: '1011', name: 'Anby', faction: 'Cunning Hares', element: 'Electric', specialty: 'Stun', blurb: 'Learns everything from movies. It works more often than it should.' },
-  { id: '1311', name: 'Astra Yao', faction: 'Stars of Lyra', element: 'Ether', specialty: 'Support', blurb: 'Headliner, diva and the best-kept secret of the night shift.' },
-  { id: '1101', name: 'Koleda', faction: 'Belobog Heavy Industries', element: 'Fire', specialty: 'Stun', blurb: 'Small president, big hammer, bigger plans.' },
-  { id: '1141', name: 'Lycaon', faction: 'Victoria Housekeeping', element: 'Ice', specialty: 'Stun', blurb: 'Impeccable manners, impeccable suit, impeccable kick.' },
-]
+  {
+    id: '1191',
+    name: 'Ellen',
+    faction: 'Victoria Housekeeping',
+    element: 'Ice',
+    specialty: 'Attack',
+    blurb: 'Off the clock at 5 p.m. sharp. Do not make her work overtime.',
+  },
+  {
+    id: '1091',
+    name: 'Miyabi',
+    faction: 'Section 6',
+    element: 'Frost',
+    specialty: 'Anomaly',
+    blurb: 'The youngest Void Hunter on record, and the calmest person in any room.',
+  },
+  {
+    id: '1241',
+    name: 'Zhu Yuan',
+    faction: 'Public Security',
+    element: 'Ether',
+    specialty: 'Attack',
+    blurb: 'By the book, every page of it, with a very large gun.',
+  },
+  {
+    id: '1261',
+    name: 'Jane',
+    faction: 'Criminal Investigation',
+    element: 'Physical',
+    specialty: 'Anomaly',
+    blurb: 'Undercover, under suspicion and always one step ahead.',
+  },
+  {
+    id: '1031',
+    name: 'Nicole',
+    faction: 'Cunning Hares',
+    element: 'Ether',
+    specialty: 'Support',
+    blurb: 'Runs the Hares, the books and occasionally from creditors.',
+  },
+  {
+    id: '1011',
+    name: 'Anby',
+    faction: 'Cunning Hares',
+    element: 'Electric',
+    specialty: 'Stun',
+    blurb: 'Learns everything from movies. It works more often than it should.',
+  },
+  {
+    id: '1311',
+    name: 'Astra Yao',
+    faction: 'Stars of Lyra',
+    element: 'Ether',
+    specialty: 'Support',
+    blurb: 'Headliner, diva and the best-kept secret of the night shift.',
+  },
+  {
+    id: '1101',
+    name: 'Koleda',
+    faction: 'Belobog Heavy Industries',
+    element: 'Fire',
+    specialty: 'Stun',
+    blurb: 'Small president, big hammer, bigger plans.',
+  },
+  {
+    id: '1141',
+    name: 'Lycaon',
+    faction: 'Victoria Housekeeping',
+    element: 'Ice',
+    specialty: 'Stun',
+    blurb: 'Impeccable manners, impeccable suit, impeccable kick.',
+  },
+];
 
 /** The agent drawn in the hero (full-body art). */
-export const HERO_AGENT_ID = '1191'
+export const HERO_AGENT_ID = '1191';
 
 export interface FaqItem {
-  value: string
-  question: string
-  answer: string
+  value: string;
+  question: string;
+  answer: string;
 }
 
 export const FAQ: readonly FaqItem[] = [
@@ -205,19 +262,21 @@ export const FAQ: readonly FaqItem[] = [
   {
     value: 'often',
     question: 'How often is the dispatch updated?',
-    answer: 'Usually every couple of days, and right after maintenance. Subscribe below to get a weekly digest by email.',
+    answer:
+      'Usually every couple of days, and right after maintenance. Subscribe below to get a weekly digest by email.',
   },
   {
     value: 'submit',
     question: 'Can I submit a story or a tip?',
-    answer: 'Yes. Reply to any newsletter email with your tip. We read everything, even the ones written entirely in Bangboo.',
+    answer:
+      'Yes. Reply to any newsletter email with your tip. We read everything, even the ones written entirely in Bangboo.',
   },
   {
     value: 'unsubscribe',
     question: 'How do I unsubscribe?',
     answer: 'Every email has a one-click unsubscribe link at the bottom. No hard feelings, Proxy.',
   },
-]
+];
 
 /** Loose email check for the newsletter form (the server would validate for real). */
-export const isValidEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value.trim())
+export const isValidEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value.trim());

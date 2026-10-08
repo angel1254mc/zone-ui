@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import { fn } from 'storybook/test'
-import { LevelPill } from './LevelPill'
-import { Specimen, Specimens } from '../StatRow/Specimens.story-helpers'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { fn } from 'storybook/test';
+import { LevelPill } from './LevelPill';
+import { Specimen, Specimens } from '../StatRow/Specimens.story-helpers';
 
-const gpx = (n: number) => `calc(${n} * var(--zzz-px))`
+const gpx = (n: number) => `calc(${n} * var(--zzz-px))`;
 
 const meta = {
   title: 'Data Display/LevelPill',
@@ -11,7 +11,10 @@ const meta = {
   tags: ['autodocs'],
   args: { variant: 'panel', level: 60, max: 60, rank: 'S' },
   argTypes: {
-    variant: { control: 'inline-radio', options: ['panel', 'equip', 'large', 'agent'] },
+    variant: {
+      control: 'inline-radio',
+      options: ['panel', 'equip', 'large', 'agent'],
+    },
     rank: { control: 'inline-radio', options: ['S', 'A', 'B', undefined] },
     level: { control: { type: 'number', min: 0, max: 60 } },
     max: { control: { type: 'number', min: 1, max: 60 } },
@@ -20,11 +23,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Level displays. `panel` 200 × 44 (side DETAIL panel, "Lv. 60/60" + RankCoin), `equip` ~450 × 44 black bar with a flush ' +
-          'left end (equip list), `large` 296 × 60 (big item panel: italic outlined "Lv. 60", 24° divider, engraved ghost max digits, `(i)` ' +
-          'Details sub-pill via `onInfo`), `agent` 355 × 66 (Agent Info: big "Lv. 60", ghost "60", black MAX capsule). The pill is a group ' +
-          'named "Level 60 of 60"; the digits are hidden from assistive tech. Below max, the agent variant ' +
-          'shows the MAX capsule empty.',
+          'Wrapper around the standard pill. Best for displaying levels, can be combined with rank icon on the left-hand side.',
       },
     },
   },
@@ -35,19 +34,25 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof LevelPill>
+} satisfies Meta<typeof LevelPill>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Panel: Story = {}
-export const Equip: Story = { args: { variant: 'equip', rank: 'A' } }
-export const Large: Story = { args: { variant: 'large', onInfo: fn() } }
-export const LargeInfoPressed: Story = { args: { variant: 'large', onInfo: fn(), infoProps: { pressed: true } } }
-export const LargeInfoDisabled: Story = { args: { variant: 'large', onInfo: fn(), infoProps: { disabled: true } } }
-export const Agent: Story = { args: { variant: 'agent', rank: undefined } }
+export const Panel: Story = {};
+export const Equip: Story = { args: { variant: 'equip', rank: 'A' } };
+export const Large: Story = { args: { variant: 'large', onInfo: fn() } };
+export const LargeInfoPressed: Story = {
+  args: { variant: 'large', onInfo: fn(), infoProps: { pressed: true } },
+};
+export const LargeInfoDisabled: Story = {
+  args: { variant: 'large', onInfo: fn(), infoProps: { disabled: true } },
+};
+export const Agent: Story = { args: { variant: 'agent', rank: undefined } };
 /** Agent variant below max level: the MAX capsule is empty. */
-export const AgentBelowMax: Story = { args: { variant: 'agent', rank: undefined, level: 45 } }
+export const AgentBelowMax: Story = {
+  args: { variant: 'agent', rank: undefined, level: 45 },
+};
 
 export const AllVariants: Story = {
   render: () => (
@@ -76,4 +81,4 @@ export const AllVariants: Story = {
       </Specimen>
     </Specimens>
   ),
-}
+};

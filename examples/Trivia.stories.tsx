@@ -1,14 +1,29 @@
-import type { Decorator, Meta, StoryObj } from '@storybook/react-vite'
-import { useMemo, type ReactNode } from 'react'
-import { fn } from 'storybook/test'
-import { GameArtProvider, useGameArt, type GameArtState } from './art'
-import { STORAGE_KEY, TriviaPage, generateDailySet, nextRecord, EMPTY_RECORD, TIMED_OUT, type TriviaPageProps } from './pages/Trivia'
+import type { Decorator, Meta, StoryObj } from '@storybook/react-vite';
+import { useMemo, type ReactNode } from 'react';
+import { fn } from 'storybook/test';
+import { GameArtProvider, useGameArt, type GameArtState } from './art';
+import {
+  STORAGE_KEY,
+  TriviaPage,
+  generateDailySet,
+  nextRecord,
+  EMPTY_RECORD,
+  TIMED_OUT,
+  type TriviaPageProps,
+} from './pages/Trivia';
 
-const FIXED_DATE = '2026-09-30'
+const FIXED_DATE = '2026-09-30';
 
 /** The page fills the story viewport (layout fullscreen); `width` simulates a device. */
 const Frame = ({ children, width, height }: { children: ReactNode; width?: number; height?: number }) => (
-  <div style={{ minHeight: '100vh', background: '#000', display: 'flex', justifyContent: 'center' }}>
+  <div
+    style={{
+      minHeight: '100vh',
+      background: '#000',
+      display: 'flex',
+      justifyContent: 'center',
+    }}
+  >
     <div
       style={{
         display: 'flex',
@@ -23,7 +38,7 @@ const Frame = ({ children, width, height }: { children: ReactNode; width?: numbe
       {children}
     </div>
   </div>
-)
+);
 
 /** Pins the art state for one story (the loading and no-art states). */
 const withArtState =
@@ -32,36 +47,64 @@ const withArtState =
     <GameArtProvider state={state}>
       <Story />
     </GameArtProvider>
-  )
+  );
 
 /** Answers for the fixed day: correct except at `wrongAt`; `timeoutAt` ran out of time. */
 function useScripted(count: number, wrongAt: number[] = [], timeoutAt: number[] = []): number[] {
-  const manifest = useGameArt()
+  const manifest = useGameArt();
   return useMemo(() => {
-    const set = generateDailySet(manifest, FIXED_DATE)
-    return set.questions.slice(0, count).map((q, i) => (timeoutAt.includes(i) ? TIMED_OUT : wrongAt.includes(i) ? (q.answer + 1) % 4 : q.answer))
+    const set = generateDailySet(manifest, FIXED_DATE);
+    return set.questions
+      .slice(0, count)
+      .map((q, i) => (timeoutAt.includes(i) ? TIMED_OUT : wrongAt.includes(i) ? (q.answer + 1) % 4 : q.answer));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [manifest, count])
+  }, [manifest, count]);
 }
 
-function Scripted({ count, wrongAt, timeoutAt, ...props }: TriviaPageProps & { count: number; wrongAt?: number[]; timeoutAt?: number[] }) {
-  const answers = useScripted(count, wrongAt, timeoutAt)
-  return <TriviaPage {...props} initialAnswers={answers} />
+function Scripted({
+  count,
+  wrongAt,
+  timeoutAt,
+  ...props
+}: TriviaPageProps & {
+  count: number;
+  wrongAt?: number[];
+  timeoutAt?: number[];
+}) {
+  const answers = useScripted(count, wrongAt, timeoutAt);
+  return <TriviaPage {...props} initialAnswers={answers} />;
 }
 
 /** A storage that already holds a finished run for the fixed day (as after a reload). */
 function AlreadyPlayedPage(props: TriviaPageProps) {
-  const answers = useScripted(5, [3])
-  const manifest = useGameArt()
+  const answers = useScripted(5, [3]);
+  const manifest = useGameArt();
   const storage = useMemo(() => {
-    const set = generateDailySet(manifest, FIXED_DATE)
-    const score = set.questions.filter((q, i) => answers[i] === q.answer).length
-    const prev = { ...EMPTY_RECORD, lastDate: '2026-09-29', streak: 6, best: 5, played: 21 }
-    const rec = { ...nextRecord(prev, FIXED_DATE, score), day: { date: FIXED_DATE, answers, elapsedMs: 74_000, started: null } }
-    const map = new Map([[STORAGE_KEY, JSON.stringify(rec)]])
-    return { getItem: (k: string) => map.get(k) ?? null, setItem: (k: string, v: string) => void map.set(k, v) }
-  }, [manifest, answers])
-  return <TriviaPage {...props} storage={storage} />
+    const set = generateDailySet(manifest, FIXED_DATE);
+    const score = set.questions.filter((q, i) => answers[i] === q.answer).length;
+    const prev = {
+      ...EMPTY_RECORD,
+      lastDate: '2026-09-29',
+      streak: 6,
+      best: 5,
+      played: 21,
+    };
+    const rec = {
+      ...nextRecord(prev, FIXED_DATE, score),
+      day: {
+        date: FIXED_DATE,
+        answers,
+        elapsedMs: 74_000,
+        started: null,
+      },
+    };
+    const map = new Map([[STORAGE_KEY, JSON.stringify(rec)]]);
+    return {
+      getItem: (k: string) => map.get(k) ?? null,
+      setItem: (k: string, v: string) => void map.set(k, v),
+    };
+  }, [manifest, answers]);
+  return <TriviaPage {...props} storage={storage} />;
 }
 
 const meta = {
@@ -70,7 +113,10 @@ const meta = {
   tags: ['autodocs'],
   args: { onBack: fn() },
   argTypes: {
-    date: { control: 'text', description: 'YYYY-MM-DD — the same date always gives the same 5 questions.' },
+    date: {
+      control: 'text',
+      description: 'YYYY-MM-DD — the same date always gives the same 5 questions.',
+    },
     scale: { control: { type: 'number', min: 0.3, max: 1, step: 0.05 } },
     manifest: { control: false },
     facts: { control: false },
@@ -88,41 +134,20 @@ const meta = {
     docs: {
       story: { inline: false, height: '720px' },
       description: {
-        component:
-          'An example daily-quiz web app (in the style of Chiikawa Daily Trivia) composed only from general zone-ui ' +
-          'components and examples/art — the starting point for a real "ZZZ Daily Trivia" site. Flow: **Hero** start ' +
-          'screen (Puzzle #N counted from 2026-09-01; 5 questions · 30 s each · one try per day) → per question a ' +
-          '**SweepTransition** "QUESTION n", a **ContentCard** with **StepProgress**, a 30 s **CountdownBar** (warning at ' +
-          '10 s; a timeout counts as wrong) and a **ChoiceGroup** (A–D badges; 1–4 / A–D hotkeys; a pick reveals and ' +
-          'locks) → "Next question" / "See my score" → results ("You got X out of 5", **StatusGrid**, time taken, ' +
-          '**CopyButton** share text, **Countdown** to the next puzzle) and stats (**StatTiles** played / streak / best, a ' +
-          '**BarChart** score distribution from the `distribution` prop — MOCK data here, feed it from your backend — ' +
-          'and "You did better than N%"). Today\'s host (AgentImage `full`) reacts in a speech bubble; **SoundToggle** ' +
-          'is wired to state only (no audio bundled). One attempt per day is kept in localStorage (every access is ' +
-          'try/catch-guarded); a reload shows the results, and reloading mid-question counts that question as timed ' +
-          'out. Responsive web page (not a Stage): the web default density (0.7) at every width, with container queries ' +
-          'changing only the layout; the toolbar Scale tool previews other densities. ' +
-          'App logic (question generator, date seeding, scoring, share text) lives in examples/pages/Trivia. ' +
-          'Art is real game art by URL (static.nanoka.cc, Zenless Zone Zero © HoYoverse) referenced by real id; the day\'s ' +
-          'question set is generated once when the art state settles and then locked (art arriving never restarts a run). ' +
-          'While the art state is loading the start screen waits with Play disabled (**Loading** story); with no art it ' +
-          'plays the hand-checked, text-answerable fallback set with empty image frames (**No art** stories). If the ' +
-          'manifest is ready but an image URL fails (unreachable or hotlink-blocked CDN), a picture-only question ' +
-          '("Who is this agent?", "Which W-Engine is this?") shows its text clue over the empty frame instead; the clue ' +
-          'is generated with the set and fits only the correct option.',
+        component: 'An example daily-quiz web app composed only from general zone-ui ',
       },
     },
   },
-} satisfies Meta<typeof TriviaPage>
+} satisfies Meta<typeof TriviaPage>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 /** Today's puzzle with your real localStorage: play once, and a reload shows your results until midnight. */
-export const Default: Story = {}
+export const Default: Story = {};
 
 /** A fixed date: deterministic questions and host (memory-only storage, so it can be replayed). */
-export const FixedDate: Story = { args: { date: FIXED_DATE, storage: null } }
+export const FixedDate: Story = { args: { date: FIXED_DATE, storage: null } };
 
 /** Question 3 after one right and one wrong answer (timer frozen at 21 s). */
 export const MidQuiz: Story = {
@@ -132,7 +157,7 @@ export const MidQuiz: Story = {
       <Scripted {...args} count={2} wrongAt={[1]} />
     </Frame>
   ),
-}
+};
 
 /** The warning state of the question timer (≤ 10 s left: orange, pulsing; the host hurries you). */
 export const WarningTimer: Story = {
@@ -143,17 +168,22 @@ export const WarningTimer: Story = {
       <Scripted {...args} count={3} wrongAt={[0]} />
     </Frame>
   ),
-}
+};
 
 /** A revealed wrong answer: the pick in red, the right one revealed, the fact and "Next question". */
 export const Revealed: Story = {
-  args: { date: FIXED_DATE, storage: null, initialRevealed: true, timerSecondsLeft: 12 },
+  args: {
+    date: FIXED_DATE,
+    storage: null,
+    initialRevealed: true,
+    timerSecondsLeft: 12,
+  },
   render: (args) => (
     <Frame>
       <Scripted {...args} count={2} wrongAt={[1]} />
     </Frame>
   ),
-}
+};
 
 /** Results + stats after a run with one wrong answer and one timeout. */
 export const Results: Story = {
@@ -163,7 +193,7 @@ export const Results: Story = {
       <Scripted {...args} count={5} wrongAt={[1]} timeoutAt={[3]} />
     </Frame>
   ),
-}
+};
 
 /** Reloading after today's run: straight to the results with an "already played" notice. */
 export const AlreadyPlayed: Story = {
@@ -173,7 +203,7 @@ export const AlreadyPlayed: Story = {
       <AlreadyPlayedPage {...args} />
     </Frame>
   ),
-}
+};
 
 /** Phone (390 × 844): same density as desktop; the host becomes a row above the card. */
 export const Phone: Story = {
@@ -183,7 +213,7 @@ export const Phone: Story = {
       <Scripted {...args} count={1} />
     </Frame>
   ),
-}
+};
 
 /** Phone start screen. */
 export const PhoneStart: Story = {
@@ -194,7 +224,7 @@ export const PhoneStart: Story = {
       <TriviaPage {...args} />
     </Frame>
   ),
-}
+};
 
 /** Phone results. */
 export const PhoneResults: Story = {
@@ -205,7 +235,7 @@ export const PhoneResults: Story = {
       <Scripted {...args} count={5} wrongAt={[2]} />
     </Frame>
   ),
-}
+};
 
 /** No art reachable (art state `missing`): the deterministic text fallback set; image slots are empty frames. */
 export const NoArt: Story = {
@@ -217,20 +247,20 @@ export const NoArt: Story = {
       <Scripted {...args} count={0} />
     </Frame>
   ),
-}
+};
 
 /** Start screen without art: same layout, the host is an empty frame (same real host as the fallback day). */
 export const NoArtStart: Story = {
   name: 'No art — start',
   args: { date: FIXED_DATE, storage: null },
   decorators: [withArtState({ status: 'missing', manifest: null })],
-}
+};
 
 /** Art state still loading (pinned): the start screen waits — Play disabled with a spinner, a neutral skeleton for the host. */
 export const Loading: Story = {
   args: { date: FIXED_DATE, storage: null },
   decorators: [withArtState({ status: 'loading', manifest: null })],
-}
+};
 
 /** Phone while loading. */
 export const PhoneLoading: Story = {
@@ -242,4 +272,4 @@ export const PhoneLoading: Story = {
       <TriviaPage {...args} />
     </Frame>
   ),
-}
+};

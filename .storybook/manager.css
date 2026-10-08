@@ -23,18 +23,30 @@ html:root {
    * needed): #333 ring with its #454545 lit top/left row, then the black keyline. */
   --sbz-ring: var(--zzz-border-width-ring);
   --sbz-ring-shadow:
-    calc(0.5 * var(--zzz-px)) calc(0.5 * var(--zzz-px)) 0 calc(var(--sbz-ring) - 0.5 * var(--zzz-px)) var(--zzz-color-border-button),
+    calc(0.5 * var(--zzz-px)) calc(0.5 * var(--zzz-px)) 0 calc(var(--sbz-ring) - 0.5 * var(--zzz-px))
+      var(--zzz-color-border-button),
     0 0 0 var(--sbz-ring) var(--zzz-color-border-button-bevel-top),
     0 0 0 calc(var(--sbz-ring) + var(--zzz-border-width-keyline)) var(--zzz-color-border-keyline);
   --sbz-panel-shadow:
-    calc(0.5 * var(--zzz-px)) calc(0.5 * var(--zzz-px)) 0 calc(var(--zzz-border-width-panel) - 0.5 * var(--zzz-px)) var(--zzz-color-border-panel),
+    calc(0.5 * var(--zzz-px)) calc(0.5 * var(--zzz-px)) 0 calc(var(--zzz-border-width-panel) - 0.5 * var(--zzz-px))
+      var(--zzz-color-border-panel),
     0 0 0 var(--zzz-border-width-panel) var(--zzz-color-border-button-bevel-top),
     0 0 0 calc(var(--zzz-border-width-panel) + var(--zzz-border-width-keyline)) var(--zzz-color-border-keyline);
   /* Dot mesh of the pill surface (pattern.dots.sm, see base.css .zzz-mat-pill). */
   --sbz-dots-s: calc(4.64 * var(--zzz-px) * 2);
   --sbz-dots:
-    radial-gradient(circle, rgb(255 255 255 / 0.03) 0 calc(var(--sbz-dots-s) * 0.15), transparent calc(var(--sbz-dots-s) * 0.33)) 0 0 / var(--sbz-dots-s) var(--sbz-dots-s),
-    radial-gradient(circle, rgb(255 255 255 / 0.03) 0 calc(var(--sbz-dots-s) * 0.15), transparent calc(var(--sbz-dots-s) * 0.33)) calc(var(--sbz-dots-s) / 2) calc(var(--sbz-dots-s) / 2) / var(--sbz-dots-s) var(--sbz-dots-s);
+    radial-gradient(
+        circle,
+        rgb(255 255 255 / 0.03) 0 calc(var(--sbz-dots-s) * 0.15),
+        transparent calc(var(--sbz-dots-s) * 0.33)
+      )
+      0 0 / var(--sbz-dots-s) var(--sbz-dots-s),
+    radial-gradient(
+        circle,
+        rgb(255 255 255 / 0.03) 0 calc(var(--sbz-dots-s) * 0.15),
+        transparent calc(var(--sbz-dots-s) * 0.33)
+      )
+      calc(var(--sbz-dots-s) / 2) calc(var(--sbz-dots-s) / 2) / var(--sbz-dots-s) var(--sbz-dots-s);
   /* Global hatch (= .zzz-bg-hatch: 39.8deg, period 7.68, peak alpha .105) at game scale 1. */
   --sbz-hatch-p: calc(7.68 * var(--zzz-px) * 2);
   --sbz-hatch: repeating-linear-gradient(
@@ -54,8 +66,18 @@ html:root {
   /* Textured panel header (#222, dots lg) — section headers. */
   --sbz-dots-lg-s: calc(7 * var(--zzz-px) * 2);
   --sbz-dots-lg:
-    radial-gradient(circle, rgb(255 255 255 / 0.03) 0 calc(var(--sbz-dots-lg-s) * 0.15), transparent calc(var(--sbz-dots-lg-s) * 0.33)) 0 0 / var(--sbz-dots-lg-s) var(--sbz-dots-lg-s),
-    radial-gradient(circle, rgb(255 255 255 / 0.03) 0 calc(var(--sbz-dots-lg-s) * 0.15), transparent calc(var(--sbz-dots-lg-s) * 0.33)) calc(var(--sbz-dots-lg-s) / 2) calc(var(--sbz-dots-lg-s) / 2) / var(--sbz-dots-lg-s) var(--sbz-dots-lg-s);
+    radial-gradient(
+        circle,
+        rgb(255 255 255 / 0.03) 0 calc(var(--sbz-dots-lg-s) * 0.15),
+        transparent calc(var(--sbz-dots-lg-s) * 0.33)
+      )
+      0 0 / var(--sbz-dots-lg-s) var(--sbz-dots-lg-s),
+    radial-gradient(
+        circle,
+        rgb(255 255 255 / 0.03) 0 calc(var(--sbz-dots-lg-s) * 0.15),
+        transparent calc(var(--sbz-dots-lg-s) * 0.33)
+      )
+      calc(var(--sbz-dots-lg-s) / 2) calc(var(--sbz-dots-lg-s) / 2) / var(--sbz-dots-lg-s) var(--sbz-dots-lg-s);
   /* Game triangle (expand chevron / select caret), pointing right. */
   --sbz-tri: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 12'%3E%3Cpath fill='%23000' d='M1 0.8Q1 0 1.7 0.4L9.3 5.3Q10 6 9.3 6.7L1.7 11.6Q1 12 1 11.2Z'/%3E%3C/svg%3E");
   --sbz-ui-font: var(--zzz-font-family-ui);
@@ -83,7 +105,8 @@ body {
 /* Focus (web addition): black keyline + accent ring, like .zzz-focusable. The ring is a
  * box-shadow, which forced-colors (WHCM) mode drops, so a transparent outline rides along: invisible
  * normally, painted in the system colour under forced colors (base.css .zzz-focusable recipe). */
-#root :is(button, a, input, textarea, select, [role='tab'], [tabindex='0']):not(#storybook-explorer-menu):focus-visible {
+#root
+  :is(button, a, input, textarea, select, [role='tab'], [tabindex='0']):not(#storybook-explorer-menu):focus-visible {
   outline: calc(4 * var(--zzz-px)) solid transparent !important;
   outline-offset: calc(3 * var(--zzz-px)) !important;
   box-shadow: var(--zzz-focus-ring) !important;
@@ -149,7 +172,9 @@ body {
 #storybook-sidebar-region [role='search'] .search-field:focus-within {
   outline: calc(4 * var(--zzz-px)) solid transparent;
   outline-offset: calc(var(--sbz-ring) + 3 * var(--zzz-px));
-  box-shadow: var(--sbz-ring-shadow), 0 0 0 calc(var(--sbz-ring) + 6 * var(--zzz-px)) var(--zzz-accent) !important;
+  box-shadow:
+    var(--sbz-ring-shadow),
+    0 0 0 calc(var(--sbz-ring) + 6 * var(--zzz-px)) var(--zzz-accent) !important;
 }
 #storybook-sidebar-region [role='search'] .search-field > div:first-child {
   margin-left: calc(10 * var(--zzz-px));
@@ -311,8 +336,12 @@ body {
   padding-inline: calc(12 * var(--zzz-px)) calc(6 * var(--zzz-px));
   height: calc(56 * var(--zzz-px));
   border-radius: var(--zzz-radius-film-cap) var(--zzz-radius-film-cap) calc(4 * var(--zzz-px)) calc(4 * var(--zzz-px));
-  background: var(--sbz-dots-lg), linear-gradient(180deg, var(--zzz-color-surface-film-cap-top), var(--zzz-color-surface-film-cap-bottom));
-  box-shadow: inset 0 calc(1 * var(--zzz-px)) 0 #3A3A3A, 0 0 0 var(--zzz-border-width-keyline) var(--zzz-color-border-keyline);
+  background:
+    var(--sbz-dots-lg),
+    linear-gradient(180deg, var(--zzz-color-surface-film-cap-top), var(--zzz-color-surface-film-cap-bottom));
+  box-shadow:
+    inset 0 calc(1 * var(--zzz-px)) 0 #3a3a3a,
+    0 0 0 var(--zzz-border-width-keyline) var(--zzz-color-border-keyline);
 }
 #storybook-explorer-tree .sidebar-subheading[data-nodetype='root'] > button:first-child {
   color: var(--zzz-color-text-muted) !important;
@@ -397,7 +426,9 @@ body {
   height: calc(26 * var(--zzz-px));
 }
 /* Active / pressed = accent fill, black glyph (ring hidden under the fill). */
-[data-testid='sb-preview-toolbar'] [role='toolbar'] button:is([aria-checked='true'], [aria-expanded='true'], [aria-pressed='true'], :active) {
+[data-testid='sb-preview-toolbar']
+  [role='toolbar']
+  button:is([aria-checked='true'], [aria-expanded='true'], [aria-pressed='true'], :active) {
   background: var(--zzz-accent) !important;
   box-shadow: 0 0 0 calc(var(--sbz-ring) + var(--zzz-size-control-press-outset)) var(--zzz-accent) !important;
   color: var(--zzz-color-accent-on) !important;
@@ -617,7 +648,8 @@ body {
 }
 
 /* Inputs -> dark pills; textarea -> rounded dark field. */
-#storybook-panel-root :is(input:not([type='radio'], [type='checkbox'], [type='range'], [type='color']), select, textarea) {
+#storybook-panel-root
+  :is(input:not([type='radio'], [type='checkbox'], [type='range'], [type='color']), select, textarea) {
   min-height: calc(57 * var(--zzz-px));
   border: 0 !important;
   border-radius: var(--zzz-radius-pill) !important;
@@ -631,7 +663,9 @@ body {
   padding-block: calc(14 * var(--zzz-px)) !important;
 }
 #storybook-panel-root :is(input, select, textarea):focus-visible {
-  box-shadow: var(--sbz-ring-shadow), 0 0 0 calc(var(--sbz-ring) + 6 * var(--zzz-px)) var(--zzz-accent) !important;
+  box-shadow:
+    var(--sbz-ring-shadow),
+    0 0 0 calc(var(--sbz-ring) + 6 * var(--zzz-px)) var(--zzz-accent) !important;
 }
 /* "Set boolean / Set number …" and other text buttons in the panel: dark pills. */
 #storybook-panel-root .docblock-argstable td > button,
@@ -671,7 +705,11 @@ body {
   display: block !important;
   padding: 0 !important;
   border-radius: var(--zzz-radius-pill) !important;
-  background: linear-gradient(180deg, var(--zzz-color-surface-toggle-track-top), var(--zzz-color-surface-toggle-track-bottom)) !important;
+  background: linear-gradient(
+    180deg,
+    var(--zzz-color-surface-toggle-track-top),
+    var(--zzz-color-surface-toggle-track-bottom)
+  ) !important;
   box-shadow: 0 0 0 calc(1.5 * var(--zzz-px)) var(--zzz-color-border-keyline) !important;
   color: transparent !important;
   font-size: 0 !important;
@@ -689,17 +727,26 @@ body {
   height: calc(31 * var(--zzz-px));
   border-radius: 50%;
   background:
-    linear-gradient(90deg, transparent calc(4 * var(--zzz-px)), #818181 0 calc(10 * var(--zzz-px)), transparent 0) center / 100% calc(3 * var(--zzz-px)) no-repeat,
-    linear-gradient(180deg, #2B2B2B, #3B3B3B);
-  box-shadow: 0 0 0 calc(1 * var(--zzz-px)) #000, inset 0 calc(2 * var(--zzz-px)) 0 #4C4C4C;
+    linear-gradient(90deg, transparent calc(4 * var(--zzz-px)), #818181 0 calc(10 * var(--zzz-px)), transparent 0)
+      center / 100% calc(3 * var(--zzz-px)) no-repeat,
+    linear-gradient(180deg, #2b2b2b, #3b3b3b);
+  box-shadow:
+    0 0 0 calc(1 * var(--zzz-px)) #000,
+    inset 0 calc(2 * var(--zzz-px)) 0 #4c4c4c;
   pointer-events: none;
   transition: transform 120ms var(--zzz-motion-easing-out-expo);
 }
 #storybook-panel-root label:has(> input[type='checkbox']:only-of-type:checked)::after {
   transform: translateX(calc(31 * var(--zzz-px)));
   background:
-    linear-gradient(90deg, transparent calc(4 * var(--zzz-px)), var(--zzz-accent) 0 calc(10 * var(--zzz-px)), transparent 0) center / 100% calc(3 * var(--zzz-px)) no-repeat,
-    linear-gradient(180deg, #2B2B2B, #3B3B3B);
+    linear-gradient(
+        90deg,
+        transparent calc(4 * var(--zzz-px)),
+        var(--zzz-accent) 0 calc(10 * var(--zzz-px)),
+        transparent 0
+      )
+      center / 100% calc(3 * var(--zzz-px)) no-repeat,
+    linear-gradient(180deg, #2b2b2b, #3b3b3b);
 }
 #storybook-panel-root label:has(> input[type='checkbox']:only-of-type) > input {
   position: absolute !important;

@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import type { CSSProperties } from 'react'
-import { Stage } from '../components/Stage'
-import { ZzzTheme } from '../components/ZzzTheme'
-import './foundations.css'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { CSSProperties } from 'react';
+import { Stage } from '../components/Stage';
+import { ZzzTheme } from '../components/ZzzTheme';
+import './foundations.css';
 
 const meta = {
   title: 'Foundations/Stage',
@@ -23,19 +23,24 @@ const meta = {
     },
   },
   args: { width: 1920, height: 1080, fit: 'contain' },
-  argTypes: { fit: { control: 'inline-radio', options: ['contain', 'height', 'none'] } },
-} satisfies Meta<typeof Stage>
+  argTypes: {
+    fit: {
+      control: 'inline-radio',
+      options: ['contain', 'height', 'none'],
+    },
+  },
+} satisfies Meta<typeof Stage>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-const edge = 'calc(5 * var(--zzz-px))'
+const edge = 'calc(5 * var(--zzz-px))';
 const CORNERS: CSSProperties[] = [
   { left: 0, top: 0, borderLeftWidth: edge, borderTopWidth: edge },
   { right: 0, top: 0, borderRightWidth: edge, borderTopWidth: edge },
   { left: 0, bottom: 0, borderLeftWidth: edge, borderBottomWidth: edge },
   { right: 0, bottom: 0, borderRightWidth: edge, borderBottomWidth: edge },
-]
+];
 
 /** A 120 design-unit grid, corner brackets and a centred marker with the canvas size. */
 function Artboard({ w = 1920, h = 1080 }: { w?: number; h?: number }) {
@@ -54,7 +59,7 @@ function Artboard({ w = 1920, h = 1080 }: { w?: number; h?: number }) {
         </div>
       </div>
     </>
-  )
+  );
 }
 
 export const Default: Story = {
@@ -65,7 +70,7 @@ export const Default: Story = {
       </Stage>
     </div>
   ),
-}
+};
 
 export const FitHeight: Story = {
   args: { fit: 'height' },
@@ -76,7 +81,7 @@ export const FitHeight: Story = {
       </Stage>
     </div>
   ),
-}
+};
 
 export const ThemeScale: Story = {
   name: 'ZzzTheme scale',
@@ -98,7 +103,7 @@ export const ThemeScale: Story = {
       ))}
     </div>
   ),
-}
+};
 
 /** Raw `.zzz-theme` nesting: class only keeps the parent scale; an inline `--zzz-scale` re-scales. */
 export const NestedThemes: Story = {
@@ -116,8 +121,16 @@ export const NestedThemes: Story = {
     <ZzzTheme scale={1.5}>
       <div className="zzz-doc-row">
         {[
-          { key: 'inherit', caption: 'class only (inherits 1.5)', style: undefined },
-          { key: 'scale', caption: 'inline --zzz-scale: 0.75', style: { '--zzz-scale': 0.75 } as CSSProperties },
+          {
+            key: 'inherit',
+            caption: 'class only (inherits 1.5)',
+            style: undefined,
+          },
+          {
+            key: 'scale',
+            caption: 'inline --zzz-scale: 0.75',
+            style: { '--zzz-scale': 0.75 } as CSSProperties,
+          },
         ].map(({ key, caption, style }) => (
           <div key={key} className="zzz-theme" data-nested={key} style={style}>
             <div className="zzz-doc-cell">
@@ -131,4 +144,4 @@ export const NestedThemes: Story = {
       </div>
     </ZzzTheme>
   ),
-}
+};

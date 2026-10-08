@@ -1,37 +1,37 @@
-import { useId } from 'react'
-import type { ComponentPropsWithoutRef, ReactNode, Ref } from 'react'
-import { cx, useControllableState, usePressFlash } from '../../utils'
-import './EffectText.css'
+import { useId } from 'react';
+import type { ComponentPropsWithoutRef, ReactNode, Ref } from 'react';
+import { cx, useControllableState, usePressFlash } from '../../utils';
+import './EffectText.css';
 
 export interface EffectNameBarOwnProps {
   /** Effect name ("Scorching Breath"). */
-  children?: ReactNode
+  children?: ReactNode;
   /**
    * Capsule fill: `panel` #161616 (side DETAIL panel), `sunken` #0D0D0D (big panel), `black` (equip
    * screen). Default `panel`.
    */
-  surface?: 'panel' | 'sunken' | 'black'
+  surface?: 'panel' | 'sunken' | 'black';
   /**
    * Show the white expand chevron (a `button` with `aria-expanded`) under the bar. The chevron hangs
    * 13 px below the bar and reserves no layout space: leave at least 13 px before the next content.
    */
-  expandable?: boolean
+  expandable?: boolean;
   /** Controlled expanded state. */
-  expanded?: boolean
+  expanded?: boolean;
   /** Uncontrolled initial state. Default false. */
-  defaultExpanded?: boolean
-  onExpandedChange?: (expanded: boolean) => void
+  defaultExpanded?: boolean;
+  onExpandedChange?: (expanded: boolean) => void;
   /** Accessible name of the chevron button. Default "Show effect details". */
-  expandLabel?: string
+  expandLabel?: string;
   /** Id of the region the chevron expands (`aria-controls`). */
-  controls?: string
+  controls?: string;
   /** Force the pressed look on the chevron (stories / tests). */
-  chevronPressed?: boolean
-  ref?: Ref<HTMLDivElement>
+  chevronPressed?: boolean;
+  ref?: Ref<HTMLDivElement>;
 }
 
 export type EffectNameBarProps = EffectNameBarOwnProps &
-  Omit<ComponentPropsWithoutRef<'div'>, keyof EffectNameBarOwnProps>
+  Omit<ComponentPropsWithoutRef<'div'>, keyof EffectNameBarOwnProps>;
 
 /**
  * Full-width 38 px effect-name capsule, white `body` label, pad 18. With `expandable`, a
@@ -52,10 +52,10 @@ export function EffectNameBar({
   ref,
   ...rest
 }: EffectNameBarProps) {
-  const [expanded, setExpanded] = useControllableState(expandedProp, defaultExpanded, onExpandedChange)
-  const flash = usePressFlash<HTMLButtonElement>({})
-  const labelId = useId()
-  const pressed = chevronPressed || 'data-pressed' in flash
+  const [expanded, setExpanded] = useControllableState(expandedProp, defaultExpanded, onExpandedChange);
+  const flash = usePressFlash<HTMLButtonElement>({});
+  const labelId = useId();
+  const pressed = chevronPressed || 'data-pressed' in flash;
 
   return (
     <div
@@ -65,7 +65,7 @@ export function EffectNameBar({
         'zzz-effect-name-bar',
         surface !== 'panel' && `zzz-effect-name-bar--${surface}`,
         expandable && 'zzz-effect-name-bar--expandable',
-        className,
+        className
       )}
     >
       <span className="zzz-effect-name-bar__label" id={labelId}>
@@ -92,5 +92,5 @@ export function EffectNameBar({
         </button>
       ) : null}
     </div>
-  )
+  );
 }

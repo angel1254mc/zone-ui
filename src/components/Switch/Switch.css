@@ -63,7 +63,7 @@
   height: calc(31 * var(--zzz-switch-u));
   border-radius: 50%;
   /* Rim: a lit crescent over the upper arc (#4A..#4C) that runs down both sides and darkens to ~#2A under the knob. */
-  background: linear-gradient(180deg, #4C4C4C 0, #4A4A4A 30%, #424242 55%, #353535 75%, #2A2A2A 100%);
+  background: linear-gradient(180deg, #4c4c4c 0, #4a4a4a 30%, #424242 55%, #353535 75%, #2a2a2a 100%);
   /* Black keyline OUTSIDE the rim only - nothing dark between the rim and the face. The inset
    * shade softens the rim's outer pixel. */
   box-shadow:
@@ -82,7 +82,7 @@
   bottom: calc(2 * var(--zzz-switch-u));
   left: calc(3 * var(--zzz-switch-u));
   border-radius: 50%;
-  background: linear-gradient(180deg, #2B2B2B 0, #2E2E2E 25%, #383838 60%, #3B3B3B 85%);
+  background: linear-gradient(180deg, #2b2b2b 0, #2e2e2e 25%, #383838 60%, #3b3b3b 85%);
 }
 
 /* LED dash. */

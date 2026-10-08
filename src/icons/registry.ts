@@ -1,4 +1,4 @@
-import type { IconComponent } from './types'
+import type { IconComponent } from './types';
 import {
   ArchiveReelIcon,
   BackIcon,
@@ -29,8 +29,13 @@ import {
   StarIcon,
   TrashIcon,
   UnlockIcon,
-} from './actions'
-import { ConsumablesCategoryIcon, DriveDiscCategoryIcon, MaterialsCategoryIcon, WEngineCategoryIcon } from './categories'
+} from './actions';
+import {
+  ConsumablesCategoryIcon,
+  DriveDiscCategoryIcon,
+  MaterialsCategoryIcon,
+  WEngineCategoryIcon,
+} from './categories';
 import {
   AchievementsIcon,
   AgentsIcon,
@@ -44,10 +49,18 @@ import {
   SquadIcon,
   StorageIcon,
   StoreIcon,
-} from './dock'
-import { CompletedCheckIcon, GiftIcon, HourglassIcon, TargetLoopIcon } from './events'
-import { AnomalyIcon, ArmorerIcon, AttackIcon, DefenseIcon, RuptureIcon, StunIcon, SupportIcon } from './specialty'
-import { ElectricIcon, FireIcon, GoldDiamondIcon, HexStarIcon, SnowflakeIcon, StarSparkIcon, SwirlIcon } from './elements'
+} from './dock';
+import { CompletedCheckIcon, GiftIcon, HourglassIcon, TargetLoopIcon } from './events';
+import { AnomalyIcon, ArmorerIcon, AttackIcon, DefenseIcon, RuptureIcon, StunIcon, SupportIcon } from './specialty';
+import {
+  ElectricIcon,
+  FireIcon,
+  GoldDiamondIcon,
+  HexStarIcon,
+  SnowflakeIcon,
+  StarSparkIcon,
+  SwirlIcon,
+} from './elements';
 import {
   CombatSIcon,
   HexBadge,
@@ -62,9 +75,9 @@ import {
   SlotDigit4,
   SlotDigit5,
   SlotDigit6,
-} from './rank'
-import { BatteryIcon, CoinSmallIcon, DennyIcon, PolychromeIcon } from './currency'
-import { DotGridOrnament, EmptySlotX, FilmSprocket, OverclockChevron, SignalBars } from './decorative'
+} from './rank';
+import { BatteryIcon, CoinSmallIcon, DennyIcon, PolychromeIcon } from './currency';
+import { DotGridOrnament, EmptySlotX, FilmSprocket, OverclockChevron, SignalBars } from './decorative';
 
 /**
  * Every glyph by name. Keys are the export name without the `Icon` suffix, in
@@ -166,10 +179,10 @@ export const icons = {
   signalBars: SignalBars,
   filmSprocket: FilmSprocket,
   dotGridOrnament: DotGridOrnament,
-} satisfies Record<string, IconComponent>
+} satisfies Record<string, IconComponent>;
 
 /** Union of every registered icon name (`'back' | 'close' | …`). */
-export type IconName = keyof typeof icons
+export type IconName = keyof typeof icons;
 
 /** All icon names, in registry order. */
-export const iconNames = Object.keys(icons) as IconName[]
+export const iconNames = Object.keys(icons) as IconName[];

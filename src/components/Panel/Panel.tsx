@@ -1,6 +1,6 @@
-import { useId, type ComponentPropsWithRef, type CSSProperties, type ReactNode } from 'react'
-import { cx } from '../../utils'
-import './Panel.css'
+import { useId, type ComponentPropsWithRef, type CSSProperties, type ReactNode } from 'react';
+import { cx } from '../../utils';
+import './Panel.css';
 
 /**
  * `side`: 460 × 670 DETAIL panel (5 px `#333` ring, outer radius 29, 35 px black header strip,
@@ -9,29 +9,29 @@ import './Panel.css'
  * `#2D2D2D` ring + 3 px black, outer radius 33, 70 px title band, art stage + raised right
  * column). `drawerInner`: the `#030303` radius-12 panel inside the filter drawer (no ring).
  */
-export type PanelVariant = 'side' | 'tool' | 'large' | 'drawerInner'
+export type PanelVariant = 'side' | 'tool' | 'large' | 'drawerInner';
 
 export interface PanelProps extends Omit<ComponentPropsWithRef<'section'>, 'title'> {
   /** Default `side`. */
-  variant?: PanelVariant
+  variant?: PanelVariant;
   /** Header strip label: "DETAIL" (side, `micro` in `text.faint`) or "Crafting" (tool, `bodyLg` in `text.panelTab`). */
-  headerLabel?: ReactNode
+  headerLabel?: ReactNode;
   /** Title in the 70 px title band (`large`). On other variants it is rendered as the first body line. */
-  title?: ReactNode
+  title?: ReactNode;
   /** Footer (buttons). */
-  footer?: ReactNode
+  footer?: ReactNode;
   /** `tool`: textured lower section (`color.surface.panelBodyTextured` + dots lg) filling the rest of the body. */
-  lower?: ReactNode
+  lower?: ReactNode;
   /** `tool`: start the textured lower background at this y (design units from the top of the body), with a hard edge. */
-  lowerTexturedFrom?: number
+  lowerTexturedFrom?: number;
   /** `large`: the raised right column (`color.surface.raised`). The children fill the art stage on the left. */
-  aside?: ReactNode
+  aside?: ReactNode;
   /** `large`: right column width in design units. Default 725. */
-  asideWidth?: number
+  asideWidth?: number;
   /** Outer width in design units (ring included). Defaults: side 460, tool 626, others fluid. */
-  width?: number
+  width?: number;
   /** Outer height in design units (ring included). Defaults: side 670, tool 820, others auto. */
-  height?: number
+  height?: number;
 }
 
 /**
@@ -56,13 +56,13 @@ export function Panel({
   'aria-labelledby': labelledBy,
   ...rest
 }: PanelProps) {
-  const uid = useId()
-  const headerId = `${uid}-header`
-  const titleId = `${uid}-title`
-  const isLarge = variant === 'large'
-  const showHeader = !isLarge && headerLabel !== undefined && headerLabel !== null
-  const showTitle = title !== undefined && title !== null
-  const autoLabel = showTitle ? titleId : showHeader ? headerId : undefined
+  const uid = useId();
+  const headerId = `${uid}-header`;
+  const titleId = `${uid}-title`;
+  const isLarge = variant === 'large';
+  const showHeader = !isLarge && headerLabel !== undefined && headerLabel !== null;
+  const showTitle = title !== undefined && title !== null;
+  const autoLabel = showTitle ? titleId : showHeader ? headerId : undefined;
 
   const vars = {
     ...(width !== undefined ? { '--zzz-panel-w': width } : null),
@@ -70,7 +70,7 @@ export function Panel({
     ...(asideWidth !== undefined ? { '--zzz-panel-aside-w': asideWidth } : null),
     ...(lowerTexturedFrom !== undefined ? { '--zzz-panel-lower-from': lowerTexturedFrom } : null),
     ...style,
-  } as CSSProperties
+  } as CSSProperties;
 
   const body = isLarge ? (
     <div className="zzz-panel__body zzz-panel__split">
@@ -79,7 +79,9 @@ export function Panel({
     </div>
   ) : (
     <div className="zzz-panel__body">
-      {lowerTexturedFrom !== undefined ? <div className="zzz-panel__lower-bg zzz-mat-textured zzz-mat-textured--body" aria-hidden="true" /> : null}
+      {lowerTexturedFrom !== undefined ? (
+        <div className="zzz-panel__lower-bg zzz-mat-textured zzz-mat-textured--body" aria-hidden="true" />
+      ) : null}
       <div className="zzz-panel__content">
         {showTitle ? (
           <h2 id={titleId} className="zzz-panel__heading">
@@ -88,9 +90,11 @@ export function Panel({
         ) : null}
         {children}
       </div>
-      {lower !== undefined && lower !== null ? <div className="zzz-panel__lower zzz-mat-textured zzz-mat-textured--body">{lower}</div> : null}
+      {lower !== undefined && lower !== null ? (
+        <div className="zzz-panel__lower zzz-mat-textured zzz-mat-textured--body">{lower}</div>
+      ) : null}
     </div>
-  )
+  );
 
   return (
     <section
@@ -99,7 +103,13 @@ export function Panel({
       className={cx('zzz-panel', `zzz-panel--${variant === 'drawerInner' ? 'drawer-inner' : variant}`, className)}
       style={vars}
     >
-      <div className={cx('zzz-panel__surface', variant !== 'drawerInner' && 'zzz-mat-panel', isLarge && 'zzz-mat-panel--large')}>
+      <div
+        className={cx(
+          'zzz-panel__surface',
+          variant !== 'drawerInner' && 'zzz-mat-panel',
+          isLarge && 'zzz-mat-panel--large'
+        )}
+      >
         {showHeader ? (
           <div className={cx('zzz-panel__header', variant === 'tool' && 'zzz-mat-textured')}>
             <span id={headerId} className="zzz-panel__label">
@@ -118,5 +128,5 @@ export function Panel({
         {footer !== undefined && footer !== null ? <div className="zzz-panel__footer">{footer}</div> : null}
       </div>
     </section>
-  )
+  );
 }

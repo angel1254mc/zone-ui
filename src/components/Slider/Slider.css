@@ -139,9 +139,20 @@
   border-radius: 50%;
   background:
     /* flat face */
-    radial-gradient(circle at 52% 52%, #585858 0 calc(10.5 * var(--zzz-slider-u)), transparent calc(11.5 * var(--zzz-slider-u))),
+    radial-gradient(
+      circle at 52% 52%,
+      #585858 0 calc(10.5 * var(--zzz-slider-u)),
+      transparent calc(11.5 * var(--zzz-slider-u))
+    ),
     /* sphere: bright crescent top-left, dark rim lower-right */
-    radial-gradient(circle at 32% 24%, #DCDCDC 0, #A4A4A4 calc(7 * var(--zzz-slider-u)), #585858 calc(17 * var(--zzz-slider-u)), #2A2A2A calc(25 * var(--zzz-slider-u)), #181818 calc(32 * var(--zzz-slider-u)));
+    radial-gradient(
+        circle at 32% 24%,
+        #dcdcdc 0,
+        #a4a4a4 calc(7 * var(--zzz-slider-u)),
+        #585858 calc(17 * var(--zzz-slider-u)),
+        #2a2a2a calc(25 * var(--zzz-slider-u)),
+        #181818 calc(32 * var(--zzz-slider-u))
+      );
   box-shadow: 0 0 0 calc(1 * var(--zzz-slider-u)) #000;
   cursor: grab;
 }
@@ -155,7 +166,7 @@
   width: calc(6 * var(--zzz-slider-u));
   height: calc(3 * var(--zzz-slider-u));
   border-radius: calc(1 * var(--zzz-slider-u));
-  background: #3C3C3C;
+  background: #3c3c3c;
 }
 
 .zzz-slider__thumb:active {

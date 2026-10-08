@@ -12,9 +12,9 @@
   --zzz-web-tabs-k: 1;
   --zzz-web-tabs-u: calc(var(--zzz-px) * var(--zzz-web-tabs-k));
   --zzz-web-tabs-track: #222122;
-  --zzz-web-tabs-chip: #FFFFFF;
+  --zzz-web-tabs-chip: #ffffff;
   --zzz-web-tabs-on-chip: #333333;
-  --zzz-web-tabs-text: #FFFFFF;
+  --zzz-web-tabs-text: #ffffff;
   --zzz-web-tabs-chip-w: calc(108 * var(--zzz-web-tabs-u));
   --zzz-web-tabs-chip-h: calc(44 * var(--zzz-web-tabs-u));
   --zzz-web-tabs-chip-skew: -38deg;
@@ -58,7 +58,8 @@
   --zzz-mat-bevel:
     inset calc(1 * var(--zzz-web-tabs-u)) calc(1 * var(--zzz-web-tabs-u)) 0 var(--zzz-color-border-button-bevel-top),
     inset calc(2 * var(--zzz-web-tabs-u)) calc(2 * var(--zzz-web-tabs-u)) 0 #373737;
-  --zzz-shadow-keyline: 0 0 0 calc(var(--zzz-border-width-keyline-n) * var(--zzz-web-tabs-u)) var(--zzz-color-border-keyline);
+  --zzz-shadow-keyline: 0 0 0 calc(var(--zzz-border-width-keyline-n) * var(--zzz-web-tabs-u))
+    var(--zzz-color-border-keyline);
 }
 
 .zzz-web-tabs__tab {
@@ -130,7 +131,9 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .zzz-web-tabs[data-skin='web'] .zzz-web-tabs__tab {
-    transition: transform 300ms, color 300ms;
+    transition:
+      transform 300ms,
+      color 300ms;
   }
   .zzz-web-tabs[data-skin='web'] .zzz-web-tabs__chip {
     transition: opacity 300ms;

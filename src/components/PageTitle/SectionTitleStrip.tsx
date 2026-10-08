@@ -1,24 +1,24 @@
-import type { ComponentPropsWithoutRef, ReactNode, Ref } from 'react'
-import { cx } from '../../utils'
-import { Text } from '../Text'
-import './PageTitle.css'
+import type { ComponentPropsWithoutRef, ReactNode, Ref } from 'react';
+import { cx } from '../../utils';
+import { Text } from '../Text';
+import './PageTitle.css';
 
 export interface SectionTitleStripOwnProps {
   /** "W-Engine Storage", "Drive Disc Storage". */
-  title: ReactNode
+  title: ReactNode;
   /** `[current, max]` → rendered as "[ 113/2000 ]" (a space inside each bracket). */
-  count?: readonly [number, number]
+  count?: readonly [number, number];
   /** Right-hand content (e.g. `IconTabs`, which overlap the strip). */
-  right?: ReactNode
+  right?: ReactNode;
   /** Draw the 5 px `color.border.rule` + 4 px black above the strip. Default true. */
-  rule?: boolean
+  rule?: boolean;
   /** Heading element for the title. Default `h2`. */
-  headingAs?: 'h1' | 'h2' | 'h3' | 'div'
-  ref?: Ref<HTMLDivElement>
+  headingAs?: 'h1' | 'h2' | 'h3' | 'div';
+  ref?: Ref<HTMLDivElement>;
 }
 
 export type SectionTitleStripProps = SectionTitleStripOwnProps &
-  Omit<ComponentPropsWithoutRef<'div'>, keyof SectionTitleStripOwnProps | 'children' | 'title'>
+  Omit<ComponentPropsWithoutRef<'div'>, keyof SectionTitleStripOwnProps | 'children' | 'title'>;
 
 /**
  * Section-title strip: a 60 px `effect.headerStrip`
@@ -53,5 +53,5 @@ export function SectionTitleStrip({
         {right != null ? <div className="zzz-section-strip__right">{right}</div> : null}
       </div>
     </div>
-  )
+  );
 }

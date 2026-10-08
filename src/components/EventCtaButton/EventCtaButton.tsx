@@ -1,19 +1,20 @@
-import type { ComponentPropsWithoutRef, KeyboardEvent, MouseEvent, ReactNode, Ref } from 'react'
-import { cx, usePressFlash } from '../../utils'
-import { Text } from '../Text'
-import './EventCtaButton.css'
+import type { ComponentPropsWithoutRef, KeyboardEvent, MouseEvent, ReactNode, Ref } from 'react';
+import { cx, usePressFlash } from '../../utils';
+import { Text } from '../Text';
+import './EventCtaButton.css';
 
 export interface EventCtaButtonOwnProps {
   /** Label. Default "Go". */
-  children?: ReactNode
+  children?: ReactNode;
   /** Force the pressed look (stories, tests). */
-  pressed?: boolean
+  pressed?: boolean;
   /** Stop the chevron drift (it also stops under `prefers-reduced-motion`). */
-  still?: boolean
-  ref?: Ref<HTMLButtonElement>
+  still?: boolean;
+  ref?: Ref<HTMLButtonElement>;
 }
 
-export type EventCtaButtonProps = EventCtaButtonOwnProps & Omit<ComponentPropsWithoutRef<'button'>, keyof EventCtaButtonOwnProps>
+export type EventCtaButtonProps = EventCtaButtonOwnProps &
+  Omit<ComponentPropsWithoutRef<'button'>, keyof EventCtaButtonOwnProps>;
 
 /**
  * Bottom-right event call to action: a 284 × 57 dark pill
@@ -37,24 +38,24 @@ export function EventCtaButton(props: EventCtaButtonProps) {
     onBlur,
     ref,
     ...rest
-  } = props
-  const ariaDisabled = rest['aria-disabled'] === true || rest['aria-disabled'] === 'true'
-  const inert = disabled || ariaDisabled
+  } = props;
+  const ariaDisabled = rest['aria-disabled'] === true || rest['aria-disabled'] === 'true';
+  const inert = disabled || ariaDisabled;
   const flash = usePressFlash<HTMLButtonElement>({
     disabled: inert,
     onKeyDown: onKeyDown as ((e: KeyboardEvent<HTMLButtonElement>) => void) | undefined,
     onKeyUp,
     onBlur,
-  })
-  const isPressed = !inert && (pressed || 'data-pressed' in flash)
+  });
+  const isPressed = !inert && (pressed || 'data-pressed' in flash);
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     if (inert) {
-      event.preventDefault()
-      return
+      event.preventDefault();
+      return;
     }
-    onClick?.(event)
-  }
+    onClick?.(event);
+  };
 
   return (
     <button
@@ -68,7 +69,7 @@ export function EventCtaButton(props: EventCtaButtonProps) {
         'zzz-pressable',
         'zzz-focusable',
         still && 'zzz-event-cta--still',
-        className,
+        className
       )}
       {...(isPressed ? { 'data-pressed': '' } : null)}
       onKeyDown={flash.onKeyDown}
@@ -81,5 +82,5 @@ export function EventCtaButton(props: EventCtaButtonProps) {
         {children}
       </Text>
     </button>
-  )
+  );
 }

@@ -1,41 +1,41 @@
-import { useId } from 'react'
-import type { ComponentPropsWithRef, ReactNode, Ref } from 'react'
-import { cx } from '../../utils'
-import './ContentCard.css'
+import { useId } from 'react';
+import type { ComponentPropsWithRef, ReactNode, Ref } from 'react';
+import { cx } from '../../utils';
+import './ContentCard.css';
 
 /**
  * - `default`: panel material (5 px lit `#333` ring, black body, 3 px keyline) with a textured header strip
  * - `accent`: the same with a pulsing accent edge down the left side and an accent eyebrow (featured / current item)
  * - `compact`: tighter paddings, smaller title and header (lists, sidebars, phones)
  */
-export type ContentCardVariant = 'default' | 'accent' | 'compact'
+export type ContentCardVariant = 'default' | 'accent' | 'compact';
 
 /** `top`: full-bleed media under the header. `side`: media column beside the body on wide containers (stacks on narrow ones). */
-export type ContentCardMediaPosition = 'top' | 'side'
+export type ContentCardMediaPosition = 'top' | 'side';
 
-export type ContentCardElement = 'article' | 'section' | 'div' | 'li'
-export type ContentCardHeading = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div'
+export type ContentCardElement = 'article' | 'section' | 'div' | 'li';
+export type ContentCardHeading = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div';
 
 export interface ContentCardProps extends Omit<ComponentPropsWithRef<'article'>, 'title' | 'ref'> {
   /** Small label at the left of the header strip ("Question 3 / 5", "Daily", "Settings"). */
-  eyebrow?: ReactNode
+  eyebrow?: ReactNode;
   /** Right end of the header strip: a tag, timer, counter, icon button… */
-  trailing?: ReactNode
+  trailing?: ReactNode;
   /** Large heavy title; also the card's accessible name. */
-  title?: ReactNode
+  title?: ReactNode;
   /** Heading element for `title`. Default `h2`. */
-  titleAs?: ContentCardHeading
+  titleAs?: ContentCardHeading;
   /** Image / art / SVG slot (sized with CSS: `object-fit: cover`). */
-  media?: ReactNode
+  media?: ReactNode;
   /** Default `top`. */
-  mediaPosition?: ContentCardMediaPosition
+  mediaPosition?: ContentCardMediaPosition;
   /** Footer actions (right-aligned, wrapping). */
-  footer?: ReactNode
+  footer?: ReactNode;
   /** Default `default`. */
-  variant?: ContentCardVariant
+  variant?: ContentCardVariant;
   /** Root element. Default `article`. */
-  as?: ContentCardElement
-  ref?: Ref<HTMLElement>
+  as?: ContentCardElement;
+  ref?: Ref<HTMLElement>;
 }
 
 /**
@@ -60,14 +60,14 @@ export function ContentCard({
   'aria-labelledby': labelledBy,
   ...rest
 }: ContentCardProps) {
-  const uid = useId()
-  const titleId = `${uid}-title`
-  const has = (n: ReactNode) => n !== undefined && n !== null && n !== false
-  const hasHeader = has(eyebrow) || has(trailing)
-  const hasTitle = has(title)
-  const hasMedia = has(media)
-  const hasFooter = has(footer)
-  const named = rest['aria-label'] != null
+  const uid = useId();
+  const titleId = `${uid}-title`;
+  const has = (n: ReactNode) => n !== undefined && n !== null && n !== false;
+  const hasHeader = has(eyebrow) || has(trailing);
+  const hasTitle = has(title);
+  const hasMedia = has(media);
+  const hasFooter = has(footer);
+  const named = rest['aria-label'] != null;
 
   return (
     <Root
@@ -78,7 +78,7 @@ export function ContentCard({
         'zzz-content-card',
         `zzz-content-card--${variant}`,
         hasMedia && `zzz-content-card--media-${mediaPosition}`,
-        className,
+        className
       )}
     >
       <div className="zzz-content-card__surface zzz-mat-panel">
@@ -100,8 +100,10 @@ export function ContentCard({
             {has(children) ? <div className="zzz-content-card__content">{children}</div> : null}
           </div>
         </div>
-        {hasFooter ? <div className="zzz-content-card__footer zzz-mat-textured zzz-mat-textured--body">{footer}</div> : null}
+        {hasFooter ? (
+          <div className="zzz-content-card__footer zzz-mat-textured zzz-mat-textured--body">{footer}</div>
+        ) : null}
       </div>
     </Root>
-  )
+  );
 }

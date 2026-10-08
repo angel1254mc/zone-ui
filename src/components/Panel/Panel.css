@@ -99,12 +99,14 @@
    * the strip, ~#13 at 95 px, #0A at 130 px and #000 by 160 px. The shared token stretches its
    * #101010 -> #000 tail to 100 % of the box (a visible grey down to ~520 px), so the stops are laid
    * out here from the same colour tokens: top -> hero-bottom at 110 px -> black at 160 px. */
-  background: linear-gradient(
-    180deg,
-    var(--zzz-color-surface-panel-hero-top) 0,
-    var(--zzz-color-surface-panel-hero-bottom) calc(110 * var(--zzz-px)),
-    var(--zzz-color-surface-panel) calc(160 * var(--zzz-px))
-  ), var(--zzz-color-surface-panel);
+  background:
+    linear-gradient(
+      180deg,
+      var(--zzz-color-surface-panel-hero-top) 0,
+      var(--zzz-color-surface-panel-hero-bottom) calc(110 * var(--zzz-px)),
+      var(--zzz-color-surface-panel) calc(160 * var(--zzz-px))
+    ),
+    var(--zzz-color-surface-panel);
 }
 .zzz-panel__content {
   position: relative;
@@ -192,11 +194,20 @@
   background-color: var(--zzz-color-surface-title-band);
   /* vertical falloff: ~#111 at the top to ~#060606 at the bottom */
   background-image:
-    var(--zzz-dots-light),
-    var(--zzz-dots-light),
-    linear-gradient(180deg, color-mix(in srgb, var(--zzz-color-surface-title-band), #ffffff 1.5%), color-mix(in srgb, var(--zzz-color-surface-title-band), #000000 57%));
-  background-size: var(--zzz-dots-s) var(--zzz-dots-s), var(--zzz-dots-s) var(--zzz-dots-s), 100% 100%;
-  background-position: 0 0, calc(var(--zzz-dots-s) / 2) calc(var(--zzz-dots-s) / 2), 0 0;
+    var(--zzz-dots-light), var(--zzz-dots-light),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--zzz-color-surface-title-band), #ffffff 1.5%),
+      color-mix(in srgb, var(--zzz-color-surface-title-band), #000000 57%)
+    );
+  background-size:
+    var(--zzz-dots-s) var(--zzz-dots-s),
+    var(--zzz-dots-s) var(--zzz-dots-s),
+    100% 100%;
+  background-position:
+    0 0,
+    calc(var(--zzz-dots-s) / 2) calc(var(--zzz-dots-s) / 2),
+    0 0;
 }
 .zzz-panel__title {
   margin: 0;
@@ -218,8 +229,18 @@
   /* ~#1E at the top-left, darkening to ~#080808 through the middle, ~#0E at the
    * bottom (a top-lit vignette behind the art) */
   background:
-    radial-gradient(ellipse 70% 60% at 0% 0%, color-mix(in srgb, var(--zzz-color-surface-art-stage), #ffffff 9%), transparent 100%),
-    linear-gradient(180deg, color-mix(in srgb, var(--zzz-color-surface-art-stage), #ffffff 6%) 0%, var(--zzz-color-surface-art-stage) 45%, var(--zzz-color-surface-art-stage) 80%, color-mix(in srgb, var(--zzz-color-surface-art-stage), #ffffff 3%) 100%);
+    radial-gradient(
+      ellipse 70% 60% at 0% 0%,
+      color-mix(in srgb, var(--zzz-color-surface-art-stage), #ffffff 9%),
+      transparent 100%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--zzz-color-surface-art-stage), #ffffff 6%) 0%,
+      var(--zzz-color-surface-art-stage) 45%,
+      var(--zzz-color-surface-art-stage) 80%,
+      color-mix(in srgb, var(--zzz-color-surface-art-stage), #ffffff 3%) 100%
+    );
 }
 .zzz-panel__aside {
   flex: none;

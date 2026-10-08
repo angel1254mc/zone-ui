@@ -1,66 +1,69 @@
-import { useMemo } from 'react'
-import type { ComponentPropsWithRef, CSSProperties, Key, ReactNode } from 'react'
-import { cx, useControllableState } from '../../utils'
-import './Table.css'
+import { useMemo } from 'react';
+import type { ComponentPropsWithRef, CSSProperties, Key, ReactNode } from 'react';
+import { cx, useControllableState } from '../../utils';
+import './Table.css';
 
-export type TableAlign = 'start' | 'center' | 'end'
-export type SortDirection = 'ascending' | 'descending'
+export type TableAlign = 'start' | 'center' | 'end';
+export type SortDirection = 'ascending' | 'descending';
 
 export interface TableSort {
-  key: string
-  direction: SortDirection
+  key: string;
+  direction: SortDirection;
 }
 
 export interface TableColumn<Row> {
   /** Column id (also the default field read from each row). */
-  key: string
-  header: ReactNode
+  key: string;
+  header: ReactNode;
   /** Cell content. Default: `row[key]`. */
-  cell?(row: Row, index: number): ReactNode
+  cell?(row: Row, index: number): ReactNode;
   /** Default `center` (cells centred). */
-  align?: TableAlign
+  align?: TableAlign;
   /** Clickable header that sorts by this column (`aria-sort` on the header cell). */
-  sortable?: boolean
+  sortable?: boolean;
   /** Value used for sorting. Default: `row[key]`. Numbers sort numerically, the rest by locale. */
-  sortValue?(row: Row): string | number | null | undefined
+  sortValue?(row: Row): string | number | null | undefined;
   /** Column width in design units. */
-  width?: number
+  width?: number;
   /** Render this column's body cells as `<th scope="row">` (the row's name). */
-  rowHeader?: boolean
+  rowHeader?: boolean;
 }
 
 export interface TableProps<Row> extends Omit<ComponentPropsWithRef<'table'>, 'children'> {
-  columns: TableColumn<Row>[]
-  rows: Row[]
+  columns: TableColumn<Row>[];
+  rows: Row[];
   /** Row key. Default: the row index. */
-  rowKey?(row: Row, index: number): Key
+  rowKey?(row: Row, index: number): Key;
   /** Table caption (its accessible name). */
-  caption?: ReactNode
+  caption?: ReactNode;
   /** Keep the caption for assistive tech only. */
-  hideCaption?: boolean
+  hideCaption?: boolean;
   /** Current sort (controlled; `null` = unsorted). */
-  sort?: TableSort | null
+  sort?: TableSort | null;
   /** Initial sort (uncontrolled). */
-  defaultSort?: TableSort | null
-  onSortChange?(sort: TableSort | null): void
+  defaultSort?: TableSort | null;
+  onSortChange?(sort: TableSort | null): void;
   /** Do not reorder `rows` (the caller sorts, e.g. server-side); headers still report the sort. */
-  manualSort?: boolean
+  manualSort?: boolean;
   /** Column dividers as well as row dividers. */
-  bordered?: boolean
+  bordered?: boolean;
   /** Shown in a full-width row when `rows` is empty. */
-  empty?: ReactNode
+  empty?: ReactNode;
 }
 
 function readField<Row>(row: Row, key: string): unknown {
-  return row != null && typeof row === 'object' ? (row as Record<string, unknown>)[key] : undefined
+  return row != null && typeof row === 'object' ? (row as Record<string, unknown>)[key] : undefined;
 }
 
 function compare(a: unknown, b: unknown): number {
-  if (a == null && b == null) return 0
-  if (a == null) return 1
-  if (b == null) return -1
-  if (typeof a === 'number' && typeof b === 'number') return a - b
-  return String(a).localeCompare(String(b), undefined, { numeric: true, sensitivity: 'base' })
+  if (a == null && b == null) return 0;
+  if (a == null) return 1;
+  if (b == null) return -1;
+  if (typeof a === 'number' && typeof b === 'number') return a - b;
+  return String(a).localeCompare(String(b), undefined, {
+    numeric: true,
+    sensitivity: 'base',
+  });
 }
 
 /**
@@ -83,30 +86,33 @@ export function Table<Row>({
   className,
   ...rest
 }: TableProps<Row>) {
-  const [sort, setSort] = useControllableState<TableSort | null>(sortProp, defaultSort, onSortChange)
+  const [sort, setSort] = useControllableState<TableSort | null>(sortProp, defaultSort, onSortChange);
 
   const sorted = useMemo(() => {
-    if (!sort || manualSort) return rows
-    const col = columns.find((c) => c.key === sort.key)
-    if (!col) return rows
-    const get = col.sortValue ?? ((r: Row) => readField(r, col.key) as string | number | null | undefined)
-    const dir = sort.direction === 'ascending' ? 1 : -1
+    if (!sort || manualSort) return rows;
+    const col = columns.find((c) => c.key === sort.key);
+    if (!col) return rows;
+    const get = col.sortValue ?? ((r: Row) => readField(r, col.key) as string | number | null | undefined);
+    const dir = sort.direction === 'ascending' ? 1 : -1;
     return rows
       .map((row, i) => ({ row, i }))
       .sort((x, y) => compare(get(x.row), get(y.row)) * dir || x.i - y.i)
-      .map((x) => x.row)
-  }, [rows, columns, sort, manualSort])
+      .map((x) => x.row);
+  }, [rows, columns, sort, manualSort]);
 
   const toggle = (key: string) => {
     setSort((prev) =>
       prev && prev.key === key
-        ? { key, direction: prev.direction === 'ascending' ? 'descending' : 'ascending' }
-        : { key, direction: 'ascending' },
-    )
-  }
+        ? {
+            key,
+            direction: prev.direction === 'ascending' ? 'descending' : 'ascending',
+          }
+        : { key, direction: 'ascending' }
+    );
+  };
 
   const colStyle = (c: TableColumn<Row>): CSSProperties | undefined =>
-    c.width != null ? { width: `calc(${c.width} * var(--zzz-px))` } : undefined
+    c.width != null ? { width: `calc(${c.width} * var(--zzz-px))` } : undefined;
 
   return (
     <table {...rest} className={cx('zzz-table', bordered && 'zzz-table--bordered', className)}>
@@ -116,7 +122,7 @@ export function Table<Row>({
       <thead>
         <tr>
           {columns.map((c) => {
-            const active = sort?.key === c.key ? sort.direction : undefined
+            const active = sort?.key === c.key ? sort.direction : undefined;
             return (
               <th
                 key={c.key}
@@ -143,7 +149,7 @@ export function Table<Row>({
                   c.header
                 )}
               </th>
-            )
+            );
           })}
         </tr>
       </thead>
@@ -156,8 +162,8 @@ export function Table<Row>({
           sorted.map((row, i) => (
             <tr key={rowKey ? rowKey(row, i) : i} className="zzz-table__row">
               {columns.map((c) => {
-                const content = c.cell ? c.cell(row, i) : (readField(row, c.key) as ReactNode)
-                const Cell = c.rowHeader ? 'th' : 'td'
+                const content = c.cell ? c.cell(row, i) : (readField(row, c.key) as ReactNode);
+                const Cell = c.rowHeader ? 'th' : 'td';
                 return (
                   <Cell
                     key={c.key}
@@ -167,12 +173,12 @@ export function Table<Row>({
                   >
                     {content}
                   </Cell>
-                )
+                );
               })}
             </tr>
           ))
         )}
       </tbody>
     </table>
-  )
+  );
 }

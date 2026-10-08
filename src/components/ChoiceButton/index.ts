@@ -1,4 +1,4 @@
-export { ChoiceButton, choiceState, DEFAULT_RESULT_LABELS } from './ChoiceButton'
+export { ChoiceButton, choiceState, DEFAULT_RESULT_LABELS } from './ChoiceButton';
 export type {
   ChoiceButtonProps,
   ChoiceButtonOwnProps,
@@ -7,8 +7,8 @@ export type {
   ChoiceMediaLayout,
   ChoiceCorrectTone,
   ChoiceSize,
-} from './ChoiceButton'
-export { ChoiceGroup } from './ChoiceGroup'
+} from './ChoiceButton';
+export { ChoiceGroup } from './ChoiceGroup';
 export type {
   ChoiceGroupProps,
   ChoiceGroupSingleProps,
@@ -17,4 +17,4 @@ export type {
   ChoiceBadges,
   ChoiceLayout,
   ChoiceResultLabels,
-} from './ChoiceGroup'
+} from './ChoiceGroup';

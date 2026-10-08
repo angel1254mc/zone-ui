@@ -45,7 +45,7 @@
 }
 /* Third panel #202A27, hatch barely visible: ±2 levels around the base. */
 .zzz-hatch-bg--deep {
-  --zzz-hatch-light: color-mix(in srgb, var(--zzz-color-interstitial-deep), #FFFFFF 2%);
+  --zzz-hatch-light: color-mix(in srgb, var(--zzz-color-interstitial-deep), #ffffff 2%);
   --zzz-hatch-dark: color-mix(in srgb, var(--zzz-color-interstitial-deep), #000000 7%);
 }
 
@@ -91,7 +91,7 @@
  * legible inside the black band. */
 .zzz-graffiti--dialog {
   --zzz-graffiti-dialog-large: #181818;
-  --zzz-graffiti-dialog-detail: #1E1E1E;
+  --zzz-graffiti-dialog-detail: #1e1e1e;
 }
 
 /* Dialog-band drift: one 1800-unit tile along the rotated baseline per loop (−23.3, +6.4 px/s). */
@@ -117,7 +117,7 @@
  * body between them. Rotated about the layer's vertical centre. */
 .zzz-filmstrip__strip {
   --zzz-film-base: #020200;
-  --zzz-film-hole: #1E2020;
+  --zzz-film-hole: #1e2020;
   --zzz-film-edge: calc(30 * var(--zzz-px));
   position: absolute;
   top: -50%;
@@ -130,7 +130,9 @@
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 35'%3E%3Crect x='7' y='6.5' width='16' height='22' rx='4' fill='%231E2020'/%3E%3C/svg%3E"),
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 35'%3E%3Crect x='7' y='6.5' width='16' height='22' rx='4' fill='%231E2020'/%3E%3C/svg%3E");
   background-repeat: repeat-y, repeat-y;
-  background-position: left top, right top;
+  background-position:
+    left top,
+    right top;
   background-size: var(--zzz-film-edge) calc(35 * var(--zzz-px));
   transform: rotate(var(--zzz-skew-watermark-rotate));
 }
@@ -148,7 +150,7 @@
 }
 /* The poster strip's body is a grey teal (#3D4A4A; no token). */
 .zzz-filmstrip__strip--teal .zzz-filmstrip__frames {
-  background-color: #3D4A4A;
+  background-color: #3d4a4a;
 }
 /* Its posters are the tall ones (≈ 420 units along the strip). */
 .zzz-filmstrip__strip--teal .zzz-filmstrip__frame--poster {

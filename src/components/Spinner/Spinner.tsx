@@ -1,33 +1,33 @@
-import { useId } from 'react'
-import type { ComponentPropsWithRef, CSSProperties } from 'react'
-import { cx } from '../../utils'
-import './Spinner.css'
+import { useId } from 'react';
+import type { ComponentPropsWithRef, CSSProperties } from 'react';
+import { cx } from '../../utils';
+import './Spinner.css';
 
 /** `ring` = a conic ring; `chevrons` = three hatched chevrons (SweepTransition flavoured). */
-export type SpinnerVariant = 'ring' | 'chevrons'
+export type SpinnerVariant = 'ring' | 'chevrons';
 /** Ring colour: the live accent (default), white, or `current` (inherit `color`). */
-export type SpinnerTone = 'accent' | 'white' | 'current'
+export type SpinnerTone = 'accent' | 'white' | 'current';
 
 export interface SpinnerProps extends Omit<ComponentPropsWithRef<'span'>, 'children'> {
   /** Default `ring`. */
-  variant?: SpinnerVariant
+  variant?: SpinnerVariant;
   /** Height in design units. Default 40 (ring) / 44 (chevrons). */
-  size?: number
+  size?: number;
   /** Ring colour. Default `accent`. (The chevrons use the interstitial sage / teal / deep.) */
-  tone?: SpinnerTone
+  tone?: SpinnerTone;
   /** Accessible status text (visually hidden). Default "Loading". */
-  label?: string
+  label?: string;
 }
 
 /* Chevron geometry on a 0 0 72 44 grid (design units at size 44): three ">" bands 16 wide at a
  * 22 pitch; each half leans skew.chevron 16.2deg -> tip offset 22 * tan(16.2deg) = 6.4. */
-const TIP = 6.4
-const BAND = 16
-const PITCH = 22
-const TONES = ['sage', 'teal', 'deep'] as const
+const TIP = 6.4;
+const BAND = 16;
+const PITCH = 22;
+const TONES = ['sage', 'teal', 'deep'] as const;
 
 function chevron(x: number) {
-  return `M${x} 0 H${x + BAND} L${x + BAND + TIP} 22 L${x + BAND} 44 H${x} L${x + TIP} 22 Z`
+  return `M${x} 0 H${x + BAND} L${x + BAND + TIP} 22 L${x + BAND} 44 H${x} L${x + TIP} 22 Z`;
 }
 
 /**
@@ -35,13 +35,24 @@ function chevron(x: number) {
  * transition.
  * `role="status"` with a visually-hidden label; rotation / sweep stop under reduced motion.
  */
-export function Spinner({ variant = 'ring', size, tone = 'accent', label = 'Loading', className, style, ...rest }: SpinnerProps) {
-  const uid = useId().replace(/[^a-zA-Z0-9_-]/g, '')
-  const h = size ?? (variant === 'ring' ? 40 : 44)
+export function Spinner({
+  variant = 'ring',
+  size,
+  tone = 'accent',
+  label = 'Loading',
+  className,
+  style,
+  ...rest
+}: SpinnerProps) {
+  const uid = useId().replace(/[^a-zA-Z0-9_-]/g, '');
+  const h = size ?? (variant === 'ring' ? 40 : 44);
   // The hatch keeps its game period (pattern.hatch.period 7.68 px, stripes 39.8deg below the
   // horizontal like .zzz-bg-hatch) whatever the spinner size: convert to viewBox units.
-  const period = (7.68 * 44) / h
-  const rootStyle = { '--zzz-spinner-size': `calc(${h} * var(--zzz-px))`, ...style } as CSSProperties
+  const period = (7.68 * 44) / h;
+  const rootStyle = {
+    '--zzz-spinner-size': `calc(${h} * var(--zzz-px))`,
+    ...style,
+  } as CSSProperties;
   return (
     <span
       role="status"
@@ -76,5 +87,5 @@ export function Spinner({ variant = 'ring', size, tone = 'accent', label = 'Load
       )}
       <span className="zzz-sr-only">{label}</span>
     </span>
-  )
+  );
 }

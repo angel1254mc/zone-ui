@@ -1,12 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import { useState } from 'react'
-import type { CSSProperties } from 'react'
-import { Modal } from './Modal'
-import { Button } from '../Button'
-import { CheckIcon, CloseIcon } from '../../icons'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useState } from 'react';
+import type { CSSProperties } from 'react';
+import { Modal } from './Modal';
+import { Button } from '../Button';
+import { CheckIcon, CloseIcon } from '../../icons';
 
 /** calc(N * var(--zzz-px)) */
-const gpx = (n: number) => `calc(${n} * var(--zzz-px))`
+const gpx = (n: number) => `calc(${n} * var(--zzz-px))`;
 
 const meta = {
   title: 'Overlays/Modal',
@@ -17,23 +17,22 @@ const meta = {
     docs: {
       story: { inline: false, iframeHeight: 640 },
       description: {
-        component: [
+        component:
           'A centred modal panel for web pages. In full-screen game-style layouts use `DialogBand` (the Confirm / Obtained band).',
-          '',
-          '- 450 wide, asymmetric radius `20 0 20 20` (top-right square), 3 px black border + 3 px `rgba(66,66,66,.66)` outline, `linear-gradient(170deg, #222, #000 80%)` under a rhombus grid.',
-          '- Header min 60 on `linear-gradient(#1C1C1C, #080808)`, title `color.text.title`; optional description (the dialog\'s description). Footer actions right-aligned; close button (`IconButton` stepper) in the square corner.',
-          '- Backdrop: light scrim + 39.8° stripes + 4 px blur. `role="dialog"` (or `alertdialog`) + `aria-modal`; focus moves in, Tab is trapped, Escape / backdrop / close button close, focus returns to the opener; page scroll is locked.',
-        ].join('\n'),
       },
     },
   },
   args: { title: 'Reset build?' },
-} satisfies Meta<typeof Modal>
+} satisfies Meta<typeof Modal>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-const page: CSSProperties = { minHeight: gpx(640), display: 'grid', placeItems: 'center' }
+const page: CSSProperties = {
+  minHeight: gpx(640),
+  display: 'grid',
+  placeItems: 'center',
+};
 
 /** Uncontrolled: the trigger opens it. */
 export const Default: Story = {
@@ -58,12 +57,12 @@ export const Default: Story = {
       </Modal>
     </div>
   ),
-}
+};
 
 /** Forced open for inspection. */
 export const Open: Story = {
   render: function Render() {
-    const [open, setOpen] = useState(true)
+    const [open, setOpen] = useState(true);
     return (
       <div style={page}>
         <Button width="compact" onClick={() => setOpen(true)}>
@@ -88,9 +87,9 @@ export const Open: Story = {
           </p>
         </Modal>
       </div>
-    )
+    );
   },
-}
+};
 
 export const AlertDialog: Story = {
   render: () => (
@@ -111,4 +110,4 @@ export const AlertDialog: Story = {
       </Modal>
     </div>
   ),
-}
+};

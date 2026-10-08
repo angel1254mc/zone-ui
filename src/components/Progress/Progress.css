@@ -97,7 +97,11 @@
   padding: 0 calc(25 * var(--zzz-px)) 0 calc(1 * var(--zzz-px));
   gap: calc(13 * var(--zzz-px));
   border-radius: var(--zzz-radius-pill);
-  background: linear-gradient(180deg, var(--zzz-color-surface-polychrome-top), var(--zzz-color-surface-polychrome-bottom));
+  background: linear-gradient(
+    180deg,
+    var(--zzz-color-surface-polychrome-top),
+    var(--zzz-color-surface-polychrome-bottom)
+  );
   box-shadow:
     inset 0 calc(1 * var(--zzz-px)) 0 #393939,
     0 0 0 var(--zzz-border-width-keyline) var(--zzz-color-border-keyline);
@@ -115,7 +119,7 @@
   height: calc(62 * var(--zzz-px));
   margin-block: calc(-3 * var(--zzz-px));
   border-radius: 50%;
-  background: #0E0E0E;
+  background: #0e0e0e;
   box-shadow: inset 0 0 0 calc(5 * var(--zzz-px)) #333333;
   overflow: hidden;
 }

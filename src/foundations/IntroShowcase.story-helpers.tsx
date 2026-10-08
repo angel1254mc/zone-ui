@@ -1,46 +1,46 @@
 // Storybook-only: the bird's-eye showcase at the top of the Introduction page. Not exported from the package.
-import { useState } from 'react'
-import { BarChart } from '../components/BarChart'
-import { Button } from '../components/Button'
-import { ChipGroup } from '../components/Chip'
-import { ChoiceGroup } from '../components/ChoiceButton'
-import type { ChoiceResult } from '../components/ChoiceButton'
-import { ContentCard } from '../components/ContentCard'
-import { CountdownBar } from '../components/CountdownBar'
-import { ConfirmDialog } from '../components/DialogBand'
-import { FilterDrawer } from '../components/Drawer'
-import { Modal } from '../components/Modal'
-import { HatchBackground } from '../components/Backgrounds'
-import { IconButton } from '../components/IconButton'
-import { SegmentedTabs } from '../components/SegmentedTabs'
-import { StatTile, StatTiles } from '../components/StatTiles'
-import { StatusGrid } from '../components/StatusGrid'
-import { StepProgress } from '../components/StepProgress'
-import { Switch } from '../components/Switch'
-import { ZzzTheme } from '../components/ZzzTheme'
-import { CheckIcon, FilterIcon, StarIcon } from '../icons'
-import './introShowcase.css'
+import { useState } from 'react';
+import { BarChart } from '../components/BarChart';
+import { Button } from '../components/Button';
+import { ChipGroup } from '../components/Chip';
+import { ChoiceGroup } from '../components/ChoiceButton';
+import type { ChoiceResult } from '../components/ChoiceButton';
+import { ContentCard } from '../components/ContentCard';
+import { CountdownBar } from '../components/CountdownBar';
+import { ConfirmDialog } from '../components/DialogBand';
+import { FilterDrawer } from '../components/Drawer';
+import { Modal } from '../components/Modal';
+import { HatchBackground } from '../components/Backgrounds';
+import { IconButton } from '../components/IconButton';
+import { SegmentedTabs } from '../components/SegmentedTabs';
+import { StatTile, StatTiles } from '../components/StatTiles';
+import { StatusGrid } from '../components/StatusGrid';
+import { StepProgress } from '../components/StepProgress';
+import { Switch } from '../components/Switch';
+import { ZzzTheme } from '../components/ZzzTheme';
+import { CheckIcon, FilterIcon, StarIcon } from '../icons';
+import './introShowcase.css';
 
 const CHOICES = [
   { value: 'lime', label: 'Lime ↔ yellow' },
   { value: 'teal', label: 'Teal ↔ cyan' },
   { value: 'magenta', label: 'Magenta ↔ pink' },
   { value: 'orange', label: 'Orange ↔ red' },
-]
-const ANSWER = 'lime'
+];
+const ANSWER = 'lime';
 
 const CATEGORY_OPTIONS = [
   { value: 'agents', label: 'Agents' },
   { value: 'lore', label: 'Lore' },
   { value: 'gear', label: 'Gear' },
   { value: 'music', label: 'Music', disabled: true },
-]
-const DEFAULT_CATEGORIES = ['agents', 'lore']
+];
+const DEFAULT_CATEGORIES = ['agents', 'lore'];
 const DIFFICULTY_OPTIONS = [
   { value: 'easy', label: 'Easy' },
   { value: 'normal', label: 'Normal' },
   { value: 'hard', label: 'Hard' },
-]
+];
 
 const DISTRIBUTION = [
   { label: '0', value: 4 },
@@ -49,27 +49,30 @@ const DISTRIBUTION = [
   { label: '3', value: 28 },
   { label: '4', value: 26 },
   { label: '5', value: 16 },
-]
+];
 
 export function IntroShowcase() {
-  const [picked, setPicked] = useState<string | null>(null)
-  const [revealed, setRevealed] = useState(false)
-  const [round, setRound] = useState(0)
-  const [categories, setCategories] = useState<string[]>(DEFAULT_CATEGORIES)
-  const [difficulty, setDifficulty] = useState<string[]>(['normal'])
-  const [quitOpen, setQuitOpen] = useState(false)
-  const [helpOpen, setHelpOpen] = useState(false)
-  const [filtersOpen, setFiltersOpen] = useState(false)
+  const [picked, setPicked] = useState<string | null>(null);
+  const [revealed, setRevealed] = useState(false);
+  const [round, setRound] = useState(0);
+  const [categories, setCategories] = useState<string[]>(DEFAULT_CATEGORIES);
+  const [difficulty, setDifficulty] = useState<string[]>(['normal']);
+  const [quitOpen, setQuitOpen] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   const results: Record<string, ChoiceResult> | undefined = revealed
-    ? { [ANSWER]: 'correct', ...(picked && picked !== ANSWER ? { [picked]: 'incorrect' } : {}) }
-    : undefined
+    ? {
+        [ANSWER]: 'correct',
+        ...(picked && picked !== ANSWER ? { [picked]: 'incorrect' } : {}),
+      }
+    : undefined;
 
   const reset = () => {
-    setPicked(null)
-    setRevealed(false)
-    setRound((r) => r + 1)
-  }
+    setPicked(null);
+    setRevealed(false);
+    setRound((r) => r + 1);
+  };
 
   return (
     <ZzzTheme scale={0.6} className="zzz-intro-showcase">
@@ -130,7 +133,12 @@ export function IntroShowcase() {
               revealed ? (
                 <Button onClick={reset}>Try again</Button>
               ) : (
-                <Button icon={<CheckIcon />} iconTone="confirm" disabled={picked === null} onClick={() => setRevealed(true)}>
+                <Button
+                  icon={<CheckIcon />}
+                  iconTone="confirm"
+                  disabled={picked === null}
+                  onClick={() => setRevealed(true)}
+                >
                   Confirm
                 </Button>
               )
@@ -231,14 +239,30 @@ export function IntroShowcase() {
           defaultValue: 'newest',
         }}
         groups={[
-          { id: 'categories', label: 'Categories', options: CATEGORY_OPTIONS, value: categories, onValueChange: setCategories, multiple: true, columns: 2 },
-          { id: 'difficulty', label: 'Difficulty', options: DIFFICULTY_OPTIONS, value: difficulty, onValueChange: setDifficulty, multiple: true, columns: 2 },
+          {
+            id: 'categories',
+            label: 'Categories',
+            options: CATEGORY_OPTIONS,
+            value: categories,
+            onValueChange: setCategories,
+            multiple: true,
+            columns: 2,
+          },
+          {
+            id: 'difficulty',
+            label: 'Difficulty',
+            options: DIFFICULTY_OPTIONS,
+            value: difficulty,
+            onValueChange: setDifficulty,
+            multiple: true,
+            columns: 2,
+          },
         ]}
         onReset={() => {
-          setCategories(DEFAULT_CATEGORIES)
-          setDifficulty(['normal'])
+          setCategories(DEFAULT_CATEGORIES);
+          setDifficulty(['normal']);
         }}
       />
     </ZzzTheme>
-  )
+  );
 }

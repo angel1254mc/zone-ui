@@ -1,11 +1,11 @@
-import type { ComponentPropsWithoutRef, KeyboardEvent, ReactNode, Ref } from 'react'
-import { cx } from '../../utils'
-import { GraffitiLayer, HatchBackground, StorageMuralBackground } from '../Backgrounds'
-import { UidFooter } from '../BottomBar'
-import type { SignalLevel } from '../BottomBar'
-import './Screen.css'
+import type { ComponentPropsWithoutRef, KeyboardEvent, ReactNode, Ref } from 'react';
+import { cx } from '../../utils';
+import { GraffitiLayer, HatchBackground, StorageMuralBackground } from '../Backgrounds';
+import { UidFooter } from '../BottomBar';
+import type { SignalLevel } from '../BottomBar';
+import './Screen.css';
 
-export type ScreenBackgroundVariant = 'black' | 'hatch' | 'flat' | 'mural' | 'graffiti'
+export type ScreenBackgroundVariant = 'black' | 'hatch' | 'flat' | 'mural' | 'graffiti';
 
 export interface ScreenOwnProps {
   /**
@@ -17,43 +17,43 @@ export interface ScreenOwnProps {
    * - `graffiti`: black + the original graffiti lettering (agent screens);
    * - any ReactNode: your own art (`<img>`, `<picture>`, SVG, a 3D canvas…), covering the canvas.
    */
-  background?: ScreenBackgroundVariant | ReactNode
+  background?: ScreenBackgroundVariant | ReactNode;
   /** `background="mural"`: mural image URL (omitted = flat dimmed band). */
-  muralSrc?: string
+  muralSrc?: string;
   /** Top bar (`<TopBar>`), placed in the `<header>` landmark. */
-  topBar?: ReactNode
+  topBar?: ReactNode;
   /** Section-title strip (`<SectionTitleStrip>`), directly under the top bar in the header. */
-  sectionStrip?: ReactNode
+  sectionStrip?: ReactNode;
   /** Bottom bar (`<BottomBar>` or your own dock), placed in the `<footer>` landmark. */
-  bottomBar?: ReactNode
+  bottomBar?: ReactNode;
   /** Player UID for the bottom-right `UidFooter`, or your own node. */
-  uid?: ReactNode
+  uid?: ReactNode;
   /** Signal level shown by the UID footer. Default 3. */
-  signal?: SignalLevel
+  signal?: SignalLevel;
   /** Escape anywhere inside the screen (focus inside it) calls this, unless a child handled it first. */
-  onBack?: () => void
+  onBack?: () => void;
   /** Fade in from black on mount (`motion.duration.screenIn` 300 ms). Default true. Off under reduced motion. */
-  entrance?: boolean
-  ref?: Ref<HTMLDivElement>
+  entrance?: boolean;
+  ref?: Ref<HTMLDivElement>;
 }
 
-export type ScreenProps = ScreenOwnProps & Omit<ComponentPropsWithoutRef<'div'>, keyof ScreenOwnProps>
+export type ScreenProps = ScreenOwnProps & Omit<ComponentPropsWithoutRef<'div'>, keyof ScreenOwnProps>;
 
-const VARIANTS = new Set<string>(['black', 'hatch', 'flat', 'mural', 'graffiti'])
+const VARIANTS = new Set<string>(['black', 'hatch', 'flat', 'mural', 'graffiti']);
 
 function backgroundLayer(background: ReactNode, muralSrc: string | undefined): ReactNode {
   switch (background) {
     case 'hatch':
-      return <HatchBackground />
+      return <HatchBackground />;
     case 'mural':
-      return <StorageMuralBackground className="zzz-screen__mural" src={muralSrc} />
+      return <StorageMuralBackground className="zzz-screen__mural" src={muralSrc} />;
     case 'graffiti':
-      return <GraffitiLayer />
+      return <GraffitiLayer />;
     case 'black':
     case 'flat':
-      return null
+      return null;
     default:
-      return background
+      return background;
   }
 }
 
@@ -79,22 +79,23 @@ export function Screen({
   ref,
   ...rest
 }: ScreenProps) {
-  const variant = typeof background === 'string' && VARIANTS.has(background) ? background : background == null ? 'black' : 'art'
-  const layer = backgroundLayer(background, muralSrc)
+  const variant =
+    typeof background === 'string' && VARIANTS.has(background) ? background : background == null ? 'black' : 'art';
+  const layer = backgroundLayer(background, muralSrc);
 
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-    onKeyDown?.(event)
-    if (!onBack || event.defaultPrevented || event.key !== 'Escape') return
-    event.preventDefault()
-    onBack()
-  }
+    onKeyDown?.(event);
+    if (!onBack || event.defaultPrevented || event.key !== 'Escape') return;
+    event.preventDefault();
+    onBack();
+  };
 
   const uidNode =
     uid == null || uid === false ? null : typeof uid === 'string' || typeof uid === 'number' ? (
       <UidFooter uid={String(uid)} signal={signal} />
     ) : (
       uid
-    )
+    );
 
   return (
     <div
@@ -116,5 +117,5 @@ export function Screen({
       {bottomBar != null ? <footer className="zzz-screen__footer">{bottomBar}</footer> : null}
       {uidNode != null ? <div className="zzz-screen__uid">{uidNode}</div> : null}
     </div>
-  )
+  );
 }

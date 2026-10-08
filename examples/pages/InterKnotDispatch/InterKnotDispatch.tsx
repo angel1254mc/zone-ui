@@ -9,7 +9,7 @@
  * (horizontal ScrollArea roster + detail) · newsletter form in a Panel (TextField, Checkbox, Button) → Toast ·
  * Accordion FAQ · SiteFooter, over HatchBackground in a .zzz-scrollbar scroller.
  */
-import { useId, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from 'react'
+import { useId, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from 'react';
 import {
   Accordion,
   AccordionItem,
@@ -34,8 +34,8 @@ import {
   getTabId,
   useToast,
   type WebSkin,
-} from '@angel1254mc/zone-ui'
-import { AgentImage, NamecardImage, useGameArt } from '../../art'
+} from '@angel1254mc/zone-ui';
+import { AgentImage, NamecardImage, useGameArt } from '../../art';
 import {
   DispatchLogo,
   DownloadGlyph,
@@ -47,7 +47,7 @@ import {
   SocialFeed,
   SocialPhoto,
   SocialVideo,
-} from './Art'
+} from './Art';
 import {
   CATEGORY_LABEL,
   FAQ,
@@ -59,27 +59,27 @@ import {
   isValidEmail,
   type NewsPost,
   type NewsTab,
-} from './data'
-import './InterKnotDispatch.css'
+} from './data';
+import './InterKnotDispatch.css';
 
 export interface InterKnotDispatchPageProps {
   /** News tab shown first. Default `all`. */
-  initialTab?: NewsTab
+  initialTab?: NewsTab;
   /** News page shown first (1-based). Default 1. */
-  initialPage?: number
+  initialPage?: number;
   /** Skin of the web components (NavBar, WebTabs, Pagination, CategoryTag). Default `game` (live accent). */
-  skin?: WebSkin
+  skin?: WebSkin;
   /**
    * Height of the page's own scroller (`.zzz-scrollbar`). Default `100dvh`; `auto` lets the
    * document scroll instead (e.g. full-page captures).
    */
-  height?: CSSProperties['height']
-  onDownload?: () => void
-  onTrailer?: () => void
+  height?: CSSProperties['height'];
+  onDownload?: () => void;
+  onTrailer?: () => void;
   /** Called with the email after a valid newsletter submission. */
-  onSubscribe?: (email: string) => void
-  className?: string
-  style?: CSSProperties
+  onSubscribe?: (email: string) => void;
+  className?: string;
+  style?: CSSProperties;
 }
 
 const NAV_ITEMS = [
@@ -88,24 +88,34 @@ const NAV_ITEMS = [
   { value: 'agents', label: 'Agents', href: '#ikd-agents' },
   { value: 'newsletter', label: 'Newsletter', href: '#ikd-newsletter' },
   { value: 'faq', label: 'FAQ', href: '#ikd-faq' },
-]
+];
 
 const SOCIAL = [
   { label: 'Video channel', href: '#video', icon: <SocialVideo /> },
   { label: 'Community chat', href: '#chat', icon: <SocialChat /> },
   { label: 'Photo feed', href: '#photos', icon: <SocialPhoto /> },
   { label: 'RSS feed', href: '#rss', icon: <SocialFeed /> },
-]
+];
 
 const FOOTER_LINKS = [
   { label: 'Privacy Policy', href: '#privacy' },
   { label: 'Terms of Use', href: '#terms' },
   { label: 'Contact', href: '#contact' },
   { label: 'Press Kit', href: '#press' },
-]
+];
 
 /** Section heading: accent index, italic title and a condensed watermark word behind it. */
-function SectionHeading({ id, index, watermark, children }: { id: string; index: string; watermark: string; children: ReactNode }) {
+function SectionHeading({
+  id,
+  index,
+  watermark,
+  children,
+}: {
+  id: string;
+  index: string;
+  watermark: string;
+  children: ReactNode;
+}) {
   return (
     <div className="ikd-heading">
       <span className="ikd-heading__mark" aria-hidden="true">
@@ -118,7 +128,7 @@ function SectionHeading({ id, index, watermark, children }: { id: string; index:
         <span className="zzz-italic">{children}</span>
       </h2>
     </div>
-  )
+  );
 }
 
 /** News banner: real art only (a neutral skeleton while loading, an empty frame when missing). */
@@ -127,7 +137,7 @@ function PostArt({ post }: { post: NewsPost }) {
     <AgentImage crop="crop" id={post.art.agentId} alt="" fit="cover" position="50% 28%" />
   ) : (
     <NamecardImage id={post.art.id} alt="" fit="cover" position={post.art.position} />
-  )
+  );
 }
 
 function Hero({ onDownload, onTrailer }: Pick<InterKnotDispatchPageProps, 'onDownload' | 'onTrailer'>) {
@@ -145,8 +155,8 @@ function Hero({ onDownload, onTrailer }: Pick<InterKnotDispatchPageProps, 'onDow
               <span className="ikd-nowrap">Inter-Knot</span> Dispatch
             </EventTitle>
             <p className="ikd-hero__lede">
-              Patch notes, event schedules and street-level gossip for Proxies — collected, fact-checked and filed before
-              the next Hollow shifts.
+              Patch notes, event schedules and street-level gossip for Proxies — collected, fact-checked and filed
+              before the next Hollow shifts.
             </p>
             <div className="ikd-hero__actions">
               <Button
@@ -156,8 +166,8 @@ function Hero({ onDownload, onTrailer }: Pick<InterKnotDispatchPageProps, 'onDow
                 width={300}
                 onClick={(e) => {
                   if (onDownload) {
-                    e.preventDefault()
-                    onDownload()
+                    e.preventDefault();
+                    onDownload();
                   }
                 }}
               >
@@ -166,7 +176,13 @@ function Hero({ onDownload, onTrailer }: Pick<InterKnotDispatchPageProps, 'onDow
                   Download
                 </span>
               </Button>
-              <Button icon={<PlayGlyph className="ikd-play" />} iconTone="plain" size="lg" width={300} onClick={onTrailer}>
+              <Button
+                icon={<PlayGlyph className="ikd-play" />}
+                iconTone="plain"
+                size="lg"
+                width={300}
+                onClick={onTrailer}
+              >
                 Trailer
               </Button>
             </div>
@@ -177,26 +193,26 @@ function Hero({ onDownload, onTrailer }: Pick<InterKnotDispatchPageProps, 'onDow
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 /** The hero's full-body agent art: a transparent cut-out standing on the band (above the fold, so eager). */
 function HeroFigure() {
-  return <AgentImage crop="full" id={HERO_AGENT_ID} alt="" fit="contain" priority className="ikd-hero__agent" />
+  return <AgentImage crop="full" id={HERO_AGENT_ID} alt="" fit="contain" priority className="ikd-hero__agent" />;
 }
 
 function NewsSection({ initialTab, initialPage, skin }: { initialTab: NewsTab; initialPage: number; skin: WebSkin }) {
-  const [tab, setTab] = useState<NewsTab>(initialTab)
-  const [page, setPage] = useState(initialPage)
-  const posts = filterPosts(tab)
-  const pageCount = Math.max(1, Math.ceil(posts.length / PAGE_SIZE))
-  const current = Math.min(Math.max(1, page), pageCount)
-  const visible = posts.slice((current - 1) * PAGE_SIZE, current * PAGE_SIZE)
+  const [tab, setTab] = useState<NewsTab>(initialTab);
+  const [page, setPage] = useState(initialPage);
+  const posts = filterPosts(tab);
+  const pageCount = Math.max(1, Math.ceil(posts.length / PAGE_SIZE));
+  const current = Math.min(Math.max(1, page), pageCount);
+  const visible = posts.slice((current - 1) * PAGE_SIZE, current * PAGE_SIZE);
   // One shared panel (the tabs FILTER one list rather than swap content): every tab's
   // aria-controls points at it, and it is labelled by whichever tab is selected.
-  const tabsId = `ikd-news-tabs-${useId().replace(/[^A-Za-z0-9_-]/g, '')}`
-  const panelId = `${tabsId}-panel`
-  const tabItems = NEWS_TABS.map((item) => ({ ...item, panelId }))
+  const tabsId = `ikd-news-tabs-${useId().replace(/[^A-Za-z0-9_-]/g, '')}`;
+  const panelId = `${tabsId}-panel`;
+  const tabItems = NEWS_TABS.map((item) => ({ ...item, panelId }));
 
   return (
     <section className="ikd-section ikd-news" aria-labelledby="ikd-news-title" id="ikd-news">
@@ -211,8 +227,8 @@ function NewsSection({ initialTab, initialPage, skin }: { initialTab: NewsTab; i
           items={tabItems}
           value={tab}
           onValueChange={(v) => {
-            setTab(v as NewsTab)
-            setPage(1)
+            setTab(v as NewsTab);
+            setPage(1);
           }}
           className="ikd-news__tablist"
         />
@@ -245,15 +261,15 @@ function NewsSection({ initialTab, initialPage, skin }: { initialTab: NewsTab; i
         />
       </div>
     </section>
-  )
+  );
 }
 
 function AgentsSection() {
-  const manifest = useGameArt()
-  const [selected, setSelected] = useState(FEATURED_AGENTS[0].id)
-  const agent = FEATURED_AGENTS.find((a) => a.id === selected) ?? FEATURED_AGENTS[0]
-  const meta = manifest?.agents.find((a) => a.id === agent.id)
-  const name = meta?.name ?? agent.name
+  const manifest = useGameArt();
+  const [selected, setSelected] = useState(FEATURED_AGENTS[0].id);
+  const agent = FEATURED_AGENTS.find((a) => a.id === selected) ?? FEATURED_AGENTS[0];
+  const meta = manifest?.agents.find((a) => a.id === agent.id);
+  const name = meta?.name ?? agent.name;
 
   return (
     <section className="ikd-section ikd-agents" aria-labelledby="ikd-agents-title" id="ikd-agents">
@@ -303,7 +319,7 @@ function AgentsSection() {
         >
           <ul role="list" aria-label="Choose an agent" className="ikd-agents__roster">
             {FEATURED_AGENTS.map((a) => {
-              const label = manifest?.agents.find((m) => m.id === a.id)?.name ?? a.name
+              const label = manifest?.agents.find((m) => m.id === a.id)?.name ?? a.name;
               return (
                 <li key={a.id}>
                   <button
@@ -318,23 +334,23 @@ function AgentsSection() {
                     <span className="ikd-agents__roster-name">{label}</span>
                   </button>
                 </li>
-              )
+              );
             })}
           </ul>
         </ScrollArea>
       </div>
     </section>
-  )
+  );
 }
 
 function NewsletterForm({ onSubscribe }: Pick<InterKnotDispatchPageProps, 'onSubscribe'>) {
-  const { toast } = useToast()
-  const [email, setEmail] = useState('')
-  const [consent, setConsent] = useState(false)
-  const [submitted, setSubmitted] = useState(false)
-  const emailRef = useRef<HTMLInputElement>(null)
-  const consentRef = useRef<HTMLInputElement>(null)
-  const consentErrId = useId()
+  const { toast } = useToast();
+  const [email, setEmail] = useState('');
+  const [consent, setConsent] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const consentRef = useRef<HTMLInputElement>(null);
+  const consentErrId = useId();
 
   const emailError = !submitted
     ? undefined
@@ -342,26 +358,29 @@ function NewsletterForm({ onSubscribe }: Pick<InterKnotDispatchPageProps, 'onSub
       ? 'Enter your email, Proxy.'
       : !isValidEmail(email)
         ? 'That doesn’t look like an email address.'
-        : undefined
-  const consentError = submitted && !consent ? 'Tick the box so we can send you the digest.' : undefined
+        : undefined;
+  const consentError = submitted && !consent ? 'Tick the box so we can send you the digest.' : undefined;
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    const ok = isValidEmail(email) && consent
+    event.preventDefault();
+    const ok = isValidEmail(email) && consent;
     if (!ok) {
-      setSubmitted(true)
+      setSubmitted(true);
       // Focus the first invalid field so its error (aria-describedby) is read out.
-      if (!isValidEmail(email)) emailRef.current?.focus()
-      else consentRef.current?.focus()
-      return
+      if (!isValidEmail(email)) emailRef.current?.focus();
+      else consentRef.current?.focus();
+      return;
     }
-    const value = email.trim()
-    onSubscribe?.(value)
-    toast({ message: `Subscribed! The next dispatch goes to ${value}.`, variant: 'success' })
-    setEmail('')
-    setConsent(false)
-    setSubmitted(false)
-  }
+    const value = email.trim();
+    onSubscribe?.(value);
+    toast({
+      message: `Subscribed! The next dispatch goes to ${value}.`,
+      variant: 'success',
+    });
+    setEmail('');
+    setConsent(false);
+    setSubmitted(false);
+  };
 
   return (
     <section className="ikd-section ikd-newsletter" aria-labelledby="ikd-newsletter-title" id="ikd-newsletter">
@@ -401,13 +420,19 @@ function NewsletterForm({ onSubscribe }: Pick<InterKnotDispatchPageProps, 'onSub
               </InlineError>
             ) : null}
           </div>
-          <Button type="submit" icon={<CheckIcon />} iconTone="confirm" width="default" className="ikd-newsletter__submit">
+          <Button
+            type="submit"
+            icon={<CheckIcon />}
+            iconTone="confirm"
+            width="default"
+            className="ikd-newsletter__submit"
+          >
             Subscribe
           </Button>
         </form>
       </Panel>
     </section>
-  )
+  );
 }
 
 function FaqSection() {
@@ -424,7 +449,7 @@ function FaqSection() {
         ))}
       </Accordion>
     </section>
-  )
+  );
 }
 
 export function InterKnotDispatchPage({
@@ -438,7 +463,7 @@ export function InterKnotDispatchPage({
   className,
   style,
 }: InterKnotDispatchPageProps) {
-  const [nav, setNav] = useState('home')
+  const [nav, setNav] = useState('home');
   return (
     <div className={['ikd', 'zzz-scrollbar', className].filter(Boolean).join(' ')} style={{ height, ...style }}>
       <ZzzTheme className="ikd__theme">
@@ -460,8 +485,8 @@ export function InterKnotDispatchPage({
               href: '#download',
               onClick: (e) => {
                 if (onDownload) {
-                  e.preventDefault()
-                  onDownload()
+                  e.preventDefault();
+                  onDownload();
                 }
               },
             }}
@@ -487,5 +512,5 @@ export function InterKnotDispatchPage({
         </ToastProvider>
       </ZzzTheme>
     </div>
-  )
+  );
 }

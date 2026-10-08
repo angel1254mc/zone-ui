@@ -1,11 +1,11 @@
-import type { ComponentPropsWithRef } from 'react'
-import { getTabId, getTabPanelId } from './useTabList'
+import type { ComponentPropsWithRef } from 'react';
+import { getTabId, getTabPanelId } from './useTabList';
 
 export interface TabPanelProps extends ComponentPropsWithRef<'div'> {
   /** The `id` given to the SegmentedTabs / IconTabs that controls this panel. */
-  tabsId: string
+  tabsId: string;
   /** The tab value this panel belongs to. */
-  value: string
+  value: string;
 }
 
 /**
@@ -23,5 +23,5 @@ export function TabPanel({ tabsId, value, ref, ...rest }: TabPanelProps) {
       ref={ref}
       {...rest}
     />
-  )
+  );
 }

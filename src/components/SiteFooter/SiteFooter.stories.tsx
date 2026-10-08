@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import { SiteFooter } from './SiteFooter'
-import { DemoLogo, demoSocial } from '../NavBar/storyArt.story-helpers'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { SiteFooter } from './SiteFooter';
+import { DemoLogo, demoSocial } from '../NavBar/storyArt.story-helpers';
 
 const links = [
   { label: 'Privacy Policy', href: '#privacy' },
@@ -8,7 +8,7 @@ const links = [
   { label: 'About Us', href: '#about' },
   { label: 'Contact Us', href: '#contact' },
   { label: 'Help Center', href: '#help' },
-]
+];
 
 const meta = {
   title: 'Shell/SiteFooter',
@@ -18,13 +18,7 @@ const meta = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component: [
-          'Site footer for web pages.',
-          '',
-          '- Social band `#111`, 63 + a 2 px `#1A1A1A` rule; 64 px icon cells right-aligned in the 1920 content width, icons in a 34 px box, `#898989` (white on hover). Each cell is a link named by `label`; the `icon` slot is decorative.',
-          '- Body `#000`: centred `logo` slot, policy `links` (`nav aria-label="Legal"`), `children`, then `legal` text in `tiny` `#BBB`.',
-          '- The social glyphs in these stories are generic originals, not brand logos.',
-        ].join('\n'),
+        component: 'Site footer for web pages.',
       },
     },
   },
@@ -40,12 +34,19 @@ const meta = {
       </>
     ),
   },
-} satisfies Meta<typeof SiteFooter>
+  argTypes: {
+    social: { control: false },
+    logo: { control: false },
+    legal: { control: false },
+  },
+} satisfies Meta<typeof SiteFooter>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {}
+export const Default: Story = {};
 
 /** Social band only. */
-export const SocialOnly: Story = { args: { logo: undefined, links: undefined, legal: undefined } }
+export const SocialOnly: Story = {
+  args: { logo: undefined, links: undefined, legal: undefined },
+};

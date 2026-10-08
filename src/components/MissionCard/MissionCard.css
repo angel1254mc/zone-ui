@@ -55,7 +55,7 @@
   height: calc(54 * var(--zzz-px));
   padding: 0 calc(40 * var(--zzz-px)) 0 calc(25 * var(--zzz-px));
   border-radius: calc(8 * var(--zzz-px)) calc(8 * var(--zzz-px)) 0 0;
-  background: linear-gradient(180deg, #3F3D3E 0%, #353437 45%, #2D2C2F 75%, #28272A 100%);
+  background: linear-gradient(180deg, #3f3d3e 0%, #353437 45%, #2d2c2f 75%, #28272a 100%);
 }
 .zzz-mission-card__title {
   margin: 0;
@@ -102,7 +102,11 @@
   left: 0;
   width: calc(58 * var(--zzz-px));
   border-radius: 0 calc(10 * var(--zzz-px)) 0 0;
-  background: linear-gradient(90deg, color-mix(in srgb, var(--zzz-mission-card-ring) 88%, #fff), var(--zzz-mission-card-ring) 30%);
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--zzz-mission-card-ring) 88%, #fff),
+    var(--zzz-mission-card-ring) 30%
+  );
 }
 
 /* Card coordinates (it lives on the article, outside the clipping frame). */
@@ -117,9 +121,9 @@
   padding: calc(8 * var(--zzz-px));
   border-radius: 50%;
   /* light outer rim (150,233,220) */
-  border: calc(5 * var(--zzz-px)) solid color-mix(in srgb, var(--zzz-mission-card-ring) 35%, #D8FFF0);
+  border: calc(5 * var(--zzz-px)) solid color-mix(in srgb, var(--zzz-mission-card-ring) 35%, #d8fff0);
   /* dark teal inner ring (22,81,73) -> near black at the art edge */
-  background: color-mix(in srgb, var(--zzz-mission-card-ring) 40%, #00241C);
+  background: color-mix(in srgb, var(--zzz-mission-card-ring) 40%, #00241c);
   /* ring-colour band outside the rim (right side reads against the pink) */
   box-shadow: 0 0 0 calc(6 * var(--zzz-px)) var(--zzz-mission-card-ring);
 }
@@ -166,7 +170,7 @@
   right: calc(-1 * var(--zzz-px));
   width: calc(17 * var(--zzz-px));
   height: calc(17 * var(--zzz-px));
-  fill: color-mix(in srgb, var(--zzz-mission-card-ring) 25%, #F4FFF8);
+  fill: color-mix(in srgb, var(--zzz-mission-card-ring) 25%, #f4fff8);
   pointer-events: none;
 }
 

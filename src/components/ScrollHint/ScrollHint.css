@@ -16,7 +16,9 @@
   color: var(--zzz-color-text-primary);
   line-height: 0;
   pointer-events: none;
-  transition: opacity 120ms linear, visibility 0s linear 0s;
+  transition:
+    opacity 120ms linear,
+    visibility 0s linear 0s;
 }
 .zzz-scroll-hint--list {
   --zzz-scroll-hint-w: 25;
@@ -97,7 +99,9 @@
 .zzz-scroll-hint[data-visible='false'] {
   opacity: 0;
   visibility: hidden;
-  transition: opacity 120ms linear, visibility 0s linear 120ms;
+  transition:
+    opacity 120ms linear,
+    visibility 0s linear 120ms;
 }
 
 .zzz-scroll-hint--interactive {

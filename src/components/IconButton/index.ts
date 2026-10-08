@@ -1,4 +1,4 @@
-export { IconButton } from './IconButton'
+export { IconButton } from './IconButton';
 export type {
   IconButtonProps,
   IconButtonOwnProps,
@@ -6,4 +6,4 @@ export type {
   IconButtonScaleSize,
   IconButtonPreset,
   IconButtonTone,
-} from './IconButton'
+} from './IconButton';

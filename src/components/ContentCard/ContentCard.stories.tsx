@@ -1,14 +1,14 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import type { CSSProperties, ReactNode } from 'react'
-import { ClockIcon, InfoAlertIcon } from '../../icons'
-import { AgentImage, NamecardImage, WEngineImage } from '../../../examples/art'
-import { Button } from '../Button'
-import { Capsule } from '../Capsule'
-import { ChoiceGroup } from '../ChoiceButton'
-import { ContentCard } from './ContentCard'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { CSSProperties, ReactNode } from 'react';
+import { ClockIcon, InfoAlertIcon } from '../../icons';
+import { AgentImage, NamecardImage, WEngineImage } from '../../../examples/art';
+import { Button } from '../Button';
+import { Capsule } from '../Capsule';
+import { ChoiceGroup } from '../ChoiceButton';
+import { ContentCard } from './ContentCard';
 
 /** calc(N * var(--zzz-px)) */
-const gpx = (n: number) => `calc(${n} * var(--zzz-px))`
+const gpx = (n: number) => `calc(${n} * var(--zzz-px))`;
 
 /** A device-width frame (CSS px); the cards inside use the web default scale. */
 const Frame = ({ children, width, style }: { children: ReactNode; width: number; style?: CSSProperties }) => (
@@ -24,14 +24,14 @@ const Frame = ({ children, width, style }: { children: ReactNode; width: number;
   >
     {children}
   </div>
-)
+);
 
 const Timer = ({ children }: { children: ReactNode }) => (
   <span style={{ display: 'inline-flex', alignItems: 'center', gap: gpx(8) }}>
     <ClockIcon size={22} />
     {children}
   </span>
-)
+);
 
 const meta = {
   title: 'Data Display/ContentCard',
@@ -43,7 +43,8 @@ const meta = {
     title: 'Hollow activity is up in Sixth Street',
     children: (
       <p>
-        Patrols report three new rifts since midnight. Proxies on duty should check in before 18:00 and avoid the old subway entrance.
+        Patrols report three new rifts since midnight. Proxies on duty should check in before 18:00 and avoid the old
+        subway entrance.
       </p>
     ),
     footer: (
@@ -54,28 +55,33 @@ const meta = {
     ),
   },
   argTypes: {
-    variant: { control: 'inline-radio', options: ['default', 'accent', 'compact'] },
+    variant: {
+      control: 'inline-radio',
+      options: ['default', 'accent', 'compact'],
+    },
     mediaPosition: { control: 'inline-radio', options: ['top', 'side'] },
+    trailing: { control: false },
+    children: { control: false },
+    footer: { control: false },
   },
   parameters: {
     docs: {
       description: {
-        component:
-          'A general card on the kit\'s panel material (5 px lit #333 ring, black body, 3 px keyline): a textured header strip ' +
-          '(eyebrow + trailing slot for a tag, timer or counter), a large heavy title, optional media (top or side), body and footer actions on the textured lower body. ' +
-          'Variants: `default`, `accent` (pulsing accent edge + accent eyebrow for the featured / current item), `compact`. Fluid width; side media stacks on narrow cards.',
+        component: 'A general card component',
       },
     },
   },
   decorators: [(S, ctx) => (ctx.parameters.bare ? S() : <Frame width={760}>{S()}</Frame>)],
-} satisfies Meta<typeof ContentCard>
+} satisfies Meta<typeof ContentCard>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {}
+export const Default: Story = {};
 
-export const Accent: Story = { args: { variant: 'accent', eyebrow: 'Featured' } }
+export const Accent: Story = {
+  args: { variant: 'accent', eyebrow: 'Featured' },
+};
 
 export const Compact: Story = {
   args: {
@@ -86,7 +92,7 @@ export const Compact: Story = {
     children: <p>Servers go down at 02:00 for about an hour.</p>,
     footer: <Button width="compact">OK</Button>,
   },
-}
+};
 
 export const MediaTop: Story = {
   args: {
@@ -96,7 +102,7 @@ export const MediaTop: Story = {
     // A real Inter-Knot namecard banner (Astra Yao), cover-cropped to the card's 16:9 media window.
     media: <NamecardImage agentId="1311" alt="" />,
   },
-}
+};
 
 export const MediaSide: Story = {
   parameters: { bare: true },
@@ -114,18 +120,24 @@ export const MediaSide: Story = {
         footer={<Button width="compact">Equip</Button>}
       >
         <p>
-          A supercomputing W-Engine equipped with a motion monitoring feature. Thanks to Nekomata&apos;s modifications, it perfectly
-          matches the fast reflexes and combat maneuvers of feline Thirens.
+          A supercomputing W-Engine equipped with a motion monitoring feature. Thanks to Nekomata&apos;s modifications,
+          it perfectly matches the fast reflexes and combat maneuvers of feline Thirens.
         </p>
       </ContentCard>
     </Frame>
   ),
-}
+};
 
 /** Title and body only — no header strip, no footer. */
 export const Minimal: Story = {
-  args: { eyebrow: undefined, trailing: undefined, footer: undefined, title: 'Nothing here yet', children: <p>Come back tomorrow for a new puzzle.</p> },
-}
+  args: {
+    eyebrow: undefined,
+    trailing: undefined,
+    footer: undefined,
+    title: 'Nothing here yet',
+    children: <p>Come back tomorrow for a new puzzle.</p>,
+  },
+};
 
 /** A quiz question card: counter + timer in the header, ChoiceGroup in the body, action in the footer. */
 const Question = () => (
@@ -146,7 +158,7 @@ const Question = () => (
       ]}
     />
   </ContentCard>
-)
+);
 
 export const QuizQuestionDesktop: Story = {
   parameters: { bare: true, layout: 'fullscreen' },
@@ -155,7 +167,7 @@ export const QuizQuestionDesktop: Story = {
       <Question />
     </Frame>
   ),
-}
+};
 
 export const QuizQuestionPhone: Story = {
   name: 'Quiz Question (phone 390)',
@@ -165,24 +177,47 @@ export const QuizQuestionPhone: Story = {
       <Question />
     </Frame>
   ),
-}
+};
 
 /** A dashboard / landing grid of mixed cards. */
 export const Grid: Story = {
   parameters: { bare: true, layout: 'fullscreen' },
   render: () => (
     <Frame width={1400}>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: gpx(24), alignItems: 'start' }}>
-        <ContentCard variant="accent" eyebrow="Today" trailing={<Timer>14h left</Timer>} title="Daily puzzle #212" media={<AgentImage id="1191" crop="crop" fit="cover" position="50% 28%" priority alt="" />}>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+          gap: gpx(24),
+          alignItems: 'start',
+        }}
+      >
+        <ContentCard
+          variant="accent"
+          eyebrow="Today"
+          trailing={<Timer>14h left</Timer>}
+          title="Daily puzzle #212"
+          media={<AgentImage id="1191" crop="crop" fit="cover" position="50% 28%" priority alt="" />}
+        >
           <p>Five questions, thirty seconds each.</p>
         </ContentCard>
-        <ContentCard eyebrow="Your stats" trailing={<Capsule>Streak 6</Capsule>} title="83% correct" footer={<Button width="compact">Share</Button>}>
+        <ContentCard
+          eyebrow="Your stats"
+          trailing={<Capsule>Streak 6</Capsule>}
+          title="83% correct"
+          footer={<Button width="compact">Share</Button>}
+        >
           <p>Best streak: 14 days. Played 212 times.</p>
         </ContentCard>
-        <ContentCard variant="compact" eyebrow="Host" title="Today's host" media={<AgentImage id="1071" crop="crop" fit="cover" position="50% 28%" alt="" />}>
+        <ContentCard
+          variant="compact"
+          eyebrow="Host"
+          title="Today's host"
+          media={<AgentImage id="1071" crop="crop" fit="cover" position="50% 28%" alt="" />}
+        >
           <p>Says hi.</p>
         </ContentCard>
       </div>
     </Frame>
   ),
-}
+};

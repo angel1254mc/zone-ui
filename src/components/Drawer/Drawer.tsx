@@ -1,34 +1,34 @@
-import { useId, useRef } from 'react'
-import type { ComponentPropsWithRef, CSSProperties, ReactNode } from 'react'
-import { cx, mergeRefs, useControllableState } from '../../utils'
-import { Text } from '../Text'
-import { TagButton } from '../TagButton'
-import { MOTION, OverlayPortal, prefersReducedMotion, useModalLayer, usePresence } from '../DialogBand/overlay'
-import './Drawer.css'
+import { useId, useRef } from 'react';
+import type { ComponentPropsWithRef, CSSProperties, ReactNode } from 'react';
+import { cx, mergeRefs, useControllableState } from '../../utils';
+import { Text } from '../Text';
+import { TagButton } from '../TagButton';
+import { MOTION, OverlayPortal, prefersReducedMotion, useModalLayer, usePresence } from '../DialogBand/overlay';
+import './Drawer.css';
 
 export interface DrawerProps extends Omit<ComponentPropsWithRef<'div'>, 'title' | 'role'> {
   /** Open state (controlled). */
-  open?: boolean
+  open?: boolean;
   /** Initial open state (uncontrolled). */
-  defaultOpen?: boolean
-  onOpenChange?(open: boolean): void
+  defaultOpen?: boolean;
+  onOpenChange?(open: boolean): void;
   /** Header title (upright, `fontSize.button` 26); the dialog's accessible name. */
-  title: ReactNode
+  title: ReactNode;
   /** Header glyph before the title (e.g. `<FilterIcon />`, 21 × 22). */
-  icon?: ReactNode
+  icon?: ReactNode;
   /** Footer action(s), centred on the inner panel (e.g. the Reset button). */
-  footer?: ReactNode
+  footer?: ReactNode;
   /** Drawer width in design units (default 688, `size.panel.drawerWidth`). */
-  width?: number
+  width?: number;
   /** Accessible name of the header Close tag (default "Close"). */
-  closeLabel?: string
+  closeLabel?: string;
   /** Close when the dimmed page (scrim) is clicked (default true). */
-  closeOnScrim?: boolean
+  closeOnScrim?: boolean;
   /** Escape closes (default true). */
-  closeOnEscape?: boolean
+  closeOnEscape?: boolean;
   /** Render inside this element (position: absolute) instead of a fixed layer on `<body>`. */
-  container?: HTMLElement | null
-  children?: ReactNode
+  container?: HTMLElement | null;
+  children?: ReactNode;
 }
 
 /**
@@ -59,13 +59,13 @@ export function Drawer({
   ref,
   ...rest
 }: DrawerProps) {
-  const [open, setOpen] = useControllableState(openProp, defaultOpen, onOpenChange)
-  const reduced = typeof window !== 'undefined' && prefersReducedMotion(container)
-  const { mounted, state } = usePresence(open, reduced ? 100 : MOTION.drawerOut)
-  const titleId = `zzz-drawer${useId().replace(/[^a-zA-Z0-9_-]/g, '')}-title`
-  const layerRef = useRef<HTMLDivElement>(null)
-  const drawerRef = useRef<HTMLDivElement>(null)
-  const close = () => setOpen(false)
+  const [open, setOpen] = useControllableState(openProp, defaultOpen, onOpenChange);
+  const reduced = typeof window !== 'undefined' && prefersReducedMotion(container);
+  const { mounted, state } = usePresence(open, reduced ? 100 : MOTION.drawerOut);
+  const titleId = `zzz-drawer${useId().replace(/[^a-zA-Z0-9_-]/g, '')}-title`;
+  const layerRef = useRef<HTMLDivElement>(null);
+  const drawerRef = useRef<HTMLDivElement>(null);
+  const close = () => setOpen(false);
 
   const { onKeyDown } = useModalLayer({
     active: open && mounted,
@@ -73,14 +73,22 @@ export function Drawer({
     dialogRef: drawerRef,
     lockScroll: container == null,
     onEscape: closeOnEscape ? close : undefined,
-  })
+  });
 
-  if (!mounted) return null
+  if (!mounted) return null;
 
-  const layerStyle = (width != null ? { '--zzz-drawer-width': `calc(${width} * var(--zzz-px))` } : undefined) as CSSProperties | undefined
+  const layerStyle = (width != null ? { '--zzz-drawer-width': `calc(${width} * var(--zzz-px))` } : undefined) as
+    | CSSProperties
+    | undefined;
 
   return (
-    <OverlayPortal container={container} state={state} layerRef={layerRef} className="zzz-drawer-layer" style={layerStyle}>
+    <OverlayPortal
+      container={container}
+      state={state}
+      layerRef={layerRef}
+      className="zzz-drawer-layer"
+      style={layerStyle}
+    >
       <div
         className="zzz-drawer-scrim"
         aria-hidden="true"
@@ -98,8 +106,8 @@ export function Drawer({
         className={cx('zzz-drawer', className)}
         style={style}
         onKeyDown={(e) => {
-          rest.onKeyDown?.(e)
-          onKeyDown(e)
+          rest.onKeyDown?.(e);
+          onKeyDown(e);
         }}
       >
         <header className="zzz-drawer__header">
@@ -119,5 +127,5 @@ export function Drawer({
         <footer className="zzz-drawer__footer">{footer}</footer>
       </div>
     </OverlayPortal>
-  )
+  );
 }

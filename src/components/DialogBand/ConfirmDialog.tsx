@@ -1,22 +1,22 @@
-import { useRef } from 'react'
-import { useControllableState } from '../../utils'
-import { CheckIcon, CloseIcon } from '../../icons'
-import { Button } from '../Button'
-import { DialogBand, type DialogBandProps } from './DialogBand'
+import { useRef } from 'react';
+import { useControllableState } from '../../utils';
+import { CheckIcon, CloseIcon } from '../../icons';
+import { Button } from '../Button';
+import { DialogBand, type DialogBandProps } from './DialogBand';
 
 export interface ConfirmDialogProps extends Omit<DialogBandProps, 'actions' | 'initialFocus' | 'alert'> {
   /** Default "Confirm". */
-  confirmLabel?: string
+  confirmLabel?: string;
   /** Default "Cancel". */
-  cancelLabel?: string
+  cancelLabel?: string;
   /** Confirm pressed; the dialog then closes (onOpenChange(false)). */
-  onConfirm(): void
+  onConfirm(): void;
   /** Cancel pressed or Escape; the dialog then closes. */
-  onCancel?(): void
+  onCancel?(): void;
   /** Which button takes focus on open (default `confirm`). */
-  initialFocus?: 'confirm' | 'cancel'
+  initialFocus?: 'confirm' | 'cancel';
   /** Disable Confirm (e.g. insufficient materials). */
-  confirmDisabled?: boolean
+  confirmDisabled?: boolean;
 }
 
 /**
@@ -36,9 +36,9 @@ export function ConfirmDialog({
   onOpenChange,
   ...rest
 }: ConfirmDialogProps) {
-  const [open, setOpen] = useControllableState(openProp, defaultOpen, onOpenChange)
-  const confirmRef = useRef<HTMLButtonElement>(null)
-  const cancelRef = useRef<HTMLButtonElement>(null)
+  const [open, setOpen] = useControllableState(openProp, defaultOpen, onOpenChange);
+  const confirmRef = useRef<HTMLButtonElement>(null);
+  const cancelRef = useRef<HTMLButtonElement>(null);
 
   return (
     <DialogBand
@@ -57,8 +57,8 @@ export function ConfirmDialog({
             iconTone="cancel"
             pressOutset={0}
             onClick={() => {
-              onCancel?.()
-              setOpen(false)
+              onCancel?.();
+              setOpen(false);
             }}
           >
             {cancelLabel}
@@ -71,8 +71,8 @@ export function ConfirmDialog({
             pressOutset={0}
             disabled={confirmDisabled}
             onClick={() => {
-              onConfirm()
-              setOpen(false)
+              onConfirm();
+              setOpen(false);
             }}
           >
             {confirmLabel}
@@ -80,5 +80,5 @@ export function ConfirmDialog({
         </>
       }
     />
-  )
+  );
 }

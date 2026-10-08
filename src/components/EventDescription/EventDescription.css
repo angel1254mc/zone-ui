@@ -9,6 +9,14 @@
      (not .zzz-text--outline-md). */
   letter-spacing: var(--zzz-event-description-tracking, 0.05em);
 }
-.zzz-event-description--start { text-align: start; }
-.zzz-event-description--center { text-align: center; margin-inline: auto; }
-.zzz-event-description--end { text-align: end; margin-inline-start: auto; }
+.zzz-event-description--start {
+  text-align: start;
+}
+.zzz-event-description--center {
+  text-align: center;
+  margin-inline: auto;
+}
+.zzz-event-description--end {
+  text-align: end;
+  margin-inline-start: auto;
+}

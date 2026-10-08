@@ -1,6 +1,6 @@
-import { cx } from '../../utils'
-import { SweepTransition, SWEEP_COLORS, SWEEP_TIMING } from '../SweepTransition'
-import type { SweepTransitionProps } from '../SweepTransition'
+import { cx } from '../../utils';
+import { SweepTransition, SWEEP_COLORS, SWEEP_TIMING } from '../SweepTransition';
+import type { SweepTransitionProps } from '../SweepTransition';
 
 /** Timeline (ms) of the default sweep. Same values as `SWEEP_TIMING`. */
 export const INTERSTITIAL_TIMING = {
@@ -8,23 +8,31 @@ export const INTERSTITIAL_TIMING = {
   midpoint: SWEEP_TIMING.midpoint,
   reducedTotal: SWEEP_TIMING.reducedTotal,
   reducedMidpoint: SWEEP_TIMING.reducedMidpoint,
-} as const
+} as const;
 
-export interface AgentSelectInterstitialProps
-  extends Omit<SweepTransitionProps, 'active' | 'runKey' | 'tone' | 'label' | 'duration'> {
+export interface AgentSelectInterstitialProps extends Omit<
+  SweepTransitionProps,
+  'active' | 'runKey' | 'tone' | 'label' | 'duration'
+> {
   /** Rising edge (false → true) plays the wipe once; set it back to false (e.g. in onDone) to arm it again. */
-  play: boolean
+  play: boolean;
   /** Band text (default "Agent Select"). */
-  label?: string
+  label?: string;
   /** Tint of the chevron panels (= `SweepTransition tone="<colour>"`). Default: sage / teal / deep. */
-  agentColor?: string
+  agentColor?: string;
 }
 
 /**
  * @deprecated Use `SweepTransition` (`active` / `runKey`, `label`, `tone`, `duration`). This is the
  * "AGENT SELECT" preset of it, kept so existing code keeps working: `play` → `active`, `agentColor` → `tone`.
  */
-export function AgentSelectInterstitial({ play, label = 'Agent Select', agentColor, className, ...rest }: AgentSelectInterstitialProps) {
+export function AgentSelectInterstitial({
+  play,
+  label = 'Agent Select',
+  agentColor,
+  className,
+  ...rest
+}: AgentSelectInterstitialProps) {
   return (
     <SweepTransition
       {...rest}
@@ -33,8 +41,8 @@ export function AgentSelectInterstitial({ play, label = 'Agent Select', agentCol
       tone={agentColor ?? 'default'}
       className={cx('zzz-interstitial', className)}
     />
-  )
+  );
 }
 
 /** The default panel colours, for docs. */
-export const INTERSTITIAL_COLORS = SWEEP_COLORS
+export const INTERSTITIAL_COLORS = SWEEP_COLORS;

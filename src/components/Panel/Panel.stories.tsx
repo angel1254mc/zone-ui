@@ -1,14 +1,18 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import type { CSSProperties } from 'react'
-import { LockIcon, AttackIcon } from '../../icons'
-import { AgentImage, ItemImage, WEngineImage } from '../../../examples/art'
-import { Button } from '../Button'
-import { IconButton } from '../IconButton'
-import { ItemCard } from '../ItemCard'
-import { Panel } from './Panel'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { CSSProperties } from 'react';
+import { LockIcon, AttackIcon } from '../../icons';
+import { AgentImage, ItemImage, WEngineImage } from '../../../examples/art';
+import { Button } from '../Button';
+import { IconButton } from '../IconButton';
+import { ItemCard } from '../ItemCard';
+import { Panel } from './Panel';
 
-const gpx = (n: number) => `calc(${n} * var(--zzz-px))`
-const muted: CSSProperties = { color: 'var(--zzz-color-text-muted)', fontSize: 'var(--zzz-font-size-body)', margin: 0 }
+const gpx = (n: number) => `calc(${n} * var(--zzz-px))`;
+const muted: CSSProperties = {
+  color: 'var(--zzz-color-text-muted)',
+  fontSize: 'var(--zzz-font-size-body)',
+  margin: 0,
+};
 const row: CSSProperties = {
   display: 'flex',
   justifyContent: 'space-between',
@@ -18,20 +22,54 @@ const row: CSSProperties = {
   borderRadius: gpx(21),
   background: 'var(--zzz-color-surface-stat-row)',
   fontSize: 'var(--zzz-font-size-body)',
-}
+};
 
 /** Stand-in content. */
 function DetailBody() {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: gpx(12), position: 'relative' }}>
-      <div style={{ position: 'absolute', right: gpx(-10), top: gpx(-30), width: gpx(170), height: gpx(170), opacity: 0.9 }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: gpx(12),
+        position: 'relative',
+      }}
+    >
+      <div
+        style={{
+          position: 'absolute',
+          right: gpx(-10),
+          top: gpx(-30),
+          width: gpx(170),
+          height: gpx(170),
+          opacity: 0.9,
+        }}
+      >
         <WEngineImage id="14104" alt="" />
       </div>
       <div style={{ display: 'flex', gap: gpx(8), marginTop: gpx(10) }}>
-        <span style={{ width: gpx(42), height: gpx(42), borderRadius: '50%', background: '#000', display: 'grid', placeItems: 'center', color: 'var(--zzz-color-icon-specialty)' }}>
+        <span
+          style={{
+            width: gpx(42),
+            height: gpx(42),
+            borderRadius: '50%',
+            background: '#000',
+            display: 'grid',
+            placeItems: 'center',
+            color: 'var(--zzz-color-icon-specialty)',
+          }}
+        >
           <AttackIcon size={24} />
         </span>
-        <span style={{ width: gpx(42), height: gpx(42), borderRadius: '50%', overflow: 'hidden', border: `${gpx(3)} solid #000` }}>
+        <span
+          style={{
+            width: gpx(42),
+            height: gpx(42),
+            borderRadius: '50%',
+            overflow: 'hidden',
+            border: `${gpx(3)} solid #000`,
+          }}
+        >
           <AgentImage id="1041" crop="circle" />
         </span>
       </div>
@@ -47,7 +85,7 @@ function DetailBody() {
         <span>30%</span>
       </div>
     </div>
-  )
+  );
 }
 
 const detailFooter = (
@@ -55,7 +93,7 @@ const detailFooter = (
     <IconButton icon={<LockIcon />} label="Lock" />
     <Button width="wide">View</Button>
   </>
-)
+);
 
 const meta = {
   title: 'Inventory/Panel',
@@ -63,7 +101,10 @@ const meta = {
   tags: ['autodocs'],
   args: { variant: 'side', headerLabel: 'Detail' },
   argTypes: {
-    variant: { control: 'inline-radio', options: ['side', 'tool', 'large', 'drawerInner'] },
+    variant: {
+      control: 'inline-radio',
+      options: ['side', 'tool', 'large', 'drawerInner'],
+    },
     footer: { control: false },
     lower: { control: false },
     aside: { control: false },
@@ -78,20 +119,14 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component:
-          'Framed containers. `side` 460 × 670 DETAIL panel (5 px `#333` ring, outer radius 29, ' +
-          '35 px black strip, hero gradient). `tool` 626 × 820 Crafting / W-ENGINE UPGRADE panel (44 px textured ' +
-          'header, black body, textured `lower` section). `large` full-width item panel (4 px `#2D2D2D` ring + 3 px black, ' +
-          'outer radius 33, 70 px title band, art stage + raised `aside` column). `drawerInner` the `#030303` radius-12 ' +
-          'panel inside the filter drawer. `width` / `height` are the OUTER size (ring included). Slots: ' +
-          '`headerLabel`, `title`, children (body), `lower`, `aside`, `footer`.',
+        component: 'Framed vertical container.',
       },
     },
   },
-} satisfies Meta<typeof Panel>
+} satisfies Meta<typeof Panel>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Side: Story = {
   args: { title: 'The Brimstone', footer: detailFooter },
@@ -100,7 +135,7 @@ export const Side: Story = {
       <DetailBody />
     </Panel>
   ),
-}
+};
 
 function CraftingInfo() {
   return (
@@ -109,13 +144,26 @@ function CraftingInfo() {
         <ItemImage id="502" alt="" />
       </div>
       <div>
-        <p style={{ margin: 0, fontSize: 'var(--zzz-font-size-title)', lineHeight: 1.2 }}>Ether Battery × 7</p>
-        <p style={{ ...muted, color: 'var(--zzz-color-text-secondary)' }}>
+        <p
+          style={{
+            margin: 0,
+            fontSize: 'var(--zzz-font-size-title)',
+            lineHeight: 1.2,
+          }}
+        >
+          Ether Battery × 7
+        </p>
+        <p
+          style={{
+            ...muted,
+            color: 'var(--zzz-color-text-secondary)',
+          }}
+        >
           Gain 60 Battery Charge when used. Can also be used for auto-combat in Combat Simulation.
         </p>
       </div>
     </div>
-  )
+  );
 }
 
 export const Tool: Story = {
@@ -123,9 +171,28 @@ export const Tool: Story = {
     variant: 'tool',
     headerLabel: 'Crafting',
     lower: (
-      <div style={{ display: 'flex', justifyContent: 'center', gap: gpx(28), paddingTop: gpx(90) }}>
-        <ItemCard size="ingredient" interactive={false} rarity="a" count={{ owned: 6, required: 1 }} art={<ItemImage id="511" alt="Prepaid Power Card" />} />
-        <ItemCard size="ingredient" interactive={false} rarity="a" count={{ owned: 20, required: 60 }} art={<ItemImage id="501" alt="Battery Charge" />} />
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          gap: gpx(28),
+          paddingTop: gpx(90),
+        }}
+      >
+        <ItemCard
+          size="ingredient"
+          interactive={false}
+          rarity="a"
+          count={{ owned: 6, required: 1 }}
+          art={<ItemImage id="511" alt="Prepaid Power Card" />}
+        />
+        <ItemCard
+          size="ingredient"
+          interactive={false}
+          rarity="a"
+          count={{ owned: 20, required: 60 }}
+          art={<ItemImage id="501" alt="Battery Charge" />}
+        />
       </div>
     ),
   },
@@ -136,18 +203,25 @@ export const Tool: Story = {
       </div>
     </Panel>
   ),
-}
+};
 
 export const ToolLowerTexturedFrom: Story = {
   name: 'Tool (lowerTexturedFrom)',
-  args: { variant: 'tool', headerLabel: 'W-ENGINE UPGRADE', lowerTexturedFrom: 506, footer: <Button width="wide">Auto Add</Button> },
+  args: {
+    variant: 'tool',
+    headerLabel: 'W-ENGINE UPGRADE',
+    lowerTexturedFrom: 506,
+    footer: <Button width="wide">Auto Add</Button>,
+  },
   render: (args) => (
     <Panel {...args}>
       <p style={{ margin: 0, fontSize: 'var(--zzz-font-size-body-xl)' }}>Scorching Breath</p>
-      <p style={{ ...muted, color: 'var(--zzz-color-text-primary)' }}>Upon hitting an enemy with a Basic Attack, the equipper&apos;s ATK increases.</p>
+      <p style={{ ...muted, color: 'var(--zzz-color-text-primary)' }}>
+        Upon hitting an enemy with a Basic Attack, the equipper&apos;s ATK increases.
+      </p>
     </Panel>
   ),
-}
+};
 
 export const Large: Story = {
   args: {
@@ -156,9 +230,20 @@ export const Large: Story = {
     height: 700,
     asideWidth: 520,
     aside: (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: gpx(14) }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: gpx(14),
+        }}
+      >
         <p style={muted}>Base Stat</p>
-        <div style={{ ...row, background: 'var(--zzz-color-surface-stat-row-sunken)' }}>
+        <div
+          style={{
+            ...row,
+            background: 'var(--zzz-color-surface-stat-row-sunken)',
+          }}
+        >
           <span>Base ATK</span>
           <span>684</span>
         </div>
@@ -168,16 +253,26 @@ export const Large: Story = {
   render: (args) => (
     <div style={{ width: gpx(1500) }}>
       <Panel {...args}>
-        <div style={{ position: 'absolute', inset: `${gpx(80)} ${gpx(200)}` }}>
+        <div
+          style={{
+            position: 'absolute',
+            inset: `${gpx(80)} ${gpx(200)}`,
+          }}
+        >
           <WEngineImage id="14104" alt="" />
         </div>
       </Panel>
     </div>
   ),
-}
+};
 
 export const DrawerInner: Story = {
-  args: { variant: 'drawerInner', headerLabel: undefined, width: 580, height: 400 },
+  args: {
+    variant: 'drawerInner',
+    headerLabel: undefined,
+    width: 580,
+    height: 400,
+  },
   render: (args) => (
     <div className="zzz-mat-drawer" style={{ padding: `${gpx(21)} ${gpx(63)} ${gpx(23)} ${gpx(41)}` }}>
       <Panel {...args} aria-label="Filters">
@@ -185,4 +280,4 @@ export const DrawerInner: Story = {
       </Panel>
     </div>
   ),
-}
+};

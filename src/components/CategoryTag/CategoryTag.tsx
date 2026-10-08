@@ -1,11 +1,11 @@
-import type { ComponentPropsWithRef } from 'react'
-import { cx } from '../../utils'
-import type { WebSkin } from '../WebTabs'
-import './CategoryTag.css'
+import type { ComponentPropsWithRef } from 'react';
+import { cx } from '../../utils';
+import type { WebSkin } from '../WebTabs';
+import './CategoryTag.css';
 
 export interface CategoryTagProps extends ComponentPropsWithRef<'span'> {
   /** `web` (default): `#BFDB5A` text. `game`: the live `--zzz-accent`. */
-  skin?: WebSkin
+  skin?: WebSkin;
 }
 
 /**
@@ -17,5 +17,5 @@ export function CategoryTag({ skin = 'web', className, children, ...rest }: Cate
     <span className={cx('zzz-category-tag', className)} data-skin={skin} {...rest}>
       {children}
     </span>
-  )
+  );
 }

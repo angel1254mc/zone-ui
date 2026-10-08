@@ -47,7 +47,7 @@
 
 /* Back: 5 px red ring (color.danger.base), #0A0A0A interior + dot mesh. */
 .zzz-tag-button__fill {
-  fill: #0A0A0A; /* interior; no exact token */
+  fill: #0a0a0a; /* interior; no exact token */
 }
 .zzz-tag-button__dot {
   fill: rgb(255 255 255 / 0.045);

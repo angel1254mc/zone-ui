@@ -7,11 +7,11 @@
  */
 .zzz-site-footer {
   --zzz-site-footer-band: #111111;
-  --zzz-site-footer-rule: #1A1A1A;
+  --zzz-site-footer-rule: #1a1a1a;
   --zzz-site-footer-bg: #000000;
   --zzz-site-footer-icon: #898989;
-  --zzz-site-footer-text: #BBBBBB;
-  --zzz-site-footer-hover: #FFFFFF;
+  --zzz-site-footer-text: #bbbbbb;
+  --zzz-site-footer-hover: #ffffff;
   display: block;
   width: 100%;
   background: var(--zzz-site-footer-bg);

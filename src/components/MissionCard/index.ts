@@ -1,2 +1,2 @@
-export { MissionCard } from './MissionCard'
-export type { MissionCardProps, MissionCardOwnProps, MissionCardTheme, MissionStatus } from './MissionCard'
+export { MissionCard } from './MissionCard';
+export type { MissionCardProps, MissionCardOwnProps, MissionCardTheme, MissionStatus } from './MissionCard';

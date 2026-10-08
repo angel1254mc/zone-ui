@@ -1,12 +1,14 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import type { CSSProperties } from 'react'
-import { AgentImage } from '../../../examples/art'
-import { MissionCard } from './MissionCard'
-import type { MissionCardProps } from './MissionCard'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { CSSProperties } from 'react';
+import { AgentImage } from '../../../examples/art';
+import { MissionCard } from './MissionCard';
+import type { MissionCardProps } from './MissionCard';
 
-const gpx = (n: number) => `calc(${n} * var(--zzz-px))`
-const pastel: CSSProperties = { background: 'linear-gradient(100deg, #E9F4F2, #F4D9E3 55%, #F6E7EC)' }
-const reward = (seed: number) => <AgentImage crop="circle" seed={seed} />
+const gpx = (n: number) => `calc(${n} * var(--zzz-px))`;
+const pastel: CSSProperties = {
+  background: 'linear-gradient(100deg, #E9F4F2, #F4D9E3 55%, #F6E7EC)',
+};
+const reward = (seed: number) => <AgentImage crop="circle" seed={seed} />;
 
 const meta = {
   title: 'Game/MissionCard',
@@ -19,7 +21,10 @@ const meta = {
     isNew: false,
   },
   argTypes: {
-    status: { control: 'inline-radio', options: ['go', 'claimed', 'locked'] },
+    status: {
+      control: 'inline-radio',
+      options: ['go', 'claimed', 'locked'],
+    },
     reward: { control: false },
   },
   render: (args) => <MissionCard {...args} reward={reward(4)} />,
@@ -33,35 +38,50 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component:
-          'Event mission card: 581 × 150 (pitch 162), 8 px teal ring, radius 14, light ' +
-          'notch on the top-right corner. Dark 54 px header with the mission text (one line at `bodyLg`, two at `body`); ' +
-          'an 80 px event-theme body with a teal left strip, a 70 px reward circle, a magnifier `IconButton ' +
-          'size="mission"` and a `Button variant="mission"` (Go / Claimed / Stay Tuned). `theme` recolours ring, body and ' +
-          'both button halos per event. Pressed states come from Button/IconButton.',
+        component: 'Event mission card',
       },
     },
   },
-} satisfies Meta<typeof MissionCard>
+} satisfies Meta<typeof MissionCard>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Go: Story = { args: { isNew: true } }
-export const Claimed: Story = { args: { title: 'Complete all stages in "Clink, Clank, Pinball Knight!"', status: 'claimed' } }
-export const Locked: Story = { name: 'Locked (Stay Tuned)', args: { title: 'This mission unlocks in Version 3.3', status: 'locked' } }
-export const SingleLine: Story = { args: { title: 'Clear "Shiyu Defense" Critical Node 3 times' } }
-export const WithOrnament: Story = { args: { theme: { ornament: '#F3A445' } } }
+export const Go: Story = { args: { isNew: true } };
+export const Claimed: Story = {
+  args: {
+    title: 'Complete all stages in "Clink, Clank, Pinball Knight!"',
+    status: 'claimed',
+  },
+};
+export const Locked: Story = {
+  name: 'Locked (Stay Tuned)',
+  args: { title: 'This mission unlocks in Version 3.3', status: 'locked' },
+};
+export const SingleLine: Story = {
+  args: { title: 'Clear "Shiyu Defense" Critical Node 3 times' },
+};
+export const WithOrnament: Story = { args: { theme: { ornament: '#F3A445' } } };
 export const OtherTheme: Story = {
   name: 'Other event theme',
-  args: { theme: { ring: '#6C63D9', body: '#F2B233' }, title: 'Defeat 30 Ethereals in "Hollow Zero: Operation Matrix"' },
-}
+  args: {
+    theme: { ring: '#6C63D9', body: '#F2B233' },
+    title: 'Defeat 30 Ethereals in "Hollow Zero: Operation Matrix"',
+  },
+};
 
 const CARDS: Pick<MissionCardProps, 'title' | 'status' | 'isNew'>[] = [
-  { title: 'Complete all stages in "Clink, Clank, Pinball Knight!"', status: 'claimed' },
-  { title: 'Check in for a total of 14 days in the "Surprise Screening Plan" to obtain', status: 'go', isNew: true },
+  {
+    title: 'Complete all stages in "Clink, Clank, Pinball Knight!"',
+    status: 'claimed',
+  },
+  {
+    title: 'Check in for a total of 14 days in the "Surprise Screening Plan" to obtain',
+    status: 'go',
+    isNew: true,
+  },
   { title: 'This mission unlocks in Version 3.3', status: 'locked' },
-]
+];
 
 /** A column of three cards at a 162 pitch. */
 export const Column: Story = {
@@ -72,4 +92,4 @@ export const Column: Story = {
       ))}
     </div>
   ),
-}
+};

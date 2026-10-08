@@ -1,4 +1,4 @@
-export { StatTiles, StatTile } from './StatTiles'
+export { StatTiles, StatTile } from './StatTiles';
 export type {
   StatTilesProps,
   StatTilesOwnProps,
@@ -6,4 +6,4 @@ export type {
   StatTileProps,
   StatTileOwnProps,
   StatTileDeltaTone,
-} from './StatTiles'
+} from './StatTiles';

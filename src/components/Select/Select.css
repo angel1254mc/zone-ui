@@ -46,7 +46,8 @@
   --zzz-mat-bevel:
     inset calc(1 * var(--zzz-select-u)) calc(1 * var(--zzz-select-u)) 0 var(--zzz-color-border-button-bevel-top),
     inset calc(2 * var(--zzz-select-u)) calc(2 * var(--zzz-select-u)) 0 #373737;
-  --zzz-shadow-keyline: 0 0 0 calc(var(--zzz-border-width-keyline-n) * var(--zzz-select-u)) var(--zzz-color-border-keyline);
+  --zzz-shadow-keyline: 0 0 0 calc(var(--zzz-border-width-keyline-n) * var(--zzz-select-u))
+    var(--zzz-color-border-keyline);
 }
 /* md keeps the inherited / default size.control.pressOutset. */
 .zzz-select:is([data-size='sm'], [data-size='lg']) .zzz-select__trigger {
@@ -118,7 +119,7 @@
   list-style: none;
   border-radius: calc(24 * var(--zzz-select-u));
   transform-origin: 50% 0;
-  animation: zzz-select-open 130ms var(--zzz-motion-easing-out-expo, cubic-bezier(.16, 1, .3, 1));
+  animation: zzz-select-open 130ms var(--zzz-motion-easing-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
   scrollbar-width: none;
 }
 

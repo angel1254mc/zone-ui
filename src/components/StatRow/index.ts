@@ -1,4 +1,4 @@
-export { StatRow, StatGrid, EmptyStatRow } from './StatRow'
+export { StatRow, StatGrid, EmptyStatRow } from './StatRow';
 export type {
   StatRowProps,
   StatRowOwnProps,
@@ -7,4 +7,4 @@ export type {
   StatGridOwnProps,
   EmptyStatRowProps,
   EmptyStatRowOwnProps,
-} from './StatRow'
+} from './StatRow';

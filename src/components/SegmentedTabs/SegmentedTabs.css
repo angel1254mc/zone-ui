@@ -78,9 +78,7 @@
 }
 
 .zzz-segmented-tabs__indicator {
-  --zzz-seg-left: calc(
-    (var(--zzz-seg-index) + 0.5) * 100% / var(--zzz-seg-count) - var(--zzz-seg-fill-w) / 2
-  );
+  --zzz-seg-left: calc((var(--zzz-seg-index) + 0.5) * 100% / var(--zzz-seg-count) - var(--zzz-seg-fill-w) / 2);
   position: absolute;
   top: calc((100% - var(--zzz-seg-fill-h)) / 2 - var(--zzz-seg-pop));
   left: calc(var(--zzz-seg-left) - var(--zzz-seg-pop));

@@ -22,7 +22,9 @@
   scroll-padding-top: calc(110 * var(--zzz-px));
 }
 @media (prefers-reduced-motion: reduce) {
-  .ikd { scroll-behavior: auto; }
+  .ikd {
+    scroll-behavior: auto;
+  }
 }
 
 /* The density (--zzz-scale / --zzz-px) is inherited from the page / app theme (base.css). */
@@ -295,7 +297,7 @@
   text-transform: uppercase;
   white-space: nowrap;
   color: transparent;
-  -webkit-text-stroke: calc(3 * var(--zzz-px)) #1E1E1E;
+  -webkit-text-stroke: calc(3 * var(--zzz-px)) #1e1e1e;
   transform: skewX(-10deg);
   pointer-events: none;
   user-select: none;
@@ -404,9 +406,7 @@
   gap: calc(56 * var(--zzz-px));
   padding: calc(36 * var(--zzz-px)) calc(56 * var(--zzz-px));
   border-radius: 0 calc(55 * var(--zzz-px)) 0 calc(55 * var(--zzz-px));
-  background:
-    linear-gradient(105deg, rgb(255 255 255 / 0.05), transparent 60%),
-    var(--zzz-color-surface-raised);
+  background: linear-gradient(105deg, rgb(255 255 255 / 0.05), transparent 60%), var(--zzz-color-surface-raised);
   box-shadow: 0 0 0 calc(5 * var(--zzz-px)) var(--zzz-color-border-button);
   overflow: hidden;
 }

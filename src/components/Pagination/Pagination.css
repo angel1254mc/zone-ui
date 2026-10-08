@@ -14,9 +14,9 @@
   --zzz-pagination-k: 1;
   --zzz-pagination-u: calc(var(--zzz-px) * var(--zzz-pagination-k));
   --zzz-pagination-track: #222122;
-  --zzz-pagination-chip: #FFFFFF;
+  --zzz-pagination-chip: #ffffff;
   --zzz-pagination-on-chip: #000000;
-  --zzz-pagination-text: #FFFFFF;
+  --zzz-pagination-text: #ffffff;
   --zzz-pagination-skew: -40deg;
   --zzz-pagination-chip-w: calc(45 * var(--zzz-pagination-u));
   --zzz-pagination-chip-h: calc(32 * var(--zzz-pagination-u));
@@ -40,7 +40,8 @@
   --zzz-mat-bevel:
     inset calc(1 * var(--zzz-pagination-u)) calc(1 * var(--zzz-pagination-u)) 0 var(--zzz-color-border-button-bevel-top),
     inset calc(2 * var(--zzz-pagination-u)) calc(2 * var(--zzz-pagination-u)) 0 #373737;
-  --zzz-shadow-keyline: 0 0 0 calc(var(--zzz-border-width-keyline-n) * var(--zzz-pagination-u)) var(--zzz-color-border-keyline);
+  --zzz-shadow-keyline: 0 0 0 calc(var(--zzz-border-width-keyline-n) * var(--zzz-pagination-u))
+    var(--zzz-color-border-keyline);
 }
 
 .zzz-pagination[data-skin='game'] {
@@ -188,12 +189,15 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .zzz-pagination[data-skin='web'] :is(.zzz-pagination__page, .zzz-pagination__step) {
-    transition: transform 300ms, color 300ms;
+    transition:
+      transform 300ms,
+      color 300ms;
   }
   .zzz-pagination[data-skin='web'] .zzz-pagination__chip {
     transition: opacity 300ms;
   }
-  .zzz-pagination[data-skin='web'] :is(.zzz-pagination__page:not([aria-current='page']), .zzz-pagination__step):hover:not([aria-disabled='true']) {
+  .zzz-pagination[data-skin='web']
+    :is(.zzz-pagination__page:not([aria-current='page']), .zzz-pagination__step):hover:not([aria-disabled='true']) {
     transform: scale(1.12);
   }
 }

@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import type { CSSProperties, ReactNode } from 'react'
-import { StarRating } from './StarRating'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { CSSProperties, ReactNode } from 'react';
+import { StarRating } from './StarRating';
 
-const gpx = (n: number) => `calc(${n} * var(--zzz-px))`
+const gpx = (n: number) => `calc(${n} * var(--zzz-px))`;
 const caption: CSSProperties = {
   fontSize: 'var(--zzz-font-size-micro)',
   lineHeight: 'var(--zzz-line-height-single)',
   color: 'var(--zzz-color-text-muted)',
-}
+};
 
 const meta = {
   title: 'Primitives/StarRating',
@@ -16,32 +16,40 @@ const meta = {
   args: { value: 3, max: 5, size: 'card' },
   argTypes: {
     value: { control: { type: 'range', min: 0, max: 5, step: 1 } },
-    size: { control: 'inline-radio', options: ['card', 'pill', 'bar', 'large', 'onLime'] },
+    size: {
+      control: 'inline-radio',
+      options: ['card', 'pill', 'bar', 'large', 'onLime'],
+    },
   },
   parameters: {
     docs: {
       description: {
-        component:
-          'Display-only refinement stars. `role="img"` labelled "n of max stars". Filled `color.star.filled`, ' +
-          'empty `color.star.empty` (flat grey). Every size carries the black outline with a small lower-right drop ' +
-          '(visible on art, lime and grey pills); `outline={false}` removes it.',
+        component: 'Display-only refinement stars.',
       },
     },
   },
-} satisfies Meta<typeof StarRating>
+} satisfies Meta<typeof StarRating>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Playground: Story = {}
+export const Playground: Story = {};
 
 function Row({ label, children, bg = '#000' }: { label: string; children: ReactNode; bg?: string }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: gpx(24) }}>
       <span style={{ ...caption, width: gpx(180) }}>{label}</span>
-      <div style={{ padding: `${gpx(10)} ${gpx(16)}`, background: bg, borderRadius: gpx(30) }}>{children}</div>
+      <div
+        style={{
+          padding: `${gpx(10)} ${gpx(16)}`,
+          background: bg,
+          borderRadius: gpx(30),
+        }}
+      >
+        {children}
+      </div>
     </div>
-  )
+  );
 }
 
 export const Sizes: Story = {
@@ -64,7 +72,7 @@ export const Sizes: Story = {
       </Row>
     </div>
   ),
-}
+};
 
 export const Values: Story = {
   render: () => (
@@ -79,4 +87,4 @@ export const Values: Story = {
       </Row>
     </div>
   ),
-}
+};

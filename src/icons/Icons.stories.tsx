@@ -1,16 +1,16 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import type { CSSProperties, ReactNode } from 'react'
-import { Icon } from './Icon'
-import { iconNames, type IconName } from './registry'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { CSSProperties, ReactNode } from 'react';
+import { Icon } from './Icon';
+import { iconNames, type IconName } from './registry';
 
 /** calc(N * var(--zzz-px)): N design units. */
-const gpx = (n: number) => `calc(${n} * var(--zzz-px))`
+const gpx = (n: number) => `calc(${n} * var(--zzz-px))`;
 
 const font: CSSProperties = {
   fontFamily: 'var(--zzz-font-family-ui, sans-serif)',
   fontWeight: 900,
   lineHeight: 1.2,
-}
+};
 
 const meta = {
   title: 'Foundations/Icons',
@@ -37,10 +37,10 @@ const meta = {
       },
     },
   },
-} satisfies Meta
+} satisfies Meta;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 function Grid({ background, color, children }: { background: string; color: string; children: ReactNode }) {
   return (
@@ -58,7 +58,7 @@ function Grid({ background, color, children }: { background: string; color: stri
     >
       {children}
     </div>
-  )
+  );
 }
 
 function Tile({ name, size = 48 }: { name: IconName; size?: number }) {
@@ -73,9 +73,18 @@ function Tile({ name, size = 48 }: { name: IconName; size?: number }) {
       }}
     >
       <Icon name={name} size={size} />
-      <span style={{ fontSize: gpx(12), opacity: 0.8, overflowWrap: 'anywhere', textAlign: 'center' }}>{name}</span>
+      <span
+        style={{
+          fontSize: gpx(12),
+          opacity: 0.8,
+          overflowWrap: 'anywhere',
+          textAlign: 'center',
+        }}
+      >
+        {name}
+      </span>
     </div>
-  )
+  );
 }
 
 /** Every glyph, white on the app background. */
@@ -87,7 +96,7 @@ export const Gallery: Story = {
       ))}
     </Grid>
   ),
-}
+};
 
 /** Every glyph, black (`color.accent.on`) on the pulsing accent: the pressed / selected look. */
 export const OnAccent: Story = {
@@ -98,21 +107,44 @@ export const OnAccent: Story = {
       ))}
     </Grid>
   ),
-}
+};
 
-const sizeSteps = [14, 22, 28, 34, 45, 60]
+const sizeSteps = [14, 22, 28, 34, 45, 60];
 
 /** `size.icon.*` steps (design units), plus the `1em` default inheriting the font size. */
 export const Sizes: Story = {
   render: () => (
-    <div style={{ display: 'flex', alignItems: 'flex-end', gap: gpx(24), color: '#FFFFFF', ...font }}>
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'flex-end',
+        gap: gpx(24),
+        color: '#FFFFFF',
+        ...font,
+      }}
+    >
       {sizeSteps.map((s) => (
-        <div key={s} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: gpx(8) }}>
+        <div
+          key={s}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: gpx(8),
+          }}
+        >
           <Icon name="home" size={s} />
           <span style={{ fontSize: gpx(14) }}>{s}</span>
         </div>
       ))}
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: gpx(8) }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: gpx(8),
+        }}
+      >
         <span style={{ fontSize: gpx(40) }}>
           <Icon name="home" />
         </span>
@@ -120,7 +152,7 @@ export const Sizes: Story = {
       </div>
     </div>
   ),
-}
+};
 
 /** Accessible name via `title`. */
 export const WithTitle: Story = {
@@ -129,4 +161,4 @@ export const WithTitle: Story = {
       <Icon name="lock" size={45} title="Locked" />
     </span>
   ),
-}
+};

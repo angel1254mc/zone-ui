@@ -1,26 +1,30 @@
-import type { ComponentPropsWithRef, CSSProperties } from 'react'
-import { cx } from '../../utils'
-import { InfinityRankIcon, RankLetterA, RankLetterS, RankStarburstIcon } from '../../icons'
-import { badgeA11y, type BadgeA11yProps } from './shared'
-import './Badges.css'
+import type { ComponentPropsWithRef, CSSProperties } from 'react';
+import { cx } from '../../utils';
+import { InfinityRankIcon, RankLetterA, RankLetterS, RankStarburstIcon } from '../../icons';
+import { badgeA11y, type BadgeA11yProps } from './shared';
+import './Badges.css';
 
-export type AgentRank = 'S' | 'A' | 'infinity'
+export type AgentRank = 'S' | 'A' | 'infinity';
 
 export interface RankBadgeProps extends Omit<ComponentPropsWithRef<'span'>, 'children'>, BadgeA11yProps {
-  rank: AgentRank
+  rank: AgentRank;
   /** Size in design units. Default 37 (card footer sun, 36 × 37). */
-  size?: number
+  size?: number;
 }
 
-const GLYPHS = { S: RankLetterS, A: RankLetterA, infinity: InfinityRankIcon } as const
+const GLYPHS = {
+  S: RankLetterS,
+  A: RankLetterA,
+  infinity: InfinityRankIcon,
+} as const;
 
 /**
  * Card rank sun: the gold `color.rank.starburst*` gear with a black italic
  * letter, or "∞". S and A share the gold sun.
  */
 export function RankBadge({ rank, size, label, decorative, className, style, ...rest }: RankBadgeProps) {
-  const Glyph = GLYPHS[rank]
-  const s = size == null ? style : ({ '--zzz-badge-size': String(size), ...style } as CSSProperties)
+  const Glyph = GLYPHS[rank];
+  const s = size == null ? style : ({ '--zzz-badge-size': String(size), ...style } as CSSProperties);
   return (
     <span
       {...rest}
@@ -31,5 +35,5 @@ export function RankBadge({ rank, size, label, decorative, className, style, ...
       <RankStarburstIcon className="zzz-rank-badge__sun" />
       <Glyph className="zzz-rank-badge__glyph" />
     </span>
-  )
+  );
 }

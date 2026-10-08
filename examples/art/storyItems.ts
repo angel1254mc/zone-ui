@@ -4,9 +4,9 @@
  * fails if one does not). Use with `<ItemImage id={item.id} />`.
  */
 export interface StoryItem {
-  id: string
-  name: string
-  rarity: 's' | 'a' | 'b' | 'c'
+  id: string;
+  name: string;
+  rarity: 's' | 'a' | 'b' | 'c';
 }
 
 export const STORY_ITEMS: readonly StoryItem[] = [
@@ -24,4 +24,4 @@ export const STORY_ITEMS: readonly StoryItem[] = [
   { id: '300003', name: 'Senior Investigator Log', rarity: 'a' },
   { id: '301003', name: 'W-Engine Energy Module', rarity: 'a' },
   { id: '303002', name: 'Bangboo Algorithm Module', rarity: 'b' },
-]
+];

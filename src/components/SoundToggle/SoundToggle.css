@@ -29,11 +29,7 @@
 
 /* Level fill on the volume track. --zzz-slider-fraction is set inline by Slider on its root. */
 .zzz-sound-toggle .zzz-slider__track {
-  background-image: linear-gradient(
-    90deg,
-    var(--zzz-accent) calc(var(--zzz-slider-fraction, 0) * 100%),
-    transparent 0
-  );
+  background-image: linear-gradient(90deg, var(--zzz-accent) calc(var(--zzz-slider-fraction, 0) * 100%), transparent 0);
 }
 .zzz-sound-toggle[data-muted] .zzz-slider__track,
 .zzz-sound-toggle .zzz-slider[data-disabled] .zzz-slider__track {

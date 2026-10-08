@@ -1,47 +1,47 @@
-import { useId, useRef } from 'react'
-import type { ComponentPropsWithRef, ReactNode, RefObject } from 'react'
-import { cx, mergeRefs, useControllableState } from '../../utils'
-import { Text } from '../Text'
-import { GraffitiLayer } from '../Backgrounds'
-import { DialogBackdrop } from './DialogBackdrop'
-import { OverlayPortal, prefersReducedMotion, useModalLayer, usePresence } from './overlay'
-import './DialogBand.css'
+import { useId, useRef } from 'react';
+import type { ComponentPropsWithRef, ReactNode, RefObject } from 'react';
+import { cx, mergeRefs, useControllableState } from '../../utils';
+import { Text } from '../Text';
+import { GraffitiLayer } from '../Backgrounds';
+import { DialogBackdrop } from './DialogBackdrop';
+import { OverlayPortal, prefersReducedMotion, useModalLayer, usePresence } from './overlay';
+import './DialogBand.css';
 
 export interface DialogBandProps extends Omit<ComponentPropsWithRef<'div'>, 'title' | 'children' | 'role'> {
   /** Open state (controlled). */
-  open?: boolean
+  open?: boolean;
   /** Initial open state (uncontrolled). */
-  defaultOpen?: boolean
-  onOpenChange?(open: boolean): void
+  defaultOpen?: boolean;
+  onOpenChange?(open: boolean): void;
   /** The question / heading, centred at the top of the band (its accessible name). */
-  title: ReactNode
+  title: ReactNode;
   /** Band content under the title (e.g. a RewardTileGroup). */
-  children?: ReactNode
+  children?: ReactNode;
   /** Button row straddling the bottom edge line (e.g. Cancel / Confirm `Button width="dialog"`). */
-  actions?: ReactNode
+  actions?: ReactNode;
   /** Drifting graffiti watermark inside the band (default true). */
-  watermark?: boolean
+  watermark?: boolean;
   /** Blurred, striped scrim behind the band (default true). */
-  backdrop?: boolean
+  backdrop?: boolean;
   /** ~100 ms pixelated freeze of the page before the band pops in (optional). */
-  pixelate?: boolean
+  pixelate?: boolean;
   /** Element to focus on open. Default: the last button of `actions` (Confirm), else the first tabbable. */
-  initialFocus?: RefObject<HTMLElement | null>
+  initialFocus?: RefObject<HTMLElement | null>;
   /** `alertdialog` instead of `dialog` (confirmations). */
-  alert?: boolean
+  alert?: boolean;
   /** Escape closes (default true). */
-  closeOnEscape?: boolean
+  closeOnEscape?: boolean;
   /** Called on Escape before the dialog closes (ConfirmDialog maps it to cancel). */
-  onEscapeKeyDown?(): void
+  onEscapeKeyDown?(): void;
   /** Freeze the page's accent pulse behind the dialog (default true). */
-  freezePage?: boolean
+  freezePage?: boolean;
   /** Render inside this element (position: absolute) instead of a fixed layer on `<body>`. */
-  container?: HTMLElement | null
+  container?: HTMLElement | null;
 }
 
 /** Band exit: band 60 ms, stripes fade 100 ms after 60 ms, blur hard-swaps off at ~200 ms. */
-const EXIT_MS = 200
-const EXIT_MS_REDUCED = 100
+const EXIT_MS = 200;
+const EXIT_MS_REDUCED = 100;
 
 /**
  * The kit's modal band: a full-width 390 px black band, vertically centred, with 4 px edge
@@ -72,13 +72,13 @@ export function DialogBand({
   ref,
   ...rest
 }: DialogBandProps) {
-  const [open, setOpen] = useControllableState(openProp, defaultOpen, onOpenChange)
-  const reduced = typeof window !== 'undefined' && prefersReducedMotion(container)
-  const { mounted, state } = usePresence(open, reduced ? EXIT_MS_REDUCED : EXIT_MS)
-  const titleId = `zzz-dialog${useId().replace(/[^a-zA-Z0-9_-]/g, '')}-title`
-  const layerRef = useRef<HTMLDivElement>(null)
-  const bandRef = useRef<HTMLDivElement>(null)
-  const actionsRef = useRef<HTMLDivElement>(null)
+  const [open, setOpen] = useControllableState(openProp, defaultOpen, onOpenChange);
+  const reduced = typeof window !== 'undefined' && prefersReducedMotion(container);
+  const { mounted, state } = usePresence(open, reduced ? EXIT_MS_REDUCED : EXIT_MS);
+  const titleId = `zzz-dialog${useId().replace(/[^a-zA-Z0-9_-]/g, '')}-title`;
+  const layerRef = useRef<HTMLDivElement>(null);
+  const bandRef = useRef<HTMLDivElement>(null);
+  const actionsRef = useRef<HTMLDivElement>(null);
 
   const { onKeyDown } = useModalLayer({
     active: open && mounted,
@@ -87,19 +87,19 @@ export function DialogBand({
     lockScroll: container == null,
     freezeAccent: freezePage,
     getInitialFocus: () => {
-      if (initialFocus?.current) return initialFocus.current
-      const buttons = actionsRef.current?.querySelectorAll<HTMLElement>('button:not([disabled]), a[href]')
-      return buttons && buttons.length > 0 ? buttons[buttons.length - 1] : null
+      if (initialFocus?.current) return initialFocus.current;
+      const buttons = actionsRef.current?.querySelectorAll<HTMLElement>('button:not([disabled]), a[href]');
+      return buttons && buttons.length > 0 ? buttons[buttons.length - 1] : null;
     },
     onEscape: closeOnEscape
       ? () => {
-          onEscapeKeyDown?.()
-          setOpen(false)
+          onEscapeKeyDown?.();
+          setOpen(false);
         }
       : undefined,
-  })
+  });
 
-  if (!mounted) return null
+  if (!mounted) return null;
 
   return (
     <OverlayPortal
@@ -120,8 +120,8 @@ export function DialogBand({
         data-state={state}
         className={cx('zzz-dialog-band', className)}
         onKeyDown={(e) => {
-          rest.onKeyDown?.(e)
-          onKeyDown(e)
+          rest.onKeyDown?.(e);
+          onKeyDown(e);
         }}
       >
         <div className="zzz-dialog-band__fill" aria-hidden="true">
@@ -141,5 +141,5 @@ export function DialogBand({
         ) : null}
       </div>
     </OverlayPortal>
-  )
+  );
 }

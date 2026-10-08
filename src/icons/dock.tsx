@@ -3,9 +3,9 @@
  * external dark outline applied by the consumer via `filter: shadow.iconOutline`.
  * City Fund and Signal Search are coloured.
  */
-import { createIcon } from './createIcon'
-import { arcBand, circle, ellipse, ellipsePts, join, polar, poly, rect, starPoints, stroke, type Pt } from './geometry'
-import { crossPoints } from './actions'
+import { createIcon } from './createIcon';
+import { arcBand, circle, ellipse, ellipsePts, join, polar, poly, rect, starPoints, stroke, type Pt } from './geometry';
+import { crossPoints } from './actions';
 
 /** "Z" letter polygon (top bar, diagonal, bottom bar). */
 export function zPoints(x0: number, y0: number, x1: number, y1: number, t: number, d: number): Pt[] {
@@ -20,7 +20,7 @@ export function zPoints(x0: number, y0: number, x1: number, y1: number, t: numbe
     [x0, y1 - t],
     [x1 - d, y0 + t],
     [x0, y0 + t],
-  ]
+  ];
 }
 
 /** 3 × 3 dots, the top-right one replaced by a small "+". */
@@ -29,11 +29,13 @@ export const MoreIcon = createIcon(
   'more',
   <path
     d={join(
-      ...[4.4, 16, 27.6].flatMap((y) => [4.4, 16, 27.6].filter((x) => !(x === 27.6 && y === 4.4)).map((x) => circle(x, y, 4.2))),
-      poly(crossPoints(27.6, 4.4, 4.4, 1.55), 0.3),
+      ...[4.4, 16, 27.6].flatMap((y) =>
+        [4.4, 16, 27.6].filter((x) => !(x === 27.6 && y === 4.4)).map((x) => circle(x, y, 4.2))
+      ),
+      poly(crossPoints(27.6, 4.4, 4.4, 1.55), 0.3)
     )}
-  />,
-)
+  />
+);
 
 /**
  * A bust outline in front, two smaller solid busts behind it, spread wide.
@@ -43,26 +45,35 @@ export const SquadIcon = createIcon(
   'SquadIcon',
   'squad',
   (uid) => {
-    const W = 40.5
-    const frontOuter = 'M9.45 31.5 V26.4 C9.45 20.4 14.05 17.3 20.25 17.3 C26.45 17.3 31.05 20.4 31.05 26.4 V31.5 Z'
-    const frontInner = 'M12.85 28.4 V26.4 C12.85 22.6 15.65 20.5 20.25 20.5 C24.85 20.5 27.65 22.6 27.65 26.4 V28.4 Z'
+    const W = 40.5;
+    const frontOuter = 'M9.45 31.5 V26.4 C9.45 20.4 14.05 17.3 20.25 17.3 C26.45 17.3 31.05 20.4 31.05 26.4 V31.5 Z';
+    const frontInner = 'M12.85 28.4 V26.4 C12.85 22.6 15.65 20.5 20.25 20.5 C24.85 20.5 27.65 22.6 27.65 26.4 V28.4 Z';
     const back = (cx: number) =>
-      join(circle(cx, 12.2, 4.1), `M${cx - 5.9} 28.8 V25 C${cx - 5.9} 21 ${cx - 3.4} 18.6 ${cx} 18.6 C${cx + 3.4} 18.6 ${cx + 5.9} 21 ${cx + 5.9} 25 V28.8 Z`)
+      join(
+        circle(cx, 12.2, 4.1),
+        `M${cx - 5.9} 28.8 V25 C${cx - 5.9} 21 ${cx - 3.4} 18.6 ${cx} 18.6 C${cx + 3.4} 18.6 ${cx + 5.9} 21 ${cx + 5.9} 25 V28.8 Z`
+      );
     return (
       <>
         <defs>
           <mask id={`${uid}-m`} maskUnits="userSpaceOnUse" x="0" y="0" width={W} height="32">
             <rect width={W} height="32" fill="#fff" />
-            <path d={join(circle(20.25, 9.2, 8.9), frontOuter)} fill="#000" stroke="#000" strokeWidth="3" strokeLinejoin="round" />
+            <path
+              d={join(circle(20.25, 9.2, 8.9), frontOuter)}
+              fill="#000"
+              stroke="#000"
+              strokeWidth="3"
+              strokeLinejoin="round"
+            />
           </mask>
         </defs>
         <path mask={`url(#${uid}-m)`} d={join(back(5.9), back(W - 5.9))} />
         <path fillRule="evenodd" d={join(circle(20.25, 9.2, 7.4), circle(20.25, 9.2, 4.2), frontOuter, frontInner)} />
       </>
-    )
+    );
   },
-  { viewBoxWidth: 40.5 },
-)
+  { viewBoxWidth: 40.5 }
+);
 
 /**
  * Solid envelope with the flap "V" knocked out and a bold "M" badge at the bottom right.
@@ -72,9 +83,9 @@ export const MailIcon = createIcon(
   'MailIcon',
   'mail',
   (uid) => {
-    const W = 41
-    const [x0, x1, y0, y1] = [27.4, 41, 19.9, 30.3]
-    const mid = (x0 + x1) / 2
+    const W = 41;
+    const [x0, x1, y0, y1] = [27.4, 41, 19.9, 30.3];
+    const mid = (x0 + x1) / 2;
     const m = poly(
       [
         [x0, y1],
@@ -90,8 +101,8 @@ export const MailIcon = createIcon(
         [x0 + 3, y0 + 5.3],
         [x0 + 3, y1],
       ],
-      0.3,
-    )
+      0.3
+    );
     return (
       <>
         <defs>
@@ -112,31 +123,54 @@ export const MailIcon = createIcon(
                 [32.4, 7.6],
               ],
               3,
-              0.4,
-            ),
+              0.4
+            )
           )}
         />
         <path d={m} />
       </>
-    )
+    );
   },
-  { viewBoxWidth: 41 },
-)
+  { viewBoxWidth: 41 }
+);
 
 /** Scalloped gear (8 rounded teeth) with a crescent "C" cut out of the centre, open to the upper right. */
 export const OptionsIcon = createIcon(
   'OptionsIcon',
   'options',
-  <path fillRule="evenodd" d={join(poly(starPoints(16, 16, 8, 16.4, 12.2, 0), 2.6), arcBand(16, 16, 7.2, 2.8, 62, 372))} />,
-)
+  <path
+    fillRule="evenodd"
+    d={join(poly(starPoints(16, 16, 8, 16.4, 12.2, 0), 2.6), arcBand(16, 16, 7.2, 2.8, 62, 372))}
+  />
+);
 
 /** Megaphone: a rounded back cup with a handle and a tall flared horn. */
 export const NoticesIcon = createIcon(
   'NoticesIcon',
   'notices',
   <>
-    <path d={poly([[0.6, 9.4], [10.8, 9.4], [10.8, 21.4], [0.6, 21.4]], [4.4, 0.8, 0.8, 4.4])} />
-    <path d={poly([[5.2, 20], [9.6, 20], [10.2, 31], [6.8, 31]], 0.7)} />
+    <path
+      d={poly(
+        [
+          [0.6, 9.4],
+          [10.8, 9.4],
+          [10.8, 21.4],
+          [0.6, 21.4],
+        ],
+        [4.4, 0.8, 0.8, 4.4]
+      )}
+    />
+    <path
+      d={poly(
+        [
+          [5.2, 20],
+          [9.6, 20],
+          [10.2, 31],
+          [6.8, 31],
+        ],
+        0.7
+      )}
+    />
     <path
       d={poly(
         [
@@ -147,12 +181,12 @@ export const NoticesIcon = createIcon(
           [26.6, 29.2],
           [12.4, 21.4],
         ],
-        [0.6, 1.6, 1.2, 1.2, 1.6, 0.6],
+        [0.6, 1.6, 1.2, 1.2, 1.6, 0.6]
       )}
     />
     <path d={ellipse(28.4, 15, 3.4, 8.2)} />
-  </>,
-)
+  </>
+);
 
 /** Round badge with an original stacked double-Z monogram knocked out. */
 export const AchievementsIcon = createIcon(
@@ -162,10 +196,14 @@ export const AchievementsIcon = createIcon(
     <path fillRule="evenodd" d={join(circle(16, 16, 16), circle(16, 16, 12.9))} />
     <path
       fillRule="evenodd"
-      d={join(circle(16, 16, 10.9), poly(zPoints(10.2, 8.6, 22.2, 14.6, 2.5, 3.4), 0.3), poly(zPoints(9.8, 17.4, 21.8, 23.4, 2.5, 3.4), 0.3))}
+      d={join(
+        circle(16, 16, 10.9),
+        poly(zPoints(10.2, 8.6, 22.2, 14.6, 2.5, 3.4), 0.3),
+        poly(zPoints(9.8, 17.4, 21.8, 23.4, 2.5, 3.4), 0.3)
+      )}
     />
-  </>,
-)
+  </>
+);
 
 /**
  * Two wire-frame globes over a tiny "INTER-KNOT" caption (live text, condensed face).
@@ -192,30 +230,32 @@ export const InterKnotIcon = createIcon(
       fontWeight="900"
       textLength="34"
       lengthAdjust="spacingAndGlyphs"
-      style={{ fontFamily: 'var(--zzz-font-family-condensed, Impact, "Arial Narrow", sans-serif)' }}
+      style={{
+        fontFamily: 'var(--zzz-font-family-condensed, Impact, "Arial Narrow", sans-serif)',
+      }}
     >
       INTER-KNOT
     </text>
   </>,
-  { viewBoxWidth: 46 },
-)
+  { viewBoxWidth: 46 }
+);
 
 /** Arms of a "Y" around (cx, cy): one bar per angle, joined in the middle. */
 function yPoints(cx: number, cy: number, angles: readonly number[], L: number, h: number): Pt[] {
-  const out: Pt[] = []
-  const sorted = [...angles].sort((a, b) => a - b)
+  const out: Pt[] = [];
+  const sorted = [...angles].sort((a, b) => a - b);
   for (let i = 0; i < sorted.length; i++) {
-    const a = sorted[i]!
-    const b = sorted[(i + 1) % sorted.length]! + (i === sorted.length - 1 ? 360 : 0)
-    const tip = polar(cx, cy, L, a)
-    const [ux, uy] = [(tip[0] - cx) / L, (tip[1] - cy) / L]
+    const a = sorted[i]!;
+    const b = sorted[(i + 1) % sorted.length]! + (i === sorted.length - 1 ? 360 : 0);
+    const tip = polar(cx, cy, L, a);
+    const [ux, uy] = [(tip[0] - cx) / L, (tip[1] - cy) / L];
     // clockwise order: left corner then right corner of this arm's tip
-    out.push([tip[0] - uy * h, tip[1] + ux * h])
-    out.push([tip[0] + uy * h, tip[1] - ux * h])
-    const half = (b - a) / 2
-    out.push(polar(cx, cy, h / Math.sin((half * Math.PI) / 180), a + half))
+    out.push([tip[0] - uy * h, tip[1] + ux * h]);
+    out.push([tip[0] + uy * h, tip[1] - ux * h]);
+    const half = (b - a) / 2;
+    out.push(polar(cx, cy, h / Math.sin((half * Math.PI) / 180), a + half));
   }
-  return out
+  return out;
 }
 
 /** Isometric cube: a solid hexagon with its three inner edges knocked out. */
@@ -224,9 +264,15 @@ export const StorageIcon = createIcon(
   'storage',
   <path
     fillRule="evenodd"
-    d={join(poly([0, 60, 120, 180, 240, 300].map((a) => polar(16, 16, 16, a)), 2.4), poly(yPoints(16, 16, [60, 180, 300], 10.6, 1.35), 0.2))}
-  />,
-)
+    d={join(
+      poly(
+        [0, 60, 120, 180, 240, 300].map((a) => polar(16, 16, 16, a)),
+        2.4
+      ),
+      poly(yPoints(16, 16, [60, 180, 300], 10.6, 1.35), 0.2)
+    )}
+  />
+);
 
 /**
  * A small figure standing inside a wide, flat, tilted planet ring.
@@ -236,13 +282,16 @@ export const AgentsIcon = createIcon(
   'AgentsIcon',
   'agents',
   (uid) => {
-    const W = 56
-    const cx = 28
-    const cy = 20.4
-    const tilt = -9
-    const ringOuter = ellipsePts(cx, cy, 28.2, 7.4, 0, Math.PI * 2, 96, tilt)
-    const ringInner = ellipsePts(cx, cy, 21, 3.7, 0, Math.PI * 2, 96, tilt)
-    const front = [...ellipsePts(cx, cy, 30.2, 9.4, 0, Math.PI, 48, tilt), ...ellipsePts(cx, cy, 11.4, 1.8, Math.PI, 0, 36, tilt)]
+    const W = 56;
+    const cx = 28;
+    const cy = 20.4;
+    const tilt = -9;
+    const ringOuter = ellipsePts(cx, cy, 28.2, 7.4, 0, Math.PI * 2, 96, tilt);
+    const ringInner = ellipsePts(cx, cy, 21, 3.7, 0, Math.PI * 2, 96, tilt);
+    const front = [
+      ...ellipsePts(cx, cy, 30.2, 9.4, 0, Math.PI, 48, tilt),
+      ...ellipsePts(cx, cy, 11.4, 1.8, Math.PI, 0, 36, tilt),
+    ];
     return (
       <>
         <defs>
@@ -257,10 +306,10 @@ export const AgentsIcon = createIcon(
         />
         <path fillRule="evenodd" d={join(poly(ringOuter), poly(ringInner))} />
       </>
-    )
+    );
   },
-  { viewBoxWidth: 56 },
-)
+  { viewBoxWidth: 56 }
+);
 
 /** "24" numerals over a tiny "HOUR" caption (numerals are paths, caption is live text). */
 export const StoreIcon = createIcon(
@@ -270,17 +319,17 @@ export const StoreIcon = createIcon(
     <path d={arcBand(9.6, 7.2, 6.9, 2.5, 292, 482)} />
     <path
       d={poly(
-          [
-            [11.8, 8.4],
-            [15.6, 10.6],
-            [9.7, 16.8],
-            [16.6, 16.8],
-            [16.6, 21.4],
-            [2.8, 21.4],
-            [2.8, 17.6],
-          ],
-          [0.2, 0.4, 0.2, 0.5, 0.5, 0.5, 0.4],
-        )}
+        [
+          [11.8, 8.4],
+          [15.6, 10.6],
+          [9.7, 16.8],
+          [16.6, 16.8],
+          [16.6, 21.4],
+          [2.8, 21.4],
+          [2.8, 17.6],
+        ],
+        [0.2, 0.4, 0.2, 0.5, 0.5, 0.5, 0.4]
+      )}
     />
     <path
       fillRule="evenodd"
@@ -299,7 +348,7 @@ export const StoreIcon = createIcon(
             [16.4, 20.2],
             [16.4, 16.6],
           ],
-          0.5,
+          0.5
         ),
         poly(
           [
@@ -307,8 +356,8 @@ export const StoreIcon = createIcon(
             [23.9, 16.4],
             [20, 16.4],
           ],
-          0.2,
-        ),
+          0.2
+        )
       )}
     />
     <text
@@ -319,12 +368,14 @@ export const StoreIcon = createIcon(
       fontWeight="900"
       textLength="24"
       lengthAdjust="spacingAndGlyphs"
-      style={{ fontFamily: 'var(--zzz-font-family-condensed, Impact, "Arial Narrow", sans-serif)' }}
+      style={{
+        fontFamily: 'var(--zzz-font-family-condensed, Impact, "Arial Narrow", sans-serif)',
+      }}
     >
       HOUR
     </text>
-  </>,
-)
+  </>
+);
 
 /**
  * New Eridu City Fund: a stylised figure (head, V wings, chest notch) over
@@ -354,7 +405,7 @@ export const CityFundIcon = createIcon('CityFundIcon', 'cityFund', (uid) => (
             [23.4, 21.6],
             [8.6, 21.6],
           ],
-          [0.8, 0.6, 0.6, 0.6, 0.8, 0.8, 0.8],
+          [0.8, 0.6, 0.6, 0.6, 0.8, 0.8, 0.8]
         ),
         poly(
           [
@@ -362,8 +413,8 @@ export const CityFundIcon = createIcon('CityFundIcon', 'cityFund', (uid) => (
             [19.1, 17.1],
             [16, 20.8],
           ],
-          0.3,
-        ),
+          0.3
+        )
       )}
     />
     <path
@@ -382,11 +433,11 @@ export const CityFundIcon = createIcon('CityFundIcon', 'cityFund', (uid) => (
           [9.2, 31.8],
           [13.3, 27.7],
         ],
-        0.4,
+        0.4
       )}
     />
   </>
-))
+));
 
 /**
  * Signal Search: a retro TV (currentColor frame, V antenna) whose screen holds a
@@ -414,15 +465,20 @@ export const SignalSearchIcon = createIcon(
             [25.4, 0.9],
           ],
           2.4,
-          0.4,
+          0.4
         )}
       />
       <path
         fillRule="evenodd"
-        d={join(rect(0.2, 6.6, 36.6, 25.2, 4.6), rect(3, 9.4, 31, 17.4, 4.4), rect(5.6, 28.1, 4, 1.3, 0.4), rect(26.4, 28.1, 5.6, 1.3, 0.4))}
+        d={join(
+          rect(0.2, 6.6, 36.6, 25.2, 4.6),
+          rect(3, 9.4, 31, 17.4, 4.4),
+          rect(5.6, 28.1, 4, 1.3, 0.4),
+          rect(26.4, 28.1, 5.6, 1.3, 0.4)
+        )}
       />
       <path fill={`url(#${uid}-g)`} d={rect(4.4, 10.7, 28.2, 14.8, 3.6)} />
     </>
   ),
-  { viewBoxWidth: 37 },
-)
+  { viewBoxWidth: 37 }
+);

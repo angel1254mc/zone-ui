@@ -34,9 +34,7 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background:
-    conic-gradient(from 0deg, transparent 0 10%, currentColor 100%),
-    var(--zzz-color-border-button);
+  background: conic-gradient(from 0deg, transparent 0 10%, currentColor 100%), var(--zzz-color-border-button);
   mask: radial-gradient(
     farthest-side,
     transparent calc(100% - var(--zzz-spinner-thickness)),
@@ -59,12 +57,24 @@
   aspect-ratio: 72 / 44;
   overflow: visible;
 }
-.zzz-spinner__base--sage { fill: var(--zzz-color-interstitial-sage-dark); }
-.zzz-spinner__stripe--sage { fill: var(--zzz-color-interstitial-sage-light); }
-.zzz-spinner__base--teal { fill: var(--zzz-color-interstitial-teal-dark); }
-.zzz-spinner__stripe--teal { fill: var(--zzz-color-interstitial-teal-light); }
-.zzz-spinner__base--deep { fill: var(--zzz-color-interstitial-deep); }
-.zzz-spinner__stripe--deep { fill: var(--zzz-color-interstitial-teal-dark); }
+.zzz-spinner__base--sage {
+  fill: var(--zzz-color-interstitial-sage-dark);
+}
+.zzz-spinner__stripe--sage {
+  fill: var(--zzz-color-interstitial-sage-light);
+}
+.zzz-spinner__base--teal {
+  fill: var(--zzz-color-interstitial-teal-dark);
+}
+.zzz-spinner__stripe--teal {
+  fill: var(--zzz-color-interstitial-teal-light);
+}
+.zzz-spinner__base--deep {
+  fill: var(--zzz-color-interstitial-deep);
+}
+.zzz-spinner__stripe--deep {
+  fill: var(--zzz-color-interstitial-teal-dark);
+}
 
 .zzz-spinner__chevron {
   animation: zzz-spinner-sweep 900ms steps(1, end) infinite;

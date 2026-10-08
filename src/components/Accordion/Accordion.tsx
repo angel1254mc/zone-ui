@@ -1,39 +1,39 @@
-import { createContext, useCallback, useContext, useId, useMemo } from 'react'
-import type { ComponentPropsWithRef, ReactNode } from 'react'
-import { cx, useControllableState } from '../../utils'
-import { CaretDownIcon } from '../../icons'
-import './Accordion.css'
+import { createContext, useCallback, useContext, useId, useMemo } from 'react';
+import type { ComponentPropsWithRef, ReactNode } from 'react';
+import { cx, useControllableState } from '../../utils';
+import { CaretDownIcon } from '../../icons';
+import './Accordion.css';
 
-export type AccordionType = 'single' | 'multiple'
+export type AccordionType = 'single' | 'multiple';
 /** `default` = black pill header, `tertiary` content; `plain` = #222 header, muted content. */
-export type AccordionVariant = 'default' | 'plain'
+export type AccordionVariant = 'default' | 'plain';
 
 interface AccordionCtx {
-  open: readonly string[]
-  toggle(value: string): void
-  headingLevel: 2 | 3 | 4 | 5 | 6
-  baseId: string
+  open: readonly string[];
+  toggle(value: string): void;
+  headingLevel: 2 | 3 | 4 | 5 | 6;
+  baseId: string;
 }
 
-const Ctx = createContext<AccordionCtx | null>(null)
+const Ctx = createContext<AccordionCtx | null>(null);
 
 export interface AccordionProps extends Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange'> {
   /** `single` (default): opening an item closes the others. `multiple`: independent items. */
-  type?: AccordionType
+  type?: AccordionType;
   /** Open item values (controlled). */
-  value?: string[]
+  value?: string[];
   /** Initially open item values (uncontrolled). */
-  defaultValue?: string[]
-  onValueChange?(value: string[]): void
+  defaultValue?: string[];
+  onValueChange?(value: string[]): void;
   /** `single` only: allow closing the open item (default true). */
-  collapsible?: boolean
+  collapsible?: boolean;
   /** Heading level wrapping each header button. Default 3. */
-  headingLevel?: 2 | 3 | 4 | 5 | 6
+  headingLevel?: 2 | 3 | 4 | 5 | 6;
   /** Default `default`. */
-  variant?: AccordionVariant
+  variant?: AccordionVariant;
 }
 
-const EMPTY: string[] = []
+const EMPTY: string[] = [];
 
 /**
  * Header = the dark full pill (58 tall) with a white title and a caret that turns
@@ -52,41 +52,41 @@ export function Accordion({
   children,
   ...rest
 }: AccordionProps) {
-  const [open, setOpen] = useControllableState<string[]>(value, defaultValue, onValueChange)
-  const baseId = useId().replace(/[^a-zA-Z0-9_-]/g, '')
+  const [open, setOpen] = useControllableState<string[]>(value, defaultValue, onValueChange);
+  const baseId = useId().replace(/[^a-zA-Z0-9_-]/g, '');
 
   const toggle = useCallback(
     (v: string) => {
       setOpen((prev) => {
-        const isOpen = prev.includes(v)
-        if (type === 'multiple') return isOpen ? prev.filter((x) => x !== v) : [...prev, v]
-        if (isOpen) return collapsible ? [] : prev
-        return [v]
-      })
+        const isOpen = prev.includes(v);
+        if (type === 'multiple') return isOpen ? prev.filter((x) => x !== v) : [...prev, v];
+        if (isOpen) return collapsible ? [] : prev;
+        return [v];
+      });
     },
-    [setOpen, type, collapsible],
-  )
+    [setOpen, type, collapsible]
+  );
 
-  const ctx = useMemo(() => ({ open, toggle, headingLevel, baseId }), [open, toggle, headingLevel, baseId])
+  const ctx = useMemo(() => ({ open, toggle, headingLevel, baseId }), [open, toggle, headingLevel, baseId]);
 
   return (
     <div {...rest} className={cx('zzz-accordion', `zzz-accordion--${variant}`, className)} data-type={type}>
       <Ctx.Provider value={ctx}>{children}</Ctx.Provider>
     </div>
-  )
+  );
 }
 
 export interface AccordionItemProps extends Omit<ComponentPropsWithRef<'div'>, 'title'> {
   /** Unique value within the Accordion. */
-  value: string
+  value: string;
   /** Header title. */
-  title: ReactNode
+  title: ReactNode;
   /** Optional trailing node in the header, before the caret (a count, a badge…). */
-  meta?: ReactNode
-  disabled?: boolean
+  meta?: ReactNode;
+  disabled?: boolean;
   /** Force the header's pressed look (stories / visual tests). */
-  pressed?: boolean
-  children?: ReactNode
+  pressed?: boolean;
+  children?: ReactNode;
 }
 
 export function AccordionItem({
@@ -99,13 +99,13 @@ export function AccordionItem({
   children,
   ...rest
 }: AccordionItemProps) {
-  const ctx = useContext(Ctx)
-  if (!ctx) throw new Error('AccordionItem must be used inside <Accordion>')
-  const isOpen = ctx.open.includes(value)
-  const safe = value.replace(/[^a-zA-Z0-9_-]/g, '_')
-  const headerId = `zzz-acc${ctx.baseId}-${safe}-h`
-  const panelId = `zzz-acc${ctx.baseId}-${safe}-p`
-  const Heading = `h${ctx.headingLevel}` as 'h3'
+  const ctx = useContext(Ctx);
+  if (!ctx) throw new Error('AccordionItem must be used inside <Accordion>');
+  const isOpen = ctx.open.includes(value);
+  const safe = value.replace(/[^a-zA-Z0-9_-]/g, '_');
+  const headerId = `zzz-acc${ctx.baseId}-${safe}-h`;
+  const panelId = `zzz-acc${ctx.baseId}-${safe}-p`;
+  const Heading = `h${ctx.headingLevel}` as 'h3';
 
   return (
     <div
@@ -130,15 +130,9 @@ export function AccordionItem({
           <CaretDownIcon className="zzz-accordion__caret" />
         </button>
       </Heading>
-      <div
-        id={panelId}
-        role="region"
-        aria-labelledby={headerId}
-        className="zzz-accordion__panel"
-        hidden={!isOpen}
-      >
+      <div id={panelId} role="region" aria-labelledby={headerId} className="zzz-accordion__panel" hidden={!isOpen}>
         <div className="zzz-accordion__content">{children}</div>
       </div>
     </div>
-  )
+  );
 }

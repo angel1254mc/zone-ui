@@ -20,16 +20,16 @@
  */
 @keyframes zzz-accent-pulse {
   from {
-    --zzz-accent: #93BA00;
+    --zzz-accent: #93ba00;
   }
   to {
-    --zzz-accent: #FCDC00;
+    --zzz-accent: #fcdc00;
   }
 }
 
 :root,
 .zzz-theme {
-  animation: zzz-accent-pulse 750ms cubic-bezier(.45, 0, .55, 1) -300ms infinite alternate;
+  animation: zzz-accent-pulse 750ms cubic-bezier(0.45, 0, 0.55, 1) -300ms infinite alternate;
 }
 
 /* A .zzz-theme inside the document inherits the running root clock instead of starting its
@@ -43,7 +43,7 @@
 /* Freeze at lime: component prop reducedMotion (data-reduced-motion) … */
 [data-reduced-motion] {
   animation: none;
-  --zzz-accent: #93BA00;
+  --zzz-accent: #93ba00;
 }
 
 /* … or the OS setting (the registered initial value is lime, so stopping the clock is enough). */
@@ -58,15 +58,15 @@
 /* Pinned phases for visual regression / static mocks. */
 [data-accent-phase='lime'] {
   animation: none;
-  --zzz-accent: #93BA00;
+  --zzz-accent: #93ba00;
 }
 [data-accent-phase='mid'] {
   animation: none;
-  --zzz-accent: #C7CB00;
+  --zzz-accent: #c7cb00;
 }
 [data-accent-phase='yellow'] {
   animation: none;
-  --zzz-accent: #FCDC00;
+  --zzz-accent: #fcdc00;
 }
 
 /* ── 2. Theme root ─────────────────────────────────────────────────────────────────────────
@@ -128,12 +128,29 @@
  * (.zzz-text-bodyLg) is accepted as an alias.
  */
 :where(
-    .zzz-text-nano, .zzz-text-tiny, .zzz-text-micro, .zzz-text-caption, .zzz-text-label,
-    .zzz-text-body, .zzz-text-body-lg, .zzz-text-bodyLg, .zzz-text-body-xl, .zzz-text-bodyXl,
-    .zzz-text-button, .zzz-text-title, .zzz-text-title-pill, .zzz-text-titlePill,
-    .zzz-text-event-title, .zzz-text-eventTitle, .zzz-text-display-name, .zzz-text-displayName,
-    .zzz-text-ghost-level, .zzz-text-ghostLevel, .zzz-text-badge-new, .zzz-text-badgeNew
-  ) {
+  .zzz-text-nano,
+  .zzz-text-tiny,
+  .zzz-text-micro,
+  .zzz-text-caption,
+  .zzz-text-label,
+  .zzz-text-body,
+  .zzz-text-body-lg,
+  .zzz-text-bodyLg,
+  .zzz-text-body-xl,
+  .zzz-text-bodyXl,
+  .zzz-text-button,
+  .zzz-text-title,
+  .zzz-text-title-pill,
+  .zzz-text-titlePill,
+  .zzz-text-event-title,
+  .zzz-text-eventTitle,
+  .zzz-text-display-name,
+  .zzz-text-displayName,
+  .zzz-text-ghost-level,
+  .zzz-text-ghostLevel,
+  .zzz-text-badge-new,
+  .zzz-text-badgeNew
+) {
   font-family: var(--zzz-font-family-ui);
   font-weight: 900;
   font-stretch: var(--zzz-font-stretch-ui);
@@ -143,11 +160,19 @@
 }
 
 :where(
-    .zzz-text-condensed-sm, .zzz-text-condensedSm, .zzz-text-condensed-md, .zzz-text-condensedMd,
-    .zzz-text-condensed-interstitial, .zzz-text-condensedInterstitial,
-    .zzz-text-condensed-lg, .zzz-text-condensedLg, .zzz-text-condensed-xl-hud,
-    .zzz-text-condensedXlHud, .zzz-text-condensed-xl, .zzz-text-condensedXl
-  ) {
+  .zzz-text-condensed-sm,
+  .zzz-text-condensedSm,
+  .zzz-text-condensed-md,
+  .zzz-text-condensedMd,
+  .zzz-text-condensed-interstitial,
+  .zzz-text-condensedInterstitial,
+  .zzz-text-condensed-lg,
+  .zzz-text-condensedLg,
+  .zzz-text-condensed-xl-hud,
+  .zzz-text-condensedXlHud,
+  .zzz-text-condensed-xl,
+  .zzz-text-condensedXl
+) {
   font-family: var(--zzz-font-family-condensed);
   font-weight: 900;
   font-stretch: var(--zzz-font-stretch-condensed);
@@ -253,23 +278,55 @@
 }
 
 /* Tones (TextTone) */
-.zzz-tone-primary { color: var(--zzz-color-text-primary); }
-.zzz-tone-soft { color: var(--zzz-color-text-soft); }
-.zzz-tone-secondary { color: var(--zzz-color-text-secondary); }
-.zzz-tone-title { color: var(--zzz-color-text-title); }
-.zzz-tone-tertiary { color: var(--zzz-color-text-tertiary); }
-.zzz-tone-muted { color: var(--zzz-color-text-muted); }
-.zzz-tone-subtle { color: var(--zzz-color-text-subtle); }
-.zzz-tone-disabled { color: var(--zzz-color-text-disabled); }
-.zzz-tone-faint { color: var(--zzz-color-text-faint); }
-.zzz-tone-ghost { color: var(--zzz-color-text-ghost); }
-.zzz-tone-engraved { color: var(--zzz-color-text-engraved); }
-.zzz-tone-keyword { color: var(--zzz-color-highlight-keyword); }
-.zzz-tone-value { color: var(--zzz-color-highlight-value); }
-.zzz-tone-danger { color: var(--zzz-color-danger-text); }
+.zzz-tone-primary {
+  color: var(--zzz-color-text-primary);
+}
+.zzz-tone-soft {
+  color: var(--zzz-color-text-soft);
+}
+.zzz-tone-secondary {
+  color: var(--zzz-color-text-secondary);
+}
+.zzz-tone-title {
+  color: var(--zzz-color-text-title);
+}
+.zzz-tone-tertiary {
+  color: var(--zzz-color-text-tertiary);
+}
+.zzz-tone-muted {
+  color: var(--zzz-color-text-muted);
+}
+.zzz-tone-subtle {
+  color: var(--zzz-color-text-subtle);
+}
+.zzz-tone-disabled {
+  color: var(--zzz-color-text-disabled);
+}
+.zzz-tone-faint {
+  color: var(--zzz-color-text-faint);
+}
+.zzz-tone-ghost {
+  color: var(--zzz-color-text-ghost);
+}
+.zzz-tone-engraved {
+  color: var(--zzz-color-text-engraved);
+}
+.zzz-tone-keyword {
+  color: var(--zzz-color-highlight-keyword);
+}
+.zzz-tone-value {
+  color: var(--zzz-color-highlight-value);
+}
+.zzz-tone-danger {
+  color: var(--zzz-color-danger-text);
+}
 .zzz-tone-on-accent,
-.zzz-tone-onAccent { color: var(--zzz-color-accent-on); }
-.zzz-tone-sage { color: var(--zzz-color-sage-base); }
+.zzz-tone-onAccent {
+  color: var(--zzz-color-accent-on);
+}
+.zzz-tone-sage {
+  color: var(--zzz-color-sage-base);
+}
 
 /* Italic = the upright glyphs sheared 10deg about the baseline. Never font-style: italic. */
 .zzz-italic {
@@ -386,7 +443,8 @@
   border-radius: calc(var(--zzz-mat-radius) - var(--zzz-mat-ring));
   background-color: var(--zzz-color-surface-panel);
   box-shadow:
-    calc(0.5 * var(--zzz-px)) calc(0.5 * var(--zzz-px)) 0 calc(var(--zzz-mat-ring) - 0.5 * var(--zzz-px)) var(--zzz-mat-ring-color),
+    calc(0.5 * var(--zzz-px)) calc(0.5 * var(--zzz-px)) 0 calc(var(--zzz-mat-ring) - 0.5 * var(--zzz-px))
+      var(--zzz-mat-ring-color),
     0 0 0 var(--zzz-mat-ring) var(--zzz-mat-lit),
     0 0 0 calc(var(--zzz-mat-ring) + var(--zzz-border-width-keyline)) var(--zzz-color-border-keyline);
 }
@@ -466,7 +524,9 @@
 }
 
 .zzz-pressable {
-  --zzz-press-inset: calc(-1 * (var(--zzz-press-border) + var(--zzz-press-outset, var(--zzz-size-control-press-outset))));
+  --zzz-press-inset: calc(
+    -1 * (var(--zzz-press-border) + var(--zzz-press-outset, var(--zzz-size-control-press-outset)))
+  );
   position: relative;
   isolation: isolate;
 }
@@ -529,11 +589,11 @@
   }
 
   [class*='zzz-']:is(
-      [aria-selected='true'],
-      [aria-current]:not([aria-current='false']),
-      [data-selected]:not([data-selected='false']),
-      [data-active]:not([data-active='false'])
-    ) {
+    [aria-selected='true'],
+    [aria-current]:not([aria-current='false']),
+    [data-selected]:not([data-selected='false']),
+    [data-active]:not([data-active='false'])
+  ) {
     outline: calc(2 * var(--zzz-px)) solid Highlight;
     outline-offset: calc(-2 * var(--zzz-px));
   }
@@ -547,7 +607,12 @@
     outline-offset: calc(2 * var(--zzz-px)); /* see the ItemGrid focus exception above */
   }
 
-  [class*='zzz-']:is([role='option'], [role='menuitem'], [role='menuitemcheckbox'], [role='menuitemradio'])[data-active]:not([data-active='false']) {
+  [class*='zzz-']:is(
+      [role='option'],
+      [role='menuitem'],
+      [role='menuitemcheckbox'],
+      [role='menuitemradio']
+    )[data-active]:not([data-active='false']) {
     forced-color-adjust: none;
     background: Highlight;
     color: HighlightText;

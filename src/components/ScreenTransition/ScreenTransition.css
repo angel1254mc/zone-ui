@@ -29,13 +29,28 @@
   animation: zzz-screen-out-fade var(--zzz-motion-duration-screen-out) linear both;
 }
 @keyframes zzz-screen-out-fade {
-  0% { opacity: 0; }
-  15% { opacity: 0.03; }
-  30.5% { opacity: 0.09; }
-  45.5% { opacity: 0.21; }
-  60.5% { opacity: 0.44; }
-  76% { opacity: 0.92; }
-  91%, 100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.03;
+  }
+  30.5% {
+    opacity: 0.09;
+  }
+  45.5% {
+    opacity: 0.21;
+  }
+  60.5% {
+    opacity: 0.44;
+  }
+  76% {
+    opacity: 0.92;
+  }
+  91%,
+  100% {
+    opacity: 1;
+  }
 }
 .zzz-screen-transition[data-phase='hold'] > .zzz-screen-transition__veil {
   opacity: 1;
@@ -45,12 +60,20 @@
   animation: zzz-screen-transition-veil-out var(--zzz-motion-duration-screen-in) var(--zzz-motion-easing-screen-in) both;
 }
 @keyframes zzz-screen-out {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 @keyframes zzz-screen-transition-veil-out {
-  from { opacity: 1; }
-  to { opacity: 0; }
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 /* blurThrough: the outgoing screen is blurred at once (σ 8) under a #1A1A1A scrim fading .28 → .70
@@ -63,8 +86,12 @@
   animation: zzz-screen-blur-scrim var(--zzz-motion-duration-frame) linear both;
 }
 @keyframes zzz-screen-blur-scrim {
-  from { opacity: 0.28; }
-  to { opacity: 0.7; }
+  from {
+    opacity: 0.28;
+  }
+  to {
+    opacity: 0.7;
+  }
 }
 
 /* Reduced motion: the new layer cross-fades over the old one in 100 ms. */
@@ -81,8 +108,12 @@
   animation-delay: calc(var(--zzz-motion-duration-frame) + var(--i, 0) * var(--zzz-motion-duration-tile-stagger-slow));
 }
 @keyframes zzz-stagger-tile-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .zzz-stagger-tile {

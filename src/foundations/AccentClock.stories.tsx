@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import { ZzzTheme } from '../components/ZzzTheme'
-import './foundations.css'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { ZzzTheme } from '../components/ZzzTheme';
+import './foundations.css';
 
 const meta = {
   title: 'Foundations/Accent Clock',
@@ -21,10 +21,10 @@ const meta = {
       },
     },
   },
-} satisfies Meta
+} satisfies Meta;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 function Chip({ caption }: { caption: string }) {
   return (
@@ -32,7 +32,7 @@ function Chip({ caption }: { caption: string }) {
       <div className="zzz-doc-accent-chip" />
       <span className="zzz-doc-caption">{caption}</span>
     </div>
-  )
+  );
 }
 
 export const Live: Story = {
@@ -48,7 +48,7 @@ export const Live: Story = {
       </div>
     </div>
   ),
-}
+};
 
 export const PinnedPhases: Story = {
   render: () => (
@@ -67,7 +67,7 @@ export const PinnedPhases: Story = {
       </ZzzTheme>
     </div>
   ),
-}
+};
 
 export const LiveInsidePinned: Story = {
   name: 'Live inside a pinned ancestor',
@@ -81,4 +81,4 @@ export const LiveInsidePinned: Story = {
       </div>
     </ZzzTheme>
   ),
-}
+};

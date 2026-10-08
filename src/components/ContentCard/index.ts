@@ -1,8 +1,8 @@
-export { ContentCard } from './ContentCard'
+export { ContentCard } from './ContentCard';
 export type {
   ContentCardProps,
   ContentCardVariant,
   ContentCardMediaPosition,
   ContentCardElement,
   ContentCardHeading,
-} from './ContentCard'
+} from './ContentCard';

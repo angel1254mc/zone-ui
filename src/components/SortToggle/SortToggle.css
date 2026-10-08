@@ -41,9 +41,11 @@
  * keyline goes through --zzz-shadow-keyline so :focus-visible still replaces it. md keeps the tokens. */
 .zzz-sort-toggle.zzz-mat-pill:is([data-size='sm'], [data-size='lg']) {
   --zzz-mat-bevel:
-    inset calc(1 * var(--zzz-sort-toggle-u)) calc(1 * var(--zzz-sort-toggle-u)) 0 var(--zzz-color-border-button-bevel-top),
+    inset calc(1 * var(--zzz-sort-toggle-u)) calc(1 * var(--zzz-sort-toggle-u)) 0
+      var(--zzz-color-border-button-bevel-top),
     inset calc(2 * var(--zzz-sort-toggle-u)) calc(2 * var(--zzz-sort-toggle-u)) 0 #373737;
-  --zzz-shadow-keyline: 0 0 0 calc(var(--zzz-border-width-keyline-n) * var(--zzz-sort-toggle-u)) var(--zzz-color-border-keyline);
+  --zzz-shadow-keyline: 0 0 0 calc(var(--zzz-border-width-keyline-n) * var(--zzz-sort-toggle-u))
+    var(--zzz-color-border-keyline);
 }
 /* md keeps the inherited / default size.control.pressOutset. */
 .zzz-sort-toggle:is([data-size='sm'], [data-size='lg']) {

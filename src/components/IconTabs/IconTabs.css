@@ -44,7 +44,8 @@
   --zzz-mat-bevel:
     inset calc(1 * var(--zzz-icon-tabs-u)) calc(1 * var(--zzz-icon-tabs-u)) 0 var(--zzz-color-border-button-bevel-top),
     inset calc(2 * var(--zzz-icon-tabs-u)) calc(2 * var(--zzz-icon-tabs-u)) 0 #373737;
-  --zzz-shadow-keyline: 0 0 0 calc(var(--zzz-border-width-keyline-n) * var(--zzz-icon-tabs-u)) var(--zzz-color-border-keyline);
+  --zzz-shadow-keyline: 0 0 0 calc(var(--zzz-border-width-keyline-n) * var(--zzz-icon-tabs-u))
+    var(--zzz-color-border-keyline);
 }
 
 .zzz-icon-tabs__tab {

@@ -1,2 +1,2 @@
-export { RewardPreview } from './RewardPreview'
-export type { RewardPreviewProps, RewardPreviewOwnProps } from './RewardPreview'
+export { RewardPreview } from './RewardPreview';
+export type { RewardPreviewProps, RewardPreviewOwnProps } from './RewardPreview';

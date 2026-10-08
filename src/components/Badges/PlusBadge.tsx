@@ -1,10 +1,10 @@
-import type { ComponentPropsWithRef } from 'react'
-import { cx, usePressFlash } from '../../utils'
-import './Badges.css'
+import type { ComponentPropsWithRef } from 'react';
+import { cx, usePressFlash } from '../../utils';
+import './Badges.css';
 
 export interface PlusBadgeProps extends Omit<ComponentPropsWithRef<'button'>, 'children' | 'aria-label'> {
   /** Accessible name, e.g. "Get more Battery Charge" (the badge shows only a "+"). */
-  label: string
+  label: string;
 }
 
 /**
@@ -12,8 +12,22 @@ export interface PlusBadgeProps extends Omit<ComponentPropsWithRef<'button'>, 'c
  * 8 px span) and a 1.5 px dark ring. It is a `<button>`; its hit area extends 8 px beyond the disc.
  * Pressed: the disc takes the live accent and grows 1 px per side.
  */
-export function PlusBadge({ label, className, type = 'button', disabled, onKeyDown, onKeyUp, onBlur, ...rest }: PlusBadgeProps) {
-  const press = usePressFlash<HTMLButtonElement>({ disabled, onKeyDown, onKeyUp, onBlur })
+export function PlusBadge({
+  label,
+  className,
+  type = 'button',
+  disabled,
+  onKeyDown,
+  onKeyUp,
+  onBlur,
+  ...rest
+}: PlusBadgeProps) {
+  const press = usePressFlash<HTMLButtonElement>({
+    disabled,
+    onKeyDown,
+    onKeyUp,
+    onBlur,
+  });
   return (
     <button
       {...press}
@@ -28,5 +42,5 @@ export function PlusBadge({ label, className, type = 'button', disabled, onKeyDo
         <rect x="6" y="3.5" width="3" height="8" />
       </svg>
     </button>
-  )
+  );
 }

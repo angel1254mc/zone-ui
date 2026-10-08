@@ -5,7 +5,7 @@
  */
 .zzz-category-tag {
   --zzz-category-tag-bg: #000000;
-  --zzz-category-tag-text: #BFDB5A;
+  --zzz-category-tag-text: #bfdb5a;
   position: relative;
   isolation: isolate;
   display: inline-flex;

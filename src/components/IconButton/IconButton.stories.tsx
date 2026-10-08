@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import { useState } from 'react'
-import type { CSSProperties } from 'react'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useState } from 'react';
+import type { CSSProperties } from 'react';
 import {
   CameraModeIcon,
   FilterIcon,
@@ -13,14 +13,22 @@ import {
   StarIcon,
   TrashIcon,
   UnlockIcon,
-} from '../../icons'
-import { Button } from '../Button'
-import { IconButton } from './IconButton'
+} from '../../icons';
+import { Button } from '../Button';
+import { IconButton } from './IconButton';
 
 /** calc(N * var(--zzz-px)) */
-const gpx = (n: number) => `calc(${n} * var(--zzz-px))`
-const row: CSSProperties = { display: 'flex', alignItems: 'center', gap: 'var(--zzz-space-control-gap)', flexWrap: 'wrap' }
-const caption: CSSProperties = { font: '600 13px/1.3 system-ui, sans-serif', color: '#9a9a9a' }
+const gpx = (n: number) => `calc(${n} * var(--zzz-px))`;
+const row: CSSProperties = {
+  display: 'flex',
+  alignItems: 'center',
+  gap: 'var(--zzz-space-control-gap)',
+  flexWrap: 'wrap',
+};
+const caption: CSSProperties = {
+  font: '600 13px/1.3 system-ui, sans-serif',
+  color: '#9a9a9a',
+};
 
 const meta = {
   title: 'Primitives/IconButton',
@@ -28,7 +36,10 @@ const meta = {
   tags: ['autodocs'],
   args: { icon: <FilterIcon />, label: 'Filter' },
   argTypes: {
-    size: { control: 'inline-radio', options: ['sm', 'md', 'lg', 'stepper', 'key', 'mission', 'sort'] },
+    size: {
+      control: 'inline-radio',
+      options: ['sm', 'md', 'lg', 'stepper', 'key', 'mission', 'sort'],
+    },
     tone: { control: 'inline-radio', options: ['default', 'lockOn'] },
     icon: { control: false },
     iconOn: { control: false },
@@ -37,30 +48,16 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: [
-          'Round icon-only button: the dark pill material as a circle with a white glyph.',
-          '`label` is required and becomes the accessible name (`aria-label`).',
-          '',
-          '- **Sizes** (the shared web control scale): `sm` 46 · `md` 57 (default; filter, trash, lock, star, info) · `lg` 69 design units,',
-          '  about **32 / 40 / 48 px** at the default scale 0.7. Circle and glyph come from `size.control.*`; ring, bevel, keyline and',
-          '  pressed outset scale with the size.',
-          '- **Presets** (fixed geometry, outside the scale): `stepper` 47 (slider −/+), `key` 38 (bare key circle), `mission` 48',
-          '  (teal halo). `sort` 56 is deprecated — use `md` (1 unit larger).',
-          '- `tone="lockOn"`: the locked padlock — light `#8E8E8E` fill, black glyph.',
-          '- `toggle` makes it a toggle button (`aria-pressed`), controlled (`pressedState` + `onPressedStateChange`) or',
-          '  uncontrolled (`defaultPressedState`). `iconOn` swaps the glyph while on. The caller picks the look per state.',
-          '- Pressed: the pill rule (accent + 4 px outset).',
-          '- Disabled: glyph `#666`, shape unchanged.',
-        ].join('\n'),
+        component: 'Round icon-only button.',
       },
     },
   },
-} satisfies Meta<typeof IconButton>
+} satisfies Meta<typeof IconButton>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {}
+export const Default: Story = {};
 
 export const Glyphs: Story = {
   render: () => (
@@ -76,9 +73,9 @@ export const Glyphs: Story = {
       <IconButton icon={<CameraModeIcon />} label="Camera mode" />
     </div>
   ),
-}
+};
 
-const SIZES = ['sm', 'md', 'lg'] as const
+const SIZES = ['sm', 'md', 'lg'] as const;
 
 export const Sizes: Story = {
   render: () => (
@@ -105,7 +102,7 @@ export const Sizes: Story = {
       },
     },
   },
-}
+};
 
 export const Presets: Story = {
   render: () => (
@@ -115,7 +112,13 @@ export const Presets: Story = {
       <IconButton icon={<MinusIcon />} label="Decrease" size="stepper" />
       <IconButton icon={<PlusIcon />} label="Increase" size="stepper" />
       <IconButton icon={<span style={{ fontSize: gpx(17.5), lineHeight: 1 }}>T</span>} label="Lock (T)" size="key" />
-      <div style={{ background: '#F58DB0', padding: gpx(12), display: 'flex' }}>
+      <div
+        style={{
+          background: '#F58DB0',
+          padding: gpx(12),
+          display: 'flex',
+        }}
+      >
         <IconButton icon={<SearchIcon />} label="Mission details" size="mission" />
       </div>
     </div>
@@ -123,14 +126,15 @@ export const Presets: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'The fixed presets next to `md` 57: `sort` 56 (deprecated → `md`), `stepper` 47, `key` 38, `mission` 48.',
+        story:
+          'The fixed presets next to `md` 57: `sort` 56 (deprecated → `md`), `stepper` 47, `key` 38, `mission` 48.',
       },
     },
   },
-}
+};
 
 function LockToggleDemo() {
-  const [locked, setLocked] = useState(true)
+  const [locked, setLocked] = useState(true);
   return (
     <div style={row}>
       <IconButton
@@ -144,18 +148,35 @@ function LockToggleDemo() {
       />
       <span style={caption}>{locked ? 'locked (aria-pressed=true)' : 'unlocked'}</span>
     </div>
-  )
+  );
 }
 
 export const LockToggle: Story = {
   render: () => <LockToggleDemo />,
-  parameters: { docs: { description: { story: 'Controlled toggle: locked = light fill + black closed padlock; unlocked = dark + white open padlock.' } } },
-}
+  parameters: {
+    docs: {
+      description: {
+        story: 'Controlled toggle: locked = light fill + black closed padlock; unlocked = dark + white open padlock.',
+      },
+    },
+  },
+};
 
 export const Favourite: Story = {
-  args: { toggle: true, defaultPressedState: false, icon: <StarIcon />, label: 'Favourite' },
-  parameters: { docs: { description: { story: 'Uncontrolled toggle; only `aria-pressed` changes (pass `iconOn` for an "on" glyph).' } } },
-}
+  args: {
+    toggle: true,
+    defaultPressedState: false,
+    icon: <StarIcon />,
+    label: 'Favourite',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Uncontrolled toggle; only `aria-pressed` changes (pass `iconOn` for an "on" glyph).',
+      },
+    },
+  },
+};
 
 export const Pressed: Story = {
   render: () => (
@@ -165,8 +186,14 @@ export const Pressed: Story = {
       <IconButton icon={<PlusIcon />} label="Increase" size="stepper" pressed />
     </div>
   ),
-  parameters: { docs: { description: { story: 'Forced (`pressed`): the pill rule (accent + 4 px outset).' } } },
-}
+  parameters: {
+    docs: {
+      description: {
+        story: 'Forced (`pressed`): the pill rule (accent + 4 px outset).',
+      },
+    },
+  },
+};
 
 export const Disabled: Story = {
   render: () => (
@@ -176,4 +203,4 @@ export const Disabled: Story = {
       <IconButton icon={<TrashIcon />} label="Discard" disabled />
     </div>
   ),
-}
+};

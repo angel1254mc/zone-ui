@@ -1,2 +1,2 @@
-export { StepProgress } from './StepProgress'
-export type { StepProgressProps, StepProgressOwnProps, StepItem, StepStatus, StepProgressSize } from './StepProgress'
+export { StepProgress } from './StepProgress';
+export type { StepProgressProps, StepProgressOwnProps, StepItem, StepStatus, StepProgressSize } from './StepProgress';

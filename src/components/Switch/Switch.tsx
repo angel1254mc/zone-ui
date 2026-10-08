@@ -1,18 +1,18 @@
-import type { ComponentPropsWithRef, MouseEvent } from 'react'
-import { cx, useControllableState } from '../../utils'
-import './Switch.css'
+import type { ComponentPropsWithRef, MouseEvent } from 'react';
+import { cx, useControllableState } from '../../utils';
+import './Switch.css';
 
 /** `sm` / `md` / `lg`: bezel 61 × 36 / 76 × 45 / 92 × 54 design units (≈ 43 × 25 / 53 × 32 / 64 × 38 CSS px at the default scale). */
-export type SwitchSize = 'sm' | 'md' | 'lg'
+export type SwitchSize = 'sm' | 'md' | 'lg';
 
 export interface SwitchProps extends Omit<ComponentPropsWithRef<'button'>, 'onChange' | 'children'> {
   /** On (controlled). */
-  checked?: boolean
+  checked?: boolean;
   /** Initial state (uncontrolled). */
-  defaultChecked?: boolean
-  onCheckedChange?(checked: boolean): void
+  defaultChecked?: boolean;
+  onCheckedChange?(checked: boolean): void;
   /** Bezel, track, knob and travel scale together (sm = md × 46/57, lg = md × 69/57). Default `md`. */
-  size?: SwitchSize
+  size?: SwitchSize;
 }
 
 /**
@@ -35,13 +35,13 @@ export function Switch({
   type = 'button',
   ...rest
 }: SwitchProps) {
-  const [checked, setChecked] = useControllableState(checkedProp, defaultChecked, onCheckedChange)
+  const [checked, setChecked] = useControllableState(checkedProp, defaultChecked, onCheckedChange);
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-    onClick?.(event)
-    if (event.defaultPrevented || disabled) return
-    setChecked((c) => !c)
-  }
+    onClick?.(event);
+    if (event.defaultPrevented || disabled) return;
+    setChecked((c) => !c);
+  };
 
   return (
     <button
@@ -59,5 +59,5 @@ export function Switch({
         <span className="zzz-switch__knob" />
       </span>
     </button>
-  )
+  );
 }

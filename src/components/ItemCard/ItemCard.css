@@ -68,10 +68,18 @@ button.zzz-item-card:disabled {
   border-radius: var(--zzz-card-radius);
   background: var(--zzz-card-fill, var(--zzz-color-rarity-b));
 }
-.zzz-item-card--rarity-s { --zzz-card-fill: var(--zzz-color-rarity-s); }
-.zzz-item-card--rarity-a { --zzz-card-fill: var(--zzz-color-rarity-a); }
-.zzz-item-card--rarity-b { --zzz-card-fill: var(--zzz-color-rarity-b); }
-.zzz-item-card--rarity-c { --zzz-card-fill: var(--zzz-color-rarity-c); }
+.zzz-item-card--rarity-s {
+  --zzz-card-fill: var(--zzz-color-rarity-s);
+}
+.zzz-item-card--rarity-a {
+  --zzz-card-fill: var(--zzz-color-rarity-a);
+}
+.zzz-item-card--rarity-b {
+  --zzz-card-fill: var(--zzz-color-rarity-b);
+}
+.zzz-item-card--rarity-c {
+  --zzz-card-fill: var(--zzz-color-rarity-c);
+}
 
 /* grey ring, above the art */
 .zzz-item-card__tile::before {
@@ -148,11 +156,8 @@ button.zzz-item-card:disabled {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border-radius:
-    calc(var(--zzz-card-radius) - var(--zzz-card-ring))
-    calc(var(--zzz-card-radius) - var(--zzz-card-ring))
-    calc(var(--zzz-radius-card-art-n) * var(--zzz-card-u))
-    calc(var(--zzz-radius-card-art-n) * var(--zzz-card-u));
+  border-radius: calc(var(--zzz-card-radius) - var(--zzz-card-ring)) calc(var(--zzz-card-radius) - var(--zzz-card-ring))
+    calc(var(--zzz-radius-card-art-n) * var(--zzz-card-u)) calc(var(--zzz-radius-card-art-n) * var(--zzz-card-u));
   background: var(--zzz-color-surface-card);
 }
 .zzz-item-card__art > * {

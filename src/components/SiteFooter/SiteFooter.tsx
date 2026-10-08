@@ -1,37 +1,37 @@
-import type { ComponentPropsWithRef, ReactNode } from 'react'
-import { cx } from '../../utils'
-import './SiteFooter.css'
+import type { ComponentPropsWithRef, ReactNode } from 'react';
+import { cx } from '../../utils';
+import './SiteFooter.css';
 
 export interface SiteFooterSocial {
   /** Accessible name (the icon itself is decorative). */
-  label: string
-  href: string
+  label: string;
+  href: string;
   /** Icon slot, drawn in a 34 px box in the 64 px cell (use currentColor). */
-  icon: ReactNode
+  icon: ReactNode;
 }
 
 export interface SiteFooterLink {
-  label: ReactNode
-  href: string
+  label: ReactNode;
+  href: string;
 }
 
 export interface SiteFooterProps extends ComponentPropsWithRef<'footer'> {
   /** Social icon cells, right-aligned in the 64 px top band. */
-  social?: readonly SiteFooterSocial[]
+  social?: readonly SiteFooterSocial[];
   /** Open social links in a new tab (`target="_blank"` + `rel="noopener noreferrer"`). */
-  externalSocial?: boolean
+  externalSocial?: boolean;
   /** Accessible name of the social list. Default `Social media`. */
-  socialLabel?: string
+  socialLabel?: string;
   /** Logo slot, centred. */
-  logo?: ReactNode
+  logo?: ReactNode;
   /** Legal / policy links row. */
-  links?: readonly SiteFooterLink[]
+  links?: readonly SiteFooterLink[];
   /** Accessible name of the links navigation. Default `Legal`. */
-  linksLabel?: string
+  linksLabel?: string;
   /** Legal text (copyright, trademarks), centred `tiny`. */
-  legal?: ReactNode
+  legal?: ReactNode;
   /** Extra content between the links and the legal text (ratings, language picker…). */
-  children?: ReactNode
+  children?: ReactNode;
 }
 
 /**
@@ -92,5 +92,5 @@ export function SiteFooter({
         {legal != null && <div className="zzz-site-footer__legal">{legal}</div>}
       </div>
     </footer>
-  )
+  );
 }

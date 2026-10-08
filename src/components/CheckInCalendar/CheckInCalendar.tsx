@@ -1,18 +1,19 @@
-import type { ComponentPropsWithoutRef, CSSProperties, Ref } from 'react'
-import { cx } from '../../utils'
-import { CheckInTile } from './CheckInTile'
-import type { CheckInTileProps } from './CheckInTile'
-import './CheckInCalendar.css'
+import type { ComponentPropsWithoutRef, CSSProperties, Ref } from 'react';
+import { cx } from '../../utils';
+import { CheckInTile } from './CheckInTile';
+import type { CheckInTileProps } from './CheckInTile';
+import './CheckInCalendar.css';
 
 export interface CheckInCalendarOwnProps {
   /** One entry per day, in order. */
-  days: CheckInTileProps[]
+  days: CheckInTileProps[];
   /** Tiles per row. Default 7 (e.g. 7 × 2 at a 144 × 277.5 pitch). */
-  columns?: number
-  ref?: Ref<HTMLOListElement>
+  columns?: number;
+  ref?: Ref<HTMLOListElement>;
 }
 
-export type CheckInCalendarProps = CheckInCalendarOwnProps & Omit<ComponentPropsWithoutRef<'ol'>, keyof CheckInCalendarOwnProps>
+export type CheckInCalendarProps = CheckInCalendarOwnProps &
+  Omit<ComponentPropsWithoutRef<'ol'>, keyof CheckInCalendarOwnProps>;
 
 /**
  * Daily check-in calendar:
@@ -34,5 +35,5 @@ export function CheckInCalendar({ days, columns = 7, className, style, ref, ...r
         </li>
       ))}
     </ol>
-  )
+  );
 }

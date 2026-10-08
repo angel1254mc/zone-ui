@@ -1,8 +1,8 @@
-import { useId } from 'react'
-import { cx } from '../../utils'
-import { tokens } from '../../styles/tokens'
-import type { BackgroundLayerProps } from './types'
-import './Backgrounds.css'
+import { useId } from 'react';
+import { cx } from '../../utils';
+import { tokens } from '../../styles/tokens';
+import type { BackgroundLayerProps } from './types';
+import './Backgrounds.css';
 
 export interface GraffitiLayerProps extends BackgroundLayerProps {
   /**
@@ -13,57 +13,57 @@ export interface GraffitiLayerProps extends BackgroundLayerProps {
    * `dialog`: dialog band: large shapes ≈ #181818, small print ≈ #1E1E1E (a step lighter than the
    * color.watermark.dialog* tokens, see Backgrounds.css).
    */
-  variant?: 'agent' | 'dialog'
+  variant?: 'agent' | 'dialog';
   /**
    * Drift along the layer's own baseline at pattern.watermark.drift (−23.3, +6.4) px/s (dialog band).
    * Frozen under prefers-reduced-motion or `data-reduced-motion` on an ancestor.
    */
-  drift?: boolean
+  drift?: boolean;
 }
 
 /** Copy lines from pattern.watermark.content ("A / B /// C" → ["A", "B", "C"]). */
 const COPY = tokens.pattern.watermark.content
   .split('/')
   .map((s) => s.trim())
-  .filter(Boolean)
+  .filter(Boolean);
 const [
   BRAND = 'ZONE UI KIT',
   MONO = 'ZONE',
   SITE = 'ZONE-UI',
   GUIDE = 'INTERFACE FIELD MANUAL',
   WARNING = 'STAY SHARP: EVERY PRESS LIGHTS THE ACCENT',
-] = COPY
+] = COPY;
 
 /** Brand words ("A B C" → ["A", "B", "C"]); the plate prints them one per line. */
-const BRAND_WORDS = BRAND.split(' ').filter(Boolean)
+const BRAND_WORDS = BRAND.split(' ').filter(Boolean);
 /** Short knock-out run: the first two letters of the first brand word. */
-const KNOCK_SHORT = (BRAND_WORDS[0] ?? MONO).slice(0, 2)
+const KNOCK_SHORT = (BRAND_WORDS[0] ?? MONO).slice(0, 2);
 /** Site name without its extension and punctuation, split into two knock-out halves (3 + rest). */
-const SITE_LETTERS = SITE.split('.')[0].replace(/[^A-Za-z0-9]/g, '')
-const KNOCK_A = SITE_LETTERS.slice(0, 3)
-const KNOCK_B = SITE_LETTERS.slice(3, 7)
+const SITE_LETTERS = SITE.split('.')[0].replace(/[^A-Za-z0-9]/g, '');
+const KNOCK_A = SITE_LETTERS.slice(0, 3);
+const KNOCK_B = SITE_LETTERS.slice(3, 7);
 /** Outline-only word: the last brand word. */
-const OUTLINE = BRAND_WORDS[BRAND_WORDS.length - 1] ?? MONO
+const OUTLINE = BRAND_WORDS[BRAND_WORDS.length - 1] ?? MONO;
 /** Ring motif letter: the monogram's initial. */
-const RING = MONO.charAt(0)
+const RING = MONO.charAt(0);
 
 /**
  * The SVG canvas in design units: a fixed 21:9 board (2520 × 1080), centred in the layer and cropped
  * by it. Keep in sync with `.zzz-graffiti__svg` in Backgrounds.css.
  */
-const CANVAS_W = 2520
-const CANVAS_H = 1080
+const CANVAS_W = 2520;
+const CANVAS_H = 1080;
 
 /** Width of one repeating graffiti tile along the rotated baseline (design units). */
-const TILE = 1800
+const TILE = 1800;
 /** Drift speed along the baseline: |(−23.3, 6.4)| = 24.16 px/s → one tile every 74.5 s. */
-const DRIFT = Math.hypot(tokens.pattern.watermark.drift.x, tokens.pattern.watermark.drift.y)
-export const GRAFFITI_LOOP_SECONDS = Math.round((TILE / DRIFT) * 100) / 100
+const DRIFT = Math.hypot(tokens.pattern.watermark.drift.x, tokens.pattern.watermark.drift.y);
+export const GRAFFITI_LOOP_SECONDS = Math.round((TILE / DRIFT) * 100) / 100;
 
 interface Paint {
-  large: string
-  detail: string
-  knock: string
+  large: string;
+  detail: string;
+  knock: string;
 }
 
 /**
@@ -71,7 +71,7 @@ interface Paint {
  * a huge monogram, an outline-only word, a ring motif, a knock-out plate and micro-copy lines.
  */
 function Tile({ x, paint }: { x: number; paint: Paint }) {
-  const [w1, w2, w3] = BRAND_WORDS
+  const [w1, w2, w3] = BRAND_WORDS;
   return (
     <g transform={`translate(${x} -900)`}>
       {/* big rounded blocks */}
@@ -108,7 +108,14 @@ function Tile({ x, paint }: { x: number; paint: Paint }) {
         <text x="360" y="810" fontSize="200">
           {KNOCK_A}
         </text>
-        <text x="835" y="810" fontSize="200" style={{ letterSpacing: KNOCK_B.length > 3 ? '-0.05em' : undefined }}>
+        <text
+          x="835"
+          y="810"
+          fontSize="200"
+          style={{
+            letterSpacing: KNOCK_B.length > 3 ? '-0.05em' : undefined,
+          }}
+        >
           {KNOCK_B}
         </text>
       </g>
@@ -118,7 +125,11 @@ function Tile({ x, paint }: { x: number; paint: Paint }) {
         x="1470"
         y="1310"
         fontSize="150"
-        style={{ fill: 'none', stroke: paint.large, letterSpacing: '0.04em' }}
+        style={{
+          fill: 'none',
+          stroke: paint.large,
+          letterSpacing: '0.04em',
+        }}
         strokeWidth="11"
       >
         {OUTLINE}
@@ -154,7 +165,7 @@ function Tile({ x, paint }: { x: number; paint: Paint }) {
         </text>
       </g>
     </g>
-  )
+  );
 }
 
 /**
@@ -172,12 +183,12 @@ export function GraffitiLayer({
   ref,
   ...rest
 }: GraffitiLayerProps) {
-  const uid = useId().replace(/[^a-zA-Z0-9_-]/g, '')
-  const fadeId = `zzz-graffiti-fade-${uid}`
-  const hatchId = `zzz-graffiti-hatch-${uid}`
-  const maskId = `zzz-graffiti-mask-${uid}`
-  const ditherId = `zzz-graffiti-dither-${uid}`
-  const agent = variant === 'agent'
+  const uid = useId().replace(/[^a-zA-Z0-9_-]/g, '');
+  const fadeId = `zzz-graffiti-fade-${uid}`;
+  const hatchId = `zzz-graffiti-hatch-${uid}`;
+  const maskId = `zzz-graffiti-mask-${uid}`;
+  const ditherId = `zzz-graffiti-dither-${uid}`;
+  const agent = variant === 'agent';
   const paint: Paint = agent
     ? {
         large: 'var(--zzz-color-watermark-glyph)',
@@ -188,15 +199,19 @@ export function GraffitiLayer({
         large: 'var(--zzz-graffiti-dialog-large)',
         detail: 'var(--zzz-graffiti-dialog-detail)',
         knock: 'var(--zzz-color-bg-base)',
-      }
+      };
   const hatchPaint: Paint = {
     large: `url(#${hatchId})`,
     detail: `url(#${hatchId})`,
     knock: 'none',
-  }
-  const ditherPaint: Paint = { large: `url(#${ditherId})`, detail: `url(#${ditherId})`, knock: 'none' }
+  };
+  const ditherPaint: Paint = {
+    large: `url(#${ditherId})`,
+    detail: `url(#${ditherId})`,
+    knock: 'none',
+  };
   // Columns cover the rotated frame (±1400 × ±900 around the centre) plus one tile of drift.
-  const cols = [-2700, -900, 900, 2700]
+  const cols = [-2700, -900, 900, 2700];
 
   return (
     <div
@@ -261,5 +276,5 @@ export function GraffitiLayer({
         </g>
       </svg>
     </div>
-  )
+  );
 }
