@@ -1,0 +1,62 @@
+/* Examples → Daily Trivia. Page-local styles, prefixed ex-. */
+.ex-preview {
+  border: 1px solid var(--d-rule);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--d-panel);
+}
+.ex-preview__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--d-rule);
+  background: #070707;
+}
+.ex-preview__widths {
+  display: block;
+}
+@media (max-width: 900px) {
+  /* Narrow screens already show the phone layout. */
+  .ex-preview__widths {
+    display: none;
+  }
+}
+.ex-preview__stage {
+  display: flex;
+  justify-content: center;
+  background:
+    radial-gradient(circle, #1d1d1d 1px, transparent 1.4px) 0 0 / 12px 12px,
+    #040404;
+}
+.ex-preview__viewport {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  height: min(860px, calc(100vh - 140px));
+  min-height: 560px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  background: #000;
+}
+.ex-preview__viewport[data-width='tablet'],
+.ex-preview__viewport[data-width='phone'] {
+  border-inline: 1px solid var(--d-ring);
+}
+.ex-preview__viewport[data-width='tablet'] {
+  width: 834px;
+}
+.ex-preview__viewport[data-width='phone'] {
+  width: 390px;
+}
+
+.ex-points {
+  margin: 0;
+  padding-left: 18px;
+}
+.ex-points li + li {
+  margin-top: 8px;
+}

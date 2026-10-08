@@ -7,3 +7,5 @@ storybook-static/
 *.tgz
 .vercel/
 .env*
+site/build/
+site/.react-router/

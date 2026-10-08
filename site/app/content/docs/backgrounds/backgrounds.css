@@ -1,0 +1,19 @@
+/* Foundations → Backgrounds. Page-local styles, prefixed bg-. */
+.bg-prose > .d-example {
+  margin: 18px 0;
+}
+.bg-prose > .d-example:last-child {
+  margin-bottom: 0;
+}
+.bg-prose > .d-note__list {
+  margin-bottom: 18px;
+}
+
+.bg-page > :first-child {
+  margin-top: 0;
+}
+/* Long source paths in the props headers wrap instead of widening the page on phones. */
+.bg-page .d-api__file {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
