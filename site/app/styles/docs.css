@@ -1094,6 +1094,21 @@ body {
   font-size: 12.5px;
   color: var(--d-muted);
 }
+/* Introduction: graffiti behind the content area (not the header or sidebar), fading out below the hero. */
+.d-shell__main:has(.d-backdrop) {
+  position: relative;
+  isolation: isolate;
+}
+.d-backdrop {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: -1;
+  height: min(100%, 900px);
+  overflow: hidden;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent);
+  mask-image: linear-gradient(to bottom, #000 55%, transparent);
+}
 .d-intro {
   padding: 24px 0 8px;
 }

@@ -1,4 +1,5 @@
 import { Link } from 'react-router';
+import { GraffitiLayer } from '@angel1254mc/zone-ui';
 import pkg from '../../../../../package.json';
 import { COMPONENT_TIERS, entriesOf, tierOf } from '../../../catalog';
 import type { PageDoc } from '../../../types';
@@ -36,6 +37,9 @@ function Introduction() {
   const total = entriesOf('components').length;
   return (
     <>
+      <div className="d-backdrop" aria-hidden="true">
+        <GraffitiLayer drift />
+      </div>
       <header className="d-intro">
         <p className="d-eyebrow">
           <span className="d-eyebrow__tier">v{pkg.version}</span>
