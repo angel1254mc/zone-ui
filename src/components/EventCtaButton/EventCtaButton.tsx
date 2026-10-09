@@ -6,7 +6,7 @@ import './EventCtaButton.css';
 export interface EventCtaButtonOwnProps {
   /** Label. Default "Go". */
   children?: ReactNode;
-  /** Force the pressed look (stories, tests). */
+  /** Force the pressed look (tests). */
   pressed?: boolean;
   /** Stop the chevron drift (it also stops under `prefers-reduced-motion`). */
   still?: boolean;

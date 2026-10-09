@@ -84,7 +84,7 @@ export interface AccordionItemProps extends Omit<ComponentPropsWithRef<'div'>, '
   /** Optional trailing node in the header, before the caret (a count, a badge…). */
   meta?: ReactNode;
   disabled?: boolean;
-  /** Force the header's pressed look (stories / visual tests). */
+  /** Force the header's pressed look (visual tests). */
   pressed?: boolean;
   children?: ReactNode;
 }

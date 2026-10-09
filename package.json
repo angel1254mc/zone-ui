@@ -10,8 +10,7 @@
     "design-system",
     "zenless-zone-zero",
     "zzz",
-    "game-ui",
-    "storybook"
+    "game-ui"
   ],
   "homepage": "https://zone.angel1254.com",
   "repository": {
@@ -58,8 +57,6 @@
     "test": "vitest run && node scripts/check-provenance.mjs --source",
     "test:watch": "vitest",
     "tokens": "node scripts/build-tokens.mjs",
-    "storybook": "storybook dev -p 6006 --no-open",
-    "build-storybook": "storybook build -o storybook-static",
     "art-manifest": "node scripts/build-art-manifest.mjs",
     "barrel": "node scripts/build-barrel.mjs",
     "check:provenance": "node scripts/check-provenance.mjs --source",
@@ -71,9 +68,6 @@
   },
   "devDependencies": {
     "@react-router/dev": "^8.4.0",
-    "@storybook/addon-a11y": "^10.6.0",
-    "@storybook/addon-docs": "^10.6.0",
-    "@storybook/react-vite": "^10.6.0",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
     "@testing-library/user-event": "^14.6.7",
@@ -87,7 +81,6 @@
     "react-dom": "^19.3.0",
     "react-router": "^8.4.0",
     "shiki": "^4.5.0",
-    "storybook": "^10.6.0",
     "typescript": "~5.9.0",
     "vite": "^8.3.1",
     "vitest": "^5.0.1"

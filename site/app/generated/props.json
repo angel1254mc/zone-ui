@@ -91,7 +91,7 @@
         "type": "boolean",
         "required": false,
         "default": null,
-        "description": "Force the header's pressed look (stories / visual tests)."
+        "description": "Force the header's pressed look (visual tests)."
       }
     ]
   },
@@ -118,7 +118,7 @@
         "type": "number",
         "required": false,
         "default": null,
-        "description": "Freeze the timeline at this time in ms (of `duration`) for stories / visual tests; renders regardless of `active`."
+        "description": "Freeze the timeline at this time in ms (of `duration`) for demos / visual tests; renders regardless of `active`."
       },
       {
         "name": "container",
@@ -360,7 +360,7 @@
         "type": "boolean",
         "required": false,
         "default": null,
-        "description": "Force the pressed look (stories, tests, externally driven presses)."
+        "description": "Force the pressed look (tests, externally driven presses)."
       },
       {
         "name": "pressOutset",
@@ -627,7 +627,7 @@
         "type": "boolean",
         "required": false,
         "default": null,
-        "description": "Force the pressed look (stories / visual tests)."
+        "description": "Force the pressed look (visual tests)."
       },
       {
         "name": "selected",
@@ -765,7 +765,7 @@
         "type": "boolean",
         "required": false,
         "default": null,
-        "description": "Force the pressed look (stories, tests, externally driven presses)."
+        "description": "Force the pressed look (tests, externally driven presses)."
       },
       {
         "name": "ref",
@@ -1272,7 +1272,7 @@
         "type": "boolean",
         "required": false,
         "default": null,
-        "description": "Force the pressed look (stories, tests, externally driven presses)."
+        "description": "Force the pressed look (tests, externally driven presses)."
       },
       {
         "name": "pressOutset",
@@ -1974,7 +1974,7 @@
         "type": "boolean",
         "required": false,
         "default": "false",
-        "description": "Force the pressed look on the chevron (stories / tests)."
+        "description": "Force the pressed look on the chevron (tests)."
       },
       {
         "name": "children",
@@ -2132,7 +2132,7 @@
         "type": "boolean",
         "required": false,
         "default": null,
-        "description": "Force the pressed look (stories, tests)."
+        "description": "Force the pressed look (tests)."
       },
       {
         "name": "ref",
@@ -2595,7 +2595,7 @@
         "type": "boolean",
         "required": false,
         "default": null,
-        "description": "Force the momentary pressed look (accent fill + outset), for stories and tests."
+        "description": "Force the momentary pressed look (accent fill + outset), for demos and tests."
       },
       {
         "name": "pressedState",
@@ -2726,7 +2726,7 @@
         "type": "boolean",
         "required": false,
         "default": null,
-        "description": "Force the pressed look (stories, tests). Button pills only."
+        "description": "Force the pressed look (tests). Button pills only."
       },
       {
         "name": "ref",
@@ -5037,7 +5037,7 @@
         "type": "boolean",
         "required": false,
         "default": "false",
-        "description": "Initial open state (uncontrolled; stories)."
+        "description": "Initial open state (uncontrolled)."
       },
       {
         "name": "defaultValue",
@@ -5093,7 +5093,7 @@
         "type": "boolean",
         "required": false,
         "default": null,
-        "description": "Force the trigger's pressed look (stories / visual tests)."
+        "description": "Force the trigger's pressed look (visual tests)."
       },
       {
         "name": "size",
@@ -5403,7 +5403,7 @@
         "type": "boolean",
         "required": false,
         "default": null,
-        "description": "Force the pressed look (stories / visual tests)."
+        "description": "Force the pressed look (visual tests)."
       },
       {
         "name": "size",
@@ -6341,7 +6341,7 @@
         "type": "number",
         "required": false,
         "default": null,
-        "description": "Freeze the timeline at this time in ms (of `duration`) for stories / visual tests; renders regardless of `active`."
+        "description": "Freeze the timeline at this time in ms (of `duration`) for demos / visual tests; renders regardless of `active`."
       },
       {
         "name": "container",
@@ -6573,7 +6573,7 @@
         "type": "boolean",
         "required": false,
         "default": null,
-        "description": "Force the pressed look (stories, tests)."
+        "description": "Force the pressed look (tests)."
       },
       {
         "name": "ref",
@@ -6926,7 +6926,7 @@
         "type": "Omit<TagButtonProps, \"label\" | \"onClick\" | \"kind\">",
         "required": false,
         "default": null,
-        "description": "Extra props for the Back `TagButton` (e.g. `pressed` in stories)."
+        "description": "Extra props for the Back `TagButton` (e.g. `pressed`)."
       },
       {
         "name": "left",

@@ -54,7 +54,7 @@ export interface ButtonOwnProps {
    * An explicit value is absolute (not scaled by `size`).
    */
   pressOutset?: number;
-  /** Force the pressed look (stories, tests, externally driven presses). */
+  /** Force the pressed look (tests, externally driven presses). */
   pressed?: boolean;
   /** Default `default`. */
   variant?: ButtonVariant;

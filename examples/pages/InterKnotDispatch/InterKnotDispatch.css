@@ -3,7 +3,7 @@
  * the kit keeps the library's web default density (inherited --zzz-scale, 0.7; rem-based) at every
  * width, like any web design system. Container queries on the page's own scroller change only the
  * layout (gutters, columns, stacking), so the same rules fire in a real 390 px viewport and inside a
- * fixed-width story wrapper.
+ * fixed-width wrapper.
  *
  * Every length is calc(<design units> * var(--zzz-px)) except the container-query thresholds
  * (query conditions cannot read var(), as in NavBar) and the 0 / 100% values.
