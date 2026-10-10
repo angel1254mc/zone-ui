@@ -7,4 +7,5 @@ export type {
   ButtonWidth,
   ButtonVariant,
   ButtonMissionState,
+  ButtonCost,
 } from './Button';

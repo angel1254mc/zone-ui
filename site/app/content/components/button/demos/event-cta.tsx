@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { ClockIcon, EventCtaButton, EventTitle, InfoPill } from '@angel1254mc/zone-ui';
+import { Button, ClockIcon, EventTitle, InfoPill } from '@angel1254mc/zone-ui';
 
-export default function OnEventArt() {
+export default function EventCta() {
   const [entered, setEntered] = useState(false);
   return (
     <div
@@ -24,7 +24,9 @@ export default function OnEventArt() {
       <EventTitle as="h2">Night Market Festival</EventTitle>
       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'flex-end', gap: 16 }}>
         <InfoPill icon={<ClockIcon />}>{entered ? 'Entered' : '12d'}</InfoPill>
-        <EventCtaButton onClick={() => setEntered(true)}>Go</EventCtaButton>
+        <Button variant="event" onClick={() => setEntered(true)}>
+          Go
+        </Button>
       </div>
     </div>
   );

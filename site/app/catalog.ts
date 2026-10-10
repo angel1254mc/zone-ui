@@ -60,7 +60,6 @@ export const CATALOG: CatalogEntry[] = [
   e('atoms', 'Choice Button', 'A large selectable answer with optional media.'),
   e('atoms', 'Countdown Bar', 'A shrinking timer bar for short countdowns, with the useCountdown hook.'),
   e('atoms', 'Effect Text', 'Body text with highlighted keywords and values.', ['EffectText', 'EffectNameBar']),
-  e('atoms', 'Event CTA Button', 'The large call to action on an event page.', ['EventCtaButton']),
   e('atoms', 'Event Description', 'The description block under an event title.'),
   e('atoms', 'Event Ribbon', 'A subtitle ribbon for an event header.'),
   e('atoms', 'Event Title', 'A display title for an event page.'),

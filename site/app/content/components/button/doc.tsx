@@ -30,6 +30,11 @@ const doc: ComponentDoc = {
         The icon cap is optional. Give it a coloured disc with <code>iconTone</code> when the action has a meaning
         people already know: confirm, cancel, reset, recycle.
       </p>
+      <p>
+        For the one big action on an event page, use <code>variant=&quot;event&quot;</code>. For a featured action such
+        as a draw or a purchase, <code>variant=&quot;marquee&quot;</code> drifts big words behind the label and can show
+        its price in a <code>cost</code> segment.
+      </p>
     </>
   ),
   usageCode: `import { Button } from '@angel1254mc/zone-ui';
@@ -57,12 +62,43 @@ const doc: ComponentDoc = {
       description: 'The compact sub-pill for a single glyph, and the mission button used on event cards.',
     },
     {
+      demo: 'event-cta',
+      title: 'Event call to action',
+      description:
+        'The event variant is 284 units wide with chevrons drifting right, for the main action on an event page.',
+      frame: 'bleed',
+    },
+    {
+      demo: 'marquee',
+      title: 'Marquee',
+      description: 'Big words drift behind the label; a cost segment and the icon cap are both optional.',
+    },
+    {
       demo: 'as-link',
       title: 'As a link',
       description: 'With href the button renders an anchor, so it works with your router and opens in new tabs.',
     },
   ],
   playground: ButtonPlayground,
+  types: [
+    {
+      name: 'ButtonCost',
+      rows: [
+        {
+          name: 'amount',
+          type: 'ReactNode',
+          required: true,
+          description: 'The price, e.g. `× 1`. Screen readers hear it as the button description.',
+        },
+        {
+          name: 'icon',
+          type: 'ReactNode',
+          description:
+            'Shown before the amount and hidden from assistive tech, so name the currency in `amount` if it matters.',
+        },
+      ],
+    },
+  ],
   notes: [
     {
       title: 'States',
@@ -77,6 +113,20 @@ const doc: ComponentDoc = {
         </>,
         <>
           <b>Hover.</b> None, by design. The kit behaves like a game menu.
+        </>,
+      ],
+    },
+    {
+      title: 'Motion',
+      items: [
+        <>
+          The <code className="d-inline-code">event</code> and <code className="d-inline-code">marquee</code>{' '}
+          backgrounds drift slowly to the right. <code className="d-inline-code">still</code> stops them, and they stop
+          on their own when the system asks for reduced motion.
+        </>,
+        <>
+          The drifting words are decorative and hidden from assistive tech. The{' '}
+          <code className="d-inline-code">cost</code> segment is read as the button&apos;s description.
         </>,
       ],
     },

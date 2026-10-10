@@ -321,6 +321,13 @@
         "description": "Image in the cap instead of an icon (Special Training Plan). A string renders an `<img>`."
       },
       {
+        "name": "cost",
+        "type": "ButtonCost",
+        "required": false,
+        "default": null,
+        "description": "`variant=\"marquee\"`: a segment joined to the left of the pill with the price. It describes the button\n(`aria-describedby`); only the pill is pressable. `className`, `style` and `ref` stay on the button."
+      },
+      {
         "name": "fit",
         "type": "boolean",
         "required": false,
@@ -347,6 +354,13 @@
         "required": false,
         "default": null,
         "description": "Disc colour behind `icon`. Default `plain` (white glyph on the black cap, e.g. City's house, Filter's funnel)."
+      },
+      {
+        "name": "marqueeText",
+        "type": "string",
+        "required": false,
+        "default": null,
+        "description": "`variant=\"marquee\"`: the words drifting behind the label, drawn upper-case. Default: the label, when it is a string."
       },
       {
         "name": "missionState",
@@ -391,6 +405,13 @@
         "description": "Control size: `sm` 46 · `md` 57 · `lg` 69 design units (≈ 32 / 40 / 48 px at the default scale). Default `md`."
       },
       {
+        "name": "still",
+        "type": "boolean",
+        "required": false,
+        "default": null,
+        "description": "Stop the drifting background of `event` / `marquee` (it also stops under `prefers-reduced-motion`)."
+      },
+      {
         "name": "target",
         "type": "string",
         "required": false,
@@ -406,7 +427,7 @@
       },
       {
         "name": "variant",
-        "type": "\"sub\" | \"default\" | \"mission\"",
+        "type": "\"sub\" | \"default\" | \"marquee\" | \"mission\" | \"event\"",
         "required": false,
         "default": null,
         "description": "Default `default`."
@@ -1219,6 +1240,13 @@
         "description": "Label + live announcement after a successful copy. Default \"Copied\"."
       },
       {
+        "name": "cost",
+        "type": "ButtonCost",
+        "required": false,
+        "default": null,
+        "description": "`variant=\"marquee\"`: a segment joined to the left of the pill with the price. It describes the button\n(`aria-describedby`); only the pill is pressable. `className`, `style` and `ref` stay on the button."
+      },
+      {
         "name": "failedLabel",
         "type": "ReactNode",
         "required": false,
@@ -1245,6 +1273,13 @@
         "required": false,
         "default": null,
         "description": "Leading glyph while idle. Default the copy glyph; `null` for none (the status glyphs still show)."
+      },
+      {
+        "name": "marqueeText",
+        "type": "string",
+        "required": false,
+        "default": null,
+        "description": "`variant=\"marquee\"`: the words drifting behind the label, drawn upper-case. Default: the label, when it is a string."
       },
       {
         "name": "onCopy",
@@ -1315,6 +1350,13 @@
         "required": false,
         "default": null,
         "description": "Controlled status (force the copied / failed look, or drive it from outside)."
+      },
+      {
+        "name": "still",
+        "type": "boolean",
+        "required": false,
+        "default": null,
+        "description": "Stop the drifting background of `event` / `marquee` (it also stops under `prefers-reduced-motion`)."
       },
       {
         "name": "target",
@@ -2113,40 +2155,6 @@
         "required": false,
         "default": null,
         "description": "Default `grid` (the 300 × 40 big-panel capsule), or the enclosing StatGrid's variant."
-      }
-    ]
-  },
-  "EventCtaButton": {
-    "file": "src/components/EventCtaButton/EventCtaButton.tsx",
-    "description": "Bottom-right event call to action: a 284 × 57 dark pill\n(`.zzz-mat-pill` ring) whose fill is a row of right-pointing chevron bands (`color.event.ctaChevronLight`\n~23 px / `ctaChevronDark` ~12 px, period 35, arms ~35° from vertical) fading to ~50 % toward both ends and\ndrifting right ~20 px/s (`motion.duration.ctaChevronDrift`), with a centred italic `button` label.\nPressed follows the shared pressed recipe (accent fill, 4 px outset, black label; chevrons hidden).\nDistinct from `Button variant=\"mission\"`.",
-    "props": [
-      {
-        "name": "children",
-        "type": "ReactNode",
-        "required": false,
-        "default": null,
-        "description": "Label. Default \"Go\"."
-      },
-      {
-        "name": "pressed",
-        "type": "boolean",
-        "required": false,
-        "default": null,
-        "description": "Force the pressed look (tests)."
-      },
-      {
-        "name": "ref",
-        "type": "Ref<HTMLButtonElement>",
-        "required": false,
-        "default": null,
-        "description": ""
-      },
-      {
-        "name": "still",
-        "type": "boolean",
-        "required": false,
-        "default": null,
-        "description": "Stop the chevron drift (it also stops under `prefers-reduced-motion`)."
       }
     ]
   },

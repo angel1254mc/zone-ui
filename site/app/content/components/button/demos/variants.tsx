@@ -5,9 +5,7 @@ export default function Variants() {
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24, alignItems: 'center' }}>
       <Button>Default</Button>
       <Button variant="sub" icon={<EnhanceIcon />} aria-label="Enhance" />
-      <div style={{ background: '#F58DB0', padding: 16 }}>
-        <Button variant="mission">Go</Button>
-      </div>
+      <Button variant="mission">Go</Button>
     </div>
   );
 }
