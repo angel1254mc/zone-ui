@@ -4,6 +4,7 @@ import pkg from '../../../../../package.json';
 import { COMPONENT_TIERS, entriesOf, tierOf } from '../../../catalog';
 import type { PageDoc } from '../../../types';
 import { ButtonLink } from '../../../ui/ButtonLink';
+import { useSweepClick } from '../../../ui/SweepNavigation';
 import { IntroShowcase } from './IntroShowcase';
 
 function TierCards() {
@@ -35,6 +36,7 @@ function TierCards() {
 
 function Introduction() {
   const total = entriesOf('components').length;
+  const getStarted = useSweepClick('/docs/installation', 'Installation');
   return (
     <>
       <div className="d-backdrop" aria-hidden="true">
@@ -51,7 +53,7 @@ function Introduction() {
           on one pulsing accent and a dark pill material.
         </p>
         <div className="d-intro__actions">
-          <ButtonLink to="/docs/installation" width="compact">
+          <ButtonLink to="/docs/installation" width="compact" onClick={getStarted}>
             Get started
           </ButtonLink>
           <ButtonLink to="/components" width="auto">

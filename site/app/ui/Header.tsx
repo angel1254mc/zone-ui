@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router';
 import { Drawer, IconButton, SearchIcon } from '@angel1254mc/zone-ui';
 import type { Section } from '../types';
 import { Search } from './Search';
+import { useSweepClick } from './SweepNavigation';
 
 export const GITHUB_URL = 'https://github.com/angel1254mc/zone-ui';
 
@@ -63,6 +64,7 @@ export function Header({ section }: { section: Section }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [shortcut, setShortcut] = useState('Ctrl K');
+  const getStarted = useSweepClick('/docs/installation', 'Installation');
 
   useEffect(() => {
     if (/Mac|iPhone|iPad/.test(navigator.userAgent)) setShortcut('⌘ K');
@@ -97,7 +99,7 @@ export function Header({ section }: { section: Section }) {
         <div className="d-header__search">
           <Search inputRef={searchRef} shortcut={shortcut} />
         </div>
-        <Link to="/docs/installation" className="d-cta d-header__cta">
+        <Link to="/docs/installation" className="d-cta d-header__cta" onClick={getStarted}>
           Get started
         </Link>
         <IconButton
@@ -122,7 +124,14 @@ export function Header({ section }: { section: Section }) {
           <SectionLinks section={section} onNavigate={() => setMenuOpen(false)} />
         </nav>
         <div className="d-menu__actions">
-          <Link to="/docs/installation" className="d-cta" onClick={() => setMenuOpen(false)}>
+          <Link
+            to="/docs/installation"
+            className="d-cta"
+            onClick={(e) => {
+              setMenuOpen(false);
+              getStarted(e);
+            }}
+          >
             Get started
           </Link>
           <a className="d-menu__github" href={GITHUB_URL}>

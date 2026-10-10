@@ -11,6 +11,7 @@ import '../styles/docs.css';
 import { sectionOfPath } from '../lib/nav';
 import { Header } from '../ui/Header';
 import { Sidebar, sectionLabel } from '../ui/Sidebar';
+import { SweepNavigation } from '../ui/SweepNavigation';
 
 function MenuGlyph() {
   return (
@@ -20,7 +21,10 @@ function MenuGlyph() {
   );
 }
 
-/** Header on top; the current section's sidebar beside the page. Below 960 px the sidebar opens from Browse. */
+/**
+ * Header on top; the current section's sidebar beside the page. Below 960 px the sidebar opens from Browse.
+ * The Get started links play a Sweep Transition, mounted here so it outlives the route it leaves.
+ */
 export default function Shell() {
   const { pathname } = useLocation();
   const section = sectionOfPath(pathname);
@@ -29,26 +33,28 @@ export default function Shell() {
 
   return (
     <ZzzTheme className="d-app">
-      <a href="#main" className="d-skip">
-        Skip to content
-      </a>
-      <Header section={section} />
-      <div className="d-shell">
-        <div className="d-shell__side zzz-scrollbar">
-          <Sidebar section={section} />
-        </div>
-        <main className="d-shell__main" id="main" tabIndex={-1}>
-          <div className="d-browse">
-            <Button size="sm" width="auto" icon={<MenuGlyph />} onClick={() => setBrowseOpen(true)}>
-              Browse {label.toLowerCase()}
-            </Button>
+      <SweepNavigation>
+        <a href="#main" className="d-skip">
+          Skip to content
+        </a>
+        <Header section={section} />
+        <div className="d-shell">
+          <div className="d-shell__side zzz-scrollbar">
+            <Sidebar section={section} />
           </div>
-          <Outlet />
-        </main>
-      </div>
-      <Drawer title={label} open={browseOpen} onOpenChange={setBrowseOpen} width={460}>
-        <Sidebar section={section} onNavigate={() => setBrowseOpen(false)} />
-      </Drawer>
+          <main className="d-shell__main" id="main" tabIndex={-1}>
+            <div className="d-browse">
+              <Button size="sm" width="auto" icon={<MenuGlyph />} onClick={() => setBrowseOpen(true)}>
+                Browse {label.toLowerCase()}
+              </Button>
+            </div>
+            <Outlet />
+          </main>
+        </div>
+        <Drawer title={label} open={browseOpen} onOpenChange={setBrowseOpen} width={460}>
+          <Sidebar section={section} onNavigate={() => setBrowseOpen(false)} />
+        </Drawer>
+      </SweepNavigation>
     </ZzzTheme>
   );
 }
