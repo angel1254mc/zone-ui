@@ -59,7 +59,7 @@ export interface SweepTransitionProps extends Omit<ComponentPropsWithRef<'div'>,
   onDone?(): void;
   /** Render inside this element (position: absolute) instead of a fixed layer on `<body>`. */
   container?: HTMLElement | null;
-  /** Freeze the timeline at this time in ms (of `duration`) for stories / visual tests; renders regardless of `active`. */
+  /** Freeze the timeline at this time in ms (of `duration`) for demos / visual tests; renders regardless of `active`. */
   at?: number;
   /** Force (true) or suppress (false) the reduced-motion quick fade. Default: the OS setting / a `data-reduced-motion` ancestor. */
   reducedMotion?: boolean;

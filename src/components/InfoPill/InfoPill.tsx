@@ -10,7 +10,7 @@ export interface InfoPillOwnProps {
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
   /** Button pills only: disables it (label/glyph grey, shape unchanged). */
   disabled?: boolean;
-  /** Force the pressed look (stories, tests). Button pills only. */
+  /** Force the pressed look (tests). Button pills only. */
   pressed?: boolean;
   children?: ReactNode;
   ref?: Ref<HTMLButtonElement | HTMLSpanElement>;

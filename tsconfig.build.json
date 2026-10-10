@@ -9,5 +9,5 @@
     "types": ["vite/client"]
   },
   "include": ["src"],
-  "exclude": ["src/**/*.stories.tsx", "src/**/*.test.tsx", "src/**/*.test.ts", "src/**/*.story-helpers.tsx"]
+  "exclude": ["src/**/*.test.tsx", "src/**/*.test.ts"]
 }

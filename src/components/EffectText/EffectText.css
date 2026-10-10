@@ -47,7 +47,7 @@
 }
 /* `color` cannot tint a raster glyph: monochrome white glyph art
  * is mapped to ≈ #8C8C8C (text.muted) instead. Art with transparent padding should be scaled up by
- * the caller (the stories pass `scale: 1.4` for the 80 × 71-in-100 specialty art). */
+ * the caller (e.g. `scale: 1.4` for the 80 × 71-in-100 specialty art). */
 .zzz-effect-text .zzz-keyword__icon > img {
   filter: grayscale(1) brightness(0.55);
 }

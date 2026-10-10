@@ -9,7 +9,7 @@
 //              inside a git work tree, otherwise a directory walk that honours .gitignore.
 //   --staged   only the files staged for commit, read from the git index (for a pre-commit hook).
 //   --package  the files `npm pack --dry-run` would publish, plus checks on a fresh dist/ build;
-//              storybook-static/ and demo-dist/ are scanned too when present, with the built-in
+//              site/build/client/ and demo-dist/ are scanned too when present, with the built-in
 //              checks only (they bundle third-party code; the private patterns are not applied).
 // Options:
 //   --strict   the private pattern file (below) must exist; also checks the git author log.
@@ -466,10 +466,10 @@ function runPackage(ctx) {
     scanFile(ctx, 'npm', f.path, f.size ?? (existsSync(abs) ? statSync(abs).size : 0), () => readFileSync(abs));
   }
 
-  // The site builds bundle third-party code (Storybook, React, axe…) that the private patterns
+  // The site builds bundle third-party code (React, Shiki…) that the private patterns
   // cannot be tuned for, so they get the built-in rules only: paths, media, size, binary review.
   const siteCtx = { ...ctx, patterns: { hard: [], soft: [] } };
-  for (const dir of ['storybook-static', 'demo-dist']) {
+  for (const dir of ['site/build/client', 'demo-dist']) {
     for (const rel of walk(root, dir, null).filter(ctx.inScope)) {
       const abs = join(root, rel);
       scanFile(siteCtx, dir, rel, statSync(abs).size, () => readFileSync(abs), { rasterRule: false });

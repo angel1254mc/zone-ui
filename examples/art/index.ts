@@ -1,5 +1,5 @@
 /**
- * Real game art for stories, example pages and the demo, loaded by URL at runtime from the
+ * Real game art for the docs site, example pages and the demo, loaded by URL at runtime from the
  * committed manifest (art-manifest.json; static.nanoka.cc + Enka.Network, Zenless Zone Zero ©
  * HoYoverse). Image components render real art, a neutral skeleton while loading, or an empty
  * frame — never imitation art. The library (src/) never imports this folder.

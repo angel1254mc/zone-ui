@@ -1,0 +1,12 @@
+/* Foundations → Materials. Page-local styles, prefixed mt-. */
+.mt-prose > .d-example,
+.mt-prose > .d-table-wrap {
+  margin: 18px 0;
+}
+.mt-prose > .d-example:last-child,
+.mt-prose > .d-table-wrap:last-child {
+  margin-bottom: 0;
+}
+.mt-prose > .d-note__list {
+  margin-bottom: 18px;
+}

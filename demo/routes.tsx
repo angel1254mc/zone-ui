@@ -47,7 +47,7 @@ export const GROUPS: { id: DemoGroup; label: string }[] = [
 
 /**
  * The example pages that ship with the repo. Each one composes the general-purpose zone-ui components;
- * the individual components (every variant and state) live in Storybook, not here.
+ * the individual components (examples and props) are documented on the docs site, not here.
  */
 export const ROUTES: DemoRoute[] = [
   {

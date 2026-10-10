@@ -41,7 +41,7 @@ export interface IconButtonOwnProps {
   /** Uncontrolled initial toggle state. */
   defaultPressedState?: boolean;
   onPressedStateChange?: (pressed: boolean) => void;
-  /** Force the momentary pressed look (accent fill + outset), for stories and tests. */
+  /** Force the momentary pressed look (accent fill + outset), for demos and tests. */
   pressed?: boolean;
   /** Pressed outset in design units. Default `size.control.pressOutset` (4) × the size ratio (sm ≈ 3.2, lg ≈ 4.8); an explicit value is absolute. */
   pressOutset?: number;

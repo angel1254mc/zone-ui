@@ -232,3 +232,120 @@ describe('Button sizes (sm / md / lg web scale)', () => {
     );
   });
 });
+
+describe('Button event / marquee variants', () => {
+  it('event: the pill with a drifting chevron layer, hidden from assistive tech and while pressed', () => {
+    render(<Button variant="event">Go</Button>);
+    const btn = screen.getByRole('button', { name: 'Go' });
+    expect(btn).toHaveClass('zzz-button--event', 'zzz-mat-pill', 'zzz-pressable', 'zzz-button--w-auto');
+    const chevrons = btn.querySelector('.zzz-button__chevrons')!;
+    expect(chevrons).toHaveAttribute('aria-hidden', 'true');
+    expect(chevrons).toHaveClass('zzz-button__bg', 'zzz-pressable__hide');
+    expect(css).toMatch(/\.zzz-button--event\.zzz-button--w-auto\s*\{[^}]*--zzz-size-event-cta-width/);
+  });
+
+  it('marquee: the label repeats behind itself, twice, so the strip loops seamlessly', () => {
+    render(<Button variant="marquee">Search</Button>);
+    const btn = screen.getByRole('button', { name: 'Search' });
+    expect(btn).toHaveClass('zzz-button--marquee', 'zzz-mat-pill');
+    const layer = btn.querySelector('.zzz-button__marquee')!;
+    expect(layer).toHaveAttribute('aria-hidden', 'true');
+    expect(layer).toHaveClass('zzz-button__bg', 'zzz-pressable__hide');
+    const copies = layer.querySelectorAll('.zzz-button__marquee-copy');
+    expect(copies).toHaveLength(2);
+    expect(copies[0].textContent).toBe(copies[1].textContent);
+    expect(copies[0].textContent).toMatch(/^(Search )+$/);
+    expect(copies[0].textContent!.length).toBeGreaterThanOrEqual(24);
+    expect(layer.getAttribute('style')).toContain(`--zzz-marquee-chars: ${copies[0].textContent!.length}`);
+  });
+
+  it('marquee: marqueeText sets the words; the accessible name stays the label', () => {
+    render(
+      <Button variant="marquee" marqueeText="Good luck">
+        Single Signal Search
+      </Button>
+    );
+    const btn = screen.getByRole('button', { name: 'Single Signal Search' });
+    expect(btn.querySelector('.zzz-button__marquee-copy')!.textContent).toMatch(/^(Good luck )+$/);
+  });
+
+  it('marquee: no words without marqueeText when the label is not plain text', () => {
+    render(
+      <Button variant="marquee">
+        <b>Search</b>
+      </Button>
+    );
+    expect(screen.getByRole('button').querySelector('.zzz-button__marquee-copy')).toBeNull();
+  });
+
+  it('still stops the drift; reduced motion stops it too', () => {
+    const { rerender } = render(
+      <Button variant="event" still>
+        Go
+      </Button>
+    );
+    expect(screen.getByRole('button')).toHaveClass('zzz-button--still');
+    rerender(
+      <Button variant="marquee" still>
+        Go
+      </Button>
+    );
+    expect(screen.getByRole('button')).toHaveClass('zzz-button--still');
+    expect(css).toMatch(/@media \(prefers-reduced-motion: reduce\)\s*\{[^}]*\.zzz-button__chevrons/);
+    expect(css).toMatch(/@media \(prefers-reduced-motion: reduce\)\s*\{[^}]*\.zzz-button__marquee-track/);
+  });
+
+  it('event and marquee take the optional icon cap', () => {
+    for (const variant of ['event', 'marquee'] as const) {
+      const { container, unmount } = render(
+        <Button variant={variant} icon={<Glyph />}>
+          Go
+        </Button>
+      );
+      expect(container.querySelector('.zzz-button__cap')).not.toBeNull();
+      expect(screen.getByRole('button')).toHaveClass('zzz-button--capped');
+      unmount();
+    }
+  });
+
+  it('marquee cost: a segment left of the pill that describes the button', () => {
+    render(
+      <Button variant="marquee" cost={{ icon: <Glyph />, amount: '× 1' }} aria-describedby="hint">
+        Single Signal Search
+      </Button>
+    );
+    const btn = screen.getByRole('button', { name: 'Single Signal Search' });
+    const group = btn.parentElement!;
+    expect(group).toHaveClass('zzz-button-cost');
+    const segment = group.querySelector('.zzz-button-cost__segment')!;
+    expect(segment.nextElementSibling).toBe(btn);
+    expect(segment).toHaveTextContent('× 1');
+    expect(segment.querySelector('.zzz-button-cost__icon')).toHaveAttribute('aria-hidden', 'true');
+    expect(btn.getAttribute('aria-describedby')!.split(' ')).toEqual(['hint', segment.id]);
+  });
+
+  it('cost only applies to marquee', () => {
+    render(<Button cost={{ amount: '× 1' }}>View</Button>);
+    expect(document.querySelector('.zzz-button-cost')).toBeNull();
+    expect(screen.getByRole('button')).not.toHaveAttribute('aria-describedby');
+  });
+
+  it('event keeps the shared press and disabled behaviour', async () => {
+    const onClick = vi.fn();
+    const { rerender } = render(
+      <Button variant="event" onClick={onClick}>
+        Enter
+      </Button>
+    );
+    const btn = screen.getByRole('button', { name: 'Enter' });
+    await userEvent.click(btn);
+    expect(onClick).toHaveBeenCalledTimes(1);
+    rerender(
+      <Button variant="event" disabled pressed onClick={onClick}>
+        Enter
+      </Button>
+    );
+    expect(btn).toBeDisabled();
+    expect(btn).not.toHaveAttribute('data-pressed');
+  });
+});

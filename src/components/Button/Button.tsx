@@ -1,3 +1,4 @@
+import { useId } from 'react';
 import type { ComponentPropsWithoutRef, CSSProperties, KeyboardEvent, MouseEvent, ReactNode, Ref } from 'react';
 import { cx, usePressFlash } from '../../utils';
 import { Text } from '../Text';
@@ -24,8 +25,18 @@ export type ButtonWidth = 'compact' | 'default' | 'dialog' | 'wide' | 'auto' | n
  * - `default`: the dark pill (View, Recycle, Filter, City, Confirm, Craft…)
  * - `mission`: 174×48 event-mission pill with the 2 px black gap + 4 px teal halo (Go / Claimed / Stay Tuned)
  * - `sub`: the 81×57 icon-only sub-pill (the `>>` enhance chip at the end of the stars pill). Needs `aria-label`.
+ * - `event`: the large event call to action, 284 wide by default, filled with chevron bands drifting right
+ * - `marquee`: the pill over a halftone fill with big words drifting right behind the label (`marqueeText`),
+ *   optionally joined to a `cost` segment
  */
-export type ButtonVariant = 'default' | 'mission' | 'sub';
+export type ButtonVariant = 'default' | 'mission' | 'sub' | 'event' | 'marquee';
+
+/** `variant="marquee"`: the price shown in a segment joined to the left of the pill, e.g. a currency icon and "× 1". */
+export interface ButtonCost {
+  /** Shown before the amount (hidden from assistive tech: say the currency in `amount` if it matters). */
+  icon?: ReactNode;
+  amount: ReactNode;
+}
 
 /** Mission button state: `claimed` (flat grey, dim label) and `locked` ("Stay Tuned") are both disabled. */
 export type ButtonMissionState = 'default' | 'claimed' | 'locked';
@@ -54,12 +65,21 @@ export interface ButtonOwnProps {
    * An explicit value is absolute (not scaled by `size`).
    */
   pressOutset?: number;
-  /** Force the pressed look (stories, tests, externally driven presses). */
+  /** Force the pressed look (tests, externally driven presses). */
   pressed?: boolean;
   /** Default `default`. */
   variant?: ButtonVariant;
   /** `variant="mission"` only. */
   missionState?: ButtonMissionState;
+  /** `variant="marquee"`: the words drifting behind the label, upper-case. Default: the label, when it is a string. */
+  marqueeText?: string;
+  /**
+   * `variant="marquee"`: a segment joined to the left of the pill with the price. It describes the button
+   * (`aria-describedby`); only the pill is pressable. `className`, `style` and `ref` stay on the button.
+   */
+  cost?: ButtonCost;
+  /** Stop the drifting background of `event` / `marquee` (it also stops under `prefers-reduced-motion`). */
+  still?: boolean;
   /** Render as `<a href>` (navigation that looks like a button). */
   href?: string;
   target?: string;
@@ -71,6 +91,15 @@ export type ButtonProps = ButtonOwnProps & Omit<ComponentPropsWithoutRef<'button
 
 const WIDTHS = new Set(['compact', 'default', 'dialog', 'wide', 'auto']);
 const gpx = (n: number) => `calc(${n} * var(--zzz-px))`;
+
+/** Characters in one copy of the marquee strip: enough to span the widest pill, so two copies loop seamlessly. */
+const MARQUEE_MIN_CHARS = 24;
+
+/** One copy of the marquee strip: the words, each followed by a space, repeated to at least MARQUEE_MIN_CHARS. */
+function marqueeCopy(words: string) {
+  const unit = `${words} `;
+  return unit.repeat(Math.ceil(MARQUEE_MIN_CHARS / unit.length));
+}
 
 /**
  * The kit's dark pill button on the web control scale (`size` sm / md / lg).
@@ -90,6 +119,9 @@ export function Button(props: ButtonProps) {
     pressed = false,
     variant = 'default',
     missionState = 'default',
+    marqueeText,
+    cost,
+    still = false,
     href,
     target,
     rel,
@@ -108,6 +140,10 @@ export function Button(props: ButtonProps) {
 
   const isMission = variant === 'mission';
   const isSub = variant === 'sub';
+  const isEvent = variant === 'event';
+  const isMarquee = variant === 'marquee';
+  const costId = useId();
+  const hasCost = isMarquee && cost != null;
   const missionDisabled = isMission && missionState !== 'default';
   const disabled = disabledProp || missionDisabled;
   const ariaDisabled = rest['aria-disabled'] === true || rest['aria-disabled'] === 'true';
@@ -115,7 +151,8 @@ export function Button(props: ButtonProps) {
 
   const size: ButtonSize = sizeProp ?? 'md';
   const pressOutset = pressOutsetProp ?? (width === 'dialog' ? 0 : undefined);
-  const fit = fitProp ?? (!twoLine && !isSub && (width !== 'auto' || isMission));
+  // The event pill has a fixed width even at width="auto", so its label shrinks to fit like a preset width.
+  const fit = fitProp ?? (!twoLine && !isSub && (width !== 'auto' || isMission || isEvent));
 
   const flash = usePressFlash<HTMLElement>({
     disabled: inert,
@@ -141,6 +178,7 @@ export function Button(props: ButtonProps) {
     typeof width === 'string' && WIDTHS.has(width) ? `zzz-button--w-${width}` : 'zzz-button--w-custom',
     variant !== 'default' && `zzz-button--${variant}`,
     isMission && missionState !== 'default' && `zzz-button--${missionState}`,
+    (isEvent || isMarquee) && still && 'zzz-button--still',
     hasCap && 'zzz-button--capped',
     twoLine && 'zzz-button--two-line',
     className
@@ -156,6 +194,25 @@ export function Button(props: ButtonProps) {
           <span className="zzz-button__glyph">{icon}</span>
         </>
       )}
+    </span>
+  ) : null;
+
+  const words = isMarquee ? (marqueeText ?? (typeof children === 'string' ? children : '')).trim() : '';
+  const copy = words ? marqueeCopy(words) : '';
+  const background = isEvent ? (
+    <span className="zzz-button__bg zzz-button__chevrons zzz-pressable__hide" aria-hidden="true" />
+  ) : isMarquee ? (
+    <span
+      className="zzz-button__bg zzz-button__marquee zzz-pressable__hide"
+      aria-hidden="true"
+      style={copy ? ({ '--zzz-marquee-chars': copy.length } as CSSProperties) : undefined}
+    >
+      {copy ? (
+        <span className="zzz-button__marquee-track">
+          <span className="zzz-button__marquee-copy">{copy}</span>
+          <span className="zzz-button__marquee-copy">{copy}</span>
+        </span>
+      ) : null}
     </span>
   ) : null;
 
@@ -180,9 +237,12 @@ export function Button(props: ButtonProps) {
     (onClick as ((e: MouseEvent<HTMLElement>) => void) | undefined)?.(event);
   };
 
+  const describedBy = hasCost ? cx(rest['aria-describedby'], costId) : rest['aria-describedby'];
+
   const common = {
     className: classes,
     style: mergedStyle,
+    'aria-describedby': describedBy,
     'data-size': size,
     'data-icon-tone': tone,
     ...(isPressed ? { 'data-pressed': '' } : null),
@@ -192,9 +252,10 @@ export function Button(props: ButtonProps) {
     onClick: handleClick,
   };
 
+  let element: ReactNode;
   if (href !== undefined) {
     const anchorRest = rest as unknown as ComponentPropsWithoutRef<'a'>;
-    return (
+    element = (
       <a
         {...anchorRest}
         {...common}
@@ -205,16 +266,35 @@ export function Button(props: ButtonProps) {
         role={disabled ? 'link' : anchorRest.role}
         aria-disabled={disabled ? 'true' : anchorRest['aria-disabled']}
       >
+        {background}
         {cap}
         {content}
       </a>
     );
+  } else {
+    element = (
+      <button {...rest} {...common} ref={ref as Ref<HTMLButtonElement>} type={type} disabled={disabled}>
+        {background}
+        {cap}
+        {content}
+      </button>
+    );
   }
 
+  if (!hasCost) return element;
   return (
-    <button {...rest} {...common} ref={ref as Ref<HTMLButtonElement>} type={type} disabled={disabled}>
-      {cap}
-      {content}
-    </button>
+    <span className="zzz-button-cost" data-size={size}>
+      <span className="zzz-button-cost__segment" id={costId}>
+        {cost.icon != null ? (
+          <span className="zzz-button-cost__icon" aria-hidden="true">
+            {cost.icon}
+          </span>
+        ) : null}
+        <Text role="button" italic className="zzz-button-cost__amount">
+          {cost.amount}
+        </Text>
+      </span>
+      {element}
+    </span>
   );
 }

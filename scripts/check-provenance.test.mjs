@@ -319,7 +319,7 @@ describe('check-provenance --package', () => {
     };
     const vendorOnly = fixture({
       ...base,
-      'storybook-static/assets/vendor.js': `// ${WORD}\n`,
+      'site/build/client/assets/vendor.js': `// ${WORD}\n`,
       'demo-dist/assets/index.js': `// ${WORD}\n`,
     });
     const ok = run(vendorOnly, ['--package', '--strict'], {
@@ -330,12 +330,12 @@ describe('check-provenance --package', () => {
 
     const leaky = fixture({
       ...base,
-      'storybook-static/assets/a.js': `// built from ${['C:', 'Users', 'someone', 'x'].join('\\')}\n`,
+      'site/build/client/assets/a.js': `// built from ${['C:', 'Users', 'someone', 'x'].join('\\')}\n`,
       'demo-dist/clip.webm': 'x',
     });
     const r = run(leaky, ['--package', '--strict'], { patterns: PATTERNS });
     expect(r.code).toBe(1);
-    expect(r.out).toContain('storybook-static/assets/a.js:1');
+    expect(r.out).toContain('site/build/client/assets/a.js:1');
     expect(r.out).toContain('demo-dist/clip.webm  media file');
   }, 60000);
 });

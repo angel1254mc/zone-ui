@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Build the COMMITTED game-art manifest used by Storybook, the example pages and the demo:
+// Build the COMMITTED game-art manifest used by the docs site, the example pages and the demo:
 // names + metadata + REMOTE image keys. No image file is downloaded or committed.
 //
 //   npm run art-manifest                 # live version → examples/art/art-manifest.json
@@ -99,7 +99,7 @@ const ITEM_CLASSES = {
   17: 'bangboo-exp',
 };
 const ITEM_RARITY = { 1: 'c', 2: 'b', 3: 'a', 4: 's', 5: 's' };
-// Items the stories use (examples/art/storyItems.ts); each must resolve with an image.
+// Items the docs and examples use (examples/art/storyItems.ts); each must resolve with an image.
 const STORY_ITEM_IDS = [
   '10',
   '100',

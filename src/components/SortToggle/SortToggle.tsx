@@ -20,7 +20,7 @@ export interface SortToggleProps extends Omit<ComponentPropsWithRef<'button'>, '
    * pressed outset scale with it.
    */
   size?: SortToggleSize;
-  /** Force the pressed look (stories / visual tests). */
+  /** Force the pressed look (visual tests). */
   pressed?: boolean;
 }
 

@@ -27,7 +27,7 @@ export const HOST_LINES = {
   played: ["You've already played today. Come back tomorrow!", 'One try a day, Proxy. New set at midnight!'],
 } as const;
 
-/** Deterministic pick so a given date/question always gets the same line (stable stories). */
+/** Deterministic pick so a given date/question always gets the same line (stable output). */
 export function hostLine(list: readonly string[], ...salt: (string | number)[]): string {
   return list[hashString(salt.join(':')) % list.length];
 }
