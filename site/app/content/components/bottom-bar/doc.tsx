@@ -8,8 +8,12 @@ function Thumbnail() {
       <div className="zzz-bg-hatch" style={{ height: 'calc(200 * var(--zzz-px))' }} />
       <BottomBar
         left={<IconButton icon={<FilterIcon />} label="Filter" />}
-        hints={[{ keyCap: 'T', label: 'Lock' }]}
-        right={<Button width="compact">Enhance</Button>}
+        right={
+          <>
+            <Button>Lock</Button>
+            <Button width="compact">Enhance</Button>
+          </>
+        }
       />
     </div>
   );
