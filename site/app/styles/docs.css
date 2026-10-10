@@ -1177,8 +1177,9 @@ body {
   .d-header__end {
     gap: 8px;
   }
+  /* The kit's own display: IconButton centres its glyph as a grid (place-items), which flex would undo. */
   .d-header .d-header__mobile {
-    display: inline-flex;
+    display: inline-grid;
   }
   .d-shell {
     grid-template-columns: minmax(0, 1fr);
