@@ -1,23 +1,41 @@
 /*
- * Table.
- * Radius 10 (radius.tabCorner), header row #1C1C1C (surface.profileChip) with fontSize.label in
- * color.text.muted; body rows #000 with 2 px #232323 row dividers (column dividers when
- * --bordered); cells padding 10, centred, tabular numbers; body text fontSize.body in
- * color.text.secondary (#C8C8C8).
- * Hover (web component): the body row lifts to #0F0F0F.
+ * Table. Lengths are design units (1 unit = var(--zzz-px)).
+ *
+ * Capsule rows: every body row is one Stat Row capsule. Cells share the row fill (#161616,
+ * surface.statRow); the first and last cells carry the rounded ends (radius = half the row height),
+ * so a row that wraps to two lines becomes a rounded rectangle. Rows are 57 high (size.control.md),
+ * 46 when small, 8 apart (6 when small). The header is a row of muted labels (fontSize.label) on no
+ * fill; body text is fontSize.body in color.text.secondary, row headers white.
+ * Selected: the capsule fills with the live accent and its text turns black.
+ * Hover (opt-in, web tables): the capsule lifts to #232323.
+ * Footer: sunken #0D0D0D capsules; the last footer row (the total) lifts to #222 at 24 units.
+ *
+ * TableContainer: the lit panel ring (.zzz-mat-panel, outer radius 29) around a black surface that
+ * stacks the textured #222 toolbar strip, the scrolling table and the textured #191919 pagination strip.
  */
+
+/* ── Table ─────────────────────────────────────────────────────────────────────────────── */
 .zzz-table {
-  --zzz-table-divider: calc(2 * var(--zzz-px)) solid #232323;
+  --zzz-table-row-h: var(--zzz-size-control-md);
+  --zzz-table-gap: calc(8 * var(--zzz-px));
+  --zzz-table-pad: calc(20 * var(--zzz-px));
+  --zzz-table-end-start: calc(26 * var(--zzz-px));
+  --zzz-table-end-end: calc(30 * var(--zzz-px));
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0;
-  border-radius: var(--zzz-radius-tab-corner);
-  overflow: hidden;
-  background: var(--zzz-color-bg-base);
+  border-spacing: 0 var(--zzz-table-gap);
   color: var(--zzz-color-text-secondary);
   font-size: var(--zzz-font-size-body);
-  line-height: var(--zzz-line-height-list);
+  font-weight: 900;
+  line-height: var(--zzz-line-height-single);
   font-variant-numeric: tabular-nums;
+}
+.zzz-table[data-size='small'] {
+  --zzz-table-row-h: var(--zzz-size-control-sm);
+  --zzz-table-gap: calc(6 * var(--zzz-px));
+}
+.zzz-table[data-layout='fixed'] {
+  table-layout: fixed;
 }
 
 .zzz-table__caption {
@@ -29,52 +47,134 @@
   text-align: left;
 }
 
-.zzz-table__th,
-.zzz-table__td,
-.zzz-table__empty > td {
-  padding: var(--zzz-space-5);
-  text-align: center;
+.zzz-table__cell {
+  padding: 0 var(--zzz-table-pad);
+  text-align: start;
   vertical-align: middle;
+  white-space: nowrap;
   font-weight: 900;
 }
-.zzz-table [data-align='start'] {
-  text-align: start;
+.zzz-table__cell[data-align='center'] {
+  text-align: center;
 }
-.zzz-table [data-align='end'] {
+.zzz-table__cell[data-align='end'] {
   text-align: end;
 }
+.zzz-table tr > .zzz-table__cell:first-child {
+  padding-inline-start: var(--zzz-table-end-start);
+}
+.zzz-table tr > .zzz-table__cell:last-child {
+  padding-inline-end: var(--zzz-table-end-end);
+}
+.zzz-table__cell[data-padding='checkbox'] {
+  width: calc(70 * var(--zzz-px));
+}
+.zzz-table__cell[data-padding='checkbox'] .zzz-checkbox {
+  vertical-align: middle;
+}
+.zzz-table .zzz-table__cell[data-padding='none'] {
+  padding: 0;
+}
+.zzz-table__cell[data-overflow='wrap'] {
+  padding-block: calc(14 * var(--zzz-px));
+  white-space: normal;
+  line-height: var(--zzz-line-height-paragraph);
+}
+/* Ellipsis that never widens the column: no intrinsic width of its own, then the full cell width. */
+.zzz-table__truncate {
+  display: block;
+  width: 0;
+  min-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: var(--zzz-radius-thumb);
+}
 
-.zzz-table thead .zzz-table__th {
-  background: var(--zzz-color-surface-profile-chip);
+/* Header row: muted labels, no fill. Pinned (stickyHeader) it takes the panel's black so rows pass under it. */
+.zzz-table__head .zzz-table__cell {
+  height: calc(42 * var(--zzz-px));
   color: var(--zzz-color-text-muted);
   font-size: var(--zzz-font-size-label);
-  line-height: var(--zzz-line-height-dialog-item);
+}
+.zzz-table[data-sticky] .zzz-table__head .zzz-table__cell {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--zzz-color-surface-panel);
 }
 
-.zzz-table tbody > tr > * {
-  border-top: var(--zzz-table-divider);
-  background: var(--zzz-color-bg-base);
+/* Body and footer capsules */
+.zzz-table :is(.zzz-table__body, .zzz-table__foot) .zzz-table__cell {
+  --zzz-table-cell-bg: var(--zzz-color-surface-stat-row);
+  height: var(--zzz-table-row-h);
+  background: var(--zzz-table-cell-bg);
 }
-.zzz-table tbody th.zzz-table__td {
+.zzz-table :is(.zzz-table__body, .zzz-table__foot) .zzz-table__row > .zzz-table__cell:first-child {
+  border-start-start-radius: calc(var(--zzz-table-row-h) / 2);
+  border-end-start-radius: calc(var(--zzz-table-row-h) / 2);
+}
+.zzz-table :is(.zzz-table__body, .zzz-table__foot) .zzz-table__row > .zzz-table__cell:last-child {
+  border-start-end-radius: calc(var(--zzz-table-row-h) / 2);
+  border-end-end-radius: calc(var(--zzz-table-row-h) / 2);
+}
+/* Column edges land on fractional pixels: each cell paints 1 CSS px of its fill over the seam to its left
+   (a hairline fix, not a design length). */
+.zzz-table :is(.zzz-table__body, .zzz-table__foot) .zzz-table__cell:not(:first-child) {
+  box-shadow: -1px 0 0 var(--zzz-table-cell-bg);
+}
+.zzz-table__body th.zzz-table__cell {
   color: var(--zzz-color-text-primary);
 }
-.zzz-table__row:hover > * {
-  background: var(--zzz-color-bg-content);
+
+.zzz-table--bordered :is(.zzz-table__body, .zzz-table__foot) .zzz-table__cell + .zzz-table__cell {
+  border-inline-start: calc(2 * var(--zzz-px)) solid var(--zzz-color-surface-panel);
+  box-shadow: none;
 }
 
-.zzz-table--bordered :is(thead, tbody) > tr > * + * {
-  border-left: var(--zzz-table-divider);
+/* Hover: opt-in on the table (data-hover) or per row (data-hover="on" / "off"). */
+.zzz-table[data-hover] .zzz-table__body .zzz-table__row:not([data-selected], [data-hover='off']):hover > *,
+.zzz-table .zzz-table__body .zzz-table__row[data-hover='on']:not([data-selected]):hover > * {
+  --zzz-table-cell-bg: #232323;
 }
 
+/* Selected: the live accent capsule. A checkbox on it inverts (black box, accent check) so it stays visible. */
+.zzz-table .zzz-table__body .zzz-table__row[data-selected] > .zzz-table__cell {
+  --zzz-table-cell-bg: var(--zzz-accent);
+  color: var(--zzz-color-accent-on);
+}
+.zzz-table__row[data-selected] .zzz-checkbox .zzz-checkbox__box {
+  border-color: var(--zzz-color-border-keyline);
+  background: var(--zzz-color-border-keyline);
+  color: var(--zzz-accent);
+}
+
+.zzz-table__foot .zzz-table__cell {
+  --zzz-table-cell-bg: var(--zzz-color-surface-stat-row-sunken);
+  color: var(--zzz-color-text-primary);
+}
+.zzz-table .zzz-table__foot .zzz-table__row:last-child > .zzz-table__cell {
+  --zzz-table-cell-bg: var(--zzz-color-surface-panel-header);
+  font-size: calc(24 * var(--zzz-px));
+}
+
+/* Empty: one sunken capsule across the columns, message centred. */
 .zzz-table__empty > td {
-  color: var(--zzz-color-text-disabled);
+  --zzz-table-cell-bg: var(--zzz-color-surface-stat-row-empty);
+  padding: calc(26 * var(--zzz-px)) var(--zzz-table-pad);
+  border-radius: calc(28 * var(--zzz-px));
+  background: var(--zzz-table-cell-bg);
+  color: var(--zzz-color-text-muted);
+  text-align: center;
+  white-space: normal;
+  line-height: var(--zzz-line-height-list);
 }
 
-/* Sortable header: a bare button (label + stacked triangles); the active direction is white. */
+/* Sort label: a bare button (label + stacked triangles); the active arrow takes the accent. */
 .zzz-table__sort {
   display: inline-flex;
   align-items: center;
-  gap: var(--zzz-space-3);
+  gap: calc(9 * var(--zzz-px));
   margin: 0;
   padding: 0;
   border: 0;
@@ -82,33 +182,173 @@
   background: none;
   color: inherit;
   font: inherit;
+  text-align: inherit;
   cursor: pointer;
 }
-.zzz-table__sort:hover {
-  color: var(--zzz-color-text-primary);
+.zzz-table__cell[data-align='end'] .zzz-table__sort {
+  flex-direction: row-reverse;
 }
 .zzz-table__sort[data-direction] {
   color: var(--zzz-color-text-primary);
 }
 /* Pressed (the shared pressed recipe, .zzz-pressable): accent fill, black label and glyph. */
-.zzz-table__sort:active {
-  color: var(--zzz-color-accent-on);
-}
 .zzz-table__sort:active .zzz-table__sort-glyph path {
   fill: currentColor;
 }
-
 .zzz-table__sort-glyph {
   flex: none;
   width: calc(10 * var(--zzz-px));
   height: calc(14 * var(--zzz-px));
 }
 .zzz-table__sort-glyph path {
-  /* Inactive arrows: color.text.caption #787878 = 3.86:1 on the #1C1C1C header (WCAG 1.4.11 >= 3:1);
-     text.disabled #666 was 2.97:1. Still dimmer than the muted header label. */
+  /* Inactive arrows: color.text.caption #787878 (3:1 or better on black and #1C1C1C, WCAG 1.4.11). */
   fill: var(--zzz-color-text-caption);
 }
 .zzz-table__sort[data-direction='ascending'] .zzz-table__sort-up,
 .zzz-table__sort[data-direction='descending'] .zzz-table__sort-down {
   fill: var(--zzz-accent);
+}
+
+/* ── TableContainer ────────────────────────────────────────────────────────────────────── */
+/* The ring and keyline are drawn outside the surface (box-shadow), so the root reserves them as padding:
+   height / maxHeight are the outer size. */
+.zzz-table-container {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-width: 0;
+  padding: calc(var(--zzz-border-width-panel) + var(--zzz-border-width-keyline));
+  color: var(--zzz-color-text-primary);
+}
+.zzz-table-container[data-bounded='height'] {
+  height: var(--zzz-table-container-h);
+}
+.zzz-table-container[data-bounded='max'] {
+  max-height: var(--zzz-table-container-h);
+}
+.zzz-table-container__surface {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+.zzz-table-container__surface > * {
+  flex: none;
+}
+.zzz-table-container__surface > .zzz-table-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: calc(4 * var(--zzz-px)) calc(14 * var(--zzz-px)) calc(12 * var(--zzz-px));
+}
+/* Let a wheel or swipe that the table cannot use carry on to the page; only sideways overscroll is held, so
+   it never turns into the browser's back gesture. */
+.zzz-table-scroll .zzz-table-scroll__viewport {
+  padding: 0 calc(8 * var(--zzz-px));
+  overscroll-behavior-x: contain;
+  overscroll-behavior-y: auto;
+}
+/* Sideways scrolling is the exception: the horizontal bar takes no room until the table is wider than its
+   panel. The vertical bar keeps its column, so columns do not shift when rows start to overflow. */
+.zzz-table-scroll .zzz-scroll-area__bar--horizontal:not([data-overflow]) {
+  display: none;
+}
+.zzz-table-scroll:not(:has(.zzz-scroll-area__bar--horizontal[data-overflow])) {
+  row-gap: 0;
+}
+/* A fixed height with no rows: the empty capsule fills the space down to the pagination. */
+.zzz-table-container[data-bounded='height'] .zzz-table-scroll__viewport:has(.zzz-table__empty) {
+  display: flex;
+  flex-direction: column;
+}
+.zzz-table-container[data-bounded='height'] .zzz-table-scroll__viewport:has(.zzz-table__empty) > .zzz-table {
+  flex: 1 0 auto;
+}
+
+/* ── TableToolbar ──────────────────────────────────────────────────────────────────────── */
+.zzz-table-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(16 * var(--zzz-px)) calc(28 * var(--zzz-px));
+  min-height: calc(84 * var(--zzz-px));
+  padding: calc(16 * var(--zzz-px)) calc(30 * var(--zzz-px));
+  font-weight: 900;
+}
+.zzz-table-toolbar__lead {
+  display: flex;
+  flex-direction: column;
+  gap: calc(9 * var(--zzz-px));
+  min-width: 0;
+}
+.zzz-table-toolbar__title {
+  display: flex;
+  align-items: center;
+  gap: calc(14 * var(--zzz-px));
+  margin: 0;
+  color: var(--zzz-color-text-primary);
+  font-size: var(--zzz-font-size-title);
+  line-height: var(--zzz-line-height-single);
+}
+/* The selected count: black on the accent parallelogram (skew 26.5deg, the selected-chip slant). */
+.zzz-table-toolbar__count {
+  position: relative;
+  isolation: isolate;
+  display: inline-grid;
+  place-items: center;
+  min-width: calc(46 * var(--zzz-px));
+  height: calc(36 * var(--zzz-px));
+  padding: 0 calc(12 * var(--zzz-px));
+  color: var(--zzz-color-accent-on);
+}
+.zzz-table-toolbar__count::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: calc(8 * var(--zzz-px));
+  background: var(--zzz-accent);
+  transform: skewX(-26.5deg);
+}
+.zzz-table-toolbar__description {
+  margin: 0;
+  color: var(--zzz-color-text-muted);
+  font-size: var(--zzz-font-size-label);
+  line-height: var(--zzz-line-height-list);
+}
+.zzz-table-toolbar__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(18 * var(--zzz-px));
+}
+
+/* ── TablePagination ───────────────────────────────────────────────────────────────────── */
+.zzz-table-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(16 * var(--zzz-px)) calc(28 * var(--zzz-px));
+  padding: calc(16 * var(--zzz-px)) calc(30 * var(--zzz-px)) calc(18 * var(--zzz-px));
+  color: var(--zzz-color-text-muted);
+  font-size: var(--zzz-font-size-label);
+  font-weight: 900;
+}
+.zzz-table-pagination__rows {
+  display: flex;
+  align-items: center;
+  gap: calc(14 * var(--zzz-px));
+}
+.zzz-table-pagination__nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(14 * var(--zzz-px)) calc(22 * var(--zzz-px));
+}
+.zzz-table-pagination__range {
+  color: var(--zzz-color-text-secondary);
+  font-size: var(--zzz-font-size-body);
+  white-space: nowrap;
 }

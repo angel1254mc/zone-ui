@@ -1,57 +1,202 @@
-import { Table } from '@angel1254mc/zone-ui';
-import type { TableColumn } from '@angel1254mc/zone-ui';
-import { AgentImage, WEngineImage } from 'examples/art';
+import { useMemo, useState } from 'react';
+import {
+  Button,
+  Checkbox,
+  RankCoin,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TablePagination,
+  TableRow,
+  TableSortLabel,
+  TableToolbar,
+} from '@angel1254mc/zone-ui';
+import type { TableSortDirection } from '@angel1254mc/zone-ui';
 
-interface Pull {
-  no: number;
+interface Agent {
   id: string;
   name: string;
-  kind: 'Agent' | 'W-Engine';
-  rank: 'S' | 'A' | 'B';
-  time: string;
+  rank: 'S' | 'A';
+  specialty: string;
+  faction: string;
+  level: number;
+  atk: number;
 }
 
-const PULLS: Pull[] = [
-  { no: 1, id: '1471', name: 'Banyue', kind: 'Agent', rank: 'S', time: '2024-07-12 20:14' },
-  { no: 2, id: '14102', name: 'Steel Cushion', kind: 'W-Engine', rank: 'S', time: '2024-07-12 20:14' },
-  { no: 3, id: '1011', name: 'Anby', kind: 'Agent', rank: 'A', time: '2024-07-11 18:02' },
-  { no: 4, id: '13001', name: 'Street Superstar', kind: 'W-Engine', rank: 'A', time: '2024-07-11 18:02' },
-  { no: 5, id: '1061', name: 'Corin', kind: 'Agent', rank: 'A', time: '2024-07-10 09:40' },
-  { no: 6, id: '12007', name: '[Vortex] Revolver', kind: 'W-Engine', rank: 'B', time: '2024-07-10 09:40' },
+const AGENTS: Agent[] = [
+  {
+    id: 'ellen',
+    name: 'Ellen',
+    rank: 'S',
+    specialty: 'Attack',
+    faction: 'Victoria Housekeeping',
+    level: 60,
+    atk: 3284,
+  },
+  {
+    id: 'lycaon',
+    name: 'Lycaon',
+    rank: 'S',
+    specialty: 'Stun',
+    faction: 'Victoria Housekeeping',
+    level: 60,
+    atk: 2912,
+  },
+  { id: 'rina', name: 'Rina', rank: 'S', specialty: 'Support', faction: 'Victoria Housekeeping', level: 50, atk: 2541 },
+  {
+    id: 'corin',
+    name: 'Corin',
+    rank: 'A',
+    specialty: 'Attack',
+    faction: 'Victoria Housekeeping',
+    level: 40,
+    atk: 2106,
+  },
+  { id: 'anby', name: 'Anby', rank: 'A', specialty: 'Stun', faction: 'Cunning Hares', level: 60, atk: 2377 },
+  { id: 'nicole', name: 'Nicole', rank: 'A', specialty: 'Support', faction: 'Cunning Hares', level: 50, atk: 1968 },
+  { id: 'billy', name: 'Billy', rank: 'A', specialty: 'Attack', faction: 'Cunning Hares', level: 45, atk: 2233 },
+  { id: 'nekomata', name: 'Nekomata', rank: 'S', specialty: 'Attack', faction: 'Cunning Hares', level: 60, atk: 3105 },
+  {
+    id: 'grace',
+    name: 'Grace',
+    rank: 'S',
+    specialty: 'Anomaly',
+    faction: 'Belobog Heavy Industries',
+    level: 50,
+    atk: 2688,
+  },
+  {
+    id: 'koleda',
+    name: 'Koleda',
+    rank: 'S',
+    specialty: 'Stun',
+    faction: 'Belobog Heavy Industries',
+    level: 55,
+    atk: 2754,
+  },
+  { id: 'soukaku', name: 'Soukaku', rank: 'A', specialty: 'Support', faction: 'Section 6', level: 50, atk: 2044 },
+  { id: 'miyabi', name: 'Miyabi', rank: 'S', specialty: 'Anomaly', faction: 'Section 6', level: 60, atk: 3371 },
 ];
 
-const RANK_COLOR = {
-  S: 'var(--zzz-color-rarity-s)',
-  A: 'var(--zzz-color-rarity-a)',
-  B: 'var(--zzz-color-rarity-b)',
-};
-
-const columns: TableColumn<Pull>[] = [
-  { key: 'no', header: 'No.', sortable: true, width: 100 },
-  {
-    key: 'name',
-    header: 'Item',
-    sortable: true,
-    rowHeader: true,
-    align: 'start',
-    cell: (p) => (
-      <span style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-        <span style={{ width: 24, height: 24, borderRadius: '50%', overflow: 'hidden', flex: 'none' }}>
-          {p.kind === 'Agent' ? (
-            <AgentImage id={p.id} crop="circle" alt="" />
-          ) : (
-            <WEngineImage id={p.id} fit="cover" alt="" />
-          )}
-        </span>
-        <span style={{ color: RANK_COLOR[p.rank] }}>{p.name}</span>
-      </span>
-    ),
-  },
-  { key: 'kind', header: 'Type', sortable: true },
-  { key: 'rank', header: 'Rank', sortable: true, sortValue: (p) => 'SAB'.indexOf(p.rank) },
-  { key: 'time', header: 'Time', align: 'end' },
+type Key = 'name' | 'specialty' | 'faction' | 'level' | 'atk';
+const COLUMNS: { key: Key; label: string; numeric?: boolean }[] = [
+  { key: 'name', label: 'Agent' },
+  { key: 'specialty', label: 'Specialty' },
+  { key: 'faction', label: 'Faction' },
+  { key: 'level', label: 'Level', numeric: true },
+  { key: 'atk', label: 'ATK', numeric: true },
 ];
 
 export default function TableHero() {
-  return <Table caption="Signal Search history" columns={columns} rows={PULLS} rowKey={(p) => p.no} />;
+  const [orderBy, setOrderBy] = useState<Key>('name');
+  const [order, setOrder] = useState<TableSortDirection>('ascending');
+  const [selected, setSelected] = useState<Set<string>>(() => new Set(['ellen']));
+  const [page, setPage] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  const sorted = useMemo(() => {
+    const dir = order === 'ascending' ? 1 : -1;
+    return [...AGENTS].sort((a, b) => {
+      const x = a[orderBy];
+      const y = b[orderBy];
+      return (typeof x === 'number' && typeof y === 'number' ? x - y : String(x).localeCompare(String(y))) * dir;
+    });
+  }, [orderBy, order]);
+  const visible = sorted.slice((page - 1) * rowsPerPage, page * rowsPerPage);
+
+  const sortBy = (key: Key) => {
+    setOrder(orderBy === key && order === 'ascending' ? 'descending' : 'ascending');
+    setOrderBy(key);
+  };
+  const toggle = (id: string) =>
+    setSelected((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  const all = selected.size === AGENTS.length;
+
+  return (
+    <TableContainer style={{ width: '100%' }}>
+      <TableToolbar
+        title="Agent roster"
+        description={selected.size > 3 ? 'A squad takes up to 3 agents.' : 'Pick up to 3 agents for a squad.'}
+        selectedCount={selected.size}
+      >
+        {selected.size > 0 ? (
+          <>
+            <Button size="sm" disabled={selected.size > 3}>
+              Deploy squad
+            </Button>
+            <Button size="sm" onClick={() => setSelected(new Set())}>
+              Clear
+            </Button>
+          </>
+        ) : null}
+      </TableToolbar>
+      <Table caption="Agent roster" hideCaption>
+        <TableHead>
+          <TableRow>
+            <TableCell padding="checkbox">
+              <Checkbox
+                aria-label="Select all agents"
+                checked={all}
+                indeterminate={selected.size > 0 && !all}
+                onCheckedChange={(checked) => setSelected(checked ? new Set(AGENTS.map((a) => a.id)) : new Set())}
+              />
+            </TableCell>
+            {COLUMNS.map((c) => (
+              <TableCell
+                key={c.key}
+                align={c.numeric ? 'end' : 'start'}
+                sortDirection={orderBy === c.key ? order : false}
+              >
+                <TableSortLabel
+                  active={orderBy === c.key}
+                  direction={orderBy === c.key ? order : 'ascending'}
+                  onClick={() => sortBy(c.key)}
+                >
+                  {c.label}
+                </TableSortLabel>
+              </TableCell>
+            ))}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {visible.map((a) => (
+            <TableRow key={a.id} selected={selected.has(a.id)}>
+              <TableCell padding="checkbox">
+                <Checkbox
+                  aria-label={`Select ${a.name}`}
+                  checked={selected.has(a.id)}
+                  onCheckedChange={() => toggle(a.id)}
+                />
+              </TableCell>
+              <TableCell scope="row">
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 'calc(14 * var(--zzz-px))' }}>
+                  <RankCoin rank={a.rank} />
+                  {a.name}
+                </span>
+              </TableCell>
+              <TableCell>{a.specialty}</TableCell>
+              <TableCell>{a.faction}</TableCell>
+              <TableCell align="end">{a.level}</TableCell>
+              <TableCell align="end">{a.atk.toLocaleString('en-US')}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+      <TablePagination
+        count={AGENTS.length}
+        page={page}
+        onPageChange={setPage}
+        rowsPerPage={rowsPerPage}
+        onRowsPerPageChange={setRowsPerPage}
+        rowsPerPageOptions={[5, 10, 25]}
+      />
+    </TableContainer>
+  );
 }
