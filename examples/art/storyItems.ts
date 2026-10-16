@@ -1,5 +1,5 @@
 /**
- * A static list of real items for stories and examples, so visible LABELS never depend on the
+ * A static list of real items for the docs and examples, so visible LABELS never depend on the
  * manifest (no text swap). Every id resolves with an icon in art-manifest.json (the generator
  * fails if one does not). Use with `<ItemImage id={item.id} />`.
  */

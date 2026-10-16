@@ -2,7 +2,7 @@
   "rasterDirs": [],
   "entries": [
     {
-      "glob": "{src/components/**/*.css,dist/*.css,storybook-static/**/*.css,demo-dist/assets/*.css}",
+      "glob": "{src/components/**/*.css,dist/*.css,site/build/client/**/*.css,demo-dist/assets/*.css}",
       "pattern": "\\b(img|picture|svg|vide[o]|canvas)(,\\s*(img|picture|svg|vide[o]|canvas))+",
       "why": "Media-slot selectors list the HTML media elements."
     },
@@ -12,9 +12,9 @@
       "why": "Social-link label and icon key of a web footer."
     },
     {
-      "glob": "{storybook-static,demo-dist}/assets/*.js",
+      "glob": "{site/build/client,demo-dist}/assets/*.js",
       "pattern": "[Vv]ide[o] channel`|`#vide[o]`|\\{vide[o]:|icon:\\w+\\.vide[o]\\b",
-      "why": "The same footer label, link and icon key in the built Storybook and demo."
+      "why": "The same footer label, link and icon key in the built docs site and demo."
     },
     {
       "glob": "examples/art/art-manifest.json",
@@ -22,18 +22,18 @@
       "why": "Item names from the public art CDN."
     },
     {
-      "glob": "{storybook-static,demo-dist}/assets/*.js",
+      "glob": "{site/build/client,demo-dist}/assets/*.js",
       "pattern": "\\{id:`\\d+`,name:`[^`]+`",
       "why": "The same item names, bundled from the art manifest."
     },
     {
-      "glob": "{examples/art/art-manifest.json,examples/pages/Trivia/fixture.ts,storybook-static/assets/*.js,demo-dist/assets/*.js}",
+      "glob": "{examples/art/art-manifest.json,examples/pages/Trivia/fixture.ts,site/build/client/assets/*.js,demo-dist/assets/*.js}",
       "pattern": "\"?fullSize\"?:\\s*\\[\\d+,\\s*\\d+\\]",
       "why": "Pixel size of a CDN image (quoted in source, unquoted in the bundles)."
     },
     {
       "glob": "**",
-      "pattern": "sb-zzz-frame|@babel/code-frame|code-frame-[\\d.]+\\.tgz|<reference types=|capture phase",
+      "pattern": "@babel/code-frame|code-frame-[\\d.]+\\.tgz|<reference types=|capture phase",
       "why": "Class names, package names and TypeScript directives."
     }
   ]

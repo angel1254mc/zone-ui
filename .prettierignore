@@ -7,3 +7,4 @@ src/styles/tokens.css
 src/styles/tokens.ts
 examples/art/art-manifest.json
 examples/pages/Trivia/facts.json
+site/app/generated/props.json

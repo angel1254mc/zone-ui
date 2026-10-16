@@ -22,5 +22,6 @@
       "@angel1254mc/zone-ui": ["src/index.ts"]
     }
   },
-  "include": ["src", "examples", "demo", ".storybook", "vite.config.ts", "vite.demo.config.ts", "vitest.setup.ts"]
+  "include": ["src", "examples", "demo", "site", "vite.config.ts", "vite.demo.config.ts", "vitest.setup.ts"],
+  "exclude": ["site/build", "site/.react-router"]
 }

@@ -25,7 +25,7 @@ export interface EffectNameBarOwnProps {
   expandLabel?: string;
   /** Id of the region the chevron expands (`aria-controls`). */
   controls?: string;
-  /** Force the pressed look on the chevron (stories / tests). */
+  /** Force the pressed look on the chevron (tests). */
   chevronPressed?: boolean;
   ref?: Ref<HTMLDivElement>;
 }

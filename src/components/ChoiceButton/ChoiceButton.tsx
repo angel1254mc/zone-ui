@@ -46,7 +46,7 @@ export interface ChoiceButtonOwnProps {
   correctTone?: ChoiceCorrectTone;
   /** Screen-reader text appended to the label for `result`. Defaults: "Correct", "Incorrect", "Correct answer". */
   resultLabel?: string;
-  /** Force the pressed look (stories, tests, externally driven presses). */
+  /** Force the pressed look (tests, externally driven presses). */
   pressed?: boolean;
   /** Mirrored on `data-value` (handy for delegation and tests). */
   value?: string;

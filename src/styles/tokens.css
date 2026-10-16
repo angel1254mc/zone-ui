@@ -105,6 +105,10 @@
   --zzz-color-event-ribbon-fill: #E4E4E4;
   --zzz-color-event-cta-chevron-light: #282828;
   --zzz-color-event-cta-chevron-dark: #080808;
+  --zzz-color-marquee-fill: #1C1C1C;
+  --zzz-color-marquee-dot: #303030;
+  --zzz-color-marquee-word: #0A0A0A;
+  --zzz-color-marquee-cost-fill: #2C2C2C;
   --zzz-color-element-fire: linear-gradient(180deg, #EA140D 0%, #FC6F1C 100%);
   --zzz-color-element-fire-solid: #F3490F;
   --zzz-color-element-star-gradient: linear-gradient(180deg, #C8307A 0%, #7052C6 55%, #3A52BA 100%);
@@ -887,6 +891,7 @@
   --zzz-motion-duration-blur-through: 100ms;
   --zzz-motion-duration-dock-press: 133ms;
   --zzz-motion-duration-cta-chevron-drift: 1750ms;
+  --zzz-motion-duration-marquee-drift-char: 4000ms;
   --zzz-motion-easing-linear: linear;
   --zzz-motion-easing-pulse: cubic-bezier(0.45, 0, 0.55, 1);
   --zzz-motion-easing-out-expo: cubic-bezier(0.16, 1, 0.3, 1);

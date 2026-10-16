@@ -53,7 +53,7 @@ const navigate = (slug: string) => {
 
 /* ------------------------------------------------------------------ persisted settings */
 
-/** Density presets, as in the Storybook Scale tool: 0.7 = the web default, 1 = game density. */
+/** Density presets: 0.7 = the web default, 1 = game density. */
 export const SCALES = ['0.5', '0.7', '1', '1.333'] as const;
 type Scale = (typeof SCALES)[number];
 
@@ -129,8 +129,8 @@ function Launcher() {
           Component gallery
         </SectionLabel>
         <Text as="p" role="body" tone="secondary" className="zzz-demo-launcher__note">
-          Every component, with all of its variants and states, lives in Storybook: run <code>npm run storybook</code>{' '}
-          in the repository and open http://localhost:6006.
+          Every component, with live examples and its props, is documented on the docs site: run{' '}
+          <code>npm run site:dev</code> in the repository and open http://localhost:5180.
         </Text>
       </section>
     </main>

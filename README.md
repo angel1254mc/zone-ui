@@ -154,20 +154,21 @@ export function DailyTrivia() {
 
 ## Development
 
-| Command                                          | What it does                                                                                            |
-| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------- |
-| `npm run storybook`                              | Storybook on :6006 (ZZZ-styled UI; **Scale** tool in the toolbar)                                       |
-| `npm run dev`                                    | Demo app (launcher for the example pages) on :5173                                                      |
-| `npm test` / `npm run typecheck`                 | Vitest suite / TypeScript                                                                               |
-| `npm run build`                                  | Library → `dist/` (ESM, CJS, `.d.ts`, `zone-ui.css`, `tokens.css`, `fonts.css`)                         |
-| `npm run build-storybook` / `npm run build:demo` | Static Storybook / demo site                                                                            |
-| `npm run tokens`                                 | Regenerate `src/styles/tokens.{css,ts}` from `src/styles/tokens.json`                                   |
-| `npm run barrel`                                 | Regenerate `src/index.ts` from the component folders (run after adding a component)                     |
-| `npm run art-manifest`                           | Regenerate `examples/art/art-manifest.json`, the game-art URL list for stories and examples (see below) |
+| Command                                     | What it does                                                                                             |
+| ------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `npm run site:dev`                          | Docs site on :5180                                                                                       |
+| `npm run dev`                               | Demo app (launcher for the example pages) on :5173                                                       |
+| `npm test` / `npm run typecheck`            | Vitest suite / TypeScript                                                                                |
+| `npm run build`                             | Library → `dist/` (ESM, CJS, `.d.ts`, `zone-ui.css`, `tokens.css`, `fonts.css`)                          |
+| `npm run site:build` / `npm run build:demo` | Static docs site (`site/build/client`) / demo site                                                       |
+| `npm run site:docgen`                       | Regenerate the docs site's props tables from the component sources                                       |
+| `npm run tokens`                            | Regenerate `src/styles/tokens.{css,ts}` from `src/styles/tokens.json`                                    |
+| `npm run barrel`                            | Regenerate `src/index.ts` from the component folders (run after adding a component)                      |
+| `npm run art-manifest`                      | Regenerate `examples/art/art-manifest.json`, the game-art URL list for the docs and examples (see below) |
 
-### Game art in stories and examples
+### Game art in the docs and examples
 
-The stories, the example pages and the demo show real Zenless Zone Zero art
+The docs site, the example pages and the demo show real Zenless Zone Zero art
 from two community sources:
 
 - [static.nanoka.cc](https://static.nanoka.cc)
@@ -178,7 +179,7 @@ from two community sources:
   It downloads no images: it only reads the first bytes of each one to confirm it exists and record its size.
 - `configureArt({ nanokaBase, enkaBase })` (from `examples/art`, typically called once at boot; slots update when it changes) points each
   source at another base URL, e.g. a self-hosted mirror that keeps the same file names; `null` restores the
-  default. In Storybook (`iframe.html`) and the demo, `?artBase=<url>` does the same for both sources.
+  default. In the demo, `?artBase=<url>` does the same for both sources.
 
 **Credits:** game data and art from [static.nanoka.cc](https://static.nanoka.cc) (community datamine) and
 [Enka.Network](https://enka.network). Zenless Zone Zero © HoYoverse. The art is not licensed to this
@@ -187,14 +188,14 @@ project; it is linked by URL for the examples and is not redistributed.
 ## Project layout
 
 ```
-src/components/<Name>/   component, CSS, stories, tests (one folder per component)
+src/components/<Name>/   component, CSS, tests (one folder per component)
 src/icons/               original SVG icon set
 src/styles/              tokens.json (source), tokens.css / tokens.ts (generated), base.css (accent clock, materials, text roles), fonts.css
 src/index.ts             package entry (generated by `npm run barrel`)
 examples/pages/          example pages: Trivia (ZZZ Daily Trivia), InterKnotDispatch (news site)
-examples/art/            game-art URL manifest + resolver and image slot (stories/examples/demo only)
+examples/art/            game-art URL manifest + resolver and image slot (docs/examples/demo only)
 demo/                    standalone demo app (launcher for the example pages)
-docs/storybook/          Storybook intro pages (Introduction, Using this Storybook)
+site/                    docs site (Vite + React Router): pages, live examples, generated props tables
 ```
 
 ## Known gaps
@@ -202,6 +203,6 @@ docs/storybook/          Storybook intro pages (Introduction, Using this Storybo
 - A few full-screen pieces (`Screen`, `TopBar`, `BottomBar`) are designed for a `<Stage>` rather than a
   responsive page.
 - Glyph shapes differ slightly from Inpin Hongmeng because of the font substitute.
-- The stories and examples depend on two third-party art hosts at runtime (see "Game art in stories and
+- The docs and examples depend on two third-party art hosts at runtime (see "Game art in the docs and
   examples"); when they are unreachable the image slots render as empty frames.
 - S-rank badge symbol kinda sucks

@@ -42,12 +42,12 @@ export interface SelectProps extends Omit<ComponentPropsWithRef<'div'>, 'default
   disabled?: boolean;
   /** Open state (controlled). */
   open?: boolean;
-  /** Initial open state (uncontrolled; stories). */
+  /** Initial open state (uncontrolled). */
   defaultOpen?: boolean;
   onOpenChange?(open: boolean): void;
   /** Form field name: renders a hidden input carrying the value. */
   name?: string;
-  /** Force the trigger's pressed look (stories / visual tests). */
+  /** Force the trigger's pressed look (visual tests). */
   pressed?: boolean;
 }
 

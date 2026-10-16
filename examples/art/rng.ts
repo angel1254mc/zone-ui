@@ -1,6 +1,6 @@
 /**
  * Deterministic seeding for the art resolvers: the same seed always picks the same real-art entry
- * (stable stories, stable visual tests, stable SSR markup). Nothing in examples/art may call
+ * (stable demos, stable visual tests, stable SSR markup). Nothing in examples/art may call
  * Math.random.
  */
 export type Seed = number | string;

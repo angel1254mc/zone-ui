@@ -1,0 +1,63 @@
+/* Examples → Inter-Knot Dispatch. Page-local styles, prefixed ikx-. */
+.ikx-preview {
+  border: 1px solid var(--d-rule);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--d-panel);
+}
+.ikx-preview__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--d-rule);
+  background: #070707;
+}
+.ikx-preview__note {
+  margin: 0 6px 0 0;
+  font-family: var(--d-font-body);
+  font-weight: 450;
+  font-size: 13px;
+  color: var(--d-muted);
+}
+@media (max-width: 900px) {
+  /* Narrow screens already show the phone layout. */
+  .ikx-preview__bar {
+    display: none;
+  }
+}
+.ikx-preview__stage {
+  display: flex;
+  justify-content: center;
+  background:
+    radial-gradient(circle, #1d1d1d 1px, transparent 1.4px) 0 0 / 12px 12px,
+    #040404;
+}
+.ikx-preview__viewport {
+  width: 100%;
+  max-width: 100%;
+  height: min(860px, calc(100vh - 140px));
+  min-height: 560px;
+  overflow: hidden;
+  background: #000;
+}
+.ikx-preview__viewport[data-width='tablet'],
+.ikx-preview__viewport[data-width='phone'] {
+  border-inline: 1px solid var(--d-ring);
+}
+.ikx-preview__viewport[data-width='tablet'] {
+  width: 834px;
+}
+.ikx-preview__viewport[data-width='phone'] {
+  width: 390px;
+}
+
+.ikx-points {
+  margin: 0;
+  padding-left: 18px;
+}
+.ikx-points li + li {
+  margin-top: 8px;
+}

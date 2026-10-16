@@ -27,6 +27,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@angel1254mc/zone-ui': resolve(import.meta.dirname, 'src/index.ts'),
+      // Docs demos import the example art helpers as `examples/art` (site/ uses the same alias).
+      'examples/art': resolve(import.meta.dirname, 'examples/art/index.ts'),
     },
   },
   build: {
@@ -53,6 +55,7 @@ export default defineConfig({
       'src/**/*.test.{ts,tsx}',
       'examples/**/*.test.{ts,tsx}',
       'demo/**/*.test.{ts,tsx}',
+      'site/**/*.test.{ts,tsx}',
       'scripts/**/*.test.mjs',
     ],
     css: false,

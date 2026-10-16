@@ -18,7 +18,7 @@ export interface ChipProps extends Omit<ComponentPropsWithRef<'button'>, 'onChan
    * the control-size ratio (sm 46/57, lg 69/57); the label never drops below the `label` text role.
    */
   size?: ChipSize;
-  /** Force the pressed look (stories / visual tests). */
+  /** Force the pressed look (visual tests). */
   pressed?: boolean;
   children?: ReactNode;
 }

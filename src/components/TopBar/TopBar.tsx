@@ -22,7 +22,7 @@ export interface TopBarOwnProps {
   onBack?: () => void;
   /** Back button accessible name. Default "Back". */
   backLabel?: string;
-  /** Extra props for the Back `TagButton` (e.g. `pressed` in stories). */
+  /** Extra props for the Back `TagButton` (e.g. `pressed`). */
   backProps?: Omit<TagButtonProps, 'kind' | 'onClick' | 'label'>;
   /**
    * Band fill: `solid` black (sub-pages, default), `translucent` (Home, `color.bg.topBarHome`

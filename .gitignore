@@ -1,9 +1,10 @@
 node_modules/
 dist/
 demo-dist/
-storybook-static/
 .vitest/
 *.log
 *.tgz
 .vercel/
 .env*
+site/build/
+site/.react-router/

@@ -107,6 +107,12 @@ export const tokens = {
       ctaChevronLight: '#282828',
       ctaChevronDark: '#080808',
     },
+    marquee: {
+      fill: '#1C1C1C',
+      dot: '#303030',
+      word: '#0A0A0A',
+      costFill: '#2C2C2C',
+    },
     element: {
       fire: 'linear-gradient(180deg, #EA140D 0%, #FC6F1C 100%)',
       fireSolid: '#F3490F',
@@ -731,6 +737,7 @@ export const tokens = {
       blurThrough: '100ms',
       dockPress: '133ms',
       ctaChevronDrift: '1750ms',
+      marqueeDriftChar: '4000ms',
     },
     easing: {
       linear: 'linear',

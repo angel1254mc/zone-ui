@@ -33,7 +33,7 @@
 }
 
 /* A .zzz-theme inside the document inherits the running root clock instead of starting its
- * own at mount time, so remounts (tab switches, stories, stages) never reset the phase: one
+ * own at mount time, so remounts (tab switches, stages) never reset the phase: one
  * phase runs across screens. accentPhase="live" (data-accent-phase="live") opts a
  * theme into its own clock, e.g. to pulse inside a pinned ancestor. */
 :root .zzz-theme:not([data-accent-phase='live']) {

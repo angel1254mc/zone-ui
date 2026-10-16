@@ -164,7 +164,7 @@ export function resetGameArtForTests() {
 
 const GameArtContext = createContext<GameArtState | null>(null);
 
-/** Pins the art state for its subtree (tests, stories: `loading`, `ready` with a fixture, `missing`). */
+/** Pins the art state for its subtree (tests, demos: `loading`, `ready` with a fixture, `missing`). */
 export function GameArtProvider({ state, children }: { state: GameArtState; children: ReactNode }) {
   return <GameArtContext.Provider value={state}>{children}</GameArtContext.Provider>;
 }

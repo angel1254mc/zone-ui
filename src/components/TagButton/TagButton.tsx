@@ -20,7 +20,7 @@ export interface TagButtonOwnProps {
   label?: string;
   /** Replace the glyph (default U-turn arrow / ×). */
   icon?: ReactNode;
-  /** Force the pressed look (stories, tests). */
+  /** Force the pressed look (tests). */
   pressed?: boolean;
   /** `sm` · `md` (default, the 90×58 tag) · `lg` — the shared control scale. */
   size?: TagButtonSize;

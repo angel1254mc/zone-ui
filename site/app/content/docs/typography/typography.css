@@ -1,0 +1,144 @@
+/* Foundations → Typography. Page-local styles, prefixed ty-. */
+.ty-faces {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 16px;
+  margin: 18px 0 20px;
+}
+.ty-face {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  padding: 22px 24px;
+  border: 1px solid var(--d-rule);
+  border-radius: 16px;
+  background: var(--d-panel);
+}
+.ty-face__label,
+.ty-meta,
+.ty-use {
+  font-family: var(--d-font-body);
+  font-weight: 450;
+  font-stretch: 100%;
+  font-size: 13.5px;
+  line-height: 1.5;
+  letter-spacing: normal;
+  word-spacing: normal;
+  color: var(--d-muted);
+}
+.ty-face__label {
+  margin: 0;
+}
+.ty-face code,
+.ty-role code,
+.ty-tone code {
+  font-family: var(--d-font-mono);
+  font-weight: 500;
+  font-stretch: 100%;
+  font-size: 12px;
+  letter-spacing: normal;
+  word-spacing: normal;
+  color: var(--d-soft);
+  overflow-wrap: anywhere;
+}
+
+/* Role specimen */
+.ty-roles-wrap {
+  margin-top: 18px;
+  border: 1px solid var(--d-rule);
+  border-radius: 16px;
+  overflow-x: auto;
+  background: #000;
+}
+.ty-roles {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: collapse;
+}
+.ty-roles th,
+.ty-roles td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #161616;
+  text-align: start;
+  vertical-align: middle;
+}
+.ty-roles tbody tr:last-child > * {
+  border-bottom: 0;
+}
+.ty-roles thead th {
+  font-family: var(--d-font-body);
+  font-weight: 650;
+  font-stretch: 100%;
+  font-size: 12.5px;
+  letter-spacing: normal;
+  color: var(--d-faint);
+  background: #0b0b0b;
+}
+.ty-role {
+  display: grid;
+  gap: 2px;
+  width: 230px;
+}
+.ty-meta,
+.ty-role code {
+  white-space: nowrap;
+}
+.ty-sample {
+  white-space: nowrap;
+}
+.ty-plate {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+/* Tones */
+.ty-tones {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 180px), 1fr));
+  gap: 1px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--d-rule);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--d-rule);
+}
+.ty-tone {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  padding: 16px 18px;
+  background: #000;
+}
+.ty-tone--accent {
+  background: var(--zzz-accent);
+}
+.ty-tone--accent code {
+  color: #000;
+}
+.ty-tone__tag {
+  justify-self: start;
+  font-family: var(--d-font-body);
+  font-weight: 650;
+  font-stretch: 100%;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--d-muted);
+  border: 1px solid var(--d-ring);
+  border-radius: 999px;
+  padding: 0 7px;
+}
+
+.ty-link {
+  color: var(--d-fg);
+  text-decoration: underline;
+  text-decoration-color: var(--d-lime);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.ty-link:hover {
+  text-decoration-thickness: 2px;
+}
