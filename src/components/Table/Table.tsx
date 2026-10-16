@@ -1,10 +1,14 @@
-import { useMemo } from 'react';
+import { useId, useMemo } from 'react';
 import type { ComponentPropsWithRef, CSSProperties, Key, ReactNode } from 'react';
 import { cx, useControllableState } from '../../utils';
+import { ScrollArea } from '../ScrollArea';
+import { TableCell } from './TableCell';
+import { TableEmpty, TableRow } from './TableRow';
+import { TableBody, TableHead } from './TableSections';
+import { TableSortLabel } from './TableSortLabel';
+import { toLength, useTableContainer } from './shared';
+import type { SortDirection, TableAlign, TableCellOverflow, TableLength, TableSize } from './shared';
 import './Table.css';
-
-export type TableAlign = 'start' | 'center' | 'end';
-export type SortDirection = 'ascending' | 'descending';
 
 export interface TableSort {
   key: string;
@@ -23,31 +27,53 @@ export interface TableColumn<Row> {
   sortable?: boolean;
   /** Value used for sorting. Default: `row[key]`. Numbers sort numerically, the rest by locale. */
   sortValue?(row: Row): string | number | null | undefined;
-  /** Column width in design units. */
-  width?: number;
+  /** Column width: a number is design units, a string any CSS length. */
+  width?: TableLength;
+  /** Text longer than the column: `wrap` (default here), `nowrap` or `truncate`. See TableCell. */
+  overflow?: TableCellOverflow;
   /** Render this column's body cells as `<th scope="row">` (the row's name). */
   rowHeader?: boolean;
 }
 
-export interface TableProps<Row> extends Omit<ComponentPropsWithRef<'table'>, 'children'> {
-  columns: TableColumn<Row>[];
-  rows: Row[];
-  /** Row key. Default: the row index. */
-  rowKey?(row: Row, index: number): Key;
-  /** Table caption (its accessible name). */
+export interface TableProps<Row = unknown> extends Omit<ComponentPropsWithRef<'table'>, 'children'> {
+  /** TableHead, TableBody and TableFooter. Leave out when you pass `columns` and `rows`. */
+  children?: ReactNode;
+  /** Row height: `medium` 57 design units (default), `small` 46. */
+  size?: TableSize;
+  /** Body rows lift to #232323 under the pointer. Default `false` (`true` with `columns`). */
+  hover?: boolean;
+  /**
+   * Keep the header row in view while the body scrolls. Default: on inside a TableContainer with a
+   * `height` or `maxHeight`, off otherwise.
+   */
+  stickyHeader?: boolean;
+  /**
+   * `auto` (default) sizes columns from their content. `fixed` takes widths only from the header cells and
+   * splits what is left between columns without one, so columns never move as you page or sort.
+   */
+  layout?: 'auto' | 'fixed';
+  /** Below this width the table scrolls sideways instead of squeezing its columns (number = design units). */
+  minWidth?: TableLength;
+  /** A black divider between the cells of each capsule. */
+  bordered?: boolean;
+  /** Table caption (its accessible name, and the name of its scroll region in a TableContainer). */
   caption?: ReactNode;
   /** Keep the caption for assistive tech only. */
   hideCaption?: boolean;
-  /** Current sort (controlled; `null` = unsorted). */
+  /** Ready-made table: describe the columns once and pass plain row objects instead of children. */
+  columns?: TableColumn<Row>[];
+  /** Rows for `columns`. */
+  rows?: Row[];
+  /** Row key. Default: the row index. */
+  rowKey?(row: Row, index: number): Key;
+  /** Current sort (controlled; `null` = unsorted). With `columns`. */
   sort?: TableSort | null;
-  /** Initial sort (uncontrolled). */
+  /** Initial sort (uncontrolled). With `columns`. */
   defaultSort?: TableSort | null;
   onSortChange?(sort: TableSort | null): void;
   /** Do not reorder `rows` (the caller sorts, e.g. server-side); headers still report the sort. */
   manualSort?: boolean;
-  /** Column dividers as well as row dividers. */
-  bordered?: boolean;
-  /** Shown in a full-width row when `rows` is empty. */
+  /** With `columns`: shown in a full-width row when `rows` is empty. */
   empty?: ReactNode;
 }
 
@@ -67,34 +93,45 @@ function compare(a: unknown, b: unknown): number {
 }
 
 /**
- * Data table for web data lists (history, leaderboards, results). Semantic `<table>`: radius 10, header row #1C1C1C with `label` in
- * `color.text.muted`, body rows #000 with 2 px #232323 dividers, cells padding 10, centred,
- * tabular numbers. Optional sortable headers (button + `aria-sort`), controlled or uncontrolled.
+ * Data table in the kit's capsule style: each body row is a Stat Row capsule (#161616, 57 design units, 8
+ * apart), the header is a row of muted labels with no fill, and a selected row fills with the live accent.
+ * Compose it from TableHead, TableBody, TableFooter, TableRow and TableCell, or pass `columns` and `rows`
+ * for a ready-made sortable table. Inside a TableContainer it scrolls in its own region.
  */
 export function Table<Row>({
+  children,
+  size = 'medium',
+  hover,
+  stickyHeader,
+  layout = 'auto',
+  minWidth,
+  bordered = false,
+  caption,
+  hideCaption = false,
   columns,
   rows,
   rowKey,
-  caption,
-  hideCaption = false,
   sort: sortProp,
   defaultSort = null,
   onSortChange,
   manualSort = false,
-  bordered = false,
   empty,
   className,
+  style,
   ...rest
 }: TableProps<Row>) {
+  const container = useTableContainer();
+  const captionId = useId();
   const [sort, setSort] = useControllableState<TableSort | null>(sortProp, defaultSort, onSortChange);
 
   const sorted = useMemo(() => {
-    if (!sort || manualSort) return rows;
+    const list = rows ?? [];
+    if (!sort || manualSort || !columns) return list;
     const col = columns.find((c) => c.key === sort.key);
-    if (!col) return rows;
+    if (!col) return list;
     const get = col.sortValue ?? ((r: Row) => readField(r, col.key) as string | number | null | undefined);
     const dir = sort.direction === 'ascending' ? 1 : -1;
-    return rows
+    return list
       .map((row, i) => ({ row, i }))
       .sort((x, y) => compare(get(x.row), get(y.row)) * dir || x.i - y.i)
       .map((x) => x.row);
@@ -103,82 +140,93 @@ export function Table<Row>({
   const toggle = (key: string) => {
     setSort((prev) =>
       prev && prev.key === key
-        ? {
-            key,
-            direction: prev.direction === 'ascending' ? 'descending' : 'ascending',
-          }
+        ? { key, direction: prev.direction === 'ascending' ? 'descending' : 'ascending' }
         : { key, direction: 'ascending' }
     );
   };
 
-  const colStyle = (c: TableColumn<Row>): CSSProperties | undefined =>
-    c.width != null ? { width: `calc(${c.width} * var(--zzz-px))` } : undefined;
+  const sticky = stickyHeader ?? container?.bounded != null;
+  const min = toLength(minWidth);
 
-  return (
-    <table {...rest} className={cx('zzz-table', bordered && 'zzz-table--bordered', className)}>
+  const table = (
+    <table
+      {...rest}
+      className={cx('zzz-table', bordered && 'zzz-table--bordered', className)}
+      data-size={size}
+      data-hover={(hover ?? columns != null) ? '' : undefined}
+      data-sticky={sticky ? '' : undefined}
+      data-layout={layout === 'fixed' ? 'fixed' : undefined}
+      style={min ? ({ minWidth: min, ...style } as CSSProperties) : style}
+    >
       {caption != null ? (
-        <caption className={cx('zzz-table__caption', hideCaption && 'zzz-sr-only')}>{caption}</caption>
+        <caption id={captionId} className={cx('zzz-table__caption', hideCaption && 'zzz-sr-only')}>
+          {caption}
+        </caption>
       ) : null}
-      <thead>
-        <tr>
-          {columns.map((c) => {
-            const active = sort?.key === c.key ? sort.direction : undefined;
-            return (
-              <th
-                key={c.key}
-                scope="col"
-                className="zzz-table__th"
-                data-align={c.align ?? 'center'}
-                aria-sort={c.sortable && active ? active : undefined}
-                style={colStyle(c)}
-              >
-                {c.sortable ? (
-                  <button
-                    type="button"
-                    className="zzz-table__sort zzz-pressable zzz-focusable"
-                    data-direction={active}
-                    onClick={() => toggle(c.key)}
-                  >
-                    <span>{c.header}</span>
-                    <svg className="zzz-table__sort-glyph" viewBox="0 0 10 14" aria-hidden="true" focusable="false">
-                      <path className="zzz-table__sort-up" d="M5 0 L10 5.5 H0 Z" />
-                      <path className="zzz-table__sort-down" d="M5 14 L0 8.5 H10 Z" />
-                    </svg>
-                  </button>
-                ) : (
-                  c.header
-                )}
-              </th>
-            );
-          })}
-        </tr>
-      </thead>
-      <tbody>
-        {sorted.length === 0 && empty != null ? (
-          <tr className="zzz-table__empty">
-            <td colSpan={columns.length}>{empty}</td>
-          </tr>
-        ) : (
-          sorted.map((row, i) => (
-            <tr key={rowKey ? rowKey(row, i) : i} className="zzz-table__row">
+      {columns ? (
+        <>
+          <TableHead>
+            <TableRow>
               {columns.map((c) => {
-                const content = c.cell ? c.cell(row, i) : (readField(row, c.key) as ReactNode);
-                const Cell = c.rowHeader ? 'th' : 'td';
+                const active = sort?.key === c.key ? sort.direction : undefined;
                 return (
-                  <Cell
+                  <TableCell
                     key={c.key}
-                    scope={c.rowHeader ? 'row' : undefined}
-                    className="zzz-table__td"
-                    data-align={c.align ?? 'center'}
+                    align={c.align ?? 'center'}
+                    width={c.width}
+                    sortDirection={c.sortable && active ? active : false}
                   >
-                    {content}
-                  </Cell>
+                    {c.sortable ? (
+                      <TableSortLabel active={active != null} direction={active} onClick={() => toggle(c.key)}>
+                        {c.header}
+                      </TableSortLabel>
+                    ) : (
+                      c.header
+                    )}
+                  </TableCell>
                 );
               })}
-            </tr>
-          ))
-        )}
-      </tbody>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {sorted.length === 0 && empty != null ? (
+              <TableEmpty colSpan={columns.length}>{empty}</TableEmpty>
+            ) : (
+              sorted.map((row, i) => (
+                <TableRow key={rowKey ? rowKey(row, i) : i}>
+                  {columns.map((c) => (
+                    <TableCell
+                      key={c.key}
+                      scope={c.rowHeader ? 'row' : undefined}
+                      align={c.align ?? 'center'}
+                      overflow={c.overflow ?? 'wrap'}
+                    >
+                      {c.cell ? c.cell(row, i) : (readField(row, c.key) as ReactNode)}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            )}
+          </TableBody>
+        </>
+      ) : (
+        children
+      )}
     </table>
+  );
+
+  if (!container) return table;
+  return (
+    <ScrollArea
+      orientation="both"
+      alwaysShow={false}
+      gap={12}
+      className="zzz-table-scroll"
+      viewportClassName="zzz-table-scroll__viewport"
+      aria-labelledby={caption != null ? captionId : undefined}
+      aria-label={caption == null ? rest['aria-label'] : undefined}
+    >
+      {table}
+    </ScrollArea>
   );
 }

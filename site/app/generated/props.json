@@ -360,7 +360,7 @@
         "type": "string",
         "required": false,
         "default": null,
-        "description": "`variant=\"marquee\"`: the words drifting behind the label, drawn upper-case. Default: the label, when it is a string."
+        "description": "`variant=\"marquee\"`: the words drifting behind the label, upper-case. Default: the label, when it is a string."
       },
       {
         "name": "missionState",
@@ -1279,7 +1279,7 @@
         "type": "string",
         "required": false,
         "default": null,
-        "description": "`variant=\"marquee\"`: the words drifting behind the label, drawn upper-case. Default: the label, when it is a string."
+        "description": "`variant=\"marquee\"`: the words drifting behind the label, upper-case. Default: the label, when it is a string."
       },
       {
         "name": "onCopy",
@@ -6445,49 +6445,49 @@
   },
   "Table": {
     "file": "src/components/Table/Table.tsx",
-    "description": "Data table for web data lists (history, leaderboards, results). Semantic `<table>`: radius 10, header row #1C1C1C with `label` in\n`color.text.muted`, body rows #000 with 2 px #232323 dividers, cells padding 10, centred,\ntabular numbers. Optional sortable headers (button + `aria-sort`), controlled or uncontrolled.",
+    "description": "Data table in the kit's capsule style: each body row is a Stat Row capsule (#161616, 57 design units, 8\napart), the header is a row of muted labels with no fill, and a selected row fills with the live accent.\nCompose it from TableHead, TableBody, TableFooter, TableRow and TableCell, or pass `columns` and `rows`\nfor a ready-made sortable table. Inside a TableContainer it scrolls in its own region.",
     "props": [
-      {
-        "name": "columns",
-        "type": "TableColumn<Row>[]",
-        "required": true,
-        "default": null,
-        "description": ""
-      },
-      {
-        "name": "rows",
-        "type": "Row[]",
-        "required": true,
-        "default": null,
-        "description": ""
-      },
       {
         "name": "bordered",
         "type": "boolean",
         "required": false,
         "default": "false",
-        "description": "Column dividers as well as row dividers."
+        "description": "A black divider between the cells of each capsule."
       },
       {
         "name": "caption",
         "type": "ReactNode",
         "required": false,
         "default": null,
-        "description": "Table caption (its accessible name)."
+        "description": "Table caption (its accessible name, and the name of its scroll region in a TableContainer)."
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": false,
+        "default": null,
+        "description": "TableHead, TableBody and TableFooter. Leave out when you pass `columns` and `rows`."
+      },
+      {
+        "name": "columns",
+        "type": "TableColumn<Row>[]",
+        "required": false,
+        "default": null,
+        "description": "Ready-made table: describe the columns once and pass plain row objects instead of children."
       },
       {
         "name": "defaultSort",
         "type": "TableSort | null",
         "required": false,
         "default": "null",
-        "description": "Initial sort (uncontrolled)."
+        "description": "Initial sort (uncontrolled). With `columns`."
       },
       {
         "name": "empty",
         "type": "ReactNode",
         "required": false,
         "default": null,
-        "description": "Shown in a full-width row when `rows` is empty."
+        "description": "With `columns`: shown in a full-width row when `rows` is empty."
       },
       {
         "name": "hideCaption",
@@ -6497,11 +6497,32 @@
         "description": "Keep the caption for assistive tech only."
       },
       {
+        "name": "hover",
+        "type": "boolean",
+        "required": false,
+        "default": null,
+        "description": "Body rows lift to #232323 under the pointer. Default `false` (`true` with `columns`)."
+      },
+      {
+        "name": "layout",
+        "type": "\"auto\" | \"fixed\"",
+        "required": false,
+        "default": "auto",
+        "description": "`auto` (default) sizes columns from their content. `fixed` takes widths only from the header cells and\nsplits what is left between columns without one, so columns never move as you page or sort."
+      },
+      {
         "name": "manualSort",
         "type": "boolean",
         "required": false,
         "default": "false",
         "description": "Do not reorder `rows` (the caller sorts, e.g. server-side); headers still report the sort."
+      },
+      {
+        "name": "minWidth",
+        "type": "TableLength",
+        "required": false,
+        "default": null,
+        "description": "Below this width the table scrolls sideways instead of squeezing its columns (number = design units)."
       },
       {
         "name": "onSortChange",
@@ -6518,11 +6539,299 @@
         "description": "Row key. Default: the row index."
       },
       {
+        "name": "rows",
+        "type": "Row[]",
+        "required": false,
+        "default": null,
+        "description": "Rows for `columns`."
+      },
+      {
+        "name": "size",
+        "type": "\"small\" | \"medium\"",
+        "required": false,
+        "default": "medium",
+        "description": "Row height: `medium` 57 design units (default), `small` 46."
+      },
+      {
         "name": "sort",
         "type": "TableSort | null",
         "required": false,
         "default": null,
-        "description": "Current sort (controlled; `null` = unsorted)."
+        "description": "Current sort (controlled; `null` = unsorted). With `columns`."
+      },
+      {
+        "name": "stickyHeader",
+        "type": "boolean",
+        "required": false,
+        "default": null,
+        "description": "Keep the header row in view while the body scrolls. Default: on inside a TableContainer with a\n`height` or `maxHeight`, off otherwise."
+      }
+    ]
+  },
+  "TableBody": {
+    "file": "src/components/Table/TableSections.tsx",
+    "description": "The data rows (`<tbody>`): stat-row capsules (#161616) 8 design units apart (6 when small).",
+    "props": []
+  },
+  "TableCell": {
+    "file": "src/components/Table/TableCell.tsx",
+    "description": "One cell. In TableHead it is a column header (`<th scope=\"col\">`) in the muted label role; elsewhere a data\ncell (`<td>`) in the body role, or a row header (`<th scope=\"row\">`) with `scope=\"row\"`. Cells take the\nrow's capsule fill, so a row reads as one Stat Row capsule.",
+    "props": [
+      {
+        "name": "align",
+        "type": "\"center\" | \"end\" | \"start\"",
+        "required": false,
+        "default": "start",
+        "description": "Text alignment. Default `start`; use `end` for numbers so their digits line up."
+      },
+      {
+        "name": "overflow",
+        "type": "\"wrap\" | \"nowrap\" | \"truncate\"",
+        "required": false,
+        "default": "nowrap",
+        "description": "Text longer than the column: `nowrap` (default) keeps one line and widens the column; `truncate` cuts it\nwith an ellipsis and shows the full text in a tooltip on hover or focus; `wrap` breaks it over lines\nand the row grows taller."
+      },
+      {
+        "name": "padding",
+        "type": "\"none\" | \"checkbox\" | \"normal\"",
+        "required": false,
+        "default": "normal",
+        "description": "`checkbox` sizes a select column (70 design units), `none` removes the padding. Default `normal`."
+      },
+      {
+        "name": "ref",
+        "type": "Ref<HTMLTableCellElement>",
+        "required": false,
+        "default": null,
+        "description": ""
+      },
+      {
+        "name": "scope",
+        "type": "\"col\" | \"colgroup\" | \"row\" | \"rowgroup\"",
+        "required": false,
+        "default": null,
+        "description": "`col` in the head (the default there). `row` makes a body or footer cell the row's header, the name\nof the row; it renders as `<th>`."
+      },
+      {
+        "name": "sortDirection",
+        "type": "false | SortDirection",
+        "required": false,
+        "default": null,
+        "description": "On a header cell: the column's current sort, announced with `aria-sort`. `false` = not sorted."
+      },
+      {
+        "name": "width",
+        "type": "TableLength",
+        "required": false,
+        "default": null,
+        "description": "Column width, set on the header cell (a number is design units, a string any CSS length). With the\ndefault layout it is a minimum and long content still widens the column; with `layout=\"fixed\"` it is exact."
+      }
+    ]
+  },
+  "TableContainer": {
+    "file": "src/components/Table/TableContainer.tsx",
+    "description": "The table's panel: the lit panel ring (5-unit #333 ring, 3-unit keyline, outer radius 29) around a black\nsurface that stacks TableToolbar, Table and TablePagination. Inside it the table scrolls in its own\nregion (the kit scrollbar, both axes) while the toolbar and pagination stay in place. With `height` or\n`maxHeight` the header row is pinned by default.\n\n`className`, `style`, `ref` and other div props go to the outer element; `height` / `maxHeight` are its\nouter size, ring included.",
+    "props": [
+      {
+        "name": "height",
+        "type": "TableLength",
+        "required": false,
+        "default": null,
+        "description": "Fixed outer height (a number is design units, a string any CSS length). The toolbar and pagination\nstay put and the table fills the space between them, scrolling what does not fit."
+      },
+      {
+        "name": "maxHeight",
+        "type": "TableLength",
+        "required": false,
+        "default": null,
+        "description": "Maximum outer height: a short table shrinks the panel, a long one scrolls once it reaches the cap."
+      }
+    ]
+  },
+  "TableEmpty": {
+    "file": "src/components/Table/TableRow.tsx",
+    "description": "The row to show when there is no data: one sunken capsule across every column with the message centred.\nIn a TableContainer with a fixed `height` it fills the space between the header and the pagination.",
+    "props": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true,
+        "default": null,
+        "description": "Say why there are no rows and, when there is one, how to get some back."
+      },
+      {
+        "name": "colSpan",
+        "type": "number",
+        "required": true,
+        "default": null,
+        "description": "Number of columns the message spans."
+      }
+    ]
+  },
+  "TableFooter": {
+    "file": "src/components/Table/TableSections.tsx",
+    "description": "Summary rows (`<tfoot>`): sunken #0D0D0D capsules; the last row, the total, lifts to #222 at a larger size.",
+    "props": []
+  },
+  "TableHead": {
+    "file": "src/components/Table/TableSections.tsx",
+    "description": "The header rows (`<thead>`). Cells inside render as column headers (`<th scope=\"col\">`).",
+    "props": []
+  },
+  "TablePagination": {
+    "file": "src/components/Table/TablePagination.tsx",
+    "description": "The textured #191919 strip under the table: a rows-per-page Select, the range of rows on show and the\ngame-skin Pagination. It does not slice rows itself; show `rows.slice((page - 1) * rowsPerPage, page *\nrowsPerPage)` in the TableBody.",
+    "props": [
+      {
+        "name": "count",
+        "type": "number",
+        "required": true,
+        "default": null,
+        "description": "Total number of rows across all pages."
+      },
+      {
+        "name": "defaultPage",
+        "type": "number",
+        "required": false,
+        "default": "1",
+        "description": "Initial page (uncontrolled). Default 1."
+      },
+      {
+        "name": "defaultRowsPerPage",
+        "type": "number",
+        "required": false,
+        "default": null,
+        "description": "Initial rows per page (uncontrolled). Default: the first option."
+      },
+      {
+        "name": "labelDisplayedRows",
+        "type": "((range: { from: number; to: number; count: number; }) => ReactNode)",
+        "required": false,
+        "default": "({ from, to, count }: { from: number; to: number; count: number }) =>\n  `${from}–${to} of ${count}`",
+        "description": "The range text. Default `{from}–{to} of {count}`."
+      },
+      {
+        "name": "labelRowsPerPage",
+        "type": "ReactNode",
+        "required": false,
+        "default": "Rows per page",
+        "description": "Label of the select. Default `Rows per page`."
+      },
+      {
+        "name": "onPageChange",
+        "type": "((page: number) => void)",
+        "required": false,
+        "default": null,
+        "description": ""
+      },
+      {
+        "name": "onRowsPerPageChange",
+        "type": "((rowsPerPage: number) => void)",
+        "required": false,
+        "default": null,
+        "description": "Called with the new size. Changing it also goes back to page 1."
+      },
+      {
+        "name": "page",
+        "type": "number",
+        "required": false,
+        "default": null,
+        "description": "Current page, 1-based (controlled), like Pagination."
+      },
+      {
+        "name": "rowsPerPage",
+        "type": "number",
+        "required": false,
+        "default": null,
+        "description": "Rows on each page (controlled). `-1` = all rows on one page."
+      },
+      {
+        "name": "rowsPerPageOptions",
+        "type": "TableRowsPerPageOption[]",
+        "required": false,
+        "default": "[10, 25, 50, 100]",
+        "description": "Choices in the rows-per-page select. Default `[10, 25, 50, 100]`. An empty list hides the select."
+      }
+    ]
+  },
+  "TableRow": {
+    "file": "src/components/Table/TableRow.tsx",
+    "description": "One row (`<tr>`). In the body it is one capsule: its first and last cells carry the rounded ends.",
+    "props": [
+      {
+        "name": "hover",
+        "type": "boolean",
+        "required": false,
+        "default": null,
+        "description": "Lift the row to #232323 under the pointer. Overrides the table's `hover` for this row."
+      },
+      {
+        "name": "selected",
+        "type": "boolean",
+        "required": false,
+        "default": "false",
+        "description": "Fills the row's capsule with the live accent and turns its text black."
+      }
+    ]
+  },
+  "TableSortLabel": {
+    "file": "src/components/Table/TableSortLabel.tsx",
+    "description": "The sort control inside a header cell: the label and two stacked triangles. While `active`, the triangle\nfor `direction` is on the live accent. Put `sortDirection` on the header cell too, so the sort is\nannounced. Pressing fills it with the accent, like every pressable control in the kit.",
+    "props": [
+      {
+        "name": "active",
+        "type": "boolean",
+        "required": false,
+        "default": "false",
+        "description": "This column is the one the rows are sorted by: its arrow for `direction` takes the accent."
+      },
+      {
+        "name": "direction",
+        "type": "\"ascending\" | \"descending\"",
+        "required": false,
+        "default": "ascending",
+        "description": "Direction shown while active. Default `ascending`."
+      }
+    ]
+  },
+  "TableToolbar": {
+    "file": "src/components/Table/TableToolbar.tsx",
+    "description": "The textured #222 strip above the table: a title in the title role with an optional description, and the\ntable's actions. While rows are selected the title becomes the count on the accent parallelogram (the\nselected look every control in the kit shares). Title and description are a polite live region, so the\ncount is announced as it changes.",
+    "props": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": false,
+        "default": null,
+        "description": "Actions for the table or the selected rows, at the right end (Buttons, a Select…)."
+      },
+      {
+        "name": "description",
+        "type": "ReactNode",
+        "required": false,
+        "default": null,
+        "description": "A short line under the title: what the rows are, or what the actions will do."
+      },
+      {
+        "name": "selectedCount",
+        "type": "number",
+        "required": false,
+        "default": "0",
+        "description": "Rows currently selected. Above 0 the title becomes the count on an accent chip."
+      },
+      {
+        "name": "selectedLabel",
+        "type": "ReactNode",
+        "required": false,
+        "default": "selected",
+        "description": "Word after the count. Default `selected`."
+      },
+      {
+        "name": "title",
+        "type": "ReactNode",
+        "required": false,
+        "default": null,
+        "description": "The table's title. Replaced by the selected count while rows are selected."
       }
     ]
   },

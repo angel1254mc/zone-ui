@@ -102,6 +102,27 @@ describe('Table', () => {
     expect(names()).toEqual(['Banyue', 'Anby', 'Corin']);
   });
 
+  it('gives each column its width and overflow', () => {
+    render(
+      <Table
+        caption="h"
+        rows={rows}
+        columns={[
+          { key: 'no', header: 'No.', width: 100 },
+          { key: 'name', header: 'Name', rowHeader: true, overflow: 'truncate' },
+        ]}
+      />
+    );
+    expect(screen.getByRole('columnheader', { name: 'No.' }).style.width).toBe('calc(100 * var(--zzz-px))');
+    const banyue = screen.getByRole('rowheader', { name: 'Banyue' });
+    expect(within(banyue).getByText('Banyue', { selector: 'span' })).toBeInTheDocument();
+  });
+
+  it('wraps long cell text by default, so a long description does not widen the table', () => {
+    render(<Table caption="h" rows={rows} columns={columns} />);
+    expect(screen.getByRole('rowheader', { name: 'Banyue' })).toHaveAttribute('data-overflow', 'wrap');
+  });
+
   it('renders the empty row, bordered class, className and ref', () => {
     let node: HTMLTableElement | null = null;
     render(
